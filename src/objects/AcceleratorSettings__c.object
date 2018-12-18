@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Settings to be configured by the Accelerator implementator.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ClusterFieldForPublicGroups__c</fullName>
+        <defaultValue>&quot;ExternalId__c&quot;</defaultValue>
+        <description>When a cluster is created, a public group is created. This field determines which cluster field will be used as the name of the public group that is created for the cluster.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>When a cluster is created, a public group is created. This field determines which cluster field will be used as the name of the public group that is created for the cluster.</inlineHelpText>
+        <label>Cluster Field for Public Groups</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EnableMediaElementAutomaticResize__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>If true, the user will have the option to resize a desktop image for tablet and/or mobile.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If true, the user will have the option to resize a desktop image for tablet and/or mobile.</inlineHelpText>
+        <label>Enable Media Element Automatic Resize</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MaxSizeDesktop__c</fullName>
+        <defaultValue>1280</defaultValue>
+        <description>Defines the maximum size (logical resolution) that an image can have for desktop when uploading a media element.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defines the maximum size (logical resolution) that an image can have for desktop when uploading a media element.</inlineHelpText>
+        <label>Max. Size Desktop</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MaxSizeMobile__c</fullName>
+        <defaultValue>480</defaultValue>
+        <externalId>false</externalId>
+        <label>Max. Size Mobile</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MaxSizeTablet__c</fullName>
+        <defaultValue>768</defaultValue>
+        <description>Defines the maximum size (logical resolution) that an image can have for tablet when uploading a media element.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defines the maximum size (logical resolution) that an image can have for tablet when uploading a media element.</inlineHelpText>
+        <label>Max. Size Tablet</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SalesforceDomain__c</fullName>
+        <externalId>false</externalId>
+        <label>Salesforce Domain</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Accelerator Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

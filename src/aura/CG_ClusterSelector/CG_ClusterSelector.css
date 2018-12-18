@@ -1,0 +1,10 @@
+.THIS .iconClass svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.THIS .unclickable-span{
+    color: lightGray;   
+    cursor: default;
+    text-decoration: none;
+}

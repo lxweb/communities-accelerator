@@ -1,0 +1,38 @@
+<aura:component extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes">
+	<!-- GENERAL VARIABLES --> 
+	<aura:attribute name="componentExternalId" type="String" />
+	<aura:attribute name="componentType" type="String" default="EventDetail"/>
+
+	<!-- Event DETAIL -->
+	<!-- IMAGE -->
+	<img src="{!v.componentWrapper.contentWrapper[0].mediaElements[0].FileURLDesktop__c}" class="detailImage"/>
+	<br/>
+	<!-- TITLE -->
+	<div class="title">
+		{!v.componentWrapper.contentWrapper[0].content.DetailTitle__c}
+	</div>
+	<br/>
+	<!-- DETAIL -->
+	<div class="detail">
+		<aura:unescapedHtml value="{!v.componentWrapper.contentWrapper[0].content.DetailDescription__c}"/>
+	</div>
+	<br/>
+	<!-- DATE AND LOCATION -->
+	<aura:if isTrue="{!not(v.componentWrapper.contentWrapper[0].content.EventStartDate__c == null)}" >
+		<p class="event_date">
+        	<ui:outputDate value="{!v.componentWrapper.contentWrapper[0].content.EventStartDate__c}"/>
+          	<aura:if isTrue="{!not(v.componentWrapper.contentWrapper[0].content.EventEndDate__c == null)}" >
+               	<ui:outputText value=" - "/>
+               	<ui:outputDate value="{!v.componentWrapper.contentWrapper[0].content.EventEndDate__c}"/>
+           	</aura:if>
+   		</p>
+   	</aura:if>
+   	<aura:if isTrue="{!not(v.componentWrapper.contentWrapper[0].content.Location__c == null)}" >
+       	<p class="event_location">
+           	<a target="_blank" href="{! 'https://www.google.com.ar/maps/place/' + v.componentWrapper.contentWrapper[0].content.Location__c}" class="LocationText">
+             	<lightning:icon iconName="utility:checkin" size="small" class="mapIcon"/>
+             	{!v.componentWrapper.contentWrapper[0].content.Location__c}
+           	</a>
+		</p>
+  	</aura:if>
+</aura:component>

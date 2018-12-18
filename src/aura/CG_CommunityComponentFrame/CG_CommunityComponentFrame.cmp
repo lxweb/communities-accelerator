@@ -1,0 +1,51 @@
+<aura:component access="global" >
+    
+    <aura:attribute name="componentWrapper" type="Object"/>
+
+    <aura:attribute name="contentActivated" type="Boolean" default="false"/>
+    <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
+    
+    <aura:if isTrue="{!and(v.componentWrapper.isEnabledCommunityEditFrame, not(v.isLivePreview))}">
+        
+        <div id="editFrame">
+            <div id="{!v.componentWrapper.component.Id}" onmouseover="{!c.doShowEditFrame}" onmouseout="{!c.doHideEditFrame}" class="mainEditFrame">
+            	
+                <!-- Component Body -->
+                <div class="componentBody">
+                    {!v.body}
+                </div>
+
+                <!-- Component Name -->
+                <div class="componentNamePanel borderColorBlue hidden">
+            		{#v.componentWrapper.component.RecordType.DeveloperName + ' - ' + v.componentWrapper.component.Name}
+            	</div>
+
+            	<!-- Buttons -->
+                <div class="buttonsPanel hidden">
+                    <lightning:buttonIcon iconName="utility:settings" class="buttonsPanelIcons" title="View Component" alternativeText="component" onclick="{!c.doViewComponent}" size="medium"/>
+                    <aura:if isTrue="{#v.componentWrapper.contentWrapper.length > 0}">
+                        <lightning:buttonIcon iconName="utility:image" class="buttonsPanelIcons" title="View Content" alternativeText="content" onclick="{!c.doViewContent}" size="medium"/>
+                    </aura:if>
+            	</div>
+
+                <!-- Related Content -->
+                <aura:if isTrue="{#v.componentWrapper.contentWrapper.length > 0}">
+                    <div aura:id="contentDetail" class="contentDetail borderColorBlue hidden">
+                        <ul>
+                            <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
+                                <li><a href="{!v.componentWrapper.acceleratorSettings.SalesforceDomain__c + '/' + wrapper.content.Id}" target="_blank">{!wrapper.content.Name}</a></li>
+                            </aura:iteration>
+                        </ul>
+                    </div>
+                </aura:if>
+
+            </div>
+        </div>
+
+        <aura:set attribute="else">
+            {!v.body}
+        </aura:set>
+
+    </aura:if>
+
+</aura:component>

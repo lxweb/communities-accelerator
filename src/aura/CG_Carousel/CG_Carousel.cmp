@@ -1,0 +1,91 @@
+<aura:component >
+    
+    <!-- GENERAL VARIABLES --> 
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <!-- External -->
+    <aura:attribute name="showTotal" type="Boolean" default="{!true}"/>
+    <aura:attribute name="cards" type="Map[]"/>
+    <aura:attribute name="seeBullet" type="Boolean" default="{!false}"/>
+    <aura:attribute name="loop" type="Boolean" default="{!false}"/>
+    <aura:attribute name="automaticTransition" type="Boolean" default="{!false}"/>
+    <aura:attribute name='transitionTime' type="Integer" default="5000"/>
+    <aura:attribute name='direction' type='String' default='Right'/>
+    <aura:attribute name="fadeInMode" type="Boolean" default="{!false}"/>
+    <aura:attribute name="heightValue" type="String"/>
+
+    <!-- Internal -->
+    <aura:attribute name="pages" type="Integer[]"/>
+    <aura:attribute name="containerWidth" type="Integer" default="480"/>
+    <aura:attribute name="currentPage" type="Integer" default="0"/>
+    <aura:attribute name="transitionAuto" type="Object" />
+
+    <aura:handler name="change" value="{!v.currentPage}" action="{!c.handleChangeCurrentPage}"/>
+
+    <aura:if isTrue="{!not(empty(v.cards))}">
+        <div class="slds-scope">
+            <div class=" sc-p_none slds-theme_shade" style="{!'height: ' + v.heightValue}">
+                
+                <div class="slds-grid slds-align_absolute-center">
+                    
+                    <!-- Carousel Body -->
+                    <aura:if isTrue="{!V.fadeInMode == false}">
+                        <div class="slds-col slds-scrollable_none">
+                            <div aura:id="carousel-body" class="{!'sc-carousel-body slds-grid slds-grid_vertical-stretch slds-scrollable_none'}">
+                                <aura:iteration items="{!v.cards}" var="card">
+                                    <!-- Card -->
+                                    <div class="{!'slds-size_1-of-1'}">
+                                        {!card}
+                                    </div>
+                                </aura:iteration>
+                            </div>
+                        </div>
+                    </aura:if>
+
+                    <!-- Fade Body -->
+                    <aura:if isTrue="{!V.fadeInMode == true}">
+                        <div class="slds-col slds-scrollable_none">
+                            <div aura:id="carousel-body" class="{!'sc-carousel-body slds-grid slds-grid_vertical-stretch slds-scrollable_none'}">
+                                <aura:iteration items="{!v.cards}" var="card" indexVar="index">
+                                    <!-- Card -->
+                                    <div class="{!'slds-size_1-of-1 image-' + index}" style="opacity: 0; transition: opacity 2s; position: absolute;z-index: -1; ">
+                                        {!card}
+                                    </div>
+                                </aura:iteration>
+                            </div>
+                        </div>
+                    </aura:if>
+
+                    <!-- Previous Button -->
+                    <aura:if isTrue="{!and(v.containerWidth gt 480, v.cards.length gt 1)}">
+                        <div class="div-prev-button">
+                            <lightning:buttonIcon iconName="utility:chevronleft" class="arrow left" alternativeText="Previous" size="small" variant="border-filled" onclick="{!c.handleClickPrevious}" />
+                        </div>
+                    </aura:if>
+
+                    <!-- Next Button -->
+                    <aura:if isTrue="{!and(v.containerWidth gt 480, v.cards.length gt 1)}">
+                        <div class="div-next-button">
+                            <lightning:buttonIcon aura:id="chevronright" iconName="utility:chevronright" class="arrow right" alternativeText="Next" size="small" variant="border-filled" onclick="{!c.handleClickNext}" />
+                        </div>
+                    </aura:if>
+
+                </div>
+
+                <!-- Pagination -->
+                <aura:if isTrue="{!v.seeBullet}">
+                    <aura:if isTrue="{!and(v.containerWidth gt 480, v.cards.length gt 1)}">
+                        <div class="slds-m-around_small pagination">
+                            <ul class="sc-pagination">
+                                <aura:iteration items="{!v.pages}" var="page" indexVar="index">
+                                    <li><a aura:id="dot" href="javascript:void(0);" class="{!'sc-pagination__dot' + if(v.currentPage == index, ' sc-pagination__dot_selected', '')}" data-page="{!index}" onclick="{!c.handleClickDot}"></a></li>
+                                </aura:iteration>
+                            </ul>
+                        </div>
+                    </aura:if>
+                </aura:if>
+            </div>
+        </div>
+    </aura:if>
+
+</aura:component>

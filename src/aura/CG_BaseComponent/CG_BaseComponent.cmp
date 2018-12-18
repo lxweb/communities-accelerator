@@ -1,0 +1,54 @@
+<aura:component extensible="true" abstract="true" controller="CG_BaseComponentController" access="global">
+    
+    <!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- KEY ATTRIBUTES -->
+	<aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentType" type="String" />
+	<aura:attribute name="componentWrapper" type="Object"/>
+    <aura:attribute name="currentPageNumber" type="Integer" default="1"/>
+    <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
+    <aura:attribute name="showComponentEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="parentComponentId" type="String" />
+    <aura:attribute name="parentContentId" type="String" />
+
+    <!-- LOADING -->
+    <aura:attribute name="isLoading" type="boolean" default="true" />
+
+    <!-- RATIO ASPECT VARIBLE -->
+    <aura:attribute name="aspectRatios" type="Object"/>
+
+    <!-- COMPONENT -->
+    <div aura:id="cg_component">
+
+        <aura:if isTrue="{!not(v.componentWrapper.component == null)}">
+            <!-- EDIT FRAME -->
+            <c:CG_CommunityComponentFrame componentWrapper="{!v.componentWrapper}" isLivePreview="{!v.isLivePreview}">
+                <!-- COMMUNITY COMPONENT -->
+                <div id="{!v.componentWrapper.component.Id}" class="body-container">
+                    {!v.body}
+                    
+                    <!-- LOADING SPINNER -->
+                    <aura:if isTrue="{!v.isLoading}">
+                        <c:CG_Spinner/>
+                    </aura:if>
+                </div>
+
+            </c:CG_CommunityComponentFrame>
+
+        </aura:if>
+
+        <aura:if isTrue="{!v.showComponentEmpty}">
+            <div class="slds-page-header">
+                <lightning:layout horizontalAlign="left">
+                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+                        <h1 class="slds-page-header__title slds-text-heading_large">{!v.componentType}</h1>
+                        <p>{!$Label.c.ComponentEmpty}</p>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

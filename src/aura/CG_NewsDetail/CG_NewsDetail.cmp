@@ -1,0 +1,25 @@
+<aura:component extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes">
+	<!-- GENERAL VARIABLES --> 
+	<aura:attribute name="componentExternalId" type="String" />
+	<aura:attribute name="componentType" type="String" default="NewsDetail"/>
+	
+	<!-- NEWS DETAIL -->
+	<!-- IMAGE -->
+	<aura:if isTrue="{!v.componentWrapper.component.ShowImage__c}">
+		<img src="{!v.componentWrapper.contentWrapper[0].mediaElements[0].FileURLDesktop__c}" class="detailImage"/>
+	</aura:if>
+	<br/>
+	<!-- TITLE -->
+	<aura:if isTrue="{!v.componentWrapper.component.ShowTitle__c}">
+		<div class="title">
+			{!v.componentWrapper.contentWrapper[0].content.DetailTitle__c}
+		</div>
+	</aura:if>
+	<br/>
+	<!-- DESCRIPTION -->
+	<aura:if isTrue="{!v.componentWrapper.component.ShowDescription__c}">
+		<div class="detail">
+			<aura:unescapedHtml value="{!v.componentWrapper.contentWrapper[0].content.DetailDescription__c}"/>
+		</div>
+	</aura:if>
+</aura:component>

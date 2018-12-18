@@ -1,0 +1,49 @@
+<aura:component controller="CG_LanguageSelectorController"  implements="forceCommunity:availableForAllPageTypes" access="global">
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:attribute name="MenuWrapper" type="Object"/>
+	<aura:attribute name="renderLangMenu" type="Boolean" default="false"/>
+
+    <div>
+        <nav id="menu">
+            <ul onclick="{!c.handleChangesHide}">
+                <li>
+                	<!--
+                	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + v.currentCountryCodeLowerValue +'-flag.svg'}" class="flag-icon"/>
+                	-->
+                	<span>{!v.MenuWrapper.userLanguage.name}</span><i aura:id="arrowicon"></i>
+            
+                    <ul id="CountryCodeSelect">
+                        <aura:iteration items="{!v.MenuWrapper.languages}" var="langCode">
+                           
+                           	<aura:if isTrue="{!v.MenuWrapper.userLanguage.value!=langCode.value}">
+                           	
+                                <li aura:id="{!langCode.value}" id="{!langCode.value}" value="{!langCode.value}" onclick="{! c.handleChanges }"> <!-- onclick="{! c.handleChanges }"-->
+                               	
+                                	<!--
+                                	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + countryCode.lowerValue +'-flag.svg'}" class="flag-icon"/>
+                                	-->
+                                	  
+                                	<span>{! langCode.name }</span></li>
+                        		
+                        		<aura:set attribute="else">
+                        			
+                                    <li aura:id="{!langCode.value}" id="{!langCode.value}" value="{!langCode.value}"  class="slds-hide">
+                                    	<!--
+                                    		onclick="{! c.handleChanges }"
+                                    	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + countryCode.lowerValue +'-flag.svg'}" class="flag-icon"/>
+                                    -->
+                                    	<span>{! langCode.name }</span></li>
+                                 	
+								</aura:set>
+
+                            </aura:if>
+                        	
+                        </aura:iteration>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</aura:component>

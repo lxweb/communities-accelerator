@@ -1,0 +1,60 @@
+<aura:component access="global" implements="forceCommunity:availableForAllPageTypes" controller='CG_ContentToolsController' description="File content tools" >
+	<!--Constructor -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        
+    <!--Attributes-->
+    <aura:attribute name="imageUrl" type="String" default="0680b000003Ltck"/>
+    <aura:attribute name="assetId" type="String" />   
+    <aura:attribute name="size" type="String" default="small" />
+
+    <aura:attribute name="imagesWrapper" type="Object"/>
+    <aura:attribute name="url" type="String"/>
+
+	<div class="{!'slds-container_' + v.size}" >
+		<div class="slds-grid slds-grid_align-center" id="shareOptions" role="group">
+
+			<div class="slds-col div_btn">
+				<button title="Facebook" onclick="{!c.shareToFacebook}">
+					<span class="{!'slds-avatar slds-avatar--' + v.size}">
+						<img src="{!$Resource.Facebook}" tittle="facebook" alt="Share on Facebook"></img>
+					</span>
+				</button>
+			</div>
+
+			<div class="slds-col div_btn">
+				<button title="Twitter" onclick="{!c.shareToTwitter}">
+					<span class="{!'slds-avatar slds-avatar--' + v.size}">
+						<img src="{!$Resource.Twitter}" style="width:55px;" tittle="twitter" alt="Share on Twitter"></img>
+					</span>
+				</button>
+			</div>
+
+			<div class="slds-col div_btn">
+				<button title="Google" onclick="{!c.shareToGoogle}">
+					<span class="{!'slds-avatar slds-avatar--' + v.size}">
+						<img src="{!$Resource.Google}" style="width:55px;" tittle="google" alt="Share on Google"></img>
+					</span>
+				</button>
+			</div>
+
+			<div class="slds-col div_btn">
+				<button title="Pinterest" onclick="{!c.shareToPinterest}">
+					<span class="{!'slds-avatar slds-avatar--' + v.size}">
+						<img src="{!$Resource.Pinterest}" style="width:55px;" tittle="pinterest" alt="Share on Pinterest"></img>
+					</span>
+				</button>
+			</div>
+
+			<div class="slds-col div_btn_addtocart">
+				<button title="Add to cart" onclick="{!c.addToCart}">
+					<lightning:icon class="{!v.size + '-icon_add_to_cart'}" iconName="utility:cart" size="{!v.size}" />
+				</button>
+			</div>
+			
+			<div class="slds-col div_btn" >
+				<!--c:CP_DownloadDocumentById iconSize="{!v.size}" classIn="downloadStyle" documentId="{!v.imagesWrapper.idImage}" iconName="action:download"/-->
+			</div>
+
+		</div>
+	</div>
+</aura:component>

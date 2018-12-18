@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AcceleratorSettingWrongField</fullName>
+        <categories>ClusterTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AcceleratorSettingWrongField</shortDescription>
+        <value>El campo seleccionado en custom settings &quot;Accelerator Settings&quot; es incorrecto</value>
+    </labels>
+    <labels>
+        <fullName>ComponentEmpty</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ComponentEmpty</shortDescription>
+        <value>Please complete the component attribute &quot;Component External Id&quot; with a valid value</value>
+    </labels>
+    <labels>
+        <fullName>Desktop</fullName>
+        <categories>MediaElementUpload.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Desktop</shortDescription>
+        <value>Desktop</value>
+    </labels>
+    <labels>
+        <fullName>ExistByDefaultLanguage</fullName>
+        <categories>ClusterTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ExistDefaultLanguage</shortDescription>
+        <value>No se puede agregar un language que este como default language</value>
+    </labels>
+    <labels>
+        <fullName>FieldsValues</fullName>
+        <categories>TranslationComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Fields Values</shortDescription>
+        <value>Fields Values</value>
+    </labels>
+    <labels>
+        <fullName>General_AreYouSure</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Are you sure?</shortDescription>
+        <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>General_Cancel</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>General_Delete</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>General_Edit</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>General_Error</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_Error</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>General_RecordsSavedSuccessfully</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_RecordsSavedSuccessfully</shortDescription>
+        <value>The records were saved successfully</value>
+    </labels>
+    <labels>
+        <fullName>General_Refresh</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Refresh</shortDescription>
+        <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>General_Save</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>General_Search</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>General_Success</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_Success</shortDescription>
+        <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>General_ViewMore</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_ViewMore</shortDescription>
+        <value>View More</value>
+    </labels>
+    <labels>
+        <fullName>ImageUploader</fullName>
+        <categories>MediaElementUpload.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ImageUploader</shortDescription>
+        <value>Image Uploader</value>
+    </labels>
+    <labels>
+        <fullName>Language</fullName>
+        <categories>TranslationComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Language</shortDescription>
+        <value>Language</value>
+    </labels>
+    <labels>
+        <fullName>Mobile</fullName>
+        <categories>MediaElementUpload.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mobile</shortDescription>
+        <value>Mobile</value>
+    </labels>
+    <labels>
+        <fullName>NoRecordsSelected</fullName>
+        <categories>JunctionObjectManager.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoRecordsSelected</shortDescription>
+        <value>No records selected</value>
+    </labels>
+    <labels>
+        <fullName>NoRecordsToShow</fullName>
+        <categories>JunctionObjectManager.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NoRecordsToShow</shortDescription>
+        <value>No records to show</value>
+    </labels>
+    <labels>
+        <fullName>OrderByInvalidFormat</fullName>
+        <categories>ComponentTriggers.cls</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Component Order By Advance Invalid Format</shortDescription>
+        <value>Invalid format:</value>
+    </labels>
+    <labels>
+        <fullName>SelectLanguage</fullName>
+        <categories>TranslationComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select language</shortDescription>
+        <value>Select language</value>
+    </labels>
+    <labels>
+        <fullName>SetUpAcceleratorSetting</fullName>
+        <categories>ClusterTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SetUpAcceleratorSetting</shortDescription>
+        <value>Se debe configurar la custom settings &quot;Accelerator Settings&quot; con un campo de tipo texto</value>
+    </labels>
+    <labels>
+        <fullName>Tablet</fullName>
+        <categories>MediaElementUpload.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tablet</shortDescription>
+        <value>Tablet</value>
+    </labels>
+    <labels>
+        <fullName>notReferClusterSelectorRecord</fullName>
+        <categories>CG_ClusterSelector.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not refer ClusterSelector record</shortDescription>
+        <value>The External Id entered does not refer to a ClusterSelector record</value>
+    </labels>
+</CustomLabels>

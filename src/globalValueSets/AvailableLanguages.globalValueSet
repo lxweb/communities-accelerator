@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>zh_CN</fullName>
+        <default>false</default>
+        <label>Chinese (Simplified)</label>
+    </customValue>
+    <customValue>
+        <fullName>zh_TW</fullName>
+        <default>false</default>
+        <label>Chinese (Traditional)</label>
+    </customValue>
+    <customValue>
+        <fullName>da</fullName>
+        <default>false</default>
+        <label>Danish</label>
+    </customValue>
+    <customValue>
+        <fullName>nl_NL</fullName>
+        <default>false</default>
+        <label>Dutch</label>
+    </customValue>
+    <customValue>
+        <fullName>en_US</fullName>
+        <default>false</default>
+        <label>English</label>
+    </customValue>
+    <customValue>
+        <fullName>fi</fullName>
+        <default>false</default>
+        <label>Finnish</label>
+    </customValue>
+    <customValue>
+        <fullName>fr</fullName>
+        <default>false</default>
+        <label>French</label>
+    </customValue>
+    <customValue>
+        <fullName>de</fullName>
+        <default>false</default>
+        <label>German</label>
+    </customValue>
+    <customValue>
+        <fullName>it</fullName>
+        <default>false</default>
+        <label>Italian</label>
+    </customValue>
+    <customValue>
+        <fullName>ja</fullName>
+        <default>false</default>
+        <label>Japanese</label>
+    </customValue>
+    <customValue>
+        <fullName>ko</fullName>
+        <default>false</default>
+        <label>Korean</label>
+    </customValue>
+    <customValue>
+        <fullName>no</fullName>
+        <default>false</default>
+        <label>Norwegian</label>
+    </customValue>
+    <customValue>
+        <fullName>pt_BR</fullName>
+        <default>false</default>
+        <label>Portuguese (Brazil)</label>
+    </customValue>
+    <customValue>
+        <fullName>ru</fullName>
+        <default>false</default>
+        <label>Russian</label>
+    </customValue>
+    <customValue>
+        <fullName>es</fullName>
+        <default>false</default>
+        <label>Spanish</label>
+    </customValue>
+    <customValue>
+        <fullName>es_MX</fullName>
+        <default>false</default>
+        <label>Spanish (Mexico)</label>
+    </customValue>
+    <customValue>
+        <fullName>sv</fullName>
+        <default>false</default>
+        <label>Swedish</label>
+    </customValue>
+    <customValue>
+        <fullName>th</fullName>
+        <default>false</default>
+        <label>Thai</label>
+    </customValue>
+    <customValue>
+        <fullName>ar</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_AE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (United Arab Emirates)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_BH</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Bahrain)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_DZ</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Algeria)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_EG</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Egypt)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_IQ</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Iraq)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_JO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Jordan)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_KW</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Kuwait)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_LB</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Lebanon)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_LY</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Libya)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_MA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Morocco)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_OM</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Oman)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_QA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Qatar)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_SA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Saudi Arabia)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_SD</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Sudan)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_SY</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Syria)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_TN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Tunisia)</label>
+    </customValue>
+    <customValue>
+        <fullName>ar_YE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arabic (Yemen)</label>
+    </customValue>
+    <customValue>
+        <fullName>bg</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bulgarian</label>
+    </customValue>
+    <customValue>
+        <fullName>bn</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bengali</label>
+    </customValue>
+    <customValue>
+        <fullName>bs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bosnian</label>
+    </customValue>
+    <customValue>
+        <fullName>ca</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Catalan</label>
+    </customValue>
+    <customValue>
+        <fullName>cs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Czech</label>
+    </customValue>
+    <customValue>
+        <fullName>cy</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Welsh</label>
+    </customValue>
+    <customValue>
+        <fullName>de_AT</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>German (Austria)</label>
+    </customValue>
+    <customValue>
+        <fullName>de_BE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>German (Belgium)</label>
+    </customValue>
+    <customValue>
+        <fullName>de_CH</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>German (Switzerland)</label>
+    </customValue>
+    <customValue>
+        <fullName>de_LU</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>German (Luxembourg)</label>
+    </customValue>
+    <customValue>
+        <fullName>el</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Greek</label>
+    </customValue>
+    <customValue>
+        <fullName>en_AU</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Australia)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_CA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Canada)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_GB</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (UK)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_HK</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Hong Kong)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_IE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Ireland)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_IN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (India)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_MY</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Malaysia)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_PH</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Philippines)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_SG</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (Singapore)</label>
+    </customValue>
+    <customValue>
+        <fullName>en_ZA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>English (South Africa)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_AR</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Argentina)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_BO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Bolivia)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_CL</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Chile)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_CO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Colombia)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_CR</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Costa Rica)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_DO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Dominican Republic)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_EC</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Ecuador)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_GT</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Guatemala)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_HN</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Honduras)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_NI</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Nicaragua)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_PA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Panama)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_PE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Peru)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_PR</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Puerto Rico)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_PY</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Paraguay)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_SV</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (El Salvador)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_US</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (United States)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_UY</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Uruguay)</label>
+    </customValue>
+    <customValue>
+        <fullName>es_VE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Spanish (Venezuela)</label>
+    </customValue>
+    <customValue>
+        <fullName>et</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Estonian</label>
+    </customValue>
+    <customValue>
+        <fullName>eu</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Basque</label>
+    </customValue>
+    <customValue>
+        <fullName>fr_BE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>French (Belgium)</label>
+    </customValue>
+    <customValue>
+        <fullName>fr_CA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>French (Canada)</label>
+    </customValue>
+    <customValue>
+        <fullName>fr_CH</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>French (Switzerland)</label>
+    </customValue>
+    <customValue>
+        <fullName>fr_LU</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>French (Luxembourg)</label>
+    </customValue>
+    <customValue>
+        <fullName>ga</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Irish</label>
+    </customValue>
+    <customValue>
+        <fullName>hi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hindi</label>
+    </customValue>
+    <customValue>
+        <fullName>hr</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Croatian</label>
+    </customValue>
+    <customValue>
+        <fullName>hu</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hungarian</label>
+    </customValue>
+    <customValue>
+        <fullName>hy</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Armenian</label>
+    </customValue>
+    <customValue>
+        <fullName>in</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Indonesian</label>
+    </customValue>
+    <customValue>
+        <fullName>is</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Icelandic</label>
+    </customValue>
+    <customValue>
+        <fullName>it_CH</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Italian (Switzerland)</label>
+    </customValue>
+    <customValue>
+        <fullName>iw</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hebrew</label>
+    </customValue>
+    <customValue>
+        <fullName>ka</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Georgian</label>
+    </customValue>
+    <customValue>
+        <fullName>lb</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Luxembourgish</label>
+    </customValue>
+    <customValue>
+        <fullName>lt</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Lithuanian</label>
+    </customValue>
+    <customValue>
+        <fullName>lv</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Latvian</label>
+    </customValue>
+    <customValue>
+        <fullName>mk</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Macedonian</label>
+    </customValue>
+    <customValue>
+        <fullName>ms</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Malay</label>
+    </customValue>
+    <customValue>
+        <fullName>mt</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Maltese</label>
+    </customValue>
+    <customValue>
+        <fullName>nl_BE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Dutch (Belgium)</label>
+    </customValue>
+    <customValue>
+        <fullName>pl</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Polish</label>
+    </customValue>
+    <customValue>
+        <fullName>pt_PT</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Portuguese (Portugal)</label>
+    </customValue>
+    <customValue>
+        <fullName>rm</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Romansh</label>
+    </customValue>
+    <customValue>
+        <fullName>ro</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Romanian</label>
+    </customValue>
+    <customValue>
+        <fullName>ro_MD</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Romanian (Moldova)</label>
+    </customValue>
+    <customValue>
+        <fullName>sh</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Serbian (Latin)</label>
+    </customValue>
+    <customValue>
+        <fullName>sh_ME</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Montenegrin</label>
+    </customValue>
+    <customValue>
+        <fullName>sk</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Slovak</label>
+    </customValue>
+    <customValue>
+        <fullName>sl</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Slovenian</label>
+    </customValue>
+    <customValue>
+        <fullName>sq</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Albanian</label>
+    </customValue>
+    <customValue>
+        <fullName>sr</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Serbian (Cyrillic)</label>
+    </customValue>
+    <customValue>
+        <fullName>ta</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Tamil</label>
+    </customValue>
+    <customValue>
+        <fullName>tl</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Tagalog</label>
+    </customValue>
+    <customValue>
+        <fullName>tr</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Turkish</label>
+    </customValue>
+    <customValue>
+        <fullName>uk</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Ukrainian</label>
+    </customValue>
+    <customValue>
+        <fullName>ur</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Urdu</label>
+    </customValue>
+    <customValue>
+        <fullName>vi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Vietnamese</label>
+    </customValue>
+    <customValue>
+        <fullName>zh_HK</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Chinese (Traditional—Hong Kong)</label>
+    </customValue>
+    <customValue>
+        <fullName>zh_SG</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Chinese (Simplified—Singapore)</label>
+    </customValue>
+    <description>Contains all available languages . By default, only fully supported languages by Salesforce are active. Implementation teams can extend the list of active languages.</description>
+    <masterLabel>Available Languages</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

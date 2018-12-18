@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>MediaElement_RecordPage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>MediaElement_CompactLayout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>MediaElement_CompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>ExternalId__c</fields>
+        <fields>StatusApprovalProcess__c</fields>
+        <label>Media Element - Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Represents the repository of media elements that can be assigned to multiple contents.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Describes the media element stating things such as what can you see in a photograph (Ex. Child feeding a dog)</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>4096</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DesktopFileExtension__c</fullName>
+        <description>Indicates the image file extension for desktop.</description>
+        <externalId>false</externalId>
+        <label>Desktop File Extension</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>MediaElementExtensions</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ExternalId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Autocompleted/editable field based on Name and Cluster External Id for import/export purposes.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Autocompleted/editable field based on Name and Cluster External Id for import/export purposes.</inlineHelpText>
+        <label>External Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>FileNameDesktop__c</fullName>
+        <description>Indicates file name for desktop image.</description>
+        <externalId>false</externalId>
+        <label>File Name Desktop</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FileNameMobile__c</fullName>
+        <description>Indicates file name for mobile image. If it was an automatic resize it would be the desktop file name plus &quot;(mobile&quot;).</description>
+        <externalId>false</externalId>
+        <label>File Name Mobile</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FileNameTablet__c</fullName>
+        <description>Indicates file name for tablet image. If it was an automatic resize it would be the desktop file name plus &quot;(tablet&quot;).</description>
+        <externalId>false</externalId>
+        <label>File Name Tablet</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FileURLDesktop__c</fullName>
+        <description>Stores the URL of the desktop file related to the media element.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the URL of the desktop file related to the media element.</inlineHelpText>
+        <label>File URL Desktop</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FileURLMobile__c</fullName>
+        <description>Stores the URL of the mobile file related to the media element.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the URL of the mobile file related to the media element.</inlineHelpText>
+        <label>File URL Mobile</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FileURLTablet__c</fullName>
+        <description>Stores the URL of the tablet file related to the media element.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the URL of the tablet file related to the media element.</inlineHelpText>
+        <label>File URL Tablet</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HeightDesktop__c</fullName>
+        <description>Indicates image height for desktop.</description>
+        <externalId>false</externalId>
+        <label>Height Desktop</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HeightMobile__c</fullName>
+        <description>Indicates image height for mobile.</description>
+        <externalId>false</externalId>
+        <label>Height Mobile</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HeightTablet__c</fullName>
+        <description>Indicates image height for tablet.</description>
+        <externalId>false</externalId>
+        <label>Height Tablet</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MobileFileExtension__c</fullName>
+        <description>Indicates the image file extension for mobile.</description>
+        <externalId>false</externalId>
+        <label>Mobile File Extension</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>MediaElementExtensions</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>PathStep__c</fullName>
+        <description>Its field is for path purpouses</description>
+        <externalId>false</externalId>
+        <label>Path step</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Initial</fullName>
+                    <default>true</default>
+                    <label>Initial</label>
+                </value>
+                <value>
+                    <fullName>SetMedia</fullName>
+                    <default>false</default>
+                    <label>Set media</label>
+                </value>
+                <value>
+                    <fullName>FinalCheck</fullName>
+                    <default>false</default>
+                    <label>Final check</label>
+                </value>
+                <value>
+                    <fullName>Available</fullName>
+                    <default>false</default>
+                    <label>Available</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StatusApprovalProcess__c</fullName>
+        <description>Indicates if the media element is available or not in order to be use within different contents.</description>
+        <externalId>false</externalId>
+        <label>Status Approval Process</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>StatusApprovalProcess</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TabletFileExtension__c</fullName>
+        <description>Indicates the image file extension for tablet.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates the image file extension for tablet.</inlineHelpText>
+        <label>Tablet File Extension</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>MediaElementExtensions</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>WidthDesktop__c</fullName>
+        <description>Indicates image width for desktop.</description>
+        <externalId>false</externalId>
+        <label>Width Desktop</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WidthMobile__c</fullName>
+        <description>Indicates image width for mobile.</description>
+        <externalId>false</externalId>
+        <label>Width Mobile</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>WidthTablet__c</fullName>
+        <description>Indicates image width for tablet.</description>
+        <externalId>false</externalId>
+        <label>Width Tablet</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Media Element</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>DesktopFileExtension__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Available_Media_Elements</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>PathStep__c</field>
+            <operation>equals</operation>
+            <value>Available</value>
+        </filters>
+        <filters>
+            <field>StatusApprovalProcess__c</field>
+            <operation>equals</operation>
+            <value>Draft,Pending Approval</value>
+        </filters>
+        <label>Available Draft Media Elements</label>
+    </listViews>
+    <listViews>
+        <fullName>Demo_1</fullName>
+        <columns>NAME</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>ExternalId__c</columns>
+        <columns>FileURLDesktop__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>contains</operation>
+            <value>demo 1</value>
+        </filters>
+        <label>Demo 1</label>
+    </listViews>
+    <listViews>
+        <fullName>MediaElementsLihue</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>contains</operation>
+            <value>Lihue</value>
+        </filters>
+        <label>Media elements Lihue</label>
+    </listViews>
+    <nameField>
+        <label>Media Element Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Media elements</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>ExternalId__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>FileURLDesktop__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>ExternalId__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>FileURLDesktop__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>MediaElement_ExternalIdRequired</fullName>
+        <active>true</active>
+        <description>Validates there is a value for the External Id field.</description>
+        <errorConditionFormula>ISBLANK( ExternalId__c )</errorConditionFormula>
+        <errorDisplayField>ExternalId__c</errorDisplayField>
+        <errorMessage>You must assign a value for the External Id.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

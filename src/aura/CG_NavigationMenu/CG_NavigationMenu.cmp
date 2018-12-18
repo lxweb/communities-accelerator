@@ -1,0 +1,44 @@
+<aura:component  >
+	<aura:attribute name="menus" type="Object[]"/>
+    <aura:attribute name="mobileFormat" type="Boolean" default="false"/>
+    <aura:attribute name="opened" type="Boolean"/> <!-- QUE ES? -->
+       
+    <div class="{!if(v.mobileFormat, if(v.opened, '', 'slds-hide'), '')}">
+        
+        <!-- DESKTOP -->
+        <aura:if isTrue="{! !v.mobileFormat}">
+            <ul class="slds-show_medium ul-level-0">
+                <aura:iteration items="{!v.menus}" var="menu" indexVar="fistIndex">
+                    <c:CG_NavigationMenuItem menuIsOpen="{!v.opened}" item="{!menu}" menuLevel="1" mobileFormat="{!v.mobileFormat}" index="{!fistIndex}">
+                        <aura:iteration items="{!menu.subMenus}" var="subM" indexVar="secondIndex">
+                            <c:CG_NavigationMenuItem menuIsOpen="{!v.opened}" item="{!subM}" menuLevel="2" mobileFormat="{!v.mobileFormat}" index="{!secondIndex}">
+                                <aura:iteration items="{!subM.subMenus}" var="subSubM" indexVar="thirdIndex">
+                                    <c:CG_NavigationMenuItem menuIsOpen="{!v.opened}" item="{!subSubM}" menuLevel="3" mobileFormat="{!v.mobileFormat}" index="{!thirdIndex}"/>
+                                </aura:iteration>
+                            </c:CG_NavigationMenuItem>
+                        </aura:iteration>
+                    </c:CG_NavigationMenuItem>
+                </aura:iteration>
+            </ul>
+        </aura:if>
+        
+        <!-- MOBILE -->
+        <!-- 
+        <aura:if isTrue="{!v.mobileFormat}">
+            <ul class="slds-hide_medium ul-level-0">
+                <aura:iteration items="{!v.menus}" var="menu" indexVar="fistIndex">
+                    <c:CP_NavigationMenuItemComponent menuIsOpen="{!v.opened}" item="{!menu}" menuLevel="1" mobileFormat="{!v.mobileFormat}" index="{!fistIndex}">
+                        <aura:iteration items="{!menu.subMenus}" var="subM" indexVar="secondIndex">
+                            <c:CP_NavigationMenuItemComponent menuIsOpen="{!v.opened}" item="{!subM}" menuLevel="2" mobileFormat="{!v.mobileFormat}" index="{!secondIndex}">
+                                <aura:iteration items="{!subM.subMenus}" var="subSubM" indexVar="thirdIndex">
+                                    <c:CP_NavigationMenuItemComponent menuIsOpen="{!v.opened}" item="{!subSubM}" menuLevel="3" mobileFormat="{!v.mobileFormat}" index="{!thirdIndex}"/>
+                                </aura:iteration>
+                            </c:CP_NavigationMenuItemComponent>
+                        </aura:iteration>
+                    </c:CP_NavigationMenuItemComponent>
+                </aura:iteration>
+            </ul>
+        </aura:if>
+        -->
+    </div>
+</aura:component>

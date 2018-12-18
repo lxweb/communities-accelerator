@@ -1,0 +1,99 @@
+<aura:component  controller="MediaElementsManagerController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="recordId" type="String"/>
+
+	<!-- Parameterizable attributes -->
+    <aura:attribute name="places" type="String"/>
+    <aura:attribute name="parentLookup" type="String"/>
+
+    <!-- General Variables -->
+    <aura:attribute name="isLoading" type="boolean" default="false" />
+    <aura:attribute name="errorMessage" type="String" default=""/>
+
+    <aura:attribute name="recordWrapperList" type="Object"/>
+
+    <aura:attribute name="mediaElementList" type="Object"/>
+    <aura:attribute name="mediaElementPlace" type="String"/>
+
+    <aura:attribute name="offset" type="Integer" default="0"/>
+
+    <aura:attribute name="elementPerPage" type="Integer" default="6"/>
+
+    <aura:attribute name="scrollCallback" type="Object" access="private" />
+    <aura:attribute name="scrollCalled" type="Boolean" access="private" default="false" />
+    <aura:attribute name="isEndPage" type="boolean" default="false"/>
+
+    <aura:attribute name="searchValue" type="String" default=""/>
+
+    <!-- Component -->
+    <div id="Component">
+		<lightning:card title="Media Element">
+		    <aura:if isTrue="{! v.errorMessage == '' }">
+		    	<aura:if isTrue="{!v.isLoading}">
+		    		<!-- LOADING -->
+		            <c:Spinner/>
+			    	<aura:set attribute="else">
+			    		<!-- CARDS -->
+			    		<div class="div_allCardsContainer">
+				    		<aura:iteration items="{!v.recordWrapperList}" var="rec">
+					    		<aura:if isTrue="{! rec.junctionObject != null }">
+					    			<!--COMPLETE CARD -->
+					    			<div class="div_cardContainer">
+					    				<img src="{!rec.junctionObject.MediaElement__r.FileURLDesktop__c}" class="img_preview"/>
+					    				{!rec.place}
+					    				<button  onclick="{!c.getMedElems}" id="{!rec.place}">change</button>
+					    				<button onclick="{!c.deleteMediaElement}" id="{!rec.junctionObject.Id}" >del</button>
+
+									</div>
+									<aura:set attribute="else">
+										<!-- EMPTY CARD -->
+										<div class="div_cardContainer">
+											<div class="img_preview" /><!-- TODO -->
+											{!rec.place}
+											<button onclick="{!c.getMedElems}" id="{!rec.place}">add</button>
+										</div>
+									</aura:set>
+								</aura:if>
+					    	</aura:iteration>
+			    		</div>
+
+				    	<!-- LIST OF MEDIA ELEMENTS -->
+				    	<aura:if isTrue="{! v.mediaElementPlace != '' }" > 
+					    	<div>
+					    		{!v.mediaElementPlace}
+					    		<!-- SEARCH BOX -->
+					    		<input type="text" aura:id="searchField" class="input_search" placeholder="Word to search"/>
+								<lightning:button title="Search" onclick="{!c.searchByText}">
+				            		<lightning:Icon class="icon_search" iconName="utility:search" title="Search" alternativeText="Search" size="x-small"/>
+				            	</lightning:button>
+
+					    	</div>
+							<div class="div_mediaElementsContainer">
+								<!-- MEDIA ELEMENTS LIST -->
+								<aura:iteration items="{!v.mediaElementList}" var="mediaElement">
+									<div class="div_mediaElementCardContainer">
+										<img src="{!mediaElement.FileURLDesktop__c}" class="img_mediaElementReview"  onclick="{!c.choseMediaElement}" id="{!mediaElement.Id}"/>
+										<div class="div_cardTitle">
+											{!mediaElement.Name}
+										</div>
+									</div>
+								</aura:iteration>
+							</div>
+							<aura:if isTrue="{! v.isEndPage }">
+								<!-- NO MORE RECORDS MESSAGE -->
+								<div >
+									{!$Label.c.NoRecordsToShow} 
+								</div>
+							</aura:if>
+				    	</aura:if>
+				    </aura:set>
+			    </aura:if>
+			    <!-- ERROR |TODO| hacer este tema -->
+			    <aura:set attribute="else">
+			    	Error: {!v.errorMessage}
+			    </aura:set>
+		    </aura:if>
+		</lightning:card>
+    </div>
+</aura:component>

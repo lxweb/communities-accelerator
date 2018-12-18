@@ -1,0 +1,4 @@
+<design:component label="Translations">
+	<design:attribute name="parentLookupName" label="Parent Lookup Name" required="true"/>
+    <design:attribute name="fieldSet" label="Fields" required="true"/>
+</design:component>

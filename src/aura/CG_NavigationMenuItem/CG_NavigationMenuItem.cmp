@@ -1,0 +1,121 @@
+<aura:component >
+	<aura:attribute type="Aura.Component[]" name="dynamicComponent" />
+    <aura:attribute name="item" required="true" type="Object"/>
+    <aura:attribute name="menuLevel" required="true" type="Integer"/>
+    <aura:attribute name="mobileFormat" required="true" type="Boolean"/>
+    <aura:attribute name="index" required="true" type="Integer"/>
+    <aura:attribute name="isActive" default="false" type="Boolean"/>
+    <aura:attribute name="urlTarget" default="" required="false" type="String"/>
+    <aura:attribute name="isLogOut" default="false" required="false" type="Boolean"/>
+    
+    <aura:attribute name="menuIsOpen" required="true" type="Boolean"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <span onclick="{!if(v.mobileFormat, c.openSubMenu, '')}" data-menu-level="{!v.menuLevel}" data-index="{!v.index}">
+        <li class="{!'li-level-' + v.menuLevel + ' menu-a ' + if(v.index == 0, 'first-child ', '') + if(v.isActive, 'active', '') + v.item.styleClass}" id="{!'li-level-' + v.menuLevel + '-' + v.index}">
+            <div class="{!if(and(v.item.menu.MenuIcon__c != null,v.item.label == null),' only-icon ',' ') + if(v.item.subMenus.length > 0, ' has-child ', '') }">
+                 
+                <!-- ***** MOBILE ***** -->
+                <!--
+                <aura:if isTrue="{!v.mobileFormat}">
+                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                        <div class="slds-col">
+                            
+                            <!- COMUNNITY PAGE / EXTERNAL URL ->
+                            <aura:if isTrue="{!or(v.item.menuType == 'CommunityPage',v.item.menuType == 'ExternalURL')}">
+                                <span>
+                                    <aura:if isTrue="{!v.item.menu.MenuIcon__c != null}">
+                                        <i class="{!v.item.menu.MenuIcon__c}"/>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.item.subMenus.length == 0}">
+                                        <aura:if isTrue="{!!v.isLogOut}">
+                                            <a href="" onclick="{!c.redirect}" target="{!v.urlTarget}">{!v.item.label}</a>
+                                        	<aura:set attribute="else">
+                                                <a href="{!v.item.menu.CommunityPageURL__c}" target="_self">{!v.item.label}</a>
+                                        	</aura:set> 
+                                        </aura:if>                                        
+                                		<aura:set attribute="else">
+                                            {!v.item.label}
+										</aura:set>
+                                    </aura:if>
+                                </span>
+                            </aura:if>
+                            
+                            <!- GROUP ->
+                            <aura:if isTrue="{!v.item.menuType == 'Group'}">
+                                <span>
+                                    <aura:if isTrue="{!v.item.menu.MenuIcon__c != null}">
+                                        <i class="{!v.item.menu.MenuIcon__c}"/>
+                                    </aura:if>
+                                    {!v.item.label}
+                                </span>
+                            </aura:if>
+                            
+                            <!- CUSTOM COMPONENT ->
+                            <aura:if isTrue="{!v.item.menuType == 'Custom'}">
+                                <div id="{!v.item.menu.Id}">
+                                    {!v.dynamicComponent}
+                                </div>
+                            </aura:if>
+                        </div>
+                        <div class="slds-col slds-hide_medium">
+                            <i class="{!'fas fa-angle-' + if(v.item.subMenus.length > 0, if(v.isActive, 'up', 'down'), 'right')}"></i>
+                        </div>
+                    </div>
+                </aura:if>
+                -->
+                <!-- ***** DESKTOP ***** -->
+                <aura:if isTrue="{! !v.mobileFormat}">
+                                   
+                    <!-- COMUNNITY PAGE / EXTERNAL URL -->
+                    <aura:if isTrue="{!or(v.item.menuType == 'CommunityPage',v.item.menuType == 'ExternalURL')}">
+                        <span>
+                            <aura:if isTrue="{!!v.isLogOut}">
+                                <a href="" onclick="{!c.redirect}" target="{!v.urlTarget}">
+                                    <aura:if isTrue="{!v.item.menu.MenuIcon__c != null}">
+                                        <i class="{!v.item.menu.MenuIcon__c}"/>
+                                    </aura:if>
+                                    <span>{!v.item.label}</span>
+                                </a>
+                                <aura:set attribute="else">
+                                    <a href="{!v.item.menu.CommunityPageURL__c}" target="_self">
+                                        <aura:if isTrue="{!v.item.menu.MenuIcon__c != null}">
+                                            <i class="{!v.item.menu.MenuIcon__c}"/>
+                                        </aura:if>
+                                        <span>{!v.item.label}</span>
+                                    </a>
+                                </aura:set> 
+                            </aura:if>
+                        </span>
+                    </aura:if>
+                    
+                    <!-- GROUP -->
+                    <aura:if isTrue="{!v.item.menuType == 'Group'}">
+                        <span class="no-action">
+                            <aura:if isTrue="{!v.item.menu.MenuIcon__c != null}">
+                                <i class="{!v.item.menu.MenuIcon__c}"/>
+                            </aura:if>
+                            {!v.item.label}
+                        </span>
+                    </aura:if>
+                    
+                    <!-- CUSTOM COMPONENT -->
+                    <aura:if isTrue="{!v.item.menuType == 'Custom'}">
+                         <span id="{!v.item.menu.Id}">
+                             {!v.dynamicComponent}
+                         </span>
+                    </aura:if>
+                    
+                </aura:if>
+                <aura:if isTrue="{!v.item.subMenus.length > 0}">
+                    <div class="{! 'div-ul div-' + v.menuLevel + '-' + v.index}">
+                        <ul class="{!'ul-level-'+ v.menuLevel + ' sub-' + v.menuLevel + '-' + v.index + if(v.mobileFormat, ' slds-hide', '')}" aura:id="{!'ulLevel'+ v.menuLevel}">
+                            {!v.body}
+                        </ul>
+                    </div>
+                </aura:if>
+            </div>
+        </li>
+   </span>
+</aura:component>

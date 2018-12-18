@@ -1,0 +1,65 @@
+<aura:component  >
+
+    <aura:attribute name="contentWrapper" type="Object" />
+    <aura:attribute name="componentWrapper" type="Object" />
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="linkDetail" type="String" />
+    <aura:attribute name="parentComponentId" type="String" />
+    <aura:attribute name="height" type="String" />
+
+    <lightning:layout multipleRows="true" class="main-layout">
+
+        <!-- LANDSCAPE -->
+        <aura:if isTrue="{!v.type == 'Landscape'}" >
+            <div class="landscape-item" style="{! 'height: ' + v.height }">
+                <div class="landscape-div-img" style="{! 'background-image: url(' + v.contentWrapper.mediaElements[0].FileURLDesktop__c + ');' }"></div>
+                
+                <div class="landscape-div-title">
+                	<h2 class="slds-align_absolute-center h2-19-black-bold">{!v.contentWrapper.content.ListTitle__c}</h2>
+                </div>
+                
+                <div class="landscape-div-body">
+                    <p class="align_absolute-center p-15-black-regular" >
+                        <aura:unescapedHtml value="{!v.contentWrapper.content.ListDescription__c}"/>
+                    </p>
+                </div>
+
+                <div class="landscape-div-button">
+                    <lightning:button class="slds-align_absolute-center view-more-button" onclick="{!c.handleDetail}" label="{!$Label.c.General_ViewMore}" />
+                </div>
+            </div>
+        </aura:if>
+
+        <!-- PORTRAIT AND HIGHLIGHTS -->
+        <aura:if isTrue="{!not(v.type == 'Landscape')}" >
+            
+            <lightning:layout class="portrait-layout">
+                
+                <lightning:layoutitem size="5" class="info-container info-detail portrait-container-image">
+                    <img class="portrait-img" src="{!v.contentWrapper.mediaElements[0].FileURLDesktop__c}"/>
+                </lightning:layoutitem>
+
+                <lightning:layoutitem size="7" class="info-container info-detail portrait-container-body">
+                    <div class="portrait-div-title">
+                        <h2 class="h2-19-black-bold" >{!v.contentWrapper.content.ListTitle__c}</h2>
+                    </div>
+                    
+                    <div class="portrait-div-body">
+                        <p class="p-15-black-regular" >
+                            <aura:unescapedHtml value="{!v.contentWrapper.content.ListDescription__c}"/>
+                        </p>
+                    </div>
+                    
+                    <div class="portrait-div-button">
+                        <lightning:button class="view-more-button" onclick="{!c.handleDetail}" label="{!$Label.c.General_ViewMore}" />
+                    </div>
+
+                </lightning:layoutitem>
+
+            </lightning:layout>
+
+        </aura:if>
+
+    </lightning:layout>
+
+</aura:component>

@@ -1,0 +1,32 @@
+<aura:component extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes">
+	
+	<!-- GENERAL VARIABLES --> 
+	<aura:attribute name="componentExternalId" type="String" />
+	<aura:attribute name="componentType" type="String" default="FAQ"/>
+
+	<aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
+		<!-- FAQs COMPONENT -->
+		<lightning:accordion aura:id="accordion" allowMultipleSectionsOpen="true">
+			
+			<aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
+		        <lightning:accordionSection name="{!wrapper.content.Id}" label="{!wrapper.content.ListTitle__c}">
+		            <aura:set attribute="body">
+		                <aura:unescapedHtml value="{!wrapper.content.ListDescription__c}"/>
+		            </aura:set>
+		        </lightning:accordionSection>
+	    	</aura:iteration>
+
+	    </lightning:accordion>
+
+    	<aura:set attribute="else">
+    		<div class="slds-page-header" style="text-align: center;">
+                <lightning:layout horizontalAlign="left">
+                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+                        <p>No existen FAQs</p>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </aura:set>
+    </aura:if>
+	
+</aura:component>

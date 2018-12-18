@@ -1,0 +1,12 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" >
+	<!-- GENERAL VARIABLES --> 
+	<!--
+	<aura:attribute name="componentExternalId" type="String" />
+	<aura:attribute name="componentType" type="String" default="Navigation"/>
+	-->
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<!--INTERNAL -->
+    <aura:attribute name="controller" type="Object" />
+
+	<c:CG_NavigationMenu menus="{!v.controller.navigationMap.desktopLocationTopLeft}" mobileFormat="false"/>
+</aura:component>

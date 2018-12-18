@@ -1,0 +1,45 @@
+.THIS  .div_allCardsContainer{
+	display: flex;
+	justify-content: space-evenly;
+}
+.THIS .div_mediaElementCardContainer{
+	height: 150px;
+	/*width: 150px;
+	border: black;
+    border-style: solid;
+*/
+    margin: 10px;
+}
+.THIS .img_mediaElementReview{
+	height: 100px;
+	/*width: 150px;*/
+	object-fit: contain;
+}
+/* TODO acomodar */
+.THIS .div_cardContainer{
+	height: 250px;
+	width: 300px;
+	border: black;
+    border-style: solid;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.THIS .img_preview{
+	height: 200px;
+	width: 300px;
+	object-fit: contain;
+}
+.THIS .input_search{
+	width: 250px;
+}
+.THIS .div_mediaElementsContainer{
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: space-evenly;
+}
+.THIS .div_cardTitle{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

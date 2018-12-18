@@ -1,0 +1,191 @@
+public class GeneralUtils{
+
+	public static String generateExternalId(String name, String clusterID){
+		String apiName = name.deleteWhitespace();
+		// Alternativa: '[|,|.|\\,||"||:|~|!|@|#|$|%|^|&|*|°|-|+|=|<|>|?|\\(|\\)|\\{|\\}|\\;|\\\'"]'s
+		apiName = apiName.replaceAll('[^a-zA-Z0-9]', '_');
+
+		if (clusterID == null){
+			return apiName;
+		} else {
+            if (Pattern.compile( '[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}' ).matcher(clusterID).matches() ){
+                Cluster__c cluster = [SELECT Id, name FROM Cluster__c WHERE Id =: clusterID];
+                clusterID = cluster.name;
+                clusterID.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_');
+            }
+        }
+		return clusterID + '_' + apiName;
+        //Test
+	}
+
+	public static String generateExternalId(String name){
+		String stringToReturn = generateExternalId(name, null);
+		return stringToReturn;	
+	}
+
+    public static String joinFields(List<String> listToJoin){
+        set<String> finalset = new set<String>();
+        finalset.addAll(listToJoin);
+        return joinFields(finalset);
+    }
+
+    public static String joinFields(set<String> setToJoin){
+        set<String> finalset = new set<String>();
+        for(String f: setToJoin){
+            finalset.add(f.toLowerCase());
+        }
+        return String.join((Iterable<String>)finalset, ', ');
+    }
+
+	public static String replaceDynamicFields(String originalText, String objectApiName, Id recordId, Boolean addQuotes){
+        if(originalText != null && objectApiName != null && recordId != null){
+            objectApiName = objectApiName.toLowerCase();
+
+            if(originalText.substringBetween('[!' + objectApiName + '.', ']') != null){            
+                set<String> fieldsToRep = new set<String>();
+                String auxText = originalText;
+                while(auxText.substringBetween('[!' + objectApiName + '.', ']') != null) {
+                    String fieldApiName = auxText.substringBetween('[!' + objectApiName + '.', ']');
+                    auxText = auxText.replace('[!' + objectApiName + '.' + fieldApiName + ']', '');
+                    fieldsToRep.add(fieldApiName);
+                }
+                
+                if(!fieldsToRep.isEmpty()){
+                    String fieldsToRepStr = '';
+                    for(String fieldApiName: fieldsToRep){
+                        fieldsToRepStr += (fieldsToRepStr == '' ? fieldApiName : ', ' + fieldApiName);
+                    }
+                    String query = 'SELECT ' + fieldsToRepStr + ' FROM ' + objectApiName + ' WHERE Id =: recordId';
+
+                    try{
+                        SObject rec = Database.query(query);
+                        while(originalText.substringBetween('[!' + objectApiName + '.', ']') != null) {
+                            try{
+                                String fieldApiName = originalText.substringBetween('[!' + objectApiName + '.', ']');
+                                if(getFieldValue(rec, fieldApiName) != null){
+                                    originalText = originalText.replace('[!' + objectApiName + '.' + fieldApiName + ']', (addQuotes ? '\'' : '') + String.ValueOf(getFieldValue(rec, fieldApiName)) + (addQuotes ? '\'' : ''));
+                                }else{
+                                    originalText = originalText.replace('[!' + objectApiName + '.' + fieldApiName + ']', (addQuotes ? '\'' : '') + (addQuotes ? '\'' : ''));
+                                }
+                            }catch(Exception e){}
+                        }
+                    }catch(Exception e){}
+                }
+            }
+        }
+        return originalText;
+    }
+
+	public static Object getFieldValue(SObject record, String fieldPath){
+        SObject recordAux = record;
+        while(fieldPath.contains('.')){
+            String fieldAux = fieldPath.substring(0, fieldPath.indexOf('.'));
+            fieldPath = fieldPath.substring(fieldPath.indexOf('.') + 1, fieldPath.length());
+            if(recordAux.getSObject(fieldAux) != null){
+                recordAux = recordAux.getSObject(fieldAux);
+            }else{
+                return null;
+            }
+        }
+        Object val = recordAux.get(fieldPath);
+        return val;
+    }
+
+    public static map<Id, List<ContentVersion>> getFilesByParentId(Set<ID> idSet){
+        map<Id, List<ContentVersion>> mapParentIdFiles = new map<Id, List<ContentVersion>>();
+
+        if(!idSet.isEmpty()){
+            for(Id ids: idSet){
+                mapParentIdFiles.put(ids, new List<ContentVersion>());
+            }
+
+            //Get document ids from ContentDocumentLink
+            set<Id> setDocumentIds = new set<Id>();
+            List<ContentDocumentLink> fileLinks = [select Id, LinkedEntityId, ContentDocumentId from ContentDocumentLink where LinkedEntityId in: idSet];
+            for(ContentDocumentLink fileLink: fileLinks){
+                setDocumentIds.add(fileLink.ContentDocumentId);
+            }
+
+            //Get ContentVersions from documents
+            map<Id, ContentVersion> mapContentVersion = new map<Id, ContentVersion>();
+            for(ContentVersion cv: [select Id, title, ContentDocumentId from ContentVersion where ContentDocumentId in: setDocumentIds]){
+                mapContentVersion.put(cv.ContentDocumentId, cv);
+            }
+
+            //Map to relate a record with his files
+            for(ContentDocumentLink fileLink: fileLinks){
+                if(mapContentVersion.containsKey(fileLink.ContentDocumentId)){
+                    mapParentIdFiles.get(fileLink.LinkedEntityId).add(mapContentVersion.get(fileLink.ContentDocumentId));
+                }
+            }
+        }
+
+        return mapParentIdFiles;
+    }
+
+    public static String getSubstring(String text, Integer length){
+        String retText;
+        if(text != null){
+            if(text.length() > length){
+                retText = text.substring(0, length);
+            }else{
+                retText = text;
+            }
+        }
+        return retText;
+    }
+
+    public static Boolean isSafeObject(String objName){
+        SObjectType myObj = Schema.getGlobalDescribe().get(objName);
+        if(myObj != null && myObj.getDescribe().isAccessible()) { 
+            return true; 
+        }
+        return false;
+    }
+
+    public static Boolean isSafeField(String objName, String fieldName){
+        if(isSafeObject(objName)) {
+            SObjectField myField = Schema.getGlobalDescribe().get(objName).getDescribe().fields.getMap().get(fieldName);
+            if(myField != null && myField.getDescribe().isAccessible()){
+                return true;
+            }            
+        }
+        return false;
+    }
+
+    public static map<String, Network> mapNetworks;
+    public static Network getNetwork(String networkId){
+        if(mapNetworks == null){
+            mapNetworks = new map<String, Network>();
+            for(Network n: [SELECT Id, Name FROM Network]){
+                mapNetworks.put(n.Id, n);
+                mapNetworks.put(String.valueOf(n.Id).substring(0, 15), n);
+            }
+        }
+        return mapNetworks.get(networkId);
+    }
+
+    public static Map<String,String> getGroupKeyAndGroupType(String groupItemName, String readAndWrite, String readAndOnly){
+        Map<String, String> mapGroupKeyAndGroupType = new Map<String, String>();
+        List<String> groupItemNameList = groupItemName.split('_');
+        String groupKey = '';
+        String groupType = '';
+        Boolean firstTime = true;
+        for(String item: groupItemNameList){
+            if(item != readAndWrite && item != readAndOnly){
+                if(firstTime){
+                    groupKey += item;
+                    firstTime = false;
+                }else{
+                    groupKey += '_' + item;
+                }
+            }else{
+                groupType = item;
+            }
+        }
+        mapGroupKeyAndGroupType.put('groupKey',groupKey);
+        mapGroupKeyAndGroupType.put('groupType',groupType);
+        return mapGroupKeyAndGroupType;
+    }
+
+}

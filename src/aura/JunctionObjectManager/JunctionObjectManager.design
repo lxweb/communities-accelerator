@@ -1,0 +1,7 @@
+<design:component label="Junction Object Manager">
+	<design:attribute name="relationTitle" label="Title"/>
+	<design:attribute name="junctionObjectAPIName" label="Object Name" required="true"/>
+    <design:attribute name="parentLookup" label="Parent Lookup Name" required="true"/>
+    <design:attribute name="secondaryLookup" label="Secondary Lookup Name" required="true"/>
+    <design:attribute name="whereCondition" label="Where Condition"/>
+</design:component>

@@ -1,0 +1,6 @@
+.THIS .slds-carousel__content{
+	display: none !important;
+}
+.THIS .slds-carousel__autoplay{
+	display: none !important;
+}

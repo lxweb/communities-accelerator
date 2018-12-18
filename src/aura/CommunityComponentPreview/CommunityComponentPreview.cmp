@@ -1,0 +1,39 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="CommunityComponentPreviewController" access="global" >
+
+    <!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="isLoading" type="boolean" default="true" />
+
+    <aura:attribute name="record" type="Object"/>
+    
+    <aura:if isTrue="{!v.isLoading}">
+        <c:Spinner/>
+
+        <aura:set attribute="else">
+            <lightning:buttonIcon iconName="utility:refresh" alternativeText="{!$Label.c.General_Refresh}" onclick="{!c.doInit}" size="medium"/>
+
+            <div id="mainDiv">
+                <div class="div_render_components">
+                    <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'Banner'}">
+                        <c:CG_Banner componentExternalId="{!v.record.ExternalId__c}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'News'}">
+                        <c:CG_News componentExternalId="{!v.record.ExternalId__c}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'Event'}">
+                        <c:CG_Events componentExternalId="{!v.record.ExternalId__c}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'FAQ'}">
+                        <c:CG_FAQ componentExternalId="{!v.record.ExternalId__c}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'AdvanceContent'}">
+                        <c:CG_AdvanceContent componentExternalId="{!v.record.ExternalId__c}"/>
+                    </aura:if>
+                </div>
+            </div>
+            
+        </aura:set>
+
+    </aura:if>
+    
+</aura:component>

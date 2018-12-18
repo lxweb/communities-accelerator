@@ -1,0 +1,3 @@
+<design:component label="CG_ClusterSelector">
+	<design:attribute name="clusterExternalID" label="Cluster External ID"/>
+</design:component>
