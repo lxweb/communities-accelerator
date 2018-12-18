@@ -7,6 +7,7 @@ public with sharing class ClusterUtils {
 			this.cluster = p_cluster;
 			this.relatedClusters = new List<ClusterWrapper>();
 		}
+		//Esto es una modificacion para probar una historia
 	}
 
 	public static map<String, set<String>> mapClustersParents;
