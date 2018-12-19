@@ -33,7 +33,6 @@
 		<members>Component__c</members>
 		<members>ContentAssignment__c</members>
 		<members>Content__c</members>
-		<members>MacroInstruction</members>
 		<members>MediaElementAssignment__c</members>
 		<members>MediaElement__c</members>
 		<members>Navigation__c</members>

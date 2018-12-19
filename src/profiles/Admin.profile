@@ -187,22 +187,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Component__c.HierarchicalOrderBy__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Component__c.LinkDetail__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Component__c.Loop__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Component__c.NavigationMode__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -592,11 +582,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Navigation__c.Cluster__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Navigation__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -767,7 +752,7 @@
         <layout>MediaElement__c-Media Element - Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Navigation__c-Navigation Point Layout</layout>
+        <layout>Navigation__c-Navigation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>TagAssignment__c-Tag Assignment Layout</layout>
@@ -988,11 +973,6 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.FAQ</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Component__c.Navigation</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
