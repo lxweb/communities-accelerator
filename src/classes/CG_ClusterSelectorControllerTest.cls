@@ -1,22 +1,50 @@
 @isTest
 public with sharing class CG_ClusterSelectorControllerTest {
 	
+    @testSetup
+	static void generateCustomSettings(){
+		MockupFactory.generateAcceleratorSetting();
+	}
+    
 	@isTest 
 	static void clusterSelectTest(){
 		/* Comment: Comprueba que dado un ExternalId__c trae el cluster correspondiente*/
 
 		//Given
 
-		//MockupFactory.createRecords();
+		Cluster__c clusterToInsert = MockupFactory.createCluster('Argentina', null, 3, 'ClusterRoot')[0];
+        MockupFactory.createComponent('Banner', 1);
 
-		Cluster__c cluster = [SELECT Id, ExternalId__c, Name FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];
-		
+		Cluster__c cluster = [SELECT Id, ExternalId__c, Name FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];	
 		Component__c component = [SELECT Id, ExternalId__c, FirstCluster__c, OnlyClusterLeaf__c From Component__c Limit 1];
+        
 		component.FirstCluster__c= cluster.Id;
 		update component;
 		//When
 		Test.startTest();
-			CG_ClusterSelectorController.TreeWrapper tree =CG_ClusterSelectorController.getClusterRoot(component.ExternalId__c);
+        CG_ClusterSelectorController.TreeWrapper tree =CG_ClusterSelectorController.getClusterRootByExternalId(component.ExternalId__c);
+		Test.stopTest();
+		//Then
+		System.assertEquals(tree.label, cluster.Name);
+	}
+    
+    @isTest 
+	static void clusterFromComponentSelectTest(){
+		/* Comment: Comprueba que dado el Id de un componente trae el cluster correspondiente*/
+
+		//Given
+
+		Cluster__c clusterToInsert1 = MockupFactory.createCluster('Argentina', null, 3, 'ClusterRoot')[0];
+        MockupFactory.createComponent('Banner', 1);
+
+		Cluster__c cluster = [SELECT Id, ExternalId__c, Name FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];	
+		Component__c component = [SELECT Id, ExternalId__c, FirstCluster__c, OnlyClusterLeaf__c From Component__c Limit 1];
+        
+		component.Cluster__c = cluster.Id;
+		update component;
+		//When
+		Test.startTest();
+        CG_ClusterSelectorController.TreeWrapper tree = CG_ClusterSelectorController.getClusterRootForComponent(component.Id);
 		Test.stopTest();
 		//Then
 		System.assertEquals(tree.label, cluster.Name);
@@ -29,10 +57,10 @@ public with sharing class CG_ClusterSelectorControllerTest {
 
 		//Given
 
-		//MockupFactory.createRecords();
-
-		Cluster__c cluster = [SELECT Id, ExternalId__c, Name, ClusterLandingUrl__c FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];
-		
+		Cluster__c clusterToInsert = MockupFactory.createCluster('Argentina', null, 3, 'ClusterRoot')[0];
+        MockupFactory.createComponent('Banner', 1); 
+        
+		Cluster__c cluster = [SELECT Id, ExternalId__c, Name, ClusterLandingUrl__c FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];		
 		Component__c component = [SELECT Id, ExternalId__c, FirstCluster__c, OnlyClusterLeaf__c From Component__c Limit 1];
 		component.FirstCluster__c= cluster.Id;
 		update component;
@@ -45,9 +73,10 @@ public with sharing class CG_ClusterSelectorControllerTest {
 		cluster.ClusterLandingUrl__c = nav.Id;
 		
 		update cluster; 
+        
 		//When
 		Test.startTest();
-			string url = CG_ClusterSelectorController.getClusterRedirect(cluster.ClusterLandingUrl__c);
+        string url = CG_ClusterSelectorController.getClusterRedirect(cluster.ClusterLandingUrl__c);
 		Test.stopTest();
 		//Then
 		System.assertEquals(url, nav.URL__c);
@@ -60,8 +89,8 @@ public with sharing class CG_ClusterSelectorControllerTest {
 		/* Comment: Comprueba que sin un ExternalId devuelve null*/
 
 		//Given
-
-		//MockupFactory.createRecords();
+		Cluster__c clusterToInsert = MockupFactory.createCluster('Argentina', null, 3, 'ClusterRoot')[0];
+        MockupFactory.createComponent('Banner', 1); 
 
 		Cluster__c cluster = [SELECT Id, ExternalId__c, Name FROM Cluster__c WHERE RecordType.DeveloperName='ClusterRoot' and Name like 'Argentina%' LIMIT 1];
 		
@@ -70,7 +99,7 @@ public with sharing class CG_ClusterSelectorControllerTest {
 		update component;
 		//When
 		Test.startTest();
-			CG_ClusterSelectorController.TreeWrapper tree =CG_ClusterSelectorController.getClusterRoot(null);
+        CG_ClusterSelectorController.TreeWrapper tree = CG_ClusterSelectorController.getClusterRootByExternalId(null);
 		Test.stopTest();
 		//Then
 		System.assertEquals(tree, null);

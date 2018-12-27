@@ -1,6 +1,6 @@
 public without sharing virtual class ContentUtils {
 
-	public class ContentWrapper{
+    public class ContentWrapper{
         public set<String> setAllContentIds;
         public Integer totalPages;
         public List<ContentDataWrapper> contentDataPage;
@@ -83,13 +83,16 @@ public without sharing virtual class ContentUtils {
         if((component.OrderBy__c != null && component.OrderBy__c != 'Custom Sorting') || (component.OrderBy__c != null && component.OrderBy__c == 'Custom Sorting' && component.OrderByAdvance__c != null) ){
             query += 'ORDER BY ' + (component.OrderBy__c == 'Custom Sorting' ? component.OrderByAdvance__c : component.OrderBy__c);
         }
-        query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ASC, ');
+        
+        if(component.HierarchicalOrderBy__c != null){
+            query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
+        }       
         
         ContentWrapper cw = new ContentWrapper();
         map<Id, Content__c> mapContent = new map<Id, Content__c>((List<Content__c>)Database.query(query));
         
         if(!mapContent.isEmpty()){
-        	//TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
+            //TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
             
             //Si despues de aplicar segmentacion tenemos algun registro evaluamos las paginas
             if(!mapContent.isEmpty()){
@@ -99,16 +102,16 @@ public without sharing virtual class ContentUtils {
 
                 //Calculo el total de paginas
                 cw.totalPages = component.PageSize__c != null ? Integer.valueOf((mapContent.size() / component.PageSize__c).round(RoundingMode.UP)) : 1;
-	            //Content Data Wrapper
-	            List<Content__c> firstPage = new List<Content__c>();
-	            if(component.PageSize__c == null){
-	            	firstPage = mapContent.values();
-	            }else{
+                //Content Data Wrapper
+                List<Content__c> firstPage = new List<Content__c>();
+                if(component.PageSize__c == null){
+                    firstPage = mapContent.values();
+                }else{
                     Decimal limitSize = component.PageSize__c < mapContent.values().size() ? component.PageSize__c : mapContent.values().size();
-	            	for(Integer i = 0; i < limitSize; i++){
-	            		firstPage.add(mapContent.values()[i]);
-		            }
-	            }
+                    for(Integer i = 0; i < limitSize; i++){
+                        firstPage.add(mapContent.values()[i]);
+                    }
+                }
                 //Translate content records
                 TranslationUtils.getTranslated(firstPage, UserInfo.getLanguage(), 'Content__c');
 
@@ -117,7 +120,7 @@ public without sharing virtual class ContentUtils {
                     replaceDynamicFieldsOnContent(firstPage);
                 }
 
-	            cw.contentDataPage = createContentDataWrappers(firstPage);
+                cw.contentDataPage = createContentDataWrappers(firstPage);
             }
         }
 
