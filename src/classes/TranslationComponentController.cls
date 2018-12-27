@@ -26,14 +26,23 @@ public with sharing class TranslationComponentController {
 	}
 	
 	@auraEnabled
-	public static RecordsWrapper getLanguages(String parentLookupName, String fieldSet){
+	public static RecordsWrapper getLanguages(String parentLookupName, String fieldSet, String recordId){
 		RecordsWrapper rw = new RecordsWrapper();
-		
+		system.debug('recordId: '+recordId);
+		Content__c content = [SELECT id, Cluster__r.DefaultLanguage__c, Cluster__r.OtherLanguages__c  FROM Content__c where id=: recordId];
+		List<String> langs= new List<String>();
+		langs.add(content.Cluster__r.DefaultLanguage__c);
+		if(content.Cluster__r.OtherLanguages__c!=null){
+			String[] tmpString = content.Cluster__r.OtherLanguages__c.split(';');
+			langs.addAll(tmpString);
+		}	
+
 		Schema.DescribeSObjectResult sobjectDescribe = Schema.getGlobalDescribe().get('Translation__c').getDescribe();
 		for (Schema.PicklistEntry lan : sobjectDescribe.fields.getMap().get('LanguageCode__c').getDescribe().getPickListValues()){
-			if(lan.isActive()){
-				rw.language.add(new Couple(lan.getValue(), lan.getLabel(), '', ''));	
-			}			
+			if(langs.contains(lan.getValue()) && lan.isActive()){	
+				rw.language.add(new Couple(lan.getValue(), lan.getLabel(), '', ''));
+			}
+			
 		}
 
 		if(GeneralUtils.isSafeObject(parentLookupName)) {

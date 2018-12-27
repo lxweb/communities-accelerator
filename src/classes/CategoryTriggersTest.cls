@@ -6,8 +6,16 @@ public with sharing class CategoryTriggersTest {
 			con el correspondiente ExternalId__c */
 
 		//Given
-		Category__c categoryTest = new Category__c(Name='Category Test 01');
+		MockupFactory.generateAcceleratorSetting();
 
+		Category__c categoryTest = new Category__c(Name='Category Test 01');
+		String name = 'Argentina';
+        String nameGroup = 'Buenos Aires';
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster(name, null, 1, 'ClusterRoot');
+        Cluster__c cg = clusterRootList[0];
+        List<Cluster__c> clusterList = MockupFactory.createCluster(nameGroup, cg.Id, 1, 'ClusterGroup');
+        Cluster__c cgGr = clusterList[0];
+        categoryTest.Cluster__c=cgGr.Id;
 		//When
 		Test.startTest();
 			insert(categoryTest);
