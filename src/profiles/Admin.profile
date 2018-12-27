@@ -734,10 +734,63 @@
         <layout>Cluster__c-Cluster - Group - Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Component__c-Component%3A Advance Content - Page Layout</layout>
+        <layout>Cluster__c-Cluster - Group - Layout</layout>
+        <recordType>Cluster__c.ClusterGroup</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Contact Layout</layout>
+        <layout>Cluster__c-Cluster - Leaf - Layout</layout>
+        <recordType>Cluster__c.ClusterLeaf</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Cluster__c-Cluster - Root - Layout</layout>
+        <recordType>Cluster__c.ClusterRoot</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Advance Content - Page Layout</layout>
+        <recordType>Component__c.AdvanceContent</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Banner - Page Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Banner - Page Layout</layout>
+        <recordType>Component__c.Banner</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A ClusterSelector - Page Layout</layout>
+        <recordType>Component__c.Cluster_Selector</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Events - Page Layout</layout>
+        <recordType>Component__c.Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Events Detail - Page Layout</layout>
+        <recordType>Component__c.EventDetail</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A FAQ - Page Layout</layout>
+        <recordType>Component__c.FAQ</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Navigation - Page Layout</layout>
+        <recordType>Component__c.Navigation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A News - Page Layout</layout>
+        <recordType>Component__c.News</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A News Detail - Page Layout</layout>
+        <recordType>Component__c.NewsDetail</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Related Events - Page Layout</layout>
+        <recordType>Component__c.RelatedEvents</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Component__c-Component%3A Related News - Page Layout</layout>
+        <recordType>Component__c.RelatedNews</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>ContentAssignment__c-Component Content Assignment Layout</layout>
@@ -746,13 +799,27 @@
         <layout>Content__c-Content Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MediaElementAssignment__c-Media Element Assignment Layout</layout>
+        <layout>Content__c-Content%3A Advance Content - Page Layout</layout>
+        <recordType>Content__c.AdvanceContent</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MediaElement__c-Media Element - Layout</layout>
+        <layout>Content__c-Content%3A Banner - Page Layout</layout>
+        <recordType>Content__c.Banner</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Navigation__c-Navigation Layout</layout>
+        <layout>Content__c-Content%3A Events - Page Layout</layout>
+        <recordType>Content__c.Event</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Content__c-Content%3A FAQ - Page Layout</layout>
+        <recordType>Content__c.FAQ</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Content__c-Content%3A News - Page Layout</layout>
+        <recordType>Content__c.News</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Navigation__c-Navigation Point Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>TagAssignment__c-Tag Assignment Layout</layout>
