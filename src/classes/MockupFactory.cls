@@ -1,47 +1,4 @@
 public class MockupFactory {
-    /*public static void createRecords(){
-        //Cluster Root
-        String name = 'Argentina';
-        generateAcceleratorSetting();
-        //List<Cluster__c> clusterRootList = createclusterRoot(new List<String>{name});
-        List<Cluster__c> clusterRootList = createCluster(name, null, 1, 'ClusterRoot');
-        Cluster__c cg = clusterRootList[0];
-
-        //Cluster
-        //List<Cluster__c> clusterList = createCluster(clusterRootList);
-        List<Cluster__c> clusterList = createCluster(cg.Name, cg.Id, 1, 'ClusterGroup');
-        
-        Cluster__c clusterArg = clusterList[0];
-        
-        //Banner
-        String nameRecordType = 'Banner';
-        List<Component__c> componentList = createComponent(nameRecordType, 2);
-
-        //Content
-        List<Content__c> contentList = createContent(nameRecordType, clusterList[0], 5);
-        
-        //ContentAssignment
-        List<ContentAssignment__c> contentAssignmentList = createContentAssignment(contentList, componentList);
-        
-        //MediaElement
-        List<MediaElement__c> mediaElementList = createMediaElement(1);
-        List<ContentDocumentLink> contentDocumentLinkList = createContentDocumentLink(mediaElementList);
-        String fileUrl = AcceleratorSettings__c.getInstance().SalesforceDomain__c + '/sfc/servlet.shepherd/document/download/' + contentDocumentLinkList[0].ContentDocumentId;
-        for(Integer i = 0; i < mediaElementList.size(); i++){
-            mediaElementList[i].FileURLDesktop__c = fileUrl;
-            mediaElementList[i].FileURLMobile__c = fileUrl;
-            mediaElementList[i].FileURLTablet__c = fileUrl;
-        }
-        update mediaElementList;
-        
-        //Translations
-        Map<String,String> apiNameTypeMap = new Map<String, String>();
-        apiNameTypeMap.put('DetailTitle__c','Text');
-        apiNameTypeMap.put('ListDescription__c','TextArea');
-        apiNameTypeMap.put('DetailDescription__c','TextAreaRich');
-        apiNameTypeMap.put('TestFieldError','Text');
-        List<Translation__c> translationList = createTranslation(contentList[0], apiNameTypeMap, 'en_US');
-    }*/
     
     // Before to create first cluster, run just one time.
     public static void generateAcceleratorSetting(){
@@ -55,22 +12,14 @@ public class MockupFactory {
     }
     //Create Cluster__c, sure to call generateAcceleratorSetting() one time before
     public static List<Cluster__c> createCluster(String clusterName, String parentClusterId, Integer quantity, String clusterType){
-        List<Cluster__c> clusterList = new List<Cluster__c>();
-        RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName =: clusterType];
-
-        Id parentClusterId2 = (Id) parentClusterId;
-
-        for(Integer i = 0; i < quantity; i++){
-            if(quantity>1){
-                clusterList.add(new Cluster__c(Name = clusterName+i, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id));
-            }else{
-                clusterList.add(new Cluster__c(Name = clusterName, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id));
-            }
-            
-        }
-        insert clusterList;
         
-        System.debug('MockupFactory clusterList: '+clusterList);
+        List<String> parentClusterIdList = new List<String>();
+        if(!String.isBlank(parentClusterId)){
+            
+            parentClusterIdList.add(parentClusterId);
+        }
+        
+        List<Cluster__c> clusterList = createCluster(clusterName, parentClusterIdList, quantity, clusterType, null, null);
         return clusterList;
     }
 
@@ -78,68 +27,76 @@ public class MockupFactory {
         List<Cluster__c> clusterList = new List<Cluster__c>();
         RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName =: clusterType];
         System.debug('MockupFactorycreateCluster parentClusterIdList: ' + parentClusterIdList);
-        if(parentClusterIdList!=null){
+        Cluster__c clusterl = new Cluster__c();
+       if(!String.isBlank(defaultLanguage) && !String.isBlank(otherLangeuage)){
+           clusterl.DefaultLanguage__c = defaultLanguage;
+           clusterl.OtherLanguages__c = otherLangeuage;
+       }
+       
+        if(parentClusterIdList.size()>0){
             integer j = 0;
             for(Id parentClusterId: parentClusterIdList){
                 for(Integer i = 0; i < quantity; i++){
-                    if(quantity>1){
-                        clusterList.add(new Cluster__c(Name = clusterName+j+i, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id, DefaultLanguage__c = defaultLanguage, OtherLanguages__c = otherLangeuage));
-                    }else{
-                        clusterList.add(new Cluster__c(Name = clusterName, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id, DefaultLanguage__c = defaultLanguage, OtherLanguages__c = otherLangeuage));
-                    }
+
+                    Cluster__c clusterItemOne = new Cluster__c(Name = clusterName+j+i, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id);
+                    clusterItemOne.DefaultLanguage__c = clusterl.DefaultLanguage__c;
+                    clusterItemOne.OtherLanguages__c = clusterl.OtherLanguages__c;
+                    clusterList.add(clusterItemOne);
                     
                 }
                 j++;
             }
         }else{
+            integer j = 0;
             for(Integer i = 0; i < quantity; i++){
-                if(quantity>1){
-                    clusterList.add(new Cluster__c(Name = clusterName+i, ParentCluster__c = null, RecordTypeId = rtGroup.Id, DefaultLanguage__c = defaultLanguage, OtherLanguages__c = otherLangeuage));
-                }else{
-                    clusterList.add(new Cluster__c(Name = clusterName, ParentCluster__c = null, RecordTypeId = rtGroup.Id, DefaultLanguage__c = defaultLanguage, OtherLanguages__c = otherLangeuage));
-                }
-                
+                    
+                Cluster__c clusterOne = new Cluster__c(Name = clusterName+i+j, ParentCluster__c = null, RecordTypeId = rtGroup.Id);
+                clusterOne.DefaultLanguage__c = clusterl.DefaultLanguage__c;
+                clusterOne.OtherLanguages__c = clusterl.OtherLanguages__c;
+                clusterList.add(clusterOne);
             }
-        }
-
-        //Id parentClusterId2 = (Id) parentClusterId;
-        System.debug('MockupFactory clusterList: '+clusterList);
-
+            j++;
+        }   
+       
+       
         insert clusterList;
+        return clusterList;
+    }
+    
+    public static List<Tag__c>  createTag(String tagName, String description, Integer cuantity, Id clusterId){
+        List<Tag__c> tagList = new List<Tag__c>();
         
-        System.debug('MockupFactory clusterList: '+clusterList);
-        return clusterList;
-    }
-
-
-    //Create Cluster__c (Root) by names
-    /*public static List<Cluster__c> createClusterRoot(List<String> nameList){
-        List<Cluster__c> clusterRootList = new List<Cluster__c>();
-        RecordType rtRoot = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName = 'ClusterRoot'];
-
-        for(String name : nameList){
-            clusterRootList.add(new Cluster__c(Name = name, RecordTypeId = rtRoot.Id));
+        for(Integer i = 0;i<cuantity;i++){
+            tagList.add( new Tag__c(Name=tagName+1,Description__c=description, Cluster__c=clusterId));
         }
-        insert clusterRootList;
-        return clusterRootList;
+        insert tagList;
+
+        return tagList;
     }
-
-    //Create Cluster__c by clusterRootList
-    public static List<Cluster__c> createCluster(List<Cluster__c> clusterRootList){
-        List<Cluster__c> clusterList = new List<Cluster__c>();
-        RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName = 'ClusterGroup'];
-
-        for(Cluster__c cRoot : clusterRootList){
-            clusterList.add(new Cluster__c(Name = cRoot.name, ParentCluster__c = cRoot.id, RecordTypeId = rtGroup.Id));
-        }
-        insert clusterList;
-        return clusterList;
-    }*/
 
     public static User createUser(String username, String email){
         User user = new User();
         user.username = username;
         user.email = email;
+        insert user;
+        return user;
+    }
+    
+    public static User createFullUser(String username, String email){
+        Profile profileTest = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator'];
+        
+        User user = new User(    
+            username = username,
+            email = email,
+            Alias = 'standt',
+            EmailEncodingKey = 'UTF-8',
+            LastName = 'Testing',
+            LanguageLocaleKey = 'en_US',
+            LocaleSidKey = 'en_US',
+            ProfileId = profileTest.Id,
+            TimeZoneSidKey = 'America/Los_Angeles'
+        );
+        
         insert user;
         return user;
     }
@@ -153,6 +110,12 @@ public class MockupFactory {
         }
         return clusterUserList;
 
+    }
+    
+    public static ClusterUser__c insertClusterUser(Id clusterId, Id userId, String accessLevel){
+        ClusterUser__c clusterUser = new ClusterUser__c(Cluster__c=clusterId, User__c=userId, AccessLevel__c=accessLevel);
+        insert clusterUser;
+        return clusterUser;
     }
 
     public static void deleteClusterByName(String clusterName){
