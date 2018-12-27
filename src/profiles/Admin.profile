@@ -132,6 +132,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Component__c.DelayTime__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Component__c.HasDelay__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Component__c.NavigationMode__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Component__c.BannerFrameType__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -737,6 +752,10 @@
         <layout>Component__c-Component%3A Advance Content - Page Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Component__c-Component%3A Navigation - Page Layout</layout>
+        <recordType>Component__c.Navigation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Contact-Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -968,6 +987,11 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.EventDetail</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Component__c.Navigation</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
