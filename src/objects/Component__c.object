@@ -373,6 +373,31 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>HierarchicalOrderBy__c</fullName>
+        <externalId>false</externalId>
+        <label>Cluster Hierarchy Order By</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ASC</fullName>
+                    <default>false</default>
+                    <label>Root to Leaf</label>
+                </value>
+                <value>
+                    <fullName>DESC</fullName>
+                    <default>false</default>
+                    <label>Leaf to Root</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>LinkDetail__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -1020,6 +1045,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -1264,6 +1300,17 @@
             </values>
             <values>
                 <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1544,6 +1591,17 @@
             </values>
             <values>
                 <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1844,6 +1902,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -2120,6 +2189,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -2392,6 +2472,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -2656,6 +2747,17 @@
             </values>
             <values>
                 <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3215,6 +3317,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -3475,6 +3588,17 @@
             </values>
             <values>
                 <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3763,6 +3887,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -4047,6 +4182,17 @@
             </values>
             <values>
                 <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

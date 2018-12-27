@@ -4,9 +4,9 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     
     <!-- KEY ATTRIBUTES -->
-	<aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentExternalId" type="String" />
     <aura:attribute name="componentType" type="String" />
-	<aura:attribute name="componentWrapper" type="Object"/>
+    <aura:attribute name="componentWrapper" type="Object"/>
     <aura:attribute name="currentPageNumber" type="Integer" default="1"/>
     <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
     <aura:attribute name="showComponentEmpty" type="Boolean" default="false"/>

@@ -49,6 +49,10 @@
         <label>Content Order</label>
         <layoutColumns>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>HierarchicalOrderBy__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Required</behavior>
                 <field>OrderBy__c</field>
             </layoutItems>
@@ -151,7 +155,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0b00000LO1XE</masterLabel>
+        <masterLabel>00h1U000000d4qV</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
