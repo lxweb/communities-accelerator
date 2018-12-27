@@ -3,47 +3,37 @@
 
 	<aura:attribute name="MenuWrapper" type="Object"/>
 	<aura:attribute name="renderLangMenu" type="Boolean" default="false"/>
+	<aura:attribute name="isGuestUser" type="Boolean" default="false"/>
+	 
 
-    <div>
-        <nav id="menu">
-            <ul onclick="{!c.handleChangesHide}">
-                <li>
-                	<!--
-                	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + v.currentCountryCodeLowerValue +'-flag.svg'}" class="flag-icon"/>
-                	-->
-                	<span>{!v.MenuWrapper.userLanguage.name}</span><i aura:id="arrowicon"></i>
-            
-                    <ul id="CountryCodeSelect">
-                        <aura:iteration items="{!v.MenuWrapper.languages}" var="langCode">
-                           
-                           	<aura:if isTrue="{!v.MenuWrapper.userLanguage.value!=langCode.value}">
-                           	
-                                <li aura:id="{!langCode.value}" id="{!langCode.value}" value="{!langCode.value}" onclick="{! c.handleChanges }"> <!-- onclick="{! c.handleChanges }"-->
-                               	
-                                	<!--
-                                	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + countryCode.lowerValue +'-flag.svg'}" class="flag-icon"/>
-                                	-->
-                                	  
-                                	<span>{! langCode.name }</span></li>
-                        		
-                        		<aura:set attribute="else">
-                        			
-                                    <li aura:id="{!langCode.value}" id="{!langCode.value}" value="{!langCode.value}"  class="slds-hide">
-                                    	<!--
-                                    		onclick="{! c.handleChanges }"
-                                    	<img src="{!$Resource.CP_MyDiageoResources + '/icons/cp_' + countryCode.lowerValue +'-flag.svg'}" class="flag-icon"/>
-                                    -->
-                                    	<span>{! langCode.name }</span></li>
-                                 	
-								</aura:set>
+	<div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open slds-grid slds-wrap  " >
 
-                            </aura:if>
-                        	
-                        </aura:iteration>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+		<div class="slds-size_full slds-size_2-of-2">
+			<a class="slds-button slds-button_icon slds-button_icon-more languajeBtn  slds-size_2-of-2 " aria-expanded="true" aria-haspopup="true" onclick="{!c.showMenuItems}">
+				<img src="{!$Resource.CG_Flags + '/ar.png'}" class="flag-icon flag-selected"/> {!v.MenuWrapper.userLanguage.name} <lightning:icon iconName="utility:down" size="xx-small" style="float:right;"/>
+
+			</a>
+		</div>
+			
+		
+		
+		<div class="slds-dropdown slds-dropdown_left hideItems slds-size_2-of-2"  aura:id="menuLanguajeItems"  >
+			<ul class="dropdown__list items" role="menu"  >
+				
+				<aura:iteration items="{!v.MenuWrapper.languages}" var="langCode">
+						<aura:if isTrue="{!v.MenuWrapper.userLanguage.value!=langCode.value}">
+							<li class="slds-dropdown__item items"  role="presentation" aura:id="{!langCode.value}"  >
+								<a href="javascript:void(0)" role="menuitem" tabindex="-1"  data-langValue="{!langCode.value}" onclick="{!c.handleChanges1}" 	>
+										<img src="{!$Resource.CG_Flags + '/ar.png'}" class="flag-icon"/>
+									<span class="slds-truncate" >{!langCode.name}</span>
+								</a>
+							</li>
+						</aura:if>
+				</aura:iteration>
+
+			</ul>
+		</div>
+		
+	</div>
 
 </aura:component>

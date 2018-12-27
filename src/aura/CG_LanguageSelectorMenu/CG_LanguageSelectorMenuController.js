@@ -24,6 +24,22 @@
         });
         eUrl.fire();
     },
+
+    handleChanges1: function (component, event,helper) {
+       
+        var languageValue = event.currentTarget.getAttribute("data-langValue"); 
+      
+        var isGuest = component.get("v.MenuWrapper.isGuestUser");
+
+        if(isGuest){
+            helper.setCountryCodeCookie(component, event,helper,languageValue);
+        }else{
+            helper.setCountryCodeUser(component, event,helper,languageValue);
+        }
+
+
+        
+    },
     handleChangesHide: function (component, event, helper) {
         var arrowicon = component.find('arrowicon');
         if(component.get("v.renderLangMenu")){
@@ -31,5 +47,20 @@
         } else {
             helper.openSelector(component, event, helper, arrowicon);
         }
+    },
+
+
+
+    showMenuItems: function(component, event, helper){  
+        
+        var arrowicon = component.find('menuLanguajeItems');
+        console.log(arrowicon);
+        $A.util.toggleClass(arrowicon, 'hideItems');
+
+       
+        
+        
+        
     }
+ 
 })

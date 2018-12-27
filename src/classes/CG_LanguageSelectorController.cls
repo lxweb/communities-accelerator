@@ -11,6 +11,7 @@ public with sharing class CG_LanguageSelectorController {
 		}	
 	}
 	public class MenuWrapper {
+		@auraEnabled public Boolean isGuestUser;
         @auraEnabled public LanguageWrapper userLanguage;
         @auraEnabled public List<LanguageWrapper> languages;
 
@@ -46,6 +47,20 @@ public with sharing class CG_LanguageSelectorController {
 			
 		}
 		
+		Profile profile =  [SELECT id, Name FROM Profile WHERE id = : UserInfo.getProfileId()];
+
+		wrapper.isGuestUser = (profile.Name == 'Guest');
+
 		return wrapper;
     }
+
+	@AuraEnabled
+	public static void setLanguage(String language){
+		
+		User u = [SELECT id ,LanguageLocaleKey FROM User WHERE id =: UserInfo.getUserId()];
+
+		u.LanguageLocaleKey = language;
+
+		update u;
+	}
 }

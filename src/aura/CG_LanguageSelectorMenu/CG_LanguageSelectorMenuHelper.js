@@ -17,13 +17,31 @@
 
     },
 
-    setCountryCodeCookie: function(component, event, helper){
-    	_cookiesUtil.setCookie('DiageoCookiesCountryCode',component.get("v.currentCountryCode"),365);
+    setCountryCodeCookie: function(component, event, helper,languaje){
+        
+        this.setCookie('languaje',languaje,365);
+        
+        var eUrl= $A.get("e.force:navigateToURL");
+        window.location.reload();
+    },
+    
+    setCountryCodeUser: function(component, event, helper,languaje){
+      
+        var action = component.get("c.setLanguage");
+        action.setParams({
+            language: languaje
+        });
+        action.setCallback(this, function(f){
+            if(f.getState() === "SUCCESS") {
+                var eUrl= $A.get("e.force:navigateToURL");
+                window.location.reload();
+        
+            }
+        });
+        $A.enqueueAction(action);
 	},
-    setCountryCodeCookie: function(cookieValue){
-    	_cookiesUtil.setCookie('DiageoCookiesCountryCode',cookieValue,365);
-	},
-	
+    
+  
     closeSelector: function (component, event, helper, arrowicon) {
         arrowicon.getElement().classList.remove("fa-angle-up");
         arrowicon.getElement().classList.add("fa-angle-down");
@@ -55,6 +73,12 @@
 	        }
 	    }
 	    return "";
-    }
+    },
+    setCookie : function(cname, cvalue, exdays) {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
 
 })

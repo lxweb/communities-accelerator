@@ -1,2 +1,22 @@
 .THIS {
-}
+        width: 130px;
+    }
+    .THIS .showItems{
+        display:block;
+    }
+    
+    .THIS .hideItems{
+        display:none !important;
+
+    }
+
+    .THIS .flag-icon{
+        width: 20px;
+    }
+
+    .THIS .flag-selected{
+        margin-right: 10px;
+    }
+    .THIS .languajeBtn{
+        text-align: left;
+    }
