@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Content__c</entityName>
+    <fieldName>PathStep__c</fieldName>
+    <masterLabel>Content News</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Congratulations ! Your Content is ready to enter the approval process&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Available</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Cluster__c</fieldNames>
+        <fieldNames>Category__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Then, assign a Cluster for this Content and, if you need it, a category to associate this Content.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Context and data</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>DetailTitle__c</fieldNames>
+        <fieldNames>DetailDescription__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;On the other hand, you need to describe a Title, Description and Link (optional) for the News Detail. This fields will be used in News Detail.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Detail information</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check the Content record and make the corrections needed before going to next step&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Final check</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Name</fieldNames>
+        <fieldNames>ExternalId__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Enter name and description for this News. You can modify the External Id, which was completed automatically.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Initial</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ListTitle__c</fieldNames>
+        <fieldNames>ListDescription__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;In this section, you need to describe a Title, Description and Link (optional) for the News component. This fields will be used in List Detail.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>List information</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Define the datasource associate to this content. See the options bellow.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Media elements</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>News</recordTypeName>
+</PathAssistant>

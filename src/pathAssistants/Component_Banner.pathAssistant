@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Component__c</entityName>
+    <fieldName>Path_status__c</fieldName>
+    <masterLabel>Component Banner</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Congratulations !&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Your Banner component record is ready to enter the approval process&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Available</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ShowBullets__c</fieldNames>
+        <fieldNames>AutomaticTransition__c</fieldNames>
+        <fieldNames>BannerTransitionTime__c</fieldNames>
+        <fieldNames>Loop__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Define some behavior for the Banner component&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Show bullets or not (each bullet representing one of the contents the Banner is going to show)&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Make an automatic transition between each content&lt;ul&gt;&lt;li&gt;Show each content by an amount of time with its &amp;quot;Banner transition time&amp;quot;&lt;/li&gt;&lt;li&gt;If your Banner component transitions as a carousel, set it to Loop or not when content shown reaches the end&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Behavior</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Datasource__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Define the source for the content to be shown&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can assign content manually or dinamically.&lt;/p&gt;&lt;p&gt;In Manual assignment mode you will be asked (on next step) for the content to be assigned to this Banner component.&lt;/p&gt;&lt;p&gt;There are three modes for dynamic assignment: Tags, Categories, and Tags + Categories.&lt;/p&gt;&lt;p&gt;In Dynamic assignment mode you will be asked (on next step) for the Tags or/and Categories your content shall belong to in order to be assigned to this Banner component.&lt;/p&gt;</info>
+        <picklistValueName>Content source</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;Assign content to your Banner component&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Using the picker(s) below, assign the content for this Banner component&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Direct content assignment</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;Define linking pages for detailed content&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Populate this field with the URL of the page should be used to present detailed content&lt;/p&gt;</info>
+        <picklistValueName>External linking</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;Do a last check&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Check the Banner component record and make the corrections needed before going to next step&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Final check</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Name</fieldNames>
+        <fieldNames>ExternalId__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Initiate your Banner component&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;Enter a name and the community group for this Banner component. You may leave blank the External Id (The system will populate it) or you can enter a unique Id there&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Initial</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>BannerFrameType__c</fieldNames>
+        <fieldNames>Orientation__c</fieldNames>
+        <fieldNames>BannerType__c</fieldNames>
+        <fieldNames>Direction__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Define how your banner is going to be displayed&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can choose different sizes/shapes (Hero, Page and Square), the banner orientation (horizontal or vertical) and the banner transition type (Fade or carousel).&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;In case of transition type carousel, select the scrolling direction (Left or Right).&lt;/p&gt;</info>
+        <picklistValueName>Layout</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>OrderBy__c</fieldNames>
+        <fieldNames>OrderByAdvance__c</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;Define the order for the content presentation&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Choose an ordering criteria from the &amp;quot;Order by&amp;quot; field, or for advance ordering, place a SOQL &amp;quot;Order by&amp;quot; criteria in the &amp;quot;Order by Advance&amp;quot; field. This order by criteria should take the form of &lt;i&gt;FieldAPIName &lt;/i&gt;(&lt;i&gt;ASC &lt;/i&gt;/ &lt;i&gt;DESC&lt;/i&gt;)[, &lt;i&gt;FieldAPIName &lt;/i&gt;(&lt;i&gt;ASC &lt;/i&gt;/ &lt;i&gt;DESC&lt;/i&gt;), [..., &lt;i&gt;FieldAPIName &lt;/i&gt;(&lt;i&gt;ASC &lt;/i&gt;/ &lt;i&gt;DESC&lt;/i&gt;)]].&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;u&gt;Example of advance Order by criteria&lt;/u&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i style=&quot;font-size: 13px;&quot;&gt;PublishStartDate__c ASC, Name ASC&lt;/i&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Note that each pair of field API and ordering are separated from the following pair &lt;span style=&quot;font-size: 13px;&quot;&gt;by a comma &lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Sorting</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Banner</recordTypeName>
+</PathAssistant>
