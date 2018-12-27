@@ -7,9 +7,10 @@ private class TranslationComponentControllerTest {
     	MockupFactory.generateAcceleratorSetting();
         
         String name = 'Argentina';
+        String nameGroup = 'Buenos Aires';
         List<Cluster__c> clusterRootList = MockupFactory.createCluster(name, null, 1, 'ClusterRoot');
         Cluster__c cg = clusterRootList[0];
-        List<Cluster__c> clusterList = MockupFactory.createCluster(cg.Name, cg.Id, 1, 'ClusterGroup');
+        List<Cluster__c> clusterList = MockupFactory.createCluster(nameGroup, cg.Id, 1, 'ClusterGroup');
 
     	List<Component__c> componentList = MockupFactory.createComponent(nameRecordType, 1);
     	List<Content__c> contentList = MockupFactory.createContent(nameRecordType, clusterList[0], 1);
@@ -18,16 +19,18 @@ private class TranslationComponentControllerTest {
 
 	@isTest 
 	static void getLanguagesTest() {
+		Content__c cont = [SELECT id from Content__c where Cluster__c!=null LIMIT 1];
 		Test.startTest();
-		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages('Content__c', 'Description__c, Name');
+		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages('Content__c', 'Description__c, Name', cont.id);
 		Test.stopTest();
 		System.assertNotEquals(rw, null);
 	}
-	
+
 	@isTest 
 	static void changeLanguageTest() {
+		Content__c cont = [SELECT id from Content__c where Cluster__c!=null LIMIT 1];
 		String parentLookupName = 'Content__c';
-		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, 'Description__c, Name');
+		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, 'Description__c, Name', cont.id);
 		String queryStr = 'SELECT id FROM ' + parentLookupName + ' LIMIT 1';
 		sObject sobj = Database.query(queryStr);
 
@@ -39,10 +42,11 @@ private class TranslationComponentControllerTest {
 	}
 
 	@isTest 
-	static void saveTranslationTest() {		
+	static void saveTranslationTest() {
+		Content__c cont = [SELECT id from Content__c where Cluster__c!=null LIMIT 1];		
 		String parentLookupName = 'Content__c';
 		String fieldSet = 'Description__c, Name,DetailDescription__c';
-		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, fieldSet);
+		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, fieldSet, cont.id);
 		String queryStr = 'SELECT id FROM ' + parentLookupName + ' LIMIT 1';
 		sObject sobj = Database.query(queryStr);
 
@@ -61,4 +65,5 @@ private class TranslationComponentControllerTest {
 		Test.stopTest();
 		System.assertEquals(rw.dataObject[2].value, 'Cambio');
 	}	
+	
 }

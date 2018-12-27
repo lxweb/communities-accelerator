@@ -5,7 +5,8 @@
 		var action = component.get("c.getLanguages");
 		action.setParams({
 			parentLookupName: component.get("v.parentLookupName"),
-			fieldSet: component.get("v.fieldSet")
+			fieldSet: component.get("v.fieldSet"),
+			recordId: component.get("v.recordId")
 		});
 
 	    action.setCallback(this, function(f) {
