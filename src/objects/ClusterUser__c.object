@@ -46,7 +46,6 @@
     <description>Determines which users have access to the cluster, the access type (Read Only or Read/Write), it&apos;s child clusters and the configuration below the cluster (ex.: Content, Components, Tags, etc.).</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
-    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -95,6 +94,17 @@
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>UserForDuplicateRule__c</fullName>
+        <externalId>false</externalId>
+        <label>User For Duplicate Rule</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>User__c</fullName>
