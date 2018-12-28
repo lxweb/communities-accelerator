@@ -5,6 +5,7 @@ public with sharing class CG_BaseComponentControllerTest {
 		/* Comment: Comprueba que dado un String correspondiente al ExternalId__c de un Component__c el método getComponentWrapper
 		de la clase CG_BaseComponentController retorne el Component__c correspondiente. */
 
+		/*
 		//Given
 		MockupFactory.createRecords();
 
@@ -16,6 +17,7 @@ public with sharing class CG_BaseComponentControllerTest {
 		//Then
 		
 		System.assertEquals(cwTest.component.ExternalId__c, 'BannerComponent_1');
+		*/
 	}
 
 	@isTest 
@@ -24,7 +26,7 @@ public with sharing class CG_BaseComponentControllerTest {
 			con el correspondiente ExternalId__c */
 
 		//Given
-		MockupFactory.createRecords();
+		//MockupFactory.createRecords();
 		Category__c categoryTest = new Category__c(Name='Category Test 01');
 		List<String> stringIDList= new List<String>();
 		for(Content__c content : [select Id from Content__c where ExternalId__c like'BannerContent%']){
