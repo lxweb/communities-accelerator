@@ -176,6 +176,22 @@
         <shortDescription>NoRecordsToShow</shortDescription>
         <value>No records to show</value>
     </labels>
+	    <labels>
+        <fullName>RepeatedCategoryName</fullName>
+        <categories>CategoryTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>RepeatedCategoryName</shortDescription>
+        <value>Category name already exist in cluster branch</value>
+    </labels>
+    <labels>
+        <fullName>RepeatedTagName</fullName>
+        <categories>TagTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>RepeatedTagName</shortDescription>
+        <value>Tag name already exist in cluster branch</value>
+    </labels>
     <labels>
         <fullName>OrderByInvalidFormat</fullName>
         <categories>ComponentTriggers.cls</categories>
