@@ -66,9 +66,11 @@ public with sharing class TagTriggers extends TriggersHandler {
             ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Tag__Share', 'Clustering__c', false);           
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
+                System.debug('NavigationTriggers dataPreparing have an exception: ');
                 toContinueTrigger = false;
             }else{
                 tagShareList  = (List<Tag__Share>) sharingWrapper.listOfSharesToInsert;
+                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
 
         }
