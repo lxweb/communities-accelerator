@@ -69,10 +69,8 @@ public with sharing class CategoryTriggers extends TriggersHandler {
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
                 toContinueTrigger = false;
-                System.debug('NavigationTriggers dataPreparing have an exception: ');
             }else{
                 categoryShareList  = (List<Category__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
 
         }
@@ -152,7 +150,6 @@ public with sharing class CategoryTriggers extends TriggersHandler {
                         (mapaClusterIdCategoryEnDB.containsKey(mapClusters.get(recNew.Cluster__c).ParentCluster__r.ParentCluster__r.ParentCluster__c) &&
                         mapaClusterIdCategoryEnDB.get(mapClusters.get(recNew.Cluster__c).ParentCluster__r.ParentCluster__r.ParentCluster__c).contains(recNew.Name))
                         )){
-
                         recNew.adderror(Label.RepeatedCategoryName);
                     }
                 }
@@ -166,7 +163,7 @@ public with sharing class CategoryTriggers extends TriggersHandler {
             try{
                 insert categoryShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'Se tiene que crear una causa para el Sharing de Cluster');
+                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Category Sharing');
             }
         }
     }
@@ -218,7 +215,6 @@ public with sharing class CategoryTriggers extends TriggersHandler {
     List<SObject> recordList = new List<SObject>(); 
     private void addSharing(Category__c recNew, Category__c recOld, Boolean isMaster){
         if(!canMethod('addSharing')){return;}
-        System.debug('Method addSharing');
 
         if(isMaster){
             Map<String, Schema.SObjectType> sharing = Schema.getGlobalDescribe();
@@ -230,7 +226,6 @@ public with sharing class CategoryTriggers extends TriggersHandler {
                             toContinueTrigger = false;
                             //recNew.addError('The object must containg a loockup relation to Cluster');
                         }else{
-                            System.debug('Update custom object is private or public read only');
                             recordList.add(recNew);
                         }
                     }
@@ -241,7 +236,6 @@ public with sharing class CategoryTriggers extends TriggersHandler {
                         toContinueTrigger = false;
                         //recNew.addError('The object must containg a loockup relation to Cluster');
                     }else{
-                        System.debug('Insdert custom object is private or public read only');
                         recordList.add(recNew);
                     }
                 }

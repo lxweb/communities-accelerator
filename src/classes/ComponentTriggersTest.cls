@@ -81,17 +81,51 @@ public with sharing class ComponentTriggersTest {
 
 	/*@isTest
 	static void insertComponentSharing(){
+=======
+		insert (clusterTest1);
+		Cluster__c clusterTest2 = new Cluster__c(Name = 'Cluster Test 2', ExternalId__c = 'ClusterTest2');
+		insert (clusterTest2);
+		List<Component__c> componentListTest = MockupFactory.createComponent(nameRecordType, 1);
+		List<Content__c> contentListTest = MockupFactory.createContent(nameRecordType, clusterTest1, 1);
+		List<ContentAssignment__c> contentAssignmentListTest = MockupFactory.createContentAssignment(contentListTest, componentListTest);
+
+		//When
+		Test.startTest();
+		Component__c[] componentTest = [SELECT Id, Cluster__c FROM Component__c WHERE Name = 'Banner'];
+		if(componentTest.size() > 0){
+			componentTest[0].Cluster__c = clusterTest2.Id;	
+		}
+		update(componentTest);
+		Test.stopTest();
+		
+		//Then
+		Component__c componentTestResult3 = [SELECT Id, Cluster__c FROM Component__c WHERE Id =: componentListTest]; 
+		System.assertNotEquals(componentTestResult3.Cluster__c,clusterTest2.Id);
+	}
+
+	@isTest
+	static void insertComponentSharing()
+	{
+>>>>>>> feature/AR
 		// Given
 		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
 		List<Cluster__c> clusterList = [SELECT Id, Name FROM Cluster__c WHERE Name LIKE 'ClusterRootTest%' LIMIT 1 ];
 		System.debug('ClusterTriggersTest method clusterList: '+clusterList);
 		String nameRecordType = 'Banner';
+<<<<<<< HEAD
 		
+=======
+>>>>>>> feature/AR
 		// When
 		Test.startTest();
 		List<Content__c> contentListTest = MockupFactory.createContent(nameRecordType, clusterList[0], 1);
 		Test.stopTest();
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feature/AR
 		System.debug('ClusterTriggersTest method contentListTest: '+contentListTest);
 
 		// Then
@@ -99,5 +133,7 @@ public with sharing class ComponentTriggersTest {
 		System.debug('ClusterTriggersTest method shareList: '+shareList);
 
 		System.assertEquals(3, shareList.size());
+<<<<<<< HEAD
 	}*/
+
 }

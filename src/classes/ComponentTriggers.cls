@@ -37,7 +37,8 @@ public with sharing class ComponentTriggers extends TriggersHandler {
         errorClusterFieldChange((Component__c)recNew, (Component__c)recOld, true);
     }
 
-    /*//PA-177 CMA: Clustering: Apex Sharing
+
+    //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
         addSharing((Component__c) recNew, null, true);
     }
@@ -51,21 +52,34 @@ public with sharing class ComponentTriggers extends TriggersHandler {
     
     public override void finalLoop_AfterUpdate(SObject recNew, SObject recOld){
         addSharing((Component__c) recNew, (Component__c) recOld, false);
-    }*/
+    }
 
     //PA-206 Governance de Componentes(Reparenting)
     public override void finalLoop_BeforeUpdate(SObject recNew, SObject recOld){
         errorClusterFieldChange((Component__c)recNew, (Component__c)recOld, false);   
     } 
 
-    //List<Component__Share> componentShareList = new List<Component__Share>();
+    List<Component__Share> componentShareList = new List<Component__Share>();
     Boolean excecuteTrigger = true;
-    //Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+    Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+
+
+    public override void executeDMLs() {
+        
+        if(!componentShareList.isEmpty() && excecuteTrigger){
+            try{
+                insert componentShareList;
+            }catch(Exception e){
+                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Component Sharing');
+            }
+        }
+    }
     
     public override void dataPreparing() {
 
-        /*//PA-177 CMA: Clustering: Apex Sharing
-        if(!recordList.isEmpty() && excecuteTrigger){ 
+
+        //PA-177 CMA: Clustering: Apex Sharing
+        if(!recordList.isEmpty() && excecuteTrigger){
             List<SObject> listSO = new List<SObject>();
 
             //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
@@ -73,13 +87,11 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
                 excecuteTrigger = false;
-                System.debug('NavigationTriggers dataPreparing have an exception: ');
             }else{
                 componentShareList  = (List<Component__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('NavigationTriggers dataPreparing have not exception: '+componentShareList);
             }
 
-        }*/
+        }
 
         //PA-206 Governance de Componentes(Reparenting)
         if(!componentIds.isEmpty() && excecuteTrigger){
@@ -97,22 +109,12 @@ public with sharing class ComponentTriggers extends TriggersHandler {
     }
 
 
-    /*public override void executeDMLs() {
-        
-        if(!componentShareList.isEmpty() && excecuteTrigger){
-            try{
-                insert componentShareList;
-            }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Component Sharing');
-            }
-        }
-    }*/
-
     
     /*****************************************************************/
     /********************** USE CASE METHODS *************************/
     /*****************************************************************/
-  private void setExternalId(Component__c recNew){
+
+    private void setExternalId(Component__c recNew){
         if(!canMethod('setExternalId')){return;}
 
         if(recNew.ExternalID__c == null){
@@ -123,14 +125,15 @@ public with sharing class ComponentTriggers extends TriggersHandler {
         if(!canMethod('customSort')){return;}
         
         if(recNew.OrderBy__c == 'Custom Sorting' && recNew.OrderByAdvance__c != null && Limits.getQueries() < 50){
-        if(trigger.isInsert || (trigger.isUpdate && (recNew.OrderByAdvance__c != recOld.OrderByAdvance__c) || recNew.OrderBy__c != recOld.OrderBy__c)){
-            try{
-                Database.query('SELECT Id FROM Content__c ORDER BY ' + recNew.OrderByAdvance__c + ' LIMIT 1');
-            }catch(Exception e){
-                recNew.OrderByAdvance__c.AddError(Label.OrderByInvalidFormat + ' ' + e.getMessage());
+            if(trigger.isInsert || (trigger.isUpdate && (recNew.OrderByAdvance__c != recOld.OrderByAdvance__c) || recNew.OrderBy__c != recOld.OrderBy__c)){
+                try{
+                    Database.query('SELECT Id FROM Content__c ORDER BY ' + recNew.OrderByAdvance__c + ' LIMIT 1');
+                }catch(Exception e){
+                    recNew.OrderByAdvance__c.AddError(Label.OrderByInvalidFormat + ' ' + e.getMessage());
+                }
             }
-        }}  
-  }
+        }  
+    }
 
     //PA-206 Governance de Componentes(Reparenting)
     Set<Id> componentIds = new Set<Id>();
@@ -143,16 +146,16 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             }
         }else{
             if(recNew.Cluster__c != recOld.Cluster__c && componentIdsWithAssignment.contains(recNew.Id)){
-                recNew.Cluster__c.AddError(Label.CannotReassignComponent);
+                //recNew.Cluster__c.AddError(Label.CannotReassignComponent);
             }
         }
     }
 
-    /*//PA-177 CMA: Clustering: Apex Sharing
+
+    //PA-177 CMA: Clustering: Apex Sharing
     List<SObject> recordList = new List<SObject>(); 
     private void addSharing(Component__c recNew, Component__c recOld, Boolean isMaster){
         if(!canMethod('addSharing')){return;}
-        System.debug('Method addSharing');
         
         if(isMaster){
             Map<String, Schema.SObjectType> sharing = Schema.getGlobalDescribe();
@@ -168,7 +171,6 @@ public with sharing class ComponentTriggers extends TriggersHandler {
 
                             //recNew.addError('The object must containg a loockup relation to Cluster');
                         }else{
-                            System.debug('Update custom object is private or public read only');
                             recordList.add(recNew);
                         }
 
@@ -182,7 +184,6 @@ public with sharing class ComponentTriggers extends TriggersHandler {
 
                         //recNew.addError('The object must containg a loockup relation to Cluster');
                     }else{
-                        System.debug('Insdert custom object is private or public read only');
                         recordList.add(recNew);
                     }
 
@@ -193,6 +194,8 @@ public with sharing class ComponentTriggers extends TriggersHandler {
                 recNew.addError(objectIdToMessageErrosMap.get(recNew.Id));
             }
         }
-    }*/
+
+    }
+
 
 }

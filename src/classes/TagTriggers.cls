@@ -67,10 +67,8 @@ public with sharing class TagTriggers extends TriggersHandler {
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
                 toContinueTrigger = false;
-                System.debug('NavigationTriggers dataPreparing have an exception: ');
             }else{
                 tagShareList  = (List<Tag__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
 
         }
@@ -109,7 +107,7 @@ public with sharing class TagTriggers extends TriggersHandler {
             try{
                 insert tagShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'Se tiene que crear una causa para el Sharing de Cluster');
+                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Tag Sharing');
             }
         }
     }
@@ -128,7 +126,6 @@ public with sharing class TagTriggers extends TriggersHandler {
     /*****************************************************************/
     private void setExternalId(Tag__c recNew){
         if(!canMethod('setExternalId')){return;}
-        System.debug('Method setExternalId');
         if(recNew.ExternalID__c == null){
             recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
         }
@@ -138,7 +135,6 @@ public with sharing class TagTriggers extends TriggersHandler {
     List<SObject> recordList = new List<SObject>(); 
     private void addSharing(Tag__c recNew, Tag__c recOld, Boolean isMaster){
         if(!canMethod('addSharing')){return;}
-        System.debug('Method addSharing');
 
         if(isMaster){
             Map<String, Schema.SObjectType> sharing = Schema.getGlobalDescribe();
@@ -150,7 +146,6 @@ public with sharing class TagTriggers extends TriggersHandler {
                             toContinueTrigger = false;
                             //recNew.addError('The object must containg a loockup relation to Cluster');
                         }else{
-                            System.debug('Update custom object is private or public read only');
                             recordList.add(recNew);
                         }
                     }
@@ -161,7 +156,6 @@ public with sharing class TagTriggers extends TriggersHandler {
                         toContinueTrigger = false;
                         //recNew.addError('The object must containg a loockup relation to Cluster');
                     }else{
-                        System.debug('Insdert custom object is private or public read only');
                         recordList.add(recNew);
                     }
                 }

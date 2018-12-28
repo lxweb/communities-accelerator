@@ -1,5 +1,5 @@
-public with sharing class ContentTriggers extends TriggersHandler{
-    public ContentTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
+public with sharing class NavigationTriggers extends TriggersHandler{
+	public NavigationTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
         super(p_triggerNew, p_triggerOld);
 
         //PA-177 CMA: Clustering: Apex Sharing
@@ -12,7 +12,7 @@ public with sharing class ContentTriggers extends TriggersHandler{
         allow_finalLoop_AfterInsert = true;
         allow_finalLoop_AfterUpdate = true;
 
-    }
+	}
 
     /*****************************************************************/
     /*********************** TRIGGER METHODS *************************/
@@ -20,21 +20,21 @@ public with sharing class ContentTriggers extends TriggersHandler{
 
     //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
-        addSharing((Content__c) recNew, null, true);
+        addSharing((Navigation__c) recNew, null, true);
     }
     public override void masterLoop_AfterUpdate(SObject recNew, SObject recOld) {
-        addSharing((Content__c) recNew, (Content__c) recOld, true);
+        addSharing((Navigation__c) recNew, (Navigation__c) recOld, true);
     }
     public override void finalLoop_AfterInsert(SObject recNew) {
-        addSharing((Content__c) recNew,null, false);
+        addSharing((Navigation__c) recNew,null, false);
     }
     
     public override void finalLoop_AfterUpdate(SObject recNew, SObject recOld){
-        addSharing((Content__c) recNew, (Content__c) recOld, false);
+        addSharing((Navigation__c) recNew, (Navigation__c) recOld, false);
     }
 
     //PA-177 CMA: Clustering: Apex Sharing
-    List<Content__Share> contentShareList = new List<Content__Share>();
+    List<Navigation__Share> navigationShareList = new List<Navigation__Share>();
     Boolean excecuteTrigger = true;
     Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
     
@@ -43,42 +43,39 @@ public with sharing class ContentTriggers extends TriggersHandler{
             List<SObject> listSO = new List<SObject>();
 
             //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
-            ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Content__Share', 'Clustering__c', false);
+            ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Navigation__Share', 'Clustering__c',false);
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
-                objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
-                excecuteTrigger = false;
-                System.debug('ContentTriggers dataPreparing have an exception: ');
+            	objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
+            	excecuteTrigger = false;
+                System.debug('NavigationTriggers dataPreparing have an exception: ');
             }else{
-                contentShareList  = (List<Content__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('ContentTriggers dataPreparing have not exception: ');
+            	navigationShareList  = (List<Navigation__Share>) sharingWrapper.listOfSharesToInsert;
+                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
-
         }
 
     }
 
 
     public override void executeDMLs() {
-
-        if(!contentShareList.isEmpty() && excecuteTrigger){
+        
+        if(!navigationShareList.isEmpty() && excecuteTrigger){
             try{
-                insert contentShareList;
+                insert navigationShareList;
             }catch(Exception e){
                 objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Navigation Sharing');
             }
         }
-
     }
 
     //PA-177 CMA: Clustering: Apex Sharing
     List<SObject> recordList = new List<SObject>(); 
-    private void addSharing(Content__c recNew, Content__c recOld, Boolean isMaster){
+    private void addSharing(Navigation__c recNew, Navigation__c recOld, Boolean isMaster){
         if(!canMethod('addSharing')){return;}
-        System.debug('Method addSharing');
-
+        
         if(isMaster){
             Map<String, Schema.SObjectType> sharing = Schema.getGlobalDescribe();
-            if(sharing.containsKey('Content__Share')) {
+            if(sharing.containsKey('Navigation__Share')) {
                 
                 if(recOld != null){
                     if(recNew.Cluster__c !=  recOld.Cluster__c){
@@ -110,13 +107,6 @@ public with sharing class ContentTriggers extends TriggersHandler{
             }
         }
 
-
-    }
-
-    private void addSharingErros(Content__c recNew, Content__c recOld){
-        if(objectIdToMessageErrosMap.containsKey(recNew.Id)){
-            recNew.addError(objectIdToMessageErrosMap.get(recNew.Id));
-        }
     }
 
 }

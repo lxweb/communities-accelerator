@@ -14,13 +14,16 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     public ClusterTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld){
         super(p_triggerNew, p_triggerOld);
 
-		allow_masterLoop_BeforeInsert = true;
-		allow_masterLoop_BeforeUpdate = true;
+        allow_masterLoop_BeforeInsert = true;
+        allow_masterLoop_BeforeUpdate = true;
         allow_masterLoop_AfterInsert = true;
         allow_masterLoop_AfterDelete = true;
         allow_masterLoop_AfterUpdate = true;
         allow_executeDMLs = true;
         allow_dataPreparing = true;
+
+        allow_finalLoop_AfterInsert = true;
+        allow_finalLoop_AfterUpdate = true;
         
     }
     
@@ -30,52 +33,64 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     
     //Master loops
     public override void masterLoop_BeforeInsert(SObject recNew) {
-    	setExternalId((Cluster__c)recNew);
+        setExternalId((Cluster__c)recNew);
     }
     public override void masterLoop_AfterInsert(SObject recNew) {
         createGroups((Cluster__c)recNew);
         addLanguages((Cluster__c) recNew, null);
     }
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
-    	setExternalId((Cluster__c)recNew);
+        setExternalId((Cluster__c)recNew);
+        
     }
     public override void masterLoop_AfterDelete(SObject recOld) {
         deleteGroups((Cluster__c)recOld);
     }
     public override void masterLoop_AfterUpdate(SObject recNew, SObject recOld) {
         addLanguages((Cluster__c) recNew, (Cluster__c) recOld);
+        addSharing((Cluster__c) recNew, (Cluster__c) recOld, true);
+    }
+
+    public override void finalLoop_AfterInsert(SObject recNew) {
+        addSharing((Cluster__c) recNew,null,false);
+    }
+    
+    public override void finalLoop_AfterUpdate(SObject recNew, SObject recOld){
+        addSharing((Cluster__c) recNew, (Cluster__c) recOld,false);
     }
 
     List<Cluster__c> clusterToUpdateLanguageList = new List<Cluster__c>();
     Map<Id,Cluster__c> clusterToUpdateLanguageMap = new Map<Id,Cluster__c>();
+    
+
+    //PA-177 CMA: Clustering: Apex Sharing
+    List<Tag__Share> tagShareList = new List<Tag__Share>();
+    //Boolean toContinueTrigger = true;
+    //Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+
+
+
+    /*PREPARING DATA FOR ADD LANGUAGE*/
     public override void dataPreparing() {
+
+        //PA-177 CMA: Clustering: Apex Sharing
+        if(!recordList.isEmpty() && toContinueTrigger){
+            List<SObject> listSO = new List<SObject>();
+            //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
+            ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForCluster(recordList, 'Cluster__c', 'Cluster__Share', 'Clustering__c', true);           
+            if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
+                objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
+                toContinueTrigger = false;
+            }else{
+                tagShareList  = (List<Tag__Share>) sharingWrapper.listOfSharesToInsert;
+            }
+
+        }
+
+
         System.debug('dataPreparing: ');
         if(!clusterIdChildWithParentListLang.isEmpty() && !haveDefaultLanguage){
-           List<Cluster__c> clusterList = [SELECT Id, Name, ParentCluster__c, 
-                PublicGroupRWName__c, 
-                PublicGroupRODownName__c, 
-                PublicGroupROUpName__c,
-                ParentCluster__r.ParentCluster__c, 
-                ParentCluster__r.PublicGroupRWName__c, 
-                ParentCluster__r.PublicGroupRODownName__c, 
-                ParentCluster__r.PublicGroupROUpName__c,
-                ParentCluster__r.DefaultLanguage__c,
-                ParentCluster__r.OtherLanguages__c,
-                ParentCluster__r.Name,
-                ParentCluster__r.ParentCluster__r.ParentCluster__c,
-                ParentCluster__r.ParentCluster__r.PublicGroupRWName__c,
-                ParentCluster__r.ParentCluster__r.PublicGroupRODownName__c,
-                ParentCluster__r.ParentCluster__r.PublicGroupROUpName__c,
-                ParentCluster__r.ParentCluster__r.DefaultLanguage__c,
-                ParentCluster__r.ParentCluster__r.OtherLanguages__c,
-                ParentCluster__r.ParentCluster__r.Name,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.PublicGroupRWName__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.PublicGroupRODownName__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.PublicGroupROUpName__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.DefaultLanguage__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.OtherLanguages__c,
-                ParentCluster__r.ParentCluster__r.ParentCluster__r.Name
+           List<Cluster__c> clusterList = [SELECT Id, Name, ParentCluster__c, ParentCluster__r.ParentCluster__c, ParentCluster__r.DefaultLanguage__c, ParentCluster__r.OtherLanguages__c, ParentCluster__r.Name, ParentCluster__r.ParentCluster__r.ParentCluster__c, ParentCluster__r.ParentCluster__r.DefaultLanguage__c, ParentCluster__r.ParentCluster__r.OtherLanguages__c, ParentCluster__r.ParentCluster__r.Name,ParentCluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__c, ParentCluster__r.ParentCluster__r.ParentCluster__r.DefaultLanguage__c, ParentCluster__r.ParentCluster__r.ParentCluster__r.OtherLanguages__c, ParentCluster__r.ParentCluster__r.ParentCluster__r.Name
             FROM Cluster__c 
             WHERE Id IN: clusterIdChildWithParentListLang];
 
@@ -95,6 +110,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                 if(cluster.ParentCluster__r.ParentCluster__r.ParentCluster__c != null){
                     mergeOtherLanguage(cluster.ParentCluster__r.ParentCluster__r);
                 }*/
+                
                 //start
                 
                 if(cluster.ParentCluster__c != null){
@@ -215,13 +231,10 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
             }
             clusterToUpdateLanguageList = clusterToUpdateLanguageList2;
-            
-            System.debug('dataPreparing clusterToUpdateLanguageMap: ' + clusterToUpdateLanguageMap);
-            System.debug('dataPreparing clusterToUpdateLanguageList: ' + clusterToUpdateLanguageList);
-            System.debug('dataPreparing clusterToUpdateLanguageList: ' + clusterToUpdateLanguageList.size());
         }
     }
 
+    //TODO use this function to reduce code
     public void mergeOtherLanguage(Cluster__c cluster){
 
         if(cluster.ParentCluster__r.OtherLanguages__c != clusterIdToOtherLanguageMap.get(cluster.Id)){
@@ -260,9 +273,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
     public String writeOtherLanguage(String parentOtherlanguage, String otherLanguage, String parentDefaultLanguage){
         Map<String,String> returnOtherLanguage= new Map<String,String>();
-        System.debug('ClusterTriggers parentOtherlanguage: ' + parentOtherlanguage);
-        System.debug('ClusterTriggers otherLanguage: ' + otherLanguage);
-        System.debug('ClusterTriggers parentDefaultLanguage: ' + parentDefaultLanguage);
 
         if(parentOtherlanguage != null){
             List<String> parentOtherlanguageList = parentOtherlanguage.split(';');
@@ -276,7 +286,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
         if(otherLanguage!=null){
             List<String> otherlanguageList = otherLanguage.split(';');
-            System.debug('ClusterTriggers returnOtherLanguage: ' + returnOtherLanguage);
+
             for(String otherL: otherlanguageList){
                 if(parentDefaultLanguage!=null){
                     if(parentDefaultLanguage != otherL){
@@ -291,7 +301,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
         }
 
         List<String> otherlanguageList2 = new List<String>(returnOtherLanguage.keySet());
-        System.debug('ClusterTriggers otherlanguageList2: ' + otherlanguageList2);
+
         String returnLanguage = '';
         if(!otherlanguageList2.isEmpty()){
             integer i = 1;
@@ -310,7 +320,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             }
         }
 
-        System.debug('ClusterTriggers returnLanguage: ' + returnLanguage);
         return returnLanguage;
 
     }
@@ -322,22 +331,18 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             update clusterToUpdateLanguageList;
         }
 
-
+        //FOR CREATION GROUPS
         if(!groupsList.isEmpty() && !haveException){
-            System.debug('ClusterTriggers executeDMLs groupsList: '+groupsList);
-
-            
-
 
             insert groupsList;
-            System.debug('ClusterTriggers executeDMLs groupsList: '+groupsList);
+
             List<Cluster__c> clustersToUpdate = new List<Cluster__c>();
             for(Group groupItem : groupsList){
 
                 List<String> GroupKeyAndGroupType = groupItem.Name.split(separatorGroupName);
-                String groupKey;
-                String groupType;
-                //VERIFICAR EL _ EN EL EXTERNALD ID DEL OTRO TRIGGER
+                String groupKey = '';
+                String groupType = '';
+                //Verifica si el externald Id tiene un _
                 if(GroupKeyAndGroupType.size()==3){
                     groupKey = groupKeyAndGroupType[0]+'_'+groupKeyAndGroupType[1];
                     groupType = groupKeyAndGroupType[2];
@@ -346,24 +351,18 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                     groupType = groupKeyAndGroupType[1];
                 }
 
-                System.debug('ClusterTriggers groupKey: '+groupKey);
-                System.debug('ClusterTriggers groupType: '+groupType);
-
-                System.debug('ClusterTriggers mapGroupDevNameToClusterId: '+mapGroupDevNameToClusterId);
                 if(groupType.equals(readAndWrite) && mapGroupDevNameToClusterId.containsKey(groupKey)){
+                    
                     Cluster__c clusterToUpdate = new Cluster__c(
                         Id = mapGroupDevNameToClusterId.get(groupKey),
                         PublicGroupRWName__c = groupKey + separatorGroupName + readAndWrite,
                         PublicGroupRODownName__c = groupKey + separatorGroupName + readAndOnlyViewDown,
                         PublicGroupROUpName__c = groupkey + separatorGroupName + readAndOnlyViewUp
-                        //PublicGroupROName__c = groupKey + separatorGroupName + readAndOnlyViewUp
                     );
+                    
                     clustersToUpdate.add(clusterToUpdate);
                 }
-
-                // groupNameToParentId.put(groupItem.name,groupItem.Id)
             }
-            System.debug('ClusterTriggers clustersToUpdate: '+clustersToUpdate);
             update clustersToUpdate;
         }
 
@@ -374,8 +373,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
             Map<String,String> mapParentGrupNames = new Map<String,String>();
 
-            System.debug('ClusterTriggers clusterIdChildWithParentList: '+clusterIdChildWithParentList);
-
             List<Cluster__c> clusterIdList = [SELECT Id, Name, ParentCluster__c, PublicGroupRWName__c, PublicGroupRODownName__c, PublicGroupROUpName__c, ParentCluster__r.PublicGroupRWName__c, ParentCluster__r.PublicGroupRODownName__c, ParentCluster__r.PublicGroupROUpName__c, ParentCluster__r.Name 
             FROM Cluster__c 
             WHERE Id IN: clusterIdChildWithParentList];
@@ -385,41 +382,32 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             for(Cluster__c cluster: clusterIdList){
 
                 if(cluster.ParentCluster__c != null){
-                    
-                    //cluster.OtherLanguages__c = clusterIdToOtherLanguageMap.get(cluster.Id);
+
                     mapParentGrupNames.put(cluster.ParentCluster__r.PublicGroupRWName__c,cluster.ParentCluster__r.PublicGroupRWName__c);
                     mapParentGrupNames.put(cluster.ParentCluster__r.PublicGroupRODownName__c,cluster.ParentCluster__r.PublicGroupRODownName__c);
+                    
                     //FOR VIEW UP
                     mapParentGrupNames.put(cluster.ParentCluster__r.PublicGroupROUpName__c,cluster.ParentCluster__r.PublicGroupROUpName__c);
                     
                 }
 
             }
-
-            System.debug('ClusterTriggers mapParentGrupNames: '+mapParentGrupNames);
-
             List<Group> listTempGroup = [SELECT Id, Name FROM Group WHERE Name IN: mapParentGrupNames.keyset()];
 
-            System.debug('ClusterTriggers listTempGroup: '+listTempGroup);
             // POPULATE THE PARENT MAP
             for(Group grupItemParent: listTempGroup){
                 parentGroupNameToGroupIdMap.put(grupItemParent.name, grupItemParent.Id);
             }
 
-            System.debug('ClusterTriggers parentGroupNameToGroupIdMap: ' + parentGroupNameToGroupIdMap);
-
-
             // POPULATE THE CHILD MAP
             List<Group> groupListTemp2 = [SELECT Id, Name FROM Group WHERE Name IN: grupNamesList];
-            System.debug('ClusterTriggers groupListTemp2: '+groupListTemp2);
             for(Group grupItem: groupListTemp2){
                 childGroupNameToGroupIdMap.put(grupItem.name, grupItem.Id);
             }
-            System.debug('ClusterTriggers childGroupNameToGroupIdMap: '+childGroupNameToGroupIdMap);
+            //System.debug('ClusterTriggers childGroupNameToGroupIdMap: '+childGroupNameToGroupIdMap);
             
             Map<Id,Map<String,Id>> parentIdToAccessModeToGroupParentIdsMap = new Map<Id,Map<String,Id>>();
             Map<Id,Map<String,List<Id>>> parentIdToAccessModeToGroupClildIdsMap = new Map<Id,Map<String,List<Id>>>();
-            System.debug('ClusterTriggers clusterIdList: ' + clusterIdList);
             for(Cluster__c clusterItem: clusterIdList){
                 
                 
@@ -449,12 +437,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                 parentIdToAccessModeToGroupClildIdsMap.get(clusterItem.ParentCluster__c).get(readAndOnlyViewDown).add(idROVDownChild);
                 //FOR VIEW UP
                 parentIdToAccessModeToGroupClildIdsMap.get(clusterItem.ParentCluster__c).get(readAndOnlyViewUp).add(idROVUpChild);
-                
-
-                System.debug('ClusterTriggers parentIdToAccessModeToGroupClildIdsMap: ' + parentIdToAccessModeToGroupClildIdsMap);
-                System.debug('ClusterTriggers parentIdToAccessModeToGroupClildIdsMap: ' + parentIdToAccessModeToGroupClildIdsMap.size());
-
-
 
                 //For populate information for groups parents cluster map
                 Id idRWParent = parentGroupNameToGroupIdMap.get(clusterItem.ParentCluster__r.PublicGroupRWName__c);
@@ -471,10 +453,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                 //FOR VIEW UP
                 parentIdToAccessModeToGroupParentIdsMap.get(clusterItem.ParentCluster__c).put(readAndOnlyViewUp,idROVUpParent);
                 
-                System.debug('ClusterTriggers parentIdToAccessModeToGroupParentIdsMap: ' + parentIdToAccessModeToGroupParentIdsMap);
-                System.debug('ClusterTriggers parentIdToAccessModeToGroupParentIdsMap: ' + parentIdToAccessModeToGroupParentIdsMap.size());
-
-
             }
 
                 
@@ -486,7 +464,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                     String parentGroupIdROVUp = (String) parentIdToAccessModeToGroupParentIdsMap.get(parentClusterId).get(readAndOnlyViewUp);
 
                     for(Id childGroupIdRW: parentIdToAccessModeToGroupClildIdsMap.get(parentClusterId).get(readAndWrite)){
-                        //(userOrGroup_target)
+                        //userOrGroup to target
                         groupChildIdToParentIdsList.add(parentGroupIdRW+'_'+childGroupIdRW);
                     }
 
@@ -513,6 +491,15 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             }
             callFutureDeleteOfGroups(groupIdToDeleteList);
         }
+
+        if(!tagShareList.isEmpty() && toContinueTrigger){
+            try{
+
+                insert tagShareList;
+            }catch(Exception e){
+                objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
+            }
+        }
     }
     
     /*****************************************************************/
@@ -520,7 +507,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     /*****************************************************************/
 
     /* DEFINITION AND COMPLETION OF EXTERNAL ID */
-	private void setExternalId(Cluster__c recNew){
+    private void setExternalId(Cluster__c recNew){
         if(!canMethod('setExternalId')){return;}
         //System.debug('recNew.ParentCluster__c');
         if(recNew.ExternalID__c == null){
@@ -530,8 +517,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     }
 
     /* CREATION OF GROUPS FOR SECURITY */
-    
-    //eliminar si no se le da uso
 
     Boolean haveException = false;
     List<String> grupNamesList = new List<String>();
@@ -542,9 +527,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     private void createGroups(Cluster__c recNew){
         if(!canMethod('createGroups')){return;}
         AcceleratorSettings__c acceleratorSettings = AcceleratorSettings__c.getOrgDefaults();
-        
-        //TODO
-        //Tipo campo tiene que ser texto
 
         String groupName = '';
         
@@ -556,30 +538,21 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             if(fieldName != null && fieldDescribe.getType() == Schema.DisplayType.STRING){
 
                 groupName = (String) recNew.get(fieldName);
-
-                //groupName = (String) recNew.get('ExternalId__c1');//(ExternalId__c by default)
-                //System.debug('ClusterTrigger createGroups groupName1: ' + groupName);
+                //groupName = (String) recNew.get('ExternalId__c1');
 
             }else{
-                //Verificar que el campo no sea null
-                //System.Label.nameLabel
-                //recNew.AddError('Se debe configurar la custom settings "Accelerator Settings" con un campo de tipo texto');
+
                 recNew.AddError(System.Label.SetUpAcceleratorSetting);
                 haveException = true;
             }
             
 
         }catch(Exception ex){
-            //Veirificar antes que el campo exista
-            //System.Label.nameLabel
-            //recNew.AddError('El campo seleccionado en custom settings "Accelerator Settings" es incorrecto');
             recNew.AddError(System.Label.AcceleratorSettingWrongField);
             haveException = true;
 
         }
         
-        System.debug('ClusterTriggers createGroups groupName: ' + groupName);
-
         groupName = groupName.replaceAll('[^a-zA-Z0-9]','');
 
         groupName = GeneralUtils.getSubstring(groupName, 29);
@@ -588,13 +561,9 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             clusterIdChildWithParentList.add(recNew.Id);
         }
 
-        //readAndOnlyViewDown
         String groupNameRW = groupName + separatorGroupName + readAndWrite;
         String groupNameROViewUp = groupName + separatorGroupName + readAndOnlyViewUp;
         String groupNameROViewDown = groupName + separatorGroupName + readAndOnlyViewDown;
-        System.debug('ClusterTrigger createGroups groupNameRW: ' + groupNameRW);
-        System.debug('ClusterTrigger createGroups groupNameROViewUp: ' + groupNameROViewUp);
-        System.debug('ClusterTrigger createGroups groupNameROViewDown: ' + groupNameROViewDown);
 
         Group publicGroupRW = new Group(Name = groupNameRW, Developername = groupNameRW, DoesIncludeBosses = false);
         groupsList.add(publicGroupRW);
@@ -604,11 +573,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
         Group publicGroupROViewDown = new Group(Name = groupNameROViewDown, Developername = groupNameROViewDown, DoesIncludeBosses = false);
         groupsList.add(publicGroupROViewDown);
-        System.debug('ClusterTrigger createGroups publicGroupRW: ' + publicGroupRW);
-        System.debug('ClusterTrigger createGroups publicGroupROViewUp: ' + publicGroupROViewUp);
-        System.debug('ClusterTrigger createGroups publicGroupROViewDown: ' + publicGroupROViewDown);
-
-        System.debug('ClusterTrigger createGroups groupsList: ' + groupsList);
         grupNamesList.add(publicGroupRW.name);
         grupNamesList.add(publicGroupROViewUp.name);
         grupNamesList.add(publicGroupROViewDown.name);
@@ -616,13 +580,12 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     
 
 
-
+    /* ADD LANGUAGE TO PARENT UP */
     List<Id> clusterIdChildWithParentListLang = new List<Id>();
     Map<Id,String> clusterIdToOtherLanguageMap = new Map<Id,String>();
     Boolean haveDefaultLanguage = false;
     private void addLanguages(Cluster__c recNew, Cluster__c recOld){
 
-        System.debug('recNew.id: '+recNew.Id);
         if(!canMethod('addLanguages')){return;}
         
         System.debug('recOld.OtherLanguages__c: ' + recNew.DefaultLanguage__c);
@@ -630,14 +593,26 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
         String developerName = recNew.name;
         string recordtypename = Schema.SObjectType.Cluster__c.getRecordTypeInfosById().get(recNew.recordtypeid).getname();
-        System.debug('recordtypename: ' + recordtypename);
+
+
         if(recordtypename == 'Cluster Leaf'){
-            System.debug('addLanguages recNew.OtherLanguages__c: '+recNew.OtherLanguages__c);
+
             if(recNew.OtherLanguages__c != null){
+                
                 List<String> otherLanguagesList = recNew.OtherLanguages__c.split(';');
                 for(String lang: otherLanguagesList){
                     if(lang == recNew.DefaultLanguage__c){
-                        recNew.AddError(System.Label.ExistByDefaultLanguage);
+
+                        String selectDefaultLanguage = '';
+                        Schema.DescribeFieldResult fieldResult = Cluster__c.DefaultLanguage__c.getDescribe();
+                        List<Schema.PicklistEntry> picklist = fieldResult.getPicklistValues();
+                        for(Schema.PicklistEntry pick:picklist){
+                            if(pick.getValue()==recNew.DefaultLanguage__c){
+                                selectDefaultLanguage = pick.getLabel();
+                            }
+                        }
+                        
+                        recNew.AddError(selectDefaultLanguage+' '+System.Label.ExistByDefaultLanguage);
                         haveDefaultLanguage = true;
                         haveException = true;
                     }
@@ -645,31 +620,26 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             }
             if(recOld!=null){
                 clusterIdChildWithParentListLang.add(recNew.Id);
-                System.debug('update recNew.OtherLanguages__c: ' + recNew.OtherLanguages__c);
+
                 if(recNew.OtherLanguages__c != recOld.OtherLanguages__c){
-                    System.debug('update have1  recNew.OtherLanguages__c: ' + recNew.OtherLanguages__c);
+
                     clusterIdToOtherLanguageMap.put(recNew.Id,recNew.OtherLanguages__c);
                     
                 }
 
-                System.debug('update recNew.DefaultLanguage__c: ' + recNew.DefaultLanguage__c);
                 if(recNew.DefaultLanguage__c != recOld.DefaultLanguage__c){
                     
                     String newOtherLanguagesPlusDefault = '';
-                    System.debug('update have2 recNew.OtherLanguages__c: ' + recNew.OtherLanguages__c);
+                    
                     
                     if(recNew.OtherLanguages__c != null && recNew.OtherLanguages__c != ''){
                         
-                        System.debug('update have3 recNew.newOtherLanguagesPlusDefault: ' + newOtherLanguagesPlusDefault);
                         newOtherLanguagesPlusDefault = recNew.OtherLanguages__c + ';' + recNew.DefaultLanguage__c;       
-                        System.debug('update have3 recNew.newOtherLanguagesPlusDefault: ' + newOtherLanguagesPlusDefault);
+                    
                     }else{
                         
-                        System.debug('update have4 newOtherLanguagesPlusDefault: ' + newOtherLanguagesPlusDefault);
                         newOtherLanguagesPlusDefault =  recNew.DefaultLanguage__c;
-                        System.debug('update have4 newOtherLanguagesPlusDefault: ' + newOtherLanguagesPlusDefault);
                     }
-                    System.debug('update have5 newOtherLanguagesPlusDefault: ' + newOtherLanguagesPlusDefault);
                     clusterIdToOtherLanguageMap.put(recNew.Id,newOtherLanguagesPlusDefault);
                 }
 
@@ -677,7 +647,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
                 clusterIdChildWithParentListLang.add(recNew.Id);
                 String newOtherLanguagesPlusDefault = '';
-                System.debug('insert recNew.OtherLanguages__c: ' + recNew.OtherLanguages__c);
                 if(recNew.OtherLanguages__c != null && recNew.OtherLanguages__c != ''){
                     clusterIdToOtherLanguageMap.put(recNew.Id,recNew.OtherLanguages__c);
                     if(recNew.DefaultLanguage__c != null && recNew.DefaultLanguage__c != null){
@@ -686,7 +655,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                     }
 
                 }else{
-                    System.debug('recNew.DefaultLanguage__c: ' + recNew.DefaultLanguage__c);
                     if(recNew.DefaultLanguage__c != null && recNew.DefaultLanguage__c != ''){
                         newOtherLanguagesPlusDefault = recNew.DefaultLanguage__c;
                         clusterIdToOtherLanguageMap.put(recNew.Id,newOtherLanguagesPlusDefault);
@@ -695,10 +663,8 @@ public with sharing class ClusterTriggers extends TriggersHandler {
                 }
                 
             }
-                System.debug('push clusterIdToOtherLanguageMap: ' + clusterIdToOtherLanguageMap.get(recNew.Id));
         }
-        System.debug('clusterIdToOtherLanguageMap: ' + clusterIdToOtherLanguageMap);
-        System.debug('clusterIdChildWithParentListLang: ' + clusterIdChildWithParentListLang);
+
     }
 
     /* DELETION GROUPS FOR SECURITY */
@@ -717,6 +683,33 @@ public with sharing class ClusterTriggers extends TriggersHandler {
         if(recOld.PublicGroupROUpName__c != null){
             groupNameToDeleteList.add(recOld.PublicGroupROUpName__c);
         }
+    }
+
+    //PA-177 CMA: Clustering: Apex Sharing
+    Boolean toContinueTrigger = true;
+    Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+    List<SObject> recordList = new List<SObject>(); 
+    private void addSharing(Cluster__c recNew, Cluster__c recOld, Boolean isMaster){
+        if(!canMethod('addSharing')){return;}
+        System.debug('Method addSharing');
+
+        if(isMaster){
+            Map<String, Schema.SObjectType> sharing = Schema.getGlobalDescribe();
+            if(sharing.containsKey('Cluster__Share')) {
+
+                if(recNew.PublicGroupRWName__c!= recOld.PublicGroupRWName__c || recNew.PublicGroupROUpName__c!= recOld.PublicGroupROUpName__c || recNew.PublicGroupRODownName__c!= recOld.PublicGroupRODownName__c){
+                    System.debug('Insdert custom object is private or public read only');
+                    recordList.add(recNew);
+                }
+
+            }
+        }else{
+            if(objectIdToMessageErrosMap.containsKey(recNew.Id)){
+                recNew.addError(objectIdToMessageErrosMap.get(recNew.Id));
+            }
+
+        }
+
     }
 
     /* UTILITY METHODS */

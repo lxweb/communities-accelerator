@@ -224,4 +224,28 @@
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
+    <labels>
+        <fullName>ClusterDoesntHaveRequiredGroups</fullName>
+        <categories>ObjectSharingUtil</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ClusterDoesntHaveRequiredGroups</shortDescription>
+        <value>The selected Cluster doesnt have required groups</value>
+    </labels>
+    <labels>
+        <fullName>ClusterHaveGroupsInBlanks</fullName>
+        <categories>ObjectSharingUtil</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ClusterHaveGroupsInBlanks</shortDescription>
+        <value>The selected Cluster have one or mor groups in blanks or with wrong values</value>
+    </labels>
+    <labels>
+        <fullName>SharingWithOutReason</fullName>
+        <categories>ClusterTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SharingWithOutReason</shortDescription>
+        <value>Sharing with out reason</value>
+    </labels>
 </CustomLabels>

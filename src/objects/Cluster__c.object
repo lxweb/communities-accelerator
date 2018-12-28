@@ -960,6 +960,10 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Clustering__c</fullName>
+        <label>Clustering</label>
+    </sharingReasons>
     <validationRules>
         <fullName>Avoid_Circular_References</fullName>
         <active>true</active>

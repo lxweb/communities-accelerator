@@ -1,13 +1,4 @@
 public with sharing class ObjectSharingUtil {
-	
-
-
-	public ObjectSharingUtil() {
-		
-	}
-
-
-  	
   	
 	public static SharingWrapper generateSharingForRecordsOnCluster(List<SObject> records, String lookupField, String nameObjectShare, String sharingReason, Boolean isCluster){
 
@@ -17,7 +8,7 @@ public with sharing class ObjectSharingUtil {
         Map<Id,List<Id>> mapRecordsByCluster = new Map<Id,List<Id>>();
         List<String> groupNameList = new List<String>();
         List<SObject> listOfSharesToInsert = new List<SObject>();
-        System.debug('ObjectSharingUtil dataPreparing records: ' + records);
+
         for(SObject record: records){
             Id clusterId = (Id) record.get(lookupField);
             Id recordId = (Id) record.get('Id');
@@ -28,10 +19,8 @@ public with sharing class ObjectSharingUtil {
         	}
         }
 
-        System.debug('ObjectSharingUtil dataPreparing mapRecordsByCluster: ' + mapRecordsByCluster);
-
         Map<Id,Cluster__c> mapClusters = new Map<Id,Cluster__c>([SELECT Id, PublicGroupRWName__c, PublicGroupROUpName__c, PublicGroupRODownName__c  FROM Cluster__c WHERE Id IN: mapRecordsByCluster.keyset()]); 
-        System.debug('ObjectSharingUtil dataPreparing mapClusters: ' + mapClusters);
+		
         for(Id clusterId: mapClusters.keySet()){
         	Cluster__c cluster = mapClusters.get(clusterId);
 
@@ -39,11 +28,8 @@ public with sharing class ObjectSharingUtil {
             groupNameList.add(cluster.PublicGroupRODownName__c);
             groupNameList.add(cluster.PublicGroupROUpName__c);
         }
-        System.debug('ObjectSharingUtil dataPreparing groupNameList: ' + groupNameList);
 
         List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name IN :groupNameList];
-
-        System.debug('ObjectSharingUtil dataPreparing groupList: ' + groupList);
 
 
         for(Group groupItem: groupList){
@@ -67,7 +53,7 @@ public with sharing class ObjectSharingUtil {
 		                	Schema.SObjectType shareType = Schema.getGlobalDescribe().get(shareObjectName);
 		                    SObject shareRecord = shareType.newSObject();
 		                    shareRecord.put('ParentId', recordId);
-		                    //shareRecord.put('UserOrGroupId', mapClusters.get(clusterId).get(fieldName));
+
 		                    if(groupNameToGroupIdMap.containsKey((String) mapClusters.get(clusterId).get(fieldName))){
 								shareRecord.put('UserOrGroupId', groupNameToGroupIdMap.get( (String) mapClusters.get(clusterId).get(fieldName)) );
 			                    
@@ -76,12 +62,13 @@ public with sharing class ObjectSharingUtil {
 			                    shareRecord.put('AccessLevel', fieldNamesAndSecLevel.get(fieldName));
 			                    listOfSharesToInsert.add(shareRecord);
 							}else{
-								objectIdToMessageErrosMap.put(recordId,'The selected Cluster doesnt have required groups2! ');
+
+								objectIdToMessageErrosMap.put(recordId,Label.ClusterDoesntHaveRequiredGroups);
 							}
 		                    
 
 	                    }else{
-	                    	objectIdToMessageErrosMap.put(recordId,'The selected Cluster have one or mor groups blanks! ');
+	                    	objectIdToMessageErrosMap.put(recordId,Label.ClusterHaveGroupsInBlanks);
 	                    }
                     }
                 }
@@ -125,10 +112,6 @@ public with sharing class ObjectSharingUtil {
         }
 
 	    Map<String,String> fieldNamesAndSecLevel = new Map<String,String>{'PublicGroupRWName__c' => 'Edit', 'PublicGroupROUpName__c' => 'Read', 'PublicGroupRODownName__c' => 'Read'};
-	    
-        System.debug('TagTriggers dataPreparing fieldNamesAndSecLevel: ' + fieldNamesAndSecLevel);
-		                
-
         for(SObject record: records){
         	for(String fieldName: fieldNamesAndSecLevel.keySet()){
         		System.debug('record.get(fieldName)'+record.get(fieldName));
@@ -148,39 +131,6 @@ public with sharing class ObjectSharingUtil {
         SharingWrapper sharingWrapper = new SharingWrapper(objectIdToMessageErrosMap, listOfSharesToInsert);
         return sharingWrapper;
     }
-
-
-   /*public static sObject createManualShareGenericObject(Id recordId, Id userOrGroupId, String accessLevel, String sObjectType){
-      
-   	if(sObjectType == 'Tag__c'){
-		Tag__Share tagShare  = new Tag__Share();
-		tagShare.ParentId = recordId;
-		tagShare.UserOrGroupId = userOrGroupId;
-		tagShare.AccessLevel = accessLevel;
-		tagShare.RowCause = Schema.Tag__Share.RowCause.Manual;
-		return tagShare;
-   	}
-
-   	if(sObjectType == 'Content__c'){
-		Content__Share contentShrare  = new Content__Share();
-		contentShrare.ParentId = recordId;
-		contentShrare.UserOrGroupId = userOrGroupId;
-		contentShrare.AccessLevel = accessLevel;
-		contentShrare.RowCause = Schema.Tag__Share.RowCause.Manual;
-		return contentShrare;
-   	}
-
-   	if(sObjectType == 'Navigation__c'){
-		Navigation__Share navigationShrare  = new Navigation__Share();
-		navigationShrare.ParentId = recordId;
-		navigationShrare.UserOrGroupId = userOrGroupId;
-		navigationShrare.AccessLevel = accessLevel;
-		navigationShrare.RowCause = Schema.Tag__Share.RowCause.Manual;
-		return navigationShrare;
-   	}
-
-	return null;
-  }*/
 
   public class SharingWrapper{
 
