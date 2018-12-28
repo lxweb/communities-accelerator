@@ -831,7 +831,7 @@
         <recordType>Content__c.News</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Navigation__c-Navigation Point Layout</layout>
+        <layout>Navigation__c-Navigation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>TagAssignment__c-Tag Assignment Layout</layout>
