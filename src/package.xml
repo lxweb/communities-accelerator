@@ -25,22 +25,7 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
-		<members>AcceleratorSettings__c</members>
-		<members>CategoryAssignment__c</members>
-		<members>Category__c</members>
-		<members>ClusterUser__c</members>
-		<members>Cluster__c</members>
-		<members>Component__c</members>
-		<members>ContentAssignment__c</members>
-		<members>Content__c</members>
-		<members>ContentCartItem__c</members>
-		<members>MediaElementAssignment__c</members>
-		<members>MediaElement__c</members>
-		<members>Navigation__c</members>
-		<members>TagAssignment__c</members>
-		<members>Tag__c</members>
-		<members>Translation__c</members>
-		<members>User</members>
+		<members>*</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
