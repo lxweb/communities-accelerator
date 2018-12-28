@@ -1,0 +1,223 @@
+# Archivos VisualStudio Code
+.forceCode/
+.sdfx/
+force.json
+sfdx-project.json
+
+# Archivos Sublime
+config/
+*.sublime-project
+*.sublime-workspace
+
+# Componentes standard de SF
+src/applications/Force_com.app
+src/applications/standard__AppLauncher.app
+src/applications/standard__Community.app
+src/applications/standard__Content.app
+src/applications/standard__LightningBolt.app
+src/applications/standard__LightningInstrumentation.app
+src/applications/standard__LightningSales.app
+src/applications/standard__LightningSalesConsole.app
+src/applications/standard__LightningService.app
+src/applications/standard__Marketing.app
+src/applications/standard__Platform.app
+src/applications/standard__Sales.app
+src/applications/standard__Service.app
+src/applications/standard__ServiceConsole.app
+src/applications/standard__Sites.app
+src/duplicateRules/Contact.Standard_Rule_for_Contacts_with_Duplicate_Leads.duplicateRule
+src/duplicateRules/Lead.Standard_Rule_for_Leads_with_Duplicate_Contacts.duplicateRule
+src/flexipages/LightningSalesConsole_UtilityBar.flexipage
+src/flexipages/LightningService_UtilityBar.flexipage
+src/layouts/Account-Account %28Marketing%29 Layout.layout
+src/layouts/Account-Account %28Sales%29 Layout.layout
+src/layouts/Account-Account %28Support%29 Layout.layout
+src/layouts/Account-Account Layout.layout
+src/layouts/AccountBrand-Account Brand Layout.layout
+src/layouts/Asset-Asset Layout.layout
+src/layouts/AssetRelationship-Asset Relationship Layout.layout
+src/layouts/Campaign-Campaign Layout.layout
+src/layouts/CampaignMember-Campaign Member Page Layout.layout
+src/layouts/Case-Case %28Marketing%29 Layout.layout
+src/layouts/Case-Case %28Sales%29 Layout.layout
+src/layouts/Case-Case %28Support%29 Layout.layout
+src/layouts/Case-Case Layout.layout
+src/layouts/CaseClose-Close Case Layout.layout
+src/layouts/CaseInteraction-Case Feed Layout.layout
+src/layouts/CommunityMemberLayout-Community Member Layout.layout
+src/layouts/Contact-Contact %28Marketing%29 Layout.layout
+src/layouts/Contact-Contact %28Sales%29 Layout.layout
+src/layouts/Contact-Contact %28Support%29 Layout.layout
+src/layouts/Contact-Contact Layout.layout
+src/layouts/ContentVersion-General.layout
+src/layouts/Contract-Contract Layout.layout
+src/layouts/DandBCompany-D%26B Company Layout.layout
+src/layouts/DuplicateRecordSet-Duplicate Record Set Layout.layout
+src/layouts/EmailMessage-Email Message Layout.layout
+src/layouts/Event-Event Layout.layout
+src/layouts/Global-Global Layout.layout
+src/layouts/Goal-Goal Layout.layout
+src/layouts/GoalLink-Goal Link Layout.layout
+src/layouts/Idea-Idea Layout.layout
+src/layouts/JobTracker-Job Tracker Layout - Summer %2715.layout
+src/layouts/JobTracker-Job Tracker Layout - Winter %2716.layout
+src/layouts/JobTracker-Job Tracker Layout.layout
+src/layouts/Lead-Lead %28Marketing%29 Layout.layout
+src/layouts/Lead-Lead %28Sales%29 Layout.layout
+src/layouts/Lead-Lead %28Support%29 Layout.layout
+src/layouts/Lead-Lead Layout.layout
+src/layouts/Macro-Macro Layout.layout
+src/layouts/Metric-Completion Metric Layout.layout
+src/layouts/Metric-Formato de medición de finalización.layout
+src/layouts/Metric-Metric Layout.layout
+src/layouts/MetricDataLink-Metric Data Link Layout.layout
+src/layouts/Opportunity-Opportunity %28Marketing%29 Layout.layout
+src/layouts/Opportunity-Opportunity %28Sales%29 Layout.layout
+src/layouts/Opportunity-Opportunity %28Support%29 Layout.layout
+src/layouts/Opportunity-Opportunity Layout.layout
+src/layouts/OpportunityLineItem-Opportunity Product Layout.layout
+src/layouts/Order-Order Layout.layout
+src/layouts/OrderItem-Order Product Layout.layout
+src/layouts/Pricebook2-Price Book Layout.layout
+src/layouts/PricebookEntry-Price Book Entry Layout.layout
+src/layouts/Product2-Product Layout.layout
+src/layouts/QuickText-Quick Text Layout.layout
+src/layouts/SOSSession-SOS Session Layout.layout
+src/layouts/SOSSessionActivity-SOS Session Activity Layout.layout
+src/layouts/Scorecard-Scorecard Layout.layout
+src/layouts/ScorecardAssociation-Scorecard Association Layout.layout
+src/layouts/ScorecardMetric-Scorecard Metric Layout.layout
+src/layouts/Solution-Solution Layout.layout
+src/layouts/Task-Task Layout.layout
+src/layouts/User-User Layout.layout
+src/layouts/UserAppMenuItem-Application Layout.layout
+src/layouts/UserProvAccount-User Provisioning Account Layout.layout
+src/layouts/UserProvisioningLog-User Provisioning Log Layout.layout
+src/layouts/UserProvisioningRequest-User Provisioning Request Layout.layout
+src/layouts/WorkCoaching-Coaching Layout 194.layout
+src/layouts/WorkCoaching-Coaching Layout 2%2E0.layout
+src/layouts/WorkCoaching-Coaching Layout.layout
+src/layouts/WorkFeedback-Feedback Layout - Summer %2715.layout
+src/layouts/WorkFeedback-Feedback Layout - Winter %2716.layout
+src/layouts/WorkFeedback-Feedback Layout.layout
+src/layouts/WorkFeedbackQuestion-Feedback Question Layout - Summer %2715.layout
+src/layouts/WorkFeedbackQuestion-Feedback Question Layout - Winter %2716.layout
+src/layouts/WorkFeedbackQuestion-Feedback Question Layout.layout
+src/layouts/WorkFeedbackQuestionSet-Feedback Question Set Layout - Summer %2715.layout
+src/layouts/WorkFeedbackQuestionSet-Feedback Question Set Layout - Winter %2716.layout
+src/layouts/WorkFeedbackQuestionSet-Feedback Question Set Layout.layout
+src/layouts/WorkFeedbackRequest-Feedback Request Layout - Summer %2715.layout
+src/layouts/WorkFeedbackRequest-Feedback Request Layout - Winter %2716.layout
+src/layouts/WorkFeedbackRequest-Feedback Request Layout.layout
+src/layouts/WorkFeedbackTemplate-Feedback Template Layout.layout
+src/layouts/WorkPerformanceCycle-Performance Cycle Layout - Summer %2715.layout
+src/layouts/WorkPerformanceCycle-Performance Cycle Layout - Winter %2716.layout
+src/layouts/WorkPerformanceCycle-Performance Cycle Layout.layout
+src/matchingRules/Account.matchingRule
+src/matchingRules/Contact.matchingRule
+src/matchingRules/Lead.matchingRule
+src/objects/Account.object
+src/objects/AccountBrand.object
+src/objects/AccountContactRole.object
+src/objects/Activity.object
+src/objects/Asset.object
+src/objects/AssetRelationship.object
+src/objects/AssistantProgress.object
+src/objects/Campaign.object
+src/objects/CampaignMember.object
+src/objects/Case.object
+src/objects/CaseContactRole.object
+src/objects/ChannelProgram.object
+src/objects/ChannelProgramLevel.object
+src/objects/ChannelProgramMember.object
+src/objects/ChatterActivity.object
+src/objects/Contact.object
+src/objects/ContentVersion.object
+src/objects/Contract.object
+src/objects/ContractContactRole.object
+src/objects/DandBCompany.object
+src/objects/DuplicateRecordItem.object
+src/objects/DuplicateRecordSet.object
+src/objects/EmailMessage.object
+src/objects/Event.object
+src/objects/ExchangeUserMapping.object
+src/objects/FeedItem.object
+src/objects/ForecastingCategoryMapping.object
+src/objects/Idea.object
+src/objects/Lead.object
+src/objects/Macro.object
+src/objects/MacroAction.object
+src/objects/MacroInstruction.object
+src/objects/NetworkMember.object
+src/objects/Opportunity.object
+src/objects/OpportunityCompetitor.object
+src/objects/OpportunityContactRole.object
+src/objects/OpportunityLineItem.object
+src/objects/Order.object
+src/objects/OrderItem.object
+src/objects/OrgDeleteRequest.object
+src/objects/PartnerFundAllocation.object
+src/objects/PartnerFundClaim.object
+src/objects/PartnerFundRequest.object
+src/objects/PartnerMarketingBudget.object
+src/objects/PartnerRole.object
+src/objects/Pricebook2.object
+src/objects/PricebookEntry.object
+src/objects/Product2.object
+src/objects/QuickText.object
+src/objects/RecordAction.object
+src/objects/RequestsForAccessSIQ.object
+src/objects/SOSSession.object
+src/objects/SOSSessionActivity.object
+src/objects/Scorecard.object
+src/objects/ScorecardAssociation.object
+src/objects/ScorecardMetric.object
+src/objects/Site.object
+src/objects/Solution.object
+src/objects/StreamActivityAccess.object
+src/objects/StreamingChannel.object
+src/objects/Task.object
+src/objects/Topic.object
+src/objects/TopicAssignment.object
+src/objects/UserProvisioningRequest.object
+src/profiles/Analytics Cloud Integration User.profile
+src/profiles/Analytics Cloud Security User.profile
+src/profiles/Authenticated Website.profile
+src/profiles/CPQ Integration User.profile
+src/profiles/Chatter External User.profile
+src/profiles/Chatter Free User.profile
+src/profiles/Chatter Moderator User.profile
+src/profiles/Chatter Only User.profile
+src/profiles/Company Communities User.profile
+src/profiles/ContractManager.profile
+src/profiles/Cross Org Data Proxy User.profile
+src/profiles/Custom%3A Marketing Profile.profile
+src/profiles/Custom%3A Sales Profile.profile
+src/profiles/Custom%3A Support Profile.profile
+src/profiles/Customer Community Login User.profile
+src/profiles/Customer Community Plus Login User.profile
+src/profiles/Customer Community Plus User.profile
+src/profiles/Customer Community User.profile
+src/profiles/Customer Portal Manager Custom.profile
+src/profiles/Customer Portal Manager Standard.profile
+src/profiles/CustomerManager.profile
+src/profiles/External Identity User.profile
+src/profiles/Force%2Ecom - Free User.profile
+src/profiles/Gold Partner User.profile
+src/profiles/Guest License User.profile
+src/profiles/High Volume Customer Portal User.profile
+src/profiles/HighVolumePortal.profile
+src/profiles/MarketingProfile.profile
+src/profiles/Overage Customer Portal Manager Custom.profile
+src/profiles/Overage Customer Portal Manager Standard.profile
+src/profiles/Overage High Volume Customer Portal User.profile
+src/profiles/Partner Community User.profile
+src/profiles/Partner.profile
+src/profiles/PlatformPortal.profile
+src/profiles/ReadOnly.profile
+src/profiles/ServiceCloud.profile
+src/profiles/Silver Partner User.profile
+src/profiles/SolutionManager.profile
+src/profiles/Standard.profile
+src/profiles/StandardAul.profile
+src/profiles/Work%2Ecom Only User.profile

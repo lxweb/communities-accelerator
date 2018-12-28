@@ -53,6 +53,19 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>Cluster__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Cluster</label>
+        <referenceTo>Cluster__c</referenceTo>
+        <relationshipLabel>Navigations</relationshipLabel>
+        <relationshipName>Navigations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Description__c</fullName>
         <externalId>false</externalId>
         <label>Description</label>
@@ -88,5 +101,9 @@
     <pluralLabel>Navigations</pluralLabel>
     <searchLayouts/>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Clustering__c</fullName>
+        <label>Clustering</label>
+    </sharingReasons>
     <visibility>Public</visibility>
 </CustomObject>

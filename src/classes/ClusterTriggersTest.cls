@@ -62,29 +62,32 @@ public with sharing class ClusterTriggersTest {
 
 		System.debug('ClusterTriggersTest clusterRootList: ' + clusterRootList);
 		// Then
-		List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name LIKE 'ClusterRootTest_R%'];
+		List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name LIKE 'ClusterRootTest%_R%'];
 		List<Group> getGroupList = new List<Group>();
 		System.debug('ClusterTriggersTest groupList: ' + groupList);
 		Group groupRW = new Group();
 		Group groupROViewDown = new Group(); 
 		Group groupROViewUp = new Group(); 
 		for(Group groupItem: groupList){
-			if(groupItem.name == 'ClusterRootTest_' + readAndWrite){
-				groupRW = groupItem;
+			if(groupItem.name == 'ClusterRootTest00_' + readAndWrite){
+				System.debug('ClusterTriggersTest readAndWrite');
+                groupRW = groupItem;
 				getGroupList.add(groupRW);
 			}
-			if(groupItem.name == 'ClusterRootTest_' + readAndOnlyViewDown){
-				groupROViewDown = groupItem;
+			if(groupItem.name == 'ClusterRootTest00_' + readAndOnlyViewDown){
+				System.debug('ClusterTriggersTest readAndOnlyViewDown');
+                groupROViewDown = groupItem;
 				getGroupList.add(groupROViewDown);
 			}
-			if(groupItem.name == 'ClusterRootTest_' + readAndOnlyViewUp){
-				groupROViewUp = groupItem;
+			if(groupItem.name == 'ClusterRootTest00_' + readAndOnlyViewUp){
+				System.debug('ClusterTriggersTest readAndOnlyViewUp');
+                groupROViewUp = groupItem;
 				getGroupList.add(groupROViewUp);
 			}
 		}
 		System.debug('ClusterTriggersTest getGroupList: ' + getGroupList);
 		Cluster__c clusterRootGeted = [SELECT Id, name, PublicGroupRWName__c, PublicGroupRODownName__c, PublicGroupROUpName__c 
-		FROM Cluster__c WHERE name = 'ClusterRootTest' LIMIT 1];
+		FROM Cluster__c WHERE name = 'ClusterRootTest00' LIMIT 1];
 		System.debug('ClusterTriggersTest clusterRootGeted: ' + clusterRootGeted);
 
 		System.assertEquals(3, getGroupList.size());
@@ -115,7 +118,7 @@ public with sharing class ClusterTriggersTest {
 		Test.stopTest();
 
 		// Then
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest_R%' ];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest%_R%' ];
 		System.debug('ClusterTriggersTest groupRootList: '+groupRootList);
 		System.debug('ClusterTriggersTest groupRootList: '+groupRootList.size());
 		List<Group> groupsForClusterGroupsList = [SELECT Id, name FROM Group WHERE name LIKE '%CGFTest%'];
@@ -134,7 +137,7 @@ public with sharing class ClusterTriggersTest {
 		System.debug('ClusterTriggersTest groupCGMemberList: '+ groupCGMemberList);
 		System.debug('ClusterTriggersTest groupCGMemberList: '+ groupCGMemberList.size());
 		
-		System.assertEquals(3, groupRootList.size());
+		System.assertEquals(4, groupRootList.size());
 		System.assertEquals(6, groupsForClusterGroupsList.size());
 		System.assertEquals(2, groupMemberList.size());
 		System.assertEquals(4, groupCGMemberList.size());
@@ -146,7 +149,7 @@ public with sharing class ClusterTriggersTest {
 
         List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
         System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
-        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'ClusterRootTest' LIMIT 1];
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name LIKE 'ClusterRootTest%' LIMIT 1];
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
         List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , (String) getClusterRoot.id ,2 ,'ClusterGroup');
         System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList);
@@ -177,7 +180,7 @@ public with sharing class ClusterTriggersTest {
 
 		// Then
 		
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest_R%'];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest%_R%'];
         System.debug('ClusterTriggersTest method groupRootList: '+groupRootList);
         System.debug('ClusterTriggersTest method groupRootList: '+groupRootList.size());
 		
@@ -203,7 +206,7 @@ public with sharing class ClusterTriggersTest {
 
 		List<Groupmember> groupMembersByClusterFirstLevelROVUList = getGroupMembersByGroup(groupsForClustersFirstLevelList,true);
 
-		System.assertEquals(3, groupRootList.size());
+		System.assertEquals(4, groupRootList.size());
 		System.assertEquals(6, groupsForClustersFirstLevelList.size());
 		System.assertEquals(12, groupsForClustersSecondLevelList.size());
 		
@@ -258,7 +261,7 @@ public with sharing class ClusterTriggersTest {
 
         List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
         System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
-        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'ClusterRootTest' LIMIT 1];
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'ClusterRootTest00' LIMIT 1];
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
 
         List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , (String) getClusterRoot.id ,2 ,'ClusterGroup');
@@ -305,7 +308,7 @@ public with sharing class ClusterTriggersTest {
 		Test.stopTest();
 
 		// Then
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'CRTest_R%'];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'CRTest00_R%'];
         System.debug('ClusterTriggersTest groupRootList: '+groupRootList);
         System.debug('ClusterTriggersTest groupRootList: '+groupRootList.size());
 		
@@ -377,7 +380,7 @@ public with sharing class ClusterTriggersTest {
 
         List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', null, 1, 'ClusterRoot');
         System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
-        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest' LIMIT 1];
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest00' LIMIT 1];
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
         List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , (String) getClusterRoot.id ,2 ,'ClusterGroup');
@@ -416,7 +419,7 @@ public with sharing class ClusterTriggersTest {
 
 		// When
 		Test.startTest();
-		MockupFactory.deleteClusterByName('ClusterRootTest');
+		MockupFactory.deleteClusterByName('ClusterRootTest00');
 		Test.stopTest();
 
 
@@ -433,7 +436,7 @@ public with sharing class ClusterTriggersTest {
 	@isTest static void changeLanguageWithThirdLavelTree() {
 		// Comment: cuando se crea un arbol de tercer nivel con hojas se debe validar que:
 		// 1.- la agregacion de los grupos correspondientes al cluster root
-
+		// 2.- Los cluster group de primer nivel deben tener sus idiomas correspondientes
 
 		// Given: la Custom Settings ha sido seteada anteriormente en el testSetup
 		
@@ -444,7 +447,7 @@ public with sharing class ClusterTriggersTest {
 		Test.stopTest();
 
 		//Then
-		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name = 'CRTest'];
+		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name = 'CRTest00'];
 		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
 		List<Cluster__c> ClusterLeafSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLeaf%'];
 
@@ -458,11 +461,11 @@ public with sharing class ClusterTriggersTest {
 	}
 
     public static List<Cluster__C> generateClusterTreeThreeLevelWithLanguage(){
-
-        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', null, 1, 'ClusterRoot','da','da');
+		List<String> clusterList = new List<String>();
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', clusterList, 1, 'ClusterRoot','da','da');
 
         System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
-        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest' LIMIT 1];
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest00' LIMIT 1];
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
         List<String> rootClusterList = new List<String>();
         rootClusterList.add((String) getClusterRoot.Id);
@@ -498,7 +501,7 @@ public with sharing class ClusterTriggersTest {
 		Test.stopTest();
 
 		// Then
-		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name = 'CRTest'];
+		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name = 'CRTest00'];
 		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
 		List<Cluster__c> ClusterGroupSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGSTest%'];
 		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
@@ -516,14 +519,167 @@ public with sharing class ClusterTriggersTest {
 
 	}
 
+
+
+
     public static List<Cluster__C> generateClusterTreeFourLevelWithLanguage(){
 
 
-
-        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', null, 1, 'ClusterRoot','da','da');
+		List<String> parentClusterIdList = new List<String>();
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', parentClusterIdList, 1, 'ClusterRoot','da','da');
 
         System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
-        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest' LIMIT 1];
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name = 'CRTest00' LIMIT 1];
+        System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
+        List<String> rootClusterList = new List<String>();
+        rootClusterList.add((String) getClusterRoot.Id);
+        List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , rootClusterList ,2 ,'ClusterGroup','en_US','es');
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList);
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList.size());
+
+        List<Cluster__c> getClusterGroupList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+        System.debug('ClusterTriggerTest Language getClusterGroupList: ' + getClusterGroupList);
+        List<Cluster__c> clusterGroupSecondList = new List<Cluster__c>();
+        Integer i = 1;
+        List<String> listIdClusters = new List<String>();
+        for(Cluster__c clusterItem : getClusterGroupList){
+ 			listIdClusters.add( (String) clusterItem.Id);
+        }
+
+       	List<Cluster__c> clusterGroupSList = MockupFactory.createCluster('CGSTest', listIdClusters ,2 ,'ClusterGroup','en_US', 'da;es');
+       	List<Cluster__c> getClusterGroupSList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+       	System.debug('ClusterTriggerTest Language getClusterLeafList: ' + getClusterGroupSList);
+
+       	List<String> listIdClusters2 = new List<String>();
+        for(Cluster__c clusterItem2 : getClusterGroupSList){
+ 			listIdClusters2.add( (String) clusterItem2.Id);
+        }
+		System.debug('ClusterTriggerTest Language listIdClusters2: ' + listIdClusters2);
+        List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es;pt_BR');
+        return clusterLeafList;
+
+    }
+
+
+    //changeLanguageWithThirdLavelTree
+	@isTest static void changeLanguageWithFourLevelTree2() {
+		// Comment: cuando se crea un arbol de cuarto nivel con hojas se debe validar que:
+		// 1.- El cluster root contenga los lenguajes correspondientes 
+		// 2.- Los cluster group de primer nivel deben tener sus idiomas correspondientes
+		// 3.- Los cluster group de segundo nivel deben tener sus idiomas correspondientes
+
+
+		// When
+		Test.startTest();
+		List<Cluster__c> clusterGroupFirstLevelList = generateClusterTreeFourLevelWithLanguage2();
+		Test.stopTest();
+
+		// Then
+		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CRTest%'];
+		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+		List<Cluster__c> ClusterGroupSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+
+		//Coment
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterRootList: ' + ClusterRootList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupFList: ' + ClusterGroupFList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupSList: ' + ClusterGroupSList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterLeafList: ' + ClusterLeafList);
+
+		System.assert(contentAllLanguages(ClusterRootList[0].OtherLanguages__c, 'da;es_MX;pt_BR;es;en_US'));
+		System.assert(contentAllLanguages(ClusterGroupFList[0].OtherLanguages__c, 'es;es_MX;pt_BR'));
+		System.assert(contentAllLanguages(ClusterGroupSList[0].OtherLanguages__c, 'da;es;pt_BR;es_MX'));
+
+
+	}
+
+    public static List<Cluster__C> generateClusterTreeFourLevelWithLanguage2(){
+		
+        List<String> clusteridList = new List<String>();
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', clusteridList, 1, 'ClusterRoot','da','da');
+
+        System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name LIKE 'CRTest%' LIMIT 1];
+        System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
+        List<String> rootClusterList = new List<String>();
+        rootClusterList.add((String) getClusterRoot.Id);
+        List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , rootClusterList ,2 ,'ClusterGroup','en_US','es');
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList);
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList.size());
+
+        List<Cluster__c> getClusterGroupList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+        System.debug('ClusterTriggerTest Language getClusterGroupList: ' + getClusterGroupList);
+        List<Cluster__c> clusterGroupSecondList = new List<Cluster__c>();
+        Integer i = 1;
+        List<String> listIdClusters = new List<String>();
+        for(Cluster__c clusterItem : getClusterGroupList){
+ 			listIdClusters.add( (String) clusterItem.Id);
+        }
+
+       	List<Cluster__c> clusterGroupSList = MockupFactory.createCluster('CGSTest', listIdClusters ,2 ,'ClusterGroup','en_US', 'da;es');
+       	List<Cluster__c> getClusterGroupSList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+       	System.debug('ClusterTriggerTest Language getClusterLeafList: ' + getClusterGroupSList);
+
+       	List<String> listIdClusters2 = new List<String>();
+       	List<String> listIdClusters3 = new List<String>();
+        
+       	Integer count = 0;
+       	Integer toCount = 2; 
+        for(Cluster__c clusterItem2 : getClusterGroupSList){
+ 			if(count < toCount){
+ 				listIdClusters2.add( (String) clusterItem2.Id);
+ 			}else{
+ 				listIdClusters3.add( (String) clusterItem2.Id);
+ 			}
+ 			
+ 			count++;
+        }
+
+        List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es;pt_BR');
+        List<Cluster__c> clusterLeafList2 = MockupFactory.createCluster('CLTest2', listIdClusters3 ,2 ,'ClusterLeaf','en_US', 'es');
+        return clusterLeafList;
+
+    }
+
+	@isTest static void updateLanguageWithFourLevelTree() {
+		// Comment: cuando se crea un arbol de cuarto nivel con hojas se debe validar que:
+		// 1.- El cluster root contenga los lenguajes correspondientes 
+		// 2.- Los cluster group de primer nivel deben tener sus idiomas correspondientes
+		// 3.- Los cluster group de segundo nivel deben tener sus idiomas correspondientes
+
+
+		// When
+		Test.startTest();
+		List<Cluster__c> clusterGroupFirstLevelList = updateClusterLanguageWithFourLevelTree();
+		Test.stopTest();
+
+		// Then
+		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CRTest%'];
+		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+		List<Cluster__c> ClusterGroupSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+
+		//Coment
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterRootList: ' + ClusterRootList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupFList: ' + ClusterGroupFList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupSList: ' + ClusterGroupSList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterLeafList: ' + ClusterLeafList);
+
+		System.assert(contentAllLanguages(ClusterRootList[0].OtherLanguages__c, 'da;es_MX;pt_BR;es'));
+		System.assert(contentAllLanguages(ClusterGroupFList[0].OtherLanguages__c, 'da;es;es_MX;pt_BR'));
+		System.assert(contentAllLanguages(ClusterGroupSList[0].OtherLanguages__c, 'da;es;pt_BR;es_MX'));
+
+
+	}
+
+    public static List<Cluster__C> updateClusterLanguageWithFourLevelTree(){
+
+
+		List<String> clusterIdList = new List<String>();
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', clusterIdList, 1, 'ClusterRoot','da','da');
+
+        System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name LIKE 'CRTest%' LIMIT 1];
         System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
         List<String> rootClusterList = new List<String>();
         rootClusterList.add((String) getClusterRoot.Id);
@@ -549,8 +705,109 @@ public with sharing class ClusterTriggersTest {
  			listIdClusters2.add( (String) clusterItem2.Id);
         }
 
-        List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es;pt_BR');
-        return clusterLeafList;
+        List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es');
+        
+        //List<Cluster__c> getClusterLeafSList = [SELECT Id FROM Cluster__c WHERE name LIKE 'ClusterLeaf%'];
+        List<Cluster__c> getClusterLeafSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+        /*for(Cluster__c cl: getClusterLeafSList){
+        	cl.OtherLanguages__c = cl.OtherLanguages__c + ';' + 'pt_BR;da';
+
+        }*/
+        for(integer j = 0; j<getClusterLeafSList.size();j++){
+        	getClusterLeafSList[j].OtherLanguages__c = getClusterLeafSList[j].OtherLanguages__c + ';' + 'da';
+        	getClusterLeafSList[j].DefaultLanguage__c = 'pt_BR';
+        }
+        System.debug('getClusterLeafSList:1: '+getClusterLeafSList);
+        update getClusterLeafSList;
+        System.debug('getClusterLeafSList:2: '+getClusterLeafSList);
+
+        return getClusterLeafSList;
+
+    }
+
+	@isTest static void updateLanguageWithThreeLevelTree() {
+		// Comment: cuando se crea un arbol de cuarto nivel con hojas se debe validar que:
+		// 1.- El cluster root contenga los lenguajes correspondientes 
+		// 2.- Los cluster group de primer nivel deben tener sus idiomas correspondientes
+		// 3.- Los cluster group de segundo nivel deben tener sus idiomas correspondientes
+
+
+		// When
+		Test.startTest();
+		List<Cluster__c> clusterGroupFirstLevelList = updateClusterLanguageWithThreeLevelTree();
+		Test.stopTest();
+
+		// Then
+		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CRTest%'];
+		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+		List<Cluster__c> ClusterGroupSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+
+		//Coment
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterRootList: ' + ClusterRootList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterRootList: ' + ClusterRootList.size());
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupFList: ' + ClusterGroupFList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupFList: ' + ClusterGroupFList.size());
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupSList: ' + ClusterGroupSList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterGroupSList: ' + ClusterGroupSList.size());
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterLeafList: ' + ClusterLeafList);
+		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterLeafList: ' + ClusterLeafList.size());
+
+		System.assert(contentAllLanguages(ClusterRootList[0].OtherLanguages__c, 'da;es_MX;pt_BR;es'));
+		System.assert(contentAllLanguages(ClusterGroupFList[0].OtherLanguages__c, 'es;es_MX;pt_BR'));
+		System.assert(contentAllLanguages(ClusterGroupSList[0].OtherLanguages__c, 'da;es;pt_BR;es_MX'));
+
+
+	}
+
+    public static List<Cluster__C> updateClusterLanguageWithThreeLevelTree(){
+
+
+		List<String> clusterIdList = new List<String>();
+        List<Cluster__c> clusterRootList = MockupFactory.createCluster('CRTest', clusterIdList, 1, 'ClusterRoot','da','da');
+
+        System.debug('ClusterTriggersTest clusterRootList: '+clusterRootList);
+        Cluster__c getClusterRoot = [SELECT Id FROM Cluster__c WHERE name LIKE 'CRTest%' LIMIT 1];
+        System.debug('ClusterTriggersTest getClusterRoot: '+getClusterRoot);
+        List<String> rootClusterList = new List<String>();
+        rootClusterList.add((String) getClusterRoot.Id);
+        List<Cluster__c> clusterGroupList = MockupFactory.createCluster('CGFTest' , rootClusterList ,2 ,'ClusterGroup','en_US','es');
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList);
+        System.debug('ClusterTriggersTest clusterGroupList: '+clusterGroupList.size());
+
+        List<Cluster__c> getClusterGroupList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGFTest%'];
+        System.debug('ClusterTriggerTest Language getClusterGroupList: ' + getClusterGroupList);
+        List<Cluster__c> clusterGroupSecondList = new List<Cluster__c>();
+        Integer i = 1;
+        List<String> listIdClusters = new List<String>();
+        for(Cluster__c clusterItem : getClusterGroupList){
+ 			listIdClusters.add( (String) clusterItem.Id);
+        }
+
+       	List<Cluster__c> clusterGroupSList = MockupFactory.createCluster('CGSTest', listIdClusters ,2 ,'ClusterGroup','en_US', 'da;es');
+       	List<Cluster__c> getClusterGroupSList = [SELECT Id FROM Cluster__c WHERE name LIKE 'CGSTest%'];
+       	System.debug('ClusterTriggerTest Language getClusterLeafList: ' + getClusterGroupSList);
+
+       	List<String> listIdClusters2 = new List<String>();
+        for(Cluster__c clusterItem2 : getClusterGroupSList){
+ 			listIdClusters2.add( (String) clusterItem2.Id);
+        }
+
+        List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es');
+        
+        List<Cluster__c> getClusterLeafSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+
+        System.debug('getClusterLeafSList:1: '+getClusterLeafSList);
+        System.debug('getClusterLeafSList:1: '+getClusterLeafSList.size());
+        for(integer j = 0; j<getClusterLeafSList.size();j++){
+        	getClusterLeafSList[j].DefaultLanguage__c = 'pt_BR';
+        }
+        System.debug('getClusterLeafSList:2: '+getClusterLeafSList);
+        System.debug('getClusterLeafSList:2: '+getClusterLeafSList.size());
+        update getClusterLeafSList;
+        System.debug('getClusterLeafSList:3: '+getClusterLeafSList);
+
+        return getClusterLeafSList;
 
     }
 
@@ -559,16 +816,44 @@ public with sharing class ClusterTriggersTest {
     	List<String> languageAList = languageA.split(';');
     	List<String> languageBList = languageB.split(';');
     	Boolean booleanReturn = true;
+    	Boolean booleanReturn2 = true;
     	for(String laguage: languageAList){
-    		if(!languageBList.contains(laguage)){
+    		if(!languageB.contains(laguage)){
     			booleanReturn = false;
     			break;
     		}
     	}
 
-    	return booleanReturn;
+    	for(String laguage2: languageBList){
+    		if(!languageA.contains(laguage2)){
+    			booleanReturn2 = false;
+    			break;
+    		}
+    	}
+
+    	return booleanReturn && booleanReturn2;
 
     }
+
+	@isTest
+	static void insertClusterSharing()
+	{
+		// Given
+		
+
+		// When
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		System.debug('ClusterTriggerTest insertClusterSharing clusterRootList: '+clusterRootList);
+
+
+		//Then
+		List<Cluster__Share> shareList = [SELECT Id, ParentId FROM Cluster__Share WHERE ParentId = :clusterRootList[0].Id AND RowCause = 'Clustering__c'];
+		System.debug('ClusterTriggerTest insertClusterSharing shareList: '+shareList);
+
+		System.assertEquals(3, shareList.size());
+
+
+	}
 
 
 }
