@@ -257,4 +257,15 @@ public class MockupFactory {
         insert translationList;
         return translationList;
     }
+
+    public static List<Navigation__c>  createNavigation(String navName, String url, Integer cuantity, Id clusterId){
+        List<Navigation__c> navList = new List<Navigation__c>();
+        
+        for(Integer i = 0;i<cuantity;i++){
+            navList.add( new Navigation__c(Name=navName+1, URL__c=url, Cluster__c=clusterId));
+        }
+        insert navList;
+
+        return navList;
+    }
 }
