@@ -10,6 +10,7 @@ public class MockupFactory {
             ClusterFieldForPublicGroups__c='ExternalId__c');
         insert acceleratorSetting;
     }
+    
     //Create Cluster__c, sure to call generateAcceleratorSetting() one time before
     public static List<Cluster__c> createCluster(String clusterName, String parentClusterId, Integer quantity, String clusterType){
         
@@ -62,18 +63,33 @@ public class MockupFactory {
         insert clusterList;
         return clusterList;
     }
-    
+
     public static List<Tag__c>  createTag(String tagName, String description, Integer cuantity, Id clusterId){
         List<Tag__c> tagList = new List<Tag__c>();
         
         for(Integer i = 0;i<cuantity;i++){
             tagList.add( new Tag__c(Name=tagName+1,Description__c=description, Cluster__c=clusterId));
+
         }
         insert tagList;
 
         return tagList;
     }
 
+    //Create Cluster__c (Root) by names
+    /*public static List<Cluster__c> createClusterRoot(List<String> nameList){
+        List<Cluster__c> clusterRootList = new List<Cluster__c>();
+        RecordType rtRoot = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName = 'ClusterRoot'];
+
+        for(String name : nameList){
+            clusterRootList.add(new Cluster__c(Name = name, RecordTypeId = rtRoot.Id));
+
+        }
+        insert tagList;
+
+        return tagList;
+    }
+*/
     public static User createUser(String username, String email){
         User user = new User();
         user.username = username;
