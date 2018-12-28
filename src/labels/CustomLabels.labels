@@ -9,6 +9,14 @@
         <value>El campo seleccionado en custom settings &quot;Accelerator Settings&quot; es incorrecto</value>
     </labels>
     <labels>
+        <fullName>CannotReassignComponent</fullName>
+        <categories>ComponentTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CannotReassignComponent</shortDescription>
+        <value>El Componente tiene asociado al menos un Contenido, Tag y/o Categoria y por ese motivo no puede reasignarse. Elimine todas las asociaciones del mismo antes de intentar reasignarlo a otro Cluster</value>
+    </labels>
+    <labels>
         <fullName>ComponentEmpty</fullName>
         <categories>CG_BaseComponent.cmp</categories>
         <language>en_US</language>
@@ -30,7 +38,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>ExistDefaultLanguage</shortDescription>
-        <value>No se puede agregar un language que este como default language</value>
+        <value>is the default language. You cannot add it as an additional one.</value>
     </labels>
     <labels>
         <fullName>FieldsValues</fullName>
@@ -175,22 +183,6 @@
         <protected>true</protected>
         <shortDescription>Component Order By Advance Invalid Format</shortDescription>
         <value>Invalid format:</value>
-    </labels>
-    <labels>
-        <fullName>RepeatedCategoryName</fullName>
-        <categories>CategoryTriggers</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>RepeatedCategoryName</shortDescription>
-        <value>Category name already exist in cluster branch</value>
-    </labels>
-    <labels>
-        <fullName>RepeatedTagName</fullName>
-        <categories>TagTriggers</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>RepeatedTagName</shortDescription>
-        <value>Tag name already exist in cluster branch</value>
     </labels>
     <labels>
         <fullName>SelectLanguage</fullName>
