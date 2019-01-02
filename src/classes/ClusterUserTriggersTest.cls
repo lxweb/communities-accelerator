@@ -88,7 +88,6 @@ private class ClusterUserTriggersTest{
 	static void updateClusterUserAccessLevelROToRW(){
 		// Given
 		Map<Id, Group> groups = new Map<Id, Group> ([SELECT Id, developerName FROM Group WHERE developerName LIKE 'TestClusterRoot%']);
-		Cluster__C cluster = [SELECT Id FROM Cluster__c WHERE Name = 'Test Cluster Root00' LIMIT 1];
 		User testUser = [SELECT Id FROM User WHERE username = 'userRO@cg.com' LIMIT 1];
 		ClusterUser__c clusterUser = [SELECT Id FROM ClusterUser__c WHERE User__c = :testUser.Id LIMIT 1];
 
@@ -103,6 +102,48 @@ private class ClusterUserTriggersTest{
 		for (GroupMember gm : groupMembers){
 			Group g = groups.get(gm.GroupId);
 			system.assert(g.developerName == 'TestClusterRoot00_RW' || g.developerName == 'TestClusterRoot00_ROViewUp');
+		}
+	}
+
+	@isTest
+	static void deleteClusterUserAccessLevelReadWrite(){
+		// Given
+		Map<Id, Group> groups = new Map<Id, Group> ([SELECT Id, developerName FROM Group WHERE developerName LIKE 'TestClusterRoot%']);
+		User testUser = [SELECT Id FROM User WHERE username = 'userRW@cg.com' LIMIT 1];
+		ClusterUser__c clusterUser = [SELECT Id FROM ClusterUser__c WHERE User__c = :testUser.Id LIMIT 1];
+
+		// When
+		Test.startTest();
+		delete clusterUser;
+		Test.stopTest();
+
+		// Then
+		List<GroupMember> groupMembers = new List<GroupMember>();
+		try{
+			groupMembers = [SELECT Id, GroupId, UserOrGroupId FROM GroupMember WHERE UserOrGroupId = :testUser.Id];
+		}catch(Exception e){
+			system.assert(groupMembers.isEmpty());
+		}
+	}
+
+	@isTest
+	static void deleteClusterUserAccessLevelReadOnly(){
+		// Given
+		Map<Id, Group> groups = new Map<Id, Group> ([SELECT Id, developerName FROM Group WHERE developerName LIKE 'TestClusterRoot%']);
+		User testUser = [SELECT Id FROM User WHERE username = 'userRO@cg.com' LIMIT 1];
+		ClusterUser__c clusterUser = [SELECT Id FROM ClusterUser__c WHERE User__c = :testUser.Id LIMIT 1];
+
+		// When
+		Test.startTest();
+		delete clusterUser;
+		Test.stopTest();
+
+		// Then
+		List<GroupMember> groupMembers = new List<GroupMember>();
+		try{
+			groupMembers = [SELECT Id, GroupId, UserOrGroupId FROM GroupMember WHERE UserOrGroupId = :testUser.Id];
+		}catch(Exception e){
+			system.assert(groupMembers.isEmpty());
 		}
 	}
 }
