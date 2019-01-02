@@ -65,19 +65,14 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Read Only Down</fullName>
+                    <fullName>Read Only</fullName>
                     <default>false</default>
-                    <label>Read Only Down</label>
+                    <label>Read Only</label>
                 </value>
                 <value>
                     <fullName>Read/Write</fullName>
                     <default>false</default>
                     <label>Read/Write</label>
-                </value>
-                <value>
-                    <fullName>Read All ORG</fullName>
-                    <default>false</default>
-                    <label>Read All ORG</label>
                 </value>
             </valueSetDefinition>
         </valueSet>

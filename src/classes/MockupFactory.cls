@@ -117,21 +117,15 @@ public class MockupFactory {
         return user;
     }
 
-    public static List<ClusterUser__c> createClusterUser(Id clusterId, Id userId, Integer quantity, String accessLevel){
+    public static List<ClusterUser__c> createClusterUser(Id clusterId, Id userId, String accessLevel, Integer quantity){
 
         //ClusterUser__c clusterUser = new ClusterUser__c(Cluster__c=clusterId, User__c=userId, AccessLevel__c=accessLevel);
         List<ClusterUser__c> clusterUserList = new List<ClusterUser__c>();
-        for(integer i; i<quantity; i++){
+        for(integer i = 0; i<quantity; i++){
             clusterUserList.add( new ClusterUser__c(Cluster__c=clusterId, User__c=userId, AccessLevel__c=accessLevel));
         }
+        insert clusterUserList;
         return clusterUserList;
-
-    }
-    
-    public static ClusterUser__c insertClusterUser(Id clusterId, Id userId, String accessLevel){
-        ClusterUser__c clusterUser = new ClusterUser__c(Cluster__c=clusterId, User__c=userId, AccessLevel__c=accessLevel);
-        insert clusterUser;
-        return clusterUser;
     }
 
     public static void deleteClusterByName(String clusterName){
