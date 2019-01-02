@@ -3,6 +3,7 @@ private class CG_ContentToolsControllerTest {
 	@testSetup
     static void setupTest(){
     	String nameRecordType = 'Banner';
+    	Integer quantity = 1;
     	MockupFactory.generateAcceleratorSetting();
         
         String name = 'Argentina';
@@ -11,26 +12,44 @@ private class CG_ContentToolsControllerTest {
         List<Cluster__c> clusterList = MockupFactory.createCluster(cg.Name, cg.Id, 1, 'ClusterGroup');
 
     	List<Component__c> componentList = MockupFactory.createComponent(nameRecordType, 1);
-    	List<Content__c> contentList = MockupFactory.createContent(nameRecordType, clusterList[0], 1);
+    	List<Content__c> contentList = MockupFactory.createContent(nameRecordType, clusterList[0], quantity);
     	List<ContentAssignment__c> contentAssignmentList = MockupFactory.createContentAssignment(contentList, componentList);
+    	List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(quantity);
+    	List<MediaElementAssignment__c> mediaElementAssList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
+    	List<ContentDocument> contentDocumentList = MockupFactory.createContentDocument('Test', quantity);
+    	
+    	for (Integer i = 0; i < mediaElementList.size(); i++){
+    		mediaElementList[i].FileURLDesktop__c = 'testing/' + contentDocumentList[i].id;
+    	}
+    	update mediaElementList;
     }
 
 	@isTest 
 	static void initDataTest() {
-		Content__c cont = [SELECT id from Content__c where Cluster__c != null LIMIT 1];
+		//When
+		Content__c cont = [SELECT id FROM Content__c WHERE Cluster__c != NULL LIMIT 1];
+		
+		//Given
 		Test.startTest();
-		CG_ContentToolsController.initData(cont.id);
+		CG_ContentToolsController.ContentWrapper contentWr = CG_ContentToolsController.initData(cont.id);
 		Test.stopTest();
-		//System.assertNotEquals(rw, null);
+
+		//Then
+		System.assertEquals(contentWr.contentId, cont.Id);
 	}
 	
 	@isTest 
 	static void addToCartsTest() {
-		Content__c cont = [SELECT id from Content__c where Cluster__c != null LIMIT 1];
+		//When
+		Content__c cont = [SELECT id FROM Content__c WHERE Cluster__c != NULL LIMIT 1];
 		CG_ContentToolsController.ContentWrapper contentWr = CG_ContentToolsController.initData(cont.id);
+		
+		//Given
 		Test.startTest();
-		CG_ContentToolsController.addToCarts(JSON.serialize(contentWr));
+		contentWr = CG_ContentToolsController.addToCarts(JSON.serialize(contentWr));
 		Test.stopTest();
-		//System.assertNotEquals(rw, null);
+
+		//Then
+		System.assertEquals(contentWr.contentId, cont.Id);
 	}
 }

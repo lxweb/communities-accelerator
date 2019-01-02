@@ -198,6 +198,37 @@ public class MockupFactory {
         return mediaElementList;
     }
 
+    //Create MediaElementAssignment__c of each Content__c
+    public static List<MediaElementAssignment__c> createMediaElementAssignment(List<Content__c> contentList, List<MediaElement__c> mediaElementList){
+        List<MediaElementAssignment__c> mediaElementAssList = new List<MediaElementAssignment__c>();
+        
+        for(Integer i = 0; i < contentList.size(); i++){
+            mediaElementAssList.add(new MediaElementAssignment__c(Content__c = contentList[i].id,
+                                    MediaElement__c = mediaElementList[i].id));
+        }
+        insert mediaElementAssList;
+        return mediaElementAssList;
+    }
+
+    //Create ContentDocument
+    public static List<ContentDocument> createContentDocument(String name, Integer quantity){
+        List<ContentVersion> contentVersionList = new List<ContentVersion>();
+        
+        for(Integer i = 0; i < quantity; i++){
+            ContentVersion contentVersion = new ContentVersion(
+              Title = name + i,
+              PathOnClient = name + i + '.jpg',
+              VersionData = Blob.valueOf('Test Content' + name + i),
+              IsMajorVersion = true
+            );
+            contentVersionList.add(contentVersion);
+        }
+        insert contentVersionList;    
+
+        List<ContentDocument> documents = [SELECT Id, Title, LatestPublishedVersionId FROM ContentDocument];
+        return documents;
+    }
+
     //Create ContentDocumentLink
     public static List<ContentDocumentLink> createContentDocumentLink(List<MediaElement__c> mediaElementList){
         List<ContentDocumentLink> contentDocumentLinkList = new List<ContentDocumentLink>();
@@ -267,5 +298,17 @@ public class MockupFactory {
         insert navList;
 
         return navList;
+    }
+
+    //Create contentCartItems to each Content
+    public static List<ContentCartItem__c>  createContentCartItem(List<Content__c> contentIdList){
+        List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
+        
+        for(Integer i = 0; i < contentIdList.size(); i++){
+            contentCartList.add( new ContentCartItem__c(Content__c = contentIdList[i].Id, User__c = UserInfo.getUserId()));
+        }
+
+        insert contentCartList;
+        return contentCartList;
     }
 }
