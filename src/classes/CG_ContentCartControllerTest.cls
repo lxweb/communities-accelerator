@@ -3,6 +3,7 @@ private class CG_ContentCartControllerTest {
 	@testSetup
     static void setupTest(){
     	String nameRecordType = 'Banner';
+    	Integer quantity = 3;
     	MockupFactory.generateAcceleratorSetting();
         
         String name = 'Argentina';
@@ -11,35 +12,101 @@ private class CG_ContentCartControllerTest {
         List<Cluster__c> clusterList = MockupFactory.createCluster(cg.Name, cg.Id, 1, 'ClusterGroup');
 
     	List<Component__c> componentList = MockupFactory.createComponent(nameRecordType, 1);
-    	List<Content__c> contentList = MockupFactory.createContent(nameRecordType, clusterList[0], 1);
+    	List<Content__c> contentList = MockupFactory.createContent(nameRecordType, clusterList[0], quantity);
     	List<ContentAssignment__c> contentAssignmentList = MockupFactory.createContentAssignment(contentList, componentList);
+    	List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(quantity);
+    	List<MediaElementAssignment__c> mediaElementAssList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
+    	List<ContentCartItem__c> contentCartItemList = MockupFactory.createContentCartItem(new List<Content__c> {contentList[0], contentList[1]});
+		List<ContentDocument> contentDocumentList = MockupFactory.createContentDocument('Test', quantity);
+    	
+    	for (Integer i = 0; i < mediaElementList.size(); i++){
+    		mediaElementList[i].FileURLDesktop__c = 'testing/' + contentDocumentList[i].id;
+    	}
+    	mediaElementList[1].FileURLDesktop__c = 'testing/imagen.jpg';
+    	update mediaElementList;
+
+    	List<ContentDistribution> contentDistributionList = new List<ContentDistribution>();
+    	for(ContentVersion contentVers : [SELECT id FROM ContentVersion WHERE contentdocumentid IN: contentDocumentList]){
+	        contentDistributionList.add(new ContentDistribution(
+	        Name = 'Test' + contentVers.Id,
+	        ContentVersionId = contentVers.Id,
+	        PreferencesAllowOriginalDownload = true,
+	        PreferencesAllowPDFDownload = false,
+	        PreferencesAllowViewInBrowser = true,
+	        PreferencesExpires = false,
+	        PreferencesLinkLatestVersion = true));
+    	}
+        insert contentDistributionList;
     }
 
 	@isTest 
 	static void initDataTest() {
+		//When
+		
+		//Given
 		Test.startTest();
-		CG_ContentCartController.initData();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
 		Test.stopTest();
-		//System.assertNotEquals(rw, null);
+
+		//Then
+		System.assertEquals(contentCartWr.cartItemList.size(), 2);
 	}
 	
 	@isTest 
 	static void addContentToCartTest() {
-		Content__c cont = [SELECT id from Content__c where Cluster__c != null LIMIT 1];
+		//When
+		Content__c cont = [SELECT id FROM Content__c WHERE Cluster__c != NULL ORDER BY createdDate DESC LIMIT 1];
 		CG_ContentCartController.initData();
+
+		//Given
 		Test.startTest();
-		CG_ContentCartController.addContentToCart(cont.id);
+		Boolean addedToCart = CG_ContentCartController.addContentToCart(cont.id);
 		Test.stopTest();
-		//System.assertNotEquals(rw, null);
+
+		//Then
+		System.assertEquals(true, addedToCart);
 	}
 
 	@isTest 
-	static void adeleteCartItemsTest() {
-		CG_ContentCartController.ContentCartWrapper contentWr = CG_ContentCartController.initData();
+	static void deleteCartItemsTest() {
+		//When
+		List<ContentCartItem__c> contentCart = [SELECT id FROM ContentCartItem__c];
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
+		
+		//Given
 		Test.startTest();
-		CG_ContentCartController.deleteCartItems('', JSON.serialize(contentWr), false);
-		CG_ContentCartController.deleteCartItems('', JSON.serialize(contentWr), true);
+		contentCartWr = CG_ContentCartController.deleteCartItems(contentCart[0].id, JSON.serialize(contentCartWr), false);
 		Test.stopTest();
-		//System.assertNotEquals(rw, null);
+
+		//Then
+		System.assertEquals(contentCartWr.cartItemList.size(), contentCart.size()-1);
+	}
+
+	@isTest 
+	static void deleteAllCartItemsTest() {
+		//When
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
+		
+		//Given
+		Test.startTest();
+		contentCartWr = CG_ContentCartController.deleteCartItems('', JSON.serialize(contentCartWr), true);
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(contentCartWr.cartItemList.size(), 0);
+	}
+
+	@isTest 
+	static void downloadAllItemsTest() {
+		//When
+		CG_ContentCartController.ContentCartWrapper contentWr = CG_ContentCartController.initData();
+		
+		//Given
+		Test.startTest();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.downloadAllItems(JSON.serialize(contentWr));
+		Test.stopTest();
+		
+		//Then
+		System.assertEquals(contentCartWr.fileDocumentList.size(), 2);
 	}
 }
