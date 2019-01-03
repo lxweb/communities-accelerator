@@ -65,8 +65,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
     //PA-177 CMA: Clustering: Apex Sharing
     List<Tag__Share> tagShareList = new List<Tag__Share>();
-    //Boolean toContinueTrigger = true;
-    //Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
 
 
 
@@ -75,8 +73,8 @@ public with sharing class ClusterTriggers extends TriggersHandler {
 
         //PA-177 CMA: Clustering: Apex Sharing
         if(!recordList.isEmpty() && toContinueTrigger){
-            List<SObject> listSO = new List<SObject>();
-            //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
+
+
             ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForCluster(recordList, 'Cluster__c', 'Cluster__Share', 'Clustering__c', true);           
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
@@ -404,7 +402,6 @@ public with sharing class ClusterTriggers extends TriggersHandler {
             for(Group grupItem: groupListTemp2){
                 childGroupNameToGroupIdMap.put(grupItem.name, grupItem.Id);
             }
-            //System.debug('ClusterTriggers childGroupNameToGroupIdMap: '+childGroupNameToGroupIdMap);
             
             Map<Id,Map<String,Id>> parentIdToAccessModeToGroupParentIdsMap = new Map<Id,Map<String,Id>>();
             Map<Id,Map<String,List<Id>>> parentIdToAccessModeToGroupClildIdsMap = new Map<Id,Map<String,List<Id>>>();
@@ -509,7 +506,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
     /* DEFINITION AND COMPLETION OF EXTERNAL ID */
     private void setExternalId(Cluster__c recNew){
         if(!canMethod('setExternalId')){return;}
-        //System.debug('recNew.ParentCluster__c');
+        
         if(recNew.ExternalID__c == null){
             //recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name, recNew.ParentCluster__c);
             recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);

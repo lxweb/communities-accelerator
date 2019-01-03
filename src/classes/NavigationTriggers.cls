@@ -40,17 +40,13 @@ public with sharing class NavigationTriggers extends TriggersHandler{
     
     public override void dataPreparing() {
         if(!recordList.isEmpty() && excecuteTrigger){
-            List<SObject> listSO = new List<SObject>();
-
-            //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
+            
             ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Navigation__Share', 'Clustering__c',false);
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
             	objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
             	excecuteTrigger = false;
-                System.debug('NavigationTriggers dataPreparing have an exception: ');
             }else{
             	navigationShareList  = (List<Navigation__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
         }
 
@@ -63,7 +59,7 @@ public with sharing class NavigationTriggers extends TriggersHandler{
             try{
                 insert navigationShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Navigation Sharing');
+                objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
     }
@@ -83,7 +79,6 @@ public with sharing class NavigationTriggers extends TriggersHandler{
                             excecuteTrigger = false;
                             //recNew.addError('The object must containg a loockup relation to Cluster');
                         }else{
-                            System.debug('Update custom object is private or public read only');
                             recordList.add(recNew);
                         }
                     }
@@ -94,7 +89,6 @@ public with sharing class NavigationTriggers extends TriggersHandler{
                         excecuteTrigger = false;
                         //recNew.addError('The object must containg a loockup relation to Cluster');
                     }else{
-                        System.debug('Insdert custom object is private or public read only');
                         recordList.add(recNew);
                     }
                 }

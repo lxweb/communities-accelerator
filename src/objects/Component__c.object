@@ -3041,6 +3041,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Mode__c</picklist>
             <values>
                 <fullName>Full</fullName>
@@ -4399,6 +4410,10 @@
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Clustering__c</fullName>
+        <label>Clustering</label>
+    </sharingReasons>
     <validationRules>
         <fullName>OrderByAdvanceRequired</fullName>
         <active>true</active>

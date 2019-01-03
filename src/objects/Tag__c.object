@@ -140,5 +140,9 @@
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Clustering__c</fullName>
+        <label>Clustering</label>
+    </sharingReasons>
     <visibility>Public</visibility>
 </CustomObject>
