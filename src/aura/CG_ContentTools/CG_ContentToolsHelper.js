@@ -1,18 +1,20 @@
 ({
 	doInit : function(component, event, helper) {
-		
-		var action = component.get("c.initData");
-		action.setParams({
-			contentId: component.get("v.contentId")
-		});
+		var contentIdVar = component.get("v.contentId");
+		if(contentIdVar != null){
+			var action = component.get("c.initData");
+			action.setParams({
+				contentId: contentIdVar
+			});
 
-	    action.setCallback(this, function(f) {
-            if(f.getState() === "SUCCESS") {
-            	component.set("v.contentWrapper", action.getReturnValue());
-	        }
-	    });
-	    
-	    $A.enqueueAction(action);
+		    action.setCallback(this, function(f) {
+	            if(f.getState() === "SUCCESS") {
+	            	component.set("v.contentWrapper", action.getReturnValue());
+		        }
+		    });
+		    
+		    $A.enqueueAction(action);			
+		}
 	},
 	shareTo : function(component, socialNetwork) {
 		var dirUrl = component.get("v.contentWrapper.urlPreview");
