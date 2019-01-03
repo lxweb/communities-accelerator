@@ -1,3 +1,3 @@
 <design:component label="CG Cluster Selector">
-	<design:attribute name="clusterExternalID" label="Cluster External ID"/>
+	<design:attribute name="clusterExternalID" label="Component External ID"/>
 </design:component>
