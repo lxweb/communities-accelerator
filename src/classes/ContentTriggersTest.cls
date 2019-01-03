@@ -39,7 +39,7 @@ public with sharing class ContentTriggersTest {
 
 		//Then
 		Content__c contentTestResult2 =[SELECT ExternalId__c FROM Content__c WHERE Id =: contentTest[0].Id];
-		System.assertEquals(contentTestResult2.ExternalId__c, null);
+		System.assertNotEquals(contentTestResult2.ExternalId__c, null);
 	}
 
 	@isTest
