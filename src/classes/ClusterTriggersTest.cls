@@ -137,7 +137,7 @@ public with sharing class ClusterTriggersTest {
 		System.debug('ClusterTriggersTest groupCGMemberList: '+ groupCGMemberList);
 		System.debug('ClusterTriggersTest groupCGMemberList: '+ groupCGMemberList.size());
 		
-		System.assertEquals(4, groupRootList.size());
+		System.assertEquals(3, groupRootList.size());
 		System.assertEquals(6, groupsForClusterGroupsList.size());
 		System.assertEquals(2, groupMemberList.size());
 		System.assertEquals(4, groupCGMemberList.size());
@@ -206,7 +206,7 @@ public with sharing class ClusterTriggersTest {
 
 		List<Groupmember> groupMembersByClusterFirstLevelROVUList = getGroupMembersByGroup(groupsForClustersFirstLevelList,true);
 
-		System.assertEquals(4, groupRootList.size());
+		System.assertEquals(3, groupRootList.size());
 		System.assertEquals(6, groupsForClustersFirstLevelList.size());
 		System.assertEquals(12, groupsForClustersSecondLevelList.size());
 		

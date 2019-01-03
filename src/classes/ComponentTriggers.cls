@@ -70,7 +70,7 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             try{
                 insert componentShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Component Sharing');
+                objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
     }
@@ -146,7 +146,7 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             }
         }else{
             if(recNew.Cluster__c != recOld.Cluster__c && componentIdsWithAssignment.contains(recNew.Id)){
-                //recNew.Cluster__c.AddError(Label.CannotReassignComponent);
+                recNew.Cluster__c.AddError(Label.CannotReassignComponent);
             }
         }
     }
@@ -168,7 +168,6 @@ public with sharing class ComponentTriggers extends TriggersHandler {
                         
                         if(recNew.Cluster__c == null){ 
                             excecuteTrigger = false;
-
                             //recNew.addError('The object must containg a loockup relation to Cluster');
                         }else{
                             recordList.add(recNew);
@@ -181,7 +180,6 @@ public with sharing class ComponentTriggers extends TriggersHandler {
                         
                     if(recNew.Cluster__c == null){ 
                         excecuteTrigger = false;
-
                         //recNew.addError('The object must containg a loockup relation to Cluster');
                     }else{
                         recordList.add(recNew);

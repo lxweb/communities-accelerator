@@ -76,6 +76,18 @@ public class MockupFactory {
         return tagList;
     }
 
+    public static List<Category__c>  createCategory(String catName, Integer cuantity, Id clusterId){
+        List<Category__c> catList = new List<Category__c>();
+        
+        for(Integer i = 0;i<cuantity;i++){
+            catList.add( new Category__c(Name=catName+1, Cluster__c=clusterId));
+
+        }
+        insert catList;
+
+        return catList;
+    }
+
     //Create Cluster__c (Root) by names
     /*public static List<Cluster__c> createClusterRoot(List<String> nameList){
         List<Cluster__c> clusterRootList = new List<Cluster__c>();
@@ -136,16 +148,38 @@ public class MockupFactory {
 
     //Create Component__c by RecordTypeName
     public static List<Component__c> createComponent(String nameRecordType, Integer quantity){
+
+        List<Component__c> componentList = createComponent(nameRecordType, quantity,null);
+        
+        return componentList;
+    }
+
+    //Create Component__c by RecordTypeName
+    public static List<Component__c> createComponent(String nameRecordType, Integer quantity, Cluster__c cluster){
         List<Component__c> componentList= new List<Component__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Component__c' AND Name =: nameRecordType LIMIT 1];
         
-        for(Integer i = 0; i < quantity; i++){
-            componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
-                                    ExternalId__c = nameRecordType +'Component_' + i,
-                                    Datasource__c = 'ManualAssignment',
-                                    Status__c = 'Available',
-                                    RecordTypeId = recordT.id));
+        if(cluster != null){
+            for(Integer i = 0; i < quantity; i++){
+                
+                componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
+                                        ExternalId__c = nameRecordType +'Component_' + i,
+                                        Datasource__c = 'ManualAssignment',
+                                        Status__c = 'Available',
+                                        RecordTypeId = recordT.Id,
+                                        Cluster__c = cluster.Id));
+            }
+
+        }else{
+            for(Integer i = 0; i < quantity; i++){
+                componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
+                                        ExternalId__c = nameRecordType +'Component_' + i,
+                                        Datasource__c = 'ManualAssignment',
+                                        Status__c = 'Available',
+                                        RecordTypeId = recordT.id));
+            }
         }
+
         insert componentList;
         return componentList;
     }

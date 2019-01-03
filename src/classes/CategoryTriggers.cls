@@ -163,7 +163,7 @@ public with sharing class CategoryTriggers extends TriggersHandler {
             try{
                 insert categoryShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Category Sharing');
+                objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
     }

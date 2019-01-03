@@ -61,16 +61,12 @@ public with sharing class TagTriggers extends TriggersHandler {
     
     public override void dataPreparing() {
         if(!recordList.isEmpty() && toContinueTrigger){
-            List<SObject> listSO = new List<SObject>();
-            //listSO = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c');
             ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Tag__Share', 'Clustering__c', false);           
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
                 objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
-                System.debug('NavigationTriggers dataPreparing have an exception: ');
                 toContinueTrigger = false;
             }else{
                 tagShareList  = (List<Tag__Share>) sharingWrapper.listOfSharesToInsert;
-                System.debug('NavigationTriggers dataPreparing have not exception: ');
             }
 
         }
@@ -109,7 +105,7 @@ public with sharing class TagTriggers extends TriggersHandler {
             try{
                 insert tagShareList;
             }catch(Exception e){
-                objectIdToMessageErrosMap.put(recordList[0].Id,'It must create a sharing reason for Tag Sharing');
+                objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
     }

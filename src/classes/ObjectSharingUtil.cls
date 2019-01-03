@@ -1,10 +1,10 @@
 public with sharing class ObjectSharingUtil {
-  	
-	public static SharingWrapper generateSharingForRecordsOnCluster(List<SObject> records, String lookupField, String nameObjectShare, String sharingReason, Boolean isCluster){
+    
+    public static SharingWrapper generateSharingForRecordsOnCluster(List<SObject> records, String lookupField, String nameObjectShare, String sharingReason, Boolean isCluster){
 
-		Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
-		Boolean excecuteTrigger = true;
-		Map<String,Id> groupNameToGroupIdMap = new Map<String,Id>();
+        Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+        Boolean excecuteTrigger = true;
+        Map<String,Id> groupNameToGroupIdMap = new Map<String,Id>();
         Map<Id,List<Id>> mapRecordsByCluster = new Map<Id,List<Id>>();
         List<String> groupNameList = new List<String>();
         List<SObject> listOfSharesToInsert = new List<SObject>();
@@ -13,16 +13,16 @@ public with sharing class ObjectSharingUtil {
             Id clusterId = (Id) record.get(lookupField);
             Id recordId = (Id) record.get('Id');
             if(!mapRecordsByCluster.containsKey(clusterId)){
-            	mapRecordsByCluster.put(clusterId, new List<Id>{recordId});
-        	}else{
+                mapRecordsByCluster.put(clusterId, new List<Id>{recordId});
+            }else{
                 mapRecordsByCluster.get(clusterId).add(recordId);
-        	}
+            }
         }
 
         Map<Id,Cluster__c> mapClusters = new Map<Id,Cluster__c>([SELECT Id, PublicGroupRWName__c, PublicGroupROUpName__c, PublicGroupRODownName__c  FROM Cluster__c WHERE Id IN: mapRecordsByCluster.keyset()]); 
-		
+        
         for(Id clusterId: mapClusters.keySet()){
-        	Cluster__c cluster = mapClusters.get(clusterId);
+            Cluster__c cluster = mapClusters.get(clusterId);
 
             groupNameList.add(cluster.PublicGroupRWName__c);
             groupNameList.add(cluster.PublicGroupRODownName__c);
@@ -45,31 +45,29 @@ public with sharing class ObjectSharingUtil {
         for(Id clusterId : mapRecordsByCluster.keySet()){
             if(mapClusters.containsKey(clusterId)){
                 for(Id recordId: mapRecordsByCluster.get(clusterId)){
-                	for(String fieldName: fieldNamesAndSecLevel.keySet()){
-                		if(String.isNotBlank((String) mapClusters.get(clusterId).get(fieldName))){
-		                	String objectName = recordId.getSobjectType().getDescribe().getName();
+                    for(String fieldName: fieldNamesAndSecLevel.keySet()){
+                        if(String.isNotBlank((String) mapClusters.get(clusterId).get(fieldName))){
+                            
+                            String objectName = recordId.getSobjectType().getDescribe().getName();
+                            String shareObjectName = nameObjectShare;
+                            Schema.SObjectType shareType = Schema.getGlobalDescribe().get(shareObjectName);
+                            SObject shareRecord = shareType.newSObject();
+                            shareRecord.put('ParentId', recordId);
 
-		                	String shareObjectName = nameObjectShare;
-		                	Schema.SObjectType shareType = Schema.getGlobalDescribe().get(shareObjectName);
-		                    SObject shareRecord = shareType.newSObject();
-		                    shareRecord.put('ParentId', recordId);
+                            if(groupNameToGroupIdMap.containsKey((String) mapClusters.get(clusterId).get(fieldName))){
 
-		                    if(groupNameToGroupIdMap.containsKey((String) mapClusters.get(clusterId).get(fieldName))){
-								shareRecord.put('UserOrGroupId', groupNameToGroupIdMap.get( (String) mapClusters.get(clusterId).get(fieldName)) );
-			                    
-			                    //pasar por parametro
-			                    shareRecord.put('RowCause', sharingReason);
-			                    shareRecord.put('AccessLevel', fieldNamesAndSecLevel.get(fieldName));
-			                    listOfSharesToInsert.add(shareRecord);
-							}else{
+                                shareRecord.put('UserOrGroupId', groupNameToGroupIdMap.get( (String) mapClusters.get(clusterId).get(fieldName)) );
+                                shareRecord.put('RowCause', sharingReason);
+                                shareRecord.put('AccessLevel', fieldNamesAndSecLevel.get(fieldName));
+                                listOfSharesToInsert.add(shareRecord);
+                            }else{
 
-								objectIdToMessageErrosMap.put(recordId,Label.ClusterDoesntHaveRequiredGroups);
-							}
-		                    
+                                objectIdToMessageErrosMap.put(recordId,Label.ClusterDoesntHaveRequiredGroups);
+                            }
 
-	                    }else{
-	                    	objectIdToMessageErrosMap.put(recordId,Label.ClusterHaveGroupsInBlanks);
-	                    }
+                        }else{
+                            objectIdToMessageErrosMap.put(recordId,Label.ClusterHaveGroupsInBlanks);
+                        }
                     }
                 }
             }
@@ -79,11 +77,11 @@ public with sharing class ObjectSharingUtil {
         return sharingWrapper;
     }
 
-	public static SharingWrapper generateSharingForCluster(List<SObject> records, String lookupField, String nameObjectShare, String sharingReason, Boolean isCluster){
+    public static SharingWrapper generateSharingForCluster(List<SObject> records, String lookupField, String nameObjectShare, String sharingReason, Boolean isCluster){
 
-		Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
-		Boolean excecuteTrigger = true;
-		Map<String,Id> groupNameToGroupIdMap = new Map<String,Id>();
+        Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
+        Boolean excecuteTrigger = true;
+        Map<String,Id> groupNameToGroupIdMap = new Map<String,Id>();
         Map<Id,List<Id>> mapRecordsByCluster = new Map<Id,List<Id>>();
         List<String> groupNameList = new List<String>();
         List<SObject> listOfSharesToInsert = new List<SObject>();
@@ -94,15 +92,8 @@ public with sharing class ObjectSharingUtil {
             groupNameList.add( ((Cluster__c) recordItem).PublicGroupRODownName__c);
             groupNameList.add( ((Cluster__c) recordItem).PublicGroupROUpName__c);
         }
-
-
-        System.debug('TagTriggers dataPreparing groupNameList: ' + groupNameList);
-
-
-
+        //System.debug('TagTriggers dataPreparing groupNameList: ' + groupNameList);
         List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name IN :groupNameList];
-
-
 
         for(Group groupItem: groupList){
 
@@ -111,15 +102,15 @@ public with sharing class ObjectSharingUtil {
             }
         }
 
-	    Map<String,String> fieldNamesAndSecLevel = new Map<String,String>{'PublicGroupRWName__c' => 'Edit', 'PublicGroupROUpName__c' => 'Read', 'PublicGroupRODownName__c' => 'Read'};
+        Map<String,String> fieldNamesAndSecLevel = new Map<String,String>{'PublicGroupRWName__c' => 'Edit', 'PublicGroupROUpName__c' => 'Read', 'PublicGroupRODownName__c' => 'Read'};
         for(SObject record: records){
-        	for(String fieldName: fieldNamesAndSecLevel.keySet()){
-        		System.debug('record.get(fieldName)'+record.get(fieldName));
-                	String shareObjectName = nameObjectShare;
-                	Schema.SObjectType shareType = Schema.getGlobalDescribe().get(shareObjectName);
+            for(String fieldName: fieldNamesAndSecLevel.keySet()){
+                System.debug('record.get(fieldName)'+record.get(fieldName));
+                    String shareObjectName = nameObjectShare;
+                    Schema.SObjectType shareType = Schema.getGlobalDescribe().get(shareObjectName);
                     SObject shareRecord = shareType.newSObject();
                     shareRecord.put('ParentId', record.Id);
-					shareRecord.put('UserOrGroupId', groupNameToGroupIdMap.get( (String) record.get(fieldName)) );
+                    shareRecord.put('UserOrGroupId', groupNameToGroupIdMap.get( (String) record.get(fieldName)) );
                     shareRecord.put('RowCause', sharingReason);
                     shareRecord.put('AccessLevel', fieldNamesAndSecLevel.get(fieldName));
                     listOfSharesToInsert.add(shareRecord);
@@ -132,21 +123,17 @@ public with sharing class ObjectSharingUtil {
         return sharingWrapper;
     }
 
-  public class SharingWrapper{
+    public class SharingWrapper{
 
-  	public Map<Id,String> objectIdToMessageErrosMap{get;set;}
+        public Map<Id,String> objectIdToMessageErrosMap{get;set;}
 
-  	public List<SObject> listOfSharesToInsert{get;set;}
+        public List<SObject> listOfSharesToInsert{get;set;}
 
-  	public SharingWrapper(){
+        public SharingWrapper(Map<Id,String> objectIdToMessageErrosMap, List<SObject> listOfSharesToInsert){
+            this.objectIdToMessageErrosMap = objectIdToMessageErrosMap;
+            this.listOfSharesToInsert = listOfSharesToInsert;
+        }
 
-  	}
-
-  	public SharingWrapper(Map<Id,String> objectIdToMessageErrosMap, List<SObject> listOfSharesToInsert){
-  		this.objectIdToMessageErrosMap = objectIdToMessageErrosMap;
-  		this.listOfSharesToInsert = listOfSharesToInsert;
-  	}
-
-  }
+    }
 
 }

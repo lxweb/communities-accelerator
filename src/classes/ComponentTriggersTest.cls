@@ -1,21 +1,18 @@
 @isTest(seeAllData = false)
 public with sharing class ComponentTriggersTest {
 
-	@isTest 
+@isTest 
 	static void insertComponentTest(){
 		/* Comment: Comprueba que al crear un Component__c se inserta
 		con el correspondiente ExternalId__c */
-
-		//Given
-		Component__c componentTest = new Component__c(Name='Component Test 01');
-
+		
 		//When
 		Test.startTest();
-		insert(componentTest);
+		List<Component__c> componentTest = MockupFactory.createComponent('Banner', 1);
 		Test.stopTest();
 
 		//Then
-		Component__c componentTestResult =[select id, ExternalId__c from Component__c where id =: componentTest.id];
+		Component__c componentTestResult =[SELECT Id, ExternalId__c FROM Component__c WHERE Id =: componentTest];
 		System.assertNotEquals(componentTestResult.ExternalId__c, null);
 	}
 
@@ -25,12 +22,12 @@ public with sharing class ComponentTriggersTest {
 		con el correspondiente ExternalId__c */
 
 		//Given
-		Component__c componentTest = new Component__c(Name='Component Test 01', 
-		OrderBy__c = 'Custom Sorting', 
-		OrderByAdvance__c = 'CreatedDate');
-		insert(componentTest);
-		componentTest.ExternalId__c = null;
-		componentTest.Name = 'Component Test 02';
+		List<Component__c> componentTest = MockupFactory.createComponent('Banner', 1);
+		componentTest[0].OrderBy__c = 'Custom Sorting';
+		componentTest[0].OrderByAdvance__c = 'CreatedDate';
+		update(componentTest);
+		componentTest[0].ExternalId__c = null;
+		componentTest[0].Name = 'Component Test 02';
 		
 		//When
 		Test.startTest();
@@ -38,11 +35,12 @@ public with sharing class ComponentTriggersTest {
 		Test.stopTest();
 
 		//Then
-		Component__c componentTestResult2 =[select id, ExternalId__c from Component__c where id =: componentTest.id];
+		Component__c componentTestResult2 =[SELECT Id, ExternalId__c FROM Component__c WHERE Id =: componentTest];
 		System.assertNotEquals(componentTestResult2.ExternalId__c, null);
 	}
 
-	@isTest
+
+@isTest
 	static void checkIfClusterWasChangedInComponent(){
 		//PA-206 Governance de Componentes(Reparenting)
 		/*Comment: Comprueba que al modificar el Cluster, el componente no tenga 
@@ -50,13 +48,10 @@ public with sharing class ComponentTriggersTest {
 
 		//Given
 		MockupFactory.generateAcceleratorSetting();
-		String nameRecordType = 'Banner';
-		Cluster__c clusterTest1 = new Cluster__c(Name = 'Cluster Test 1', ExternalId__c = 'ClusterTest1');
-		insert clusterTest1;
-		Cluster__c clusterTest2 = new Cluster__c(Name = 'Cluster Test 2', ExternalId__c = 'ClusterTest2');
-		insert clusterTest2;
-		List<Component__c> componentListTest = MockupFactory.createComponent(nameRecordType, 1);
-		List<Content__c> contentListTest = MockupFactory.createContent(nameRecordType, clusterTest1, 1);
+		List<Cluster__c> clusterTest1 = MockupFactory.createCluster('Cluster Test 1', null, 1, 'ClusterRoot');
+		List<Cluster__c> clusterTest2 = MockupFactory.createCluster('Cluster Test 2', null, 1, 'ClusterRoot');
+		List<Component__c> componentListTest = MockupFactory.createComponent('Banner', 1);
+		List<Content__c> contentListTest = MockupFactory.createContent('Banner', clusterTest1[0], 1);
 		List<ContentAssignment__c> contentAssignmentListTest = MockupFactory.createContentAssignment(contentListTest, componentListTest);
 		update componentListTest;
 		List<Component__c> componentTest = [SELECT Id, Cluster__c FROM Component__c WHERE Id =: componentListTest];
@@ -66,11 +61,11 @@ public with sharing class ComponentTriggersTest {
 		Test.startTest();
 		try{
 			if(!componentTest.isEmpty()){
-				componentTest[0].Cluster__c = clusterTest2.Id;  
+				componentTest[0].Cluster__c = clusterTest2[0].Id;  
 			}
 			update componentTest;
-		}catch(DmlException d){
-			expectedException = d;
+		}catch(DmlException expected){
+			expectedException = expected;
 		}
 		Test.stopTest();
 
@@ -79,53 +74,21 @@ public with sharing class ComponentTriggersTest {
 		System.assertNotEquals(null,expectedException,Label.CannotReassignComponent);
 	}
 
-	/*@isTest
-	static void insertComponentSharing(){
-=======
-		insert (clusterTest1);
-		Cluster__c clusterTest2 = new Cluster__c(Name = 'Cluster Test 2', ExternalId__c = 'ClusterTest2');
-		insert (clusterTest2);
-		List<Component__c> componentListTest = MockupFactory.createComponent(nameRecordType, 1);
-		List<Content__c> contentListTest = MockupFactory.createContent(nameRecordType, clusterTest1, 1);
-		List<ContentAssignment__c> contentAssignmentListTest = MockupFactory.createContentAssignment(contentListTest, componentListTest);
-
-		//When
-		Test.startTest();
-		Component__c[] componentTest = [SELECT Id, Cluster__c FROM Component__c WHERE Name = 'Banner'];
-		if(componentTest.size() > 0){
-			componentTest[0].Cluster__c = clusterTest2.Id;	
-		}
-		update(componentTest);
-		Test.stopTest();
-		
-		//Then
-		Component__c componentTestResult3 = [SELECT Id, Cluster__c FROM Component__c WHERE Id =: componentListTest]; 
-		System.assertNotEquals(componentTestResult3.Cluster__c,clusterTest2.Id);
-	}
 
 	@isTest
 	static void insertComponentSharing()
 	{
->>>>>>> feature/AR
 		// Given
 		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
 		List<Cluster__c> clusterList = [SELECT Id, Name FROM Cluster__c WHERE Name LIKE 'ClusterRootTest%' LIMIT 1 ];
 		System.debug('ClusterTriggersTest method clusterList: '+clusterList);
 		String nameRecordType = 'Banner';
-<<<<<<< HEAD
 		
-=======
->>>>>>> feature/AR
 		// When
 		Test.startTest();
-		List<Content__c> contentListTest = MockupFactory.createContent(nameRecordType, clusterList[0], 1);
+		List<Component__c> contentListTest = MockupFactory.createComponent(nameRecordType,  1, clusterList[0]);
 		Test.stopTest();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> feature/AR
 		System.debug('ClusterTriggersTest method contentListTest: '+contentListTest);
 
 		// Then
@@ -133,7 +96,42 @@ public with sharing class ComponentTriggersTest {
 		System.debug('ClusterTriggersTest method shareList: '+shareList);
 
 		System.assertEquals(3, shareList.size());
-<<<<<<< HEAD
-	}*/
+	}
+
+	@isTest
+	static void updateComponentSharing(){
+		// Given
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 2, 'ClusterRoot');
+		List<Cluster__c> getClusterList = [SELECT Id, Name FROM Cluster__c WHERE Name LIKE 'ClusterRootTest%' LIMIT 2 ];
+		System.debug('ClusterTriggersTest method getClusterList: '+getClusterList);
+		
+		List<Component__c> contentList = MockupFactory.createComponent('Banner', 1,getClusterList[0]);
+		List<Component__c> getComponentList = [SELECT Id, Name FROM Component__c WHERE Name LIKE 'Banner%'];
+		
+
+
+
+		System.debug('ClusterTriggersTest method getComponentList: '+getComponentList);
+
+		Component__c getComponentToUpdate = getComponentList[0];
+		getComponentToUpdate.Cluster__c = getClusterList[1].Id;
+		List<Component__c> componentToUpdateList = new List<Component__c>{getComponentToUpdate};
+		System.debug('ClusterTriggersTest method componentToUpdateList: '+componentToUpdateList);
+		// When
+		Test.startTest();
+		update componentToUpdateList;
+		Test.stopTest();
+
+
+		System.debug('ClusterTriggersTest method componentToUpdateList: '+componentToUpdateList);
+
+		// Then
+		List<Component__Share> shareList = [SELECT Id, ParentId FROM Component__Share WHERE ParentId = :componentToUpdateList[0].Id AND RowCause = 'Clustering__c'];
+		System.debug('ClusterTriggersTest method shareList: '+shareList);
+
+		System.assertEquals(6, shareList.size());
+
+	}
 
 }
