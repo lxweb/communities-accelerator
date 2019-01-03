@@ -7,15 +7,15 @@ public class ComponentUtilsTest {
 		componente representado por dado External Id. */
 
 		//Given
-		String componentExternalId1 = 'BannerComponent_1';
-		//MockupFactory.createRecords();
+		String componentExternalId1 = 'BannerComponent_0';
+        MockupFactory.createComponent('Banner', 1);
+        
 		set<String> bannerFieldSet = new set<String>();
         bannerFieldSet.add('Name');
         bannerFieldSet.add('ExternalId__c');
         bannerFieldSet.add('Datasource__c');
         bannerFieldSet.add('Status__c');
         bannerFieldSet.add('RecordTypeId');
-		
 		
 		//When
 		Test.startTest();
@@ -33,7 +33,7 @@ public class ComponentUtilsTest {
 		componente representado por dado Id. */
 
 		//Given
-		//MockupFactory.createRecords();
+        MockupFactory.createComponent('Banner', 1);
 		List<Component__c> component1 = [SELECT Id from Component__c LIMIT 1];
 		Id componentId1 = component1[0].Id;
 		set<String> bannerFieldSet = new set<String>();

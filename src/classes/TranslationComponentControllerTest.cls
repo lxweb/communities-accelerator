@@ -29,6 +29,9 @@ private class TranslationComponentControllerTest {
 	@isTest 
 	static void changeLanguageTest() {
 		Content__c cont = [SELECT id from Content__c where Cluster__c!=null LIMIT 1];
+        Map<String,String> apiNameTypeMap = new Map<String,String>();
+        apiNameTypeMap.put('Name','Text');
+        MockUpFactory.createTranslation(cont, apiNameTypeMap, 'it');
 		String parentLookupName = 'Content__c';
 		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, 'Description__c, Name', cont.id);
 		String queryStr = 'SELECT id FROM ' + parentLookupName + ' LIMIT 1';
