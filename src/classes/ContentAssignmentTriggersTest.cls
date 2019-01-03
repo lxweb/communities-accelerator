@@ -7,14 +7,13 @@ public class ContentAssignmentTriggersTest {
 			con el correspondiente ExternalId__c */
 
 		//Given
-		//MockupFactory.createRecords();
-		Content__c contentTest = new Content__c(Name='Test');
-		insert contentTest;
 
-		Component__c compTest = [select id, Name, ExternalId__c from Component__c limit 1];
-		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];								
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		List<Content__c> listContent= MockupFactory.createContent('Banner', clusterRootList[0], 1);
+		List<Component__c> listComponent = MockupFactory.createComponent('Banner', 1);							
 
-		ContentAssignment__c contentAssigmentTest = new ContentAssignment__c(Component__c = compTest.id, Content__c=contTest.id );
+		ContentAssignment__c contentAssigmentTest = new ContentAssignment__c(Component__c = listComponent[0].id, Content__c = listContent[0].id );
 
 		//When
 		Test.startTest();
@@ -33,10 +32,12 @@ public class ContentAssignmentTriggersTest {
 		con correspondiente ExternalId__c */
 
 		//Given
-		//MockupFactory.createRecords();
-		Component__c compTest = [select id, Name, ExternalId__c from Component__c limit 1];
-		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];	
-		ContentAssignment__c contentAssigmentTest = new ContentAssignment__c(Component__c = compTest.id, Content__c=contTest.id );
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		List<Content__c> listContent= MockupFactory.createContent('Banner', clusterRootList[0], 1);
+		List<Component__c> listComponent = MockupFactory.createComponent('Banner', 1);		
+		
+		ContentAssignment__c contentAssigmentTest = new ContentAssignment__c(Component__c = listComponent[0].id, Content__c=listContent[0].id );
 		insert contentAssigmentTest;
 		ContentAssigmenttest.ExternalId__c = null;
 

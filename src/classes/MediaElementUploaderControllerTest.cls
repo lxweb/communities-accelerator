@@ -7,21 +7,16 @@ public class MediaElementUploaderControllerTest {
 		de la clase MediaElemetUploaderController retorne el media element correspondiente. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c,
-                  FileNameDesktop__c, FileNameMobile__c, FileNameTablet__c,
-                  FileURLDesktop__c, FileURLMobile__c, FileURLTablet__c,
-                  HeightDesktop__c, HeightMobile__c, HeightTablet__c,
-                  WidthDesktop__c, WidthMobile__c, WidthTablet__c,
-                  DesktopFileExtension__c, MobileFileExtension__c, TabletFileExtension__c
-                  FROM MediaElement__c limit 1];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
+
 		//When
 		Test.startTest();
 		MediaElement__c test1 = MediaElementUploaderController.getMedia(media.Id);
 		Test.stopTest();
 
 		//Then
-		System.assertEquals(media, test1);
+		System.assertEquals(media.Id, test1.Id);
 
 	}
 
@@ -31,23 +26,18 @@ public class MediaElementUploaderControllerTest {
 		de la clase MediaElemetUploaderController retorne el media element correspondiente dentro de un Wrapper. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c,
-                  FileNameDesktop__c, FileNameMobile__c, FileNameTablet__c,
-                  FileURLDesktop__c, FileURLMobile__c, FileURLTablet__c,
-                  HeightDesktop__c, HeightMobile__c, HeightTablet__c,
-                  WidthDesktop__c, WidthMobile__c, WidthTablet__c,
-                  DesktopFileExtension__c, MobileFileExtension__c, TabletFileExtension__c
-                  FROM MediaElement__c Limit 1];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
 		//When
 		Test.startTest();
 		MediaElementUploaderController.MediaElementWrapper test1 = MediaElementUploaderController.getRecord(media.Id);
 		Test.stopTest();
 
 		//Then
-		System.assertEquals(media, test1.mediaElement);
+		System.assertEquals(media.Id, test1.mediaElement.Id);
 
 	}
+
 
 	@isTest 
 	static void getFileByIdTest(){
@@ -56,9 +46,12 @@ public class MediaElementUploaderControllerTest {
 		ContentVersion correspondiente al id dado. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c FROM MediaElement__c Limit 1];
-        ContentDocumentLink contentLink = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId =: media.Id];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
+
+        List<ContentDocumentLink> contentDocList = MockupFactory.createContentDocumentLink(listMedia);
+        ContentDocumentLink contentLink = contentDocList.get(0);
+		
 		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
 		String vdata=EncodingUtil.base64Encode(contv.VersionData);
 		//When
@@ -71,16 +64,20 @@ public class MediaElementUploaderControllerTest {
 
 	}
 
+
 	@isTest 
 	static void createFileTest(){
+
 		/* Comment: Comprueba que se asigne el file dado al media element correspondiente segun los parametros pasados. */
 
 		//Given
-		//MockupFactory.createRecords();
 		
-		MediaElement__c media = [SELECT Id, ExternalId__c FROM MediaElement__c Limit 1];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
         
-        ContentDocumentLink contentLink = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId =: media.Id];
+        List<ContentDocumentLink> contentDocList = MockupFactory.createContentDocumentLink(listMedia);
+        ContentDocumentLink contentLink = contentDocList.get(0);
+		
 		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData, Title, FileExtension FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
 		
 		String vdata=EncodingUtil.base64Encode(contv.VersionData);
@@ -102,14 +99,14 @@ public class MediaElementUploaderControllerTest {
 		System.assertEquals(mediaResult.DesktopFileExtension__c, contv.FileExtension);
 	}
 
+
 	@isTest 
 	static void createFileWihtOutFileIdTest(){
 		/* Comment: Comprueba que se asigne el file dado al media element correspondiente segun los parametros pasados. */
 
 		//Given
-		//MockupFactory.createRecords();
-		
-		MediaElement__c media = [SELECT Id, ExternalId__c FROM MediaElement__c Limit 1];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
 		
 		 String base64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
 
@@ -140,17 +137,24 @@ public class MediaElementUploaderControllerTest {
 
 	}
 
+
 	@isTest 
 	static void deleteFileDesktopTest(){
 		/* Comment: Comprueba que dado un String correspondiente a un ID de un MediaElement el método deleteFileDesktop
 		de la clase MediaElemetUploaderController elimine dicho ContentDocument y su referencia del media element correspondiente. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c, FileURLDesktop__c FROM MediaElement__c Limit 1];
-        ContentDocumentLink contentLink = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId =: media.Id];
-		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
+
+        List<ContentDocumentLink> contentDocList = MockupFactory.createContentDocumentLink(listMedia);
+        ContentDocumentLink contentLink = contentDocList.get(0);
+
+		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData, Title FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
 		String vdata=EncodingUtil.base64Encode(contv.VersionData);
+
+		MediaElementUploaderController.createFile(media.Id, contv.ContentDocumentId, vdata, contv.Title, '2', '2', 'Desktop');
+		
 		//When
 		Test.startTest();
 		MediaElementUploaderController.deleteFileDesktop(media.Id);
@@ -182,11 +186,16 @@ public class MediaElementUploaderControllerTest {
 		de la clase MediaElemetUploaderController elimine dicho ContentDocument y su referencia del media element correspondiente. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c, FileURLDesktop__c FROM MediaElement__c Limit 1];
-        ContentDocumentLink contentLink = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId =: media.Id];
-		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
+
+        List<ContentDocumentLink> contentDocList = MockupFactory.createContentDocumentLink(listMedia);
+        ContentDocumentLink contentLink = contentDocList.get(0);
+
+		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData, Title FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
 		String vdata=EncodingUtil.base64Encode(contv.VersionData);
+
+		MediaElementUploaderController.createFile(media.Id, contv.ContentDocumentId, vdata, contv.Title, '2', '2', 'Tablet');
 		//When
 		Test.startTest();
 		MediaElementUploaderController.deleteFileTablet(media.Id);
@@ -211,18 +220,25 @@ public class MediaElementUploaderControllerTest {
 		System.assertEquals(mediaResult.HeightTablet__c, null);
 		System.assertEquals(mediaResult.WidthTablet__c, null);
 	}
+	
 
 		@isTest 
 	static void deleteFileMobileTest(){
+
 		/* Comment: Comprueba que dado un String correspondiente a un ID de un MediaElement el método deleteFileMobile
 		de la clase MediaElemetUploaderController elimine dicho ContentDocument y su referencia del media element correspondiente. */
 
 		//Given
-		//MockupFactory.createRecords();
-		MediaElement__c media = [SELECT Id, ExternalId__c, FileURLDesktop__c FROM MediaElement__c Limit 1];
-        ContentDocumentLink contentLink = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId =: media.Id];
-		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
+		List<MediaElement__c> listMedia= MockupFactory.createMediaElement(1);
+		MediaElement__c media = listMedia.get(0);
+
+        List<ContentDocumentLink> contentDocList = MockupFactory.createContentDocumentLink(listMedia);
+        ContentDocumentLink contentLink = contentDocList.get(0);
+
+		ContentVersion contv = [SELECT Id, ContentDocumentId, VersionData, Title FROM ContentVersion WHERE ContentDocumentId =: contentLink.contentDocumentId];
 		String vdata=EncodingUtil.base64Encode(contv.VersionData);
+
+				MediaElementUploaderController.createFile(media.Id, contv.ContentDocumentId, vdata, contv.Title, '2', '2', 'Mobile');
 		//When
 		Test.startTest();
 		MediaElementUploaderController.deleteFileMobile(media.Id);
@@ -246,5 +262,5 @@ public class MediaElementUploaderControllerTest {
 		System.assertEquals(mediaResult.FileURLMobile__c, null);
 		System.assertEquals(mediaResult.HeightMobile__c, null);
 		System.assertEquals(mediaResult.WidthMobile__c, null);
-	}		
+	}			
 }
