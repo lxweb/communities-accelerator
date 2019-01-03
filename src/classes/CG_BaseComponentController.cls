@@ -70,9 +70,11 @@ public with sharing class CG_BaseComponentController {
 				for (String fieldApiName: getComponentFieldSetByComponentType(component.RecordType.DeveloperName, device)){
 					if (fieldApiName != 'Id' && fieldApiName != 'ExternalId__c' && fieldApiName != 'Recordtype.Developername'){
 						if (fieldApiName == 'PageSize__c'){
-							component.put(fieldApiName, (Decimal)parentComponent.get(fieldApiName));
-						} else {
-							component.put(fieldApiName, (String)parentComponent.get(fieldApiName));
+							component.PageSize__c = parentComponent.PageSize__c;
+                        }else if(fieldApiName == 'LinkDetail__r.URL__c'){
+                            component.LinkDetail__r = parentComponent.LinkDetail__r;
+                        } else {
+							component.put(fieldApiName, (String)GeneralUtils.getFieldValue(parentComponent, fieldApiName));
 						}
 					}
 				}
@@ -156,6 +158,7 @@ public with sharing class CG_BaseComponentController {
         setFields.add('OrderBy__c');
         setFields.add('OrderByAdvance__c');
         setFields.add('PageSize__c');
+        setFields.add('HierarchicalOrderBy__c');
 
         return setFields;
     }
@@ -179,5 +182,4 @@ public with sharing class CG_BaseComponentController {
 
         return setFields;
     }
-
 }

@@ -27,7 +27,7 @@ public class NavigationController {
 	@auraEnabled
 	public static ComponentWrapper getNavWrapper(String componentExternalId, String clusterId, String device) {
 		// List of fields
-  		set<String> setFields = new set<String>{'Id','Name','Recordtype.Developername','NavigationMode__c','HasDelay__c', 'DelayTime__c'};
+  		set<String> setFields = new set<String>{'Id','Name', 'ExternalId__c','Recordtype.Developername','NavigationMode__c','HasDelay__c', 'DelayTime__c'};
 
   		if(clusterId == null || clusterId.trim() == ''){
 			clusterId = ClusterUtils.getClusterIdFromMappingObject(UserInfo.getUserId(), Network.getNetworkId());
