@@ -50,7 +50,7 @@ public without sharing class TranslationUtilsTest{
             TranslationURL__c = 'Test');
         insert tra5;
         
-        User us = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+        User us = [SELECT Id, FirstName, Name FROM User WHERE Id =: UserInfo.getUserId()];
 
         //When
         Test.startTest();
