@@ -1,7 +1,14 @@
-public with sharing class ContentTriggers extends TriggersHandler{
-    public ContentTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
+public with sharing class ContentTriggers extends TriggersHandler {
+
+    /*****************************************************************/
+    /************************ CONSTRUCTOR ****************************/
+    /*****************************************************************/
+    public ContentTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld){
         super(p_triggerNew, p_triggerOld);
 
+        allow_masterLoop_BeforeInsert = true;
+        allow_masterLoop_BeforeUpdate = true;
+        
         //PA-177 CMA: Clustering: Apex Sharing
         allow_masterLoop_AfterUpdate = true;
         allow_masterLoop_AfterInsert = true;
@@ -11,12 +18,21 @@ public with sharing class ContentTriggers extends TriggersHandler{
 
         allow_finalLoop_AfterInsert = true;
         allow_finalLoop_AfterUpdate = true;
-
     }
 
     /*****************************************************************/
     /*********************** TRIGGER METHODS *************************/
     /*****************************************************************/
+
+    //Master loops
+    public override void masterLoop_BeforeInsert(SObject recNew) {
+        setExternalId((Content__c)recNew);
+        checkAdvanceContentBinding((Content__c)recNew);
+    }
+    public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        setExternalId((Content__c)recNew);
+        checkAdvanceContentBinding((Content__c)recNew);
+    }
 
     //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
@@ -32,7 +48,8 @@ public with sharing class ContentTriggers extends TriggersHandler{
     public override void finalLoop_AfterUpdate(SObject recNew, SObject recOld){
         addSharing((Content__c) recNew, (Content__c) recOld, false);
     }
-
+    
+    
     //PA-177 CMA: Clustering: Apex Sharing
     List<Content__Share> contentShareList = new List<Content__Share>();
     Boolean excecuteTrigger = true;
@@ -52,8 +69,7 @@ public with sharing class ContentTriggers extends TriggersHandler{
         }
 
     }
-
-
+    
     public override void executeDMLs() {
 
         if(!contentShareList.isEmpty() && excecuteTrigger){
@@ -65,7 +81,47 @@ public with sharing class ContentTriggers extends TriggersHandler{
         }
 
     }
+    
+    
+    /*****************************************************************/
+    /********************** USE CASE METHODS *************************/
+    /*****************************************************************/
+    private void setExternalId(Content__c recNew){
+        if(!canMethod('setExternalId')){return;}
 
+        if(recNew.ExternalID__c == null){
+            recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
+        }
+    }
+
+    private void checkAdvanceContentBinding(Content__c recNew){
+        if(!canMethod('checkAdvanceContentBinding')){return;}
+
+        if(recNew.HTMLContent__c != null && recNew.HTMLContent__c.substringBetween('[!', ']') != null){
+
+            //Replace binding by lower case
+            List<String> bindingsList = new List<String>();
+            String auxTextToReplace = recNew.HTMLContent__c;
+            while(auxTextToReplace.substringBetween('[!', ']') != null) {
+                String bind = auxTextToReplace.substringBetween('[!', ']');
+                bindingsList.add('[!' + bind + ']');
+                auxTextToReplace = auxTextToReplace.replace('[!' + bind + ']', '');
+            }
+            for(String binding: bindingsList){
+                recNew.HTMLContent__c = recNew.HTMLContent__c.replace(binding, binding.toLowerCase());
+            }
+
+            //Check consistency
+            if(Limits.getQueries() < 50){
+                String replacedValue = GeneralUtils.replaceDynamicFields(recNew.HTMLContent__c, 'User', UserInfo.getUserId(), false);
+                if(replacedValue.substringBetween('[!', ']') != null){
+                    String fieldApiName = replacedValue.substringBetween('[!', ']');
+                    recNew.HTMLContent__c.addError('Dynamic user fields error. Some relationship or field doesn\'t exists: ' + bindingsList);
+                }
+            }
+        }
+    }
+    
     //PA-177 CMA: Clustering: Apex Sharing
     List<SObject> recordList = new List<SObject>(); 
     private void addSharing(Content__c recNew, Content__c recOld, Boolean isMaster){
@@ -106,6 +162,5 @@ public with sharing class ContentTriggers extends TriggersHandler{
 
 
     }
-
 
 }
