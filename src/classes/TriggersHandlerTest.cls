@@ -1,0 +1,329 @@
+@isTest
+public class TriggersHandlerTest {
+	
+	@isTest 
+	static void simulationBeforeInsert(){
+		/* Comment: Comprueba ejecucion del trigger Before Insert*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld;
+	    map<Id, SObject> triggerOldMap;
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = true;
+	    th.triggerIsAfter = false;
+	    th.triggerIsInsert = true;
+	    th.triggerIsUpdate = false;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_BeforeInsert = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_BeforeInsert = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationAfterInsert(){
+		/* Comment: Comprueba ejecucion del trigger After Insert*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld;
+	    map<Id, SObject> triggerOldMap;
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = true;
+	    th.triggerIsUpdate = false;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterInsert = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterInsert = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationBeforeUpdate(){
+		/* Comment: Comprueba ejecucion del trigger Before Update*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = true;
+	    th.triggerIsAfter = false;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = true;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_BeforeUpdate = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_BeforeUpdate = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationAfterUpdate(){
+		/* Comment: Comprueba ejecucion del trigger After Update*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = true;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterUpdate = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterUpdate = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationBeforeDelete(){
+		/* Comment: Comprueba ejecucion del trigger Before Delete*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew;
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = true;
+	    th.triggerIsAfter = false;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = false;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = true;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_BeforeDelete = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_BeforeDelete = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationAfterDelete(){
+		/* Comment: Comprueba ejecucion del trigger After Delete*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew;
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = false;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = true;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterDelete = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterDelete = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest 
+	static void simulationAfterUndelete(){
+		/* Comment: Comprueba ejecucion del trigger After Undelete*/
+
+		//Given
+		User u = [SELECT Id, Name FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld;
+	    map<Id, SObject> triggerOldMap;
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld, false);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = false;
+	    th.triggerIsUndelete = true;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterUndelete = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterUndelete = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(true, true);
+	}
+
+	@isTest
+	static void testSelfUpdate(){
+		/* Comment: Comprueba el funcionamiento del Self Update*/
+
+		//Given
+		User u = [SELECT Id, Name, FirstName, LastName FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+	    
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = true;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterUpdate = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterUpdate = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+
+	    th.recordSelfUpdate(u.Id, 'FirstName', 'New First Name');
+	    th.recordSelfUpdate(u.Id, 'LastName', 'New Last Name');
+
+	    th.run();
+		Test.stopTest();
+
+		//Then
+		u = [SELECT Id, Name, FirstName, LastName FROM User WHERE Id =: UserInfo.getUserId()];
+		System.assertEquals(u.FirstName, 'New First Name');
+		System.assertEquals(u.LastName, 'New Last Name');
+	}
+
+	@isTest
+	static void testCanMethod(){
+		/* Comment: Comprueba el funcionamiento del Self Update*/
+
+		//Given
+		User u = [SELECT Id, Name, FirstName, LastName FROM User WHERE Id =: UserInfo.getUserId()];
+		List<SObject> triggerNew = new List<SObject>{u};
+	    List<SObject> triggerOld = new List<SObject>{u};
+	    map<Id, SObject> triggerOldMap = new map<Id, SObject>{u.Id => u};
+
+		//When
+		Test.startTest();
+	    TriggersHandler th = new TriggersHandler(triggerNew, triggerOld);
+	    th.triggerIsBefore = false;
+	    th.triggerIsAfter = true;
+	    th.triggerIsInsert = false;
+	    th.triggerIsUpdate = true;
+	    th.triggerIsUndelete = false;
+	    th.triggerIsDelete = false;
+	    th.triggerOldMap = triggerOldMap;
+
+	    th.allow_masterLoop_AfterUpdate = true;
+	    th.allow_dataPreparing = true;
+	    th.allow_executeDMLs = true;
+	    th.allow_finalLoop_AfterUpdate = true;
+	    th.allow_triggerFinish = true;
+	    th.allow_selfUpdate = true;
+		th.run();
+
+	    Boolean executed = th.canMethod('TriggersHandler.testMethod');
+
+	    TriggersHandlerManager.byPassTrigger('TriggersHandler.testMethod2');
+	    Boolean notExecuted = th.canMethod('testMethod2');
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(executed, true);
+		System.assertEquals(notExecuted, false);
+	}
+
+}

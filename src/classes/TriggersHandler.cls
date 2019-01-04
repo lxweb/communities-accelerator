@@ -22,7 +22,7 @@ Orden de ejecucion:
 
 
 public without sharing virtual class TriggersHandler {
-	
+
     private String triggerName;
     private Boolean allowRecursivity;
     private Boolean runDebugs;
@@ -46,13 +46,20 @@ public without sharing virtual class TriggersHandler {
     public Boolean allow_triggerFinish = false;
     public Boolean allow_selfUpdate = false;
 
-    public List<SObject> triggerNew;
-    public List<SObject> triggerOld;
+    @TestVisible public List<SObject> triggerNew;
+    @TestVisible public List<SObject> triggerOld;
+    @TestVisible public map<Id, SObject> triggerOldMap;
+    @TestVisible private Boolean triggerIsBefore;
+    @TestVisible private Boolean triggerIsAfter;
+    @TestVisible private Boolean triggerIsInsert;
+    @TestVisible private Boolean triggerIsUpdate;
+    @TestVisible private Boolean triggerIsUndelete;
+    @TestVisible private Boolean triggerIsDelete;
 
     private map<Id, SObject> mapRecordsToSelfUpdate;
     private Schema.DescribeSObjectResult objDesc;
     
-    //CONSTRUCTORS
+    //CONSTRUCTORES
     public TriggersHandler(List<SObject> p_triggerNew, List<SObject> p_triggerOld, Boolean allowRecursivity) {
         init(p_triggerNew, p_triggerOld, allowRecursivity);
     }
@@ -61,16 +68,24 @@ public without sharing virtual class TriggersHandler {
         init(p_triggerNew, p_triggerOld, true);
     }
 
-    //INIT METHOD
+    //METODO DE INICIALIZACION
     private void init(List<SObject> p_triggerNew, List<SObject> p_triggerOld, Boolean allowRecursivity){
         this.allowRecursivity = allowRecursivity;
         mapRecordsToSelfUpdate = new map<Id, SObject>();
 
-		triggerNew = p_triggerNew;
-		triggerOld = p_triggerOld;
+        triggerNew = p_triggerNew;
+        triggerOld = p_triggerOld;
+
+        if(!Test.isRunningTest()){triggerIsBefore   = trigger.isBefore;}
+        if(!Test.isRunningTest()){triggerIsAfter    = trigger.isAfter;}
+        if(!Test.isRunningTest()){triggerIsInsert   = trigger.isInsert;}
+        if(!Test.isRunningTest()){triggerIsUpdate   = trigger.isUpdate;}
+        if(!Test.isRunningTest()){triggerIsUndelete = trigger.isUndelete;}
+        if(!Test.isRunningTest()){triggerIsDelete   = trigger.isDelete;}
+        if(!Test.isRunningTest()){triggerOldMap   = trigger.oldMap;}
     }
 
-    //METHODS AVAILABLE TO OVERRIDE
+    //METODOS HABILITADOS PARA SER SOBREESCRITOS
     /*
     public override void triggerPreparing() {}
     public override void masterLoop_BeforeInsert(SObject recNew) {}
@@ -114,8 +129,8 @@ public without sharing virtual class TriggersHandler {
         //Ejecucion previa
         triggerPreparingMaster();
 
-        if((trigger.isInsert || trigger.isUpdate || trigger.isUndelete) && trigger.new.isEmpty()){return;}
-        if(trigger.isDelete && trigger.old.isEmpty()){return;}
+        if((triggerIsInsert || triggerIsUpdate || triggerIsUndelete) && triggerNew.isEmpty()){return;}
+        if(triggerIsDelete && triggerOld.isEmpty()){return;}
 
         //Loop principal para impactar datos default en before o recopilar datos en colecciones para operaciones posteriores
         masterLoop(false);
@@ -144,9 +159,9 @@ public without sharing virtual class TriggersHandler {
         
         //Insert loop
         if(allow_masterLoop_BeforeInsert || allow_finalLoop_BeforeInsert || allow_masterLoop_AfterInsert || allow_finalLoop_AfterInsert){
-            if(trigger.isInsert){
+            if(triggerIsInsert){
                 for(SObject recNew: (List<SObject>)triggerNew){
-                    if(trigger.isBefore){
+                    if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE INSERT - MASTER LOOP');}
                             masterLoop_BeforeInsert(recNew);
@@ -155,7 +170,7 @@ public without sharing virtual class TriggersHandler {
                             finalLoop_BeforeInsert(recNew);
                         }
                     }
-                    if(trigger.isAfter){
+                    if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER INSERT - MASTER LOOP');}
                             masterLoop_AfterInsert(recNew);
@@ -170,10 +185,10 @@ public without sharing virtual class TriggersHandler {
 
         //Update loop
         if(allow_masterLoop_BeforeUpdate || allow_finalLoop_BeforeUpdate || allow_masterLoop_AfterUpdate || allow_finalLoop_AfterUpdate){
-            if(trigger.isUpdate){
+            if(triggerIsUpdate){
                 for(SObject recNew: (List<SObject>)triggerNew){
-                    SObject recOld = trigger.oldMap.get(String.valueOf(recNew.get('id')));
-                    if(trigger.isBefore){
+                    SObject recOld = triggerOldMap.get(String.valueOf(recNew.get('id')));
+                    if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE UPDATE - MASTER LOOP');}
                             masterLoop_BeforeUpdate(recNew, recOld);
@@ -182,7 +197,7 @@ public without sharing virtual class TriggersHandler {
                             finalLoop_BeforeUpdate(recNew, recOld);
                         }
                     }
-                    if(trigger.isAfter){
+                    if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UPDATE - MASTER LOOP');}
                             masterLoop_AfterUpdate(recNew, recOld);
@@ -197,9 +212,9 @@ public without sharing virtual class TriggersHandler {
 
         //Delete loop
         if(allow_masterLoop_BeforeDelete || allow_finalLoop_BeforeDelete || allow_masterLoop_AfterDelete || allow_finalLoop_AfterDelete){
-            if(trigger.isDelete){
+            if(triggerIsDelete){
                 for(SObject recOld: (List<SObject>)triggerOld){
-                    if(trigger.isBefore){
+                    if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE DELETE - MASTER LOOP');}
                             masterLoop_BeforeDelete(recOld);
@@ -209,7 +224,7 @@ public without sharing virtual class TriggersHandler {
                         }
                         
                     }
-                    if(trigger.isAfter){
+                    if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER DELETE - MASTER LOOP');}
                             masterLoop_AfterDelete(recOld);
@@ -224,9 +239,9 @@ public without sharing virtual class TriggersHandler {
 
         //Undelete loop
         if(allow_masterLoop_AfterUndelete || allow_finalLoop_AfterUndelete){
-            if(trigger.isUndelete){
+            if(triggerIsUndelete){
                 for(SObject recNew: (List<SObject>)triggerNew){
-                    if(trigger.isAfter){
+                    if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterUndelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UNDELETE - MASTER LOOP');}
                             masterLoop_AfterUndelete(recNew);
@@ -241,7 +256,7 @@ public without sharing virtual class TriggersHandler {
 
     }
 
-    //QUERIES AND PROCESSING HERE
+    //INCLUIR QUERIES Y PROCESAMIENTO EN ESTE METODO
     private void dataPreparingMaster() {
         if(allow_dataPreparing){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - dataPreparing');}
@@ -249,7 +264,7 @@ public without sharing virtual class TriggersHandler {
         }
     }
 
-    //DMLs HERE
+    //INCLUIR DMLs EN ESTE METODO
     private void executeDMLsMaster() {
         if(allow_executeDMLs){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - executeDMLs');}
@@ -257,6 +272,7 @@ public without sharing virtual class TriggersHandler {
         }
     }
 
+    //INCLUIR DMLs AUXILIARES, METODOS @FUTURE, INTEGRACIONES, ETC (LA PRIMERA OPCION SERIA EN "executeDMLs")
     private void triggerFinishMaster() {
         if(allow_triggerFinish){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - triggerFinish');}
@@ -264,7 +280,7 @@ public without sharing virtual class TriggersHandler {
         }
     }
 
-    //SELF UPDATE OF TRIGGER NEW HERE
+    //METODO PARA ACTUALIZAR LOS REIGSTROS INVOLUCRADOS EN EL TRIGGER
     private void selfUpdateMaster() {
         if(allow_selfUpdate || !mapRecordsToSelfUpdate.values().isEmpty()){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - selfUpdate');}
@@ -272,7 +288,7 @@ public without sharing virtual class TriggersHandler {
         selfUpdate();
     }
 
-    //METHODS AVAILABLE TO OVERRIDE
+    //METODOS HABILITADOS PARA SER SOBREESCRITOS
     public virtual void triggerPreparing() {}
 
     public virtual void masterLoop_BeforeInsert(SObject recNew) {}
@@ -303,7 +319,7 @@ public without sharing virtual class TriggersHandler {
         }
     }
 
-    //UTIL METHODS
+    //METODOS DE UTILIDAD
     public Boolean canMethod(String method){
         Boolean allowMethod = TriggersHandlerManager.canTrigger(triggerName + '.' + method);
         if(allowMethod){
