@@ -221,7 +221,6 @@ src/profiles/SolutionManager.profile
 src/profiles/Standard.profile
 src/profiles/StandardAul.profile
 src/profiles/Work%2Ecom Only User.profile
-<<<<<<< HEAD
 src/aura/forgotPassword/
 src/aura/loginForm/
 src/aura/selfRegister/
@@ -279,5 +278,4 @@ src/layouts/CaseInteraction-Formato de noticias en tiempo real de Caso.layout
 src/profiles/Partner Community Login User.profile
 src/staticresources/SiteSamples.resource
 src/staticresources/SiteSamples.resource-meta.xml
-=======
->>>>>>> feature/AR
+src/pages/
