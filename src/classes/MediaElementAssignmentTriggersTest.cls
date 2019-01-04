@@ -7,13 +7,14 @@ public class MediaElementAssignmentTriggersTest {
 			con el correspondiente ExternalId__c */
 
 		//Given
-		//MockupFactory.createRecords();
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		List<Content__c> listContent= MockupFactory.createContent('Banner', clusterRootList[0], 1);
+
 		MediaElement__c mediaElementTest = new MediaElement__c(Name='Test');
-		insert mediaElementTest;
+		insert mediaElementTest;						
 
-		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];								
-
-		MediaElementAssignment__c MediaElementAssigmentTest = new MediaElementAssignment__c(Content__c=contTest.id );
+		MediaElementAssignment__c MediaElementAssigmentTest = new MediaElementAssignment__c(Content__c=listContent[0].id );
 
 		//When
 		Test.startTest();
@@ -32,9 +33,11 @@ public class MediaElementAssignmentTriggersTest {
 		con correspondiente ExternalId__c */
 
 		//Given
-		//MockupFactory.createRecords();
-		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];	
-		MediaElementAssignment__c mediaElementAssigmentTest = new MediaElementAssignment__c(Content__c=contTest.id );
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		List<Content__c> listContent= MockupFactory.createContent('Banner', clusterRootList[0], 1);
+		
+		MediaElementAssignment__c mediaElementAssigmentTest = new MediaElementAssignment__c(Content__c=listContent[0].id );
 		insert mediaElementAssigmentTest;
 		mediaElementAssigmenttest.ExternalId__c = null;
 
@@ -49,4 +52,5 @@ public class MediaElementAssignmentTriggersTest {
 		System.assertNotEquals(mediaElementAssigmentTestResult.ExternalId__c, null);
 
 	}
+	
 }
