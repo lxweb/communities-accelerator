@@ -4,18 +4,18 @@ public with sharing class MediaElementTriggersTest {
 	@isTest 
 	static void insertMediaElementTest(){
 		/* Comment: Comprueba que al crear un MediaElement__c se inserta
-			con el correspondiente ExternalId__c */
+		con el correspondiente ExternalId__c */
 
 		//Given
 		MediaElement__c mediaElementTest = new MediaElement__c(Name='MediaElement Test 01');
 
 		//When
 		Test.startTest();
-			insert(mediaElementTest);
+		insert(mediaElementTest);
 		Test.stopTest();
 
 		//Then
-		MediaElement__c mediaElementTestResult =[select id, ExternalId__c from MediaElement__c where id =: mediaElementTest.id];
+		MediaElement__c mediaElementTestResult =[SELECT Id, ExternalId__c FROM MediaElement__c WHERE Id =: mediaElementTest.Id];
 		System.assertNotEquals(mediaElementTestResult.ExternalId__c, null);
 	}
 
@@ -31,11 +31,11 @@ public with sharing class MediaElementTriggersTest {
 		mediaElementTest.Name = 'MediaElementl Test 02';
 		//When
 		Test.startTest();
-			update(mediaElementTest);
+		update(mediaElementTest);
 		Test.stopTest();
 
 		//Then
-		MediaElement__c mediaElementTestResult2 =[select id, ExternalId__c from MediaElement__c where id =: mediaElementTest.id];
+		MediaElement__c mediaElementTestResult2 =[SELECT Id, ExternalId__c FROM MediaElement__c WHERE Id =: mediaElementTest.Id];
 		System.assertNotEquals(mediaElementTestResult2.ExternalId__c, null);
 	}
 }
