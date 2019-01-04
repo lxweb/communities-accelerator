@@ -46,12 +46,18 @@ public without sharing class TriggersHandlerManager {
         return getUser().TriggersByPass__c != null ? (!getUser().TriggersByPass__c.contains(triggerName)) : true;
     }
 
+	@testVisible private static List<SObject> triggerNew;
+	@testVisible private static List<SObject> triggerOld;
+
     public static TriggerFiltered getTriggerListFiltered(String filterFieldApiName){
     	map<String, List<SObject>> triggerNewFiltered = new map<String, List<SObject>>();
     	map<String, List<SObject>> triggerOldFiltered = new map<String, List<SObject>>();
 
-		if(trigger.new != null){
-			for(SObject rec: trigger.new){
+		triggerNew = trigger.new != null ? trigger.new : triggerNew;  
+		triggerOld = trigger.old != null ? trigger.old : triggerOld;  
+		
+		if(triggerNew != null){
+			for(SObject rec: triggerNew){
 				if(filterFieldApiName != null){
 					if( String.valueOf(rec.get(filterFieldApiName)) != null && triggerNewFiltered.containsKey(String.valueOf(rec.get(filterFieldApiName))) ){
 						triggerNewFiltered.get(String.valueOf(rec.get(filterFieldApiName))).add(rec);
@@ -61,8 +67,8 @@ public without sharing class TriggersHandlerManager {
 				}
 			}
 		}
-		if(trigger.old != null){
-			for(SObject rec: trigger.old){
+		if(triggerOld != null){
+			for(SObject rec: triggerOld){
 				if(filterFieldApiName != null){
 					if( String.valueOf(rec.get(filterFieldApiName)) != null && triggerOldFiltered.containsKey(String.valueOf(rec.get(filterFieldApiName))) ){
 						triggerOldFiltered.get(String.valueOf(rec.get(filterFieldApiName))).add(rec);
