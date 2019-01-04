@@ -1,4 +1,4 @@
-public class NavigationController {
+public class CG_NavigationController {
 	//WRAPPERS
     public class ComponentWrapper{
 		@auraEnabled public AcceleratorSettings__c acceleratorSettings;
