@@ -102,15 +102,8 @@ public class MockupFactory {
         return tagList;
     }
 */
-    public static User createUser(String username, String email){
-        User user = new User();
-        user.username = username;
-        user.email = email;
-        insert user;
-        return user;
-    }
     
-    public static User createFullUser(String username, String email){
+    public static User createUser(String username, String email){
         Profile profileTest = [SELECT Id, Name FROM Profile WHERE Name = 'System Administrator'];
         
         User user = new User(    
@@ -128,8 +121,8 @@ public class MockupFactory {
         insert user;
         return user;
     }
-
-    public static List<ClusterUser__c> createClusterUser(Id clusterId, Id userId, String accessLevel, Integer quantity){
+    
+    public static List<ClusterUser__c> createClusterUser(Id clusterId, Id userId, Integer quantity, String accessLevel){
 
         //ClusterUser__c clusterUser = new ClusterUser__c(Cluster__c=clusterId, User__c=userId, AccessLevel__c=accessLevel);
         List<ClusterUser__c> clusterUserList = new List<ClusterUser__c>();

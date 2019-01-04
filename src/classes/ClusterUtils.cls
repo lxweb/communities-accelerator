@@ -71,7 +71,7 @@ public with sharing class ClusterUtils {
 		if(mapMappingKeyCluster == null){
 			mapMappingKeyCluster = new map<String, String>();
 		}
-
+		
 		String mappingKey = recordId + '-' + networkId;
 		if(!mapMappingKeyCluster.containsKey(mappingKey)){
 			try{
@@ -93,10 +93,13 @@ public with sharing class ClusterUtils {
 
 	public static Cluster__c getClusterRootFromNetwork(){
 		Cluster__c clusterRoot;
-		List<Cluster__c> queryResult = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: GeneralUtils.getNetwork(Network.getNetworkId()).Name];
-		if(!queryResult.isEmpty()){
-			clusterRoot = queryResult[0];
+		if (Network.getNetworkId() != null ){
+			List<Cluster__c> queryResult = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: GeneralUtils.getNetwork(Network.getNetworkId()).Name];
+			if(!queryResult.isEmpty()){
+				clusterRoot = queryResult[0];
+			}
+			return clusterRoot;
 		}
-		return clusterRoot;
+		return null;
 	}
 }
