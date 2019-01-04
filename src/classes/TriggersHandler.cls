@@ -56,6 +56,8 @@ public without sharing virtual class TriggersHandler {
     @TestVisible private Boolean triggerIsUndelete;
     @TestVisible private Boolean triggerIsDelete;
 
+    @TestVisible private static Boolean isTriggersHandlerTest = false;
+
     private map<Id, SObject> mapRecordsToSelfUpdate;
     private Schema.DescribeSObjectResult objDesc;
     
@@ -76,13 +78,13 @@ public without sharing virtual class TriggersHandler {
         triggerNew = p_triggerNew;
         triggerOld = p_triggerOld;
 
-        if(!Test.isRunningTest()){triggerIsBefore   = trigger.isBefore;}
-        if(!Test.isRunningTest()){triggerIsAfter    = trigger.isAfter;}
-        if(!Test.isRunningTest()){triggerIsInsert   = trigger.isInsert;}
-        if(!Test.isRunningTest()){triggerIsUpdate   = trigger.isUpdate;}
-        if(!Test.isRunningTest()){triggerIsUndelete = trigger.isUndelete;}
-        if(!Test.isRunningTest()){triggerIsDelete   = trigger.isDelete;}
-        if(!Test.isRunningTest()){triggerOldMap   = trigger.oldMap;}
+        if(!isTriggersHandlerTest){triggerIsBefore   = trigger.isBefore;}
+        if(!isTriggersHandlerTest){triggerIsAfter    = trigger.isAfter;}
+        if(!isTriggersHandlerTest){triggerIsInsert   = trigger.isInsert;}
+        if(!isTriggersHandlerTest){triggerIsUpdate   = trigger.isUpdate;}
+        if(!isTriggersHandlerTest){triggerIsUndelete = trigger.isUndelete;}
+        if(!isTriggersHandlerTest){triggerIsDelete   = trigger.isDelete;}
+        if(!isTriggersHandlerTest){triggerOldMap   = trigger.oldMap;}
     }
 
     //METODOS HABILITADOS PARA SER SOBREESCRITOS

@@ -1,6 +1,11 @@
 @isTest
 public class TriggersHandlerTest {
 	
+	@testSetup
+	static void testSetup(){
+		TriggersHandler.isTriggersHandlerTest = true;
+	}
+
 	@isTest 
 	static void simulationBeforeInsert(){
 		/* Comment: Comprueba ejecucion del trigger Before Insert*/
