@@ -6,12 +6,12 @@ private class ClusterUserTriggersTest{
 		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusters = MockupFactory.createCluster('Test Cluster Root', null, 1, 'ClusterRoot');
 		
-		User userToInsert = MockupFactory.createFullUser('userToInsert@cg.com','test@user.com');
-		User userRW = MockupFactory.createFullUser('userRW@cg.com','test@user.com');
-		User userRO = MockupFactory.createFullUser('userRO@cg.com','test@user.com');
+		User userToInsert = MockupFactory.createUser('userToInsert@cg.com','test@user.com');
+		User userRW = MockupFactory.createUser('userRW@cg.com','test@user.com');
+		User userRO = MockupFactory.createUser('userRO@cg.com','test@user.com');
 		
-		MockupFactory.createClusterUser(clusters.get(0).Id, userRO.Id, 'Read Only', 1);
-		MockupFactory.createClusterUser(clusters.get(0).Id, userRW.Id, 'Read/Write', 1);
+		MockupFactory.createClusterUser(clusters.get(0).Id, userRO.Id, 1, 'Read Only');
+		MockupFactory.createClusterUser(clusters.get(0).Id, userRW.Id, 1, 'Read/Write');
 	}
 
 	@isTest
