@@ -76,6 +76,22 @@ public class MockupFactory {
         return tagList;
     }
 
+        //Create TagAssignment__c by Category && Component
+    public static List<TagAssignment__c> createTagAssignment(List<Tag__c> tagList, List<Component__c> componentList, List<Content__c> contentList){
+        List<TagAssignment__c> tagAssignmentList = new List<TagAssignment__c>();
+        Integer quantity = 0;
+        if(tagList != null && componentList != null){
+            quantity = tagList.size() < componentList.size() ? tagList.size() : componentList.size();
+        }
+        for(Integer i = 0; i < quantity; i++){
+            tagAssignmentList.add(new TagAssignment__c(Tag__c = tagList[i].id,
+                                    Component__c = componentList[i].id, Content__c = contentList[i].id));
+        }
+        insert tagAssignmentList;
+        return tagAssignmentList;
+    }
+
+
     public static List<Category__c>  createCategory(String catName, Integer cuantity, Id clusterId){
         List<Category__c> catList = new List<Category__c>();
         
@@ -88,6 +104,21 @@ public class MockupFactory {
         return catList;
     }
 
+    //Create CategoryAssignment__c by Category && Component
+    public static List<CategoryAssignment__c> createCategoryAssignment(List<Category__c> categoryList, List<Component__c> componentList){
+        List<CategoryAssignment__c> categoryAssignmentList = new List<CategoryAssignment__c>();
+        Integer quantity = 0;
+        if(categoryList != null && componentList != null){
+            quantity = categoryList.size() < componentList.size() ? categoryList.size() : componentList.size();
+        }
+        for(Integer i = 0; i < quantity; i++){
+            categoryAssignmentList.add(new CategoryAssignment__c(Category__c = categoryList[i].id,
+                                    Component__c = componentList[i].id));
+        }
+        insert categoryAssignmentList;
+        return categoryAssignmentList;
+    }
+    
     //Create Cluster__c (Root) by names
     /*public static List<Cluster__c> createClusterRoot(List<String> nameList){
         List<Cluster__c> clusterRootList = new List<Cluster__c>();
