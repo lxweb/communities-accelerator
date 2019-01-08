@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    <layoutAssignments>
-        <layout>MenuAssignment__c-Menu Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Menu__c-Menu Layout</layout>
-    </layoutAssignments>
     <tabVisibilities>
         <tab>Menu__c</tab>
         <visibility>DefaultOn</visibility>
@@ -969,6 +963,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Translation__c-Translation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Menu__c-Menu Layout</layout>
     </layoutAssignments>
     <tabVisibilities>
         <tab>CategoryAssignment__c</tab>
