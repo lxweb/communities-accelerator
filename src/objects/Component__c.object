@@ -68,77 +68,6 @@
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
-	    <fields>
-        <fullName>NavigationMode__c</fullName>
-        <externalId>false</externalId>
-        <label>Navigation Mode</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Horizontal-Simple</fullName>
-                    <default>false</default>
-                    <label>Horizontal-Simple</label>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                    <label>Other</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-	<fields>
-        <fullName>Status__c</fullName>
-        <externalId>false</externalId>
-        <label>Status</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Set Format</fullName>
-                    <default>false</default>
-                    <label>Set Format</label>
-                </value>
-                <value>
-                    <fullName>Set Content</fullName>
-                    <default>false</default>
-                    <label>Set Content</label>
-                </value>
-                <value>
-                    <fullName>Final Check</fullName>
-                    <default>false</default>
-                    <label>Final Check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-                <value>
-                    <fullName>Set Community</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Set Community</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
     <fields>
         <fullName>BannerFrameType__c</fullName>
         <defaultValue>&quot;Hero&quot;</defaultValue>
@@ -519,7 +448,7 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <fields>
+	<fields>
         <fullName>NavigationMode__c</fullName>
         <externalId>false</externalId>
         <label>Navigation Mode</label>
@@ -896,7 +825,7 @@
             <valueSetName>StatusApprovalProcess</valueSetName>
         </valueSet>
     </fields>
-    <fields>
+	<fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
