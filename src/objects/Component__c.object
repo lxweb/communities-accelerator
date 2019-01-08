@@ -4395,22 +4395,6 @@
             </values>
         </picklistValues>
     </recordTypes>
-	    <recordTypes>
-        <fullName>Navigation</fullName>
-        <active>true</active>
-        <label>Navigation</label>
-		<picklistValues>
-            <picklist>NavigationMode__c</picklist>
-            <values>
-                <fullName>Horizontal-Simple</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-    </recordTypes>
     <searchLayouts>
         <customTabListAdditionalFields>ExternalId__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Cluster__c</customTabListAdditionalFields>
