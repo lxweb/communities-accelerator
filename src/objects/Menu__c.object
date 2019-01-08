@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Behaviour__c</fullName>
+        <externalId>false</externalId>
+        <label>Behaviour</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New Tab</fullName>
+                    <default>false</default>
+                    <label>New Tab</label>
+                </value>
+                <value>
+                    <fullName>Same Tab</fullName>
+                    <default>false</default>
+                    <label>Same Tab</label>
+                </value>
+                <value>
+                    <fullName>New Window</fullName>
+                    <default>false</default>
+                    <label>New Window</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Cluster__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Cluster</label>
+        <referenceTo>Cluster__c</referenceTo>
+        <relationshipLabel>Menus</relationshipLabel>
+        <relationshipName>Menus</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ComponentName__c</fullName>
+        <externalId>false</externalId>
+        <label>Component Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExternalId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>MenuLabel__c</fullName>
+        <externalId>false</externalId>
+        <label>Menu Label</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Menu_Icon__c</fullName>
+        <externalId>false</externalId>
+        <label>Menu Icon</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Navigation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Navigation</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.Cluster__c</field>
+                <operation>equals</operation>
+                <valueField>Navigation__c.Cluster__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Navigation__c</referenceTo>
+        <relationshipLabel>Menus</relationshipLabel>
+        <relationshipName>Navigations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentMenu__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Menu</label>
+        <referenceTo>Menu__c</referenceTo>
+        <relationshipLabel>ParentMenus</relationshipLabel>
+        <relationshipName>SubMenus</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>false</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                    <label>Inactive</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>URL_Parameters__c</fullName>
+        <externalId>false</externalId>
+        <label>URL Parameters</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <gender>Masculine</gender>
+    <label>Menu</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Menu Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Menus</pluralLabel>
+    <recordTypes>
+        <fullName>Menu</fullName>
+        <active>true</active>
+        <label>Menu</label>
+        <picklistValues>
+            <picklist>Behaviour__c</picklist>
+            <values>
+                <fullName>New Tab</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Window</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Same Tab</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>SubMenu</fullName>
+        <active>true</active>
+        <label>SubMenu</label>
+        <picklistValues>
+            <picklist>Behaviour__c</picklist>
+            <values>
+                <fullName>New Tab</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Window</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Same Tab</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>LevelValidation</fullName>
+        <active>true</active>
+        <description>Gets an error if you add more than three related submenus</description>
+        <errorConditionFormula>NOT(
+OR(
+ISBLANK(ParentMenu__c),
+ISBLANK(ParentMenu__r.ParentMenu__c),
+ISBLANK(ParentMenu__r.ParentMenu__r.ParentMenu__c),
+ISBLANK(ParentMenu__r.ParentMenu__r.ParentMenu__r.ParentMenu__c)
+)
+)</errorConditionFormula>
+        <errorMessage>It&apos;s not allowed to add more than 3 related submenus</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>
