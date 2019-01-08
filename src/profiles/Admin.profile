@@ -1,42 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    <tabVisibilities>
-        <tab>Menu__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Menu__c.Menu</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Menu__c.SubMenu</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Component__c.Navigation</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>MenuAssignment__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Menu__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>MenuAssignment__c.ExternalId__c</field>
@@ -1015,7 +978,29 @@
         <tab>Translation__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
+    <tabVisibilities>
+        <tab>Menu__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>MenuAssignment__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Menu__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
 	<objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -1133,6 +1118,16 @@
         <object>Translation__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Menu__c.Menu</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Menu__c.SubMenu</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Cluster__c.ClusterGroup</recordType>
