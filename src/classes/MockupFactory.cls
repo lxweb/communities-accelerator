@@ -352,6 +352,17 @@ public class MockupFactory {
         return navList;
     }
 
+    public static List<Menu__c>  createMenu(String menuName, Integer cuantity, Id clusterId){
+        List<Menu__c> menuList = new List<Menu__c>();
+        
+        for(Integer i = 0;i<cuantity;i++){
+            menuList.add( new Menu__c(Name=menuName+1, Cluster__c=clusterId));
+        }
+        insert menuList;
+
+        return menuList;
+    }
+
     //Create contentCartItems to each Content
     public static List<ContentCartItem__c>  createContentCartItem(List<Content__c> contentIdList){
         List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
