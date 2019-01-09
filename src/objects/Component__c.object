@@ -2942,9 +2942,9 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Navigation</fullName>
+        <fullName>Menu</fullName>
         <active>true</active>
-        <label>Navigation</label>
+        <label>Menu</label>
         <picklistValues>
             <picklist>BannerFrameType__c</picklist>
             <values>
