@@ -99,7 +99,6 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Menu Assignment</label>
     <nameField>
         <label>Menu Assignment Name</label>

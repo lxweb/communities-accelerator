@@ -35,7 +35,7 @@
         <label>Layout</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>NavigationMode__c</field>
             </layoutItems>
         </layoutColumns>
@@ -111,6 +111,7 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Menu__c</fields>
         <relatedList>MenuAssignment__c.Component__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
@@ -119,7 +120,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1U000000lQWY</masterLabel>
+        <masterLabel>00h1U000000dAfx</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

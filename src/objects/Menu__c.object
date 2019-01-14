@@ -82,6 +82,23 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>ClusterRootExternalId__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(Cluster__r.RecordType.DeveloperName = &apos;ClusterRoot&apos;, Cluster__r.ExternalId__c, &apos;&apos;)
++
+if(Cluster__r.ParentCluster__r.RecordType.DeveloperName = &apos;ClusterRoot&apos;, Cluster__r.ParentCluster__r.ExternalId__c, &apos;&apos;)
++
+if(Cluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName = &apos;ClusterRoot&apos;, Cluster__r.ParentCluster__r.ParentCluster__r.ExternalId__c, &apos;&apos;)
++
+if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName = &apos;ClusterRoot&apos;, Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.ExternalId__c, &apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cluster Root External Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Cluster__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -201,7 +218,6 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <gender>Masculine</gender>
     <label>Menu</label>
     <listViews>
         <fullName>All</fullName>
@@ -276,7 +292,11 @@
         </picklistValues>
     </recordTypes>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Clustering__c</fullName>
+        <label>Clustering</label>
+    </sharingReasons>
     <validationRules>
         <fullName>LevelValidation</fullName>
         <active>true</active>

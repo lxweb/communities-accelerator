@@ -448,7 +448,7 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-	<fields>
+    <fields>
         <fullName>NavigationMode__c</fullName>
         <externalId>false</externalId>
         <label>Navigation Mode</label>
@@ -825,7 +825,7 @@
             <valueSetName>StatusApprovalProcess</valueSetName>
         </valueSet>
     </fields>
-	<fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
