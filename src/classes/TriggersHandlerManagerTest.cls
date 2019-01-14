@@ -1,7 +1,8 @@
 @isTest
 public class TriggersHandlerManagerTest {
+    
     @testSetup
-	static void setup(){
+    static void setup(){
         MockupFactory.generateAcceleratorSetting();
 
         User u = MockupFactory.createUser('test__user@test.com', 'test__user@test.com');
@@ -18,8 +19,8 @@ public class TriggersHandlerManagerTest {
 
     @isTest
     static void bypassTriggerTest(){
-        
-        //Add Trigger to bypass
+        //Comment: Add Trigger to bypass
+
         //When
         TriggersHandlerManager.byPassTrigger('testTrigger');
 
@@ -35,6 +36,8 @@ public class TriggersHandlerManagerTest {
 
     @isTest
     static void canAutoDebugTest(){
+        //Comment: 
+
         //Given
         User u = [SELECT Id, TriggersDebugs__c FROM User WHERE username = 'test__user@test.com'];
 
@@ -50,6 +53,8 @@ public class TriggersHandlerManagerTest {
 
     @isTest
     static void cannotAutoDebugTest(){
+        //Comment: 
+
         //Given
         User u = [SELECT Id, TriggersDebugs__c FROM User WHERE username = 'test__user@test.com'];
         TriggersHandlerManager.byPassTrigger('triggerCanDebugButBypassed');
@@ -66,6 +71,8 @@ public class TriggersHandlerManagerTest {
 
     @isTest
     static void canTriggerTest(){
+        //Comment: 
+
         //Given
         User u = [SELECT Id, TriggersDebugs__c FROM User WHERE username = 'test__user@test.com'];
         TriggersHandlerManager.byPassTrigger('triggerBypassed');
@@ -88,6 +95,8 @@ public class TriggersHandlerManagerTest {
 
     @isTest
     static void getTriggerListFilteredTest(){
+        //Comment: 
+        
         //Given
         TriggersHandlerManager.triggerOld = Database.query('SELECT Id, ParentCluster__c, name FROM Cluster__c WHERE name LIKE \'TestCluster%\'');
 

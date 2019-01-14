@@ -23,6 +23,8 @@ Orden de ejecucion:
 
 public without sharing virtual class TriggersHandler {
 
+    @TestVisible private map<String, set<String>> mapExecution_forTest;
+
     private String triggerName;
     private Boolean allowRecursivity;
     private Boolean runDebugs;
@@ -74,6 +76,7 @@ public without sharing virtual class TriggersHandler {
     private void init(List<SObject> p_triggerNew, List<SObject> p_triggerOld, Boolean allowRecursivity){
         this.allowRecursivity = allowRecursivity;
         mapRecordsToSelfUpdate = new map<Id, SObject>();
+        mapExecution_forTest = new map<String, set<String>>();
 
         triggerNew = p_triggerNew;
         triggerOld = p_triggerOld;
@@ -166,18 +169,22 @@ public without sharing virtual class TriggersHandler {
                     if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE INSERT - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_BeforeInsert', recNew.Id);
                             masterLoop_BeforeInsert(recNew);
                         }else if(allow_finalLoop_BeforeInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE INSERT - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_BeforeInsert', recNew.Id);
                             finalLoop_BeforeInsert(recNew);
                         }
                     }
                     if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER INSERT - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_AfterInsert', recNew.Id);
                             masterLoop_AfterInsert(recNew);
                         }else if(allow_finalLoop_AfterInsert){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER INSERT - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_AfterInsert', recNew.Id);
                             finalLoop_AfterInsert(recNew);
                         }
                     }
@@ -193,18 +200,22 @@ public without sharing virtual class TriggersHandler {
                     if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE UPDATE - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_BeforeUpdate', recNew.Id);
                             masterLoop_BeforeUpdate(recNew, recOld);
                         }else if(allow_finalLoop_BeforeUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE UPDATE - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_BeforeUpdate', recNew.Id);
                             finalLoop_BeforeUpdate(recNew, recOld);
                         }
                     }
                     if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UPDATE - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_AfterUpdate', recNew.Id);
                             masterLoop_AfterUpdate(recNew, recOld);
                         }else if(allow_finalLoop_AfterUpdate){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UPDATE - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_AfterUpdate', recNew.Id);
                             finalLoop_AfterUpdate(recNew, recOld);
                         }
                     }
@@ -219,9 +230,11 @@ public without sharing virtual class TriggersHandler {
                     if(triggerIsBefore){
                         if(!isFinal && allow_masterLoop_BeforeDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE DELETE - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_BeforeDelete', recOld.Id);
                             masterLoop_BeforeDelete(recOld);
                         }else if(allow_finalLoop_BeforeDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - BEFORE DELETE - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_BeforeDelete', recOld.Id);
                             finalLoop_BeforeDelete(recOld);
                         }
                         
@@ -229,9 +242,11 @@ public without sharing virtual class TriggersHandler {
                     if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER DELETE - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_AfterDelete', recOld.Id);
                             masterLoop_AfterDelete(recOld);
                         }else if(allow_finalLoop_AfterDelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER DELETE - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_AfterDelete', recOld.Id);
                             finalLoop_AfterDelete(recOld);
                         }
                     }
@@ -246,9 +261,11 @@ public without sharing virtual class TriggersHandler {
                     if(triggerIsAfter){
                         if(!isFinal && allow_masterLoop_AfterUndelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UNDELETE - MASTER LOOP');}
+                            addValueToMapMapExecution_forTest('masterLoop_AfterUndelete', recNew.Id);
                             masterLoop_AfterUndelete(recNew);
                         }else if(allow_finalLoop_AfterUndelete){
                             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - AFTER UNDELETE - FINAL LOOP');}
+                            addValueToMapMapExecution_forTest('finalLoop_AfterUndelete', recNew.Id);
                             finalLoop_AfterUndelete(recNew);
                         }
                     }
@@ -262,6 +279,7 @@ public without sharing virtual class TriggersHandler {
     private void dataPreparingMaster() {
         if(allow_dataPreparing){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - dataPreparing');}
+            addValueToMapMapExecution_forTest('dataPreparing', '');
             dataPreparing();
         }
     }
@@ -270,6 +288,7 @@ public without sharing virtual class TriggersHandler {
     private void executeDMLsMaster() {
         if(allow_executeDMLs){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - executeDMLs');}
+            addValueToMapMapExecution_forTest('executeDMLs', '');
             executeDMLs();
         }
     }
@@ -278,6 +297,7 @@ public without sharing virtual class TriggersHandler {
     private void triggerFinishMaster() {
         if(allow_triggerFinish){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - triggerFinish');}
+            addValueToMapMapExecution_forTest('triggerFinish', '');
             triggerFinish();
         }
     }
@@ -286,6 +306,7 @@ public without sharing virtual class TriggersHandler {
     private void selfUpdateMaster() {
         if(allow_selfUpdate || !mapRecordsToSelfUpdate.values().isEmpty()){
             if(runDebugs){system.debug('TRIGGER ' + triggerName + ' - selfUpdate');}
+            addValueToMapMapExecution_forTest('selfUpdate', mapRecordsToSelfUpdate.keySet());
         }
         selfUpdate();
     }
@@ -365,6 +386,24 @@ public without sharing virtual class TriggersHandler {
             rec.put(fieldApiName, Double.ValueOf(value));
         } else if ( soapType == Schema.SOAPType.base64binary ){
             rec.put(fieldApiName, Blob.ValueOf(String.ValueOf(value)));
+        }
+    }
+
+    private void addValueToMapMapExecution_forTest(String method, set<Id> setIds){
+        if(Test.isRunningTest()){
+            for(Id recId: setIds){
+                addValueToMapMapExecution_forTest(method, recId);
+            }
+        }
+    }
+
+    private void addValueToMapMapExecution_forTest(String method, String recId){
+        if(Test.isRunningTest()){
+            if(mapExecution_forTest.containsKey(method)){
+                mapExecution_forTest.get(method).add(recId);
+            }else{
+                mapExecution_forTest.put(method, new set<String>{recId});
+            }
         }
     }
 
