@@ -1,6 +1,9 @@
 public with sharing class NavigationTriggers extends TriggersHandler{
-	public NavigationTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
+    public NavigationTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
         super(p_triggerNew, p_triggerOld);
+
+        allow_masterLoop_BeforeInsert = true;
+        allow_masterLoop_BeforeUpdate = true;
 
         //PA-177 CMA: Clustering: Apex Sharing
         allow_masterLoop_AfterUpdate = true;
@@ -12,11 +15,19 @@ public with sharing class NavigationTriggers extends TriggersHandler{
         allow_finalLoop_AfterInsert = true;
         allow_finalLoop_AfterUpdate = true;
 
-	}
+    }
 
     /*****************************************************************/
     /*********************** TRIGGER METHODS *************************/
     /*****************************************************************/
+
+    //Master loops
+    public override void masterLoop_BeforeInsert(SObject recNew) {
+        setExternalId((Navigation__c)recNew);
+    }
+    public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        setExternalId((Navigation__c)recNew);    
+    }    
 
     //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
@@ -43,10 +54,10 @@ public with sharing class NavigationTriggers extends TriggersHandler{
             
             ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Navigation__Share', 'Clustering__c',false);
             if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
-            	objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
-            	excecuteTrigger = false;
+                objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
+                excecuteTrigger = false;
             }else{
-            	navigationShareList  = (List<Navigation__Share>) sharingWrapper.listOfSharesToInsert;
+                navigationShareList  = (List<Navigation__Share>) sharingWrapper.listOfSharesToInsert;
             }
         }
 
@@ -101,6 +112,20 @@ public with sharing class NavigationTriggers extends TriggersHandler{
             }
         }
 
+    }
+
+
+    /*****************************************************************/
+    /********************** USE CASE METHODS *************************/
+    /*****************************************************************/
+
+    /* DEFINITION AND COMPLETION OF EXTERNAL ID */
+    private void setExternalId(Navigation__c recNew){
+        if(!canMethod('setExternalId')){return;}
+        
+        if(recNew.ExternalID__c == null){
+            recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
+        }
     }
 
 }
