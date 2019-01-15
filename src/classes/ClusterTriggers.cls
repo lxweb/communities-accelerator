@@ -40,8 +40,7 @@ public with sharing class ClusterTriggers extends TriggersHandler {
         addLanguages((Cluster__c) recNew, null);
     }
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
-        setExternalId((Cluster__c)recNew);
-        
+        setExternalId((Cluster__c)recNew);      
     }
     public override void masterLoop_AfterDelete(SObject recOld) {
         deleteGroups((Cluster__c)recOld);
