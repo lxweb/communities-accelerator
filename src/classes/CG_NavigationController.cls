@@ -58,7 +58,8 @@ public class CG_NavigationController {
 	@auraEnabled
 	public static List<NavWrapper> getWrapperFromComponent(Component__c component, String clusterId){
 		// Busqueda de Menus con Assignments al Component
-		List<MenuAssignment__c> menuAssignments = [SELECT Id, Component__c, Component__r.Cluster__c, Menu__c, Menu__r.Cluster__c FROM MenuAssignment__c WHERE Component__c =: component.Id];
+		List<MenuAssignment__c> menuAssignments = [SELECT Id, Component__c, Component__r.Cluster__c, Menu__c, Menu__r.Cluster__c 
+		FROM MenuAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
         List<String> menuIds = new List<String>();
 		for(MenuAssignment__c ma : menuAssignments){
 			if(ma.Component__r.Cluster__c == ma.Menu__r.Cluster__c){
