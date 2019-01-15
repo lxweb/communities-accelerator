@@ -2,6 +2,9 @@ public with sharing class MenuTriggers extends TriggersHandler{
     public MenuTriggers(List<SObject> p_triggerNew, List<SObject> p_triggerOld) {
         super(p_triggerNew, p_triggerOld);
 
+        allow_masterLoop_BeforeInsert = true;
+        allow_masterLoop_BeforeUpdate = true;
+
         //PA-247 CMA: Clustering: Apex Sharing on Menu
         allow_masterLoop_AfterUpdate = true;
         allow_masterLoop_AfterInsert = true;
@@ -17,6 +20,14 @@ public with sharing class MenuTriggers extends TriggersHandler{
     /*****************************************************************/
     /*********************** TRIGGER METHODS *************************/
     /*****************************************************************/
+
+    //Master loops
+    public override void masterLoop_BeforeInsert(SObject recNew) {
+        setExternalId((Menu__c)recNew);
+    }
+    public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        setExternalId((Menu__c)recNew);    
+    }  
 
     //PA-247 CMA: Clustering: Apex Sharing on Menu
     public override void masterLoop_AfterInsert(SObject recNew) {
@@ -101,6 +112,19 @@ public with sharing class MenuTriggers extends TriggersHandler{
             }
         }
 
+    }
+
+    /*****************************************************************/
+    /********************** USE CASE METHODS *************************/
+    /*****************************************************************/
+
+    /* DEFINITION AND COMPLETION OF EXTERNAL ID */
+    private void setExternalId(Menu__c recNew){
+        if(!canMethod('setExternalId')){return;}
+        
+        if(recNew.ExternalID__c == null){
+            recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
+        }
     }
 
 }
