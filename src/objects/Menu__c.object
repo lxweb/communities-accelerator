@@ -73,11 +73,6 @@
                     <default>false</default>
                     <label>Same Tab</label>
                 </value>
-                <value>
-                    <fullName>New Window</fullName>
-                    <default>false</default>
-                    <label>New Window</label>
-                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -132,9 +127,9 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>MenuLabel__c</fullName>
+        <fullName>MenuIcon__c</fullName>
         <externalId>false</externalId>
-        <label>Menu Label</label>
+        <label>Menu Icon</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -142,9 +137,9 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Menu_Icon__c</fullName>
+        <fullName>MenuLabel__c</fullName>
         <externalId>false</externalId>
-        <label>Menu Icon</label>
+        <label>Menu Label</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -240,10 +235,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>New Window</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Same Tab</fullName>
                 <default>false</default>
             </values>
@@ -268,10 +259,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             <picklist>Behaviour__c</picklist>
             <values>
                 <fullName>New Tab</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>New Window</fullName>
                 <default>false</default>
             </values>
             <values>
