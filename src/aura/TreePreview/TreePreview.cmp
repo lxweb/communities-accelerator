@@ -1,0 +1,62 @@
+<aura:component controller="TreePreviewController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="objectName" type="String" />
+    <aura:attribute name="parentLookUp" type="String" />
+	<aura:attribute name="root" type="Object" />
+
+	<aura:if isTrue="{!not(empty(v.root))}">
+        <div class="slds-tree_container">            
+            <a class="slds-tree__item-label" href="{!v.root.link}" target="_blank">
+            	<h4 class="{!v.root.id == v.recordId ? 'slds-text-title_caps idselected':' slds-text-title_caps'}" id="treeheading">{!v.root.name}</h4>
+            </a>
+            <div class="slds-grid">
+                
+                <aura:iteration items="{!v.root.childsList}" var="level1">
+                    
+                    <div class="slds-col">
+                        
+                        <ul class="slds-tree" role="tree" aria-labelledby="treeheading">
+                            <li aura:id="{!level1.id}" role="treeitem" aria-level="1" aria-expanded="true" aria-label="{!level1.name}">
+                                <div class="slds-tree__item">       		
+                                    <a class="slds-has-flexi-truncate" href="{!level1.link}" target="_blank">
+                                        <span class="{!level1.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level1.name}" >{!level1.name}</span>
+                                    </a>
+                                </div>
+                                <aura:iteration items="{!level1.childsList}" var="level2">
+                                    <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
+                                        <li aura:id="{!level2.name}" role="treeitem" aria-level="2" aria-expanded="true" aria-label="{!level2.name}">
+                                            <div class="slds-tree__item">
+
+                                                <a class="slds-has-flexi-truncate" href="{!level2.link}" target="_blank">
+                                                    <span class="{!level2.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level2.name}">{!level2.name}</span>
+                                                </a>
+                                            </div>
+                                            <aura:iteration items="{!level2.childsList}" var="level3">
+                                                <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
+                                                    <li role="treeitem" aria-level="3" aria-label="{!level3.name}">
+                                                        <div class="slds-tree__item">
+                                                            <a class="slds-has-flexi-truncate" href="{!level3.link}" target="_blank">
+                                                                <span class="{!level3.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level3.name}">{!level3.name}</span>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </aura:iteration>
+                                        </li>
+                                    </ul>
+                                </aura:iteration>
+                            </li>
+                        </ul>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div> 
+        <aura:set attribute="else">
+            {!$Label.c.notReferClusterSelectorRecord}
+        </aura:set>
+    </aura:if>
+
+</aura:component>
