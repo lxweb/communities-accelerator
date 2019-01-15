@@ -12,7 +12,28 @@
         <li class="{!'li-level-' + v.menuLevel + ' menu-a ' + if(v.index == 0, 'first-child ', '') + if(v.isActive, 'active', '')}" id="{!'li-level-' + v.menuLevel + '-' + v.index}">
             <div class="{! if(v.item.subMenus.length > 0, ' has-child ', '') }" >
                 
-                <a>{!v.item.label}</a>
+
+                <aura:if isTrue="{!and(v.item.menu.Navigation__r != null, v.item.menu.Navigation__r.URL__c != null)}">
+                    <a href="{!v.item.menu.Navigation__r.URL__c}" target="{!v.item.behaviour}">
+                        <aura:if isTrue="{!v.item.iconName != null}">
+                            <lightning:icon iconName="{!v.item.iconName}" size="small"/> &nbsp;
+                        </aura:if>
+                        <aura:if isTrue="{!v.item.menu.MenuLabel__c != null}">
+                            {!v.item.menu.MenuLabel__c}
+                        </aura:if>  
+                    </a>
+                    <aura:set attribute="else">
+                        <a class="a_menuItemNoLink">
+                            <aura:if isTrue="{!v.item.iconName != null}">
+                                <lightning:icon iconName="{!v.item.iconName}" size="small"/> &nbsp;
+                            </aura:if>
+                            <aura:if isTrue="{!v.item.menu.MenuLabel__c != null}">
+                                {!v.item.menu.MenuLabel__c}
+                            </aura:if>                            
+                        </a>
+                    </aura:set>
+                </aura:if>
+                                
                 <aura:if isTrue="{!v.item.subMenus.length > 0}">
                     <div class="{! 'div-ul div-' + v.menuLevel + '-' + v.index}">
                         <ul class="{!'ul-level-'+ v.menuLevel + ' sub-' + v.menuLevel + '-' + v.index }" aura:id="{!'ulLevel'+ v.menuLevel}">
