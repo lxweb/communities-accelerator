@@ -12,18 +12,21 @@ public with sharing class TreePreviewControllerTest {
         String nameGroup = 'Buenos Aires';
         List<Cluster__c> clusterRootList = MockupFactory.createCluster(name, null, 1, 'ClusterRoot');
         Cluster__c cg = clusterRootList[0];
-        List<Category__c> catList = MockupFactory.createCategory(nameGroup, 5, cg.Id);
+        List<Category__c> catList = MockupFactory.createCategory(nameGroup, 8, cg.Id);
         Category__c rootCat = catList[0];
         catList[1].ParentCategory__c = catList[0].Id;
         catList[2].ParentCategory__c = catList[1].Id;
         catList[3].ParentCategory__c = catList[2].Id;
-        catList[4].ParentCategory__c = catList[2].Id;
+        catList[4].ParentCategory__c = catList[3].Id;
+        catList[5].ParentCategory__c = catList[4].Id;
+        catList[6].ParentCategory__c = catList[5].Id;
+        catList[7].ParentCategory__c = catList[5].Id;
 
         update catList;
 
 		//When
 		Test.startTest();
-			TreePreviewController.ItemWrapper wrap = TreePreviewController.getTree(catList[2].Id, 'Category__c', 'ParentCategory__c');
+			TreePreviewController.ItemWrapper wrap = TreePreviewController.getTree(catList[5].Id, 'Category__c', 'ParentCategory__c');
 		Test.stopTest();
 
 		//Then

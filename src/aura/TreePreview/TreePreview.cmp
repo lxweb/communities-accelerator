@@ -27,21 +27,42 @@
                                 </div>
                                 <aura:iteration items="{!level1.childsList}" var="level2">
                                     <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
-                                        <li aura:id="{!level2.name}" role="treeitem" aria-level="2" aria-expanded="true" aria-label="{!level2.name}">
+                                        <li aura:id="{!level2.id}" role="treeitem" aria-level="2" aria-expanded="true" aria-label="{!level2.name}">
                                             <div class="slds-tree__item">
-
                                                 <a class="slds-has-flexi-truncate" href="{!level2.link}" target="_blank">
                                                     <span class="{!level2.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level2.name}">{!level2.name}</span>
                                                 </a>
                                             </div>
                                             <aura:iteration items="{!level2.childsList}" var="level3">
                                                 <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
-                                                    <li role="treeitem" aria-level="3" aria-label="{!level3.name}">
+                                                    <li aura:id="{!level3.id}" role="treeitem" aria-level="3" aria-expanded="true" aria-label="{!level3.name}">
                                                         <div class="slds-tree__item">
                                                             <a class="slds-has-flexi-truncate" href="{!level3.link}" target="_blank">
                                                                 <span class="{!level3.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level3.name}">{!level3.name}</span>
                                                             </a>
                                                         </div>
+                                                        <aura:iteration items="{!level3.childsList}" var="level4">
+                                                            <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
+                                                                <li aura:id="{!level4.id}" role="treeitem" aria-level="4" aria-expanded="true" aria-label="{!level4.name}">
+                                                                    <div class="slds-tree__item">
+                                                                        <a class="slds-has-flexi-truncate" href="{!level4.link}" target="_blank">
+                                                                            <span class="{!level4.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level4.name}">{!level4.name}</span>
+                                                                        </a>
+                                                                    </div>                        
+                                                                   <aura:iteration items="{!level4.childsList}" var="level5">
+                                                                        <ul lass="slds-tree" role="group" aria-labelledby="treeheading">
+                                                                            <li aura:id="{!level5.id}" role="treeitem" aria-level="5" aria-expanded="true" aria-label="{!level5.name}">
+                                                                                <div class="slds-tree__item">
+                                                                                    <a class="slds-has-flexi-truncate" href="{!level5.link}" target="_blank">
+                                                                                        <span class="{!level5.id == v.recordId ? 'slds-tree__item-label slds-truncate idselected':' slds-tree__item-label slds-truncate'}" title="{!level5.name}">{!level5.name}</span>
+                                                                                    </a>
+                                                                                </div>                        
+                                                                            </li>
+                                                                        </ul>
+                                                                    </aura:iteration>
+                                                                </li>
+                                                            </ul>
+                                                        </aura:iteration>
                                                     </li>
                                                 </ul>
                                             </aura:iteration>
