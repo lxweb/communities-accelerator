@@ -1,0 +1,5 @@
+<design:component label="Tree Preview">
+	<design:attribute name="recordId" label="recordId"/>
+	<design:attribute name="objectName" label="Object Name"/>
+    <design:attribute name="parentLookUp" label="Parent Field"/>
+</design:component>
