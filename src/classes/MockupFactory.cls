@@ -68,7 +68,7 @@ public class MockupFactory {
         List<Tag__c> tagList = new List<Tag__c>();
         
         for(Integer i = 0;i<cuantity;i++){
-            tagList.add( new Tag__c(Name=tagName+1,Description__c=description, Cluster__c=clusterId));
+            tagList.add( new Tag__c(Name=tagName+i,Description__c=description, Cluster__c=clusterId));
 
         }
         insert tagList;
@@ -96,7 +96,7 @@ public class MockupFactory {
         List<Category__c> catList = new List<Category__c>();
         
         for(Integer i = 0;i<cuantity;i++){
-            catList.add( new Category__c(Name=catName+1, Cluster__c=clusterId));
+            catList.add( new Category__c(Name=catName+i, Cluster__c=clusterId));
 
         }
         insert catList;

@@ -28,6 +28,7 @@ public with sharing class TreePreviewController {
 			TreePreviewController.getClustersParent(recordId, objectName, parentLookUP, referentLookUP, mapTree, itemsList);
 			TreePreviewController.getClustersChild(recordId, objectName, parentLookUP, referentLookUP, mapTree, itemsList);
 		
+
 			for(ItemWrapper wrap : itemsList){
 				if(wrap.parent==null){
 					root = wrap;
@@ -46,7 +47,9 @@ public with sharing class TreePreviewController {
     	
     	String query='SELECT Id, name, '+parentLookUP+', '+referentLookUP+'.name, '; 
     	query +=referentLookUP+'.'+parentLookUP+' , '+referentLookUP+'.'+referentLookUP+'.name, '; 
-    	query +=referentLookUP+'.'+referentLookUP+'.'+parentLookUP+', '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name '; 
+    	query +=referentLookUP+'.'+referentLookUP+'.'+parentLookUP+', '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name, '; 
+    	query +=referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP+', '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name, ';
+    	query +=referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP+', '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name ';
     	query +='FROM '+objectName+' WHERE Id =:recordId';
 
   		SObject rec = Database.query(query);
@@ -76,11 +79,29 @@ public with sharing class TreePreviewController {
 					setMapTree(mapTree, 
 							  new ItemWrapper((String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+parentLookUP),
 							  				  (String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name'),
-							  				  null), 
+							  				  (String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP)), 
 							  itemsList);
+
+					if(GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP) != null){
+						setMapTree(mapTree, 
+									new ItemWrapper((String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP),
+							  				  (String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name'),
+							  				  (String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP)), 
+							  		itemsList);
+
+						if(GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP) != null){
+							setMapTree(mapTree, 
+									new ItemWrapper((String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP),
+							  						(String)GeneralUtils.getFieldValue(rec, referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.name'),
+							  				  		null), 
+							  		itemsList);
+						}
+					}
 				}
 			}
 		}
+
+		
     }
 
     private static void getClustersChild(String recordId, String objectName, String parentLookUP, String referentLookUP, Map<String, List<ItemWrapper>> mapTree, List<ItemWrapper> itemsList){
@@ -89,6 +110,8 @@ public with sharing class TreePreviewController {
     	query +=' FROM '+objectName+' WHERE '+parentLookUP+' =: recordId'; 
     	query +=' OR '+referentLookUP+'.'+parentLookUP+' =: recordId'; 
     	query +=' OR '+referentLookUP+'.'+referentLookUP+'.'+parentLookUP+' =: recordId';
+    	query +=' OR '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP+' =: recordId';
+    	query +=' OR '+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+referentLookUP+'.'+parentLookUP+' =: recordId';
 
     	for (SObject rec : Database.query(query)){
     		
