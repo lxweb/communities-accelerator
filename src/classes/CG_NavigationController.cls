@@ -29,22 +29,18 @@ public class CG_NavigationController {
             this.iconName = menu.MenuIcon__c;
     	}
 	}
+
 	@auraEnabled
 	public static ComponentWrapper getNavWrapper(String componentExternalId, String clusterId, String device) {
 		// List of fields
   		set<String> setFields = new set<String>{'Id','Name', 'ExternalId__c','Recordtype.Developername','NavigationMode__c','HasDelay__c', 'DelayTime__c', 'Cluster__c'};
-
   		if(clusterId == null || clusterId.trim() == ''){
 			clusterId = ClusterUtils.getClusterIdFromMappingObject(UserInfo.getUserId(), Network.getNetworkId());
 		}
 
 		set<String> setClusterIds = ClusterUtils.getClustersParents(clusterId);
-
 		//Busqueda de componente
 		Component__c component = ComponentUtils.getComponent(componentExternalId, setFields, device);
-		
-		// TODO buscar los navigation Items
-
 		//Armado del Component Wrapper
 		ComponentWrapper cw = new ComponentWrapper();
 		cw.component = component;
@@ -101,9 +97,6 @@ public class CG_NavigationController {
     				OR ParentCluster__r.ParentCluster__c =: userCluster.Id 
     				OR ParentCluster__r.ParentCluster__r.ParentCluster__c =: userCluster.Id];
 
-		System.debug(allClusterIds); 
-		System.debug(clustersBelow);
-
     	for(Cluster__c cluster : clustersBelow){
     		if(cluster != null){
     			allClusterIds.add(cluster.Id);
@@ -115,7 +108,8 @@ public class CG_NavigationController {
 
 	// Traemos todos los SubMenus relacionados a los Menus del Component	
 	public static List<Menu__c> getAllMenus(List<String> menuIds){
-		return [SELECT Id, MenuLabel__c, ParentMenu__c, Cluster__c, Behaviour__c, Navigation__r.URL__c, MenuIcon__c FROM Menu__c WHERE Id =: menuIds 
+		return [SELECT Id, MenuLabel__c, ParentMenu__c, Cluster__c, Behaviour__c, Navigation__r.URL__c, MenuIcon__c FROM Menu__c 
+					WHERE Id =: menuIds 
 					OR ParentMenu__c =: menuIds 
     				OR ParentMenu__r.ParentMenu__c =: menuIds 
     				OR ParentMenu__r.ParentMenu__r.ParentMenu__c =: menuIds];
