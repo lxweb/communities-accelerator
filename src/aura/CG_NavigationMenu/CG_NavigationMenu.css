@@ -1,5 +1,15 @@
 /* *****************************
- 	NAVIGATION MODE: HORIZONTAL-SIMPLE   
+            GLOBAL   
+ ******************************* */
+.THIS .a_menuItemNoLink {
+      cursor: default;
+  }
+/* *****************************
+            GLOBAL END  
+ ******************************* */
+ 
+ /* *****************************
+  NAVIGATION MODE: HORIZONTAL-SIMPLE   
  ******************************* */
 /* DESKTOP */
 .THIS nav.Horizontal-Simple ul {
