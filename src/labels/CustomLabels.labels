@@ -17,6 +17,22 @@
         <value>El Componente tiene asociado al menos un Contenido, Tag y/o Categoria y por ese motivo no puede reasignarse. Elimine todas las asociaciones del mismo antes de intentar reasignarlo a otro Cluster</value>
     </labels>
     <labels>
+        <fullName>ClusterDoesntHaveRequiredGroups</fullName>
+        <categories>ObjectSharingUtil</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ClusterDoesntHaveRequiredGroups</shortDescription>
+        <value>The selected Cluster doesnt have required groups</value>
+    </labels>
+    <labels>
+        <fullName>ClusterHaveGroupsInBlanks</fullName>
+        <categories>ObjectSharingUtil</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ClusterHaveGroupsInBlanks</shortDescription>
+        <value>The selected Cluster have one or mor groups in blanks or with wrong values</value>
+    </labels>
+    <labels>
         <fullName>ComponentEmpty</fullName>
         <categories>CG_BaseComponent.cmp</categories>
         <language>en_US</language>
@@ -176,7 +192,15 @@
         <shortDescription>NoRecordsToShow</shortDescription>
         <value>No records to show</value>
     </labels>
-	    <labels>
+    <labels>
+        <fullName>OrderByInvalidFormat</fullName>
+        <categories>ComponentTriggers.cls</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Component Order By Advance Invalid Format</shortDescription>
+        <value>Invalid format:</value>
+    </labels>
+    <labels>
         <fullName>RepeatedCategoryName</fullName>
         <categories>CategoryTriggers</categories>
         <language>en_US</language>
@@ -191,14 +215,6 @@
         <protected>true</protected>
         <shortDescription>RepeatedTagName</shortDescription>
         <value>Tag name already exist in cluster branch</value>
-    </labels>
-    <labels>
-        <fullName>OrderByInvalidFormat</fullName>
-        <categories>ComponentTriggers.cls</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Component Order By Advance Invalid Format</shortDescription>
-        <value>Invalid format:</value>
     </labels>
     <labels>
         <fullName>SelectLanguage</fullName>
@@ -217,6 +233,14 @@
         <value>Se debe configurar la custom settings &quot;Accelerator Settings&quot; con un campo de tipo texto</value>
     </labels>
     <labels>
+        <fullName>SharingWithOutReason</fullName>
+        <categories>ClusterTriggers</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SharingWithOutReason</shortDescription>
+        <value>Sharing with out reason</value>
+    </labels>
+    <labels>
         <fullName>Tablet</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
@@ -233,27 +257,19 @@
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
     <labels>
-        <fullName>ClusterDoesntHaveRequiredGroups</fullName>
-        <categories>ObjectSharingUtil</categories>
+        <fullName>General_Reorder</fullName>
+        <categories>General</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ClusterDoesntHaveRequiredGroups</shortDescription>
-        <value>The selected Cluster doesnt have required groups</value>
+        <shortDescription>Reorder</shortDescription>
+        <value>Reorder</value>
     </labels>
     <labels>
-        <fullName>ClusterHaveGroupsInBlanks</fullName>
-        <categories>ObjectSharingUtil</categories>
+        <fullName>General_Order</fullName>
+        <categories>General</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ClusterHaveGroupsInBlanks</shortDescription>
-        <value>The selected Cluster have one or mor groups in blanks or with wrong values</value>
-    </labels>
-    <labels>
-        <fullName>SharingWithOutReason</fullName>
-        <categories>ClusterTriggers</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>SharingWithOutReason</shortDescription>
-        <value>Sharing with out reason</value>
+        <shortDescription>Order</shortDescription>
+        <value>Order</value>
     </labels>
 </CustomLabels>
