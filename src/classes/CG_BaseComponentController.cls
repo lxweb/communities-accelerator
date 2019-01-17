@@ -120,7 +120,8 @@ public with sharing class CG_BaseComponentController {
 			Integer.valueOf(pageNumber),
 			Integer.valueOf(pageSize),
 			orderBy,
-			device
+			device,
+			componentType
 		);
 
 		List<ContentWrapper> contentWrapper = convertDataToWrapper(contentDataWrapper);

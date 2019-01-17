@@ -2,7 +2,8 @@
 	doInit : function(component, event, helper) {
 		helper.getRecords(component, event, helper);
 	},
-	getMedElems : function(component, event, helper){ 
+	getMedElems : function(component, event, helper){
+		window.scrollTo(0,window.innerHeight+document.body.scrollHeight);
 		helper.getMedElemsButton(component, event, helper);
 	},
 	choseMediaElement : function(component, event, helper){ 
