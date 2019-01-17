@@ -102,7 +102,7 @@ public class CG_NavigationController {
     			allClusterIds.add(cluster.Id);
     		}
     	}
-
+    	System.debug(allClusterIds);
 		return allClusterIds;
 	}
 

@@ -204,7 +204,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </valueSet>
     </fields>
     <fields>
-        <fullName>URL_Parameters__c</fullName>
+        <fullName>URLParameters__c</fullName>
         <externalId>false</externalId>
         <label>URL Parameters</label>
         <length>255</length>
