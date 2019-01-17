@@ -4,4 +4,5 @@
     <design:attribute name="parentLookup" label="Parent Lookup Name" required="true"/>
     <design:attribute name="secondaryLookup" label="Secondary Lookup Name" required="true"/>
     <design:attribute name="whereCondition" label="Where Condition"/>
+    <design:attribute name="OrderFieldName" label="Order Field Name"/>
 </design:component>

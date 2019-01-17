@@ -11,10 +11,13 @@
     <aura:attribute name="parentLookup" type="String"/>
     <aura:attribute name="secondaryLookup" type="String"/>
     <aura:attribute name="whereCondition" type="String"/>
+    <aura:attribute name="OrderFieldName" type="String"/>
     
     <!-- Junction Object Records -->
     <aura:attribute name="recordsWrapper" type="Object"/>
-    <aura:attribute name="isEdit" type="boolean" default="false"/>
+    <aura:attribute name="SecondaryObjectWrapper" type="Object"/>
+    <aura:attribute name="isEdit" type="Boolean" default="false"/>
+    <aura:attribute name="isReorder" type="Boolean" default="false"/>
 
     <!-- Style variables -->
     <aura:attribute name="variableDivHeight" type="String" />
@@ -42,34 +45,36 @@
 					<!--Junction Object Selected Records -->
 
 					<!-- Table read only -->
-					<aura:if isTrue="{!not(v.isEdit)}">
-						
+					<aura:if isTrue="{!not(or(v.isEdit, v.isReorder))}">		
 						<aura:if isTrue="{!v.recordsWrapper.recordsSelected.length > 0}">
-							<div class="slds-table--header-fixed_container" style="{! 'height:' + v.variableDivHeight}">
-		    					<div class="slds-scrollable_y">
-									<table class="slds-table slds-table_bordered slds-table--header-fixed">
-										<thead>
-										 <tr class="slds-text-title--caps">
-											<th scope="col">
-												<div class="slds-cell-fixed">
-													<div class="c_row_header_fixed" title="Name">{!v.recordsWrapper.fieldNameLabel}</div>
-												</div>
-											</th>
-										 </tr>
-										</thead>
-										<tbody>
-											<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
-												<tr>
-													<td scope="row">
-														<div class="slds-truncate" title="{!rec.Name}"><a href="{!'/' + rec.Id}">{!rec.Name}</a></div>
-													</td>
-												</tr>
-											</aura:iteration>
-										</tbody>
-									</table>
-								</div>
-							</div>
-
+							<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+							  <thead>
+							    <tr class="slds-line-height_reset">
+							      <th class="" scope="col">
+							        <div class="slds-truncate slds-text-title--caps" title="Name">{!v.recordsWrapper.fieldNameLabel}</div>
+							      </th>
+							      <aura:if isTrue="{!and(v.OrderFieldName != null, v.OrderFieldName != '')}">
+								      <th class="" scope="col">
+								        <div class="slds-truncate slds-text-title--caps" title="Order">{!$Label.c.General_Order}</div>
+								      </th>
+								  </aura:if>
+							    </tr>
+							  </thead>
+							   <tbody>
+							   	<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
+								    <tr class="slds-hint-parent">
+								      <th data-label="{!rec.name}" scope="row">
+								        <div class="slds-truncate" title="{!rec.name}"><a href="{!'/' + rec.idRecord}" tabindex="-1">{!rec.name}</a></div>
+								      </th>
+								      <aura:if isTrue="{!and(v.OrderFieldName != null, v.OrderFieldName != '')}">
+									      <td data-label="{!rec.order}">
+									        <div class="slds-truncate" title="{!rec.order}">{!rec.order}</div>
+									      </td>
+									  </aura:if>						      
+								    </tr>
+							    </aura:iteration>							    
+							  </tbody>
+							</table>
 							<aura:set attribute="else">
 								<div class="slds-text-heading_medium slds-text-align_center">{!$Label.c.NoRecordsSelected}</div>
 							</aura:set>
@@ -100,20 +105,20 @@
 										<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
 											<tr class="c_item_searchable">
 												<td scope="row" class="c_row_toselect">
-													<ui:inputCheckbox text="{!rec.Id}" aura:id="i_input_checkbox" value="true"/>
+													<ui:inputCheckbox text="{!rec.idRecord}" aura:id="i_input_checkbox" value="true"/>
 												</td>
 												<td scope="row">
-													<div class="slds-truncate" title="{!rec.Name}"><a href="{!'/' + rec.Id}">{!rec.Name}</a></div>
+													<div class="slds-truncate" title="{!rec.name}"><a href="{!'/' + rec.idRecord}">{!rec.name}</a></div>
 												</td>
 											</tr>
 										</aura:iteration>
 										<aura:iteration items="{!v.recordsWrapper.recordsToSelect}" var="rec">
 											<tr class="c_item_searchable">
 												<td scope="row" class="c_row_toselect">
-													<ui:inputCheckbox text="{!rec.Id}" aura:id="i_input_checkbox" value="false"/>
+													<ui:inputCheckbox text="{!rec.idRecord}" aura:id="i_input_checkbox" value="false"/>
 												</td>
 												<td scope="row">
-													<div class="slds-truncate" title="{!rec.Name}"><a href="{!'/' + rec.Id}">{!rec.Name}</a></div>
+													<div class="slds-truncate" title="{!rec.name}"><a href="{!'/' + rec.idRecord}">{!rec.name}</a></div>
 												</td>
 											</tr>
 										</aura:iteration>
@@ -123,11 +128,49 @@
 						</div>
 					</aura:if>
 
+					<!-- Table Reorder -->
+					<aura:if isTrue="{!v.isReorder}">
+						<aura:if isTrue="{!v.recordsWrapper.recordsSelected.length > 0}">
+							<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+							  <thead>
+							    <tr class="slds-line-height_reset">
+							      <th class="" scope="col">
+							        <div class="slds-truncate slds-text-title--caps" title="Name">{!v.recordsWrapper.fieldNameLabel}</div>
+							      </th>
+							    </tr>
+							  </thead>
+							   <tbody>
+							   	<div >
+                					<ul ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space dropZone" style="height:100%;overflow-y:auto;">
+									   	<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
+										    <li draggable="true" ondragstart="{!c.drag}" id="{!rec.idRecord}">
+											    <tr class="">
+											      <th data-label="{!rec.name}" scope="row">
+											        <div class="slds-truncate" title="{!rec.name}">{!rec.name}</div>
+											      </th>
+											    </tr>
+											</li>
+									    </aura:iteration>
+									</ul>
+								</div>
+							  </tbody>
+							</table>
+							
+							<aura:set attribute="else">
+								<div class="slds-text-heading_medium slds-text-align_center">{!$Label.c.NoRecordsSelected}</div>
+							</aura:set>
+
+						</aura:if>
+					</aura:if>
+
 					<div class="slds-button-group" role="group">
-						<aura:if isTrue="{!not(v.isEdit)}">
+						<aura:if isTrue="{!not(or(v.isEdit, v.isReorder))}">
 							<button class="slds-button slds-button_neutral" title="Edit" onclick="{!c.doEdit}">{!$Label.c.General_Edit}</button>
 						</aura:if>
-						<aura:if isTrue="{!v.isEdit}">
+						<aura:if isTrue="{!and(not(or(v.isEdit, v.isReorder)), and(v.OrderFieldName != null, v.OrderFieldName != ''))}">
+							<button class="slds-button slds-button_neutral" title="Reorder" onclick="{!c.doReorder}">{!$Label.c.General_Reorder}</button>
+						</aura:if>
+						<aura:if isTrue="{!or(v.isEdit, v.isReorder)}">
 							<button class="slds-button slds-button_neutral" title="Cancel" onclick="{!c.doCancel}">{!$Label.c.General_Cancel}</button>
 
 							<button class="slds-button slds-button_neutral uiButton--brand" title="Save" onclick="{!c.doSave}">{!$Label.c.General_Save}</button>

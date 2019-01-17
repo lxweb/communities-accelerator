@@ -55,14 +55,14 @@ private class CG_ContentCartControllerTest {
 	@isTest 
 	static void addContentToCartTest() {
 		//When
-		Content__c cont = [SELECT id FROM Content__c WHERE Cluster__c != NULL ORDER BY createdDate DESC LIMIT 1];
+		List<Cluster__c> clusterList = [SELECT id FROM Cluster__c];
 		CG_ContentCartController.initData();
-
+		List<Content__c> contentList = MockupFactory.createContent('News', clusterList[0], 1);
+    
 		//Given
 		Test.startTest();
-		Boolean addedToCart = CG_ContentCartController.addContentToCart(cont.id);
-		Test.stopTest();
-
+		Boolean addedToCart = CG_ContentCartController.addContentToCart(contentList[0].id);
+		
 		//Then
 		System.assertEquals(true, addedToCart);
 	}

@@ -8,7 +8,8 @@
 			junctionObjectAPIName: component.get("v.junctionObjectAPIName"),
 			parentLookup: component.get("v.parentLookup"),
 			secondaryLookup: component.get("v.secondaryLookup"),
-			whereCondition: component.get("v.whereCondition")
+			whereCondition: component.get("v.whereCondition"),
+			orderBy: component.get("v.OrderFieldName")
 		});
 
 	    action.setCallback(this, function(f) {
@@ -30,8 +31,14 @@
 		component.set("v.isLoading", true);
 		var listSelectedIds = [];
 		var allCheckbox = component.find("i_input_checkbox");
+		var isReorder = component.get("v.isReorder");
 
-		if(allCheckbox.length === undefined){
+		if(allCheckbox === undefined){
+			var cmpWrSelected = component.get("v.recordsWrapper").recordsSelected;
+			for(var i = 0; i < cmpWrSelected.length; i++){
+				listSelectedIds.push(cmpWrSelected[i].idJunction);
+			}
+		} else if(allCheckbox.length === undefined){
 			if(allCheckbox.get("v.value") == true) {
 				listSelectedIds.push(allCheckbox.get("v.text"));
 			}
@@ -49,7 +56,9 @@
 			junctionObjectAPIName: component.get("v.junctionObjectAPIName"),
 			parentLookup: component.get("v.parentLookup"),
 			secondaryLookup: component.get("v.secondaryLookup"),
-			listSelectedIds: listSelectedIds
+			listSelectedIds: listSelectedIds,
+			orderBy: component.get("v.OrderFieldName"),
+			isReorder: component.get("v.isReorder")
 		});
 
 	    action.setCallback(this, function(f) {
@@ -72,7 +81,11 @@
 				component.set("v.isLoading", false);
 				showToast.fire();
 
-				component.set("v.isEdit", false);
+				if(component.get("v.isEdit")){
+					component.set("v.isEdit", false);
+				} else if(component.get("v.isReorder")){
+					component.set("v.isReorder", false);
+				}
 				helper.getRecords(component);
 	        }
 	    });
