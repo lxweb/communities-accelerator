@@ -1,5 +1,7 @@
 public with sharing class ClusterUtils {
 
+	@TestVisible private static String testNetworkName;
+
 	public class ClusterWrapper {
 		public Cluster__c cluster;
 		public List<ClusterWrapper> relatedClusters;
@@ -75,7 +77,8 @@ public with sharing class ClusterUtils {
 		String mappingKey = recordId + '-' + networkId;
 		if(!mapMappingKeyCluster.containsKey(mappingKey)){
 			try{
-				List<Cluster__c> clusterRoot = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: GeneralUtils.getNetwork(networkId).Name];
+				String networkName = Test.isRunningTest() ? testNetworkName : GeneralUtils.getNetwork(networkId).Name;
+				List<Cluster__c> clusterRoot = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: networkName];
 				if(!clusterRoot.isEmpty()){
 					List<SObject> rec = Database.query('SELECT Id, ' + clusterRoot[0].MappingObjectField__c + ' FROM ' + clusterRoot[0].MappingObject__c + ' WHERE Id =: recordId');
 					if(!rec.isEmpty()){
@@ -93,8 +96,9 @@ public with sharing class ClusterUtils {
 
 	public static Cluster__c getClusterRootFromNetwork(){
 		Cluster__c clusterRoot;
-		if (Network.getNetworkId() != null ){
-			List<Cluster__c> queryResult = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: GeneralUtils.getNetwork(Network.getNetworkId()).Name];
+		if (Network.getNetworkId() != null || Test.isRunningTest()){
+			String networkName = Test.isRunningTest() ? testNetworkName : GeneralUtils.getNetwork(Network.getNetworkId()).Name;
+			List<Cluster__c> queryResult = [SELECT Id, MappingObject__c, MappingObjectField__c, MappingClusterField__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot' AND CommunityName__c =: networkName];
 			if(!queryResult.isEmpty()){
 				clusterRoot = queryResult[0];
 			}

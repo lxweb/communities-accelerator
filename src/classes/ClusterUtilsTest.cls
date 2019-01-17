@@ -2,14 +2,14 @@
 public class ClusterUtilsTest {
 
     @testSetup
-	static void setup(){
+    static void setup(){
         MockupFactory.generateAcceleratorSetting();
         List<Cluster__c> clusterRoot = MockupFactory.createCluster('Test Cluster Root', null, 1, 'ClusterRoot');
         List<Cluster__c> clustersLevel2 = MockupFactory.createCluster('Test Cluster Level 2', clusterRoot.get(0).Id, 2, 'ClusterGroup');
         Set<Id> level2Ids = (new Map<Id, SObject>(clustersLevel2)).keySet();
-        List<Cluster__c> clustersLevel3 = MockupFactory.createCluster('Test Cluster Level 3', new List<Id>(level2Ids), 2, 'ClusterGroup', 'es', 'en_US');
+        List<Cluster__c> clustersLevel3 = MockupFactory.createCluster('Test Cluster Level 3', new List<Id>(level2Ids), 2, 'ClusterGroup', 'es', '');
         Set<Id> level3Ids = (new Map<Id, SObject>(clustersLevel3)).keySet();
-        List<Cluster__c> clustersLeaf = MockupFactory.createCluster('Test Cluster Leaf', new List<Id>(level3Ids), 2, 'ClusterLeaf', 'es', 'en_US');
+        List<Cluster__c> clustersLeaf = MockupFactory.createCluster('Test Cluster Leaf', new List<Id>(level3Ids), 2, 'ClusterLeaf', 'es', '');
     }
 
     @isTest
@@ -32,10 +32,10 @@ public class ClusterUtilsTest {
     @isTest
     static void getClustersBelowTest(){
         //Given
-        Cluster__c clusterRoot = [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Root%' LIMIT 1];
-        Cluster__c clusterLevel2 = [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Level 2%' LIMIT 1];
-        Cluster__c clusterLevel3 = [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Level 3%' LIMIT 1];
-        Cluster__c clusterLeaf = [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Leaf%' LIMIT 1];
+        Cluster__c clusterRoot =    [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Root%' LIMIT 1];
+        Cluster__c clusterLevel2 =  [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Level 2%' LIMIT 1];
+        Cluster__c clusterLevel3 =  [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Level 3%' LIMIT 1];
+        Cluster__c clusterLeaf =    [SELECT Id FROM Cluster__c WHERE name LIKE 'Test Cluster Leaf%' LIMIT 1];
 
         //When
         ClusterUtils.ClusterWrapper clusterRootRealtedClusters = ClusterUtils.getClustersBelow(clusterRoot.Id);
@@ -53,23 +53,48 @@ public class ClusterUtilsTest {
     @isTest
     static void getClusterIdFromMappingObjectTest(){
         //Given
-        // User u = [SELECT Id FROM User WHERE username = 'test_user@test.com' LIMIT 1];
+        ClusterUtils.testNetworkName = 'https://www.salesforce.com';
+
+        RecordType rtRoot = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName = 'ClusterRoot'];
+        RecordType rtLeaf = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName = 'ClusterLeaf'];
+
+        User u = [SELECT Id, LanguageLocaleKey FROM User WHERE Id =: UserInfo.getUserId()];
+
+        Cluster__c clusterRoot = new Cluster__c(
+            Name = 'Root',
+            RecordTypeId = rtRoot.Id,
+            CommunityName__c = ClusterUtils.testNetworkName,
+            DefaultLanguage__c = u.LanguageLocaleKey == 'es' ? 'en_US' : 'es'
+        );
+        insert clusterRoot;
+
+        Cluster__c clusterLeaf = new Cluster__c(
+            Name = 'Leaf',
+            RecordTypeId = rtLeaf.Id,
+            ParentCluster__c = clusterRoot.Id,
+            DefaultLanguage__c = u.LanguageLocaleKey
+        );
+        insert clusterLeaf;
 
         //When
-        String result = ClusterUtils.getClusterIdFromMappingObject('', '');
+        String result = ClusterUtils.getClusterIdFromMappingObject(UserInfo.getUserId(), '');
         //Then
-        system.assertEquals(null, result);
+        system.assertEquals(clusterLeaf.Id, result);
     }
 
     @isTest
     static void getClusterRootFromNetworkTest(){
         //Given
+        ClusterUtils.testNetworkName = 'https://www.salesforce.com';
+        Cluster__c clusterRoot = [SELECT Id FROM Cluster__c WHERE Name LIKE 'Test Cluster Root%' LIMIT 1];
+        clusterRoot.CommunityName__c = ClusterUtils.testNetworkName;
+        update clusterRoot;
 
         //When
         Cluster__c cluster = ClusterUtils.getClusterRootFromNetwork();
 
         //Then
-        system.assertEquals(null, cluster);
+        system.assertEquals(clusterRoot.Id, cluster.Id);
     }
 
 }
