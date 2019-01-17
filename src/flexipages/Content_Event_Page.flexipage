@@ -97,6 +97,17 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
+                <name>parentLookup</name>
+                <value>Content__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>places</name>
+                <value>EventImageList,EventImageDetail</value>
+            </componentInstanceProperties>
+            <componentName>MediaElementManager</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>junctionObjectAPIName</name>
                 <value>MediaElementAssignment__c</value>
             </componentInstanceProperties>
@@ -201,17 +212,6 @@
                     <rightValue>Final check</rightValue>
                 </criteria>
             </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>parentLookup</name>
-                <value>Content__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>places</name>
-                <value>icon, otros</value>
-            </componentInstanceProperties>
-            <componentName>MediaElementManager</componentName>
         </componentInstances>
         <name>header</name>
         <type>Region</type>

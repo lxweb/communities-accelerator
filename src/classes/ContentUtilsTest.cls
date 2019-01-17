@@ -34,7 +34,7 @@ public class ContentUtilsTest {
 		// When
 		Test.startTest();
 
-		List<ContentUtils.ContentDataWrapper> cdwList = ContentUtils.getContentPage(setContentIds, fieldSet, 1, 1, 'ExternalId__c', 'Desktop');
+		List<ContentUtils.ContentDataWrapper> cdwList = ContentUtils.getContentPage(setContentIds, fieldSet, 1, 1, 'ExternalId__c', 'Desktop', 'BannerImage');
 
 		Test.stopTest();
 		// Then

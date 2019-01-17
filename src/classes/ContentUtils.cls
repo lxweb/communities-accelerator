@@ -18,7 +18,7 @@ public without sharing virtual class ContentUtils {
         system.debug('ContentUtils: setContentToExclude: ' + setContentToExclude);
         system.debug('ContentUtils: setClusterIds: ' + setClusterIds);
         system.debug('ContentUtils: device: ' + device);
-
+        
         set<Id> setContentIds = new set<Id>();
         set<Id> setCategoriesIds = new set<Id>();
 
@@ -28,14 +28,14 @@ public without sharing virtual class ContentUtils {
         String query = '';
 
         //SELECT
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c FROM MediaElementAssignments__r) ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
 
         //FROM
         query += 'FROM Content__c ';
 
         //WHERE
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
-
+        
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
             query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
@@ -93,7 +93,7 @@ public without sharing virtual class ContentUtils {
         
         if(!mapContent.isEmpty()){
             //TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
-            
+
             //Si despues de aplicar segmentacion tenemos algun registro evaluamos las paginas
             if(!mapContent.isEmpty()){
 
@@ -127,9 +127,9 @@ public without sharing virtual class ContentUtils {
         return cw;
     }
 
-    public static List<ContentDataWrapper> getContentPage(set<String> setAllContentIds, set<String> fieldSet, Integer page, Integer pageSize, String orderBy, String device){
+    public static List<ContentDataWrapper> getContentPage(set<String> setAllContentIds, set<String> fieldSet, Integer page, Integer pageSize, String orderBy, String device, String componentType){
         String query = '';
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c FROM MediaElementAssignments__r) ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
         query += 'WHERE Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
@@ -200,25 +200,33 @@ public without sharing virtual class ContentUtils {
             cdw.mediaElements = new List<MediaElement__c>();
             for(MediaElementAssignment__c m: c.MediaElementAssignments__r){
                 if(mapMediaElements != null && mapMediaElements.containsKey(m.MediaElement__c)){
-                    cdw.mediaElements.add(mapMediaElements.get(m.MediaElement__c));
+                    cdw.mediaElements.add(mapMediaElements.get(m.MediaElement__c));    
                 }
             }
             listCDW.add(cdw);
         }
-
         return listCDW;
     }
 
     private static String getRecordTypeContentFromRTComponent(String componentRT){
         String contentTypeToSearch;
-        if (componentRT == 'RelatedNews' || componentRT == 'NewsDetail') {
-            contentTypeToSearch = 'News';
-        }else if (componentRT == 'RelatedEvents' || componentRT == 'EventDetail') {
-            contentTypeToSearch = 'Event';
-        }else{
+        if(componentRT == 'RelatedNews' || componentRT == 'NewsDetail'){contentTypeToSearch = 'News';}
+        else if(componentRT == 'RelatedEvents' || componentRT == 'EventDetail'){contentTypeToSearch = 'Event';}
+        else{
             contentTypeToSearch = componentRT;
         }
         return contentTypeToSearch;
+    }
+
+    // Place for components
+    private static String getPlaceForRTComponent(String componentRT){
+        String contentPlaceToSearch = '';
+        if(componentRT == 'Banner'){contentPlaceToSearch = 'BannerImage';}
+        else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
+        else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
+        else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
+        else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
+        return contentPlaceToSearch;
     }
 
     private static void replaceDynamicFieldsOnContent(List<Content__c> contentList){

@@ -101,6 +101,17 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
+                <name>parentLookup</name>
+                <value>Content__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>places</name>
+                <value>NewsImageList,NewsImageDetail</value>
+            </componentInstanceProperties>
+            <componentName>MediaElementManager</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>junctionObjectAPIName</name>
                 <value>MediaElementAssignment__c</value>
             </componentInstanceProperties>

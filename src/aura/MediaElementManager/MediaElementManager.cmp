@@ -63,7 +63,7 @@
 						<!-- LIST OF MEDIA ELEMENTS -->
 						
 						<!-- <lightning:icon iconName="utility:image" aura:id="ss01"/> -->
-				    	<aura:if isTrue="{! v.mediaElementPlace != '' }" >
+				    	<aura:if isTrue="{!v.mediaElementPlace != ''}" >
 							<!-- <lightning:tabset selectedTabId="media-element" class="media-element_tabset">
 								<lightning:tab label="Media Element" id="media-element">
 									<lightning:input label="search element"></lightning:input>
@@ -77,14 +77,13 @@
 									</div>
 								</lightning:tab>
 							</lightning:tabset> -->
-					    	<div>
-					    		{!v.mediaElementPlace}
+					    	<div class="div_mediaSearchSection">
+					    		<!--{!v.mediaElementPlace}-->
 					    		<!-- SEARCH BOX -->
 					    		<input type="text" aura:id="searchField" class="input_search" placeholder="Word to search"/>
-								<lightning:button title="Search" onclick="{!c.searchByText}">
+								<lightning:button  aura:id="searchButton" title="Search" onclick="{!c.searchByText}">
 				            		<lightning:Icon class="icon_search" iconName="utility:search" title="Search" alternativeText="Search" size="x-small"/>
 				            	</lightning:button>
-
 					    	</div>
 							<div class="div_mediaElementsContainer">
 								<!-- MEDIA ELEMENTS LIST -->
@@ -97,10 +96,10 @@
 									</div>
 								</aura:iteration>
 							</div>
-							<aura:if isTrue="{! v.isEndPage }">
+				    		<aura:if isTrue="{! v.isEndPage }">
 								<!-- NO MORE RECORDS MESSAGE -->
 								<div >
-									{!$Label.c.NoRecordsToShow} 
+									<!--{!$Label.c.NoRecordsToShow}--> 
 								</div>
 							</aura:if>
 				    	</aura:if>
