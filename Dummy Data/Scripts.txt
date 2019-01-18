@@ -1,0 +1,20 @@
+//Eliminar todos los registros del acelerador
+delete [SELECT Id FROM Content__c];
+delete [SELECT Id FROM Component__c];
+delete [SELECT Id FROM Category__c];
+delete [SELECT Id FROM Tag__c];
+delete [SELECT Id FROM MediaElement__c];
+delete [SELECT Id FROM Navigation__c];
+delete [SELECT Id FROM Menu__c];
+delete [SELECT Id FROM ClusterUser__c];
+delete [SELECT Id FROM Cluster__c];
+delete [SELECT Id FROM CategoryAssignment__c];
+delete [SELECT Id FROM ContentAssignment__c];
+delete [SELECT Id FROM ContentCartltem__c];
+delete [SELECT Id FROM MediaElementAssignment__c];
+delete [SELECT Id FROM MenuAssignment__c];
+delete [SELECT Id FROM TagAssignment__c];
+delete [SELECT Id FROM Translation__c];
+
+//Insertar dummy data
+ORGInitUtils.upsertDummyData();
