@@ -217,7 +217,8 @@ public class MockupFactory {
             contentList.add(new Content__c(Name = nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
-                                    Cluster__c = clusterArg.id));
+                                    Cluster__c = clusterArg.id,
+                                    Order__c = i+1));
         }
         insert contentList;
         return contentList;
@@ -345,7 +346,7 @@ public class MockupFactory {
         List<Navigation__c> navList = new List<Navigation__c>();
         
         for(Integer i = 0;i<cuantity;i++){
-            navList.add( new Navigation__c(Name=navName+1, URL__c=url, Cluster__c=clusterId));
+            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId));
         }
         insert navList;
 
@@ -356,11 +357,26 @@ public class MockupFactory {
         List<Menu__c> menuList = new List<Menu__c>();
         
         for(Integer i = 0;i<cuantity;i++){
-            menuList.add( new Menu__c(Name=menuName+1, Cluster__c=clusterId));
+            menuList.add( new Menu__c(Name=menuName+i, Cluster__c=clusterId));
         }
         insert menuList;
 
         return menuList;
+    }
+
+        //Create MenuAssignment__c by Menu && Component
+    public static List<MenuAssignment__c> createMenuAssignment(List<Menu__c> menuList, List<Component__c> componentList){
+        List<MenuAssignment__c> menuAssignmentList = new List<MenuAssignment__c>();
+        Integer quantity = 0;
+        if(menuList != null && componentList != null){
+            quantity = menuList.size() < componentList.size() ? menuList.size() : componentList.size();
+        }
+        for(Integer i = 0; i < quantity; i++){
+            menuAssignmentList.add(new MenuAssignment__c(Menu__c = menuList[i].id,
+                                    Component__c = componentList[i].id, Order__c = i+1));
+        }
+        insert menuAssignmentList;
+        return menuAssignmentList;
     }
 
     //Create contentCartItems to each Content
@@ -374,4 +390,6 @@ public class MockupFactory {
         insert contentCartList;
         return contentCartList;
     }
+
+
 }

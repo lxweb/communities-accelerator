@@ -14,11 +14,11 @@ public with sharing class JunctionObjectManagerControllerTest {
 
 		//When 
 		Test.startTest();
-		JunctionObjectManagerController.RecordsWrapper rw = JunctionObjectManagerController.getRecords(comp[0].Id, 'ContentAssignment__c',  'Component__c', 'Content__c', null);
+		JunctionObjectManagerController.RecordsWrapper rw = JunctionObjectManagerController.getRecords(comp[0].Id, 'ContentAssignment__c',  'Component__c', 'Content__c', null, 'Name');
 		Test.stopTest();
 
 		//Then
-		List<Content__c> contentResult = [SELECT Id FROM Content__c WHERE Id = :rw.recordsSelected]; 
+		List<Content__c> contentResult = [SELECT Id FROM Content__c WHERE Id = :rw.recordsSelected[0].idRecord]; 
 		System.assertEquals(1, contentResult.size());
 	}
 
@@ -35,32 +35,57 @@ public with sharing class JunctionObjectManagerControllerTest {
 	
 		// When 
 		Test.startTest();
-		JunctionObjectManagerController.RecordsWrapper rw = JunctionObjectManagerController.getRecords(comp[0].id, 'ContentAssignment__c',  'Component__c', 'Content__c', 'WHERE ExternalId__c = \''+ comp[0].ExternalId__c + '\'');
+		JunctionObjectManagerController.RecordsWrapper rw = JunctionObjectManagerController.getRecords(comp[0].id, 'ContentAssignment__c',  'Component__c', 'Content__c', 'WHERE ExternalId__c = \''+ comp[0].ExternalId__c + '\'', 'Name');
 		Test.stopTest();
    
 		// Then 
-		Content__c var = [SELECT Id, ExternalId__c FROM Content__c WHERE Id = :rw.recordsSelected];
+		Content__c var = [SELECT Id, ExternalId__c FROM Content__c WHERE Id = :rw.recordsSelected[0].idRecord];
 		System.assertNotEquals(var, null);
 	}
 
 	@isTest 
-	static void contentRelatedToComponent() {
+	static void menuRelatedToComponent() {
 		// Comment: Desde un componente Banner le relaciono dos registros de contenido.
 
 		// Given
 		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> cluster = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
 		List<Component__c> comp = MockupFactory.createComponent('Banner', 1);
-		List<Content__c> cont = MockupFactory.createContent('Banner', cluster[0], 2);
-		List<ContentAssignment__c> contAssign = MockupFactory.createContentAssignment(cont,comp);
+		List<Menu__c> menu = MockupFactory.createMenu('testMenu', 2, cluster[0].id);
+		List<MenuAssignment__c> menuAssign = MockupFactory.createMenuAssignment(menu,comp);
 
 		List<String> listSelectedIds = new List<String>(); 
-		listSelectedIds.add(cont[0].Id);
-		listSelectedIds.add(cont[1].Id);
+		listSelectedIds.add(menu[0].Id);
+		listSelectedIds.add(menu[1].Id);
 
 		// When 
 		Test.startTest();
-		String response = JunctionObjectManagerController.saveRelationships(comp[0].Id, 'ContentAssignment__c', 'Component__c', 'Content__c', listSelectedIds);
+		String response = JunctionObjectManagerController.saveRelationships(comp[0].Id, 'MenuAssignment__c', 'Component__c', 'Menu__c', listSelectedIds, 'order__c', 'false');
+		Test.stopTest();
+
+		// Then
+		System.assertEquals('OK', response);
+	}
+
+
+	@isTest 
+	static void saveRelationshipsTest() {
+		// Comment: Desde un componente Banner le relaciono dos registros de contenido.
+
+		// Given
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> cluster = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+		List<Component__c> comp = MockupFactory.createComponent('Banner', 1);
+		List<Menu__c> menu = MockupFactory.createMenu('testMenu', 2, cluster[0].id);
+		List<MenuAssignment__c> menuAssign = MockupFactory.createMenuAssignment(menu,comp);
+
+		List<String> listSelectedIds = new List<String>(); 
+		listSelectedIds.add(menuAssign[0].Id);
+//		listSelectedIds.add(menuAssign[1].Id);
+
+		// When 
+		Test.startTest();
+		String response = JunctionObjectManagerController.saveRelationships(comp[0].Id, 'MenuAssignment__c', 'Component__c', 'Menu__c', listSelectedIds, 'order__c', 'true');
 		Test.stopTest();
 
 		// Then
