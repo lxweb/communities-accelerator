@@ -52,6 +52,9 @@
             temp = contactData.recordsSelected.splice(index1, 1)[0];
             contactData.recordsSelected.splice(index2, 0, temp);
         }
+        for(var i = 0; i < contactData.recordsSelected.length; i++){
+            contactData.recordsSelected[i].order = i + 1;
+        }        
         component.set("v.recordsWrapper", contactData);
         event.preventDefault();
 	}
