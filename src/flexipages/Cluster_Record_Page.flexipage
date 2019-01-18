@@ -38,9 +38,12 @@
                 <name>parentLookUp</name>
                 <value>ParentCluster__c</value>
             </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>recordId</name>
+            </componentInstanceProperties>
             <componentName>TreePreview</componentName>
         </componentInstances>
-        <name>Facet-c027a20e-e0d4-4b90-9f0f-8dff800d2102</name>
+        <name>Facet-9c0620b5-5e1e-4f43-8bfa-82c852ea002b</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -73,11 +76,11 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>body</name>
-                <value>Facet-c027a20e-e0d4-4b90-9f0f-8dff800d2102</value>
+                <value>Facet-9c0620b5-5e1e-4f43-8bfa-82c852ea002b</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Tree preview</value>
+                <value>Tree Preview</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
