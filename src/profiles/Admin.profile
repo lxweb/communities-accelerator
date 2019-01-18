@@ -1492,10 +1492,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>MenuAssignment__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Menu__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
