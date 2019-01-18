@@ -137,22 +137,23 @@
 							      <th class="" scope="col">
 							        <div class="slds-truncate slds-text-title--caps" title="Name">{!v.recordsWrapper.fieldNameLabel}</div>
 							      </th>
+							      <th class="" scope="col">
+							        <div class="slds-truncate slds-text-title--caps" title="Order">{!$Label.c.General_Order}</div>
+							      </th>
 							    </tr>
 							  </thead>
 							   <tbody>
-							   	<div >
-                					<ul ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space dropZone" style="height:100%;overflow-y:auto;">
-									   	<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
-										    <li draggable="true" ondragstart="{!c.drag}" id="{!rec.idRecord}">
-											    <tr class="">
-											      <th data-label="{!rec.name}" scope="row">
-											        <div class="slds-truncate" title="{!rec.name}">{!rec.name}</div>
-											      </th>
-											    </tr>
-											</li>
-									    </aura:iteration>
-									</ul>
-								</div>
+							   	<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
+							   	<tr ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space dropZone" style="height:100%;overflow-y:auto;" draggable="true" ondragstart="{!c.drag}" id="{!rec.idRecord}">
+							   	
+							      <td data-label="{!rec.name}" scope="row">
+							        <div class="slds-truncate" title="{!rec.name}">{!rec.name}</div>
+							      </td>
+							      <td data-label="{!rec.order}" scope="row">
+							        <div class="slds-truncate" title="{!rec.order}">{!rec.order}</div>
+							      </td>
+							    </tr>
+							    </aura:iteration>
 							  </tbody>
 							</table>
 							
