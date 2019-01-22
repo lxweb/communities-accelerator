@@ -36,26 +36,26 @@
         var data = event.dataTransfer.getData("text");
         //Se busca el record Id desde el arbol de herencias del DOM
         var tar = event.target.closest('[id]');
-        var contactData = component.get("v.recordsWrapper");
+        var records = component.get("v.recordsWrapper");
         var index1, index2, temp;
         //Se localiza el indice de cada item a reordenar
-        for(var i = 0; i < contactData.recordsSelected.length; i++){
-            if(contactData.recordsSelected[i].idRecord === data) index1 = i; 
-            if(contactData.recordsSelected[i].idRecord === tar.id) index2 = i;
+        for(var i = 0; i < records.recordsSelected.length; i++){
+            if(records.recordsSelected[i].idRecord === data) index1 = i; 
+            if(records.recordsSelected[i].idRecord === tar.id) index2 = i;
         }
         if(index1 < index2){
             //Se reordenan de abajo hacia arriba
-            contactData.recordsSelected.splice(index2 + 1, 0, contactData.recordsSelected[index1]);
-            contactData.recordsSelected.splice(index1, 1);
+            records.recordsSelected.splice(index2 + 1, 0, records.recordsSelected[index1]);
+            records.recordsSelected.splice(index1, 1);
         } else {
             //Se reordenan de arriba hacia abajo
-            temp = contactData.recordsSelected.splice(index1, 1)[0];
-            contactData.recordsSelected.splice(index2, 0, temp);
+            temp = records.recordsSelected.splice(index1, 1)[0];
+            records.recordsSelected.splice(index2, 0, temp);
         }
-        for(var i = 0; i < contactData.recordsSelected.length; i++){
-            contactData.recordsSelected[i].order = i + 1;
+        for(var i = 0; i < records.recordsSelected.length; i++){
+            records.recordsSelected[i].order = i + 1;
         }        
-        component.set("v.recordsWrapper", contactData);
+        component.set("v.recordsWrapper", records);
         event.preventDefault();
 	}
 })

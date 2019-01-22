@@ -21,6 +21,10 @@
 
     <!-- Style variables -->
     <aura:attribute name="variableDivHeight" type="String" />
+
+	<!-- Render variable -->
+    <aura:attribute name="scrollCallback" type="Object" access="private" />
+
     
 	<!--Header part-->
 	<lightning:card title="{!v.relationTitle != null ? v.relationTitle : v.recordsWrapper.secondaryObjectLabelPlural}">
@@ -142,9 +146,9 @@
 							      </th>
 							    </tr>
 							  </thead>
-							   <tbody>
+							   <tbody style="cursor: move">
 							   	<aura:iteration items="{!v.recordsWrapper.recordsSelected}" var="rec">
-							   	<tr ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space dropZone" style="height:100%;overflow-y:auto;" draggable="true" ondragstart="{!c.drag}" id="{!rec.idRecord}">
+							   	<tr ondrop="{!c.drop}" ondragover="{!c.allowDrop}" class="slds-has-dividers_around-space" style="height:100%;overflow-y:auto;" draggable="true" ondragstart="{!c.drag}" id="{!rec.idRecord}">
 							   	
 							      <td data-label="{!rec.name}" scope="row">
 							        <div class="slds-truncate" title="{!rec.name}">{!rec.name}</div>

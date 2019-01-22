@@ -23,7 +23,7 @@
             		component.set("v.variableDivHeight", '162px');
             	}
 	        }
-	    });
+	    });	   
 	    $A.enqueueAction(action);
 	},
 
@@ -125,5 +125,4 @@
 			}
 		}
 	}
-
 })
