@@ -40,7 +40,7 @@
             </componentInstanceProperties>
             <componentName>TreePreview</componentName>
         </componentInstances>
-        <name>Facet-5060e6a9-01e4-49f6-869f-230a09925046</name>
+        <name>Facet-1262f077-d672-4945-98e9-e29eeb601494</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -73,11 +73,11 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>body</name>
-                <value>Facet-5060e6a9-01e4-49f6-869f-230a09925046</value>
+                <value>Facet-1262f077-d672-4945-98e9-e29eeb601494</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>title</name>
-                <value>Tree Preview</value>
+                <value>Tree preview</value>
             </componentInstanceProperties>
             <componentName>flexipage:tab</componentName>
         </componentInstances>
