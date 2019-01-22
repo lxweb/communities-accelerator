@@ -601,6 +601,17 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     </fields>
     <label>Content</label>
     <listViews>
+        <fullName>Advance_Content</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Content__c.AdvanceContent</value>
+        </filters>
+        <label>Advance Content</label>
+    </listViews>
+    <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Cluster__c</columns>
@@ -609,123 +620,48 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>Contents_View_Lihue</fullName>
+        <fullName>Banners</fullName>
         <columns>NAME</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>Lihue</value>
-        </filters>
-        <label>Contents View Lihue</label>
-    </listViews>
-    <listViews>
-        <fullName>Demo</fullName>
-        <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <columns>Cluster__c</columns>
-        <columns>CREATEDBY_USER</columns>
-        <columns>ExternalId__c</columns>
-        <columns>CREATED_DATE</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>Demo 1</value>
-        </filters>
-        <label>Demo 1</label>
-    </listViews>
-    <listViews>
-        <fullName>IrelandBanners</fullName>
-        <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <columns>ListTitle__c</columns>
-        <columns>PublishedDate__c</columns>
-        <columns>PublishStartDate__c</columns>
-        <columns>PublishEndDate__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>IRL_</value>
-        </filters>
+        <filterScope>Mine</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>Content__c.Banner</value>
         </filters>
-        <label>Ireland Banners</label>
-        <language>en_US</language>
+        <label>Banners</label>
     </listViews>
     <listViews>
-        <fullName>IrelandEvents</fullName>
+        <fullName>Events</fullName>
         <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <columns>ListTitle__c</columns>
-        <columns>PublishedDate__c</columns>
-        <columns>PublishStartDate__c</columns>
-        <columns>PublishEndDate__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>IRL_</value>
-        </filters>
+        <filterScope>Mine</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>Content__c.Event</value>
         </filters>
-        <label>Ireland Events</label>
-        <language>en_US</language>
+        <label>Events</label>
     </listViews>
     <listViews>
-        <fullName>IrelandFAQs</fullName>
+        <fullName>FAQs</fullName>
         <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <columns>PublishedDate__c</columns>
-        <columns>PublishStartDate__c</columns>
-        <columns>PublishEndDate__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>IRL</value>
-        </filters>
+        <filterScope>Mine</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>Content__c.FAQ</value>
         </filters>
-        <label>Ireland FAQs</label>
-        <language>en_US</language>
+        <label>FAQs</label>
     </listViews>
     <listViews>
-        <fullName>IrelandNews</fullName>
+        <fullName>News</fullName>
         <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <columns>ListTitle__c</columns>
-        <columns>PublishedDate__c</columns>
-        <columns>PublishStartDate__c</columns>
-        <columns>PublishEndDate__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>IRL_</value>
-        </filters>
+        <filterScope>Mine</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>Content__c.News</value>
         </filters>
-        <label>Ireland News</label>
-        <language>en_US</language>
+        <label>News</label>
     </listViews>
     <nameField>
         <label>Name</label>
@@ -1413,7 +1349,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     ,
         AND(NOT(ISBLANK(TEXT(OverlayQuadrant__c))), AND(ISBLANK(ListTitle__c), LEN(ListDescription__c) = 0, ISBLANK(ButtonLabel__c)))  
     ),
-				 RecordType.Name = &quot;Banner&quot;
+                 RecordType.Name = &quot;Banner&quot;
 )</errorConditionFormula>
         <errorDisplayField>OverlayQuadrant__c</errorDisplayField>
         <errorMessage>Si este campo esta vacío, los campos &quot;List Title&quot;, &quot;List Description&quot;, &quot;Button Label&quot; NO deben tener valor. 
