@@ -1,0 +1,8 @@
+.THIS {
+}
+.THIS .idselected{
+	color: red !important;
+	cursor: default !important;
+	text-decoration: none !important;
+	pointer-events: none !important;
+}
