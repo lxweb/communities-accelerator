@@ -109,39 +109,6 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>junctionObjectAPIName</name>
-                <value>MediaElementAssignment__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>parentLookup</name>
-                <value>Content__c</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>secondaryLookup</name>
-                <value>MediaElement__c</value>
-            </componentInstanceProperties>
-            <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Media elements</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>junctionObjectAPIName</name>
                 <value>TagAssignment__c</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
