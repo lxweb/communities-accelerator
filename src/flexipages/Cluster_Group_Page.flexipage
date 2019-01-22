@@ -3,6 +3,84 @@
     <flexiPageRegions>
         <componentInstances>
             <componentInstanceProperties>
+                <name>relatedListComponentOverride</name>
+                <value>NONE</value>
+            </componentInstanceProperties>
+            <componentName>force:relatedListContainer</componentName>
+        </componentInstances>
+        <name>Facet-cb416a53-e797-4267-a5ab-36c39ea24be3</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentName>force:detailPanel</componentName>
+        </componentInstances>
+        <name>Facet-648024a8-2d65-463e-aa13-869b56a51cbb</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>objectName</name>
+                <value>Cluster__c</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>parentLookUp</name>
+                <value>ParentCluster__c</value>
+            </componentInstanceProperties>
+            <componentName>TreePreview</componentName>
+        </componentInstances>
+        <name>Facet-8c647976-25c2-4fc4-b252-bc7b9e21f7f6</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>active</name>
+                <value>false</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-cb416a53-e797-4267-a5ab-36c39ea24be3</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.relatedLists</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>active</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-648024a8-2d65-463e-aa13-869b56a51cbb</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.detail</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-8c647976-25c2-4fc4-b252-bc7b9e21f7f6</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Tree Preview</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <name>Facet-b8900d04-1ce8-430f-8a77-1a9469910d18</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
                 <name>collapsed</name>
                 <value>false</value>
             </componentInstanceProperties>
@@ -31,14 +109,11 @@
             </visibilityRule>
         </componentInstances>
         <componentInstances>
-            <componentName>force:detailPanel</componentName>
-        </componentInstances>
-        <componentInstances>
             <componentInstanceProperties>
-                <name>relatedListComponentOverride</name>
-                <value>NONE</value>
+                <name>tabs</name>
+                <value>Facet-b8900d04-1ce8-430f-8a77-1a9469910d18</value>
             </componentInstanceProperties>
-            <componentName>force:relatedListContainer</componentName>
+            <componentName>flexipage:tabset</componentName>
         </componentInstances>
         <name>main</name>
         <type>Region</type>
