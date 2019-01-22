@@ -57,16 +57,16 @@ public class CG_NavigationController {
 		List<MenuAssignment__c> menuAssignments = [SELECT Id, Component__c, Component__r.Cluster__c, Menu__c, Menu__r.Cluster__c 
 		FROM MenuAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
         List<String> menuIds = new List<String>();
+		Set<String> parentClusterIds = ClusterUtils.getClustersParents(clusterId);
 		for(MenuAssignment__c ma : menuAssignments){
-			if(ma.Component__r.Cluster__c == ma.Menu__r.Cluster__c){
+			if(parentClusterIds.contains(ma.Menu__r.Cluster__c)){
 				menuIds.add(ma.Menu__c);
 			}
 		}
-		List<String> allClusterIds = getAllClusterIds(clusterId);
 		List<NavWrapper> menuWrappers = new List<NavWrapper>();
-		List<Menu__c> allMenus = getAllMenus(menuIds);
+		List<Menu__c> menuList = getMenuList(menuIds);
 		for(String menuId : MenuIds){
-            NavWrapper newWrapper = getMenuWrapper(menuId, allMenus, allClusterIds);
+            NavWrapper newWrapper = getMenuWrapper(menuId, menuList, parentClusterIds);
             if(newWrapper != null){
                 menuWrappers.add(newWrapper);
             }                
@@ -74,40 +74,9 @@ public class CG_NavigationController {
 		return menuWrappers;
 	}
 
-	// Traemos todos los Clusters relacionados a los SubMenus	
-	public static List<String> getAllClusterIds(String clusterId){
-		Cluster__c userCluster = [SELECT Id, ParentCluster__c, ParentCluster__r.ParentCluster__c,
-		ParentCluster__r.ParentCluster__r.ParentCluster__c FROM Cluster__c WHERE Id =: clusterId];
-
-		List<String> allClusterIds = new List<String>();
-		
-		allClusterIds.add(userCluster.Id);
-		if(userCluster.ParentCluster__c != null){
-			allClusterIds.add(userCluster.ParentCluster__c);
-		}
-		if(userCluster.ParentCluster__r.ParentCluster__c != null){
-			allClusterIds.add(userCluster.ParentCluster__r.ParentCluster__c);
-		}
-		if(userCluster.ParentCluster__r.ParentCluster__r.ParentCluster__c != null){
-			allClusterIds.add(userCluster.ParentCluster__r.ParentCluster__r.ParentCluster__c);
-		}
-
-		List<Cluster__c> clustersBelow = [SELECT Id FROM Cluster__c WHERE Id =: userCluster.Id 
-					OR ParentCluster__c =: userCluster.Id 
-    				OR ParentCluster__r.ParentCluster__c =: userCluster.Id 
-    				OR ParentCluster__r.ParentCluster__r.ParentCluster__c =: userCluster.Id];
-
-    	for(Cluster__c cluster : clustersBelow){
-    		if(cluster != null){
-    			allClusterIds.add(cluster.Id);
-    		}
-    	}
-    	System.debug(allClusterIds);
-		return allClusterIds;
-	}
 
 	// Traemos todos los SubMenus relacionados a los Menus del Component	
-	public static List<Menu__c> getAllMenus(List<String> menuIds){
+	public static List<Menu__c> getMenuList(List<String> menuIds){
 		return [SELECT Id, MenuLabel__c, ParentMenu__c, Cluster__c, Behaviour__c, Navigation__r.URL__c, MenuIcon__c FROM Menu__c 
 					WHERE Id =: menuIds 
 					OR ParentMenu__c =: menuIds 
@@ -116,7 +85,7 @@ public class CG_NavigationController {
 	}
 
 	// Armamos los Wrappers
-	public static NavWrapper getMenuWrapper(Id currentMenuId, List<Menu__c> allMenus, List<String> allClusterIds){
+	public static NavWrapper getMenuWrapper(Id currentMenuId, List<Menu__c> allMenus, Set<String> parentClusterIds){
 		Menu__c currentMenu = [SELECT Id, MenuLabel__c, Cluster__c FROM Menu__c WHERE Id =: currentMenuId]; 
 		// Armamos un mapa con el Wrapper dde cada Menu
     	map<Menu__c, NavWrapper> menuWrapperMap = new map<Menu__c, NavWrapper>(); 
@@ -128,7 +97,7 @@ public class CG_NavigationController {
 		// El MenuWrapperMap toma forma de arbol
     	for(Menu__c parent : menuWrapperMap.keySet()){
     		for(Menu__c child : menuWrapperMap.keySet()){
-    			if(child.ParentMenu__c == parent.Id && allClusterIds.contains(child.Cluster__c)){
+    			if(child.ParentMenu__c == parent.Id && parentClusterIds.contains(child.Cluster__c)){
     				menuWrapperMap.get(parent).subMenus.add(menuWrapperMap.get(child));
     			}
     		}
