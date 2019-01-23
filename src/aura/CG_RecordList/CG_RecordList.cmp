@@ -1,0 +1,94 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+	<aura:handler event="c:SetRecordList" action="{!c.handleRecordList}"/>
+
+	<aura:attribute name="title" type="String" />
+	<aura:attribute name="iconName" type="String" />
+	<aura:attribute name="columns" type="List" default="[]"/>
+    <aura:attribute name="data" type="List" default="[]"/>
+    <aura:attribute name="dataTableSchema" type="Object"/>
+    <aura:attribute name="keyField" type="String" default="Id"/>
+    <aura:attribute name="initialRows" type="Integer" default="5"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="50"/>
+    <aura:attribute name="loadMoreOffset" type="Integer" default="20"/>
+    <aura:attribute name="totalNumberOfRows" type="Integer" default="300"/>
+    <aura:attribute name="loadMoreStatus" type="String" default=""/>
+    <aura:attribute name="sortedBy" type="String" />
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+
+    <!--<lightning:card variant="base" title="{!v.title}" iconName="{!v.iconName}">
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.data.length > 0}">
+	        	<lightning:buttonMenu alternativeText="Show menu" class="slds-button_last">
+					<lightning:menuItem label="A->Z" value="item1" />
+					<lightning:menuItem label="Z->A" value="item2" />
+				</lightning:buttonMenu>
+			</aura:if>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            <aura:if isTrue="{!v.data.length > 0}">
+			    <div class="slds-is-relative">
+			    	<div style="height: 300px">
+			            <lightning:datatable
+			                columns="{! v.columns }"
+			                data="{! v.data }"
+			                keyField="{! v.keyField }"
+			                showRowNumberColumn="true"
+			                hideCheckboxColumn="true"
+			                enableInfiniteLoading="{! v.enableInfiniteLoading }"
+			                loadMoreOffset="{! v.loadMoreOffset }"
+			                sortedBy="{! v.sortedBy}"
+			                onloadmore="{! c.loadMoreData }"
+			                onsort="{! c.sortData}"
+			                />
+			        </div>
+			        {! v.loadMoreStatus }
+			    </div>
+			  	<aura:set attribute="else">
+			  		{!(v.title) ? $Label.c.GlobalSearchNoContents : ''}
+			  	</aura:set>
+			</aura:if>
+        </p>
+    </lightning:card>-->
+
+	<div class="slds-card__header slds-grid">
+	    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+	    	<aura:if isTrue="{! v.iconName != null}">
+	      		<div class="slds-media__figure">
+	        		<lightning:icon iconName="{!v.iconName}" alternativeText="{!v.title}" />
+	      		</div>
+	      	</aura:if>
+	      	<div class="slds-media__body">
+	        	<h2 class="slds-card__header-title">
+	            		<span>{!v.title}</span>
+	        	</h2>
+	      	</div>
+    	</header>
+  	</div>
+  	<div class="slds-card__body slds-card__body_inner">
+  		<aura:if isTrue="{!v.data.length > 0}">
+		    <div class="slds-is-relative">
+		    	<div style="height: 300px">
+		            <lightning:datatable
+			                columns="{! v.columns }"
+			                data="{! v.data }"
+			                keyField="{! v.keyField }"
+			                showRowNumberColumn="true"
+			                hideCheckboxColumn="true"
+			                enableInfiniteLoading="{! v.enableInfiniteLoading }"
+			                loadMoreOffset="{! v.loadMoreOffset }"
+			                sortedBy="{! v.sortedBy}"
+			                sortedDirection="{!v.sortedDirection}"
+			                onloadmore="{! c.loadMoreData }"
+			                onsort="{! c.sortData}"
+			                />
+		        </div>
+		        {! v.loadMoreStatus }
+		    </div>
+		  	<aura:set attribute="else">
+		  		{!(v.title) ? $Label.c.GlobalSearchNoContents : ''}
+		  	</aura:set>
+		</aura:if>
+  	</div>
+</aura:component>
