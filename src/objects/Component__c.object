@@ -534,6 +534,7 @@
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
+            <controllingField>Datasource__c</controllingField>
             <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
@@ -602,7 +603,185 @@
                     <default>false</default>
                     <label>Custom Sorting</label>
                 </value>
+                <value>
+                    <fullName>Manual Order</fullName>
+                    <default>false</default>
+                    <label>Manual Order</label>
+                </value>
             </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>CreatedDate ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>CreatedDate DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Name ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Name DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Category__r.Name ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Category__r.Name DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>PublishStartDate__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>PublishStartDate__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>EventStartDate__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>EventStartDate__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Custom Sorting</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <valueName>Manual Order</valueName>
+            </valueSettings>
         </valueSet>
     </fields>
     <fields>
@@ -873,6 +1052,17 @@
     </fields>
     <label>Component</label>
     <listViews>
+        <fullName>Advance_Content</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.AdvanceContent</value>
+        </filters>
+        <label>Advance Content</label>
+    </listViews>
+    <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>ExternalId__c</columns>
@@ -882,84 +1072,114 @@
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>ComponentsDefaultView</fullName>
+        <fullName>Banners</fullName>
         <columns>NAME</columns>
-        <columns>CREATED_DATE</columns>
-        <columns>CREATEDBY_USER</columns>
-        <columns>UPDATEDBY_USER</columns>
-        <filterScope>Everything</filterScope>
+        <filterScope>Mine</filterScope>
         <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>Lihue</value>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Banner</value>
         </filters>
-        <label>Components View Lihue</label>
+        <label>Banners</label>
     </listViews>
     <listViews>
-        <fullName>Demo</fullName>
+        <fullName>Cluster_Selector</fullName>
         <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>Demo</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>Demo_1</fullName>
-        <columns>NAME</columns>
-        <columns>CREATEDBY_USER</columns>
-        <columns>CREATED_DATE</columns>
-        <columns>ExternalId__c</columns>
-        <filterScope>Everything</filterScope>
+        <filterScope>Mine</filterScope>
         <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>demo 1</value>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Cluster_Selector</value>
         </filters>
-        <label>Demo 1</label>
+        <label>Cluster Selector</label>
     </listViews>
     <listViews>
-        <fullName>IRL_Discover</fullName>
+        <fullName>Event_Details</fullName>
         <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>IRL - Discover Page Components</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>IRL_Home</fullName>
-        <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>IRL - Home Page Components</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>IRL_Shop</fullName>
-        <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Status__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>IRL - Shop Page Components</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>WMA_Components1</fullName>
-        <columns>NAME</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Datasource__c</columns>
-        <columns>ExternalId__c</columns>
-        <columns>CREATED_DATE</columns>
-        <columns>UPDATEDBY_USER</columns>
-        <filterScope>Everything</filterScope>
+        <filterScope>Mine</filterScope>
         <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>WMA</value>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.EventDetail</value>
         </filters>
-        <label>WMA Components</label>
+        <label>Event Details</label>
+    </listViews>
+    <listViews>
+        <fullName>Events</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Event</value>
+        </filters>
+        <label>Events</label>
+    </listViews>
+    <listViews>
+        <fullName>FAQs</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.FAQ</value>
+        </filters>
+        <label>FAQs</label>
+    </listViews>
+    <listViews>
+        <fullName>Menus</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Menu</value>
+        </filters>
+        <label>Menus</label>
+    </listViews>
+    <listViews>
+        <fullName>News</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.News</value>
+        </filters>
+        <label>News</label>
+    </listViews>
+    <listViews>
+        <fullName>News_Details</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.NewsDetail</value>
+        </filters>
+        <label>News Details</label>
+    </listViews>
+    <listViews>
+        <fullName>Related_Events</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.RelatedEvents</value>
+        </filters>
+        <label>Related Events</label>
+    </listViews>
+    <listViews>
+        <fullName>Related_News</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.RelatedNews</value>
+        </filters>
+        <label>Related News</label>
     </listViews>
     <nameField>
         <label>Component Name</label>
@@ -1112,6 +1332,10 @@
             </values>
             <values>
                 <fullName>Custom Sorting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1371,6 +1595,10 @@
             </values>
             <values>
                 <fullName>Custom Sorting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1681,6 +1909,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -1988,6 +2220,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2275,6 +2511,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2558,6 +2798,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2826,6 +3070,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3127,6 +3375,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -3403,6 +3655,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3686,6 +3942,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3984,6 +4244,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -4272,6 +4536,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>

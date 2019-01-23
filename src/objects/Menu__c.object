@@ -223,6 +223,28 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>Menu</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Menu__c.Menu</value>
+        </filters>
+        <label>Menu</label>
+    </listViews>
+    <listViews>
+        <fullName>Submenu</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Menu__c.SubMenu</value>
+        </filters>
+        <label>Submenu</label>
+    </listViews>
     <nameField>
         <label>Menu Name</label>
         <type>Text</type>
