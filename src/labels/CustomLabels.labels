@@ -105,6 +105,14 @@
         <value>Error</value>
     </labels>
     <labels>
+        <fullName>General_Order</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
         <fullName>General_RecordsSavedSuccessfully</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -119,6 +127,14 @@
         <protected>true</protected>
         <shortDescription>Refresh</shortDescription>
         <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>General_Reorder</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Reorder</shortDescription>
+        <value>Reorder</value>
     </labels>
     <labels>
         <fullName>General_Save</fullName>
@@ -151,6 +167,30 @@
         <protected>false</protected>
         <shortDescription>General_ViewMore</shortDescription>
         <value>View More</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchNoContents</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search No Contents</shortDescription>
+        <value>No content found</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchPlaceholder</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Placeholder</shortDescription>
+        <value>Search...</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchResults</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Results</shortDescription>
+        <value>Categories</value>
     </labels>
     <labels>
         <fullName>ImageUploader</fullName>
@@ -255,21 +295,5 @@
         <protected>false</protected>
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
-    </labels>
-    <labels>
-        <fullName>General_Reorder</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Reorder</shortDescription>
-        <value>Reorder</value>
-    </labels>
-    <labels>
-        <fullName>General_Order</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Order</shortDescription>
-        <value>Order</value>
     </labels>
 </CustomLabels>
