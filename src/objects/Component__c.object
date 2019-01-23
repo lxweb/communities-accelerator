@@ -534,6 +534,7 @@
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
+            <controllingField>Datasource__c</controllingField>
             <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
@@ -602,7 +603,185 @@
                     <default>false</default>
                     <label>Custom Sorting</label>
                 </value>
+                <value>
+                    <fullName>Manual Order</fullName>
+                    <default>false</default>
+                    <label>Manual Order</label>
+                </value>
             </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>CreatedDate ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>CreatedDate DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Name ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Name DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Category__r.Name ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Category__r.Name DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>PublishStartDate__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>PublishStartDate__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>EventStartDate__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>EventStartDate__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>Custom Sorting</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <valueName>Manual Order</valueName>
+            </valueSettings>
         </valueSet>
     </fields>
     <fields>
@@ -1115,6 +1294,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -1371,6 +1554,10 @@
             </values>
             <values>
                 <fullName>Custom Sorting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1681,6 +1868,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -1988,6 +2179,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2275,6 +2470,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2558,6 +2757,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -2826,6 +3029,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3127,6 +3334,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -3403,6 +3614,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3686,6 +3901,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3984,6 +4203,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Name ASC</fullName>
                 <default>false</default>
             </values>
@@ -4272,6 +4495,10 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
             <values>
