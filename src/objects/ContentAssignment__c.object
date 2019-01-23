@@ -89,6 +89,18 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Order__c</fullName>
+        <description>It&apos;s the numeric field to do a manual order.</description>
+        <externalId>false</externalId>
+        <label>Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>StatusApprovalProcess__c</fullName>
         <externalId>false</externalId>
         <label>Status approval process</label>

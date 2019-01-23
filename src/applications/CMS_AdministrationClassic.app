@@ -10,4 +10,5 @@
     <tabs>Tag__c</tabs>
     <tabs>Translation__c</tabs>
     <tabs>Navigation__c</tabs>
+    <tabs>Menu__c</tabs>
 </CustomApplication>
