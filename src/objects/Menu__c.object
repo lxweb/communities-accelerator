@@ -47,6 +47,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Represents menu options than can be related to other menu options.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableChangeDataCapture>false</enableChangeDataCapture>
@@ -253,6 +254,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     <recordTypes>
         <fullName>Menu</fullName>
         <active>true</active>
+        <description>Represents the highest level of a Menu tree. It can be asociated to a component. (Ex. File)</description>
         <label>Menu</label>
         <picklistValues>
             <picklist>Behaviour__c</picklist>
@@ -280,6 +282,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     <recordTypes>
         <fullName>SubMenu</fullName>
         <active>true</active>
+        <description>Represents a grouping menu of other grouping menus or menu leafs. (Ex. New, Open, Save)</description>
         <label>SubMenu</label>
         <picklistValues>
             <picklist>Behaviour__c</picklist>
