@@ -2944,6 +2944,7 @@
     <recordTypes>
         <fullName>Menu</fullName>
         <active>true</active>
+        <description>Configure a new Menu component that has associated Menu records. They can be ordered manually.</description>
         <label>Menu</label>
         <picklistValues>
             <picklist>BannerFrameType__c</picklist>
