@@ -322,7 +322,7 @@ ISBLANK(ParentMenu__r.ParentMenu__r.ParentMenu__c),
 ISBLANK(ParentMenu__r.ParentMenu__r.ParentMenu__r.ParentMenu__c)
 )
 )</errorConditionFormula>
-        <errorMessage>It&apos;s not allowed to add more than 3 related submenus</errorMessage>
+        <errorMessage>Sorry, this menu already has the max of submenu levels, you can&apos;t add more.</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
