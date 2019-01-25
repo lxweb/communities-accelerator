@@ -31,7 +31,7 @@ public with sharing class RecordListLayoutTriggers extends TriggersHandler{
 	    }
 	    if(!exist){
 	    	hasError = true;
-	    	recNew.addError('The inserted SObject API Name does not exist');
+	    	recNew.addError(Label.GlobalSearchWrongSobject);
 	    }
     }
 
@@ -47,17 +47,17 @@ public with sharing class RecordListLayoutTriggers extends TriggersHandler{
 
 			for(String field : fieldsToShow){
 				if(!objectFields.contains(field.toLowerCase())) {
-					recNew.addError('The field "' + field + '" for the Sobject "' + recNew.ObjectAPIName__c + '" does not exist');
+					recNew.addError(String.format(Label.GlobalSearchWrongField, new List<String> {field, recNew.ObjectAPIName__c}));
 					return;
 				}
 			}
 			for(String field : fieldsToSearch){
 				if(!objectFields.contains(field.toLowerCase())) {
-					recNew.addError('The field "' + field + '" for the Sobject "' + recNew.ObjectAPIName__c + '" does not exist');
+					recNew.addError(String.format(Label.GlobalSearchWrongField, new List<String> {field, recNew.ObjectAPIName__c}));
 					return;
 				}
 				if(!objectFieldsMap.get(field).getDescribe().isFilterable()){
-					recNew.addError('The field "' + field + '" for the Sobject "' + recNew.ObjectAPIName__c + '" is not filterable');
+					recNew.addError(String.format(Label.GlobalSearchFieldNotFilterable, new List<String> {field, recNew.ObjectAPIName__c}));
 					return;
 				}
 			}
@@ -69,7 +69,7 @@ public with sharing class RecordListLayoutTriggers extends TriggersHandler{
 	        Map<String, Schema.SObjectType> 	schemaMap 	= Schema.getGlobalDescribe();
 			Map<String,Schema.RecordTypeInfo> 	recordTypes	= schemaMap.get(recNew.ObjectAPIName__c).getDescribe().getRecordTypeInfosByDeveloperName();
 			if(!recordTypes.containsKey(recNew.RecordTypeDevName__c)){
-				recNew.addError('The record type "' + recNew.RecordTypeDevName__c + '" for the Sobject "' + recNew.ObjectAPIName__c + '" does not exist');
+					recNew.addError(String.format(Label.GlobalSearchWrongRT, new List<String> {recNew.RecordTypeDevName__c, recNew.ObjectAPIName__c}));
 			}
 		}
     }

@@ -169,6 +169,14 @@
         <value>View More</value>
     </labels>
     <labels>
+        <fullName>GlobalSearchFieldNotFilterable</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Field Not Filterable</shortDescription>
+        <value>The field &quot;{0}&quot; for the Sobject &quot;{1}&quot; is not filterable</value>
+    </labels>
+    <labels>
         <fullName>GlobalSearchNoContents</fullName>
         <categories>Global Search</categories>
         <language>en_US</language>
@@ -191,6 +199,30 @@
         <protected>true</protected>
         <shortDescription>Global Search Results</shortDescription>
         <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchWrongField</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Wrong Field</shortDescription>
+        <value>The field {0} for the Sobject {1} does not exist</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchWrongRT</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Wrong RT</shortDescription>
+        <value>The record type &quot;{0}&quot; for the Sobject &quot;{1}&quot; does not exist</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchWrongSobject</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Wrong Sobject</shortDescription>
+        <value>The inserted SObject API Name does not exist</value>
     </labels>
     <labels>
         <fullName>ImageUploader</fullName>

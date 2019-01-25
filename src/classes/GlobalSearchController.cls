@@ -48,8 +48,7 @@ public with sharing class GlobalSearchController {
     	for(Integer i = 0; i < fields.size(); i++){
     		String field = fields.get(i);
     		query += (i == fields.size() - 1) ? 
-    					field + ' LIKE \'%' + searchedString + '%\')' :
-    					field + ' LIKE \'%' + searchedString + '%\' OR ';
+    					field + ' LIKE \'%' + searchedString + '%\')' : field + ' LIKE \'%' + searchedString + '%\' OR ';
     	}
 
     	return query;

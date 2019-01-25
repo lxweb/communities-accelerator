@@ -198,5 +198,6 @@
     <tabs>Translation__c</tabs>
     <tabs>Navigation__c</tabs>
     <tabs>Menu__c</tabs>
+    <tabs>RecordListLayout__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
