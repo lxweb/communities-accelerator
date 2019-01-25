@@ -18,6 +18,9 @@ public with sharing class ContentTriggers extends TriggersHandler {
 
         allow_finalLoop_AfterInsert = true;
         allow_finalLoop_AfterUpdate = true;
+
+        //PA-266 Trigger que elimine los registros generados en Assignment cuando no es master detail
+        allow_masterLoop_BeforeDelete = true;    
     }
 
     /*****************************************************************/
@@ -32,6 +35,12 @@ public with sharing class ContentTriggers extends TriggersHandler {
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
         setExternalId((Content__c)recNew);
         checkAdvanceContentBinding((Content__c)recNew);
+    }
+
+    //PA-266
+    public override void masterLoop_BeforeDelete (SObject recOld){
+        setDeleteIdsList((Content__c) recOld);
+
     }
 
     //PA-177 CMA: Clustering: Apex Sharing
@@ -49,25 +58,32 @@ public with sharing class ContentTriggers extends TriggersHandler {
         addSharing((Content__c) recNew, (Content__c) recOld, false);
     }
     
+
     
     //PA-177 CMA: Clustering: Apex Sharing
     List<Content__Share> contentShareList = new List<Content__Share>();
     Boolean excecuteTrigger = true;
     Map<Id,String> objectIdToMessageErrosMap = new Map<Id,String>();
-    
+    //PA-266
+    List<MediaElementAssignment__c> mediaElementAssignmentList = new List<MediaElementAssignment__c>();
+    List<TagAssignment__c> tagAssignmentList = new List<TagAssignment__c>();
     public override void dataPreparing() {
-        if(!recordList.isEmpty() && excecuteTrigger){
-
-            ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Content__Share', 'Clustering__c', false);
-            if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
-                objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
-                excecuteTrigger = false;
-            }else{
-                contentShareList  = (List<Content__Share>) sharingWrapper.listOfSharesToInsert;
+        if(excecuteTrigger){
+            if(!recordList.isEmpty()){
+                ObjectSharingUtil.SharingWrapper sharingWrapper = ObjectSharingUtil.generateSharingForRecordsOnCluster(recordList, 'Cluster__c', 'Content__Share', 'Clustering__c', false);
+                if(sharingWrapper.objectIdToMessageErrosMap.size()>0){
+                    objectIdToMessageErrosMap = sharingWrapper.objectIdToMessageErrosMap;
+                    excecuteTrigger = false;
+                }else{
+                    contentShareList  = (List<Content__Share>) sharingWrapper.listOfSharesToInsert;
+                }
             }
-
+            //PA-266
+            if(!deleteIdsList.isEmpty()){
+                mediaElementAssignmentList = [SELECT ID FROM MediaElementAssignment__c WHERE Content__c in : deleteIdsList];
+                tagAssignmentList = [SELECT ID FROM TagAssignment__c WHERE Content__c in : deleteIdsList];
+            }
         }
-
     }
     
     public override void executeDMLs() {
@@ -79,6 +95,14 @@ public with sharing class ContentTriggers extends TriggersHandler {
                 objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
+
+        //PA-266
+        if(!mediaElementAssignmentList.isEmpty()){
+            delete mediaElementAssignmentList;
+        }
+        if(!tagAssignmentList.isEmpty()){
+            delete tagAssignmentList;
+        }  
 
     }
     
@@ -161,6 +185,12 @@ public with sharing class ContentTriggers extends TriggersHandler {
         }
 
 
+    }
+
+    //PA-266
+    List<String> deleteIdsList = new List<String>(); 
+    private void setDeleteIdsList(Content__c recOld){
+        deleteIdsList.add(recOld.Id);
     }
 
 }

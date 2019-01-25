@@ -98,4 +98,59 @@ public with sharing class ContentTriggersTest {
 		System.assertEquals(6, shareList.size());
 
 	}
+
+	@isTest 
+	static void deleteBeforeContentTest(){
+		/* Comment: Comprueba que al eliminar un Content__c se eliminan
+		los assigment correspondientes */
+
+		//Given
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+		List<Content__c> contentTest = MockupFactory.createContent('Banner', clusterArg[0], 1);
+		
+		List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
+		List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentTest, mediaElementList);
+
+		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterArg[0]);
+
+		List<Tag__c> tagList = MockupFactory.createTag('TestTag', 'description', 1, clusterArg[0].id);
+		List<TagAssignment__c> tagAssigList =  MockupFactory.createTagAssignment(tagList, componentList, contentTest);
+		//When
+		Test.startTest();
+		delete contentTest;
+		Test.stopTest();
+
+		//Then
+
+		List<MediaElementAssignment__c> mediaElementAssignResultList = [SELECT ID FROM MediaElementAssignment__c WHERE id = : mediaElementAssigList[0].id];
+        List<TagAssignment__c> tagAssignResultList = [SELECT ID FROM TagAssignment__c WHERE id = : tagAssigList[0].id];
+
+		System.Assert(mediaElementAssignResultList.isEmpty());
+		System.Assert(tagAssignResultList.isEmpty());
+	}
+
+	@isTest 
+	static void AdvanceContentTest(){
+		/* Comment: Comprueba que al crear un Content__c se inserta
+		con el correspondiente ExternalId__c */
+
+		//Given
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+		List<Content__c> contentList = MockupFactory.createContent('Advance Content', clusterArg[0], 1);
+
+		Content__c contentTest = [SELECT Id, Name, ExternalId__c, HTMLContent__c FROM Content__c WHERE Id =: contentList[0].Id];
+		contentTest.HTMLContent__c ='<h1>[!Cluster__c.Name]</h1>';
+
+		//When
+		Test.startTest();
+			update contentTest;		
+		Test.stopTest();
+
+		//Then
+		Content__c contentTestResult =[SELECT ExternalId__c FROM Content__c WHERE Id =: contentTest.Id];
+		System.assertNotEquals(contentTestResult.ExternalId__c, null);
+	}
+	
 }
