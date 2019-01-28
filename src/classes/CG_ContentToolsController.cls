@@ -59,7 +59,10 @@ public with sharing class CG_ContentToolsController {
     public static ContentWrapper addToCarts(String data){
         
         ContentWrapper contentWr = (ContentWrapper)JSON.deserialize(data, ContentWrapper.class);
-        CG_ContentCartController.addContentToCart(contentWr.contentId);
+        Boolean isInserted = CG_ContentCartController.addContentToCart(contentWr.contentId);
+        if (!isInserted){
+        	throw new AuraHandledException(System.Label.DuplicateItem);
+        }
         
         return contentWr;
     }

@@ -48,10 +48,22 @@
             	var showToast = $A.get('e.force:showToast');
                 showToast.setParams({
                     'title'   : 'Success',
-                    'message' : 'Your item was added Successfully!',
+                    'message' : $A.get("$Label.c.ItemWasAdded"),
                     'type'    : 'success'
                 });
                 showToast.fire();
+              
+	        }else if (f.getState() === "ERROR") {
+	        	var errors = f.getError();
+	        	if(errors && errors[0] && errors[0].message){
+            		var showToast = $A.get('e.force:showToast');
+                	showToast.setParams({
+                    	'title'   : 'Error',
+                    	'message' : errors[0].message,
+                    	'type'    : 'Error'
+                	});
+                	showToast.fire();
+                } 
 	        }
 	    });
 		$A.enqueueAction(action);

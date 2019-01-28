@@ -1,4 +1,4 @@
-<aura:component access="global" controller='CG_ContentToolsController' description="File content tools" >
+<aura:component access="global" controller='CG_ContentToolsController' description="File content tools" implements="forceCommunity:availableForAllPageTypes">
 	<!--Constructor -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
         
@@ -6,7 +6,10 @@
     content: a030b00000YZSxyAAH contentDocument: 0690b000003Kpiq
 	content: a030b00000YZSH1  MediaElement: a070b00000m6mgS
 	a030b00000YTkqs -->
-    <aura:attribute name="contentId" type="String"/>
+
+	<aura:attribute name="contentId" type="String" default="a071U000001AgNeQAK"/>
+
+   <!-- <aura:attribute name="contentId" type="String"/> -->
 
     <aura:attribute name="size" type="String" default="xx-small" />
     <aura:attribute name="iconName" type="String" />
