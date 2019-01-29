@@ -1,14 +1,40 @@
 ({
 	initData : function(component, event, helper) {
-		var action = component.get("c.initData");
-
-		action.setCallback(this, function(f){
-			if(f.getState() === "SUCCESS"){
-				component.set("v.contentCartWrapper", action.getReturnValue());
-			}
-		});
-		$A.enqueueAction(action);
+		helper.loadMore(component,helper);
 	},
+	//LOAD ITEMS
+	loadMore : function(component, helper) {
+		var elementPerPage = component.get("v.elementPerPage");
+		var action = component.get("c.initData");
+		action.setParams({
+			stringOffset: component.get("v.offset").toString(),
+			stringElementPerPage: elementPerPage.toString()
+		});
+		action.setCallback(this, function(f) {
+            if(f.getState() === "SUCCESS") {
+				if(component.get("v.contentCartWrapper") != null){
+		        	var contentList = component.get("v.contentCartWrapper.cartItemList");
+	            	var returnList = action.getReturnValue().cartItemList;
+	            	returnList.forEach(function(ACC) {
+						contentList.push(ACC);
+					});
+					component.set("v.contentCartWrapper.cartItemList", contentList);
+					var contentMap = component.get("v.contentCartWrapper.cartItemMap");
+	            	var returnMap = action.getReturnValue().cartItemMap;
+	            	returnMap.forEach(function(ACC) {
+						contentMap.push(ACC);
+					});
+					component.set("v.contentCartWrapper.cartItemMap", contentMap);
+	        	}else {
+	        		component.set("v.contentCartWrapper", action.getReturnValue());
+	        	}
+				component.set("v.offset", component.get("v.offset")+elementPerPage);
+				component.set('v.scrollCalled', false);
+	        }
+	    });
+	    $A.enqueueAction(action);
+	},
+
 	//DELETE SELECTED ITEM
 	deleteSelectedItem: function(component, event, helper) {
 		var idSelected = event.getSource().get("v.name");

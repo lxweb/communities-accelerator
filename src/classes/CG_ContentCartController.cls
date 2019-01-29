@@ -35,13 +35,23 @@ public with sharing class CG_ContentCartController {
     }
 
     @AuraEnabled
-    public static ContentCartWrapper initData(){
+    public static ContentCartWrapper initData(String stringOffset, String stringElementPerPage){
+
+        Integer intOffset =Integer.valueOf(stringOffset);
+        Integer intElementPerPage =Integer.valueOf(stringElementPerPage);
+        
         ContentCartWrapper contentCartWr = new ContentCartWrapper();
         Map<String, CartItemWrapper> contentCartItemMap = new Map<String, CartItemWrapper>();
 
         CartItemWrapper cartItemWrapper;
+        List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
+        
+        if(intOffset < 1){
+            contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId() ORDER BY Content__r.Name DESC LIMIT :intElementPerPage];
+        }else{
+            contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId() ORDER BY Content__r.Name DESC LIMIT :intElementPerPage OFFSET :intOffset];
+        }
 
-        List<ContentCartItem__c> contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId()];
         for(ContentCartItem__c cci : contentCartList){
             cartItemWrapper = new CartItemWrapper();
             cartItemWrapper.cartItemId = cci.id;
@@ -82,8 +92,7 @@ public with sharing class CG_ContentCartController {
 				contentCartItemMap.put(contentDocIdMap.get(cd.ContentDocumentId), cartitemWrapper);
 			}        	
         }
-
-        contentCartWr.cartItemList = contentCartItemMap.values();
+        contentCartWr.cartItemList = contentCartItemMap.values();  
         return contentCartWr;
     }
 

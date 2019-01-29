@@ -1,6 +1,11 @@
 <aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="CG_ContentCartController">
 	<!-- GENERAL VARIABLES --> 
 	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="scrollCallback" type="Object" access="private" />
+	<aura:attribute name="offset" type="Integer" default="0"/>
+	<aura:attribute name="elementPerPage" type="Integer" default="4"/>
+	<aura:attribute name="scrollCalled" type="Boolean" access="private" default="false" />
+
 	<!-- Internal -->
 	<aura:attribute name="contentCartWrapper" type="Object" />
 	<aura:attribute name="downloadList" type="String[]" />
