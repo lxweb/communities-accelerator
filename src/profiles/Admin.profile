@@ -2,6 +2,41 @@
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldPermissions>
         <editable>true</editable>
+        <field>Brand__c.BrandContent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.DetailTitle__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.MasterBrand__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.SiteURL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>MenuAssignment__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -822,6 +857,14 @@
     </applicationVisibilities>
     <custom>false</custom>
     <layoutAssignments>
+        <layout>Brand__c-Brand Layout</layout>
+		<recordType>Brand__c.Brand</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Brand__c-Brand Variant Layout</layout>
+		<recordType>Brand__c.BrandVariant</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>CategoryAssignment__c-Category Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -1010,6 +1053,15 @@
         <object>CategoryAssignment__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+	<objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Brand__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -1126,6 +1178,16 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Menu__c.SubMenu</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Brand__c.Brand</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Brand__c.BrandVariant</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
