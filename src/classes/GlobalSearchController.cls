@@ -23,12 +23,12 @@ public with sharing class GlobalSearchController {
     @AuraEnabled
     public static List<SearchResultWrapper> getSearchResults(String searchedString){
     	List<SearchResultWrapper> 	searchResults = new List<SearchResultWrapper>();
-    	List<RecordListLayout__c> recordLayouts = [SELECT Name, SectionAPIName__c, FieldsToSearch__c, FieldsToShow__c, IconName__c, ObjectAPIName__c, RecordTypeDevName__c 
+    	List<RecordListLayout__c> recordLayouts = [SELECT Name, ExternalId__c, FieldsToSearch__c, FieldsToShow__c, IconName__c, ObjectAPIName__c, RecordTypeDevName__c 
     												FROM RecordListLayout__c WHERE Active__c = true];
     	for(RecordListLayout__c rll : recordLayouts){
     		searchResults.add( new SearchResultWrapper( Database.query(buildQuery(rll, searchedString)),
     													rll.Name,
-    													rll.SectionAPIName__c,
+    													rll.ExternalId__c,
     													rll.IconName__c,
     													rll.ObjectAPIName__c,
     													getLabelsByFields(rll.FieldsToShow__c.split(','), rll.ObjectAPIName__c)

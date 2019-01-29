@@ -50,7 +50,6 @@
     <description>Translates Content or Media elements into a given language</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
-    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableReports>false</enableReports>
@@ -147,6 +146,18 @@
         <externalId>false</externalId>
         <label>Media Element</label>
         <referenceTo>MediaElement__c</referenceTo>
+        <relationshipLabel>Translations</relationshipLabel>
+        <relationshipName>Translations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RecordListLayout__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Record List Layout</label>
+        <referenceTo>RecordListLayout__c</referenceTo>
         <relationshipLabel>Translations</relationshipLabel>
         <relationshipName>Translations</relationshipName>
         <required>false</required>

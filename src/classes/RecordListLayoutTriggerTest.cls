@@ -9,7 +9,7 @@ public with sharing class RecordListLayoutTriggerTest {
 
     @isTest
     static void updateListLayout(){
-    	RecordListLayout__c rll = [SELECT Id,Name,SectionAPIName__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
+    	RecordListLayout__c rll = [SELECT Id,Name,ExternalId__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
     								FROM RecordListLayout__c
     								LIMIT 1];
     	rll.FieldsToShow__c = 'Name';
@@ -18,7 +18,7 @@ public with sharing class RecordListLayoutTriggerTest {
 
     @isTest
     static void updateWrongSobject(){
-    	RecordListLayout__c rll = [SELECT Id,Name,SectionAPIName__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
+    	RecordListLayout__c rll = [SELECT Id,Name,ExternalId__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
     								FROM RecordListLayout__c
     								LIMIT 1];
     	rll.ObjectAPIName__c = 'NoExistingSobject';
@@ -32,7 +32,7 @@ public with sharing class RecordListLayoutTriggerTest {
 
     @isTest
     static void updateWrongField(){
-    	RecordListLayout__c rll = [SELECT Id,Name,SectionAPIName__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
+    	RecordListLayout__c rll = [SELECT Id,Name,ExternalId__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
     								FROM RecordListLayout__c
     								LIMIT 1];
 
@@ -68,7 +68,7 @@ public with sharing class RecordListLayoutTriggerTest {
 
     @isTest
     static void updateWrongRT(){
-    	RecordListLayout__c rll = [SELECT Id,Name,SectionAPIName__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
+    	RecordListLayout__c rll = [SELECT Id,Name,ExternalId__c,ObjectAPIName__c,FieldsToSearch__c,FieldsToShow__c,RecordTypeDevName__c 
     								FROM RecordListLayout__c
     								LIMIT 1];
 
@@ -85,7 +85,7 @@ public with sharing class RecordListLayoutTriggerTest {
     static RecordListLayout__c createListLayout(String name, String sectionApiName, String objectApiName, String fieldsToSearch, String fieldsToShow, String recordTypeDevName){
     	RecordListLayout__c rll = new RecordListLayout__c(
 												    		Name 					= name,
-												    		SectionAPIName__c 		= sectionApiName,
+												    		ExternalId__c 			= sectionApiName,
 												    		ObjectAPIName__c 		= objectApiName,
 												    		FieldsToSearch__c 		= fieldsToSearch,
 												    		FieldsToShow__c			= fieldsToShow,

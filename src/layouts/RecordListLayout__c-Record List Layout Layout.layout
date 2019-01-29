@@ -26,8 +26,8 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>SectionAPIName__c</field>
+                <behavior>Edit</behavior>
+                <field>ExternalId__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

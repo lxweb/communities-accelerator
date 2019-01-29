@@ -14,7 +14,7 @@ public with sharing class GlobalSearchControllerTest {
     static RecordListLayout__c createListLayout(String name, String sectionApiName, String objectApiName, String fieldsToSearch, String fieldsToShow, String recordTypeDevName){
     	RecordListLayout__c rll = new RecordListLayout__c(
 												    		Name 					= name,
-												    		SectionAPIName__c 		= sectionApiName,
+												    		ExternalId__c      		= sectionApiName,
 												    		ObjectAPIName__c 		= objectApiName,
 												    		FieldsToSearch__c 		= fieldsToSearch,
 												    		FieldsToShow__c			= fieldsToShow,

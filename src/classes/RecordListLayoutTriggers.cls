@@ -11,11 +11,13 @@ public with sharing class RecordListLayoutTriggers extends TriggersHandler{
 
     //Master loops
     public override void masterLoop_BeforeInsert(SObject recNew) {
+        setExternalId((RecordListLayout__c)recNew);
     	checkSobjectAPIName((RecordListLayout__c)recNew);
     	checkFieldsAPIName((RecordListLayout__c)recNew);
     	checkRecordTypeDevName((RecordListLayout__c)recNew);
     }
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        setExternalId((RecordListLayout__c)recNew);
     	checkSobjectAPIName((RecordListLayout__c)recNew);
     	checkFieldsAPIName((RecordListLayout__c)recNew);
     	checkRecordTypeDevName((RecordListLayout__c)recNew);
@@ -72,5 +74,13 @@ public with sharing class RecordListLayoutTriggers extends TriggersHandler{
 					recNew.addError(String.format(Label.GlobalSearchWrongRT, new List<String> {recNew.RecordTypeDevName__c, recNew.ObjectAPIName__c}));
 			}
 		}
+    }
+
+    private void setExternalId(RecordListLayout__c recNew){
+        if(!canMethod('setExternalId')){return;}
+
+        if(recNew.ExternalID__c == null){
+            recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
+        }
     }
 }
