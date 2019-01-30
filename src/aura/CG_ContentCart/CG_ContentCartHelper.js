@@ -21,9 +21,11 @@
 					component.set("v.contentCartWrapper.cartItemList", contentList);
 					var contentMap = component.get("v.contentCartWrapper.cartItemMap");
 	            	var returnMap = action.getReturnValue().cartItemMap;
-	            	returnMap.forEach(function(ACC) {
-						contentMap.push(ACC);
+
+	            	Object.keys(returnMap).forEach(function(key) {
+    					contentMap[key] = returnMap[key];
 					});
+
 					component.set("v.contentCartWrapper.cartItemMap", contentMap);
 	        	}else {
 	        		component.set("v.contentCartWrapper", action.getReturnValue());
