@@ -17,11 +17,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Brand__c.DetailTitle__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Brand__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -897,6 +892,10 @@
         <recordType>Component__c.Banner</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Component__c-Component%3A Brand Detail - Page Layout</layout>
+        <recordType>Component__c.Brand_Detail</recordType>
+    </layoutAssignments>	
+    <layoutAssignments>
         <layout>Component__c-Component%3A ClusterSelector - Page Layout</layout>
         <recordType>Component__c.Cluster_Selector</recordType>
     </layoutAssignments>
@@ -945,6 +944,10 @@
     <layoutAssignments>
         <layout>Content__c-Content%3A Banner - Page Layout</layout>
         <recordType>Content__c.Banner</recordType>
+    </layoutAssignments>
+	<layoutAssignments>
+        <layout>Content__c-Content%3A Brand Detail - Page Layout</layout>
+        <recordType>Content__c.BrandDetail</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content%3A Events - Page Layout</layout>
@@ -1218,6 +1221,11 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
+        <recordType>Component__c.Brand_Detail</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>	
+    <recordTypeVisibilities>
+        <default>false</default>
         <recordType>Component__c.Cluster_Selector</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -1270,6 +1278,11 @@
         <default>true</default>
         <personAccountDefault>true</personAccountDefault>
         <recordType>Content__c.Banner</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+	<recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Content__c.BrandDetail</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
