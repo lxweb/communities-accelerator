@@ -18,7 +18,7 @@
 		$A.enqueueAction(action);
 	},
 
-	getUrlParameter : function(sParam) { // URL + ?brand=a0H1U000001WuzLUAS
+	getUrlParameter : function(sParam) { 
         var sPageURL = decodeURIComponent(window.location.search.substring(1)), sURLVariables = sPageURL.split('&'), sParameterName, i;
 
         for (i = 0; i < sURLVariables.length; i++) {
