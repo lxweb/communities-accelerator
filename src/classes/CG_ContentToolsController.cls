@@ -3,7 +3,6 @@ public with sharing class CG_ContentToolsController {
         @auraEnabled public String contentId;
         @auraEnabled public String urlPreview;
         @auraEnabled public String urlDownload;
-        @auraEnabled public Boolean isExternal;
         @auraEnabled public String name;
 
         public ContentWrapper(){
@@ -47,11 +46,9 @@ public with sharing class CG_ContentToolsController {
 		        contentDist = [SELECT id, DistributionPublicUrl, ContentDownloadUrl FROM ContentDistribution WHERE ContentDocumentId =: contentDocId];
 		        contentWr.urlPreview = contentDist.DistributionPublicUrl.trim();
 		        contentWr.urlDownload = contentDist.ContentDownloadUrl.trim();
-                contentWr.isExternal = false;
 	        } else {
 	        	contentWr.urlPreview = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.trim();
 		        contentWr.urlDownload = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.trim();
-                contentWr.isExternal = true;
 	        }
 	        
 	    }

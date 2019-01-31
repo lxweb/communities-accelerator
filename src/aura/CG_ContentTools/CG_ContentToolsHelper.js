@@ -71,7 +71,7 @@
     
 
     download : function(component, helper){
-    	if(component.get("v.contentWrapper.isExternal")){
+    	if(component.get("v.contentWrapper.urlPreview") === component.get("v.contentWrapper.urlDownload")){
     		helper.saveAs(component);
 		}else{
 			window.open(component.get("v.contentWrapper.urlDownload"));
