@@ -191,6 +191,15 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
+        <content>Content_Brand_Detail_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Content__c</pageOrSobjectType>
+        <recordType>Content__c.BrandDetail</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
         <content>Component_Menu_page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Component__c</pageOrSobjectType>
