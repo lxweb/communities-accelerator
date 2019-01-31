@@ -67,5 +67,34 @@
 	        }
 	    });
 		$A.enqueueAction(action);
-    }
+    },
+    
+
+    download : function(component, helper){
+    	if(component.get("v.contentWrapper.isExternal")){
+    		helper.saveAs(component);
+		}else{
+			window.open(component.get("v.contentWrapper.urlDownload"));
+		}
+	},
+
+	saveAs : function(component){
+		var action = component.get("c.imageToBase64");
+	    action.setParams({
+	        urlImg: component.get("v.contentWrapper.urlDownload")
+	    });
+	    action.setCallback(this, function(f){
+	    	if(f.getState() === "SUCCESS") {
+	            var url = f.getReturnValue();
+	            var link = document.createElement('a');               
+	            link.href = url;                
+	            link.download = component.get("v.contentWrapper.name");
+	            document.body.appendChild(link);
+	            link.click();
+	            document.body.removeChild(link);
+	        }
+	    });
+		$A.enqueueAction(action);
+	}
+
 })

@@ -3,7 +3,9 @@ public with sharing class CG_ContentToolsController {
         @auraEnabled public String contentId;
         @auraEnabled public String urlPreview;
         @auraEnabled public String urlDownload;
-        
+        @auraEnabled public Boolean isExternal;
+        @auraEnabled public String name;
+
         public ContentWrapper(){
         }
     }
@@ -13,9 +15,10 @@ public with sharing class CG_ContentToolsController {
         ContentWrapper contentWr = new ContentWrapper();
         String contentDocId;
 
-        List<MediaElementAssignment__c> contentAssignmentList = [SELECT Content__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignment__c WHERE Content__c =: contentId AND isDeleted = false];
+        List<MediaElementAssignment__c> contentAssignmentList = [SELECT Content__c, MediaElement__r.FileURLDesktop__c, MediaElement__r.Name FROM MediaElementAssignment__c WHERE Content__c =: contentId AND isDeleted = false];
         if(contentAssignmentList.size() > 0){
-        	List<String> stringSplit = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.split('/');
+            contentWr.name = contentAssignmentList[0].MediaElement__r.Name;
+         	List<String> stringSplit = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.split('/');
             String str = stringSplit[stringSplit.size() - 1];
             if (Pattern.compile( '[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}' ).matcher(str).matches()){
             	contentDocId = str;
@@ -44,9 +47,11 @@ public with sharing class CG_ContentToolsController {
 		        contentDist = [SELECT id, DistributionPublicUrl, ContentDownloadUrl FROM ContentDistribution WHERE ContentDocumentId =: contentDocId];
 		        contentWr.urlPreview = contentDist.DistributionPublicUrl.trim();
 		        contentWr.urlDownload = contentDist.ContentDownloadUrl.trim();
+                contentWr.isExternal = false;
 	        } else {
 	        	contentWr.urlPreview = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.trim();
 		        contentWr.urlDownload = contentAssignmentList[0].MediaElement__r.FileURLDesktop__c.trim();
+                contentWr.isExternal = true;
 	        }
 	        
 	    }
@@ -67,4 +72,16 @@ public with sharing class CG_ContentToolsController {
         return contentWr;
     }
 
+    @auraEnabled
+    public static String imageToBase64(String urlImg){
+        String url = urlImg;// 'https://www.google.com/logos/doodles/2019/celebrating-mercedes-sosa-5177240911347712-2x.jpg';
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(url);
+        req.setMethod('GET');
+        Http binding = new Http();
+        HttpResponse res = binding.send(req);
+        Blob image = res.getBodyAsBlob();
+        return 'data:'+res.getHeader('Content-Type')+';base64,'+EncodingUtil.base64Encode(image);
+
+    }    
 }
