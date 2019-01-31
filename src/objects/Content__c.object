@@ -925,6 +925,127 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
     </recordTypes>
     <recordTypes>
+        <fullName>BrandDetail</fullName>
+        <active>true</active>
+        <description>Configure a new Brand Detail content. This content will display a a brand detail including all it related brands. The data this type of content allows are Media elements</description>
+        <label>Brand Detail</label>
+        <picklistValues>
+            <picklist>OverlayQuadrant__c</picklist>
+            <values>
+                <fullName>Bottom-Center</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bottom-Left</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Bottom-Right</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Middle-Center</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Middle-Left</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Middle-Right</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Top-Center</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Top-Left</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Top-Right</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PathStep__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Components</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Context and data</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Media elements</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tags</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>RedirectType__c</picklist>
+            <values>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>News</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>URL</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StatusApprovalProcess__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
         <fullName>Event</fullName>
         <active>true</active>
         <description>Configure a new Event content. This content will be shown inside an Event. The data this type of content allows are Media elements and Event metadata such as event date, event capacity, etc.</description>
