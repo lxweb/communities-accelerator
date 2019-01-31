@@ -840,7 +840,7 @@
         <field>User.TriggersDebugs__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<applicationVisibilities>
+    <applicationVisibilities>
         <application>CMS_Administration</application>
         <default>false</default>
         <visible>true</visible>
@@ -853,11 +853,11 @@
     <custom>false</custom>
     <layoutAssignments>
         <layout>Brand__c-Brand Layout</layout>
-		<recordType>Brand__c.Brand</recordType>
+        <recordType>Brand__c.Brand</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Brand__c-Brand Variant Layout</layout>
-		<recordType>Brand__c.BrandVariant</recordType>
+        <recordType>Brand__c.BrandVariant</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>CategoryAssignment__c-Category Assignment Layout</layout>
@@ -894,7 +894,7 @@
     <layoutAssignments>
         <layout>Component__c-Component%3A Brand Detail - Page Layout</layout>
         <recordType>Component__c.Brand_Detail</recordType>
-    </layoutAssignments>	
+    </layoutAssignments>    
     <layoutAssignments>
         <layout>Component__c-Component%3A ClusterSelector - Page Layout</layout>
         <recordType>Component__c.Cluster_Selector</recordType>
@@ -945,7 +945,7 @@
         <layout>Content__c-Content%3A Banner - Page Layout</layout>
         <recordType>Content__c.Banner</recordType>
     </layoutAssignments>
-	<layoutAssignments>
+    <layoutAssignments>
         <layout>Content__c-Content%3A Brand Detail - Page Layout</layout>
         <recordType>Content__c.BrandDetail</recordType>
     </layoutAssignments>
@@ -976,6 +976,10 @@
     <layoutAssignments>
         <layout>Menu__c-Menu Layout</layout>
     </layoutAssignments>
+    <tabVisibilities>
+        <tab>Brand__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <tabVisibilities>
         <tab>CategoryAssignment__c</tab>
         <visibility>DefaultOn</visibility>
@@ -1047,7 +1051,7 @@
         <object>Menu__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-	<objectPermissions>
+    <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -1056,7 +1060,7 @@
         <object>CategoryAssignment__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-	<objectPermissions>
+    <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -1223,7 +1227,7 @@
         <default>false</default>
         <recordType>Component__c.Brand_Detail</recordType>
         <visible>true</visible>
-    </recordTypeVisibilities>	
+    </recordTypeVisibilities>   
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.Cluster_Selector</recordType>
@@ -1280,7 +1284,7 @@
         <recordType>Content__c.Banner</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
-	<recordTypeVisibilities>
+    <recordTypeVisibilities>
         <default>false</default>
         <recordType>Content__c.BrandDetail</recordType>
         <visible>true</visible>
