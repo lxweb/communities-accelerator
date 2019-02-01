@@ -5,17 +5,19 @@
     <aura:attribute name="clusterExternalID" type="String"/>
     <aura:attribute name="componentId" type="Id"/>
     <aura:attribute name="isBackend" type="Boolean" default="false"/>
-    
+    <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
+
     <aura:attribute name="tree" type="Object" />
-    
+
     <aura:if isTrue="{!not(empty(v.tree))}">
+
         <div class="slds-tree_container">
-            
+
             <a class="{!v.tree.leafOnly? 'slds-tree__item-label unclickable-span':'slds-tree__item-label'}" data-clusterId="{!v.tree.name}" data-clustertype="{!v.tree.clustertype}" data-clusterLanding="{!v.tree.clusterLanding}" onclick="{!c.doOnclick}">
                 <h4 class="slds-text-title_caps" id="treeheading">{!v.tree.label}</h4>
             </a>
             <div class="slds-grid">
-                
+
                 <aura:iteration items="{!v.tree.items}" var="item">
                     
                     <div class="slds-col">
@@ -29,7 +31,7 @@
                   <lightning:icon class="iconClass" iconName="utility:chevronright" size="3" />
                </button>
               -->
-                                    </aura:if>	        		
+                                    </aura:if>                  
                                     <span class="slds-has-flexi-truncate">
                                         <span class="{!item.leafOnly? 'slds-tree__item-label slds-truncate unclickable-span':'slds-tree__item-label slds-truncate'}" title="{!item.label}" data-clusterId="{!item.name}" data-clusterLanding="{!item.clusterLanding}" data-clustertype="{!item.clustertype}" onclick="{!c.doOnclick}" >{!item.label}</span>
                                     </span>
@@ -69,9 +71,31 @@
                     </div>
                 </aura:iteration>
             </div>
-        </div> 
-        <aura:set attribute="else">
-            {!$Label.c.notReferClusterSelectorRecord}
-        </aura:set>
+        </div>
     </aura:if>
+    <aura:If isTrue="{!v.isLivePreview}">
+        <aura:If isTrue="{!v.clusterExternalID == ''}">
+            <div class="slds-page-header" style="text-align: center;">
+                <lightning:layout horizontalAlign="left">
+                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+                        <h1 class="slds-page-header__title slds-text-heading_large">Cluster Selector</h1>
+                        <p>{!$Label.c.ComponentEmpty}</p>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.tree.clustertype == null}">
+                    <div class="slds-page-header" style="text-align: center;">
+                        <lightning:layout horizontalAlign="left">
+                            <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+                                <h1 class="slds-page-header__title slds-text-heading_large">Cluster Selector</h1>
+                                <p>{!$Label.c.IncorrectExternalId}</p>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                </aura:if>    
+            </aura:set>
+        </aura:If>
+    </aura:If>
+    
 </aura:component>
