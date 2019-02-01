@@ -113,15 +113,16 @@
     </fields>
     <fields>
         <fullName>Tag__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Tag</label>
         <referenceTo>Tag__c</referenceTo>
         <relationshipLabel>Assignments</relationshipLabel>
         <relationshipName>TagAssignments</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Tag Assignment</label>
     <listViews>
@@ -149,6 +150,6 @@
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
