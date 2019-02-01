@@ -71,7 +71,7 @@ public with sharing class CG_ContentToolsController {
 
     @auraEnabled
     public static String imageToBase64(String urlImg){
-        String url = urlImg;// 'https://www.google.com/logos/doodles/2019/celebrating-mercedes-sosa-5177240911347712-2x.jpg';
+        String url = urlImg;
         HttpRequest req = new HttpRequest();
         req.setEndpoint(url);
         req.setMethod('GET');
@@ -79,6 +79,5 @@ public with sharing class CG_ContentToolsController {
         HttpResponse res = binding.send(req);
         Blob image = res.getBodyAsBlob();
         return 'data:'+res.getHeader('Content-Type')+';base64,'+EncodingUtil.base64Encode(image);
-
     }    
 }

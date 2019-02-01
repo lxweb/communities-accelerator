@@ -74,7 +74,13 @@
     	if(component.get("v.contentWrapper.urlPreview") === component.get("v.contentWrapper.urlDownload")){
     		helper.saveAs(component);
 		}else{
-			window.open(component.get("v.contentWrapper.urlDownload"));
+				var url = component.get("v.contentWrapper.urlDownload");
+	            var link = document.createElement('a');               
+	            link.href = url;                
+	            link.download = component.get("v.contentWrapper.name");
+	            document.body.appendChild(link);
+	            link.click();
+	            document.body.removeChild(link);
 		}
 	},
 
