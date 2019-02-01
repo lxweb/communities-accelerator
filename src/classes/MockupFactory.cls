@@ -379,6 +379,17 @@ public class MockupFactory {
         return menuAssignmentList;
     }
 
+    public static List<Brand__c>  createBrand(String brandName, Integer cuantity, Id clusterId){
+        List<Brand__c> brandList = new List<Brand__c>();
+        
+        for(Integer i = 0;i<cuantity;i++){
+            brandList.add( new Brand__c(Name=brandName+i, Cluster__c=clusterId));
+        }
+        insert brandList;
+
+        return brandList;
+    }
+
     //Create contentCartItems to each Content
     public static List<ContentCartItem__c>  createContentCartItem(List<Content__c> contentIdList){
         List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();

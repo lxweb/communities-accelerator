@@ -189,6 +189,24 @@
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Content_Brand_Detail_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Content__c</pageOrSobjectType>
+        <recordType>Content__c.BrandDetail</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Component_Menu_page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Component__c</pageOrSobjectType>
+        <recordType>Component__c.Menu</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <tabs>Cluster__c</tabs>
     <tabs>Component__c</tabs>
     <tabs>Content__c</tabs>
@@ -198,5 +216,6 @@
     <tabs>Translation__c</tabs>
     <tabs>Navigation__c</tabs>
     <tabs>Menu__c</tabs>
+    <tabs>Brand__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
