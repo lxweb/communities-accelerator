@@ -38,7 +38,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>ComponentEmpty</shortDescription>
-        <value>Please complete the component attribute &quot;Component External Id&quot; with a valid value</value>
+        <value>External Id is missing. Enter the external Id of the record you want to link to this component.</value>
     </labels>
     <labels>
         <fullName>Desktop</fullName>
@@ -105,6 +105,14 @@
         <value>Error</value>
     </labels>
     <labels>
+        <fullName>General_Order</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Order</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
         <fullName>General_RecordsSavedSuccessfully</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -119,6 +127,14 @@
         <protected>true</protected>
         <shortDescription>Refresh</shortDescription>
         <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>General_Reorder</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Reorder</shortDescription>
+        <value>Reorder</value>
     </labels>
     <labels>
         <fullName>General_Save</fullName>
@@ -161,6 +177,14 @@
         <value>Image Uploader</value>
     </labels>
     <labels>
+        <fullName>IncorrectExternalId</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IncorrectExternalId</shortDescription>
+        <value>External Id does not belong to a compatible object or record type. Enter the External Id of the record you want to link to this component</value>
+    </labels>
+    <labels>
         <fullName>Language</fullName>
         <categories>TranslationComponent.cmp</categories>
         <language>en_US</language>
@@ -175,6 +199,14 @@
         <protected>true</protected>
         <shortDescription>Mobile</shortDescription>
         <value>Mobile</value>
+    </labels>
+    <labels>
+        <fullName>NoClusterSelected</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>The record associated to this component hasn´t a cluster defined. Define a cluster for the record associated to this component</value>
     </labels>
     <labels>
         <fullName>NoRecordsSelected</fullName>
@@ -255,21 +287,5 @@
         <protected>false</protected>
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
-    </labels>
-    <labels>
-        <fullName>General_Reorder</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Reorder</shortDescription>
-        <value>Reorder</value>
-    </labels>
-    <labels>
-        <fullName>General_Order</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Order</shortDescription>
-        <value>Order</value>
     </labels>
 </CustomLabels>
