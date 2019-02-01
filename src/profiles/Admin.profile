@@ -597,11 +597,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.MediaElement__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElementAssignment__c.Place__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -743,11 +738,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>TagAssignment__c.TagDescription__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>TagAssignment__c.Tag__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
