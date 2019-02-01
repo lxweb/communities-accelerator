@@ -206,7 +206,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>NoClusterSelected</shortDescription>
-        <value>The record associated to this component hasn´t a cluster defined. Define a cluster for the record associated to this component</value>
+        <value>The cookie associated with the cluster don&apos;t have any value.</value>
     </labels>
     <labels>
         <fullName>NoRecordsSelected</fullName>
