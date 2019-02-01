@@ -69,42 +69,54 @@
 		$A.enqueueAction(action);
 	},
 	downloadAllItems : function(component, event, helper) {
-		
-		var action = component.get("c.downloadAllItems");
-		action.setParams({
-			data: JSON.stringify(component.get("v.contentCartWrapper"))
-		});
 
-		action.setCallback(this, function(f){
-			if(f.getState() === "SUCCESS"){
-				component.set("v.contentCartWrapper", action.getReturnValue());
-				var titles = component.get("v.contentCartWrapper.fileDocumentList");
-				titles = titles || [];
-		    	if ( titles.length > 0 ) {
-					for ( var ii = 0; ii < titles.length; ii++ ) {
-	            		helper.saveAs(titles[ii]);
-	        		}
-				}
-			}
-		});
-		$A.enqueueAction(action,'file');
-	},
-	saveAs : function(uri, filename){
-		var link = document.createElement('a');
-		if (typeof link.download === 'string') {
-			link.href = uri;
-			link.download = filename;
-
-			//Firefox requires the link to be in the body
-			document.body.appendChild(link);
-
-			//simulate click
-			link.click();
-
-			//remove the link when done
-			document.body.removeChild(link);
-		} else {
-			window.open(uri);
+		var myzip = new JSZip(); 
+		var contentList = component.get("v.contentCartWrapper.cartItemList");
+		for ( var ii = 0; ii < contentList.length; ii++ ) {
+			var cw=contentList[ii];		
+			if(cw.contentDocumentId === ""){
+				var action = component.get("c.imageToBase64");
+			    action.setParams({
+			        urlImg: cw.fileDownloadLink
+			    });
+			    action.setCallback(this, function(f){
+			    	if(f.getState() === "SUCCESS") {
+			            var url = f.getReturnValue();
+			            console.log(url);
+			            //myzip.file(cw.name+".jpg", url, {base64: true});
+			            //SE COMENTA PORQUE DESCARGA SIEMPRE CON EL ÚLTIMO NOMBRE DE LA LISTA
+			            myzip.file("External Link.jpg", url, {base64: true});
+				    }
+				    helper.generateZIP(myzip);
+			    });
+				// EL LUNES PROBAR DESCARGANDO IMAGENES DE SALESFORCE COMO SI FUERAN LINKS EXTERNOS
+				// UTILIZANDO LOS LINKS DEL PREVIWE, PASAR AL CONTROLADOR UNA LISTA PARA QUE PROCESE 
+				// TODO JUNTO   
+			}//else {
+				//myzip.file(cw.name, cw.fileDownloadLink, {blob: true});
+			//}
 		}
+
+		$A.enqueueAction(action);
+		
+	},
+
+	generateZIP : function(myzip){
+        myzip.generateAsync({type:"base64"}).then(function(base64){
+
+            var url = "data:application/zip;base64," + base64;
+            var link = document.createElement('a');               
+            link.href = url;                
+            link.download = "contetCart.zip";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+		}) 
+
 	}
+
+
+
+
 })
