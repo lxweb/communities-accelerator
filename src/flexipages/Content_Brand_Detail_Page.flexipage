@@ -3,19 +3,6 @@
     <flexiPageRegions>
         <componentInstances>
             <componentName>force:detailPanel</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <name>Facet-cf018fa9-eede-4bc1-be68-fde3548d418d</name>
         <type>Facet</type>
@@ -79,17 +66,6 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-a78f6dc1-3af3-4c2f-b285-508d2320b59e</value>
             </componentInstanceProperties>
@@ -124,24 +100,6 @@
                 <value>ORDER BY Name</value>
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Tags</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
@@ -161,24 +119,6 @@
                 <value>WHERE RecordType.DeveloperName = [!rec.RecordType.DeveloperName] AND ClusterExternalId__c = [!rec.ClusterRootExternalId__c]</value>
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Components</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <name>header</name>
         <type>Region</type>

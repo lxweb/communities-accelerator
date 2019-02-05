@@ -414,72 +414,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </valueSet>
     </fields>
     <fields>
-        <fullName>PathStep__c</fullName>
-        <defaultValue>&quot;Initial&quot;</defaultValue>
-        <externalId>false</externalId>
-        <label>Path Step</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Context and data</fullName>
-                    <default>false</default>
-                    <label>Context and data</label>
-                </value>
-                <value>
-                    <fullName>Media elements</fullName>
-                    <default>false</default>
-                    <label>Media elements</label>
-                </value>
-                <value>
-                    <fullName>Tags</fullName>
-                    <default>false</default>
-                    <label>Tags</label>
-                </value>
-                <value>
-                    <fullName>Components</fullName>
-                    <default>false</default>
-                    <label>Components</label>
-                </value>
-                <value>
-                    <fullName>Date information</fullName>
-                    <default>false</default>
-                    <label>Date information</label>
-                </value>
-                <value>
-                    <fullName>List information</fullName>
-                    <default>false</default>
-                    <label>List information</label>
-                </value>
-                <value>
-                    <fullName>Detail information</fullName>
-                    <default>false</default>
-                    <label>Detail information</label>
-                </value>
-                <value>
-                    <fullName>Final check</fullName>
-                    <default>false</default>
-                    <label>Final check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>PublishEndDate__c</fullName>
         <defaultValue>NOW()+365</defaultValue>
         <externalId>false</externalId>
@@ -715,41 +649,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>List information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Media elements</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>RedirectType__c</picklist>
             <values>
                 <fullName>Event</fullName>
@@ -848,37 +747,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Media elements</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>RedirectType__c</picklist>
             <values>
                 <fullName>Event</fullName>
@@ -965,37 +833,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Top-Right</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Media elements</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1090,49 +927,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Date information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Detail information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>List information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Media elements</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>RedirectType__c</picklist>
             <values>
                 <fullName>Event</fullName>
@@ -1223,37 +1017,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>List information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>RedirectType__c</picklist>
             <values>
                 <fullName>Event</fullName>
@@ -1340,45 +1103,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Top-Right</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Components</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Context and data</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Detail information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>List information</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Media elements</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

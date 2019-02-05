@@ -96,37 +96,6 @@
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>Path_step__c</fullName>
-        <description>This field is for path purposes</description>
-        <externalId>false</externalId>
-        <inlineHelpText>This field is for path purposes</inlineHelpText>
-        <label>Path Step</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Final check</fullName>
-                    <default>false</default>
-                    <label>Final check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -159,11 +128,6 @@
         <filterScope>Everything</filterScope>
         <label>All</label>
         <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>All1</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
     </listViews>
     <listViews>
         <fullName>CP_Category_Brand</fullName>

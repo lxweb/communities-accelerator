@@ -54,34 +54,10 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-a21b1389-7964-4b87-8562-23493432ec63</value>
             </componentInstanceProperties>
             <componentName>flexipage:tabset</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
@@ -106,22 +82,6 @@
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
             <visibilityRule>
-                <booleanFilter>(1 OR 2 OR 3) AND 4</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Direct content assignment</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
                 <criteria>
                     <leftValue>{!Record.Datasource__c}</leftValue>
                     <operator>EQUAL</operator>
@@ -148,22 +108,7 @@
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
             <visibilityRule>
-                <booleanFilter>(1 OR 2 OR 3) AND (4 OR 5)</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Direct content assignment</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
+                <booleanFilter>(1 OR 2)</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Datasource__c}</leftValue>
                     <operator>EQUAL</operator>
@@ -199,22 +144,7 @@
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
             <visibilityRule>
-                <booleanFilter>(1 OR 2 OR 3) AND (4 OR 5)</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Direct content assignment</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_status__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
+                <booleanFilter>(1 OR 2)</booleanFilter>
                 <criteria>
                     <leftValue>{!Record.Datasource__c}</leftValue>
                     <operator>EQUAL</operator>

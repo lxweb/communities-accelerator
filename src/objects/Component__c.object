@@ -848,67 +848,6 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>Path_status__c</fullName>
-        <description>This picklist is used by the Path feature to guide the user on the task of populating a Component-Banner record</description>
-        <externalId>false</externalId>
-        <label>Path status</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Layout</fullName>
-                    <default>false</default>
-                    <label>Layout</label>
-                </value>
-                <value>
-                    <fullName>Behavior</fullName>
-                    <default>false</default>
-                    <label>Behavior</label>
-                </value>
-                <value>
-                    <fullName>Content source</fullName>
-                    <default>false</default>
-                    <label>Source</label>
-                </value>
-                <value>
-                    <fullName>Direct content assignment</fullName>
-                    <default>false</default>
-                    <label>Assignment</label>
-                </value>
-                <value>
-                    <fullName>Sorting</fullName>
-                    <default>false</default>
-                    <label>Sorting</label>
-                </value>
-                <value>
-                    <fullName>External linking</fullName>
-                    <default>false</default>
-                    <label>Linking</label>
-                </value>
-                <value>
-                    <fullName>Final check</fullName>
-                    <default>false</default>
-                    <label>Final check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>ShowBullets__c</fullName>
         <defaultValue>true</defaultValue>
         <description>Determina si se muestran los bullets en el banner.</description>
@@ -1377,37 +1316,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -1636,45 +1544,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1951,45 +1820,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -2258,45 +2088,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -2573,45 +2364,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -2864,45 +2616,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -3151,41 +2864,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -3422,37 +3100,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3729,45 +3376,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -4008,45 +3616,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -4295,41 +3864,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -4598,45 +4132,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>StatusApprovalProcess__c</picklist>
             <values>
                 <fullName>Approved</fullName>
@@ -4889,45 +4384,6 @@
             </values>
             <values>
                 <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Path_status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Content source</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct content assignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>External linking</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Layout</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Sorting</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

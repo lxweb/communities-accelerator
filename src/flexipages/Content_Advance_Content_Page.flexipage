@@ -3,19 +3,6 @@
     <flexiPageRegions>
         <componentInstances>
             <componentName>force:detailPanel</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <name>Facet-f0d3b9d2-66e7-465c-901c-b720faecda12</name>
         <type>Facet</type>
@@ -75,17 +62,6 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-2e13b977-203a-484b-b8c5-ccf973fc5fd1</value>
             </componentInstanceProperties>
@@ -105,24 +81,6 @@
                 <value>MediaElement__c</value>
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Media elements</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
@@ -142,24 +100,6 @@
                 <value>ORDER BY Name</value>
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Tags</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
@@ -179,24 +119,6 @@
                 <value>WHERE RecordType.DeveloperName = [!rec.RecordType.DeveloperName] AND ClusterExternalId__c = [!rec.ClusterRootExternalId__c]</value>
             </componentInstanceProperties>
             <componentName>JunctionObjectManager</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Components</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <name>header</name>
         <type>Region</type>
