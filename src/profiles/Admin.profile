@@ -943,9 +943,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Navigation__c-Navigation Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Navigation__c-Navigation Layout</layout>
         <recordType>Navigation__c.Navigation</recordType>
     </layoutAssignments>
     <layoutAssignments>
