@@ -2,6 +2,41 @@
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldPermissions>
         <editable>true</editable>
+        <field>AudienceUser__c.Audience__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>AudienceUser__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>AudienceUser__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>AudienceUser__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>AudienceUser__c.User__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Navigation__c.AudienceUser__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Navigation__c.Audience__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Brand__c.BrandContent__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -297,6 +332,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Navigation__c.DefaultPage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Navigation__c.ParentNavigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Component__c.EventsType__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -588,11 +633,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MediaElementAssignment__c.Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MediaElementAssignment__c.Location__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -898,12 +938,26 @@
         <recordType>Component__c.EventDetail</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Navigation__c-Navigation Variant Layout</layout>
+        <recordType>Navigation__c.Navigation_variant</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Navigation__c-Navigation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Navigation__c-Navigation Layout</layout>
+        <recordType>Navigation__c.Navigation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Component__c-Component%3A FAQ - Page Layout</layout>
         <recordType>Component__c.FAQ</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Component__c-Component%3A Menu - Page Layout</layout>
         <recordType>Component__c.Menu</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AudienceUser__c-Audience user Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Component__c-Component%3A News - Page Layout</layout>
@@ -968,6 +1022,10 @@
     </layoutAssignments>
     <tabVisibilities>
         <tab>Brand__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>AudienceUser__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
@@ -1048,6 +1106,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>CategoryAssignment__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>AudienceUser__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -1282,6 +1349,16 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Content__c.Event</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Navigation__c.Navigation</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Navigation__c.Navigation_variant</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
