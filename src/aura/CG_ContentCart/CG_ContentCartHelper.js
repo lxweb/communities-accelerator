@@ -68,34 +68,26 @@
 		});
 		$A.enqueueAction(action);
 	},
-	downloadAllItems : function(component, event, helper) {
+	downloadAllItems : function(component, event, helper) { 
 
-		var myzip = new JSZip(); 
-		var contentList = component.get("v.contentCartWrapper.cartItemList");
-		for ( var ii = 0; ii < contentList.length; ii++ ) {
-			var cw=contentList[ii];		
-			if(cw.contentDocumentId === ""){
-				var action = component.get("c.imageToBase64");
-			    action.setParams({
-			        urlImg: cw.fileDownloadLink
-			    });
-			    action.setCallback(this, function(f){
-			    	if(f.getState() === "SUCCESS") {
-			            var url = f.getReturnValue();
-			            console.log(url);
-			            //myzip.file(cw.name+".jpg", url, {base64: true});
-			            //SE COMENTA PORQUE DESCARGA SIEMPRE CON EL ÚLTIMO NOMBRE DE LA LISTA
-			            myzip.file("External Link.jpg", url, {base64: true});
-				    }
-				    helper.generateZIP(myzip);
-			    });
-				// EL LUNES PROBAR DESCARGANDO IMAGENES DE SALESFORCE COMO SI FUERAN LINKS EXTERNOS
-				// UTILIZANDO LOS LINKS DEL PREVIWE, PASAR AL CONTROLADOR UNA LISTA PARA QUE PROCESE 
-				// TODO JUNTO   
-			}//else {
-				//myzip.file(cw.name, cw.fileDownloadLink, {blob: true});
-			//}
-		}
+		var action = component.get("c.downloadAllItems");
+		action.setParams({
+			data: JSON.stringify(component.get("v.contentCartWrapper"))
+		});
+		action.setCallback(this, function(f){
+			if(f.getState() === "SUCCESS") {
+				var returnMap = f.getReturnValue();
+				var myzip = new JSZip();
+			    Object.keys(returnMap).forEach(function(key) {
+	   				myzip.file(key, returnMap[key], {base64: true});
+				});
+				helper.generateZIP(myzip);
+
+				var itemList = component.get("v.contentCartWrapper.cartItemList");
+
+			}
+		});
+				// TODO JUNTO   AGREGAR EN LA DOCUMENTACIÓN LOS REMOTE SITES PARA DESCARGAR LINKS
 
 		$A.enqueueAction(action);
 		
@@ -115,8 +107,5 @@
 		}) 
 
 	}
-
-
-
 
 })

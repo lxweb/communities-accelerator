@@ -19,17 +19,7 @@ public with sharing class CG_ContentCartController {
         @auraEnabled public String fileLink;
         @auraEnabled public String filePreviewLink;        
         @auraEnabled public String fileDownloadLink;
-
-
-        public CartItemWrapper(String itemId, String name, String description, String contentDocumentId){
-            this.cartItemId = itemId;
-            this.name = name;
-            this.description = description;
-            this.fileLink = '';
-            this.filePreviewLink = '';
-            this.fileDownloadLink = '';
-            this.contentDocumentId = contentDocumentId;
-        }
+     
         public CartItemWrapper(){
         }
     }
@@ -136,29 +126,38 @@ public with sharing class CG_ContentCartController {
     }
 
     @AuraEnabled
-    public static ContentCartWrapper downloadAllItems(String data){
-        ContentCartWrapper contentCartWr = (ContentCartWrapper)JSON.deserialize(data, ContentCartWrapper.class);        
-        List<String> fileDocumentList = new List<String>();
+    public static Map <String, String> downloadAllItems(String data){
+        ContentCartWrapper contentCartWr = (ContentCartWrapper)JSON.deserialize(data, ContentCartWrapper.class);                
+        Map <String, String> imageMap = new Map <String, String>();
+        List<String> documentInternalIdList = new List<String>();
 
-        for(CartItemWrapper ciw : contentCartWr.cartItemList){
-        	contentCartWr.fileDocumentList.add(ciw.fileDownloadLink);
+        for (CartItemWrapper item : contentCartWr.cartItemList){
+            if(item.filePreviewLink.equalsIgnoreCase(item.fileDownloadLink)){
+                HttpRequest req = new HttpRequest();
+                req.setEndpoint(item.filePreviewLink);
+                req.setMethod('GET');
+                Http binding = new Http();
+                HttpResponse res = binding.send(req);
+                Blob image = res.getBodyAsBlob();
+                String name = item.filePreviewLink.substringAfterLast('/');
+                if(String.isNotEmpty(name)){
+                    if(name.contains('.')){
+                        name=name+'.jpg';
+                    }
+                }else{
+                    name=item.name+'.jpg';
+                }
+                imageMap.put(name, EncodingUtil.base64Encode(image));
+            }else{
+                documentInternalIdList.add(item.contentDocumentId);
+            }
+        }
+        List<ContentVersion> contentVersionList = [SELECT Id, Title, FileExtension, VersionData FROM ContentVersion WHERE ContentDocumentId in : documentInternalIdList AND IsLatest = true];
+        for (ContentVersion contv : contentVersionList){
+            imageMap.put(contv.Title + '.' + contv.FileExtension, EncodingUtil.base64Encode(contv.VersionData));
         }
 
-        //Descargar el .ZIP desde aquí porque ya se tiene el fileDownloadLink
-
-        return contentCartWr;
-    }
-
-    @auraEnabled
-    public static String imageToBase64(String urlImg){
-        String url = urlImg;
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint(url);
-        req.setMethod('GET');
-        Http binding = new Http();
-        HttpResponse res = binding.send(req);
-        Blob image = res.getBodyAsBlob();
-        //return 'data:'+res.getHeader('Content-Type')+';base64,'+EncodingUtil.base64Encode(image);
-        return EncodingUtil.base64Encode(image);
+        return imageMap;
     } 
+
 }
