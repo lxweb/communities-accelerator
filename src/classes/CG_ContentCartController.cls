@@ -19,29 +19,29 @@ public with sharing class CG_ContentCartController {
         @auraEnabled public String fileLink;
         @auraEnabled public String filePreviewLink;        
         @auraEnabled public String fileDownloadLink;
-
-
-        public CartItemWrapper(String itemId, String name, String description, String contentDocumentId){
-            this.cartItemId = itemId;
-            this.name = name;
-            this.description = description;
-            this.fileLink = '';
-            this.filePreviewLink = '';
-            this.fileDownloadLink = '';
-            this.contentDocumentId = contentDocumentId;
-        }
+     
         public CartItemWrapper(){
         }
     }
 
     @AuraEnabled
-    public static ContentCartWrapper initData(){
+    public static ContentCartWrapper initData(String stringOffset, String stringElementPerPage){
+
+        Integer intOffset =Integer.valueOf(stringOffset);
+        Integer intElementPerPage =Integer.valueOf(stringElementPerPage);
+        
         ContentCartWrapper contentCartWr = new ContentCartWrapper();
         Map<String, CartItemWrapper> contentCartItemMap = new Map<String, CartItemWrapper>();
 
         CartItemWrapper cartItemWrapper;
+        List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
+        
+        if(intOffset < 1){
+            contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId() ORDER BY Content__r.Name DESC LIMIT :intElementPerPage];
+        }else{
+            contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId() ORDER BY Content__r.Name DESC LIMIT :intElementPerPage OFFSET :intOffset];
+        }
 
-        List<ContentCartItem__c> contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE User__c =: UserInfo.getUserId()];
         for(ContentCartItem__c cci : contentCartList){
             cartItemWrapper = new CartItemWrapper();
             cartItemWrapper.cartItemId = cci.id;
@@ -82,8 +82,7 @@ public with sharing class CG_ContentCartController {
 				contentCartItemMap.put(contentDocIdMap.get(cd.ContentDocumentId), cartitemWrapper);
 			}        	
         }
-
-        contentCartWr.cartItemList = contentCartItemMap.values();
+        contentCartWr.cartItemList = contentCartItemMap.values();  
         return contentCartWr;
     }
 
@@ -127,16 +126,38 @@ public with sharing class CG_ContentCartController {
     }
 
     @AuraEnabled
-    public static ContentCartWrapper downloadAllItems(String data){
-        ContentCartWrapper contentCartWr = (ContentCartWrapper)JSON.deserialize(data, ContentCartWrapper.class);        
-        List<String> fileDocumentList = new List<String>();
+    public static Map <String, String> downloadAllItems(String data){
+        ContentCartWrapper contentCartWr = (ContentCartWrapper)JSON.deserialize(data, ContentCartWrapper.class);                
+        Map <String, String> imageMap = new Map <String, String>();
+        List<String> documentInternalIdList = new List<String>();
 
-        for(CartItemWrapper ciw : contentCartWr.cartItemList){
-        	contentCartWr.fileDocumentList.add(ciw.fileDownloadLink);
+        for (CartItemWrapper item : contentCartWr.cartItemList){
+            if(item.filePreviewLink.equalsIgnoreCase(item.fileDownloadLink)){
+                HttpRequest req = new HttpRequest();
+                req.setEndpoint(item.filePreviewLink);
+                req.setMethod('GET');
+                Http binding = new Http();
+                HttpResponse res = binding.send(req);
+                Blob image = res.getBodyAsBlob();
+                String name = item.filePreviewLink.substringAfterLast('/');
+                if(String.isNotEmpty(name)){
+                    if(name.contains('.')){
+                        name=name+'.jpg';
+                    }
+                }else{
+                    name=item.name+'.jpg';
+                }
+                imageMap.put(name, EncodingUtil.base64Encode(image));
+            }else{
+                documentInternalIdList.add(item.contentDocumentId);
+            }
+        }
+        List<ContentVersion> contentVersionList = [SELECT Id, Title, FileExtension, VersionData FROM ContentVersion WHERE ContentDocumentId in : documentInternalIdList AND IsLatest = true];
+        for (ContentVersion contv : contentVersionList){
+            imageMap.put(contv.Title + '.' + contv.FileExtension, EncodingUtil.base64Encode(contv.VersionData));
         }
 
-        //Descargar el .ZIP desde aquí porque ya se tiene el fileDownloadLink
+        return imageMap;
+    } 
 
-        return contentCartWr;
-    }
 }

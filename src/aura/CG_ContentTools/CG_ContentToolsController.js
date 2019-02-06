@@ -16,5 +16,8 @@
     },
     addToCart : function (component, event, helper) {
 		helper.addToCart(component, event, helper);        
+    },
+    download : function (component, event, helper) {
+    	helper.download(component, helper);
     }
 })
