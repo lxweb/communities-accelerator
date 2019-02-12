@@ -402,5 +402,13 @@ public class MockupFactory {
         return contentCartList;
     }
 
-
+    //Create SocialNetwork for a Brand 
+    public static List<SocialNetwork__c> createSocialNetworks(String name, String username, Id brandId, Id navigation, String rType){
+        List<SocialNetwork__c> socialNetwork = new List<SocialNetwork__c>();
+        RecordType recType = [SELECT Id FROM RecordType WHERE SObjectType = 'SocialNetwork__c' AND DeveloperName =: rType LIMIT 1];
+        socialNetwork.add(new SocialNetwork__c(Name = name, Username__c = username, Brand__c = brandId, Navigation__c = navigation, RecordTypeId = recType.Id));
+    
+        insert socialNetwork;
+        return socialNetwork;
+    }
 }
