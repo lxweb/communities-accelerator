@@ -19,10 +19,6 @@
                 <behavior>Edit</behavior>
                 <field>LinkDetail__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Path_status__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

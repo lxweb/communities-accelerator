@@ -52,4 +52,18 @@ private class CG_ContentToolsControllerTest {
 		//Then
 		System.assertEquals(contentWr.contentId, cont.Id);
 	}
+
+	@isTest 
+	static void imageToBase64Test() {
+		//When
+        // Set mock callout class
+        Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+		//Given
+		Test.startTest();
+		String url = CG_ContentToolsController.imageToBase64('http://example.com/example/test');
+		Test.stopTest();
+
+		//Then
+		System.assertNotEquals(url, NULL);
+	}
 }

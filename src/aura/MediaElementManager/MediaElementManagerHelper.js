@@ -33,16 +33,12 @@
 		component.set("v.searchValue",'');
 		component.set("v.mediaElementList", '');
 		component.set("v.scrollCalled", true);
-		console.log('component');
-		console.log(component.find("ss01"));
-		component.find("ss01").focus();
 		helper.getMedElems(component);
 	},
 
 	getMedElems: function( component ) {
 		//component.set("v.isLoading", true);
 		var searchValue = component.get("v.searchValue");
-
 		var elementPerPage = component.get("v.elementPerPage");
 		var action = component.get("c.getMediaElements");
 
@@ -83,8 +79,8 @@
 
 		var mElementId = event.target.getAttribute('id');
 		var junctionObjectHardcode = "MediaElementAssignment__c";
-
 		var action = component.get("c.assignMediaElementToId");
+
 		action.setParams({
 			recordId: component.get("v.recordId"),
 			place: component.get("v.mediaElementPlace"),
@@ -109,9 +105,7 @@
 		if (answer == true){
 			// var jObjectId = event.target.getAttribute('id');
 			var jObjectId = event.getSource().get("v.value");
-
 			var junctionObjectHardcode = "MediaElementAssignment__c";
-
 			var action = component.get("c.deleteJunctionObject");
 
 			action.setParams({

@@ -1,4 +1,4 @@
-<aura:component access="global" controller='CG_ContentToolsController' description="File content tools" >
+<aura:component access="global" implements="forceCommunity:availableForAllPageTypes" controller='CG_ContentToolsController' description="File content tools">
 	<!--Constructor -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
         
@@ -6,7 +6,10 @@
     content: a030b00000YZSxyAAH contentDocument: 0690b000003Kpiq
 	content: a030b00000YZSH1  MediaElement: a070b00000m6mgS
 	a030b00000YTkqs -->
-    <aura:attribute name="contentId" type="String"/>
+
+	<aura:attribute name="contentId" type="String" default="a071U000001B2U8QAK"/>
+
+   <!-- <aura:attribute name="contentId" type="String"/> -->
 
     <aura:attribute name="size" type="String" default="xx-small" />
     <aura:attribute name="iconName" type="String" />
@@ -51,11 +54,11 @@
 						</span>
 					</button>
 				</div>
-				
-				<div class="slds-col div_btn_icons" >
-					<a href="{!v.contentWrapper.urlDownload}">
+
+				<div class="slds-col div_btn">
+					<button title="Download" onclick="{!c.download}">
 			            <lightning:Icon class="{!x-small + '-icons'}" size="{!v.size}" iconName="action:download"/>
-			        </a>
+					</button>
 				</div>
 
 				<aura:if isTrue="{!not(v.isFromCart)}">

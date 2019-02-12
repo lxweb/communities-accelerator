@@ -49,6 +49,14 @@
         <value>Desktop</value>
     </labels>
     <labels>
+        <fullName>DuplicateItem</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Duplicate Item</shortDescription>
+        <value>The item you added is already present in the cart</value>
+    </labels>
+    <labels>
         <fullName>ExistByDefaultLanguage</fullName>
         <categories>ClusterTriggers</categories>
         <language>en_US</language>
@@ -183,6 +191,14 @@
         <protected>true</protected>
         <shortDescription>IncorrectExternalId</shortDescription>
         <value>External Id does not belong to a compatible object or record type. Enter the External Id of the record you want to link to this component</value>
+    </labels>
+    <labels>
+        <fullName>ItemWasAdded</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Item was added</shortDescription>
+        <value>Your item was added Successfully!</value>
     </labels>
     <labels>
         <fullName>Language</fullName>
