@@ -1,4 +1,4 @@
 <design:component label="Media Element Manager">
-	<design:attribute name="places" label="Places" required="true"/>
+	<design:attribute name="places" label="Placements" required="true"/>
     <design:attribute name="parentLookup" label="Parent Lookup Name" required="true"/>
 </design:component>
