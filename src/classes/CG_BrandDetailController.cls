@@ -38,12 +38,12 @@ public with sharing class CG_BrandDetailController {
                 bw.isVariant = false;
                 bw.description = brand.BrandContent__r.Description__c;
                 // GET BANNER URL AND LOGO URL
-                list<MediaElementAssignment__c> brandContent = [SELECT MediaElement__r.FileURLDesktop__c, Place__c  FROM MediaElementAssignment__c WHERE Content__c = :brand.BrandContent__c];
+                list<MediaElementAssignment__c> brandContent = [SELECT MediaElement__r.FileURLDesktop__c, Placement__c  FROM MediaElementAssignment__c WHERE Content__c = :brand.BrandContent__c];
                 for(MediaElementAssignment__c mediaElement : brandContent){
-                    if(mediaElement.Place__c == 'BrandImageBanner'){
+                    if(mediaElement.Placement__c == 'BrandImageBanner'){
                         bw.imageBannerURL = mediaElement.MediaElement__r.FileURLDesktop__c;
                     }
-                    if(mediaElement.Place__c == 'BrandImageLogo'){
+                    if(mediaElement.Placement__c == 'BrandImageLogo'){
                         bw.imageLogoURL = mediaElement.MediaElement__r.FileURLDesktop__c;
                     }
                 }

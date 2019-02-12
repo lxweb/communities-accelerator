@@ -28,7 +28,7 @@ public without sharing virtual class ContentUtils {
         String query = '';
 
         //SELECT
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
 
         //FROM
         query += 'FROM Content__c ';
@@ -138,7 +138,7 @@ public without sharing virtual class ContentUtils {
 
     public static List<ContentDataWrapper> getContentPage(set<String> setAllContentIds, set<String> fieldSet, Integer page, Integer pageSize, String orderBy, String device, String componentType){
         String query = '';
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
         query += 'WHERE Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';

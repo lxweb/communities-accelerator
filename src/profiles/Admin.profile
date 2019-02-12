@@ -617,7 +617,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.Place__c</field>
+        <field>MediaElementAssignment__c.Placement__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Media Element Assignment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Media Element Assignments</value>
+    </caseValues>
+    <fields>
+        <label><!-- Category --></label>
+        <name>Category__c</name>
+        <relationshipLabel><!-- Media Element Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Content --></label>
+        <name>Content__c</name>
+        <relationshipLabel><!-- Media Element Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Extensions --></label>
+        <name>Extensions__c</name>
+        <picklistValues>
+            <masterLabel>jpeg</masterLabel>
+            <translation><!-- jpeg --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>jpg</masterLabel>
+            <translation><!-- jpg --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>png</masterLabel>
+            <translation><!-- png --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>ExternalId__c</name>
+    </fields>
+    <fields>
+        <help><!-- The media element associated with this records, must have the same height as specified on this field --></help>
+        <label><!-- Height --></label>
+        <name>Height__c</name>
+    </fields>
+    <fields>
+        <label><!-- Image Order --></label>
+        <name>ImageOrder__c</name>
+    </fields>
+    <fields>
+        <label><!-- Label --></label>
+        <name>Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location --></label>
+        <name>Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Media Element --></label>
+        <name>MediaElement__c</name>
+        <relationshipLabel><!-- Media Element Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Placement --></label>
+        <name>Placement__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status approval process --></label>
+        <name>StatusApprovalProcess__c</name>
+    </fields>
+    <fields>
+        <label><!-- Width --></label>
+        <name>Width__c</name>
+    </fields>
+    <gender>Neuter</gender>
+    <layouts>
+        <layout>Media Element Assignment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Required Specifications --></label>
+            <section>Required Specifications</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>
