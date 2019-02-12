@@ -15,9 +15,9 @@ public class MediaElementsManagerControllerTest {
 		List<Content__c> content = MockupFactory.createContent('Event', cluster, 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(1);
 
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'icon');
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'small');
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'big');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'icon');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'small');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'big');
 		// When
 		Test.startTest();
 		list<MediaElementsManagerController.RecordsWrapper> rw = MediaElementsManagerController.getRecord(content[0].id, 'icon, big', 'Content__c', 'MediaElementAssignment__c');
@@ -80,10 +80,10 @@ public class MediaElementsManagerControllerTest {
 		MediaElementsManagerController.assignMediaElementToId (content[0].Id, 'icon', 'Content__c','MediaElementAssignment__c', medElement[0].Id);
 		Test.stopTest();
 
-		List<MediaElementAssignment__c> junctionObjectRecord = [SELECT id, Place__c FROM MediaElementAssignment__c WHERE Content__c = :content[0].Id AND MediaElement__c = :medElement[0].Id];
+		List<MediaElementAssignment__c> junctionObjectRecord = [SELECT id, Placement__c FROM MediaElementAssignment__c WHERE Content__c = :content[0].Id AND MediaElement__c = :medElement[0].Id];
 		// Then
 		System.assertEquals( 1, junctionObjectRecord.size());
-		System.assertEquals( 'icon', junctionObjectRecord[0].Place__c);
+		System.assertEquals( 'icon', junctionObjectRecord[0].Placement__c);
 	}
 	@isTest 
 	static void PA181_CASE_6(){
@@ -93,7 +93,7 @@ public class MediaElementsManagerControllerTest {
 		Cluster__c cluster = [SELECT id FROM Cluster__c LIMIT 1];
 		List<Content__c> content = MockupFactory.createContent('Event', cluster, 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(1);
-		MediaElementAssignment__c junctionObjectRecord = new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'icon');
+		MediaElementAssignment__c junctionObjectRecord = new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'icon');
 		insert junctionObjectRecord;
 		// When
 		Test.startTest();

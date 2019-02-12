@@ -17,11 +17,11 @@ public class MediaElementsManagerController {
 			placesList.add(place.trim());
 		}
 		// busco y me fijo si existe un registro del Objeto junctionObject que se relacione a las places e ids
-		String joQuery = 'SELECT Id, Place__c, MediaElement__r.FileURLDesktop__c, ' + parentLookup + ' FROM ' + junctionObject + ' WHERE Place__c IN :placesList AND '+ parentLookup + '= \'' + recordId + '\'';
+		String joQuery = 'SELECT Id, Placement__c, MediaElement__r.FileURLDesktop__c, ' + parentLookup + ' FROM ' + junctionObject + ' WHERE Placement__c IN :placesList AND '+ parentLookup + '= \'' + recordId + '\'';
 		for(SObject rec: Database.query(joQuery)){
 			for(RecordsWrapper rw :rwList){
 				system.debug(rw);
-				if(rw.place == rec.get('Place__c')){
+				if(rw.place == rec.get('Placement__c')){
 					system.debug('entre');
 					rw.junctionObject = rec;
 				}
@@ -65,10 +65,10 @@ public class MediaElementsManagerController {
 
 		sObj.put(parentLookup, recordId);
 		sObj.put('MediaElement__c', mediaElementId);
-		sObj.put('Place__c', place);
+		sObj.put('Placement__c', place);
 		
 		list<sObject> listToDelete = new list<sObject> ();
-		for(SObject rec: Database.query('SELECT Id, Place__c, MediaElement__r.FileURLDesktop__c, ' + parentLookup + ' FROM ' + junctionObject + ' WHERE Place__c = \'' + place + '\' AND '+ parentLookup + '= \'' + recordId + '\'')){
+		for(SObject rec: Database.query('SELECT Id, Placement__c, MediaElement__r.FileURLDesktop__c, ' + parentLookup + ' FROM ' + junctionObject + ' WHERE Placement__c = \'' + place + '\' AND '+ parentLookup + '= \'' + recordId + '\'')){
 			listToDelete.add(rec);
 		}
 

@@ -26,7 +26,7 @@ public class CG_BrandDetailControllerTest {
         update content;
 		mediaElement.FileURLDesktop__c = 'FileURLDesktopTest';
 		update mediaElement;
-		mediaElementAssignment.Place__c = 'BrandImageBanner';
+		mediaElementAssignment.Placement__c = 'BrandImageBanner';
 		update mediaElementAssignment;
 	}
 

@@ -175,9 +175,9 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>Place__c</fullName>
+        <fullName>Placement__c</fullName>
         <externalId>false</externalId>
-        <label>Place</label>
+        <label>Placement</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
