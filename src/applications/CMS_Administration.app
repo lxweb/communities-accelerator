@@ -217,5 +217,6 @@
     <tabs>Navigation__c</tabs>
     <tabs>Menu__c</tabs>
     <tabs>Brand__c</tabs>
+    <tabs>SocialNetwork__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
