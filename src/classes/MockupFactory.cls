@@ -411,4 +411,13 @@ public class MockupFactory {
         insert socialNetwork;
         return socialNetwork;
     }
+    
+    
+    //Create audience user
+    public static AudienceUser__c createAudienceUser(String name, Id clusterId, String status, Id userId){
+        AudienceUser__c AU = new AudienceUser__c(Name=name, Cluster__c=clusterId, Status__c= status, User__c = userId);
+        insert AU;
+        return AU;
+        
+    }
 }
