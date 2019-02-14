@@ -24,12 +24,6 @@ public with sharing class CG_BaseComponentController {
 
     @auraEnabled
 	public static ComponentWrapper getComponentWrapper(String componentExternalId, String componentType, String parentComponentId, String parentContentId, String clusterId, String device){
-		system.debug('CG_BaseComponentController: componentExternalId: ' + componentExternalId);
-		system.debug('CG_BaseComponentController: componentType: ' + componentType);
-		system.debug('CG_BaseComponentController: parentComponentId: ' + parentComponentId);
-		system.debug('CG_BaseComponentController: parentContentId: ' + parentContentId);
-		system.debug('CG_BaseComponentController: clusterId: ' + clusterId);
-		system.debug('CG_BaseComponentController: device: ' + device);
 
 		Component__c component;
 		Component__c parentComponent;
@@ -41,10 +35,8 @@ public with sharing class CG_BaseComponentController {
 			clusterId = ClusterUtils.getClusterIdFromMappingObject(UserInfo.getUserId(), Network.getNetworkId());
 		}
 		set<String> setClusterIds = ClusterUtils.getClustersParents(clusterId);
-
 		//Busqueda de componente
 		component = ComponentUtils.getComponent(componentExternalId, getComponentFieldSetByComponentType(componentType, device), device);
-		
 		if(componentType == 'RelatedNews' || componentType == 'RelatedEvents'){
 			//Busqueda del componente padre
 			String parentComponentType;
@@ -52,7 +44,8 @@ public with sharing class CG_BaseComponentController {
 			if(componentType == 'RelatedEvents'){parentComponentType = 'Event';}
 
 			parentComponent = ComponentUtils.getComponent(parentComponentId, getComponentFieldSetByComponentType(parentComponentType, device), device);
-			
+			system.debug(parentComponent);
+
 			if(parentContentId != null && parentContentId != ''){
 				setContentToExclude = new set<String>{parentContentId};
 			}
@@ -64,7 +57,8 @@ public with sharing class CG_BaseComponentController {
 
 		//Busqueda de contenido
 		ContentUtils.ContentWrapper contentWrapper;
-		if(component != null){
+		if(component != null)
+		{
 			if (component.Datasource__c == 'ParentComponentBehaviour'){
 				contentWrapper = ContentUtils.getContentFromComponent(parentComponent, getContentFieldSetByComponentType(parentComponent.Recordtype.Developername, device), setContentDirect, setContentToExclude, setClusterIds, device);
 				for (String fieldApiName: getComponentFieldSetByComponentType(component.RecordType.DeveloperName, device)){
@@ -92,6 +86,7 @@ public with sharing class CG_BaseComponentController {
 		cw.contentWrapper = new List<ContentWrapper>();
 		cw.pagesNumbers = new List<Integer>();
 		
+
 		if(contentWrapper != null){
 			if(contentWrapper.setAllContentIds != null){
 				cw.listAllContentIds.addAll(contentWrapper.setAllContentIds);
@@ -150,7 +145,8 @@ public with sharing class CG_BaseComponentController {
         if(componentType == 'EventDetail'){		setFields = new set<String>{};}
         if(componentType == 'RelatedNews'){		setFields = new set<String>{'NewsType__c', 'PagingType__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
         if(componentType == 'RelatedEvents'){	setFields = new set<String>{'EventsType__c', 'ExcludePastEvents__c', 'PagingType__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
-
+        if(componentType == 'Brand_Detail'){   	setFields = new set<String>{};}
+      
         //Default fields
         setFields.add('Id');
         setFields.add('Name');
@@ -176,7 +172,7 @@ public with sharing class CG_BaseComponentController {
         if(componentType == 'FAQ'){				setFields = new set<String>{'ListTitle__c', 'ListDescription__c'};}
         if(componentType == 'NewsDetail'){		setFields = new set<String>{'DetailTitle__c', 'DetailDescription__c'};}
         if(componentType == 'EventDetail'){		setFields = new set<String>{'DetailTitle__c', 'DetailDescription__c', 'EventStartDate__c', 'EventEndDate__c', 'Location__c'};}
-
+        if(componentType == 'Brand_Detail'){   	setFields = new set<String>{};}
         //Default fields
         setFields.add('Id');
         setFields.add('Name');

@@ -7,6 +7,7 @@ public with sharing class CG_BrandDetailController {
         @auraEnabled public String imageLogoURL;
         @auraEnabled public String imageBannerURL;
         @auraEnabled public boolean isVariant;
+        @auraEnabled public boolean showContent;
         @auraEnabled public list<VariantWrapper> variants;
         public BrandDetailWrapper(){
             variants = new list<VariantWrapper>();
@@ -27,13 +28,17 @@ public with sharing class CG_BrandDetailController {
             bw.component = [SELECT Id, LinkDetail__r.URL__c FROM Component__c WHERE ExternalId__c =: componentExternalId];
         }
 
-        if(brandId != null && brandId != ''){   
+        if(brandId != null && brandId != '')
+        {   
+            bw.showContent = true;
+
             Brand__c brand = [SELECT Id, Name, BrandContent__c, BrandContent__r.Description__c, BrandContent__r.DetailTitle__c, MasterBrand__c, RecordType.DeveloperName, Description__c FROM Brand__c WHERE id = :brandId];
             if(brand.RecordType.DeveloperName == 'BrandVariant'){
                 bw.isVariant = true;
                 bw.description = brand.BrandContent__r.Description__c;
                 bw.title = brand.BrandContent__r.DetailTitle__c;
             }
+
             if(brand.RecordType.DeveloperName == 'Brand'){
                 bw.isVariant = false;
                 bw.description = brand.BrandContent__r.Description__c;
@@ -72,6 +77,9 @@ public with sharing class CG_BrandDetailController {
                     bw.variants.addAll(variants);
                 }
             }
+        }
+        else{
+            bw.showContent=false;
         }
         return bw;
     }
