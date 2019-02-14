@@ -1,14 +1,17 @@
-<aura:component controller="CG_ClusterSelectorController"  implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes" access="global">
-    
+<aura:component controller="CG_ClusterSelectorController" extends="c:CG_BaseComponent" implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes" access="global">
+    <!-- implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes"-->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
-    <aura:attribute name="clusterExternalID" type="String"/>
+        <!-- GENERAL VARIABLES  -->
+    <aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentType" type="String" default="Cluster_Selector"/>
+
+    <!--<aura:attribute name="clusterExternalID" type="String"/>-->
     <aura:attribute name="componentId" type="Id"/>
     <aura:attribute name="isBackend" type="Boolean" default="false"/>
     <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
 
     <aura:attribute name="tree" type="Object" />
-
     <aura:if isTrue="{!not(empty(v.tree))}">
 
         <div class="slds-tree_container">
@@ -73,8 +76,8 @@
             </div>
         </div>
     </aura:if>
-    <aura:If isTrue="{!v.isLivePreview}">
-        <aura:If isTrue="{!v.clusterExternalID == ''}">
+<!--    <aura:If isTrue="{!v.isLivePreview}">
+        <aura:If isTrue="{!v.componentExternalId == ''}">
             <div class="slds-page-header" style="text-align: center;">
                 <lightning:layout horizontalAlign="left">
                     <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
@@ -96,6 +99,6 @@
                 </aura:if>    
             </aura:set>
         </aura:If>
-    </aura:If>
+    </aura:If>-->
     
 </aura:component>

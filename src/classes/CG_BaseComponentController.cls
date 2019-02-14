@@ -4,6 +4,9 @@ public with sharing class CG_BaseComponentController {
     public class ComponentWrapper{
 		@auraEnabled public AcceleratorSettings__c acceleratorSettings;
 		@auraEnabled public Boolean isEnabledCommunityEditFrame;
+		@auraEnabled public Boolean isEnabledCommunityViewFrame;
+		@auraEnabled public Boolean isEnabledComponentEditFrame;
+		@auraEnabled public Boolean isEnabledComponentViewFrame;
         @auraEnabled public Component__c component;
 		@auraEnabled public List<String> listAllContentIds;
 		@auraEnabled public List<ContentWrapper> contentWrapper;
@@ -14,6 +17,7 @@ public with sharing class CG_BaseComponentController {
 		public ComponentWrapper(){
 			this.acceleratorSettings = AcceleratorSettings__c.getInstance();
             this.isEnabledCommunityEditFrame = FeatureManagement.checkPermission('CommunityEditFrame');
+            this.isEnabledCommunityViewFrame = FeatureManagement.checkPermission('CommunityViewFrame');
 		}
 	}
     
@@ -72,13 +76,41 @@ public with sharing class CG_BaseComponentController {
 						}
 					}
 				}
-			} else{
-				contentWrapper = ContentUtils.getContentFromComponent(component, getContentFieldSetByComponentType(component.Recordtype.Developername, device), setContentDirect, setContentToExclude, setClusterIds, device);
+			}else{
+				if(componentType == 'Banner' || componentType == 'News' || componentType == 'Event' || 
+				componentType == 'AdvanceContent' || componentType == 'FAQ' || 
+				componentType == 'NewsDetail' || componentType == 'EventDetail' || componentType == 'RelatedNews' ||
+				componentType == 'RelatedEvents'){
+					contentWrapper = ContentUtils.getContentFromComponent(component, getContentFieldSetByComponentType(component.Recordtype.Developername, device), setContentDirect, setContentToExclude, setClusterIds, device);
+				}
 			}
 		}
 
 		//Armado del Component Wrapper
 		ComponentWrapper cw = new ComponentWrapper();
+		//Verificar los custom permisions
+		if(!cw.isEnabledCommunityEditFrame){
+			System.debug('isEnabledCommunityEditFrame: ' + cw.isEnabledCommunityEditFrame);
+			if(FeatureManagement.checkPermission(componentType + 'EditFrame')){
+				cw.isEnabledComponentEditFrame = true;
+			}else{
+				cw.isEnabledComponentEditFrame = false;
+			}
+		}else{
+			cw.isEnabledComponentEditFrame = true;
+		}
+
+		if (!cw.isEnabledCommunityViewFrame){
+			System.debug('isEnabledCommunityViewFrame: ' + cw.isEnabledCommunityViewFrame);
+			if(FeatureManagement.checkPermission(componentType + 'ViewFrame')){
+				cw.isEnabledComponentViewFrame = true;
+			}else{
+				cw.isEnabledComponentViewFrame = false;
+			}
+		}else{
+			cw.isEnabledComponentViewFrame = true;
+		}
+
 		cw.component = component;
 		cw.clusterId = clusterId;
 
@@ -145,8 +177,11 @@ public with sharing class CG_BaseComponentController {
         if(componentType == 'EventDetail'){		setFields = new set<String>{};}
         if(componentType == 'RelatedNews'){		setFields = new set<String>{'NewsType__c', 'PagingType__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
         if(componentType == 'RelatedEvents'){	setFields = new set<String>{'EventsType__c', 'ExcludePastEvents__c', 'PagingType__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
-        if(componentType == 'Brand_Detail'){   	setFields = new set<String>{};}
-      
+        if(componentType == 'Cluster_Selector'){	setFields = new set<String>{};}
+        if(componentType == 'Language_Selector'){	setFields = new set<String>{};}
+        if(componentType == 'Content_Cart'){	setFields = new set<String>{};}
+        if(componentType == 'Navigation'){	setFields = new set<String>{};}
+        
         //Default fields
         setFields.add('Id');
         setFields.add('Name');
@@ -172,8 +207,11 @@ public with sharing class CG_BaseComponentController {
         if(componentType == 'FAQ'){				setFields = new set<String>{'ListTitle__c', 'ListDescription__c'};}
         if(componentType == 'NewsDetail'){		setFields = new set<String>{'DetailTitle__c', 'DetailDescription__c'};}
         if(componentType == 'EventDetail'){		setFields = new set<String>{'DetailTitle__c', 'DetailDescription__c', 'EventStartDate__c', 'EventEndDate__c', 'Location__c'};}
-        if(componentType == 'Brand_Detail'){   	setFields = new set<String>{};}
-        //Default fields
+        if(componentType == 'Cluster_Selector'){	setFields = new set<String>{};}
+	if(componentType == 'Brand_Detail'){   	setFields = new set<String>{};}
+        if(componentType == 'Language_Selector'){	setFields = new set<String>{};}
+        if(componentType == 'Content_Cart'){	setFields = new set<String>{};}
+        if(componentType == 'Navigation'){	setFields = new set<String>{};}
         setFields.add('Id');
         setFields.add('Name');
 

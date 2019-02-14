@@ -8,10 +8,14 @@ public class CG_NavigationController {
 		@auraEnabled public List<NavWrapper> navWrapper;
 		@auraEnabled public String device;
 		@auraEnabled public Boolean isEnabledCommunityEditFrame;
+		@auraEnabled public Boolean isEnabledCommunityViewFrame;
+		@auraEnabled public Boolean isEnabledComponentEditFrame;
+		@auraEnabled public Boolean isEnabledComponentViewFrame;
 
 		public ComponentWrapper (){
 			this.acceleratorSettings = AcceleratorSettings__c.getInstance();
 			this.isEnabledCommunityEditFrame = FeatureManagement.checkPermission('CommunityEditFrame');
+			this.isEnabledCommunityViewFrame = FeatureManagement.checkPermission('CommunityViewFrame');
 			this.navWrapper = new List<NavWrapper>();
 		}
 	}
@@ -43,6 +47,30 @@ public class CG_NavigationController {
 		Component__c component = ComponentUtils.getComponent(componentExternalId, setFields, device);
 		//Armado del Component Wrapper
 		ComponentWrapper cw = new ComponentWrapper();
+		//verificar los custom permisions
+		if(!cw.isEnabledCommunityEditFrame){
+			System.debug('isEnabledCommunityEditFrame: ' + cw.isEnabledCommunityEditFrame);
+			if(FeatureManagement.checkPermission(component.RecordType.DeveloperName + 'EditFrame')){
+				System.debug('RecordType.DeveloperName: ' + component.RecordType.DeveloperName + 'EditFrame');
+				cw.isEnabledComponentEditFrame = true;
+			}else{
+				cw.isEnabledComponentEditFrame = false;
+			}
+		}else{
+			cw.isEnabledComponentEditFrame = true;
+		}
+
+		if (!cw.isEnabledCommunityViewFrame){
+			System.debug('isEnabledCommunityViewFrame: ' + cw.isEnabledCommunityViewFrame);
+			if(FeatureManagement.checkPermission(component.RecordType.DeveloperName + 'ViewFrame')){
+				System.debug('RecordType.DeveloperName: ' + component.RecordType.DeveloperName + 'ViewFrame');
+				cw.isEnabledComponentViewFrame = true;
+			}else{
+				cw.isEnabledComponentViewFrame = false;
+			}
+		}else{
+			cw.isEnabledComponentViewFrame = true;
+		}
 		cw.component = component;
 		cw.clusterId = clusterId;
 		cw.device = device;

@@ -12,7 +12,8 @@
     <aura:attribute name="showComponentEmpty" type="Boolean" default="false"/>
     <aura:attribute name="parentComponentId" type="String" />
     <aura:attribute name="parentContentId" type="String" />
-    
+    <aura:attribute name="isBackend" type="Boolean" default="false"/>
+
     <!-- LOADING -->
     <aura:attribute name="isLoading" type="boolean" default="true" />
 
@@ -22,8 +23,7 @@
     <!-- COMPONENT -->
     <div aura:id="cg_component">
 
-        <aura:if isTrue="{!not(v.componentWrapper.component == null)}">
-            <!-- EDIT FRAME -->
+        <aura:if isTrue="{!or(v.isBackend, not(v.componentWrapper == null),not(v.componentWrapper.component == null)) }">
             <c:CG_CommunityComponentFrame componentWrapper="{!v.componentWrapper}" isLivePreview="{!v.isLivePreview}">
                 <!-- COMMUNITY COMPONENT -->
                 <div id="{!v.componentWrapper.component.Id}" class="body-container">
@@ -52,7 +52,7 @@
                 </lightning:layout>
             </div>
             <aura:set attribute="else">
-                <aura:if isTrue="{!not(v.componentType == v.componentWrapper.component.RecordType.DeveloperName)}">
+                <aura:if isTrue="{!and(not(v.componentType == v.componentWrapper.component.RecordType.DeveloperName), v.componentType != 'Navigation')}">
                     <div class="slds-page-header" style="text-align: center;">
                         <lightning:layout horizontalAlign="left">
                             <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
