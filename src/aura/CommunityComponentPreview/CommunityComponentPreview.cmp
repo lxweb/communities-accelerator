@@ -28,7 +28,7 @@
                         </div>
                         <div aura:id="div1"></div>
                         <div class="slds-modal__content slds-p-around--medium" onclick="{!c.doClusterChange}">
-                            <c:CG_ClusterSelector isBackend="true" componentId="{!v.recordId}" clusterExternalID="{!v.clusterSelectorExternalId}"/>
+                            <c:CG_ClusterSelector isBackend="true" componentId="{!v.recordId}" componentExternalId="{!v.clusterSelectorExternalId}"/>
                         </div>
                         <footer class="slds-modal__footer">     
                             <div class="slds-align_absolute-center">
