@@ -427,6 +427,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Component__c.TagCriteria__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ContentAssignment__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>

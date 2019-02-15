@@ -192,6 +192,7 @@ public with sharing class CG_BaseComponentController {
         setFields.add('OrderByAdvance__c');
         setFields.add('PageSize__c');
         setFields.add('HierarchicalOrderBy__c');
+        setFields.add('TagCriteria__c');
 
         return setFields;
     }
