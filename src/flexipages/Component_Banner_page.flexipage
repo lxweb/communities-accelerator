@@ -9,9 +9,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentInstanceProperties>
-                <name>clusterExternalID</name>
-            </componentInstanceProperties>
             <componentName>CG_ClusterSelector</componentName>
         </componentInstances>
         <componentInstances>
