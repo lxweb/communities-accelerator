@@ -189,7 +189,7 @@ public without sharing virtual class ContentUtils {
         if(String.isNotBlank(tagCriteria)){
             tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
             orderList = tagCriteria.split('\\(|\\)|AND|OR');
-            tagCriteria = tagCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ').replaceAll('\\(', ' ( ').replaceAll('\\)', ' ) ') + ' ';
+            tagCriteria = ' ' + tagCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ').replaceAll('\\(', ' ( ').replaceAll('\\)', ' ) ') + ' ';
         }        
         
         for(TagAssignment__c ta: [SELECT Id, Tag__c, Order__c FROM TagAssignment__c WHERE Component__c =: parentId OR Content__c =: parentId]){
