@@ -3,7 +3,7 @@
         var action = component.get("c.getClusterRoot");
         component.set('v.isLivePreview', String(window.location.href).includes('livepreview.') || String(window.location.href).includes('sitestudio.'));
         action.setParams({
-            externalId: component.get("v.clusterExternalID"),
+            externalId: component.get("v.componentExternalId"),
             componentId: component.get("v.componentId")
         });
         action.setCallback(this, function(f){
