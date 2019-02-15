@@ -304,4 +304,12 @@
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
+    <labels>
+        <fullName>General_InvalidFormulaFormat</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid formula format</shortDescription>
+        <value>The formula can only has numbers, parentesis, AND, OR. Example: (1 AND 2) OR 3</value>
+    </labels>
 </CustomLabels>

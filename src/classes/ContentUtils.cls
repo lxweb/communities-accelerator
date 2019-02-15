@@ -49,7 +49,7 @@ public without sharing virtual class ContentUtils {
                             setCategoriesIds.add(parentContent.Category__c);
                         }
                         if(component.Datasource__c.contains('Tags')){
-                            contentIdList.addAll(getContentIdsByTags(parentContent.Id, contentTypeToSearch));
+                            contentIdList.addAll(getContentIdsByTags(parentContent.Id, contentTypeToSearch, component.TagCriteria__c));
                         }
                     }
                 }else{
@@ -60,7 +60,7 @@ public without sharing virtual class ContentUtils {
                         setCategoriesIds.addAll(getContentIdsByCategories(component.Id));
                     }
                     if(component.Datasource__c.contains('Tags')){
-                        contentIdList.addAll(getContentIdsByTags(component.Id, contentTypeToSearch));
+                        contentIdList.addAll(getContentIdsByTags(component.Id, contentTypeToSearch, component.TagCriteria__c));
                     }
                 }
             }
@@ -179,17 +179,74 @@ public without sharing virtual class ContentUtils {
         return categoriesIdList;
     }
 
-    private static List<Id> getContentIdsByTags(Id parentId, String contentTypeToSearch){
+    private static List<Id> getContentIdsByTags(Id parentId, String contentTypeToSearch, String tagCriteria){
         List<Id> tagIdList = new List<Id>();
-        for(TagAssignment__c ta: [SELECT Id, Tag__c FROM TagAssignment__c WHERE Component__c =: parentId OR Content__c =: parentId]){
-            if(!tagIdList.contains(ta.Tag__c)) tagIdList.add(ta.Tag__c);
+        List<String> orderList = new List<String>();
+        List<String> tagList = new List<String>();
+        List<String> visitedList = new List<String>();
+        Map<String, String> orderTagMap = new Map<String, Id>();
+
+        if(String.isNotBlank(tagCriteria)){
+            tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
+            orderList = tagCriteria.split('\\(|\\)|AND|OR');
+            tagCriteria = tagCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ').replaceAll('\\(', ' ( ').replaceAll('\\)', ' ) ') + ' ';
+        }        
+        
+        for(TagAssignment__c ta: [SELECT Id, Tag__c, Order__c FROM TagAssignment__c WHERE Component__c =: parentId OR Content__c =: parentId]){
+            if(!tagIdList.contains(ta.Tag__c)) {
+                tagIdList.add(ta.Tag__c);
+                orderTagMap.put(String.valueOf(ta.Order__c), ta.Tag__c);
+            }
         }
 
+        //Reemplazo de los orders por id de tags
+        if(String.isNotBlank(tagCriteria)){
+            for(String st : orderList){
+                if(String.isNotBlank(st) && !visitedList.contains(st) && orderTagMap.containsKey(st)){
+                    tagCriteria = tagCriteria.replaceAll(' ' + st + ' ', orderTagMap.get(st));
+                    visitedList.add(st);
+                    tagList.add(orderTagMap.get(st));
+                }
+            }
+        }
+        
+        //Busqueda de los contents
         List<Id> contentIdList = new List<Id>();
-        for(TagAssignment__c ta: [SELECT Id, Content__c FROM TagAssignment__c WHERE Tag__c IN: tagIdList AND Content__r.RecordType.Developername =: contentTypeToSearch]){
-            if(!contentIdList.contains(ta.Content__c)) contentIdList.add(ta.Content__c);
+        Map<Id, String> contentTagsMap = new Map<Id, String>();
+        for(TagAssignment__c ta: [SELECT Id, Content__c, Tag__c FROM TagAssignment__c WHERE Tag__c IN: tagIdList AND Content__r.RecordType.Developername =: contentTypeToSearch]){
+            if (String.isBlank(tagCriteria)){
+                if(!contentIdList.contains(ta.Content__c)) contentIdList.add(ta.Content__c);
+            }else{
+                if (contentTagsMap.containsKey(ta.Content__c)){
+                    contentTagsMap.put(ta.Content__c, contentTagsMap.get(ta.Content__c) + ta.Tag__c + ', ');
+                }else{
+                    contentTagsMap.put(ta.Content__c, ta.Tag__c + ', ');    
+                }                
+            }
         }
+        
+        //Remplazo y validacion de la formula
+        if(String.isNotBlank(tagCriteria)){
+            for(Id contentId : contentTagsMap.KeySet()){
+                String tags = contentTagsMap.get(contentId);
+                String evalCriteria = tagCriteria;
+                visitedList = new List<String>();
+                for(String st : tagList){
+                    if(String.isNotBlank(st) && !visitedList.contains(st) && tags.contains(st)){
+                        evalCriteria = evalCriteria.replaceAll(st, 'TRUE');                        
+                    }else {
+                        evalCriteria = evalCriteria.replaceAll(st, 'FALSE');
+                    }
+                    visitedList.add(st);
+                }
 
+                evalCriteria = evalCriteria.deleteWhitespace();
+                evalCriteria = evalCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ');
+                if (String.isNotBlank(contentId) && BooleanExpression.eval(evalCriteria)){
+                    if(!contentIdList.contains(contentId)) contentIdList.add(contentId);
+                }
+            }
+        }
         return contentIdList;
     }
 

@@ -30,10 +30,12 @@ public with sharing class ComponentTriggers extends TriggersHandler {
     
     //Master loops
     public override void masterLoop_BeforeInsert(SObject recNew) {
+        validateTagCriteria((Component__c)recNew);
         setExternalId((Component__c)recNew);
         customSort((Component__c)recNew, null);
     }
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        validateTagCriteria((Component__c)recNew);
         setExternalId((Component__c)recNew);
         customSort((Component__c)recNew, (Component__c)recOld);
         //PA-206 Governance de Componentes(Reparenting)
@@ -154,6 +156,19 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
         }
     }
+
+    private void validateTagCriteria(Component__c recNew){
+        if(!canMethod('validateTagCriteria')){return;}
+
+        if(recNew.TagCriteria__c != null){
+            String value = recNew.TagCriteria__c.deleteWhitespace().toUpperCase().replaceAll('AND', ' AND ').replaceAll('OR', ' OR ');
+            value = value.replaceAll('\\d', 'TRUE');
+            if(value.replaceAll('TRUE|\\(|\\)|AND|OR| ', '').length() > 0 || !BooleanExpression.eval(value)){
+                recNew.TagCriteria__c.AddError(Label.General_InvalidFormulaFormat);
+            }
+        }
+    }
+
     private void customSort(Component__c recNew, Component__c recOld){
         if(!canMethod('customSort')){return;}
         

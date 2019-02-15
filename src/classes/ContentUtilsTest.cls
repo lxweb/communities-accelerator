@@ -16,7 +16,7 @@ public class ContentUtilsTest {
 		List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
 		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
 		Component__c comp = componentList[0];
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -47,7 +47,7 @@ public class ContentUtilsTest {
 		comp.ExcludePastEvents__c = true;
 		update comp;
 
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Content__c> contentList = MockupFactory.createContent('Event', clusterRootList[0], 1);
@@ -78,7 +78,7 @@ public class ContentUtilsTest {
 		comp.Datasource__c = 'Tags';
 		update comp;
 
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -110,7 +110,7 @@ public class ContentUtilsTest {
 		comp.Datasource__c = 'Categories';
 		update comp;
 
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Category__c> categoryList = MockupFactory.createCategory('TestCategory', 1, clusterRootList[0].Id);
@@ -143,7 +143,7 @@ public class ContentUtilsTest {
 		comp.Datasource__c = 'ParentContentTags';
 		update comp;
 
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Category__c> categoryList = MockupFactory.createCategory('Test2', 1, clusterRootList[0].Id);
@@ -176,7 +176,7 @@ public class ContentUtilsTest {
 		List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
 		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterRootList[0]);
 		Component__c comp = componentList[0];
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
 				FROM Component__c WHERE Id =: comp.ID];
 		
 		Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
@@ -209,7 +209,7 @@ public class ContentUtilsTest {
 		comp.OrderBy__c = 'Manual Order';
 		update comp;
 
-		componentList = [SELECT Name, ExternalId__c, Datasource__c, Status__c, PageSize__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, PageSize__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
 
 		List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -232,5 +232,38 @@ public class ContentUtilsTest {
 			System.assertEquals(contentAssigmentList[i].Content__c, cont.content.Id);
 			i++;
 		}		
+	}
+
+	@isTest
+	static void getContentFromTagFilteredTest(){
+		// Comment: dado un Component__c y un Cluster__c devuelve el componente correspondiente asignado a un Tag
+
+		// Given
+		List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
+		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
+		Component__c comp = componentList[0];
+		comp.TagCriteria__c = '1 AND 2';
+		comp.Datasource__c = 'Tags';
+		update comp;
+
+		componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+				FROM Component__c WHERE Id =: comp.ID];
+
+		List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
+		List<Tag__c> tagList = MockupFactory.createTag('TestTag', 'Tag de test', 2, clusterRootList[0].Id);
+		List<TagAssignment__c> tagAssigmentList = MockupFactory.createTagAssignment(tagList, componentList, contentList);
+		List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
+		List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
+
+		Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+		Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
+		
+		// When
+		Test.startTest();
+		ContentUtils.ContentWrapper cw = ContentUtils.getContentFromComponent(componentList[0], fieldSet, null, null, setClusterIds, 'Desktop');
+		Test.stopTest();
+
+		// Then		
+		System.assertNotEquals(cw, null);
 	}
 }
