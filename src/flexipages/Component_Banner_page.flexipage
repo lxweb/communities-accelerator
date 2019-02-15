@@ -9,7 +9,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>CG_ClusterSelector</componentName>
+            <componentName>CG_ClusterSelector</componentName> 
         </componentInstances>
         <componentInstances>
             <componentName>CommunityComponentPreview</componentName>
