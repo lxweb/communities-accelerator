@@ -1049,19 +1049,6 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <fields>
-        <fullName>TagCriteria__c</fullName>
-        <description>It&apos;s the tag criteria to filter the content on the community.</description>
-        <externalId>false</externalId>
-        <inlineHelpText>(1 AND 2) OR 3</inlineHelpText>
-        <label>Tag Criteria</label>
-        <length>80</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <label>Component</label>
     <listViews>
         <fullName>Advance_Content</fullName>
