@@ -1049,6 +1049,19 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
+    <fields>
+        <fullName>TagCriteria__c</fullName>
+        <description>It&apos;s the tag criteria to filter the content on the community.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>(1 AND 2) OR 3</inlineHelpText>
+        <label>Tag Criteria</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
     <label>Component</label>
     <listViews>
         <fullName>Advance_Content</fullName>
@@ -4974,6 +4987,317 @@
             </values>
         </picklistValues>
     </recordTypes>
+    <recordTypes>
+        <fullName>Language_Selector</fullName>
+        <active>true</active>
+        <label>Language Selector</label>
+        <picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BannerType__c</picklist>
+            <values>
+                <fullName>Carousel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Datasource__c</picklist>
+            <values>
+                <fullName>All Events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>All News</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Categories</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ManualAssignment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ParentComponentBehaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ParentContentCategories</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ParentContentTags</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ParentContentTagsCategories</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tags</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TagsCategories</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Direction__c</picklist>
+            <values>
+                <fullName>Left</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Right</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EventsType__c</picklist>
+            <values>
+                <fullName>Highlight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Landscape</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mode__c</picklist>
+            <values>
+                <fullName>Full</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mini</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>NavigationMode__c</picklist>
+            <values>
+                <fullName>Horizontal-Simple</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>NewsType__c</picklist>
+            <values>
+                <fullName>Highlight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Landscape</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OrderBy__c</picklist>
+            <values>
+                <fullName>Category%5F%5Fr%2EName ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Category%5F%5Fr%2EName DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CreatedDate ASC</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>CreatedDate DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Custom Sorting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EventStartDate%5F%5Fc ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EventStartDate%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ListTitle%5F%5Fc ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Name ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Name DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PublishStartDate%5F%5Fc ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PublishStartDate%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Orientation__c</picklist>
+            <values>
+                <fullName>Horizontal-Landscape</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Vertical-Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PagingType__c</picklist>
+            <values>
+                <fullName>Carousel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paging Bottom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Path_status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Behavior</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Content source</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Direct content assignment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External linking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Layout</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sorting</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StatusApprovalProcess__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Set Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Format</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+	
     <searchLayouts>
         <customTabListAdditionalFields>ExternalId__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Cluster__c</customTabListAdditionalFields>
