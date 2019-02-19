@@ -1,4 +1,4 @@
 <design:component>
 	<design:attribute label="Component" 				name="componentExtId" 	datasource="apex://SearchComponentPicklist"	/>
-	<design:attribute label="Redirect to Search Page" 	name="redirect" 		default="false"			/>
+	
 </design:component>

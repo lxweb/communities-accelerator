@@ -7,7 +7,6 @@
 
     <aura:attribute name="componentExtId" 	    type="String"                           />
     <aura:attribute name="component"		    type="Component__c"                     />
-    <aura:attribute name="redirect"			    type="Boolean" 		                    />
     <aura:attribute name="searchDetails"	    type="List" 		                    />
     <aura:attribute name="predictiveResults"    type="List"                             />
     <aura:attribute name="searchLength"         type="Integer"        default="0"       />

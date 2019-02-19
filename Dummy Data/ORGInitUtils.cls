@@ -475,6 +475,7 @@ public with sharing class ORGInitUtils {
         Component__c comp_FAQ               = new Component__c(RecordTypeId = getRTId('Component__c-FAQ').Id,               Name = 'DUMMY_FAQ',               ExternalId__c = 'DUMMY_FAQ',              Cluster__c = getId('DUMMY_OnTrade_Global'), Datasource__c = 'Categories', HierarchicalOrderBy__c = '', OrderBy__c = 'Name DESC', Path_status__c = 'Available');
         Component__c comp_ClusterSelector   = new Component__c(RecordTypeId = getRTId('Component__c-Cluster_Selector').Id,  Name = 'DUMMY_Cluster Selector',  ExternalId__c = 'DUMMY_ClusterSelector',  Cluster__c = getId('DUMMY_OnTrade_Global'), FirstCluster__c = getId('DUMMY_OnTrade_Global'), Path_status__c = 'Available');
         Component__c comp_Menu              = new Component__c(RecordTypeId = getRTId('Component__c-Menu').Id,              Name = 'DUMMY_Menu',              ExternalId__c = 'DUMMY_Menu',             Cluster__c = getId('DUMMY_OnTrade_Global'), NavigationMode__c = 'Horizontal-Simple', HasDelay__c = true, DelayTime__c = 500, Path_status__c = 'Available');
+        Component__c comp_Search            = new Component__c(RecordTypeId = getRTId('Component__c-Search').Id,            Name = 'DUMMY_Search',            ExternalId__c = 'DUMMY_Search',           Cluster__c = getId('DUMMY_OnTrade_Global'), SearchPlaceholder__c = 'GlobalSearchPlaceholder', PredictiveSearchEnabled__c = true);
 
         componentsList.add(comp_Banner);
         componentsList.add(comp_Event);
@@ -496,6 +497,64 @@ public with sharing class ORGInitUtils {
         insert categoryAssignmentList;
         insert contentAssignmentList;
         insert tagAssignmentList;
+    }
+
+    private static void upsertSearchDetails(){
+        List<SearchDetail__c> dsList = new List<SearchDetail__c>();
+
+        dsList.add(new SearchDetail__c(
+                                                            Name                                = 'Banner',
+                                                            ExternalId__c                       = 'Dummy_SearchBanner',
+                                                            Component__c                        = getId('DUMMY_Search'),
+                                                            Cluster__c                          = getId('DUMMY_OnTrade_Global'),
+                                                            Navigation__c                       = null,//DUMMY_Nav_newsDetail
+                                                            ObjectAPIName__c                    = 'Content__c',
+                                                            FieldsToSearch__c                   = 'Name',
+                                                            FieldsToShow__c                     = 'Name,Description__c',
+                                                            RecordTypeDevName__c                = 'Banner',
+                                                            Filter__c                           = null,
+                                                            IconName__c                         = 'standard:customer_portal_users',
+                                                            PredictiveSearchRecordsNumber__c    = 3,
+                                                            URLParameterField__c                = 'Id',
+                                                            URLParameterName__c                 = 'Id',
+                                                            Active__c                           = true));
+
+        dsList.add(new SearchDetail__c(
+                                                            Name                                = 'Event',
+                                                            ExternalId__c                       = 'Dummy_SearchEvent',
+                                                            Component__c                        = getId('DUMMY_Search'),
+                                                            Cluster__c                          = getId('DUMMY_OnTrade_Global'),
+                                                            Navigation__c                       = null,//DUMMY_Nav_newsDetail
+                                                            ObjectAPIName__c                    = 'Content__c',
+                                                            FieldsToSearch__c                   = 'Name',
+                                                            FieldsToShow__c                     = 'Name,Description__c,Status__c',
+                                                            RecordTypeDevName__c                = 'Event',
+                                                            Filter__c                           = null,
+                                                            IconName__c                         = 'standard:event',
+                                                            PredictiveSearchRecordsNumber__c    = 3,
+                                                            URLParameterField__c                = 'Id',
+                                                            URLParameterName__c                 = 'Id',
+                                                            Active__c                           = true));
+
+        dsList.add(new SearchDetail__c(
+                                                            Name                                = 'News',
+                                                            ExternalId__c                       = 'Dummy_SearchNews',
+                                                            Component__c                        = getId('DUMMY_Search'),
+                                                            Cluster__c                          = getId('DUMMY_OnTrade_Global'),
+                                                            Navigation__c                       = null,//DUMMY_Nav_newsDetail
+                                                            ObjectAPIName__c                    = 'Content__c',
+                                                            FieldsToSearch__c                   = 'Name',
+                                                            FieldsToShow__c                     = 'Name,Description__c,Status__c',
+                                                            RecordTypeDevName__c                = 'News',
+                                                            Filter__c                           = null,
+                                                            IconName__c                         = 'standard:customer_portal_users',
+                                                            PredictiveSearchRecordsNumber__c    = 3,
+                                                            URLParameterField__c                = 'Id',
+                                                            URLParameterName__c                 = 'Id',
+                                                            Active__c                           = true));
+
+
+        List<Database.UpsertResult> results = Database.upsert(dsList, SearchDetail__c.Fields.ExternalId__c, true);
     }
 
 }

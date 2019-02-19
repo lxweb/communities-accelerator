@@ -751,18 +751,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>RecordTypeDevNames__c</fullName>
-        <description>Content object Record Type Developer Names to search for the inserted Global Search text</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Content object Record Type Developer Names comma separated</inlineHelpText>
-        <label>Record Type Dev Names</label>
-        <length>32768</length>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>3</visibleLines>
-    </fields>
-    <fields>
         <fullName>SearchPlaceholder__c</fullName>
         <description>Custom Label name to use as placeholder of the search input box</description>
         <externalId>false</externalId>
@@ -782,15 +770,6 @@
         <externalId>false</externalId>
         <inlineHelpText>Determina si se muestran los bullets en el banner.</inlineHelpText>
         <label>Show Bullets</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>ShowCategories__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Show Categories</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -853,15 +832,6 @@
         <externalId>false</externalId>
         <inlineHelpText>Show Search on the catalog view</inlineHelpText>
         <label>Show Search</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>ShowTags__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Show Tags</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -1128,6 +1098,17 @@
             <value>Component__c.RelatedNews</value>
         </filters>
         <label>Related News</label>
+    </listViews>
+    <listViews>
+        <fullName>Search</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Search</value>
+        </filters>
+        <label>Search</label>
     </listViews>
     <listViews>
         <fullName>WMA_Components1</fullName>
