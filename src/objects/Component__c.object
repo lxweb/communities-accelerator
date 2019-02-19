@@ -1139,6 +1139,17 @@
         <label>FAQs</label>
     </listViews>
     <listViews>
+        <fullName>Language_Selectors</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.Language_Selector</value>
+        </filters>
+        <label>Language Selectors</label>
+    </listViews>
+    <listViews>
         <fullName>Menus</fullName>
         <columns>NAME</columns>
         <filterScope>Mine</filterScope>
