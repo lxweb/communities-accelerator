@@ -212,11 +212,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Cluster__c.PathStep__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Cluster__c.PublicGroupRODownName__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -512,11 +507,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.PathStep__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Content__c.PublishEndDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -672,11 +662,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElement__c.PathStep__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElement__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -748,11 +733,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Tag__c.ExternalId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Tag__c.PathStep__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
