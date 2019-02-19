@@ -582,11 +582,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.Place__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElementAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
