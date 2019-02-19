@@ -1,11 +1,14 @@
 <aura:component access="global" >
     
+    <!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
     <aura:attribute name="componentWrapper" type="Object"/>
 
     <aura:attribute name="contentActivated" type="Boolean" default="false"/>
     <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
     
-    <aura:if isTrue="{!and(v.componentWrapper.isEnabledCommunityEditFrame, not(v.isLivePreview))}">
+    <aura:if isTrue="{!and(or(v.componentWrapper.isEnabledCommunityViewFrame,v.componentWrapper.isEnabledComponentViewFrame), not(v.isLivePreview))}">
         
         <div id="editFrame">
             <div id="{!v.componentWrapper.component.Id}" onmouseover="{!c.doShowEditFrame}" onmouseout="{!c.doHideEditFrame}" class="mainEditFrame">

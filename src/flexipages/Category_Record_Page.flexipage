@@ -80,34 +80,10 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-d6f4d963-4a3b-488d-aa27-d89530bf3a6f</value>
             </componentInstanceProperties>
             <componentName>flexipage:tabset</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.Path_step__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Final check</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.Path_step__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <mode>Replace</mode>
         <name>header</name>

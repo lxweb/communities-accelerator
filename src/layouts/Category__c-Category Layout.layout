@@ -35,12 +35,6 @@
         <label>Status</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Path_step__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Status__c</field>
             </layoutItems>

@@ -1,31 +1,16 @@
-<aura:component implements="forceCommunity:availableForAllPageTypes" controller="CG_NavigationController">
+<aura:component controller="CG_NavigationController" extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes">
+    <!-- extends="c:CG_BaseComponent" 
+    -->
 	<!-- GENERAL VARIABLES --> 
 	<aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentType" type="String" default="Navigation"/>
 
 	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 	<!--INTERNAL -->
     <aura:attribute name="componentWrapper" type="Object" />
     <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
 
-    
-    <!-- EDIT FRAME -->	
-    <aura:if isTrue="{!not(v.componentWrapper.component == null)}">
-        <c:CG_CommunityComponentFrame componentWrapper="{!v.componentWrapper}" isLivePreview="{!v.isLivePreview}">
-        	<!-- NAVIGATION COMPONENT -->
 		    <div class="slds-text-longform">
 				<c:CG_NavigationMenu menus="{!v.componentWrapper.navWrapper}" device="{! v.componentWrapper.device}" navMode="{!v.componentWrapper.component.NavigationMode__c}" component="{!v.componentWrapper.component}"/>
 			</div>
-        </c:CG_CommunityComponentFrame>
-    </aura:if>
-    <!-- COMPONENT NULL ERROR -->
-    <aura:if isTrue="{!v.componentWrapper.component == null}">
-        <div class="slds-page-header">
-            <lightning:layout horizontalAlign="left">
-                <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
-                    <h1 class="slds-page-header__title slds-text-heading_large">Navigation</h1>
-                    <p>{!$Label.c.ComponentEmpty}</p>
-                </lightning:layoutItem>
-            </lightning:layout>
-        </div>
-    </aura:if>
 </aura:component>

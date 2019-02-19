@@ -17,11 +17,11 @@ public class TagAssignmentTriggersTest {
 		Component__c compTest = [select id, Name, ExternalId__c from Component__c limit 1];
 		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];								
 
-		TagAssignment__c tagAssigmentTest = new TagAssignment__c(Component__c = compTest.id, Content__c=contTest.id );
+		TagAssignment__c tagAssigmentTest = new TagAssignment__c(Component__c = compTest.id, Content__c=contTest.id, Tag__c = tagTest.Id);
 
 		//When
 		Test.startTest();
-			insert(tagAssigmentTest);
+		insert(tagAssigmentTest);
 		Test.stopTest();
 
 		//Then
@@ -40,9 +40,12 @@ public class TagAssignmentTriggersTest {
         Cluster__c cluster = MockupFactory.createCluster('Argentina', null, 1, 'ClusterRoot')[0];
 		MockupFactory.createComponent('Banner', 1);
         MockupFactory.createContent('Banner', cluster, 1);
+		Tag__c tagTest = new Tag__c(Name='Test');
+		insert tagTest;
+		
         Component__c compTest = [select id, Name, ExternalId__c from Component__c limit 1];
 		Content__c contTest = [select id, Name, ExternalId__c from Content__c limit 1];	
-		TagAssignment__c tagAssigmentTest = new TagAssignment__c(Component__c = compTest.id, Content__c=contTest.id );
+		TagAssignment__c tagAssigmentTest = new TagAssignment__c(Component__c = compTest.id, Content__c=contTest.id, Tag__c = tagTest.Id);
 		insert tagAssigmentTest;
 		tagAssigmenttest.ExternalId__c = null;
 

@@ -33,12 +33,6 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Status</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>PathStep__c</field>
-            </layoutItems>
-        </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>

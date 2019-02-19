@@ -89,6 +89,18 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Order__c</fullName>
+        <description>It will be the order on the criteria filter.</description>
+        <externalId>false</externalId>
+        <label>Order</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>StatusApprovalProcess__c</fullName>
         <externalId>false</externalId>
         <label>Status approval process</label>
@@ -113,15 +125,16 @@
     </fields>
     <fields>
         <fullName>Tag__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Tag</label>
         <referenceTo>Tag__c</referenceTo>
         <relationshipLabel>Assignments</relationshipLabel>
         <relationshipName>TagAssignments</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Tag Assignment</label>
     <listViews>
@@ -149,6 +162,6 @@
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

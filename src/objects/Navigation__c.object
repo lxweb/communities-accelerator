@@ -54,10 +54,43 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>AudienceUser__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Audience user</label>
+        <referenceTo>AudienceUser__c</referenceTo>
+        <relationshipLabel>Navigations</relationshipLabel>
+        <relationshipName>Navigations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Audience__c</fullName>
+        <externalId>false</externalId>
+        <label>Audience</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Cluster__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Cluster</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Cluster__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>ClusterRoot</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>Cluster__c</referenceTo>
         <relationshipLabel>Navigations</relationshipLabel>
         <relationshipName>Navigations</relationshipName>
@@ -65,6 +98,15 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DefaultPage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Default Page</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Description__c</fullName>
@@ -90,6 +132,19 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ParentNavigation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Navigation</label>
+        <referenceTo>Navigation__c</referenceTo>
+        <relationshipLabel>Related Navigations</relationshipLabel>
+        <relationshipName>RelatedNavigations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Type__c</fullName>
@@ -150,6 +205,41 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Navigations</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Navigation</fullName>
+        <active>true</active>
+        <description>Internal or external navigation points. They are mostly references to community pages.</description>
+        <label>Navigation</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>External</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Navigation_variant</fullName>
+        <active>true</active>
+        <description>Navigation points referred to page variants in community. Also have a relationship with a audience user.</description>
+        <label>Navigation variant</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>External</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
     <searchLayouts/>
     <sharingModel>Private</sharingModel>
     <sharingReasons>

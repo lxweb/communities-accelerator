@@ -48,12 +48,59 @@
             	var showToast = $A.get('e.force:showToast');
                 showToast.setParams({
                     'title'   : 'Success',
-                    'message' : 'Your item was added Successfully!',
+                    'message' : $A.get("$Label.c.ItemWasAdded"),
                     'type'    : 'success'
                 });
                 showToast.fire();
+              
+	        }else if (f.getState() === "ERROR") {
+	        	var errors = f.getError();
+	        	if(errors && errors[0] && errors[0].message){
+            		var showToast = $A.get('e.force:showToast');
+                	showToast.setParams({
+                    	'title'   : 'Error',
+                    	'message' : errors[0].message,
+                    	'type'    : 'Error'
+                	});
+                	showToast.fire();
+                } 
 	        }
 	    });
 		$A.enqueueAction(action);
-    }
+    },
+    
+
+    download : function(component, helper){
+    	if(component.get("v.contentWrapper.urlPreview") === component.get("v.contentWrapper.urlDownload")){
+    		helper.saveAs(component);
+		}else{
+				var url = component.get("v.contentWrapper.urlDownload");
+	            var link = document.createElement('a');               
+	            link.href = url;                
+	            link.download = component.get("v.contentWrapper.name");
+	            document.body.appendChild(link);
+	            link.click();
+	            document.body.removeChild(link);
+		}
+	},
+
+	saveAs : function(component){
+		var action = component.get("c.imageToBase64");
+	    action.setParams({
+	        urlImg: component.get("v.contentWrapper.urlDownload")
+	    });
+	    action.setCallback(this, function(f){
+	    	if(f.getState() === "SUCCESS") {
+	            var url = f.getReturnValue();
+	            var link = document.createElement('a');               
+	            link.href = url;                
+	            link.download = component.get("v.contentWrapper.name");
+	            document.body.appendChild(link);
+	            link.click();
+	            document.body.removeChild(link);
+	        }
+	    });
+		$A.enqueueAction(action);
+	}
+
 })

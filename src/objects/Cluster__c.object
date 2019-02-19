@@ -260,36 +260,6 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>PathStep__c</fullName>
-        <externalId>false</externalId>
-        <label>Path Step</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Setup</fullName>
-                    <default>true</default>
-                    <label>Setup</label>
-                </value>
-                <value>
-                    <fullName>Languages</fullName>
-                    <default>false</default>
-                    <label>Languages</label>
-                </value>
-                <value>
-                    <fullName>Confirmation</fullName>
-                    <default>false</default>
-                    <label>Confirmation</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
         <fullName>PublicGroupRODownName__c</fullName>
         <description>There is a one to one relationship between cluster and public group RO Down in order to manage cluster governance. This field stores the public group RO Down name related to the cluster.</description>
         <externalId>false</externalId>
@@ -543,21 +513,6 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
                 <default>false</default>
             </values>
         </picklistValues>
-        <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Confirmation</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Languages</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Setup</fullName>
-                <default>true</default>
-            </values>
-        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>ClusterLeaf</fullName>
@@ -721,21 +676,6 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
                 <default>false</default>
             </values>
         </picklistValues>
-        <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Confirmation</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Languages</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Setup</fullName>
-                <default>true</default>
-            </values>
-        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>ClusterRoot</fullName>
@@ -897,21 +837,6 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
             <values>
                 <fullName>zh_TW</fullName>
                 <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>PathStep__c</picklist>
-            <values>
-                <fullName>Confirmation</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Languages</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Setup</fullName>
-                <default>true</default>
             </values>
         </picklistValues>
     </recordTypes>

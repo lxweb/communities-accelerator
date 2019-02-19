@@ -1,0 +1,4 @@
+<design:component label="CG BrandDetail">
+	<design:attribute name="componentExternalId" label="Component External Id"
+		datasource="apex://CG_DynamicPicklistComponent"/>
+</design:component>

@@ -11,4 +11,6 @@
     <tabs>Translation__c</tabs>
     <tabs>Navigation__c</tabs>
     <tabs>Menu__c</tabs>
+    <tabs>Brand__c</tabs>
+    <tabs>AudienceUser__c</tabs>
 </CustomApplication>

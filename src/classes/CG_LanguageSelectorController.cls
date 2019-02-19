@@ -22,6 +22,7 @@ public with sharing class CG_LanguageSelectorController {
 
 	@AuraEnabled
     public static MenuWrapper getLanguageMenu(String clusterId){
+    	System.debug('getLanguageMenu clusterId: ' + clusterId);
     	Cluster__c cluster = [SELECT Id, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c where Id =: clusterId];
 
     	Set<String>langs = new Set<String>();

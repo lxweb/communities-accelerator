@@ -20,9 +20,9 @@ private class CG_ContentCartControllerTest {
 		List<ContentDocument> contentDocumentList = MockupFactory.createContentDocument('Test', quantity);
     	
     	for (Integer i = 0; i < mediaElementList.size(); i++){
-    		mediaElementList[i].FileURLDesktop__c = 'testing/' + contentDocumentList[i].id;
+    		mediaElementList[i].FileURLDesktop__c = 'http://example.com/example/test' + contentDocumentList[i].id;
     	}
-    	mediaElementList[1].FileURLDesktop__c = 'testing/imagen.jpg';
+    	mediaElementList[1].FileURLDesktop__c = 'http://example.com/example/test';
     	update mediaElementList;
 
     	List<ContentDistribution> contentDistributionList = new List<ContentDistribution>();
@@ -45,18 +45,31 @@ private class CG_ContentCartControllerTest {
 		
 		//Given
 		Test.startTest();
-		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData('0','2');
 		Test.stopTest();
 
 		//Then
 		System.assertEquals(contentCartWr.cartItemList.size(), 2);
+	}
+
+	@isTest 
+	static void infiniteScrollTest() {
+		//When
+
+		//Given
+		Test.startTest();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData('1','1');
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(contentCartWr.cartItemList.size(), 1);
 	}
 	
 	@isTest 
 	static void addContentToCartTest() {
 		//When
 		List<Cluster__c> clusterList = [SELECT id FROM Cluster__c];
-		CG_ContentCartController.initData();
+		CG_ContentCartController.initData('0','2');
 		List<Content__c> contentList = MockupFactory.createContent('News', clusterList[0], 1);
     
 		//Given
@@ -71,7 +84,7 @@ private class CG_ContentCartControllerTest {
 	static void deleteCartItemsTest() {
 		//When
 		List<ContentCartItem__c> contentCart = [SELECT id FROM ContentCartItem__c];
-		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData('0','2');
 		
 		//Given
 		Test.startTest();
@@ -85,7 +98,7 @@ private class CG_ContentCartControllerTest {
 	@isTest 
 	static void deleteAllCartItemsTest() {
 		//When
-		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData();
+		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.initData('0','2');
 		
 		//Given
 		Test.startTest();
@@ -99,14 +112,35 @@ private class CG_ContentCartControllerTest {
 	@isTest 
 	static void downloadAllItemsTest() {
 		//When
-		CG_ContentCartController.ContentCartWrapper contentWr = CG_ContentCartController.initData();
-		
+		CG_ContentCartController.ContentCartWrapper contentWr = CG_ContentCartController.initData('0','2');
+		Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
 		//Given
 		Test.startTest();
-		CG_ContentCartController.ContentCartWrapper contentCartWr = CG_ContentCartController.downloadAllItems(JSON.serialize(contentWr));
+		Map <String, String> imagenMap = CG_ContentCartController.downloadAllItems(JSON.serialize(contentWr));
 		Test.stopTest();
 		
 		//Then
-		System.assertEquals(contentCartWr.fileDocumentList.size(), 2);
-	}
+		System.assertEquals(imagenMap.keySet().size(), 2);
+	}	
+
+	@isTest 
+	static void initDataExternalTest() {
+		//When
+		Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+		List<MediaElement__c> mediaElementList = [SELECT Id FROM MediaElement__c];
+
+        for(MediaElement__c media : mediaElementList){
+        	media.FileURLDesktop__c='https://www.google.com/logos/doodles/2018/gottfried-wilhelm-leibnizs-372nd-birthday-4525892901535744-2x';
+        }
+        update mediaElementList;
+
+        CG_ContentCartController.ContentCartWrapper contentWr = CG_ContentCartController.initData('0','10');
+		//Given
+		Test.startTest();
+		Map <String, String> imagenMap = CG_ContentCartController.downloadAllItems(JSON.serialize(contentWr));
+		Test.stopTest();
+		
+		//Then
+		System.assertEquals(imagenMap.keySet().size(), 1);
+	}	
 }

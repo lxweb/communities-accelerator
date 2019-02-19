@@ -163,20 +163,21 @@
     </fields>
     <fields>
         <fullName>MediaElement__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Media Element</label>
         <referenceTo>MediaElement__c</referenceTo>
         <relationshipLabel>Media Element Assignments</relationshipLabel>
         <relationshipName>Assignments</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>Place__c</fullName>
+        <fullName>Placement__c</fullName>
         <externalId>false</externalId>
-        <label>Place</label>
+        <label>Placement</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -230,6 +231,6 @@
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

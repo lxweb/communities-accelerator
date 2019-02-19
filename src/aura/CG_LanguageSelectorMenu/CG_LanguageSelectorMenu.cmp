@@ -1,12 +1,16 @@
-<aura:component controller="CG_LanguageSelectorController"  implements="forceCommunity:availableForAllPageTypes" access="global">
+<aura:component controller="CG_LanguageSelectorController" extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes" access="global">
 	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+        <!-- GENERAL VARIABLES  -->
+    <aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentType" type="String" default="Language_Selector"/>
 
 	<aura:attribute name="MenuWrapper" type="Object"/>
 	<aura:attribute name="renderLangMenu" type="Boolean" default="false"/>
 	<aura:attribute name="isGuestUser" type="Boolean" default="false"/>
 	 
-
-	<div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open slds-grid slds-wrap  " >
+	<div class="slds-list_horizontal">
+	<div class="slds-grid slds-gutters slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open slds-grid slds-wrap  " >
 
 		<div class="slds-size_full slds-size_2-of-2">
 			<a class="slds-button slds-button_icon slds-button_icon-more languajeBtn  slds-size_2-of-2 " aria-expanded="true" aria-haspopup="true" onclick="{!c.showMenuItems}">
@@ -34,6 +38,7 @@
 			</ul>
 		</div>
 		
+	</div>
 	</div>
 
 </aura:component>

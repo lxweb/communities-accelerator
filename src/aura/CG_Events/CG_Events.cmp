@@ -62,18 +62,6 @@
                     </div>
                 </div>
             </aura:if>
-
         </aura:if>
-
-        <aura:set attribute="else">
-            <div class="slds-page-header" style="text-align: center;">
-                <lightning:layout horizontalAlign="left">
-                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
-                        <p>No existen Events</p>
-                    </lightning:layoutItem>
-                </lightning:layout>
-            </div>
-        </aura:set>
     </aura:if>
-
 </aura:component>

@@ -55,15 +55,15 @@
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>Component__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Component</label>
         <referenceTo>Component__c</referenceTo>
+        <relationshipLabel>Content Assignment</relationshipLabel>
         <relationshipName>ComponentContentAssignment</relationshipName>
-        <relationshipOrder>1</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Content__c</fullName>

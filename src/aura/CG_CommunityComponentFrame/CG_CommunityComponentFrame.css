@@ -33,6 +33,7 @@
 	transition: opacity 0.7s;
 	font-weight: bold;
 	z-index: 100;
+	min-width: 300px;
 }
 
 /* PANEL - BUTTONS */
@@ -56,7 +57,7 @@
 	bottom: 0;
 	padding: 10px;
 	background-color: #2874A6;
-	min-width: 30%;
+	min-width: 70%;
 	transition: opacity 0.7s;
 	z-index: 100;
 }

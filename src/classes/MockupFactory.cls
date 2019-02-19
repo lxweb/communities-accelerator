@@ -379,6 +379,17 @@ public class MockupFactory {
         return menuAssignmentList;
     }
 
+    public static List<Brand__c>  createBrand(String brandName, Integer cuantity, Id clusterId){
+        List<Brand__c> brandList = new List<Brand__c>();
+        
+        for(Integer i = 0;i<cuantity;i++){
+            brandList.add( new Brand__c(Name=brandName+i, Cluster__c=clusterId));
+        }
+        insert brandList;
+
+        return brandList;
+    }
+
     //Create contentCartItems to each Content
     public static List<ContentCartItem__c>  createContentCartItem(List<Content__c> contentIdList){
         List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
@@ -391,5 +402,22 @@ public class MockupFactory {
         return contentCartList;
     }
 
-
+    //Create SocialNetwork for a Brand 
+    public static List<SocialNetwork__c> createSocialNetworks(String name, String username, Id brandId, Id navigation, String rType){
+        List<SocialNetwork__c> socialNetwork = new List<SocialNetwork__c>();
+        RecordType recType = [SELECT Id FROM RecordType WHERE SObjectType = 'SocialNetwork__c' AND DeveloperName =: rType LIMIT 1];
+        socialNetwork.add(new SocialNetwork__c(Name = name, Username__c = username, Brand__c = brandId, Navigation__c = navigation, RecordTypeId = recType.Id));
+    
+        insert socialNetwork;
+        return socialNetwork;
+    }
+    
+    
+    //Create audience user
+    public static AudienceUser__c createAudienceUser(String name, Id clusterId, String status, Id userId){
+        AudienceUser__c AU = new AudienceUser__c(Name=name, Cluster__c=clusterId, Status__c= status, User__c = userId);
+        insert AU;
+        return AU;
+        
+    }
 }
