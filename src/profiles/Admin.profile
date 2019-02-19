@@ -142,11 +142,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Category__c.Path_step__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Category__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
