@@ -1513,4 +1513,9 @@
         <recordType>RecipeIngredient__c.CustomIngredient</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
+	<recordTypeVisibilities>
+        <default>true</default>
+        <recordType>RecipeIngredient__c-Recipe Ingredient Layout</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
 </Profile>
