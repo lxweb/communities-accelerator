@@ -1582,7 +1582,7 @@
         <recordType>Content__c.Recipe</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>   
-    <recordTypeVisibilities>
+	<recordTypeVisibilities>
         <default>true</default>
         <recordType>RecipeIngredient__c.BrandIngredient</recordType>
         <visible>true</visible>
