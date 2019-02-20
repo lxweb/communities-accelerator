@@ -142,6 +142,52 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>CatalogContentType__c</fullName>
+        <externalId>false</externalId>
+        <label>Catalog Content Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Logo</fullName>
+                    <default>false</default>
+                    <label>Logo</label>
+                </value>
+                <value>
+                    <fullName>Social Media</fullName>
+                    <default>false</default>
+                    <label>Social Media</label>
+                </value>
+                <value>
+                    <fullName>Videos</fullName>
+                    <default>false</default>
+                    <label>Videos</label>
+                </value>
+                <value>
+                    <fullName>Occasion</fullName>
+                    <default>false</default>
+                    <label>Occasion</label>
+                </value>
+                <value>
+                    <fullName>Recipe</fullName>
+                    <default>false</default>
+                    <label>Recipe</label>
+                </value>
+                <value>
+                    <fullName>Product</fullName>
+                    <default>false</default>
+                    <label>Product</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>ClusterExternalId__c</fullName>
         <externalId>false</externalId>
         <formula>Cluster__r.ExternalId__c</formula>
@@ -236,6 +282,26 @@
                     <fullName>All Events</fullName>
                     <default>false</default>
                     <label>All Events</label>
+                </value>
+                <value>
+                    <fullName>Brands</fullName>
+                    <default>false</default>
+                    <label>Brands</label>
+                </value>
+                <value>
+                    <fullName>Brand Variants</fullName>
+                    <default>false</default>
+                    <label>Brand Variants</label>
+                </value>
+                <value>
+                    <fullName>Assets</fullName>
+                    <default>false</default>
+                    <label>Assets</label>
+                </value>
+                <value>
+                    <fullName>Assets Related to Assets</fullName>
+                    <default>false</default>
+                    <label>Assets Related to Assets</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -609,6 +675,10 @@
                 </value>
             </valueSetDefinition>
             <valueSettings>
+                <controllingFieldValue>Brands</controllingFieldValue>
+                <controllingFieldValue>Brand Variants</controllingFieldValue>
+                <controllingFieldValue>Assets</controllingFieldValue>
+                <controllingFieldValue>Assets Related to Assets</controllingFieldValue>
                 <controllingFieldValue>ManualAssignment</controllingFieldValue>
                 <controllingFieldValue>Tags</controllingFieldValue>
                 <controllingFieldValue>Categories</controllingFieldValue>
@@ -622,6 +692,10 @@
                 <valueName>CreatedDate ASC</valueName>
             </valueSettings>
             <valueSettings>
+                <controllingFieldValue>Brands</controllingFieldValue>
+                <controllingFieldValue>Brand Variants</controllingFieldValue>
+                <controllingFieldValue>Assets</controllingFieldValue>
+                <controllingFieldValue>Assets Related to Assets</controllingFieldValue>
                 <controllingFieldValue>ManualAssignment</controllingFieldValue>
                 <controllingFieldValue>Tags</controllingFieldValue>
                 <controllingFieldValue>Categories</controllingFieldValue>
@@ -633,6 +707,40 @@
                 <controllingFieldValue>All News</controllingFieldValue>
                 <controllingFieldValue>All Events</controllingFieldValue>
                 <valueName>CreatedDate DESC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Brands</controllingFieldValue>
+                <controllingFieldValue>Brand Variants</controllingFieldValue>
+                <controllingFieldValue>Assets</controllingFieldValue>
+                <controllingFieldValue>Assets Related to Assets</controllingFieldValue>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c ASC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Brands</controllingFieldValue>
+                <controllingFieldValue>Brand Variants</controllingFieldValue>
+                <controllingFieldValue>Assets</controllingFieldValue>
+                <controllingFieldValue>Assets Related to Assets</controllingFieldValue>
+                <controllingFieldValue>ManualAssignment</controllingFieldValue>
+                <controllingFieldValue>Tags</controllingFieldValue>
+                <controllingFieldValue>Categories</controllingFieldValue>
+                <controllingFieldValue>TagsCategories</controllingFieldValue>
+                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
+                <controllingFieldValue>ParentContentTags</controllingFieldValue>
+                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
+                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
+                <controllingFieldValue>All News</controllingFieldValue>
+                <controllingFieldValue>All Events</controllingFieldValue>
+                <valueName>ListTitle__c DESC</valueName>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>ManualAssignment</controllingFieldValue>
@@ -737,32 +845,6 @@
                 <controllingFieldValue>All News</controllingFieldValue>
                 <controllingFieldValue>All Events</controllingFieldValue>
                 <valueName>EventStartDate__c DESC</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>ManualAssignment</controllingFieldValue>
-                <controllingFieldValue>Tags</controllingFieldValue>
-                <controllingFieldValue>Categories</controllingFieldValue>
-                <controllingFieldValue>TagsCategories</controllingFieldValue>
-                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
-                <controllingFieldValue>ParentContentTags</controllingFieldValue>
-                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
-                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
-                <controllingFieldValue>All News</controllingFieldValue>
-                <controllingFieldValue>All Events</controllingFieldValue>
-                <valueName>ListTitle__c ASC</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>ManualAssignment</controllingFieldValue>
-                <controllingFieldValue>Tags</controllingFieldValue>
-                <controllingFieldValue>Categories</controllingFieldValue>
-                <controllingFieldValue>TagsCategories</controllingFieldValue>
-                <controllingFieldValue>ParentComponentBehaviour</controllingFieldValue>
-                <controllingFieldValue>ParentContentTags</controllingFieldValue>
-                <controllingFieldValue>ParentContentCategories</controllingFieldValue>
-                <controllingFieldValue>ParentContentTagsCategories</controllingFieldValue>
-                <controllingFieldValue>All News</controllingFieldValue>
-                <controllingFieldValue>All Events</controllingFieldValue>
-                <valueName>ListTitle__c DESC</valueName>
             </valueSettings>
             <valueSettings>
                 <controllingFieldValue>ManualAssignment</controllingFieldValue>
@@ -1158,6 +1240,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
                 <fullName>Categories</fullName>
@@ -1386,6 +1495,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1622,274 +1758,29 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Datasource__c</picklist>
+            <picklist>CatalogContentType__c</picklist>
             <values>
-                <fullName>All Events</fullName>
+                <fullName>Logo</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>All News</fullName>
+                <fullName>Occasion</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Categories</fullName>
+                <fullName>Product</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>ManualAssignment</fullName>
+                <fullName>Recipe</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>ParentComponentBehaviour</fullName>
+                <fullName>Social Media</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>ParentContentCategories</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentContentTags</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentContentTagsCategories</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>TagsCategories</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Direction__c</picklist>
-            <values>
-                <fullName>Left</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Right</fullName>
-                <default>true</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>EventsType__c</picklist>
-            <values>
-                <fullName>Highlight</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Landscape</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Portrait</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>HierarchicalOrderBy__c</picklist>
-            <values>
-                <fullName>ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>DESC</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Mode__c</picklist>
-            <values>
-                <fullName>Full</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Mini</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>NavigationMode__c</picklist>
-            <values>
-                <fullName>Horizontal-Simple</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>NewsType__c</picklist>
-            <values>
-                <fullName>Highlight</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Landscape</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Portrait</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>OrderBy__c</picklist>
-            <values>
-                <fullName>Category%5F%5Fr%2EName ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Category%5F%5Fr%2EName DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>CreatedDate ASC</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>CreatedDate DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Custom Sorting</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>EventStartDate%5F%5Fc ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>EventStartDate%5F%5Fc DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ListTitle%5F%5Fc ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ListTitle%5F%5Fc DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Manual Order</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Name ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Name DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>PublishStartDate%5F%5Fc ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>PublishStartDate%5F%5Fc DESC</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Orientation__c</picklist>
-            <values>
-                <fullName>Horizontal-Landscape</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Vertical-Portrait</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>PagingType__c</picklist>
-            <values>
-                <fullName>Carousel</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Paging Bottom</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>StatusApprovalProcess__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Draft</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Pending Approval</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Status__c</picklist>
-            <values>
-                <fullName>Available</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-    </recordTypes>
-    <recordTypes>
-        <fullName>Catalog</fullName>
-        <active>true</active>
-        <description>Configure a new Catalog component. This component show Catalog information such as filters, mode, orderBy values, etc.</description>
-        <label>Catalog</label>
-        <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>BannerType__c</picklist>
-            <values>
-                <fullName>Carousel</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Fade</fullName>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -2166,6 +2057,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
                 <fullName>All Events</fullName>
@@ -2407,6 +2325,249 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
+        <fullName>ContentCatalog</fullName>
+        <active>true</active>
+        <description>Configure a new Catalog component. This component show Catalog information such as filters, mode, orderBy values, etc.</description>
+        <label>Content Catalog</label>
+        <picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>BannerType__c</picklist>
+            <values>
+                <fullName>Carousel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Datasource__c</picklist>
+            <values>
+                <fullName>Assets</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assets Related to Assets</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brand Variants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brands</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Direction__c</picklist>
+            <values>
+                <fullName>Left</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Right</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>EventsType__c</picklist>
+            <values>
+                <fullName>Highlight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Landscape</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HierarchicalOrderBy__c</picklist>
+            <values>
+                <fullName>ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DESC</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mode__c</picklist>
+            <values>
+                <fullName>Full</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mini</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>NavigationMode__c</picklist>
+            <values>
+                <fullName>Horizontal-Simple</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>NewsType__c</picklist>
+            <values>
+                <fullName>Highlight</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Landscape</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>OrderBy__c</picklist>
+            <values>
+                <fullName>CreatedDate ASC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CreatedDate DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Custom Sorting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ListTitle%5F%5Fc ASC</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>ListTitle%5F%5Fc DESC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Order</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Orientation__c</picklist>
+            <values>
+                <fullName>Horizontal-Landscape</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Vertical-Portrait</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PagingType__c</picklist>
+            <values>
+                <fullName>Carousel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paging Bottom</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>StatusApprovalProcess__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Final Check</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Set Content</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Set Format</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
         <fullName>Event</fullName>
         <active>true</active>
         <description>Configure a new Event component. Each event will have related information such as event date, event place, event maximum allowance, etc.</description>
@@ -2434,6 +2595,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -2690,6 +2878,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
                 <fullName>Categories</fullName>
@@ -2938,6 +3153,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
                 <fullName>Categories</fullName>
@@ -3174,6 +3416,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3450,6 +3719,33 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
                 <fullName>All News</fullName>
@@ -3690,6 +3986,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3938,6 +4261,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -4202,6 +4552,33 @@
             </values>
             <values>
                 <fullName>Fade</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CatalogContentType__c</picklist>
+            <values>
+                <fullName>Logo</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Occasion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Product</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recipe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Videos</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
