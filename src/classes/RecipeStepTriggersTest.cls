@@ -6,7 +6,8 @@ private class RecipeStepTriggersTest {
     	MockupFactory.generateAcceleratorSetting();
     	String name = 'Argentina';
     	List<Cluster__c> clusterRootList = MockupFactory.createCluster(name, null, 1, 'ClusterRoot');
-    	List<Recipe__c> recipesList = MockupFactory.createRecipe('RecipeTest',1,clusterRootList[0].id); 
+    	List<Content__c> contentList = MockupFactory.createContent('Recipe', clusterRootList[0], 1);    	
+    	List<Recipe__c> recipesList = MockupFactory.createRecipes('RecipeTest',1, contentList[0].id,clusterRootList[0].id); 
     }
 
 	@isTest 
