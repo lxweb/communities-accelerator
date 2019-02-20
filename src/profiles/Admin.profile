@@ -7,16 +7,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Recipe__c.Cluster__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Recipe__c.Content__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>RecipeIngredient__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -32,27 +22,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>RecipeIngredient__c.Brand__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>RecipeIngredient__c.BrandVariant__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>RecipeIngredient__c.OtherIngredient__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.Order__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>RecipeIngredient__c.Recipe__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -75,11 +50,6 @@
         <field>RecipeStep__c.Step__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>RecipeStep__c.Recipe__c</field>
-        <readable>true</readable>
-    </fieldPermissions> 
     <fieldPermissions>
         <editable>true</editable>
         <field>AudienceUser__c.Audience__c</field>
@@ -578,6 +548,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Component__c.ShowTitle__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Component__c.ShowOrder__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Component__c.ShowSearch__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

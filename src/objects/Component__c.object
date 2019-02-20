@@ -2696,7 +2696,6 @@
             </values>
             <values>
                 <fullName>PublishStartDate%5F%5Fc DESC</fullName>
-                <fullName>Manual Order</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
