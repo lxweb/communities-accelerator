@@ -5,52 +5,82 @@
         <field>Recipe__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Content__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.Quantity__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.Unit__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Brand__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.BrandVariant__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.OtherIngredient__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.Order__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Recipe__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.CustomIngredient__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeStep__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeStep__c.Order__c</field>
         <readable>true</readable>
-    </fieldPermissions>	
-	<fieldPermissions>
+    </fieldPermissions> 
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeStep__c.Step__c</field>
         <readable>true</readable>
-    </fieldPermissions>	
-	<fieldPermissions>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeStep__c.Recipe__c</field>
+        <readable>true</readable>
+    </fieldPermissions> 
+    <fieldPermissions>
         <editable>true</editable>
         <field>AudienceUser__c.Audience__c</field>
         <readable>true</readable>
@@ -141,6 +171,66 @@
         <readable>true</readable>
     </fieldPermissions>
         <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.Component__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.FieldsToSearch__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.FieldsToShow__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.Filter__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.IconName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.Navigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.PredictiveSearchRecordsNumber__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.RecordTypeDevName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>SearchDetail__c.URLParameterField__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>SearchDetail__c.Active__c</field>
         <readable>true</readable>
@@ -347,6 +437,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Component__c.CatalogContentType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Component__c.HierarchicalOrderBy__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -463,11 +558,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Component__c.PagingType__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Component__c.Path_status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -702,6 +792,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>MediaElementAssignment__c.Location__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>MediaElementAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -798,6 +893,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MediaElement__c.WidthTablet__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Navigation__c.Behaviour__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -936,23 +1036,23 @@
         <visible>true</visible>
     </applicationVisibilities>
     <custom>false</custom>
-	<layoutAssignments>
+    <layoutAssignments>
         <layout>Recipe__c-Recipe Layout</layout>
     </layoutAssignments>
-	<layoutAssignments>
+    <layoutAssignments>
         <layout>RecipeIngredient__c-Recipe Ingredient Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>RecipeIngredient__c-Custom Ingredient Layout</layout>
         <recordType>RecipeIngredient__c.CustomIngredient</recordType>
-    </layoutAssignments>	
+    </layoutAssignments>    
     <layoutAssignments>
         <layout>RecipeIngredient__c-Brand Ingredient Layout</layout>
         <recordType>RecipeIngredient__c.BrandIngredient</recordType>
-    </layoutAssignments>	
-	<layoutAssignments>
+    </layoutAssignments>    
+    <layoutAssignments>
         <layout>RecipeStep__c-Recipe Step Layout</layout>
-    </layoutAssignments>	
+    </layoutAssignments>    
     <layoutAssignments>
         <layout>Brand__c-Brand Layout</layout>
         <recordType>Brand__c.Brand</recordType>
@@ -1002,6 +1102,10 @@
         <recordType>Component__c.Cluster_Selector</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Component__c-Component%3A Catalog - Page Layout</layout>
+        <recordType>Component__c.ContentCatalog</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Component__c-Component%3A Events - Page Layout</layout>
         <recordType>Component__c.Event</recordType>
     </layoutAssignments>
@@ -1042,7 +1146,7 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content Layout</layout>
-    </layoutAssignments>	
+    </layoutAssignments>    
     <layoutAssignments>
         <layout>Content__c-Content%3A Recipe - Page Layout</layout>
         <recordType>Content__c.Recipe</recordType>
@@ -1149,7 +1253,7 @@
     <tabVisibilities>
         <tab>Recipe__c</tab>
         <visibility>DefaultOn</visibility>
-    </tabVisibilities>	
+    </tabVisibilities>  
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -1304,7 +1408,7 @@
         <object>Translation__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-	<objectPermissions>
+    <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -1313,7 +1417,7 @@
         <object>Recipe__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-	<objectPermissions>
+    <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -1322,7 +1426,7 @@
         <object>RecipeStep__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-	<objectPermissions>
+    <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -1331,6 +1435,11 @@
         <object>RecipeIngredient__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Component__c.ContentCatalog</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.Language_Selector</recordType>
@@ -1472,13 +1581,13 @@
         <default>false</default>
         <recordType>Content__c.Recipe</recordType>
         <visible>true</visible>
-    </recordTypeVisibilities>	
+    </recordTypeVisibilities>   
 	<recordTypeVisibilities>
         <default>true</default>
         <recordType>RecipeIngredient__c.BrandIngredient</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
-	<recordTypeVisibilities>
+    <recordTypeVisibilities>
         <default>false</default>
         <recordType>RecipeIngredient__c.CustomIngredient</recordType>
         <visible>true</visible>
