@@ -93,7 +93,6 @@
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Recipe</label>
     <listViews>
         <fullName>All</fullName>

@@ -102,7 +102,6 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Recipe Step</label>
     <nameField>
         <label>Recipe Step Name</label>

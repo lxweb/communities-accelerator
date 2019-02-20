@@ -167,7 +167,6 @@
             <valueSetName>Unit</valueSetName>
         </valueSet>
     </fields>
-    <gender>Feminine</gender>
     <label>Recipe Ingredient</label>
     <listViews>
         <fullName>All</fullName>
