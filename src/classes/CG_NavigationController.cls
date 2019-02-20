@@ -114,24 +114,27 @@ public class CG_NavigationController {
 
 	// Armamos los Wrappers
 	public static NavWrapper getMenuWrapper(Id currentMenuId, List<Menu__c> allMenus, Set<String> parentClusterIds){
-		Menu__c currentMenu = [SELECT Id, MenuLabel__c, Cluster__c FROM Menu__c WHERE Id =: currentMenuId]; 
-		// Armamos un mapa con el Wrapper dde cada Menu
-    	map<Menu__c, NavWrapper> menuWrapperMap = new map<Menu__c, NavWrapper>(); 
+		// Armamos un mapa con el Wrapper de cada Menu
+    	map<Id, NavWrapper> menuWrapperMap = new map<Id, NavWrapper>();
+    	map<Id, Menu__c> menuMap = new map<Id, Menu__c>();
     	for(Menu__c menu : allMenus){
-    		menuWrapperMap.put(menu, new NavWrapper(menu));
+    		menuMap.put(menu.Id, menu);
+    		menuWrapperMap.put(menu.Id, new NavWrapper(menu));
     	}
     	// Si el Cluster de child esta en la lista de Clusters
 		// Para cada parent padre de child, agregamos child a los hijos de parent
 		// El MenuWrapperMap toma forma de arbol
-    	for(Menu__c parent : menuWrapperMap.keySet()){
-    		for(Menu__c child : menuWrapperMap.keySet()){
+    	for(String parentId : menuWrapperMap.keySet()){
+    		for(String childId : menuWrapperMap.keySet()){
+                Menu__c parent = menuMap.get(parentId);
+                Menu__c child = menuMap.get(childId);
     			if(child.ParentMenu__c == parent.Id && parentClusterIds.contains(child.Cluster__c)){
-    				menuWrapperMap.get(parent).subMenus.add(menuWrapperMap.get(child));
+    				menuWrapperMap.get(parentId).subMenus.add(menuWrapperMap.get(childId));
     			}
     		}
     	}
     	//Devolvemos el nodo raiz del arbol creado
-    	return menuWrapperMap.get(currentMenu);
+    	return menuWrapperMap.get(currentMenuId);
 	}
 
 }
