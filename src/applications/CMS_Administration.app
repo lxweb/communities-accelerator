@@ -14,8 +14,6 @@
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
     <formFactors>Large</formFactors>
-    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
-    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>CMS Administration</label>
     <navType>Standard</navType>
     <profileActionOverrides>
