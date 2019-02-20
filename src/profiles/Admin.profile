@@ -1071,6 +1071,10 @@
         <tab>Translation__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
+    <tabVisibilities>
+        <tab>SearchDetail__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
