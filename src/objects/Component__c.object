@@ -2160,10 +2160,10 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Catalog</fullName>
+        <fullName>ContentCatalog</fullName>
         <active>true</active>
         <description>Configure a new Catalog component. This component show Catalog information such as filters, mode, orderBy values, etc.</description>
-        <label>Catalog</label>
+        <label>Content Catalog</label>
         <picklistValues>
             <picklist>BannerFrameType__c</picklist>
             <values>
