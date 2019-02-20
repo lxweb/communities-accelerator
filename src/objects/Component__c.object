@@ -613,6 +613,11 @@
                     <default>false</default>
                     <label>Custom Sorting</label>
                 </value>
+                <value>
+                    <fullName>Manual Order</fullName>
+                    <default>false</default>
+                    <label>Manual Order</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
