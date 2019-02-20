@@ -1114,6 +1114,17 @@
         <label>Cluster Selector</label>
     </listViews>
     <listViews>
+        <fullName>ContentCatalog</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Component__c.ContentCatalog</value>
+        </filters>
+        <label>Content Catalog</label>
+    </listViews>
+    <listViews>
         <fullName>Event_Details</fullName>
         <columns>NAME</columns>
         <filterScope>Mine</filterScope>
