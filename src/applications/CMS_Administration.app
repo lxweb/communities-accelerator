@@ -189,6 +189,16 @@
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
+
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Search_Component_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Component__c</pageOrSobjectType>
+        <recordType>Component__c.Search</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Content_Brand_Detail_Page</content>
@@ -216,6 +226,7 @@
     <tabs>Translation__c</tabs>
     <tabs>Navigation__c</tabs>
     <tabs>Menu__c</tabs>
+    <tabs>SearchDetail__c</tabs>
     <tabs>Brand__c</tabs>
     <tabs>AudienceUser__c</tabs>
     <tabs>SocialNetwork__c</tabs>

@@ -122,7 +122,6 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Social Network</label>
     <listViews>
         <fullName>All</fullName>

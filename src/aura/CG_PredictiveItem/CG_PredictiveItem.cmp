@@ -1,0 +1,25 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+	<aura:attribute name="result" 	       type="Object"                           />
+	<aura:attribute name="record" 	       type="Object"                           />
+	<aura:attribute name="url"             type="String"                           />
+	
+    <li class="slds-p-horizontal--medium slds-p-vertical--x-small">
+        <a class="MRU_GLOBAL slds-text-link--reset slds-grid slds-grid--vertical-align-center slds-truncate" role="option"  href="{! v.url}">
+            <aura:if isTrue="{!v.result.iconName != null}">
+                <div class="slds-icon_container">
+                    <lightning:icon class="slds-m-vertical--xx-small slds-m-right--small slds-m-left--none" size="small" iconName="{!v.result.iconName}" alternativeText="Approved" />
+                </div>
+            </aura:if>
+            <div class="slds-truncate">
+                <span class="mruName slds-text-body--regular slds-text-color--default slds-truncate slds-show" title="{!v.record.Name}">
+                    <ui:outputRichText value="{!v.record.Name}"/>
+                </span>
+                <div class="slds-clearfix mruDescription slds-text-heading--label-normal slds-show slds-truncate">
+                    <ui:outputRichText class="slds-float--left" value="{!v.result.sectionName}"/>
+                </div>
+            </div>
+        </a>
+    </li>
+</aura:component>

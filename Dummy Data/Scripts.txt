@@ -16,6 +16,7 @@ delete [SELECT Id FROM MediaElementAssignment__c];
 delete [SELECT Id FROM MenuAssignment__c];
 delete [SELECT Id FROM TagAssignment__c];
 delete [SELECT Id FROM Translation__c];
+delete [SELECT Id FROM SearchDetail__c];
 delete [SELECT Id From Group WHERE Type='Regular' and DoesIncludeBosses=false and (Name LIKE '%_RW%' or Name LIKE '%_RO%')];
 
 //Insertar dummy data
