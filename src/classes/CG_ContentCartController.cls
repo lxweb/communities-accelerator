@@ -95,6 +95,7 @@ public with sharing class CG_ContentCartController {
             ContentCartItem__c contentCart = new ContentCartItem__c();
             contentCart.User__c = UserInfo.getUserId();
             contentCart.Content__c = contentId;
+            contentCart.Name = contentId;
             insert contentCart;
             isCreated = true;
 		}
