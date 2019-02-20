@@ -2,6 +2,91 @@
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldPermissions>
         <editable>true</editable>
+        <field>Recipe__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Content__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Quantity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Unit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Brand__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.BrandVariant__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.OtherIngredient__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Recipe__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.CustomIngredient__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeStep__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeStep__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>	
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeStep__c.Step__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeStep__c.Recipe__c</field>
+        <readable>true</readable>
+    </fieldPermissions>	
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>AudienceUser__c.Audience__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Brand__c.BrandContent__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -647,11 +732,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.Location__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElementAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -886,6 +966,23 @@
         <visible>true</visible>
     </applicationVisibilities>
     <custom>false</custom>
+	<layoutAssignments>
+        <layout>Recipe__c-Recipe Layout</layout>
+    </layoutAssignments>
+	<layoutAssignments>
+        <layout>RecipeIngredient__c-Recipe Ingredient Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>RecipeIngredient__c-Custom Ingredient Layout</layout>
+        <recordType>RecipeIngredient__c.CustomIngredient</recordType>
+    </layoutAssignments>	
+    <layoutAssignments>
+        <layout>RecipeIngredient__c-Brand Ingredient Layout</layout>
+        <recordType>RecipeIngredient__c.BrandIngredient</recordType>
+    </layoutAssignments>	
+	<layoutAssignments>
+        <layout>RecipeStep__c-Recipe Step Layout</layout>
+    </layoutAssignments>	
     <layoutAssignments>
         <layout>Brand__c-Brand Layout</layout>
         <recordType>Brand__c.Brand</recordType>
@@ -975,6 +1072,10 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content Layout</layout>
+    </layoutAssignments>	
+    <layoutAssignments>
+        <layout>Content__c-Content%3A Recipe - Page Layout</layout>
+        <recordType>Content__c.Recipe</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content%3A Advance Content - Page Layout</layout>
@@ -1075,6 +1176,10 @@
         <tab>SearchDetail__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
+    <tabVisibilities>
+        <tab>Recipe__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>	
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -1229,6 +1334,33 @@
         <object>Translation__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+	<objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Recipe__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+	<objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>RecipeStep__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+	<objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>RecipeIngredient__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.Language_Selector</recordType>
@@ -1364,6 +1496,21 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Content__c.News</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Content__c.Recipe</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>	
+	<recordTypeVisibilities>
+        <default>false</default>
+        <recordType>RecipeIngredient__c.BrandIngredient</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+	<recordTypeVisibilities>
+        <default>false</default>
+        <recordType>RecipeIngredient__c.CustomIngredient</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
 </Profile>
