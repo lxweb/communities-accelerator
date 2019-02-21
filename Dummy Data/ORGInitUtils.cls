@@ -13,7 +13,7 @@ public with sharing class ORGInitUtils {
         return null;
     }
 
-    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c'};
+    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c','RecipeIngredient__c','Brand__c'};
     private static map<String, RecordType> mapRecordTypes;
     private static RecordType getRTId(String objDevName){
         if(mapRecordTypes == null){
@@ -53,6 +53,13 @@ public with sharing class ORGInitUtils {
         
         TriggersHandlerManager.byPassTrigger('MenuAssignmentTriggers');
         upsertMenuAssigment();
+
+        TriggersHandlerManager.byPassTrigger('RecipeTriggers');
+        upsertRecipe();
+        TriggersHandlerManager.byPassTrigger('RecipeIngredientTriggers');
+        upsertRecipeIngredient();
+        TriggersHandlerManager.byPassTrigger('RecipeStepTriggers');
+        upsertRecipeStep();
         
         upsertContentCartItems();
 
@@ -438,6 +445,8 @@ public with sharing class ORGInitUtils {
         Content__c news2            = new Content__c(RecordTypeId = getRTId('Content__c-News').Id,              Name = 'DUMMY_News 1',                ExternalId__c = 'DUMMY_cont_News2',       Cluster__c = getId('DUMMY_OnTrade_Europe'),   Category__c = getId('DUMMY_ImpresorasyAccesorios'), ListTitle__c = 'Lorem Ipsum News 2', ListDescription__c = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', DetailTitle__c = 'Lorem Ipsum News 2', DetailDescription__c = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');
         Content__c faq1             = new Content__c(RecordTypeId = getRTId('Content__c-FAQ').Id,               Name = 'DUMMY_FAQ 1',                 ExternalId__c = 'DUMMY_cont_FAQ1',        Cluster__c = getId('DUMMY_OnTrade_Global'),   Category__c = getId('DUMMY_CelularesyTelefonos'), ListTitle__c = 'What is Lorem Ipsum?', ListDescription__c = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry');
         Content__c faq2             = new Content__c(RecordTypeId = getRTId('Content__c-FAQ').Id,               Name = 'DUMMY_FAQ 1',                 ExternalId__c = 'DUMMY_cont_FAQ2',        Cluster__c = getId('DUMMY_OnTrade_America'),  Category__c = null, ListTitle__c = 'Why do we use it?', ListDescription__c = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+        Content__c recipe 			= new Content__c(RecordTypeId = getRTId('Content__c-Recipe').Id,			Name = 'DUMMY_Recipe',				  ExternalId__c = 'DUMMY_cont_Recipe',		Cluster__c = getId('DUMMY_OnTrade_Global'),	  DetailTitle__c = 'Lorem Ipsum Recipe 1', ListDescription__c = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+        Content__c recipe2 			= new Content__c(RecordTypeId = getRTId('Content__c-Recipe').Id,			Name = 'DUMMY_Recipe 2',			  ExternalId__c = 'DUMMY_cont_Recipe_2',	Cluster__c = getId('DUMMY_OnTrade_America'),  DetailTitle__c = 'Lorem Ipsum Recipe 2', ListDescription__c = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout Recipe 2.');
 
         contentsList.add(banner1);
         contentsList.add(banner2);
@@ -448,6 +457,8 @@ public with sharing class ORGInitUtils {
         contentsList.add(news2);
         contentsList.add(faq1);
         contentsList.add(faq2);
+        contentsList.add(recipe);
+        contentsList.add(recipe2);
         List<Database.UpsertResult> result = Database.upsert(contentsList, Content__c.Fields.ExternalId__c, true);
         addToMapRecords(contentsList);
 
@@ -463,9 +474,16 @@ public with sharing class ORGInitUtils {
         mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = event1.Id,  MediaElement__c = getId('DUMMY_meVeleros'),     Placement__c = 'EventImageDetail'));
         mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = event2.Id,  MediaElement__c = getId('DUMMY_meOtonio'),      Placement__c = 'EventImageList'));
         mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = event2.Id,  MediaElement__c = getId('DUMMY_meOtonio'),      Placement__c = 'EventImageDetail'));
+        mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = recipe.Id,   MediaElement__c = getId('DUMMY_meEstatuas'),    Placement__c = 'RecipeImageList'));
+        mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = recipe.Id,   MediaElement__c = getId('DUMMY_meEstatuas'),    Placement__c = 'RecipeImageDetail'));
+        mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = recipe2.Id,  MediaElement__c = getId('DUMMY_meAbeja'),       Placement__c = 'RecipeImageList'));
+        mediaElementAssignmentList.add(new MediaElementAssignment__c(Content__c = recipe2.Id,  MediaElement__c = getId('DUMMY_meAbeja'),       Placement__c = 'RecipeImageDetail'));
+
         insert mediaElementAssignmentList;
 
         tagAssignmentList.add(new TagAssignment__c(Tag__c = getId('DUMMY_home'), Content__c = banner1.Id));
+        tagAssignmentList.add(new TagAssignment__c(Tag__c = getId('DUMMY_home'), Content__c = recipe.Id));
+        tagAssignmentList.add(new TagAssignment__c(Tag__c = getId('DUMMY_home'), Content__c = recipe2.Id));
         insert tagAssignmentList;
     }
 
@@ -579,8 +597,8 @@ public with sharing class ORGInitUtils {
             List<Brand__c> brandList = new List<Brand__c>();
             
             Brand__c Brand1 = new Brand__c(Name='Brand 1', ExternalId__c='DUMMY_Brand1', BrandContent__c=getId('DUMMY_cont_Estatuas'), Cluster__c=getId('DUMMY_OnTrade_Global'));
-            Brand__c Brand2 = new Brand__c(Name='Brand 2', ExternalId__c='DUMMY_Brand2', BrandContent__c=getId('DUMMY_cont_Colina'), Cluster__c=getId('DUMMY_OnTrade_America'));
-            Brand__c Brand3 = new Brand__c(Name='Brand 3', ExternalId__c='DUMMY_Brand3', BrandContent__c=getId('DUMMY_cont_AC1'), Cluster__c=getId('DUMMY_OnTrade_Europe'));
+            Brand__c Brand2 = new Brand__c(Name='Brand 2', ExternalId__c='DUMMY_Brand2', BrandContent__c=getId('DUMMY_cont_Colina'), Cluster__c=getId('DUMMY_OnTrade_America'), RecordTypeId = getRTId('Brand__c-Brand').Id);
+            Brand__c Brand3 = new Brand__c(Name='Brand 3', ExternalId__c='DUMMY_Brand3', BrandContent__c=getId('DUMMY_cont_AC1'), Cluster__c=getId('DUMMY_OnTrade_Europe'), RecordTypeId = getRTId('Brand__c-BrandVariant').Id);
         
             brandList.add(Brand1);
             brandList.add(Brand2);
@@ -638,5 +656,52 @@ public with sharing class ORGInitUtils {
             menuAssignmentList.add(MenuAssignment3);
             List<Database.UpsertResult> result = Database.upsert(menuAssignmentList, MenuAssignment__c.Fields.ExternalId__c, true);
             addToMapRecords(menuAssignmentList);
-        }       
+        }
+
+        private static void upsertRecipe(){ 
+            //Inserta 2 Recipe__c
+            List<Recipe__c> recipeList = new List<Recipe__c>();
+
+            Recipe__c recipe1 =  new Recipe__c(Name = 'DUMMY_Recipe1', ExternalId__c='DUMMY_Ex_Recipe1', Content__c = getId('DUMMY_cont_Recipe'), Cluster__c = getId('DUMMY_OnTrade_Global'));
+            Recipe__c recipe2 =  new Recipe__c(Name = 'DUMMY_Recipe2', ExternalId__c='DUMMY_Ex_Recipe2', Content__c = getId('DUMMY_cont_Recipe_2'), Cluster__c = getId('DUMMY_OnTrade_America'));
+           
+            recipeList.add(recipe1);
+            recipeList.add(recipe2);
+            List<Database.UpsertResult> result = Database.upsert(recipeList, Recipe__c.Fields.ExternalId__c, true);
+            addToMapRecords(recipeList);
+        }
+
+        private static void upsertRecipeStep(){
+        	//Inserta 2 RecipeStep__c
+        	List<RecipeStep__c> recipeStepList = new List<RecipeStep__c>();
+
+            RecipeStep__c recipeStep1 =  new RecipeStep__c(Name = 'DUMMY_RecipeStep1', ExternalId__c='DUMMY_Ex_RecipeStep1', Order__c =1, Step__c = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', Recipe__c = getId('DUMMY_Ex_Recipe1'));
+            RecipeStep__c recipeStep2 =  new RecipeStep__c(Name = 'DUMMY_RecipeStep2', ExternalId__c='DUMMY_Ex_RecipeStep2', Order__c =1, Step__c = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', Recipe__c = getId('DUMMY_Ex_Recipe2'));
+           
+            recipeStepList.add(recipeStep1);
+            recipeStepList.add(recipeStep2);
+            List<Database.UpsertResult> result = Database.upsert(recipeStepList, RecipeStep__c.Fields.ExternalId__c, true);
+            addToMapRecords(recipeStepList);
+        }
+
+        private static void upsertRecipeIngredient(){
+        	//Inserta 4 RecipeIngredient__c
+        	List<RecipeIngredient__c> recipeIngList = new List<RecipeIngredient__c>();
+
+            RecipeIngredient__c recipeIng1 =  new RecipeIngredient__c(Name = 'DUMMY_RecipeIngredient1', ExternalId__c='DUMMY_Ex_RecipeIngredient1', Order__c =1, RecordTypeId = getRTId('RecipeIngredient__c-BrandIngredient').Id , Recipe__c = getId('DUMMY_Ex_Recipe1'), Brand__c = getId('DUMMY_Brand2'), BrandVariant__c =  getId('DUMMY_Brand3'));
+            RecipeIngredient__c recipeIng2 =  new RecipeIngredient__c(Name = 'DUMMY_RecipeIngredient2', ExternalId__c='DUMMY_Ex_RecipeIngredient2', Order__c =1, RecordTypeId = getRTId('RecipeIngredient__c-BrandIngredient').Id , Recipe__c = getId('DUMMY_Ex_Recipe2'), Brand__c = getId('DUMMY_Brand2'), BrandVariant__c =  getId('DUMMY_Brand3'));           
+
+            RecipeIngredient__c recipeIng3 =  new RecipeIngredient__c(Name = 'DUMMY_RecipeIngredient3', ExternalId__c='DUMMY_Ex_RecipeIngredient3', Order__c =2, RecordTypeId = getRTId('RecipeIngredient__c-CustomIngredient').Id , Recipe__c = getId('DUMMY_Ex_Recipe1'), OtherIngredient__c = 'DUMMY_INGREDIENT_1');
+            RecipeIngredient__c recipeIng4 =  new RecipeIngredient__c(Name = 'DUMMY_RecipeIngredient4', ExternalId__c='DUMMY_Ex_RecipeIngredient4', Order__c =2, RecordTypeId = getRTId('RecipeIngredient__c-CustomIngredient').Id , Recipe__c = getId('DUMMY_Ex_Recipe2'), OtherIngredient__c = 'DUMMY_INGREDIENT_1');   
+
+            recipeIngList.add(recipeIng1);
+            recipeIngList.add(recipeIng2);
+            recipeIngList.add(recipeIng3);
+            recipeIngList.add(recipeIng4);
+            List<Database.UpsertResult> result = Database.upsert(recipeIngList, RecipeIngredient__c.Fields.ExternalId__c, true);
+            addToMapRecords(recipeIngList);
+
+        }
+        
+                 
 }
