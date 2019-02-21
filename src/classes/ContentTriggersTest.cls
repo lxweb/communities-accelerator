@@ -76,7 +76,7 @@ public with sharing class ContentTriggersTest {
 		System.debug('ClusterTriggersTest method getClusterList: '+getClusterList);
 		
 		List<Content__c> contentList = MockupFactory.createContent('Banner', getClusterList[0], 1);
-		List<Content__c> getContentList = [SELECT Id, Name FROM Content__c WHERE Name LIKE 'Banner%'];
+		List<Content__c> getContentList = [SELECT Id, Name FROM Content__c ];
 		System.debug('ClusterTriggersTest method getContentList: '+getContentList);
 
 		Content__c getContenToUpdate = getContentList[0];

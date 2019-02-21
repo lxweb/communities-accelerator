@@ -397,7 +397,7 @@ public class MockupFactory {
         List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
         
         for(Integer i = 0; i < contentIdList.size(); i++){
-            contentCartList.add( new ContentCartItem__c(Content__c = contentIdList[i].Id, User__c = UserInfo.getUserId()));
+            contentCartList.add( new ContentCartItem__c(Content__c = contentIdList[i].Id, User__c = UserInfo.getUserId(), Name='Test'+i));
         }
 
         insert contentCartList;
