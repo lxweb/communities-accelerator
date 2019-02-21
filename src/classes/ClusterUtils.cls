@@ -47,14 +47,14 @@ public with sharing class ClusterUtils {
 		}
 
 		if(!mapClustersBelow.containsKey(clusterId)){
-			Cluster__c cluster = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, ExternalId__c FROM Cluster__c WHERE Id =: clusterId];
+			Cluster__c cluster = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE Id =: clusterId];
 			
 			mapClustersBelow.put(cluster.Id, new ClusterWrapper(cluster));
 			
 			//The accelerator allows only 4 levels of depth of Clusters
 			set<Id> setClusterRelated = new set<Id>{cluster.Id};
 			while(!setClusterRelated.isEmpty()){
-				List<Cluster__c> clustersRelated = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, ExternalId__c FROM Cluster__c WHERE ParentCluster__c IN: setClusterRelated];
+				List<Cluster__c> clustersRelated = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE ParentCluster__c IN: setClusterRelated];
 				setClusterRelated.clear();
 				for(Cluster__c rc: clustersRelated){
 					setClusterRelated.add(rc.Id);
