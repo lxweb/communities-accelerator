@@ -15,7 +15,7 @@ public class ContentSearchFiltersControllerTest {
         
 		//When
 		Test.startTest();
-		List<ContentSearchFiltersController.FilterTypeWrapper> filters = ContentSearchFiltersController.getFilters();
+		List<ContentSearchFiltersController.FilterTypeWrapper> filters = ContentSearchFiltersController.getFilters('Content__c');
 		Test.stopTest();
 
 		//Then

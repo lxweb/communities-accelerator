@@ -1,6 +1,5 @@
 public class ContentSearchFiltersController {
 
-    public static final String FILTER_TYPE_CLUSTER_TYPE = 'Cluster';
 
     //FILTER WRAPPER
     public class FilterTypeWrapper {
@@ -25,10 +24,10 @@ public class ContentSearchFiltersController {
     
 
     @AuraEnabled
-    public static List<FilterTypeWrapper> getFilters (){
+    public static List<FilterTypeWrapper> getFilters (String sObjectType){
         Set<Id> clusterIds = getCurrentUserClusterTree();
         List<Cluster__c> clusterList = [SELECT ExternalId__c, Name FROM Cluster__c WHERE id IN :clusterIds];
-        List<RecordType> contentTypeList = [SELECT Name FROM RecordType WHERE sObjectType = 'Content__c'];
+        List<RecordType> contentTypeList = [SELECT Name FROM RecordType WHERE sObjectType = :sObjectType];
         List<Category__c> categoryList = [SELECT ExternalId__c, Name FROM Category__c WHERE Cluster__c IN :clusterIds];
         List<Tag__c> tagList = [SELECT ExternalId__c, Name FROM Tag__c WHERE Cluster__c IN :clusterIds];
     
