@@ -312,4 +312,36 @@
         <shortDescription>Invalid formula format</shortDescription>
         <value>The formula can only has numbers, parentesis, AND, OR. Example: (1 AND 2) OR 3</value>
     </labels>
+    <labels>
+        <fullName>SearchContentClusterFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of cluster filter in search content page</shortDescription>
+        <value>Cluster</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentTypeFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of content type filter in search content page</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentCategoryFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of category filter in search content page</shortDescription>
+        <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentTagFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of tag filter in search content page</shortDescription>
+        <value>Tags</value>
+    </labels>
 </CustomLabels>

@@ -47,14 +47,14 @@ public with sharing class ClusterUtils {
 		}
 
 		if(!mapClustersBelow.containsKey(clusterId)){
-			Cluster__c cluster = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE Id =: clusterId];
+			Cluster__c cluster = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, ExternalId__c FROM Cluster__c WHERE Id =: clusterId];
 			
 			mapClustersBelow.put(cluster.Id, new ClusterWrapper(cluster));
 			
 			//The accelerator allows only 4 levels of depth of Clusters
 			set<Id> setClusterRelated = new set<Id>{cluster.Id};
 			while(!setClusterRelated.isEmpty()){
-				List<Cluster__c> clustersRelated = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE ParentCluster__c IN: setClusterRelated];
+				List<Cluster__c> clustersRelated = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, ExternalId__c FROM Cluster__c WHERE ParentCluster__c IN: setClusterRelated];
 				setClusterRelated.clear();
 				for(Cluster__c rc: clustersRelated){
 					setClusterRelated.add(rc.Id);
@@ -105,5 +105,51 @@ public with sharing class ClusterUtils {
 			return clusterRoot;
 		}
 		return null;
+	}
+
+
+	public static Set<Id> getEntireClusterBranch(String clusterId){
+		List<Cluster__c> clusterList = [SELECT id, parentCluster__c FROM Cluster__c];
+		//Map with id as key and cluster as value
+		Map<String, Cluster__c> clusterMap = new Map<String, Cluster__c>();
+		//Map with id as key and a list of the child clusters as value
+		Map<String, List<Cluster__c>> parentClusterMap = new Map<String, List<Cluster__c>>();
+		//Set with all the cluster ids of the branch
+		Set<Id> clusterIdSet = new Set<Id>{clusterId};
+
+		//Instantiate both maps
+		for(Cluster__c cluster : clusterList){
+			clusterMap.put(cluster.id, cluster);
+			if(cluster.parentCluster__c != null){
+				if(parentClusterMap.get(cluster.parentCluster__c) != null){
+					List<Cluster__c> childList = parentClusterMap.get(cluster.parentCluster__c);
+					childList.add(cluster);
+					parentClusterMap.put(cluster.parentCluster__c, childList);
+				}else{
+					parentClusterMap.put(cluster.parentCluster__c, new List<Cluster__c>{cluster});
+				}
+			}
+		}
+		//Gets all the parent clusters
+		Cluster__c currentCluster = clusterMap.get(clusterId);
+		Boolean noMoreParents = false;
+		while(currentCluster.parentCluster__c != null){
+			currentCluster = clusterMap.get(currentCluster.parentCluster__c);
+			clusterIdSet.add(currentCluster.id);
+		}
+		
+		//Gets all the child clusters
+		List<Cluster__c> childClusterList = parentClusterMap.get(clusterId);
+		while(childClusterList != null && !childClusterList.isEmpty()){
+			List<Cluster__c> subChildList = new List<Cluster__c>();
+			for(Cluster__c childCluster : childClusterList){
+				clusterIdSet.add(childCluster.id);
+				if(parentClusterMap.get(childCluster.id) != null){
+					subChildList.addAll(parentClusterMap.get(childCluster.id));
+				}
+			}
+			childClusterList = subChildList;
+		}
+		return clusterIdSet;
 	}
 }
