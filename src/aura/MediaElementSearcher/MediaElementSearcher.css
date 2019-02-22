@@ -1,0 +1,42 @@
+.THIS .div_mediaElementCardContainer{	
+	display: -webkit-box;
+    margin: 10px;
+}
+
+.THIS .img_mediaElementReview{
+	height: 100px;
+	object-fit: contain;
+}
+
+.THIS .input_search{
+	width: 250px;
+	height: 28px;
+}
+
+.THIS .div_mediaElementsContainer{
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: space-evenly;
+	overflow: auto;
+	max-height: 90%;
+}
+
+.THIS .div_cardTitle{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.THIS .div_mediaSearchSection{
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	background-color: rgb(243, 242, 242);
+	max-height: 70%;
+}
+
+.THIS .slds-modal__header{
+	background-color: rgb(243, 242, 242);
+}

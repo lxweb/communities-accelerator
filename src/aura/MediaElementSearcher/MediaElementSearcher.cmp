@@ -1,0 +1,67 @@
+<aura:component controller="MediaElementSearcherController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+	<!-- External -->
+	<aura:attribute name="iconName" type="String" default="us"/>
+
+	<!-- General Variables -->
+    <aura:attribute name="isLoading" type="boolean" default="false" />
+    <aura:attribute name="searchValue" type="String" default=""/>
+    <aura:attribute name="scrollCallback" type="Object" access="private" />
+    <aura:attribute name="scrollCalled" type="Boolean" access="private" default="false" />
+    <aura:attribute name="isEndPage" type="boolean" default="false"/>
+    <aura:attribute name="mediaElementList" type="Object"/>
+    <aura:attribute name="offset" type="Integer" default="0"/>
+    <aura:attribute name="elementPerPage" type="Integer" default="3"/>
+
+	<!-- ICON USAGE -->
+    <aura:if isTrue="{!and(v.iconName != null, v.iconName != '')}">
+        <lightning:button variant="brand" title="Add Image" onclick="{!c.initSearch}">
+            <lightning:Icon size="small" iconName="utility:image"/>
+        </lightning:button>
+    </aura:if>
+
+    <!-- LABEL USAGE -->
+    <aura:if isTrue="{!not(and(v.iconName != null, v.iconName != ''))}">
+        <aura:if isTrue="{!v.isLoading}">
+            <lightning:button variant="brand" label="Search..." disabled="true"/>
+            <aura:set attribute="else">
+                <lightning:button class="{!v.classIn}" variant="brand" label="Add Image" title="Add Image" onclick="{!c.initSearch}"/>
+            </aura:set>
+        </aura:if>
+    </aura:if>
+
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox" class="slds-modal slds-modal_large">
+        <div class="slds-modal__container" style="width: 40%;">
+            <div class="slds-modal__header">
+                <div style="text-align: right;">
+                    <lightning:button title="Search" onclick="{!c.closeNewModal}">
+                        <lightning:Icon iconName="utility:close" title="Close" alternativeText="Close" size="x-small"/>
+                    </lightning:button>
+                </div>
+                <div style="text-transform: uppercase; font-weight: bold;">
+                    Select Media Element
+                </div>
+                <!-- SEARCH BOX -->
+                <input type="text" aura:id="searchField" class="input_search" placeholder="Search..."/>
+                <lightning:button  aura:id="searchButton" title="Search" onclick="{!c.searchByText}">
+                    <lightning:Icon class="icon_search" iconName="utility:search" title="Search" alternativeText="Search" size="x-small"/>
+                </lightning:button>
+            </div>
+            <div class="div_mediaSearchSection">
+            	<!-- MEDIA ELEMENTS LIST -->
+            	<div class="div_mediaElementsContainer" id='infinite-list'>					
+					<aura:iteration items="{!v.mediaElementList}" var="mediaElement">
+						<div class="div_mediaElementCardContainer">
+							<img src="{!mediaElement.fileURLDesktop}" class="img_mediaElementReview" onclick="{!c.selectMediaElement}" id="{!mediaElement.idME}"/>
+							<div class="div_cardTitle">
+								{!mediaElement.name}
+                            <br/>
+                                {!mediaElement.lastModified} - {!mediaElement.size} KB - {!mediaElement.ext}
+							</div>
+						</div>
+					</aura:iteration>
+				</div>
+	    	</div>            
+        </div>
+    </div>
+	
+</aura:component>
