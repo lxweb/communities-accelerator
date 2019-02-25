@@ -49,6 +49,14 @@
         <value>Desktop</value>
     </labels>
     <labels>
+        <fullName>DuplicateItem</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Duplicate Item</shortDescription>
+        <value>The item you added is already present in the cart</value>
+    </labels>
+    <labels>
         <fullName>ExistByDefaultLanguage</fullName>
         <categories>ClusterTriggers</categories>
         <language>en_US</language>
@@ -103,6 +111,14 @@
         <protected>false</protected>
         <shortDescription>General_Error</shortDescription>
         <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>General_InvalidFormulaFormat</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid formula format</shortDescription>
+        <value>The formula can only has numbers, parentesis, AND, OR. Example: (1 AND 2) OR 3</value>
     </labels>
     <labels>
         <fullName>General_Order</fullName>
@@ -249,6 +265,22 @@
         <value>Image Uploader</value>
     </labels>
     <labels>
+        <fullName>IncorrectExternalId</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IncorrectExternalId</shortDescription>
+        <value>External Id does not belong to a compatible object or record type. Enter the External Id of the record you want to link to this component</value>
+    </labels>
+    <labels>
+        <fullName>ItemWasAdded</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Item was added</shortDescription>
+        <value>Your item was added Successfully!</value>
+    </labels>
+    <labels>
         <fullName>Language</fullName>
         <categories>TranslationComponent.cmp</categories>
         <language>en_US</language>
@@ -263,6 +295,14 @@
         <protected>true</protected>
         <shortDescription>Mobile</shortDescription>
         <value>Mobile</value>
+    </labels>
+    <labels>
+        <fullName>NoClusterSelected</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>The cookie associated with the cluster don&apos;t have any value.</value>
     </labels>
     <labels>
         <fullName>NoRecordsSelected</fullName>
