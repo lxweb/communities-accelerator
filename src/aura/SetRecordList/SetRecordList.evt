@@ -1,0 +1,16 @@
+<aura:event type="APPLICATION" description="Event template" >
+
+    <aura:attribute name="title"                    type="String"  />
+    <aura:attribute name="iconName"                 type="String"  />
+	<aura:attribute name="columns" 					type="List"    />
+    <aura:attribute name="data" 					type="List"    />
+    <aura:attribute name="dataTableSchema" 			type="Object"  />
+    <aura:attribute name="keyField" 				type="String"  />
+    <aura:attribute name="initialRows" 				type="Integer" />
+    <aura:attribute name="selectedRowsCount" 		type="Integer" />
+    <aura:attribute name="enableInfiniteLoading" 	type="Boolean" />
+    <aura:attribute name="rowsToLoad" 				type="Integer" />
+    <aura:attribute name="loadMoreOffset" 			type="Integer" />
+    <aura:attribute name="totalNumberOfRows" 		type="Integer" />
+   
+</aura:event>

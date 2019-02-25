@@ -64,10 +64,10 @@ public class MockupFactory {
         return clusterList;
     }
 
-    public static List<Tag__c>  createTag(String tagName, String description, Integer cuantity, Id clusterId){
+    public static List<Tag__c>  createTag(String tagName, String description, Integer quantity, Id clusterId){
         List<Tag__c> tagList = new List<Tag__c>();
         
-        for(Integer i = 0;i<cuantity;i++){
+        for(Integer i = 0;i<quantity;i++){
             tagList.add( new Tag__c(Name=tagName+i,Description__c=description, Cluster__c=clusterId));
 
         }
@@ -92,10 +92,10 @@ public class MockupFactory {
     }
 
 
-    public static List<Category__c>  createCategory(String catName, Integer cuantity, Id clusterId){
+    public static List<Category__c>  createCategory(String catName, Integer quantity, Id clusterId){
         List<Category__c> catList = new List<Category__c>();
         
-        for(Integer i = 0;i<cuantity;i++){
+        for(Integer i = 0;i<quantity;i++){
             catList.add( new Category__c(Name=catName+i, Cluster__c=clusterId));
 
         }
@@ -214,7 +214,7 @@ public class MockupFactory {
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Content__c' AND Name =: nameRecordType LIMIT 1];
 
         for(Integer i = 0; i < quantity; i++){
-            contentList.add(new Content__c(Name = nameRecordType + ' ' + i,
+            contentList.add(new Content__c(Name =1+ nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
@@ -300,7 +300,9 @@ public class MockupFactory {
                             ContentDocumentId = contentDocument,
                             LinkedEntityId = mediaElement.Id,
                             ShareType = 'V' ));
+            mediaElement.FileURLDesktop__c =AcceleratorSettings__c.getInstance().SalesforceDomain__c + '/sfc/servlet.shepherd/document/download/' + cv.ContentDocumentId;
         }
+        update mediaElementList;
         insert contentDocumentLinkList;
         return contentDocumentLinkList;
     }
@@ -342,10 +344,10 @@ public class MockupFactory {
         return translationList;
     }
 
-    public static List<Navigation__c>  createNavigation(String navName, String url, Integer cuantity, Id clusterId){
+    public static List<Navigation__c>  createNavigation(String navName, String url, Integer quantity, Id clusterId){
         List<Navigation__c> navList = new List<Navigation__c>();
         
-        for(Integer i = 0;i<cuantity;i++){
+        for(Integer i = 0;i<quantity;i++){
             navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId));
         }
         insert navList;
@@ -353,10 +355,10 @@ public class MockupFactory {
         return navList;
     }
 
-    public static List<Menu__c>  createMenu(String menuName, Integer cuantity, Id clusterId){
+    public static List<Menu__c>  createMenu(String menuName, Integer quantity, Id clusterId){
         List<Menu__c> menuList = new List<Menu__c>();
         
-        for(Integer i = 0;i<cuantity;i++){
+        for(Integer i = 0;i<quantity;i++){
             menuList.add( new Menu__c(Name=menuName+i, Cluster__c=clusterId));
         }
         insert menuList;
@@ -379,10 +381,10 @@ public class MockupFactory {
         return menuAssignmentList;
     }
 
-    public static List<Brand__c>  createBrand(String brandName, Integer cuantity, Id clusterId){
+    public static List<Brand__c>  createBrand(String brandName, Integer quantity, Id clusterId){
         List<Brand__c> brandList = new List<Brand__c>();
         
-        for(Integer i = 0;i<cuantity;i++){
+        for(Integer i = 0;i<quantity;i++){
             brandList.add( new Brand__c(Name=brandName+i, Cluster__c=clusterId));
         }
         insert brandList;
@@ -395,7 +397,7 @@ public class MockupFactory {
         List<ContentCartItem__c> contentCartList = new List<ContentCartItem__c>();
         
         for(Integer i = 0; i < contentIdList.size(); i++){
-            contentCartList.add( new ContentCartItem__c(Content__c = contentIdList[i].Id, User__c = UserInfo.getUserId()));
+            contentCartList.add( new ContentCartItem__c(Content__c = contentIdList[i].Id, User__c = UserInfo.getUserId(), Name='Test'+i));
         }
 
         insert contentCartList;
@@ -420,4 +422,65 @@ public class MockupFactory {
         return AU;
         
     }
+
+    //Create Recipe
+    public static List<Recipe__c>  createRecipes(String recipeName, Integer quantity, Id content, Id clusterId){
+        List<Recipe__c> recipeList = new List<Recipe__c>();
+        
+        for(Integer i = 0;i<quantity;i++){
+            recipeList.add( new Recipe__c(Name=recipeName+i, Content__c = content, Cluster__c=clusterId));
+        }
+        insert recipeList;
+
+        return recipeList;
+    }
+
+    //Create RecipeStep for Recipe
+    public static List<RecipeStep__c> createRecipeStep(String step, Integer quantity, Id recipe){
+        List<RecipeStep__c> stepsList = new List<RecipeStep__c>();
+        
+        for(Integer i = 0; i < quantity; i++){
+            stepsList.add(new RecipeStep__c( Step__c = step+i, Name = step+i, Recipe__c = recipe, Order__c = i+1));
+        }
+        insert stepsList;
+        return stepsList;
+    }
+
+    //Create RecipeIngredient for Recipe
+    public static List<RecipeIngredient__c> createRecipeIngredientBrand(String name, Integer quantity, Id recipe, Id brand, Id brandVariant){
+        List<RecipeIngredient__c> stepsList = new List<RecipeIngredient__c>();        
+ //       Id recordTypeId = Schema.SObjectType.RecipeIngredient__c.getRecordTypeInfosByDeveloperName().get('BrandIngredient').getRecordTypeId();
+
+        RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'RecipeIngredient__c' AND DeveloperName =: 'BrandIngredient'];
+
+        for(Integer i = 0; i < quantity; i++){
+            stepsList.add(new RecipeIngredient__c( Name = name+i, 
+                                                Recipe__c = recipe, 
+                                                Order__c = i+1,
+                                                Brand__c = brand,
+                                                BrandVariant__c = brandVariant, 
+                                                RecordTypeId = rtGroup.Id));
+        }
+        insert stepsList;
+        return stepsList;
+    }
+
+    //Create RecipeIngredient for Recipe
+    public static List<RecipeIngredient__c> createRecipeIngredientWithoutBrand(String name, Integer quantity, Id recipe){
+        List<RecipeIngredient__c> stepsList = new List<RecipeIngredient__c>(); 
+        //Id recordTypeId = Schema.SObjectType.RecipeIngredient__c.getRecordTypeInfosByDeveloperName().get('BrandIngredient').getRecordTypeId();
+
+        RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'RecipeIngredient__c' AND DeveloperName =: 'CustomIngredient'];
+        for(Integer i = 0; i < quantity; i++){
+            stepsList.add(new RecipeIngredient__c( Name = name+i, 
+                                                Recipe__c = recipe,
+                                                Order__c = i+1,
+                                                OtherIngredient__c = name+i,
+                                                CustomIngredient__c = 'ice', 
+                                                RecordTypeId = rtGroup.Id));
+        }
+        insert stepsList;
+        return stepsList;
+    }
+
 }

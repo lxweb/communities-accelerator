@@ -92,9 +92,11 @@ public with sharing class CG_ContentCartController {
 		List<ContentCartItem__c> contentCartList = [SELECT id, Content__c, Content__r.Name, Content__r.Description__c FROM ContentCartItem__c WHERE Content__c =: contentId AND User__c =: UserInfo.getUserId()];
 		Boolean isCreated = false;
 		if(contentCartList.size() == 0){
+            Content__c content = [SELECT id, Name FROM Content__c WHERE Id =: contentId LIMIT 1];
             ContentCartItem__c contentCart = new ContentCartItem__c();
             contentCart.User__c = UserInfo.getUserId();
             contentCart.Content__c = contentId;
+            contentCart.Name = content.Name;
             insert contentCart;
             isCreated = true;
 		}
