@@ -18,8 +18,8 @@
 	},
 
     selectMediaElement : function(component, event, helper) {
-        var mElementId = event.target.getAttribute('src');
-        console.log(mElementId);
+        var mElementUrl = event.target.getAttribute('src');
+        var mElementId = event.target.getAttribute('id');
         helper.closeModal(component, event, helper);
     }
 })

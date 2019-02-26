@@ -14,8 +14,7 @@
 		component.set('v.scrollCallback', $A.getCallback( function() {
 			//Add validation
 			if (component.isValid() && !component.get('v.scrollCalled')) {
-				//if(window['outerHeight'] >= document.documentElement.scrollHeight - window['scrollY']){
-				if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+				if (listElm.clientHeight + listElm.scrollTop + 1 >= listElm.scrollHeight) {
 					//Call your helper method to show more items
 					helper.getMedElems(component);
 					component.set('v.scrollCalled', true);
@@ -26,7 +25,6 @@
 		//Add the event Listener 'scroll' to the window
 		listElm.addEventListener('scroll', component.get('v.scrollCallback'));
 		//** End the Infinite Scroll
-
 		return afterRend;
 	}
 })

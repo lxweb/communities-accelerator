@@ -1,6 +1,7 @@
-<aura:component controller="MediaElementSearcherController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+<aura:component controller="MediaElementsManagerController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
 	<!-- External -->
-	<aura:attribute name="iconName" type="String" default="us"/>
+	<aura:attribute name="iconName" type="String"/>
+    <aura:attribute name="hasButton" type="boolean" default="true"/>
 
 	<!-- General Variables -->
     <aura:attribute name="isLoading" type="boolean" default="false" />
@@ -12,20 +13,22 @@
     <aura:attribute name="offset" type="Integer" default="0"/>
     <aura:attribute name="elementPerPage" type="Integer" default="3"/>
 
-	<!-- ICON USAGE -->
-    <aura:if isTrue="{!and(v.iconName != null, v.iconName != '')}">
-        <lightning:button variant="brand" title="Add Image" onclick="{!c.initSearch}">
-            <lightning:Icon size="small" iconName="utility:image"/>
-        </lightning:button>
-    </aura:if>
+    <aura:if isTrue="{!v.hasButton}">
+    	<!-- ICON USAGE iconName=utility:image-->
+        <aura:if isTrue="{!and(v.iconName != null, v.iconName != '')}">
+            <lightning:button variant="brand" title="{!$Label.c.AddMediaElement}" onclick="{!c.initSearch}">
+                <lightning:Icon size="small" iconName="{!c.iconName }"/>
+            </lightning:button>
+        </aura:if>
 
-    <!-- LABEL USAGE -->
-    <aura:if isTrue="{!not(and(v.iconName != null, v.iconName != ''))}">
-        <aura:if isTrue="{!v.isLoading}">
-            <lightning:button variant="brand" label="Search..." disabled="true"/>
-            <aura:set attribute="else">
-                <lightning:button class="{!v.classIn}" variant="brand" label="Add Image" title="Add Image" onclick="{!c.initSearch}"/>
-            </aura:set>
+        <!-- LABEL USAGE -->
+        <aura:if isTrue="{!not(and(v.iconName != null, v.iconName != ''))}">
+            <aura:if isTrue="{!v.isLoading}">
+                <lightning:button variant="brand" label="Search..." disabled="true"/>
+                <aura:set attribute="else">
+                    <lightning:button class="{!v.classIn}" variant="brand" label="{!$Label.c.AddMediaElement}" title="{!$Label.c.AddMediaElement}" onclick="{!c.initSearch}"/>
+                </aura:set>
+            </aura:if>
         </aura:if>
     </aura:if>
 
@@ -38,7 +41,7 @@
                     </lightning:button>
                 </div>
                 <div style="text-transform: uppercase; font-weight: bold;">
-                    Select Media Element
+                    {!$Label.c.SelectMediaElement}
                 </div>
                 <!-- SEARCH BOX -->
                 <input type="text" aura:id="searchField" class="input_search" placeholder="Search..."/>
@@ -55,7 +58,7 @@
 							<div class="div_cardTitle">
 								{!mediaElement.name}
                             <br/>
-                                {!mediaElement.lastModified} - {!mediaElement.size} KB - {!mediaElement.ext}
+                                {!mediaElement.lastModified} - {!mediaElement.size} - {!mediaElement.ext}
 							</div>
 						</div>
 					</aura:iteration>

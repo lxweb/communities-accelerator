@@ -17,7 +17,8 @@
 		action.setParams({
 			stringOffset: component.get("v.offset").toString(),
 			searchText: searchtext,
-			stringElementPerPage: elementPerPage.toString()
+			stringElementPerPage: elementPerPage.toString(),
+			findContent: 'true'
 		});
 
 		action.setCallback(this, function(f) {
