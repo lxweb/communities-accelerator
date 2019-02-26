@@ -1,4 +1,4 @@
-<aura:component controller="MediaElementsManagerController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+<aura:component controller="MediaElementsManagerController" access="global">
 	<!-- External -->
 	<aura:attribute name="iconName" type="String"/>
     <aura:attribute name="hasButton" type="boolean" default="true"/>
@@ -12,6 +12,10 @@
     <aura:attribute name="mediaElementList" type="Object"/>
     <aura:attribute name="offset" type="Integer" default="0"/>
     <aura:attribute name="elementPerPage" type="Integer" default="3"/>
+
+    <!-- Events -->
+    <aura:registerevent name="URLEvent" type="c:MediaElementSearcherEvent" />
+    <aura:method name="initPopUp" action="{!c.initSearch}"  />
 
     <aura:if isTrue="{!v.hasButton}">
     	<!-- ICON USAGE iconName=utility:image-->

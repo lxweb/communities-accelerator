@@ -20,6 +20,12 @@
     selectMediaElement : function(component, event, helper) {
         var mElementUrl = event.target.getAttribute('src');
         var mElementId = event.target.getAttribute('id');
+        var compEvents = component.getEvent("URLEvent");
+        compEvents.setParams({ 
+                                "URL" : mElementUrl,
+                                "ID" :  mElementId
+                            });
+        compEvents.fire();
         helper.closeModal(component, event, helper);
     }
 })
