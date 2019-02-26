@@ -1,0 +1,29 @@
+<template>
+
+
+    <div class="slds-m-top_medium">
+            
+    </div>
+
+    <div class="rich">
+        <lightning-button type="submit" name="save" label="Display Source" onclick={displaySource}></lightning-button>
+        <lightning-input-rich-text 
+            id="Rich1"
+            value={myVal}
+            onchange={handleTextChange}
+            disabled-categories="INSERT_CONTENT"
+            custom-buttons={myCustomButtons}       
+            >
+        </lightning-input-rich-text>
+    </div>
+    
+    <div class="source" style="display:none;">
+        <lightning-button type="submit" name="save" label="Hide Source" onclick={hideSource}></lightning-button>
+        <textarea id="textarea-id-01" class="slds-textarea" onchange={handleAreaText} rows="5" ></textarea>
+    </div>
+    
+
+    <div class="slds-m-top_medium">
+        <lightning-button type="submit" name="save" label="Save" onclick={handleSaveEvent}></lightning-button>
+    </div>
+</template>
