@@ -17,7 +17,7 @@
                 </div>
                 <div class="div_description">
                     <aura:if isTrue="{!not(v.contentWrapper.isRecipie)}">
-                        <h2>Asset Details</h2>
+                        <h2>{!$Label.c.AssetDetailsTitle}</h2>
                 	   <aura:unescapedHtml value="{!v.contentWrapper.longDescription}"/>
                     </aura:if>
                 </div>
@@ -63,7 +63,7 @@
         <aura:if isTrue="{!v.contentWrapper.isRecipie}">
             <div class="div_featuring">
                 <div class="div_featuring_title">
-                    <h1>Featuring</h1>
+                    <h1>{!$Label.c.AssetDetailsFeaturing}</h1>
                 </div>
                 <div class="div_featuring_panel_description">
                     <div class="div_featuring_image">
@@ -75,11 +75,11 @@
                         </div>
                     </div>
                     <div class="div_featuring_ingredients">
-                        <h1>INGREDIENTS</h1>
+                        <h1>{!$Label.c.AssetDetailsIngredients}</h1>
                         <aura:unescapedHtml value="{!v.contentWrapper.ingredients}"/>
                     </div>
                     <div class="div_featuring_instructions">
-                        <h1>INSTRUCTIONS</h1>
+                        <h1>{!$Label.c.AssetDetailsInstructions}</h1>
                         <aura:unescapedHtml value="{!v.contentWrapper.instructions}"/>
                     </div>
                 </div>    
@@ -88,7 +88,7 @@
         
         <div class="div_tags">
             <div class="div_tags_title">
-               <h1>Related Tags</h1>
+               <h1>{!$Label.c.AssetDetailsRelatedTags}</h1>
             </div>
             <aura:if isTrue="{!v.contentWrapper.tagsList.length > 0}">
                 <aura:iteration items="{!v.contentWrapper.tagsList}" var="item">

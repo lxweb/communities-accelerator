@@ -9,6 +9,46 @@
         <value>El campo seleccionado en custom settings &quot;Accelerator Settings&quot; es incorrecto</value>
     </labels>
     <labels>
+        <fullName>AssetDetailsFeaturing</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Featuring</shortDescription>
+        <value>Featuring</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsIngredients</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Ingredients</shortDescription>
+        <value>INGREDIENTS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsInstructions</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Instructions</shortDescription>
+        <value>INSTRUCTIONS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsRelatedTags</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Related Tags</shortDescription>
+        <value>Related Tags</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsTitle</fullName>
+        <categories>CG Asset Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AssetDetailsTitle</shortDescription>
+        <value>Asset Details</value>
+    </labels>
+    <labels>
         <fullName>CannotReassignComponent</fullName>
         <categories>ComponentTriggers</categories>
         <language>en_US</language>
