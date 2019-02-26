@@ -18,9 +18,9 @@
 	    </div>
 	    <div class="slds-col slds-size_1-of-2" >
 	    	<aura:if isTrue="{!(v.Status) == ($Label.c.ContentDetailDraft)}">
-	        	<button class="slds-button slds-button_neutral">{!$Label.c.ContentDetailSaveDraft}</button>
+	        	<button class="slds-button slds-button_neutral" onclick="{!c.doSaveDraft}">{!$Label.c.ContentDetailSaveDraft}</button>
 	        	<aura:set attribute="else">
-	        		<button class="slds-button slds-button_text-destructive" >{!$Label.c.ContentDetailUnpublish}</button>
+	        		<button class="slds-button slds-button_text-destructive" onclick="{!c.doUnPublishContent}">{!$Label.c.ContentDetailUnpublish}</button>
 	        	</aura:set>
 	        </aura:if>
 	        <button class="slds-button slds-button_brand" onclick="{!c.doPublishContent}" >{!$Label.c.ContentDetailPublish}</button>
