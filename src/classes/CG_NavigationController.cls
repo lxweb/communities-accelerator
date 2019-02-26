@@ -9,8 +9,6 @@ public class CG_NavigationController {
 		@auraEnabled public String device;
 		@auraEnabled public Boolean isEnabledCommunityEditFrame;
 		@auraEnabled public Boolean isEnabledCommunityViewFrame;
-		@auraEnabled public Boolean isEnabledComponentEditFrame;
-		@auraEnabled public Boolean isEnabledComponentViewFrame;
 
 		public ComponentWrapper (){
 			this.acceleratorSettings = AcceleratorSettings__c.getInstance();
@@ -49,27 +47,25 @@ public class CG_NavigationController {
 		ComponentWrapper cw = new ComponentWrapper();
 		//verificar los custom permisions
 		if(!cw.isEnabledCommunityEditFrame){
-			System.debug('isEnabledCommunityEditFrame: ' + cw.isEnabledCommunityEditFrame);
+			System.debug('CG_NavigationController isEnabledCommunityEditFrame: ' + cw.isEnabledCommunityEditFrame);
+			System.debug('CG_NavigationController component.RecordType.DeveloperName: ' + component.RecordType.DeveloperName);
 			if(FeatureManagement.checkPermission(component.RecordType.DeveloperName + 'EditFrame')){
 				System.debug('RecordType.DeveloperName: ' + component.RecordType.DeveloperName + 'EditFrame');
-				cw.isEnabledComponentEditFrame = true;
+				cw.isEnabledCommunityEditFrame = true;
 			}else{
-				cw.isEnabledComponentEditFrame = false;
+				cw.isEnabledCommunityEditFrame = false;
 			}
-		}else{
-			cw.isEnabledComponentEditFrame = true;
 		}
 
 		if (!cw.isEnabledCommunityViewFrame){
-			System.debug('isEnabledCommunityViewFrame: ' + cw.isEnabledCommunityViewFrame);
+			System.debug('CG_NavigationController isEnabledCommunityViewFrame: ' + cw.isEnabledCommunityViewFrame);
+			System.debug('CG_NavigationController component.RecordType.DeveloperName: ' + component.RecordType.DeveloperName);
 			if(FeatureManagement.checkPermission(component.RecordType.DeveloperName + 'ViewFrame')){
 				System.debug('RecordType.DeveloperName: ' + component.RecordType.DeveloperName + 'ViewFrame');
-				cw.isEnabledComponentViewFrame = true;
+				cw.isEnabledCommunityViewFrame = true;
 			}else{
-				cw.isEnabledComponentViewFrame = false;
+				cw.isEnabledCommunityViewFrame = false;
 			}
-		}else{
-			cw.isEnabledComponentViewFrame = true;
 		}
 		cw.component = component;
 		cw.clusterId = clusterId;

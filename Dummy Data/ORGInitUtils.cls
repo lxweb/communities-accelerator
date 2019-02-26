@@ -486,7 +486,8 @@ public with sharing class ORGInitUtils {
         Component__c comp_FAQ               = new Component__c(RecordTypeId = getRTId('Component__c-FAQ').Id,               Name = 'DUMMY_FAQ',               ExternalId__c = 'DUMMY_CFAQ',              Cluster__c = getId('DUMMY_OnTrade_Global'), Datasource__c = 'Categories', HierarchicalOrderBy__c = '', OrderBy__c = 'Name DESC' );
         Component__c comp_ClusterSelector   = new Component__c(RecordTypeId = getRTId('Component__c-Cluster_Selector').Id,  Name = 'DUMMY_Cluster Selector',  ExternalId__c = 'DUMMY_CClusterSelector',  Cluster__c = getId('DUMMY_OnTrade_Global'), FirstCluster__c = getId('DUMMY_OnTrade_Global') );
         Component__c comp_Menu              = new Component__c(RecordTypeId = getRTId('Component__c-Menu').Id,              Name = 'DUMMY_Menu',              ExternalId__c = 'DUMMY_CMenu',             Cluster__c = getId('DUMMY_OnTrade_Global'), NavigationMode__c = 'Horizontal-Simple', HasDelay__c = true, DelayTime__c = 500 );
-
+		Component__c comp_LanguageSelector   = new Component__c(RecordTypeId = getRTId('Component__c-Language_Selector').Id,  Name = 'DUMMY_Language Selector',  ExternalId__c = 'DUMMY_CLanguageSelector',  Cluster__c = getId('DUMMY_OnTrade_Global'), FirstCluster__c = getId('DUMMY_OnTrade_Global') );
+        
         componentsList.add(comp_Banner);
         componentsList.add(comp_Event);
         componentsList.add(comp_EventDetail);
@@ -498,6 +499,8 @@ public with sharing class ORGInitUtils {
         componentsList.add(comp_FAQ);
         componentsList.add(comp_ClusterSelector);
         componentsList.add(comp_Menu);
+        componentsList.add(comp_LanguageSelector);
+        
         List<Database.UpsertResult> result = Database.upsert(componentsList, Component__c.Fields.ExternalId__c, true);
         addToMapRecords(componentsList);
 
