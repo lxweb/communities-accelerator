@@ -5,8 +5,6 @@ public with sharing class CG_BaseComponentController {
 		@auraEnabled public AcceleratorSettings__c acceleratorSettings;
 		@auraEnabled public Boolean isEnabledCommunityEditFrame;
 		@auraEnabled public Boolean isEnabledCommunityViewFrame;
-		@auraEnabled public Boolean isEnabledComponentEditFrame;
-		@auraEnabled public Boolean isEnabledComponentViewFrame;
         @auraEnabled public Component__c component;
 		@auraEnabled public List<String> listAllContentIds;
 		@auraEnabled public List<ContentWrapper> contentWrapper;
@@ -88,27 +86,25 @@ public with sharing class CG_BaseComponentController {
 
 		//Armado del Component Wrapper
 		ComponentWrapper cw = new ComponentWrapper();
+		
 		//Verificar los custom permisions
 		if(!cw.isEnabledCommunityEditFrame){
-			System.debug('isEnabledCommunityEditFrame: ' + cw.isEnabledCommunityEditFrame);
+			System.debug('componentType: ' + componentType);
 			if(FeatureManagement.checkPermission(componentType + 'EditFrame')){
-				cw.isEnabledComponentEditFrame = true;
+				cw.isEnabledCommunityEditFrame = true;
+			
 			}else{
-				cw.isEnabledComponentEditFrame = false;
+				cw.isEnabledCommunityEditFrame = false;
 			}
-		}else{
-			cw.isEnabledComponentEditFrame = true;
 		}
 
 		if (!cw.isEnabledCommunityViewFrame){
-			System.debug('isEnabledCommunityViewFrame: ' + cw.isEnabledCommunityViewFrame);
+			System.debug('componentType: ' + componentType);
 			if(FeatureManagement.checkPermission(componentType + 'ViewFrame')){
-				cw.isEnabledComponentViewFrame = true;
+				cw.isEnabledCommunityViewFrame = true;
 			}else{
-				cw.isEnabledComponentViewFrame = false;
+				cw.isEnabledCommunityViewFrame = false;
 			}
-		}else{
-			cw.isEnabledComponentViewFrame = true;
 		}
 
 		cw.component = component;
