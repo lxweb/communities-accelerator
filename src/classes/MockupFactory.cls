@@ -4,10 +4,11 @@ public class MockupFactory {
     public static void generateAcceleratorSetting(){
 
         AcceleratorSettings__c acceleratorSetting  = new AcceleratorSettings__c ( 
-            MaxSizeDesktop__c= 1280, 
+            MaxSizeDesktop__c = 1280, 
             MaxSizeMobile__c = 480, 
             MaxSizeTablet__c = 768,
-            ClusterFieldForPublicGroups__c='ExternalId__c');
+            ClusterFieldForPublicGroups__c = 'ExternalId__c',
+            ContentLandingColumnFields__c = 'RecordType.Name,Name,Category__r.Name,Status__c');
         insert acceleratorSetting;
     }
     
