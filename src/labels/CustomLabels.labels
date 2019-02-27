@@ -6,7 +6,47 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>AcceleratorSettingWrongField</shortDescription>
-        <value>El campo seleccionado en custom settings &quot;Accelerator Settings&quot; es incorrecto</value>
+        <value>The selected field at custom settings &quot;Accelerator Settings&quot; is incorrect.</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsFeaturing</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Featuring</shortDescription>
+        <value>Featuring</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsIngredients</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Ingredients</shortDescription>
+        <value>INGREDIENTS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsInstructions</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Instructions</shortDescription>
+        <value>INSTRUCTIONS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsRelatedTags</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Related Tags</shortDescription>
+        <value>Related Tags</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsTitle</fullName>
+        <categories>CG Asset Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AssetDetailsTitle</shortDescription>
+        <value>Asset Details</value>
     </labels>
     <labels>
         <fullName>AssetDetailsFeaturing</fullName>
@@ -54,7 +94,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>CannotReassignComponent</shortDescription>
-        <value>El Componente tiene asociado al menos un Contenido, Tag y/o Categoria y por ese motivo no puede reasignarse. Elimine todas las asociaciones del mismo antes de intentar reasignarlo a otro Cluster</value>
+        <value>The Component has associated at least one Content, Label and/or Category and for that reason can not be reassigned. Remove all associations from it before attempting to reassign it to another Cluster.</value>
     </labels>
     <labels>
         <fullName>ClusterDoesntHaveRequiredGroups</fullName>

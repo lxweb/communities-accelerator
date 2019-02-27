@@ -172,6 +172,20 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Status</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Type__c</fullName>
         <externalId>false</externalId>
         <label>Type</label>
@@ -267,6 +281,14 @@
             <values>
                 <fullName>Same Tab</fullName>
                 <default>false</default>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
             </values>
         </picklistValues>
         <picklistValues>
@@ -295,6 +317,14 @@
             <values>
                 <fullName>Same Tab</fullName>
                 <default>false</default>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
             </values>
         </picklistValues>
         <picklistValues>
