@@ -298,7 +298,7 @@ public without sharing virtual class ContentUtils {
         else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
         else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
         else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
-        else if(componentRT == 'RelatedEvent'){contentPlaceToSearch = 'EventImageList';}
+        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImageList';}
         else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
         return contentPlaceToSearch;
     }
