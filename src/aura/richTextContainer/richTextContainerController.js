@@ -17,6 +17,10 @@
 		component.find('customRich').handleReceiveUrl(URL);
     },
 
+  handleTextChange : function(component, event) {
+      var body = event.getParam('contentBody');
+      component.set('v.contentBody',body);
+    },
 
 	
          

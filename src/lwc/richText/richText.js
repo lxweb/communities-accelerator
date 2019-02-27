@@ -14,6 +14,9 @@ export default class CustomRichText extends LightningElement {
       handleTextChange(event){   //On RichText change, clone text from RichText to AreaText in HTML Format.
         var textArea = this.template.querySelector('textarea');
         textArea.value  = event.detail.value;
+        this.handleSaveContentEvent();
+      
+
     }
 
     handleAreaText(){ //On TextArea change, clone text from TextArea to RichText in plain text format.
@@ -37,17 +40,17 @@ export default class CustomRichText extends LightningElement {
         divSource.style.display="none";
     }
 
-   /* handleSaveEvent(){
+    handleSaveContentEvent(){
         // Get the labels of selected checkboxes
         var Rich = this.template.querySelector('lightning-input-rich-text');
-        const messageTest = Rich.value;
-        const messageEvent = new CustomEvent('saveevent', {
-            detail: { messageTest },
+        const contentBody = Rich.value;
+        const contentBodyEvent = new CustomEvent('savecontent', {
+            detail: { contentBody },
         });        
         // Fire the custom event
-        this.dispatchEvent(messageEvent);
+        this.dispatchEvent(contentBodyEvent);
 
-    }*/
+    }
 
 
     handleImageEvent() {    
