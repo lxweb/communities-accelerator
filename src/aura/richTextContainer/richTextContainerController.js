@@ -1,5 +1,6 @@
 ({
   
+
     handleImageClicked: function(component, event) {
       	component.find('mediaElement').initPopUp();
 

@@ -1,8 +1,7 @@
-import { LightningElement,  api } from 'lwc';
+import { LightningElement, api } from 'lwc';
 export default class CustomRichText extends LightningElement {
-   
+  
 
- 
     @api handleReceiveUrl(URL){
         // Receive URL from Lightning Component (container).
         var Rich = this.template.querySelector('lightning-input-rich-text');
@@ -10,7 +9,17 @@ export default class CustomRichText extends LightningElement {
         Rich.value = newValue;
        
     }
-    
+
+     
+    @api setText(body){
+        var Rich = this.template.querySelector('lightning-input-rich-text');
+        Rich.value = body;
+        Rich.focus();
+        Rich.blur();
+  
+    }
+
+
       handleTextChange(event){   //On RichText change, clone text from RichText to AreaText in HTML Format.
         var textArea = this.template.querySelector('textarea');
         textArea.value  = event.detail.value;
@@ -83,10 +92,5 @@ export default class CustomRichText extends LightningElement {
         return this.customButtons;
     }
 
-    get myVal() {
-        return ' ';
 
-    }
-
-    
 }
