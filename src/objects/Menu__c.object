@@ -186,26 +186,15 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     </fields>
     <fields>
         <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Active</fullName>
-                    <default>false</default>
-                    <label>Active</label>
-                </value>
-                <value>
-                    <fullName>Inactive</fullName>
-                    <default>false</default>
-                    <label>Inactive</label>
-                </value>
-            </valueSetDefinition>
+            <valueSetName>Status</valueSetName>
         </valueSet>
     </fields>
     <fields>
@@ -275,7 +264,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Inactive</fullName>
-                <default>false</default>
+                <default>true</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -303,7 +292,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Inactive</fullName>
-                <default>false</default>
+                <default>true</default>
             </values>
         </picklistValues>
     </recordTypes>

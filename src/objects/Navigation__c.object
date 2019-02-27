@@ -147,6 +147,20 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Status</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Type__c</fullName>
         <externalId>false</externalId>
         <label>Type</label>
@@ -212,6 +226,17 @@
         <description>Internal or external navigation points. They are mostly references to community pages.</description>
         <label>Navigation</label>
         <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Type__c</picklist>
             <values>
                 <fullName>External</fullName>
@@ -228,6 +253,17 @@
         <active>true</active>
         <description>Navigation points referred to page variants in community. Also have a relationship with a audience user.</description>
         <label>Navigation variant</label>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Type__c</picklist>
             <values>
