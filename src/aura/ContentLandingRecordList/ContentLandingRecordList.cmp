@@ -1,0 +1,16 @@
+<aura:component implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="ContentLandingRecordListController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="tableWrapper" type="Object"/>
+
+	{!v.tableWrapper.title}
+	<br></br>
+	<br></br> | 
+    <aura:iteration items="{!v.tableWrapper.columnSet}" var="column">
+        {!column} | 
+    </aura:iteration>
+	<br></br> 
+    <aura:iteration items="{!v.tableWrapper.contentWrappers}" var="contentWrapper">
+        <br></br>| {!contentWrapper.fieldWrappers[0].value} | <a href="{!contentWrapper.fieldWrappers[1].link}"> {!contentWrapper.fieldWrappers[1].value} </a> | {!contentWrapper.fieldWrappers[2].value + ' | ' + contentWrapper.fieldWrappers[3].value + ' | ' + contentWrapper.fieldWrappers[4].value}
+    </aura:iteration>
+        
+</aura:component>
