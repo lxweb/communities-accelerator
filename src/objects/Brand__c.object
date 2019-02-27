@@ -117,6 +117,34 @@
         <type>Url</type>
     </fields>
     <label>Brand</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Brand</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Brand__c.Brand</value>
+        </filters>
+        <label>Brand</label>
+    </listViews>
+    <listViews>
+        <fullName>BrandVariant</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Brand__c.BrandVariant</value>
+        </filters>
+        <label>Brand Variant</label>
+    </listViews>
     <nameField>
         <label>Brand Name</label>
         <type>Text</type>

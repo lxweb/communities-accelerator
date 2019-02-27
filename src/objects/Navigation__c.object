@@ -224,6 +224,28 @@
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>Navigation</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Navigation__c.Navigation</value>
+        </filters>
+        <label>Navigation</label>
+    </listViews>
+    <listViews>
+        <fullName>NavigationVariant</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Navigation__c.Navigation_variant</value>
+        </filters>
+        <label>Navigation variant</label>
+    </listViews>
     <nameField>
         <label>Navigation Name</label>
         <trackHistory>false</trackHistory>
