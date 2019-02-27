@@ -1,12 +1,11 @@
 <aura:component>
      <aura:handler name="URLEvent" event="c:MediaElementSearcherEvent" action="{!c.handleURLEvent}"/>
-    <aura:attribute name="messageUrl" type="String" default=""/>
-    <aura:attribute name="messageId" type="String" default=""/>
+
 
     <lightning:card title="News" iconName="custom:custom30">        
         <div class="slds-m-around_medium">
             <c:MediaElementSearcher aura:id="mediaElement" hasButton="false"/>
-           <c:richText aura:id="customRich" onimageclicked="{!c.handleImageClicked}" onsaveevent="{!c.handleSaveEvent}"/>
+           <c:richText aura:id="customRich" onimageclicked="{!c.handleImageClicked}"/>
        </div>
     </lightning:card>
 </aura:component>

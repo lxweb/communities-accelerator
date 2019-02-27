@@ -1,0 +1,4 @@
+.THIS .slds-rich-text-area__content {
+    min-height: 20rem !important;
+    max-height: 40rem !important;
+}

@@ -13,9 +13,7 @@
 
     handleURLEvent : function(component, event) {
         var URL = event.getParam("URL");
-        var ID = event.getParam("ID");
-		component.set("v.messageUrl", URL);
-		component.set("v.messageId", ID);
+        var ID = event.getParam("ID"); 
 		component.find('customRich').handleReceiveUrl(URL);
     },
 
