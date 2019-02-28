@@ -1,4 +1,4 @@
-<aura:component access="global" >
+<aura:component access="global" controller="CG_CommunityComponentFrameController" >
     
     <!-- CONSTRUCTOR -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -28,7 +28,15 @@
                     <lightning:buttonIcon iconName="utility:settings" class="buttonsPanelIcons" title="View Component" alternativeText="component" onclick="{!c.doViewComponent}" size="medium"/>
 
                     <aura:if isTrue="{!v.componentWrapper.isEnabledCommunityEditFrame}">
-                        <lightning:buttonIcon iconName="utility:insert_template" class="buttonsPanelIcons" title="Add content" alternativeText="Add content" onclick="{!c.doNewContent}" size="medium"/>
+
+                        <aura:if isTrue="{!or(
+                            and(v.componentWrapper.component.RecordType.DeveloperName == 'AdvanceContent',
+                                or(v.componentWrapper.contentWrapper == null, 0 >= v.componentWrapper.contentWrapper.length)),
+                            v.componentWrapper.component.RecordType.DeveloperName != 'AdvanceContent')}">
+
+                            <lightning:buttonIcon iconName="utility:insert_template" class="buttonsPanelIcons" title="Add content" alternativeText="Add content" onclick="{!c.doNewContent}" size="medium"/>
+                        </aura:if>
+                        
                     </aura:if>
 
                     <aura:if isTrue="{!v.componentWrapper.contentWrapper.length > 0}">

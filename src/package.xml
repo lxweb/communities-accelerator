@@ -25,16 +25,101 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
-		<members>*</members>
-		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>CustomObjectTranslation</name>
-	</types>
-	<types>
 		<members>CustomLabels</members>
 		<name>CustomLabels</name>
+	</types>
+	<types>
+		<members>AcceleratorSettings__c</members>
+		<members>Account</members>
+		<members>AccountBrand</members>
+		<members>AccountContactRole</members>
+		<members>Activity</members>
+		<members>Asset</members>
+		<members>AssetRelationship</members>
+		<members>AssistantProgress</members>
+		<members>AudienceUser__c</members>
+		<members>Brand__c</members>
+		<members>Campaign</members>
+		<members>CampaignMember</members>
+		<members>Case</members>
+		<members>CaseContactRole</members>
+		<members>CategoryAssignment__c</members>
+		<members>Category__c</members>
+		<members>ChannelProgram</members>
+		<members>ChannelProgramLevel</members>
+		<members>ChannelProgramMember</members>
+		<members>ChatterActivity</members>
+		<members>ClusterUser__c</members>
+		<members>Cluster__c</members>
+		<members>CollaborationGroup</members>
+		<members>CollaborationGroupMember</members>
+		<members>Component__c</members>
+		<members>Contact</members>
+		<members>ContactRequest</members>
+		<members>ContentAssignment__c</members>
+		<members>ContentCartItem__c</members>
+		<members>ContentVersion</members>
+		<members>Content__c</members>
+		<members>Contract</members>
+		<members>ContractContactRole</members>
+		<members>DandBCompany</members>
+		<members>DuplicateRecordItem</members>
+		<members>DuplicateRecordSet</members>
+		<members>EmailMessage</members>
+		<members>Event</members>
+		<members>ExchangeUserMapping</members>
+		<members>FeedItem</members>
+		<members>ForecastingCategoryMapping</members>
+		<members>Idea</members>
+		<members>Image</members>
+		<members>Lead</members>
+		<members>Macro</members>
+		<members>MacroAction</members>
+		<members>MacroInstruction</members>
+		<members>MediaElementAssignment__c</members>
+		<members>MediaElement__c</members>
+		<members>MenuAssignment__c</members>
+		<members>Menu__c</members>
+		<members>Navigation__c</members>
+		<members>NetworkMember</members>
+		<members>Opportunity</members>
+		<members>OpportunityCompetitor</members>
+		<members>OpportunityContactRole</members>
+		<members>OpportunityLineItem</members>
+		<members>Order</members>
+		<members>OrderItem</members>
+		<members>OrgDeleteRequest</members>
+		<members>PartnerFundAllocation</members>
+		<members>PartnerFundClaim</members>
+		<members>PartnerFundRequest</members>
+		<members>PartnerMarketingBudget</members>
+		<members>PartnerRole</members>
+		<members>Pricebook2</members>
+		<members>PricebookEntry</members>
+		<members>Product2</members>
+		<members>QuickText</members>
+		<members>Recommendation</members>
+		<members>RecordAction</members>
+		<members>RequestsForAccessSIQ</members>
+		<members>SOSSession</members>
+		<members>SOSSessionActivity</members>
+		<members>Scorecard</members>
+		<members>ScorecardAssociation</members>
+		<members>ScorecardMetric</members>
+		<members>Site</members>
+		<members>SocialNetwork__c</members>
+		<members>Solution</members>
+		<members>StreamActivityAccess</members>
+		<members>StreamingChannel</members>
+		<members>TagAssignment__c</members>
+		<members>Tag__c</members>
+		<members>Task</members>
+		<members>Topic</members>
+		<members>TopicAssignment</members>
+		<members>Translation__c</members>
+		<members>User</members>
+		<members>UserProvisioningRequest</members>
+		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -54,35 +139,18 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>Flow</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>FlowCategory</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>FlowDefinition</name>
-	</types>
-	<types>
-		<members>*</members>
 		<name>GlobalValueSet</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>GlobalValueSetTranslation</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>Account</members>
+		<members>Cluster__c</members>
+		<members>Contact</members>
+		<members>Lead</members>
 		<name>MatchingRules</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>PathAssistant</name>
 	</types>
 	<types>
 		<members>*</members>
