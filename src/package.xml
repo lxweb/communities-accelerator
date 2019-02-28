@@ -25,12 +25,16 @@
 		<name>CustomApplication</name>
 	</types>
 	<types>
-		<members>CustomLabels</members>
-		<name>CustomLabels</name>
+		<members>*</members>
+		<name>CustomObject</name>
 	</types>
 	<types>
 		<members>*</members>
-		<name>CustomObject</name>
+		<name>CustomObjectTranslation</name>
+	</types>
+	<types>
+		<members>CustomLabels</members>
+		<name>CustomLabels</name>
 	</types>
 	<types>
 		<members>*</members>
@@ -50,18 +54,35 @@
 	</types>
 	<types>
 		<members>*</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>FlowCategory</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>FlowDefinition</name>
+	</types>
+	<types>
+		<members>*</members>
 		<name>GlobalValueSet</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>GlobalValueSetTranslation</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>Account</members>
-		<members>Cluster__c</members>
-		<members>Contact</members>
-		<members>Lead</members>
+		<members>*</members>
 		<name>MatchingRules</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>PathAssistant</name>
 	</types>
 	<types>
 		<members>*</members>
