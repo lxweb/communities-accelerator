@@ -40,30 +40,37 @@ public class ContentLandingRecordListController {
 		String clusterId;
 		String categoryId;
 		List<String> tagIds;
+		String status;
+		String searchText;
 		// Wrapper para agrupar los criterios de filtro recibidos
-		FilterWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds){
+		FilterWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
             this.contentTypeName = contentTypeId != null ? [SELECT Id, Name FROM RecordType WHERE SObjectType = 'Content__c' AND Id =: contentTypeId LIMIT 1].Name : 'Recent';
 			this.contentTypeId = contentTypeId;
 			this.clusterId = clusterId;
 			this.categoryId = categoryId;
 			this.tagIds = tagIds;
+			this.status = status;
+			this.searchText = searchText;
 		}
 	}
 
 	@auraEnabled(Cacheable = true)
-	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds){
-		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds);
+	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
+		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds, status, searchText);
 		// El Wrapper es enviado al componente en forma de JSON
 		return JSON.serialize(tableWrapper);
 	}
 
-	public static TableWrapper buildTableWrapper(String contentType, String clusterId, String categoryId, List<String> tagIds){
+	public static TableWrapper buildTableWrapper(String contentType, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
 //		FilterWrapper wrapper = mockUpWrapper();
-		FilterWrapper wrapper = new FilterWrapper(contentType, clusterId, categoryId, tagIds);
+		FilterWrapper wrapper = new FilterWrapper(contentType, clusterId, categoryId, tagIds, status, searchText);
 		String title = (wrapper.contentTypeName + ' Records').toUpperCase();
-		List<String> columnSet = getColumnSet().split(',');		
-		TableWrapper tableWrapper = new TableWrapper(title, columnSet, new List<ContentWrapper>());
+		List<String> columnSet = getColumnSet().split(',');
+		List<String> columnLabelSet = getColumnLabelSet();
+		TableWrapper tableWrapper = new TableWrapper(title, columnLabelSet, new List<ContentWrapper>());
 		List<Content__c> contents = getRecords(wrapper);
+		// Filtra los Contenidos que contienen el String buscado en la columna Name
+		if(searchText != null && searchText != '') contents = searchTextInRecords(searchText, contents);
 		// Construye los Wrappers auxiliares
 		for(Content__c content : contents){
 			List<FieldWrapper> fieldWrappers = new List<FieldWrapper>();
@@ -77,6 +84,10 @@ public class ContentLandingRecordListController {
 			}
 			// Crea el Wrapper de Contenido y lo agrega a la lista
 			tableWrapper.contentWrappers.add(new ContentWrapper(fieldWrappers));
+		}
+		// Si no hay registros, mostramos un mensaje de error
+		if(contents.isEmpty()){
+			tableWrapper = new TableWrapper(System.Label.NoRecordsToShow, null, null);
 		}
 		// El Wrapper es enviado al componente en forma de JSON
 		return tableWrapper;
@@ -97,10 +108,39 @@ public class ContentLandingRecordListController {
 		return records;
 	}
 
+	static List<Content__c> searchTextInRecords(String searchText, List<Content__c> contents){
+		List<Content__c> filteredContents = new List<Content__c>();
+		List<String> columnSet = getColumnSet().split(',');
+		for(Content__c content : contents){
+//			for(String column : columnSet){
+				if(getWrapperValue(content, 'Name').toLowerCase().contains(searchText.toLowerCase())){
+					if( !filteredContents.contains(content)){
+						filteredContents.add(content);	
+					}					
+				}
+//			}
+		}
+		return filteredContents;
+	}
+
 	static String getColumnSet(){
 		// Trae las columnas seteadas en Custom Settings
 		AcceleratorSettings__c settings = [SELECT Id, ContentLandingColumnFields__c FROM AcceleratorSettings__c LIMIT 1];
 		return settings.ContentLandingColumnFields__c;
+	}
+
+	static List<String> getColumnLabelSet(){
+		// Trae las columnas seteadas en Custom Settings
+		List<String> columnSet = getColumnSet().split(',');
+		List<String> columnLabelSet = new List<String>();
+		for(String column : columnSet){
+			String columnLabel;
+			columnLabel = column.remove('__c');
+			columnLabel = columnLabel.remove('__r');
+			columnLabel = columnLabel.replace('.', ' ');
+			columnLabelSet.add(columnLabel);
+		}
+		return columnLabelSet;
 	}
 
 	static String getWrapperValue(Content__c content, String column){
@@ -129,6 +169,7 @@ public class ContentLandingRecordListController {
 			String tagedContentIds = getTagedContentIds(wrapper.tagIds);
 			queryConditions.add('Id IN ' + tagedContentIds);
 		}
+		if(wrapper.status != null && wrapper.status.toLowerCase() != 'all') queryConditions.add('Status__c = \'' + wrapper.status + '\'');
 		return queryConditions;
 	}
 
