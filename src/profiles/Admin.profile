@@ -17,11 +17,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Recipe__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Recipe__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -87,11 +82,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>AudienceUser__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Brand__c.BrandContent__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -118,11 +108,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Brand__c.SiteURL__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Brand__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -173,11 +158,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Menu__c.ParentMenu__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Menu__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -353,11 +333,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Category__c.ParentCategory__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Category__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -607,11 +582,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Component__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Component__c.PredictiveSearchEnabled__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -762,11 +732,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Content__c.URLRedirect__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -872,11 +837,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElement__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElement__c.TabletFileExtension__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -898,16 +858,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Navigation__c.Behaviour__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>SocialNetwork__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Navigation__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -953,11 +903,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Tag__c.ExternalId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Tag__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
