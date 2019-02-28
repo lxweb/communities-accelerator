@@ -17,6 +17,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Recipe__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.StatusApprovalProcess__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>RecipeIngredient__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -77,6 +87,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>AudienceUser__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Brand__c.BrandContent__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -103,6 +118,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Brand__c.SiteURL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Brand__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -313,11 +338,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>CategoryAssignment__c.ExternalId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>CategoryAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -607,11 +627,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContentAssignment__c.StatusApprovalProcess__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Content__c.ButtonLabel__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -797,11 +812,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.StatusApprovalProcess__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElementAssignment__c.Width__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -872,7 +882,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElement__c.StatusApprovalProcess__c</field>
+        <field>MediaElement__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -902,6 +912,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>SocialNetwork__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Navigation__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Navigation__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -926,11 +946,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>TagAssignment__c.StatusApprovalProcess__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>TagAssignment__c.TagDescription__c</field>
         <readable>true</readable>
@@ -948,6 +963,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Tag__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Tag__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

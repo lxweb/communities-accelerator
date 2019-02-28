@@ -90,7 +90,7 @@ public without sharing virtual class ContentUtils {
         
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
-        
+
         if(!mapContent.isEmpty()){
             //Manual Order del contenido
             if(component.Datasource__c == 'ManualAssignment' && component.OrderBy__c == 'Manual Order' && contentIdList.size() > 0){
@@ -289,13 +289,16 @@ public without sharing virtual class ContentUtils {
         return contentTypeToSearch;
     }
 
-    // Place for components
+    // Image Placement for RT components
     private static String getPlaceForRTComponent(String componentRT){
+        
         String contentPlaceToSearch = '';
         if(componentRT == 'Banner'){contentPlaceToSearch = 'BannerImage';}
+        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImageList';}
         else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
         else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
         else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
+        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImageList';}
         else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
         return contentPlaceToSearch;
     }

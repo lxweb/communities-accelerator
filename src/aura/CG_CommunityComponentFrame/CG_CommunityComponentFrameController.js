@@ -8,6 +8,9 @@
 	doViewContent : function(component, event, helper) {
 		helper.viewContent(component, event, helper);
 	},
+	doNewContent : function(component, event, helper){
+		helper.newContent(component, event, helper);
+	},
 	doShowEditFrame : function(component, event, helper) {
 		helper.showHideEditFrame(component, helper, true);
 	},

@@ -46,6 +46,7 @@
     <description>Determines which users have access to the cluster, the access type (Read Only or Read/Write), it&apos;s child clusters and the configuration below the cluster (ex.: Content, Components, Tags, etc.).</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -73,6 +74,18 @@
                     <fullName>Read/Write</fullName>
                     <default>false</default>
                     <label>Read/Write</label>
+                </value>
+                <value>
+                    <fullName>Read All ORG</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Read All ORG</label>
+                </value>
+                <value>
+                    <fullName>Read Only Down</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Read Only Down</label>
                 </value>
             </valueSetDefinition>
         </valueSet>

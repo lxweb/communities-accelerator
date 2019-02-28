@@ -90,7 +90,7 @@
         <label>Status</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Required</behavior>
                 <field>Status__c</field>
             </layoutItems>
         </layoutColumns>

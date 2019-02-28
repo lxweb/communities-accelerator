@@ -1059,50 +1059,17 @@
     </fields>
     <fields>
         <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Set Format</fullName>
-                    <default>false</default>
-                    <label>Set Format</label>
-                </value>
-                <value>
-                    <fullName>Set Content</fullName>
-                    <default>false</default>
-                    <label>Set Content</label>
-                </value>
-                <value>
-                    <fullName>Final Check</fullName>
-                    <default>false</default>
-                    <label>Final Check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-                <value>
-                    <fullName>Set Community</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                    <label>Set Community</label>
-                </value>
-            </valueSetDefinition>
+                <restricted>true</restricted>
+                <valueSetName>Status</valueSetName>
         </valueSet>
-    </fields>
+    </fields>      
     <fields>
         <fullName>TagCriteria__c</fullName>
         <description>It&apos;s the tag criteria to filter the content on the community.</description>
@@ -1495,7 +1462,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1510,24 +1477,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -1750,7 +1705,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1765,24 +1720,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -2045,7 +1988,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -2060,24 +2003,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -2142,21 +2073,21 @@
         <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
-				<fullName>Brands</fullName>
-				<default>false</default>
-			</values>
-			<values>
-				<fullName>Brand Variants</fullName>
-				<default>false</default>
-			</values>
-			<values>
-				<fullName>Assets</fullName>
-				<default>false</default>
-			</values>
-			<values>
-				<fullName>Assets Related to Assets</fullName>
-				<default>false</default>
-			</values>
+                <fullName>Brands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brand Variants</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assets</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assets Related to Assets</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
         <picklistValues>
             <picklist>Direction__c</picklist>
@@ -2280,7 +2211,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -2295,24 +2226,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -2551,7 +2470,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -2566,24 +2485,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -2826,7 +2733,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -2841,24 +2748,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -3097,7 +2992,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -3112,24 +3007,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -3360,7 +3243,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -3375,24 +3258,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -3655,7 +3526,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -3670,24 +3541,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -3922,7 +3781,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -3937,24 +3796,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -4193,7 +4040,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -4208,24 +4055,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -4484,7 +4319,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -4499,24 +4334,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -4767,7 +4590,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -4782,24 +4605,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -5034,7 +4845,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -5049,24 +4860,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -5301,7 +5100,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -5316,24 +5115,12 @@
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Available</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Final Check</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initial</fullName>
+                <fullName>Inactive</fullName>
                 <default>true</default>
-            </values>
-            <values>
-                <fullName>Set Content</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Set Format</fullName>
-                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>

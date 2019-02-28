@@ -12,6 +12,24 @@
 			helper.showContentDetail(component, false);
 		}
 	},
+	newContent : function(component, event, helper) {
+		var cWrapper = component.get('v.componentWrapper');
+		var contentWrapper = cWrapper.contentWrapper
+		
+		if(contentWrapper !=null && contentWrapper.length > 0){
+			var contentRecordTypeId = contentWrapper[0].content.RecordTypeId;
+		}
+
+		var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
+		//var recordTypeId = cWrapper.component.RecordType.Id;
+		if(contentRecordTypeId != null || contentRecordTypeId != undefined){
+			var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new' + '?recordTypeId=' + contentRecordTypeId;
+		}else{
+			var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new';
+		}
+		
+		window.open(url);
+	},
 	showHideEditFrame : function(component, helper, show) {
 		var cWrapper = component.get('v.componentWrapper');
 		var mainPanel = document.getElementById(component.get('v.componentWrapper.component.Id'));
