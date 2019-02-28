@@ -772,11 +772,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElementAssignment__c.Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElementAssignment__c.Content__c</field>
         <readable>true</readable>
     </fieldPermissions>

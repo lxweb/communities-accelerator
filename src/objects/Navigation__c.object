@@ -281,6 +281,9 @@
             <values>
                 <fullName>Same Tab</fullName>
                 <default>false</default>
+	    </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Active</fullName>
@@ -317,6 +320,9 @@
             <values>
                 <fullName>Same Tab</fullName>
                 <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Active</fullName>

@@ -785,6 +785,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
+	    <values>
+                <fullName>Archived</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
@@ -875,6 +879,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
+	    <values>
+                <fullName>Archived</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
@@ -965,6 +973,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
+	    <values>
+                <fullName>Archived</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
@@ -1055,6 +1067,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
+	    <values>
+                <fullName>Archived</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
@@ -1145,6 +1161,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
+	    <values>
+                <fullName>Archived</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
