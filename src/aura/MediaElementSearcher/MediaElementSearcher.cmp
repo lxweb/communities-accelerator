@@ -28,9 +28,9 @@
         <!-- LABEL USAGE -->
         <aura:if isTrue="{!not(and(v.iconName != null, v.iconName != ''))}">
             <aura:if isTrue="{!v.isLoading}">
-                <lightning:button variant="brand" label="Search..." disabled="true"/>
+                <lightning:button variant="brand" label="{!$Label.c.General_Search}" disabled="true"/>
                 <aura:set attribute="else">
-                    <lightning:button class="{!v.classIn}" variant="brand" label="{!$Label.c.AddMediaElement}" title="{!$Label.c.AddMediaElement}" onclick="{!c.initSearch}"/>
+                    <lightning:button variant="brand" label="{!$Label.c.AddMediaElement}" title="{!$Label.c.AddMediaElement}" onclick="{!c.initSearch}"/>
                 </aura:set>
             </aura:if>
         </aura:if>
@@ -40,7 +40,7 @@
         <div class="slds-modal__container" style="width: 40%;">
             <div class="slds-modal__header">
                 <div style="text-align: right;">
-                    <lightning:button title="Search" onclick="{!c.closeNewModal}">
+                    <lightning:button class="buttonStyle" title="Close" onclick="{!c.closeNewModal}">
                         <lightning:Icon iconName="utility:close" title="Close" alternativeText="Close" size="x-small"/>
                     </lightning:button>
                 </div>
@@ -48,9 +48,9 @@
                     {!$Label.c.SelectMediaElement}
                 </div>
                 <!-- SEARCH BOX -->
-                <input type="text" aura:id="searchField" class="input_search" placeholder="Search..."/>
-                <lightning:button  aura:id="searchButton" title="Search" onclick="{!c.searchByText}">
-                    <lightning:Icon class="icon_search" iconName="utility:search" title="Search" alternativeText="Search" size="x-small"/>
+                <input type="text" aura:id="searchField" class="input_search" placeholder="{!$Label.c.GlobalSearchPlaceholder}"/>
+                <lightning:button  class="buttonStyle" aura:id="searchButton" title="{!$Label.c.General_Search}" onclick="{!c.searchByText}">
+                    <lightning:Icon class="icon_search" iconName="utility:search" title="{!$Label.c.General_Search}" alternativeText="{!$Label.c.General_Search}" size="x-small"/>
                 </lightning:button>
             </div>
             <div class="div_mediaSearchSection">
