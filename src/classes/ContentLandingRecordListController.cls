@@ -98,7 +98,11 @@ public class ContentLandingRecordListController {
 		List<String> queryConditions = getQueryConditions(wrapper);
 		// Si no recibe filtros, trae los 10 registros modificados mas recientemente
 		if(queryConditions.isEmpty()){
-			queryInString = setDefaultCondition(queryInString);
+			if(wrapper.searchText == null || wrapper.searchText == ''){
+				queryInString = setDefaultCondition(queryInString);
+			} else {
+				queryInString = setSearchCondition(queryInString, wrapper.searchText);
+			}
 		// Si recibe filtros, construye la query
 		} else {
 			queryInString = setCustomConditions(queryInString, queryConditions);
@@ -176,6 +180,12 @@ public class ContentLandingRecordListController {
 	static String setDefaultCondition(String queryInString){
 		String defaultCondition = 'ORDER BY LastModifiedDate DESC LIMIT 10';
 		queryInString += defaultCondition;
+		return queryInString;
+	}
+
+	static String setSearchCondition(String queryInString, String searchText){
+		String searchCondition = 'WHERE Name LIKE \'%' + searchText + '%\'';
+		queryInString += searchCondition;
 		return queryInString;
 	}
 
