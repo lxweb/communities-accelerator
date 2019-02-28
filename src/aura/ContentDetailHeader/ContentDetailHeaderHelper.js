@@ -12,7 +12,12 @@
 			if(headerData.Status__c){
 				component.set("v.Status",headerData.Status__c);
 			}
-			component.set("v.CreatedById",headerData.CreatedBy.Name);
+			if(headerData.CreatedBy){
+				component.set("v.CreatedById",headerData.CreatedBy.Name);
+			}else {
+				component.set("v.CreatedById",component.get("v.currentUserName"));
+			}
+			
 			component.set("v.RecordType",headerData.RecordType.Name );	
    		}
 	},

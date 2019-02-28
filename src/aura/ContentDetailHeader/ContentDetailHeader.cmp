@@ -1,6 +1,7 @@
 <aura:component implements="flexipage:availableForAllPageTypes">
 
 	<aura:attribute name="contentData" type="Object" />
+	<aura:attribute name="currentUserName" type="String" />
 	<aura:attribute name="Name" type="String" default="{!$Label.c.ContentDetailNew}"/>
 	<aura:attribute name="LastModifiedDate" type="String" default="{!$Label.c.ContentDetailNever}" />
 	<aura:attribute name="CreatedById" type="String" />
@@ -18,9 +19,9 @@
 	    </div>
 	    <div class="slds-col slds-size_1-of-2" >
 	    	<aura:if isTrue="{!(v.Status) == ($Label.c.ContentDetailDraft)}">
-	        	<button class="slds-button slds-button_neutral">{!$Label.c.ContentDetailSaveDraft}</button>
+	        	<button class="slds-button slds-button_neutral" onclick="{!c.doSaveDraft}">{!$Label.c.ContentDetailSaveDraft}</button>
 	        	<aura:set attribute="else">
-	        		<button class="slds-button slds-button_text-destructive" >{!$Label.c.ContentDetailUnpublish}</button>
+	        		<button class="slds-button slds-button_text-destructive" onclick="{!c.doUnPublishContent}" >{!$Label.c.ContentDetailUnpublish}</button>
 	        	</aura:set>
 	        </aura:if>
 	        <button class="slds-button slds-button_brand" onclick="{!c.doPublishContent}" >{!$Label.c.ContentDetailPublish}</button>
