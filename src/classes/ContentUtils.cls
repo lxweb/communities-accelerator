@@ -279,7 +279,7 @@ public without sharing virtual class ContentUtils {
         return listCDW;
     }
 
-    private static String getRecordTypeContentFromRTComponent(String componentRT){
+    public static String getRecordTypeContentFromRTComponent(String componentRT){
         String contentTypeToSearch;
         if(componentRT == 'RelatedNews' || componentRT == 'NewsDetail'){contentTypeToSearch = 'News';}
         else if(componentRT == 'RelatedEvents' || componentRT == 'EventDetail'){contentTypeToSearch = 'Event';}

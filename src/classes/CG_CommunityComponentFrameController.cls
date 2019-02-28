@@ -1,0 +1,33 @@
+public with sharing class CG_CommunityComponentFrameController {
+
+
+
+    //WRAPPERS
+    public class ContentRecordTypeWrapper{
+		@auraEnabled public Boolean haveContentRecordType;
+		@auraEnabled public String contentRecordTypeId;
+		public ContentRecordTypeWrapper(){
+			this.haveContentRecordType = false;
+            this.contentRecordTypeId = '';
+		}
+	}
+
+
+	@auraEnabled
+	public static ContentRecordTypeWrapper getContentRecordtypeId(String componentRecordType) {
+		// List of fields
+		ContentRecordTypeWrapper contentRecordTypeWP =  new ContentRecordTypeWrapper();
+
+		String contentRecordType = ContentUtils.getRecordTypeContentFromRTComponent(componentRecordType);
+
+		RecordType recordType = [select Id, Name from RecordType where sObjectType = 'Content__c' and Name = :contentRecordType LIMIT 1]; 
+		
+		if(recordType != null){
+			contentRecordTypeWP.contentRecordTypeId = String.valueOf(recordType.Id);
+			contentRecordTypeWP.haveContentRecordType = true;
+			return contentRecordTypeWP;
+		}else{
+			return contentRecordTypeWP;
+		}
+	}
+}

@@ -13,22 +13,32 @@
 		}
 	},
 	newContent : function(component, event, helper) {
+		
 		var cWrapper = component.get('v.componentWrapper');
-		var contentWrapper = cWrapper.contentWrapper
-		
-		if(contentWrapper !=null && contentWrapper.length > 0){
-			var contentRecordTypeId = contentWrapper[0].content.RecordTypeId;
-		}
+		var componentRecordTypeId = cWrapper.component.RecordType.DeveloperName;
+		var action = component.get('c.getContentRecordtypeId');
 
-		var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
-		//var recordTypeId = cWrapper.component.RecordType.Id;
-		if(contentRecordTypeId != null || contentRecordTypeId != undefined){
-			var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new' + '?recordTypeId=' + contentRecordTypeId;
-		}else{
-			var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new';
-		}
-		
-		window.open(url);
+		action.setParams({
+			componentRecordType: componentRecordTypeId,
+		});
+
+	    action.setCallback(this, function(f) {
+            if(f.getState() === "SUCCESS") {
+            	var contntRecordTypeWp = action.getReturnValue();
+
+				var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
+				if(contntRecordTypeWp.haveContentRecordType){
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new' + '?recordTypeId=' + contntRecordTypeWp.contentRecordTypeId;
+				}else{
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new';
+				}
+				
+				window.open(url);
+
+	        }
+	    });
+	    
+	    $A.enqueueAction(action);
 	},
 	showHideEditFrame : function(component, helper, show) {
 		var cWrapper = component.get('v.componentWrapper');

@@ -73,9 +73,9 @@
 								<!-- MEDIA ELEMENTS LIST -->
 								<aura:iteration items="{!v.mediaElementList}" var="mediaElement">
 									<div class="div_mediaElementCardContainer">
-										<img src="{!mediaElement.FileURLDesktop__c}" class="img_mediaElementReview"  onclick="{!c.choseMediaElement}" id="{!mediaElement.Id}"/>
+										<img src="{!mediaElement.fileURLDesktop}" class="img_mediaElementReview"  onclick="{!c.choseMediaElement}" id="{!mediaElement.idME}"/>
 										<div class="div_cardTitle">
-											{!mediaElement.Name}
+											{!mediaElement.name}
 										</div>
 									</div>
 								</aura:iteration>
