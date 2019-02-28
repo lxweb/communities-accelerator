@@ -50,7 +50,6 @@
         <fullName>MediaElement_CompactLayout</fullName>
         <fields>Name</fields>
         <fields>ExternalId__c</fields>
-        <fields>StatusApprovalProcess__c</fields>
         <label>Media Element - Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -232,17 +231,17 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>StatusApprovalProcess__c</fullName>
-        <description>Indicates if the media element is available or not in order to be use within different contents.</description>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
-        <label>Status Approval Process</label>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
+        <label>Status</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetName>StatusApprovalProcess</valueSetName>
+            <valueSetName>Status</valueSetName>
         </valueSet>
     </fields>
     <fields>

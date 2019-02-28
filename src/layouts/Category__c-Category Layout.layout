@@ -19,6 +19,10 @@
                 <behavior>Edit</behavior>
                 <field>Cluster__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Status__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -33,12 +37,8 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Status</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Status__c</field>
-            </layoutItems>
-        </layoutColumns>
+        <layoutColumns/>
+        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -72,7 +72,6 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Status__c</fields>
         <relatedList>Category__c.ParentCategory__c</relatedList>
     </relatedLists>
     <relatedLists>

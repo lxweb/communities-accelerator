@@ -91,18 +91,6 @@
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <fields>
-        <fullName>StatusApprovalProcess__c</fullName>
-        <externalId>false</externalId>
-        <label>Status approval process</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>StatusApprovalProcess</valueSetName>
-        </valueSet>
-    </fields>
     <label>Category Assignment</label>
     <listViews>
         <fullName>All</fullName>
