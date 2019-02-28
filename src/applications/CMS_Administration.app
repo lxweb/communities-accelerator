@@ -9,41 +9,13 @@
         <type>Flexipage</type>
         <pageOrSobjectType>Category__c</pageOrSobjectType>
     </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Content_News_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Flexipage</type>
-        <pageOrSobjectType>Content__c</pageOrSobjectType>
-    </actionOverrides>
     <brand>
         <headerColor>#0070D2</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
     <formFactors>Large</formFactors>
-    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
-    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>CMS Administration</label>
     <navType>Standard</navType>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Menu_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Menu__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Component_News_page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Component__c</pageOrSobjectType>
-        <recordType>Component__c.News</recordType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Component_Advance_Content_page</content>
@@ -125,6 +97,23 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
+        <content>Menu_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Menu__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Component_News_page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Component__c</pageOrSobjectType>
+        <recordType>Component__c.News</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
         <content>Category_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Category__c</pageOrSobjectType>
@@ -201,15 +190,6 @@
         <profile>Admin</profile>
     </profileActionOverrides>
 
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Search_Component_Record_Page</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Component__c</pageOrSobjectType>
-        <recordType>Component__c.Search</recordType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Search_Component_Record_Page</content>
