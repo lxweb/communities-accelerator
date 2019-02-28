@@ -81,6 +81,86 @@
         <value>Please complete the component attribute &quot;Component External Id&quot; with a valid value</value>
     </labels>
     <labels>
+        <fullName>ContentDetailContent</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailContent</shortDescription>
+        <value>CONTENT</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailCreatedBy</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Created By</shortDescription>
+        <value>Created By:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailDraft</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Draft</shortDescription>
+        <value>Draft</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailLastSave</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Last Save</shortDescription>
+        <value>Last Save:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailNever</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Never</shortDescription>
+        <value>Never</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailNew</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPublicationStatus</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Publication Status</shortDescription>
+        <value>Publication Status:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPublish</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Publish</shortDescription>
+        <value>Publish</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailSaveDraft</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Save Draft</shortDescription>
+        <value>Save Draft</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailUnpublish</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Unpublish</shortDescription>
+        <value>Unpublish</value>
+    </labels>
+    <labels>
         <fullName>Desktop</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
@@ -447,5 +527,101 @@
         <protected>true</protected>
         <shortDescription>SelectMediaElement</shortDescription>
         <value>Select Media Element</value>
+    </labels>
+	<labels>
+        <fullName>NewsContentDetailError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while saving a news content</shortDescription>
+        <value>There was an error while saving.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExternalId</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ExternalId__c field</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExtract</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description__c field</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailLoadError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while loading content detail</shortDescription>
+        <value>Error while loading content.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailRequiredField</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>All required fields must be completed.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitle</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListTitle__c field</shortDescription>
+        <value>List Title</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailBody</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListDescription__c field</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailImage</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Feature image</shortDescription>
+        <value>Feature Image</value>
+    </labels>
+	<labels>
+	<fullName>SearchContentCategoryFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of category filter in search content page</shortDescription>
+        <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentClusterFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of cluster filter in search content page</shortDescription>
+        <value>Cluster</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentTagFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of tag filter in search content page</shortDescription>
+        <value>Tags</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentTypeFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of content type filter in search content page</shortDescription>
+        <value>Content Type</value>
     </labels>
 </CustomLabels>
