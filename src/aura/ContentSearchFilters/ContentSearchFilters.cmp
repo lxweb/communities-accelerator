@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" controller="ContentSearchFiltersController">
+<aura:component implements="flexipage:availableForAllPageTypes" controller="ContentSearchFiltersController">
 
     <aura:attribute name="filters" type="List" />
     <aura:attribute name="sObjectName" type="String" />

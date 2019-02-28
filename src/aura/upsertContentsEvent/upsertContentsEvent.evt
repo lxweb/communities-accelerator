@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="This event is call to send the action from ContentDetailHeader to ContentDetailContainer for insert or update Content__c" >
+	<aura:attribute name="action" type="String"/>
+</aura:event>

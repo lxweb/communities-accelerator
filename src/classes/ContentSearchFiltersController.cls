@@ -1,80 +1,95 @@
 public class ContentSearchFiltersController {
 
-
     //FILTER WRAPPER
-    public class FilterTypeWrapper {
-        @auraEnabled public String name;
-        @auraEnabled public List<FilterWrapper> values;
-
-        public FilterTypeWrapper(String name, List<FilterWrapper> values){
-            this.name = name;
-            this.values = values;
-        }
-    }
-    //FILTER VALUE WRAPPER
     public class FilterWrapper {
-        @auraEnabled public String label;
-        @AuraEnabled public String value;
+        @auraEnabled public List<FilterSelectorWrapper> filters;
 
-        public FilterWrapper(String label, string value){
+        public FilterWrapper(List<FilterSelectorWrapper> filters){
+            this.filters = filters;
+        }
+    }
+    //FILTER SELECTOR WRAPPER
+    public class FilterSelectorWrapper{
+        @auraEnabled public String label;
+        @auraEnabled public Boolean isMultiPicklist;
+        @auraEnabled public List<FilterOptionWrapper> values;
+        @auraEnabled public String apiName;
+
+        public FilterSelectorWrapper(String label, Boolean isMultiPicklist, List<FilterOptionWrapper> values, String apiName){
             this.label = label;
-            this.value = value;
+            this.isMultiPicklist = isMultiPicklist;
+            this.values = values;
+            this.apiName = apiName;
+        }
+
+    }
+    //FILTER OPTION WRAPPER
+    public class FilterOptionWrapper {
+        @auraEnabled public String label;
+        @AuraEnabled public String id;
+        @AuraEnabled public Boolean isSelected;
+
+        public FilterOptionWrapper(String label, string id){
+            this.label = label;
+            this.id = id;
+            this.isSelected = false;
         }
     }
     
 
-    @AuraEnabled
-    public static List<FilterTypeWrapper> getFilters (String sObjectType){
+    @AuraEnabled(cacheable=true)
+    public static FilterWrapper getFilters (String sObjectType){
         Set<Id> clusterIds = getCurrentUserClusterTree();
-        List<Cluster__c> clusterList = [SELECT ExternalId__c, Name FROM Cluster__c WHERE id IN :clusterIds];
-        List<RecordType> contentTypeList = [SELECT Name FROM RecordType WHERE sObjectType = :sObjectType];
-        List<Category__c> categoryList = [SELECT ExternalId__c, Name FROM Category__c WHERE Cluster__c IN :clusterIds];
-        List<Tag__c> tagList = [SELECT ExternalId__c, Name FROM Tag__c WHERE Cluster__c IN :clusterIds];
+        List<Cluster__c> clusterList = [SELECT Id, Name FROM Cluster__c WHERE id IN :clusterIds];
+        List<RecordType> contentTypeList = [SELECT Id, Name FROM RecordType WHERE sObjectType = :sObjectType];
+        List<Category__c> categoryList = [SELECT Id, Name FROM Category__c WHERE Cluster__c IN :clusterIds];
+        List<Tag__c> tagList = [SELECT Id, Name FROM Tag__c WHERE Cluster__c IN :clusterIds];
     
-        List<FilterWrapper> clusters = getClusterWrapperList(clusterList);
-        List<FilterWrapper> contentTypes = getContentTypeWrapperList(contentTypeList);
-        List<FilterWrapper> categories = getCategoryWrapperList(categoryList);
-        List<FilterWrapper> tags = getTagWrapperList(tagList);
+        List<FilterOptionWrapper> clusterOptions = getClusterWrapperList(clusterList);
+        List<FilterOptionWrapper> contentTypeOptions = getContentTypeWrapperList(contentTypeList);
+        List<FilterOptionWrapper> categoryOptions = getCategoryWrapperList(categoryList);
+        List<FilterOptionWrapper> tagOptions = getTagWrapperList(tagList);
 
-        List<FilterTypeWrapper> filters = new List<FilterTypeWrapper>();
-        filters.add(new FilterTypeWrapper(System.Label.SearchContentClusterFilter, clusters));
-        filters.add(new FilterTypeWrapper(System.Label.SearchContentTypeFilter, contentTypes));
-        filters.add(new FilterTypeWrapper(System.Label.SearchContentCategoryFilter, categories));
-        filters.add(new FilterTypeWrapper(System.Label.SearchContentTagFilter, tags));
+        List<FilterSelectorWrapper> filterSelectorList = new List<FilterSelectorWrapper>();
+        filterSelectorList.add(new FilterSelectorWrapper(System.Label.SearchContentClusterFilter, false, clusterOptions, 'Cluster__c'));
+        filterSelectorList.add(new FilterSelectorWrapper(System.Label.SearchContentTypeFilter, false, contentTypeOptions, 'RecordType'));
+        filterSelectorList.add(new FilterSelectorWrapper(System.Label.SearchContentCategoryFilter, false, categoryOptions, 'Category__c'));
+        filterSelectorList.add(new FilterSelectorWrapper(System.Label.SearchContentTagFilter, true, tagOptions, 'Tag__c'));
+        FilterWrapper filters = new FilterWrapper(filterSelectorList);
         return filters;
     }
 
-    private static List<FilterWrapper> getClusterWrapperList(List<Cluster__c> clusterList){
-        List<FilterWrapper> clusters = new List<FilterWrapper>();
+    private static List<FilterOptionWrapper> getClusterWrapperList(List<Cluster__c> clusterList){
+        List<FilterOptionWrapper> clusters = new List<FilterOptionWrapper>();
         for(Cluster__c cluster : clusterList){
-            FilterWrapper clusterWrapper = new FilterWrapper(cluster.name, cluster.ExternalId__c);
+            FilterOptionWrapper clusterWrapper = new FilterOptionWrapper(cluster.name, cluster.Id);
             clusters.add(clusterWrapper);
         }
         return clusters;
     }
 
-    private static List<FilterWrapper> getContentTypeWrapperList(List<RecordType> contentTypeList){
-        List<FilterWrapper> contentTypes = new List<FilterWrapper>();
+    private static List<FilterOptionWrapper> getContentTypeWrapperList(List<RecordType> contentTypeList){
+        List<FilterOptionWrapper> contentTypes = new List<FilterOptionWrapper>();
         for(RecordType contentType : contentTypeList){
-            FilterWrapper contentTypeWrapper = new FilterWrapper(contentType.name, contentType.name);
+            FilterOptionWrapper contentTypeWrapper = new FilterOptionWrapper(contentType.name, contentType.Id);
             contentTypes.add(contentTypeWrapper);
         }
         return contentTypes;
     }
 
-    private static List<FilterWrapper> getCategoryWrapperList(List<Category__c> categoryList){
-        List<FilterWrapper> categories = new List<FilterWrapper>();
+    private static List<FilterOptionWrapper> getCategoryWrapperList(List<Category__c> categoryList){
+        List<FilterOptionWrapper> categories = new List<FilterOptionWrapper>();
         for(Category__c category : categoryList){
-            FilterWrapper categoryWrapper = new FilterWrapper(category.name, category.ExternalId__c);
+            FilterOptionWrapper categoryWrapper = new FilterOptionWrapper(category.name, category.Id);
             categories.add(categoryWrapper);
         }
         return categories;
     }
 
-    private static List<FilterWrapper> getTagWrapperList(List<Tag__c> tagList){
-        List<FilterWrapper> tags = new List<FilterWrapper>();
+    private static List<FilterOptionWrapper> getTagWrapperList(List<Tag__c> tagList){
+        List<FilterOptionWrapper> tags = new List<FilterOptionWrapper>();
         for(Tag__c tag : tagList){
-            FilterWrapper tagWrapper = new FilterWrapper(tag.name, tag.ExternalId__c);
+            FilterOptionWrapper tagWrapper = new FilterOptionWrapper(tag.name, tag.Id);
             tags.add(tagWrapper);
         }
         return tags;
