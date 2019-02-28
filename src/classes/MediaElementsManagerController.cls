@@ -1,8 +1,17 @@
 public class MediaElementsManagerController {
 	public class RecordsWrapper{
-			@auraEnabled public String place;
-			@auraEnabled public SObject junctionObject;
-		}
+		@auraEnabled public String place;
+		@auraEnabled public SObject junctionObject;
+	}
+
+	public class ContentWrapper{
+		@auraEnabled public String idME;
+		@auraEnabled public String name;
+		@auraEnabled public String fileURLDesktop;
+		@auraEnabled public String ext;
+		@auraEnabled public String lastModified;
+		@auraEnabled public String size;
+	}
 
 	@auraEnabled
 	public static list<RecordsWrapper> getRecord(String recordId, String places, String parentLookup, String junctionObject){
@@ -29,35 +38,67 @@ public class MediaElementsManagerController {
 		}
 		return rwList;
 	}
+	
 	@auraEnabled
-	public static list<MediaElement__c> getMediaElements (String stringOffset, String searchText, String stringElementPerPage){
-		
-		Integer intOffset =Integer.valueOf(stringOffset);
-		Integer intElementPerPage =Integer.valueOf(stringElementPerPage);
+    public static List<ContentWrapper> getData(String stringOffset, String searchText, String stringElementPerPage, String findContent){
+        Map<String, ContentWrapper> contentWrMap = new Map<String, ContentWrapper>();
+        String contentDocId;
+		Integer intOffset = Integer.valueOf(stringOffset);
+		Integer elementPerPages = Integer.valueOf(stringElementPerPage);
 
 		list<MediaElement__c> mediaElementsList = new list<MediaElement__c>();
-		// TODO  pasar a database.query(String)
-		if (searchText == '' || searchText == null){
-			if(intOffset < 1){
-				mediaElementsList = [SELECT Id, Name, FileURLDesktop__c FROM MediaElement__c ORDER BY LastModifiedDate DESC LIMIT :intElementPerPage];	
-			}else{
-				mediaElementsList = [SELECT Id, Name, FileURLDesktop__c FROM MediaElement__c ORDER BY LastModifiedDate DESC LIMIT :intElementPerPage OFFSET :intOffset];
-			}
-		} else {
+		String queryMediaElement = 'SELECT Id, Name, FileURLDesktop__c, LastModifiedDate FROM MediaElement__c ';
+		if (String.isNotBlank(searchText)){
 			String likeValue = '%' + searchText + '%';
-			
-			if(intOffset < 1){
-				mediaElementsList = [SELECT Id, Name, FileURLDesktop__c FROM MediaElement__c WHERE Name LIKE :likeValue ORDER BY LastModifiedDate DESC LIMIT :intElementPerPage];	
-			}else{
-				mediaElementsList = [SELECT Id, Name, FileURLDesktop__c FROM MediaElement__c WHERE Name LIKE :likeValue ORDER BY LastModifiedDate DESC LIMIT :intElementPerPage OFFSET :intOffset];
-			}
+			queryMediaElement += ' WHERE Name LIKE \'' + likeValue + '\'';
 		}
 
-		if(!mediaElementsList.isEmpty()){
-			return mediaElementsList;
+		queryMediaElement += ' ORDER BY LastModifiedDate DESC LIMIT ' + elementPerPages;
+		if(intOffset > 0){
+			queryMediaElement += ' OFFSET ' + intOffset;
 		}
-		return new list<MediaElement__c> ();
-	}
+		
+		Set<String> contentSet = new Set<String>();
+		for(MediaElement__c me : Database.query(queryMediaElement)){
+			ContentWrapper cw = new ContentWrapper();
+			cw.idME = me.Id;
+			cw.name = me.Name;
+			cw.fileURLDesktop = me.FileURLDesktop__c;
+			cw.lastModified = String.valueOf(me.LastModifiedDate);
+
+			if(String.isNotBlank(findContent) && findContent == 'true'){
+	            String str = me.FileURLDesktop__c.substringAfterLast('/');
+	            if (Pattern.compile('[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}').matcher(str).matches()){
+	            	contentSet.add(str);
+	            } else {
+	            	cw.size = 'Web';
+	            	cw.ext = str.substringAfter('.');
+	            }
+	            contentWrMap.put(str, cw);
+			}else{
+				contentWrMap.put(me.Id, cw);
+			}
+			
+		}
+
+		if(String.isNotBlank(findContent) && findContent == 'true'){
+			if(contentSet.size() > 0){
+				for(ContentDocument file : [SELECT id, Title, ContentSize, FileExtension FROM ContentDocument WHERE id IN: contentSet]){
+					ContentWrapper cw = contentWrMap.get(file.id);
+					if(file.ContentSize != null){
+						cw.size = String.valueOf(Integer.valueOf(file.ContentSize * 0.001)) + ' KB';
+					}
+					if(String.isNotBlank(file.FileExtension)){
+						cw.ext = file.FileExtension;
+					}
+					contentWrMap.put(file.id, cw);
+				}
+			}
+		}     
+
+        return contentWrMap.values();
+    }
+
 	@auraEnabled
 	public static void assignMediaElementToId (String recordId, String place, String parentLookup, String junctionObject, String mediaElementId){
 

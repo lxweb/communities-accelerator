@@ -432,4 +432,20 @@
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
+    <labels>
+        <fullName>AddMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AddMediaElement</shortDescription>
+        <value>Add Media</value>
+    </labels>
+    <labels>
+        <fullName>SelectMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SelectMediaElement</shortDescription>
+        <value>Select Media Element</value>
+    </labels>
 </CustomLabels>

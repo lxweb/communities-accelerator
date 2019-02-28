@@ -34,7 +34,7 @@ public class MediaElementsManagerControllerTest {
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(3);
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '', '5');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '', '5', 'false');
 		Test.stopTest();
 		// Then
 		System.assertEquals(searchedList.size(), medElement.size());
@@ -47,25 +47,32 @@ public class MediaElementsManagerControllerTest {
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(11);
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '0', '15');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '0', '15', 'false');
 		Test.stopTest();
 		// Then
 		System.assertEquals( 2, searchedList.size());
 	}
 	@isTest 
 	static void PA181_CASE_4(){
-		// Comment: Se buscan media element con un paginado, no se filtra 
+		// Comment: Search media element with pagging, without filter
 
 		// Given
+		List<ContentDocument> contentDocument = MockupFactory.createContentDocument('TestCD', 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(11);
+		for(Integer i = 0; i < medElement.size(); i++){
+			medElement[i].FileURLDesktop__c = 'https://test/' + contentDocument[0].id;
+		}
+		medElement[0].FileURLDesktop__c = 'https://test/dsdsd.jpg';
+		update medElement;
+
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '', '6');
-		list<MediaElement__c> searchedList2 = MediaElementsManagerController.getMediaElements ('6', '', '6');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '', '6', 'false');
+		list<MediaElementsManagerController.ContentWrapper> searchedList2 = MediaElementsManagerController.getData('6', '', '6', 'true');
 		Test.stopTest();
 		// Then
-		System.assertEquals( 6, searchedList.size() );
-		System.assertEquals( 5, searchedList2.size() );
+		System.assertEquals(6, searchedList.size());
+		System.assertEquals(2, searchedList2.size());
 	}
 	@isTest 
 	static void PA181_CASE_5(){
