@@ -68,7 +68,7 @@ public class MockupFactory {
         List<Tag__c> tagList = new List<Tag__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            tagList.add( new Tag__c(Name=tagName+i,Description__c=description, Cluster__c=clusterId));
+            tagList.add( new Tag__c(Name=tagName+i,Description__c=description, Cluster__c=clusterId, Status__c='Inactive'));
 
         }
         insert tagList;
@@ -96,7 +96,7 @@ public class MockupFactory {
         List<Category__c> catList = new List<Category__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            catList.add( new Category__c(Name=catName+i, Cluster__c=clusterId));
+            catList.add( new Category__c(Name=catName+i, Cluster__c=clusterId, Status__c='Inactive'));
 
         }
         insert catList;
@@ -189,9 +189,9 @@ public class MockupFactory {
                 componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
-                                        Status__c = 'Available',
                                         RecordTypeId = recordT.Id,
-                                        Cluster__c = cluster.Id));
+                                        Cluster__c = cluster.Id,
+                                        Status__c='Inactive'));
             }
 
         }else{
@@ -199,8 +199,8 @@ public class MockupFactory {
                 componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
-                                        Status__c = 'Available',
-                                        RecordTypeId = recordT.id));
+                                        RecordTypeId = recordT.id,
+                                        Status__c='Inactive'));
             }
         }
 
@@ -218,7 +218,8 @@ public class MockupFactory {
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
-                                    Order__c = i+1));
+                                    Order__c = i+1,
+                                    Status__c='Draft'));
         }
         insert contentList;
         return contentList;
@@ -245,7 +246,7 @@ public class MockupFactory {
         
         for(Integer i = 0; i < quantity; i++){
             mediaElementList.add(new MediaElement__c(Name = 'MediaElement ' + i,
-                                    ExternalId__c = 'MediaElement_' + i));
+                                    ExternalId__c = 'MediaElement_' + i, Status__c='Inactive'));
         }
         insert mediaElementList;
         return mediaElementList;
@@ -348,7 +349,7 @@ public class MockupFactory {
         List<Navigation__c> navList = new List<Navigation__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId));
+            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId, Status__c='Inactive'));
         }
         insert navList;
 
@@ -359,7 +360,7 @@ public class MockupFactory {
         List<Menu__c> menuList = new List<Menu__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            menuList.add( new Menu__c(Name=menuName+i, Cluster__c=clusterId));
+            menuList.add( new Menu__c(Name=menuName+i, Cluster__c=clusterId, Status__c='Inactive'));
         }
         insert menuList;
 
@@ -385,7 +386,7 @@ public class MockupFactory {
         List<Brand__c> brandList = new List<Brand__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            brandList.add( new Brand__c(Name=brandName+i, Cluster__c=clusterId));
+            brandList.add( new Brand__c(Name=brandName+i, Cluster__c=clusterId, Status__c='Inactive'));
         }
         insert brandList;
 
@@ -408,7 +409,7 @@ public class MockupFactory {
     public static List<SocialNetwork__c> createSocialNetworks(String name, String username, Id brandId, Id navigation, String rType){
         List<SocialNetwork__c> socialNetwork = new List<SocialNetwork__c>();
         RecordType recType = [SELECT Id FROM RecordType WHERE SObjectType = 'SocialNetwork__c' AND DeveloperName =: rType LIMIT 1];
-        socialNetwork.add(new SocialNetwork__c(Name = name, Username__c = username, Brand__c = brandId, Navigation__c = navigation, RecordTypeId = recType.Id));
+        socialNetwork.add(new SocialNetwork__c(Name = name, Username__c = username, Brand__c = brandId, Navigation__c = navigation, RecordTypeId = recType.Id, Status__c='Inactive'));
     
         insert socialNetwork;
         return socialNetwork;
@@ -428,7 +429,7 @@ public class MockupFactory {
         List<Recipe__c> recipeList = new List<Recipe__c>();
         
         for(Integer i = 0;i<quantity;i++){
-            recipeList.add( new Recipe__c(Name=recipeName+i, Content__c = content, Cluster__c=clusterId));
+            recipeList.add( new Recipe__c(Name=recipeName+i, Content__c = content, Cluster__c=clusterId, Status__c='Inactive'));
         }
         insert recipeList;
 
