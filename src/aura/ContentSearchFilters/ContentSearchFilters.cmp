@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="ContentSearchFiltersController">
+
+    <aura:attribute name="filters" type="List" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <aura:iteration items="{!v.filters}" var="filterType">
+        <br/>
+        <br/>
+        {!filterType.name}
+        <br/>
+        <br/>
+        <aura:iteration items="{!filterType.values}" var="filter">
+        {!filter.label}&nbsp;
+        {!filter.value}
+        <br/>
+        </aura:iteration>
+
+    </aura:iteration>
+
+</aura:component>

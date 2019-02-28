@@ -71,7 +71,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_News_Page</content>
+        <content>Content_News_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.News</recordType>
