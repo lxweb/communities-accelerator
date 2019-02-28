@@ -3,6 +3,7 @@
 .sdfx/
 force.json
 sfdx-project.json
+.vim-force.com
 
 # Archivos Sublime
 config/
