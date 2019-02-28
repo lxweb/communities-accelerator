@@ -1161,7 +1161,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
-	    <values>
+			<values>
                 <fullName>Archived</fullName>
                 <default>false</default>
             </values>
@@ -1241,7 +1241,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1256,7 +1256,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1264,11 +1264,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>true</default>
             </values>
             <values>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Scheduled</fullName>
+                <fullName>Published</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
