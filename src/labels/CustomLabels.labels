@@ -25,14 +25,6 @@
         <value>INGREDIENTS</value>
     </labels>
     <labels>
-        <fullName>AssetDetailsInstructions</fullName>
-        <categories>CG_AssetDetail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Asset Details Instructions</shortDescription>
-        <value>INSTRUCTIONS</value>
-    </labels>
-    <labels>
         <fullName>AssetDetailsRelatedTags</fullName>
         <categories>CG_AssetDetail</categories>
         <language>en_US</language>
@@ -41,52 +33,12 @@
         <value>Related Tags</value>
     </labels>
     <labels>
-        <fullName>AssetDetailsTitle</fullName>
-        <categories>CG Asset Detail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>AssetDetailsTitle</shortDescription>
-        <value>Asset Details</value>
-    </labels>
-    <labels>
-        <fullName>AddMediaElement</fullName>
-        <categories>MediaElementSearcher.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>AddMediaElement</shortDescription>
-        <value>Add Media</value>
-    </labels>
-    <labels>
-        <fullName>AssetDetailsFeaturing</fullName>
-        <categories>CG_AssetDetail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Asset Details Featuring</shortDescription>
-        <value>Featuring</value>
-    </labels>
-    <labels>
-        <fullName>AssetDetailsIngredients</fullName>
-        <categories>CG_AssetDetail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Asset Details Ingredients</shortDescription>
-        <value>INGREDIENTS</value>
-    </labels>
-    <labels>
         <fullName>AssetDetailsInstructions</fullName>
         <categories>CG_AssetDetail</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Asset Details Instructions</shortDescription>
         <value>INSTRUCTIONS</value>
-    </labels>
-    <labels>
-        <fullName>AssetDetailsRelatedTags</fullName>
-        <categories>CG_AssetDetail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Asset Details Related Tags</shortDescription>
-        <value>Related Tags</value>
     </labels>
     <labels>
         <fullName>AssetDetailsTitle</fullName>
@@ -529,8 +481,6 @@
         <value>Mobile</value>
     </labels>
     <labels>
-<<<<<<< HEAD
-=======
         <fullName>ModalRecordTypeTitle</fullName>
         <categories>Modal Record Type</categories>
         <language>en_US</language>
@@ -547,7 +497,6 @@
         <value>Select a record type</value>
     </labels>
     <labels>
->>>>>>> feature/PA-349
         <fullName>NoClusterSelected</fullName>
         <categories>CG_BaseComponent.cmp</categories>
         <language>en_US</language>
@@ -596,22 +545,6 @@
         <value>Tag name already exist in cluster branch</value>
     </labels>
     <labels>
-        <fullName>SearchContentCategoryFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of category filter in search content page</shortDescription>
-        <value>Categories</value>
-    </labels>
-    <labels>
-        <fullName>SearchContentClusterFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of cluster filter in search content page</shortDescription>
-        <value>Cluster</value>
-    </labels>
-    <labels>
         <fullName>SearchContentTagFilter</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -642,14 +575,6 @@
         <protected>true</protected>
         <shortDescription>Select language</shortDescription>
         <value>Select language</value>
-    </labels>
-    <labels>
-        <fullName>SelectMediaElement</fullName>
-        <categories>MediaElementSearcher.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>SelectMediaElement</shortDescription>
-        <value>Select Media Element</value>
     </labels>
     <labels>
         <fullName>SetUpAcceleratorSetting</fullName>
@@ -778,21 +703,5 @@
         <protected>true</protected>
         <shortDescription>Label of cluster filter in search content page</shortDescription>
         <value>Cluster</value>
-    </labels>
-    <labels>
-        <fullName>SearchContentTagFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of tag filter in search content page</shortDescription>
-        <value>Tags</value>
-    </labels>
-    <labels>
-        <fullName>SearchContentTypeFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of content type filter in search content page</shortDescription>
-        <value>Content Type</value>
     </labels>
 </CustomLabels>
