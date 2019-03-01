@@ -4,18 +4,14 @@
         helper.getRecordTypes(component, component.get("v.sObjectName"), component.get("v.rtDevNameList"));
 	},
 	onShow : function(component, event, helper) {
-		var modalBox = component.find('modalBox');
-		var modalBackdrop = component.find('modalBackdrop');
-		$A.util.addClass(modalBox, 'slds-fade-in-open');
-		$A.util.addClass(modalBackdrop,'slds-backdrop--open');
+	    helper.openModal(component);
 	},
     onHide : function(component, event, helper) {
-		var modalBox = component.find('modalBox');
-		var modalBackdrop = component.find('modalBackdrop');
-		$A.util.removeClass(modalBox, 'slds-fade-in-open');
-		$A.util.removeClass(modalBackdrop,'slds-backdrop--open');
+	    helper.closeModal(component);
 	},
     onNewRecord : function(component, event, helper) {
+	    helper.goToNewRecord(component);
+	    helper.closeModal(component);
 	},
 	optionSelected : function(component,event,helper){
         var recordTypeId = event.target.getAttribute("value");

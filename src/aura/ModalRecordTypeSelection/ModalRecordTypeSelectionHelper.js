@@ -33,4 +33,23 @@
 			    
 		$A.enqueueAction(action);
 	},
+	openModal : function(component){
+		var modalBox = component.find('modalBox');
+		var modalBackdrop = component.find('modalBackdrop');
+		$A.util.addClass(modalBox, 'slds-fade-in-open');
+		$A.util.addClass(modalBackdrop,'slds-backdrop--open');
+	},
+	closeModal : function(component){
+		var modalBox = component.find('modalBox');
+		var modalBackdrop = component.find('modalBackdrop');
+		$A.util.removeClass(modalBox, 'slds-fade-in-open');
+		$A.util.removeClass(modalBackdrop,'slds-backdrop--open');
+	},
+	goToNewRecord : function(component){
+    	var urlEvent = $A.get("e.force:navigateToURL");
+	    urlEvent.setParams({
+	      "url": "/lightning/n/NewContent?RecordTypeId=" + component.get("v.value")
+	    });
+	    urlEvent.fire();
+	}
 })
