@@ -5,7 +5,8 @@ export default class CustomRichText extends LightningElement {
     @api handleReceiveUrl(URL){
         // Receive URL from Lightning Component (container).
         var Rich = this.template.querySelector('lightning-input-rich-text');
-        var newValue = Rich.value += '<img src="' + URL + '" >'; //Concatenate URL into current text.
+        var richValue = Rich.value ? Rich.value : '';
+        var newValue = richValue += '<img src="' + URL + '" >'; //Concatenate URL into current text.
         Rich.value = newValue;
        
     }
@@ -13,7 +14,6 @@ export default class CustomRichText extends LightningElement {
      
     @api setText(body){
         var Rich = this.template.querySelector('lightning-input-rich-text');
-        if (!body){body='';}
         Rich.value = body;
         Rich.focus();
         Rich.blur();
