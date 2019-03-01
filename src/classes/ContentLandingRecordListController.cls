@@ -171,7 +171,7 @@ public class ContentLandingRecordListController {
 		if(wrapper.tagIds != null && ! wrapper.tagIds.isEmpty()){
 			// Trae los IDs de los Contenidos asociados a las Tags recibidas
 			String tagedContentIds = getTagedContentIds(wrapper.tagIds);
-			queryConditions.add('Id IN ' + tagedContentIds);
+			if(tagedContentIds != null) queryConditions.add('Id IN ' + tagedContentIds);
 		}
 		if(wrapper.status != null && wrapper.status.toLowerCase() != 'all') queryConditions.add('Status__c = \'' + wrapper.status + '\'');
 		return queryConditions;
@@ -230,8 +230,7 @@ public class ContentLandingRecordListController {
 			}
 		}
 		// Devuelve la lista de forma que pueda ser incluida en la query dinámicamente
-		tagedContentIds = '(' + tagedContentIds.substring(0, tagedContentIds.length()-2) + ')';
-		return tagedContentIds;
+		return tagedContentIds.length() > 2 ? tagedContentIds = '(' + tagedContentIds.substring(0, tagedContentIds.length()-2) + ')' : null;
 	}
 
 }
