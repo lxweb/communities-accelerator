@@ -28,9 +28,10 @@
 
 				var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
 				if(contntRecordTypeWp.haveContentRecordType){
-					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new' + '?recordTypeId=' + contntRecordTypeWp.contentRecordTypeId;
+
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent' + '?recordTypeId=' + contntRecordTypeWp.contentRecordTypeId;
 				}else{
-					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/o/Content__c/new';
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
 				}
 				
 				window.open(url);
