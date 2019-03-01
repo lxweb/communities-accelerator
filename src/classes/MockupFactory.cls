@@ -215,7 +215,7 @@ public class MockupFactory {
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Content__c' AND Name =: nameRecordType LIMIT 1];
 
         for(Integer i = 0; i < quantity; i++){
-            contentList.add(new Content__c(Name =1+ nameRecordType + ' ' + i,
+            contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
