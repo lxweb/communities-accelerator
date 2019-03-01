@@ -8,7 +8,9 @@ public class ContentLandingRecordListControllerTest {
 		MockupFactory.generateAcceleratorSetting();
 		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
 		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0];
+		bannerTest.Status__c = 'Draft'; update bannerTest;
 		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0];
+		newsTest.Status__c = 'Draft'; update newsTest;
 
 		//When
 		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null);
@@ -51,8 +53,10 @@ public class ContentLandingRecordListControllerTest {
 		//Given
 		MockupFactory.generateAcceleratorSetting();
 		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; bannerTest.Status__c = 'Draft'; 
-		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; newsTest.Status__c = 'Draft';
+		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; 
+		bannerTest.Status__c = 'Draft'; update bannerTest;
+		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; 
+		newsTest.Status__c = 'Draft'; update newsTest;
 
 		//When
 		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'Banner');
@@ -68,8 +72,10 @@ public class ContentLandingRecordListControllerTest {
 		//Given
 		MockupFactory.generateAcceleratorSetting();
 		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; bannerTest.Status__c = 'Draft'; 
+		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; bannerTest.Status__c = 'Draft';
+		bannerTest.Status__c = 'Draft'; update bannerTest;
 		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; newsTest.Status__c = 'Draft';
+		newsTest.Status__c = 'Draft'; update newsTest;
 
 		//When
 		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'String Inexistente');
@@ -84,8 +90,10 @@ public class ContentLandingRecordListControllerTest {
 		//Given
 		MockupFactory.generateAcceleratorSetting();
 		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; bannerTest.Status__c = 'Draft'; 
-		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; newsTest.Status__c = 'Draft';
+		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0];
+		bannerTest.Status__c = 'Draft'; update bannerTest;
+		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0];
+		newsTest.Status__c = 'Draft'; update newsTest;
 
 		//When
 		ContentLandingRecordListController.TableWrapper tableWrapperTest1 = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null);
