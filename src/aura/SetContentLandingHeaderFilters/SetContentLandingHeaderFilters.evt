@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Content landing header event" >
+	<aura:attribute name="searchedString" 	type="String" />
+	<aura:attribute name="status" 			type="String" />
+</aura:event>
