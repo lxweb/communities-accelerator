@@ -13,6 +13,7 @@ export default class CustomRichText extends LightningElement {
      
     @api setText(body){
         var Rich = this.template.querySelector('lightning-input-rich-text');
+        if (!body){body='';}
         Rich.value = body;
         Rich.focus();
         Rich.blur();
