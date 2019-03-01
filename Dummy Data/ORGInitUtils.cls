@@ -348,6 +348,7 @@ public with sharing class ORGInitUtils {
         Navigation__c support2_1    = new Navigation__c(Cluster__c = getId('DUMMY_OnTrade_Global'), ExternalId__c = 'DUMMY_Nav_support2_1',     Name = 'DUMMY_Support 2_1',   Type__c = 'Internal', URL__c = 'support2-1', Status__c='Inactive');
         Navigation__c support1_1_1  = new Navigation__c(Cluster__c = getId('DUMMY_OnTrade_Global'), ExternalId__c = 'DUMMY_Nav_support1_1_1',   Name = 'DUMMY_Support 1_1_1', Type__c = 'Internal', URL__c = 'support1-1-1', Status__c='Inactive');
         Navigation__c support2_1_1  = new Navigation__c(Cluster__c = getId('DUMMY_OnTrade_Global'), ExternalId__c = 'DUMMY_Nav_support2_1_1',   Name = 'DUMMY_Support 2_1_1', Type__c = 'Internal', URL__c = 'support2-1-1', Status__c='Inactive');
+        Navigation__c search  = new Navigation__c(Cluster__c = getId('DUMMY_OnTrade_Global'), ExternalId__c = 'DUMMY_Nav_search',         Name = 'DUMMY_Search',        Type__c = 'Internal', URL__c = 'search',  Status__c='Inactive');
 
         navigationsList.add(home);
         navigationsList.add(support);
@@ -365,6 +366,7 @@ public with sharing class ORGInitUtils {
         navigationsList.add(support2_1);
         navigationsList.add(support1_1_1);
         navigationsList.add(support2_1_1);
+        navigationsList.add(search);
         List<Database.UpsertResult> result = Database.upsert(navigationsList, Navigation__c.Fields.ExternalId__c, true);
 
         addToMapRecords(navigationsList);
@@ -521,6 +523,7 @@ public with sharing class ORGInitUtils {
         componentsList.add(comp_ClusterSelector);
         componentsList.add(comp_Menu);
         componentsList.add(comp_LanguageSelector);
+        componentsList.add(comp_Search);
         
         List<Database.UpsertResult> result = Database.upsert(componentsList, Component__c.Fields.ExternalId__c, true);
         addToMapRecords(componentsList);

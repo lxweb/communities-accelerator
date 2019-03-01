@@ -135,10 +135,11 @@ public class ContentDetailController {
     private static void updateMediaElementAssignment(Content__c content, String mediaElementId){
 
         Boolean MEAAlreadyCreated = false;
-        String mePlacement = content.recordType.name + 'ImageList';
+        String meListPlacement = content.recordType.name + 'ImageList';
+        String meDetailPlacement = content.recordType.name + 'ImageDetail';
         if(content.id != null){
             List<MediaElementAssignment__c> MEAToDelete = new List<MediaElementAssignment__c>();
-            List<MediaElementAssignment__c> oldMediaElementAssignments = [SELECT id, mediaElement__c FROM MediaElementAssignment__c WHERE Content__c = :content.id];
+            List<MediaElementAssignment__c> oldMediaElementAssignments = [SELECT id, mediaElement__c FROM MediaElementAssignment__c WHERE Content__c = :content.id AND (placement__c = :meListPlacement OR placement__c = :meDetailPlacement)];
             for(MediaElementAssignment__c mea : oldMediaElementAssignments){
                 if(mea.mediaElement__c != mediaElementId){
                     MEAToDelete.add(mea);
@@ -149,8 +150,10 @@ public class ContentDetailController {
             delete MEAToDelete;
         }
         if(!MEAAlreadyCreated){
-            MediaElementAssignment__c mediaelementAssignment = new MediaElementAssignment__c(content__c = content.id, mediaElement__c = mediaElementId, placement__c = mePlacement);
-            insert mediaelementAssignment;
+            MediaElementAssignment__c mediaelementAssignmentList = new MediaElementAssignment__c(content__c = content.id, mediaElement__c = mediaElementId, placement__c = meListPlacement);
+            MediaElementAssignment__c mediaelementAssignmentDetail = new MediaElementAssignment__c(content__c = content.id, mediaElement__c = mediaElementId, placement__c = meDetailPlacement);
+            List<MediaElementAssignment__c> MEAToCreate = new List<MediaElementAssignment__c>{mediaelementAssignmentList, mediaelementAssignmentDetail};
+            insert MEAToCreate;
         }
     }
 
