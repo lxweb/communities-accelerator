@@ -16,6 +16,7 @@
         var URL = event.getParam("URL");
         var ID = event.getParam("ID"); 
 		component.find('customRich').handleReceiveUrl(URL);
+        event.stopPropagation();
     },
 
   handleTextChange : function(component, event) {
