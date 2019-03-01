@@ -193,6 +193,14 @@
         <value>New Content</value>
     </labels>
     <labels>
+        <fullName>ContentLandingContentType</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingContentType</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingTags</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
@@ -207,6 +215,14 @@
         <protected>true</protected>
         <shortDescription>Content Landing Create Template button label</shortDescription>
         <value>Create Template</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNone</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingNone</shortDescription>
+        <value>None</value>
     </labels>
     <labels>
         <fullName>Desktop</fullName>

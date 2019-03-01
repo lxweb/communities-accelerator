@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_2-of-12" onfilterselected={handlerFilterSidebarEvent}>
+            <template if:true={renderFilterSidebar}>
+                <c-acordeon filters={filters}></c-acordeon>
+            </template>
+        </div>
+        <div class="slds-col slds-size_10-of-12" onsearchenter={onSearchEvent}>
+            <template if:true={renderHeader}>
+                <c-header-list-view-page objectlabel={objectLabel} filtersstatus={filtersStatus} filterselected={filtersValues}></c-header-list-view-page>
+            </template>
+            <template if:true={renderTable}>
+                <c-table-filter tabledata={tabledata}></c-table-filter>
+            </template>
+        </div>
+    </div>
+</template>
