@@ -193,6 +193,14 @@
         <value>Order</value>
     </labels>
     <labels>
+        <fullName>ContentLandingContentType</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingContentType</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
         <fullName>GlobalSearchPlaceholder</fullName>
         <categories>Global Search</categories>
         <language>en_US</language>
@@ -207,6 +215,14 @@
         <protected>true</protected>
         <shortDescription>Global Search Results</shortDescription>
         <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNone</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingNone</shortDescription>
+        <value>None</value>
     </labels>
     <labels>
         <fullName>GlobalSearchTags</fullName>

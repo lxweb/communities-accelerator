@@ -96,5 +96,9 @@
 		<members>*</members>
 		<name>StaticResource</name>
 	</types>
-	<version>42.0</version>
+    <types>
+        <name>LightningComponentBundle</name>
+        <members>*</members>
+    </types>
+	<version>45.0</version>
 </Package>
