@@ -1208,11 +1208,7 @@
     <tabVisibilities>
         <tab>Recipe__c</tab>
         <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>NewContent</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>   
+    </tabVisibilities>  
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
