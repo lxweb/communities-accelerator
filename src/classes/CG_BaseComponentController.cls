@@ -46,7 +46,7 @@ public with sharing class CG_BaseComponentController {
 			if(componentType == 'RelatedEvents'){parentComponentType = 'Event';}
 
 			parentComponent = ComponentUtils.getComponent(parentComponentId, getComponentFieldSetByComponentType(parentComponentType, device), device);
-			system.debug(parentComponent);
+
 
 			if(parentContentId != null && parentContentId != ''){
 				setContentToExclude = new set<String>{parentContentId};
@@ -88,24 +88,19 @@ public with sharing class CG_BaseComponentController {
 		ComponentWrapper cw = new ComponentWrapper();
 		
 		//Verificar los custom permisions
-		if(!cw.isEnabledCommunityEditFrame){
-			System.debug('componentType: ' + componentType);
-			if(FeatureManagement.checkPermission(componentType + 'EditFrame')){
-				cw.isEnabledCommunityEditFrame = true;
-			
-			}else{
-				cw.isEnabledCommunityEditFrame = false;
-			}
+
+		if(FeatureManagement.checkPermission(componentType + 'EditFrame')){
+			cw.isEnabledCommunityEditFrame = true;
+		}else{
+			cw.isEnabledCommunityEditFrame = false;
 		}
 
-		if (!cw.isEnabledCommunityViewFrame){
-			System.debug('componentType: ' + componentType);
-			if(FeatureManagement.checkPermission(componentType + 'ViewFrame')){
-				cw.isEnabledCommunityViewFrame = true;
-			}else{
-				cw.isEnabledCommunityViewFrame = false;
-			}
+		if(FeatureManagement.checkPermission(componentType + 'ViewFrame')){
+			cw.isEnabledCommunityViewFrame = true;
+		}else{
+			cw.isEnabledCommunityViewFrame = false;
 		}
+
 
 		cw.component = component;
 		cw.clusterId = clusterId;
