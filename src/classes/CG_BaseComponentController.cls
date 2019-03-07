@@ -88,18 +88,18 @@ public with sharing class CG_BaseComponentController {
 		ComponentWrapper cw = new ComponentWrapper();
 		
 		//Verificar los custom permisions
-
-		if(FeatureManagement.checkPermission(componentType + 'EditFrame')){
+		if(FeatureManagement.checkPermission(componentType + 'EditFrame') || FeatureManagement.checkPermission('CommunityEditFrame')){
 			cw.isEnabledCommunityEditFrame = true;
 		}else{
 			cw.isEnabledCommunityEditFrame = false;
 		}
 
-		if(FeatureManagement.checkPermission(componentType + 'ViewFrame')){
+		if(FeatureManagement.checkPermission(componentType + 'ViewFrame') || FeatureManagement.checkPermission('CommunityViewFrame')){
 			cw.isEnabledCommunityViewFrame = true;
 		}else{
 			cw.isEnabledCommunityViewFrame = false;
 		}
+
 
 
 		cw.component = component;
