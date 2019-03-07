@@ -43,6 +43,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Each Navigation has an URL address. It also has a given behaviour which determines if it&apos;ll be opened in the current tab or a new tab.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableChangeDataCapture>false</enableChangeDataCapture>
@@ -53,10 +54,68 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>AudienceUser__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Audience user</label>
+        <referenceTo>AudienceUser__c</referenceTo>
+        <relationshipLabel>Navigations</relationshipLabel>
+        <relationshipName>Navigations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Audience__c</fullName>
+        <externalId>false</externalId>
+        <label>Audience</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Behaviour__c</fullName>
+        <externalId>false</externalId>
+        <label>Behaviour</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New Tab</fullName>
+                    <default>false</default>
+                    <label>New Tab</label>
+                </value>
+                <value>
+                    <fullName>Same Tab</fullName>
+                    <default>false</default>
+                    <label>Same Tab</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Cluster__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Cluster</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Cluster__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>ClusterRoot</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>Cluster__c</referenceTo>
         <relationshipLabel>Navigations</relationshipLabel>
         <relationshipName>Navigations</relationshipName>
@@ -64,6 +123,15 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DefaultPage__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Default Page</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Description__c</fullName>
@@ -89,6 +157,33 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ParentNavigation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Navigation</label>
+        <referenceTo>Navigation__c</referenceTo>
+        <relationshipLabel>Related Navigations</relationshipLabel>
+        <relationshipName>RelatedNavigations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Status</valueSetName>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Type__c</fullName>
@@ -143,12 +238,113 @@
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>Navigation</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Navigation__c.Navigation</value>
+        </filters>
+        <label>Navigation</label>
+    </listViews>
+    <listViews>
+        <fullName>NavigationVariant</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Navigation__c.Navigation_variant</value>
+        </filters>
+        <label>Navigation variant</label>
+    </listViews>
     <nameField>
         <label>Navigation Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>Navigations</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Navigation</fullName>
+        <active>true</active>
+        <description>Internal or external navigation points. They are mostly references to community pages.</description>
+        <label>Navigation</label>
+        <picklistValues>
+            <picklist>Behaviour__c</picklist>
+            <values>
+                <fullName>New Tab</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Same Tab</fullName>
+                <default>false</default>
+	    </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>External</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Navigation_variant</fullName>
+        <active>true</active>
+        <description>Navigation points referred to page variants in community. Also have a relationship with a audience user.</description>
+        <label>Navigation variant</label>
+        <picklistValues>
+            <picklist>Behaviour__c</picklist>
+            <values>
+                <fullName>New Tab</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Same Tab</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>External</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
     <searchLayouts/>
     <sharingModel>Private</sharingModel>
     <sharingReasons>

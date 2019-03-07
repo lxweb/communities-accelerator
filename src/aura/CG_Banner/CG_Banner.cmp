@@ -12,7 +12,7 @@
         			  if(and(v.componentWrapper.component.Orientation__c == 'Vertical-Portrait', 	v.componentWrapper.component.BannerFrameType__c == 'Hero'), v.aspectRatios.height3_1, '') +
         			  if(and(v.componentWrapper.component.Orientation__c == 'Vertical-Portrait', 	v.componentWrapper.component.BannerFrameType__c == 'Page'), v.aspectRatios.height6_1, '') +
         			  if(v.componentWrapper.component.BannerFrameType__c == 'Square', v.aspectRatios.height1_1, '')
-        			  }"/>
+        			  }"/>  			  
 	<!-- BANNER COMPONENT -->
 	
 	<!-- CAROUSEL / FADE -->
@@ -31,17 +31,9 @@
 				</c:CG_Carousel>
 
 			</div>
-
-			<aura:set attribute="else">
-				<div class="slds-page-header" style="text-align: center;">
-	                <lightning:layout horizontalAlign="left">
-	                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
-	                        <p>No existe contenido para este Banner</p>
-	                    </lightning:layoutItem>
-	                </lightning:layout>
-	            </div>
-	        </aura:set>
+			
 	    </aura:if>
 
 	</aura:if>
+	
 </aura:component>

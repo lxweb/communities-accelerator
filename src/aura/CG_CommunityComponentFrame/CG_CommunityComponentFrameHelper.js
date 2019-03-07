@@ -12,6 +12,35 @@
 			helper.showContentDetail(component, false);
 		}
 	},
+	newContent : function(component, event, helper) {
+		
+		var cWrapper = component.get('v.componentWrapper');
+		var componentRecordTypeId = cWrapper.component.RecordType.DeveloperName;
+		var action = component.get('c.getContentRecordtypeId');
+
+		action.setParams({
+			componentRecordType: componentRecordTypeId,
+		});
+
+	    action.setCallback(this, function(f) {
+            if(f.getState() === "SUCCESS") {
+            	var contntRecordTypeWp = action.getReturnValue();
+
+				var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
+				if(contntRecordTypeWp.haveContentRecordType){
+
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent' + '?recordTypeId=' + contntRecordTypeWp.contentRecordTypeId;
+				}else{
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
+				}
+				
+				window.open(url);
+
+	        }
+	    });
+	    
+	    $A.enqueueAction(action);
+	},
 	showHideEditFrame : function(component, helper, show) {
 		var cWrapper = component.get('v.componentWrapper');
 		var mainPanel = document.getElementById(component.get('v.componentWrapper.component.Id'));

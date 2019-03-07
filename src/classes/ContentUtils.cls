@@ -1,7 +1,7 @@
 public without sharing virtual class ContentUtils {
 
     public class ContentWrapper{
-        public set<String> setAllContentIds;
+        public Set<String> setAllContentIds;
         public Integer totalPages;
         public List<ContentDataWrapper> contentDataPage;
     }
@@ -11,7 +11,7 @@ public without sharing virtual class ContentUtils {
         public List<MediaElement__c> mediaElements;
     }
 
-    public static ContentWrapper getContentFromComponent(Component__c component, set<String> fieldSet, set<String> setContentDirect, set<String> setContentToExclude, set<String> setClusterIds, String device){
+    public static ContentWrapper getContentFromComponent(Component__c component, Set<String> fieldSet, Set<String> setContentDirect, Set<String> setContentToExclude, Set<String> setClusterIds, String device){
         system.debug('ContentUtils: component: ' + component);
         system.debug('ContentUtils: fieldSet: ' + fieldSet);
         system.debug('ContentUtils: setContentDirect: ' + setContentDirect);
@@ -19,16 +19,16 @@ public without sharing virtual class ContentUtils {
         system.debug('ContentUtils: setClusterIds: ' + setClusterIds);
         system.debug('ContentUtils: device: ' + device);
         
-        set<Id> setContentIds = new set<Id>();
-        set<Id> setCategoriesIds = new set<Id>();
+        List<Id> contentIdList = new List<Id>();
+        Set<Id> setCategoriesIds = new Set<Id>();
 
-        if(setContentToExclude == null){setContentToExclude = new set<String>();}
+        if(setContentToExclude == null){setContentToExclude = new Set<String>();}
 
         //Armado del query principal a objeto Content
         String query = '';
 
         //SELECT
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
 
         //FROM
         query += 'FROM Content__c ';
@@ -49,18 +49,18 @@ public without sharing virtual class ContentUtils {
                             setCategoriesIds.add(parentContent.Category__c);
                         }
                         if(component.Datasource__c.contains('Tags')){
-                            setContentIds.addAll(getContentIdsByTags(parentContent.Id, contentTypeToSearch));
+                            contentIdList.addAll(getContentIdsByTags(parentContent.Id, contentTypeToSearch, component.TagCriteria__c));
                         }
                     }
                 }else{
                     if(component.Datasource__c.contains('ManualAssignment')){
-                        setContentIds.addAll(getContentIdsByAssignment(component.Id));
+                        contentIdList.addAll(getContentIdsByAssignment(component.Id, (component.OrderBy__c != null && component.OrderBy__c == 'Manual Order')));
                     }
                     if(component.Datasource__c.contains('Categories')){
                         setCategoriesIds.addAll(getContentIdsByCategories(component.Id));
                     }
                     if(component.Datasource__c.contains('Tags')){
-                        setContentIds.addAll(getContentIdsByTags(component.Id, contentTypeToSearch));
+                        contentIdList.addAll(getContentIdsByTags(component.Id, contentTypeToSearch, component.TagCriteria__c));
                     }
                 }
             }
@@ -68,7 +68,7 @@ public without sharing virtual class ContentUtils {
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
                 query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
-                query += 'WHERE (Id IN: setContentIds OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
             if(component.Recordtype.Developername == 'Event' || component.Recordtype.DeveloperName == 'RelatedEvent'){
@@ -80,7 +80,7 @@ public without sharing virtual class ContentUtils {
         }
 
         //ORDER
-        if((component.OrderBy__c != null && component.OrderBy__c != 'Custom Sorting') || (component.OrderBy__c != null && component.OrderBy__c == 'Custom Sorting' && component.OrderByAdvance__c != null) ){
+        if((component.OrderBy__c != null && component.OrderBy__c != 'Custom Sorting' && component.OrderBy__c != 'Manual Order') || (component.OrderBy__c != null && component.OrderBy__c == 'Custom Sorting' && component.OrderByAdvance__c != null) ){
             query += 'ORDER BY ' + (component.OrderBy__c == 'Custom Sorting' ? component.OrderByAdvance__c : component.OrderBy__c);
         }
         
@@ -89,9 +89,18 @@ public without sharing virtual class ContentUtils {
         }       
         
         ContentWrapper cw = new ContentWrapper();
-        map<Id, Content__c> mapContent = new map<Id, Content__c>((List<Content__c>)Database.query(query));
-        
+        Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
+
         if(!mapContent.isEmpty()){
+            //Manual Order del contenido
+            if(component.Datasource__c == 'ManualAssignment' && component.OrderBy__c == 'Manual Order' && contentIdList.size() > 0){
+                Map<Id, Content__c> mapContentOrdered = new Map<Id, Content__c>();
+                for(Id contentId : contentIdList){
+                    mapContentOrdered.put(contentId, mapContent.get(contentId));
+                }
+                mapContent = mapContentOrdered;
+            }
+            
             //TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
 
             //Si despues de aplicar segmentacion tenemos algun registro evaluamos las paginas
@@ -129,7 +138,7 @@ public without sharing virtual class ContentUtils {
 
     public static List<ContentDataWrapper> getContentPage(set<String> setAllContentIds, set<String> fieldSet, Integer page, Integer pageSize, String orderBy, String device, String componentType){
         String query = '';
-        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Place__c FROM MediaElementAssignments__r WHERE Place__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
+        query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
         query += 'WHERE Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
@@ -149,34 +158,96 @@ public without sharing virtual class ContentUtils {
         return contentDataPage;
     }
     
-    private static set<Id> getContentIdsByAssignment(Id componentId){
-        set<Id> setContentIds = new set<Id>();
-        for(ContentAssignment__c ca: [SELECT Id, Content__c FROM ContentAssignment__c WHERE Component__c =: componentId]){
-            setContentIds.add(ca.Content__c);
+    private static List<Id> getContentIdsByAssignment(Id componentId, Boolean isManualOrder){
+        List<Id> contentIdList = new List<Id>();
+        String queryContentAssignment = 'SELECT Id, Content__c FROM ContentAssignment__c WHERE Component__c =: componentId';
+        if(isManualOrder){
+            queryContentAssignment += ' ORDER BY Order__c';
         }
-        return setContentIds;
+
+        for(ContentAssignment__c ca: Database.query(queryContentAssignment)){
+            if(!contentIdList.contains(ca.Content__c)) contentIdList.add(ca.Content__c);
+        }
+        return contentIdList;
     }
 
-    private static set<Id> getContentIdsByCategories(Id parentId){
-        set<Id> setCategoriesIds = new set<Id>();
+    private static List<Id> getContentIdsByCategories(Id parentId){
+        List<Id> categoriesIdList = new List<Id>();
         for(CategoryAssignment__c ca: [SELECT Id, Category__c FROM CategoryAssignment__c WHERE Component__c =: parentId]){
-            setCategoriesIds.add(ca.Category__c);
+            if(!categoriesIdList.contains(ca.Category__c)) categoriesIdList.add(ca.Category__c);
         }
-        return setCategoriesIds;
+        return categoriesIdList;
     }
 
-    private static set<Id> getContentIdsByTags(Id parentId, String contentTypeToSearch){
-        set<Id> setTagIds = new set<Id>();
-        for(TagAssignment__c ta: [SELECT Id, Tag__c FROM TagAssignment__c WHERE Component__c =: parentId OR Content__c =: parentId]){
-            setTagIds.add(ta.Tag__c);
+    private static List<Id> getContentIdsByTags(Id parentId, String contentTypeToSearch, String tagCriteria){
+        List<Id> tagIdList = new List<Id>();
+        List<String> orderList = new List<String>();
+        List<String> tagList = new List<String>();
+        List<String> visitedList = new List<String>();
+        Map<String, String> orderTagMap = new Map<String, Id>();
+
+        if(String.isNotBlank(tagCriteria)){
+            tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
+            orderList = tagCriteria.split('\\(|\\)|AND|OR');
+            tagCriteria = ' ' + tagCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ').replaceAll('\\(', ' ( ').replaceAll('\\)', ' ) ') + ' ';
+        }        
+        
+        for(TagAssignment__c ta: [SELECT Id, Tag__c, Order__c FROM TagAssignment__c WHERE Component__c =: parentId OR Content__c =: parentId]){
+            if(!tagIdList.contains(ta.Tag__c)) {
+                tagIdList.add(ta.Tag__c);
+                orderTagMap.put(String.valueOf(ta.Order__c), ta.Tag__c);
+            }
         }
 
-        set<Id> setContentIds = new set<Id>();
-        for(TagAssignment__c ta: [SELECT Id, Content__c FROM TagAssignment__c WHERE Tag__c IN: setTagIds AND Content__r.RecordType.Developername =: contentTypeToSearch]){
-            setContentIds.add(ta.Content__c);
+        //Reemplazo de los orders por id de tags
+        if(String.isNotBlank(tagCriteria)){
+            for(String st : orderList){
+                if(String.isNotBlank(st) && !visitedList.contains(st) && orderTagMap.containsKey(st)){
+                    tagCriteria = tagCriteria.replaceAll(' ' + st + ' ', orderTagMap.get(st));
+                    visitedList.add(st);
+                    tagList.add(orderTagMap.get(st));
+                }
+            }
         }
+        
+        //Busqueda de los contents
+        List<Id> contentIdList = new List<Id>();
+        Map<Id, String> contentTagsMap = new Map<Id, String>();
+        for(TagAssignment__c ta: [SELECT Id, Content__c, Tag__c FROM TagAssignment__c WHERE Tag__c IN: tagIdList AND Content__r.RecordType.Developername =: contentTypeToSearch]){
+            if (String.isBlank(tagCriteria)){
+                if(!contentIdList.contains(ta.Content__c)) contentIdList.add(ta.Content__c);
+            }else{
+                if (contentTagsMap.containsKey(ta.Content__c)){
+                    contentTagsMap.put(ta.Content__c, contentTagsMap.get(ta.Content__c) + ta.Tag__c + ', ');
+                }else{
+                    contentTagsMap.put(ta.Content__c, ta.Tag__c + ', ');    
+                }                
+            }
+        }
+        
+        //Remplazo y validacion de la formula
+        if(String.isNotBlank(tagCriteria)){
+            for(Id contentId : contentTagsMap.KeySet()){
+                String tags = contentTagsMap.get(contentId);
+                String evalCriteria = tagCriteria;
+                visitedList = new List<String>();
+                for(String st : tagList){
+                    if(String.isNotBlank(st) && !visitedList.contains(st) && tags.contains(st)){
+                        evalCriteria = evalCriteria.replaceAll(st, 'TRUE');                        
+                    }else {
+                        evalCriteria = evalCriteria.replaceAll(st, 'FALSE');
+                    }
+                    visitedList.add(st);
+                }
 
-        return setContentIds;
+                evalCriteria = evalCriteria.deleteWhitespace();
+                evalCriteria = evalCriteria.replaceAll('AND', ' AND ').replaceAll('OR', ' OR ');
+                if (String.isNotBlank(contentId) && BooleanExpression.eval(evalCriteria)){
+                    if(!contentIdList.contains(contentId)) contentIdList.add(contentId);
+                }
+            }
+        }
+        return contentIdList;
     }
 
     private static List<ContentDataWrapper> createContentDataWrappers(List<Content__c> contents){
@@ -208,7 +279,7 @@ public without sharing virtual class ContentUtils {
         return listCDW;
     }
 
-    private static String getRecordTypeContentFromRTComponent(String componentRT){
+    public static String getRecordTypeContentFromRTComponent(String componentRT){
         String contentTypeToSearch;
         if(componentRT == 'RelatedNews' || componentRT == 'NewsDetail'){contentTypeToSearch = 'News';}
         else if(componentRT == 'RelatedEvents' || componentRT == 'EventDetail'){contentTypeToSearch = 'Event';}
@@ -218,13 +289,16 @@ public without sharing virtual class ContentUtils {
         return contentTypeToSearch;
     }
 
-    // Place for components
+    // Image Placement for RT components
     private static String getPlaceForRTComponent(String componentRT){
+        
         String contentPlaceToSearch = '';
         if(componentRT == 'Banner'){contentPlaceToSearch = 'BannerImage';}
+        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImageList';}
         else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
         else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
         else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
+        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImageList';}
         else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
         return contentPlaceToSearch;
     }

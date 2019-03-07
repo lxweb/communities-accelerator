@@ -15,9 +15,9 @@ public class MediaElementsManagerControllerTest {
 		List<Content__c> content = MockupFactory.createContent('Event', cluster, 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(1);
 
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'icon');
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'small');
-		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'big');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'icon');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'small');
+		insert new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'big');
 		// When
 		Test.startTest();
 		list<MediaElementsManagerController.RecordsWrapper> rw = MediaElementsManagerController.getRecord(content[0].id, 'icon, big', 'Content__c', 'MediaElementAssignment__c');
@@ -34,7 +34,7 @@ public class MediaElementsManagerControllerTest {
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(3);
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '', '5');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '', '5', 'false');
 		Test.stopTest();
 		// Then
 		System.assertEquals(searchedList.size(), medElement.size());
@@ -47,25 +47,32 @@ public class MediaElementsManagerControllerTest {
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(11);
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '0', '15');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '0', '15', 'false');
 		Test.stopTest();
 		// Then
 		System.assertEquals( 2, searchedList.size());
 	}
 	@isTest 
 	static void PA181_CASE_4(){
-		// Comment: Se buscan media element con un paginado, no se filtra 
+		// Comment: Search media element with pagging, without filter
 
 		// Given
+		List<ContentDocument> contentDocument = MockupFactory.createContentDocument('TestCD', 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(11);
+		for(Integer i = 0; i < medElement.size(); i++){
+			medElement[i].FileURLDesktop__c = 'https://test/' + contentDocument[0].id;
+		}
+		medElement[0].FileURLDesktop__c = 'https://test/dsdsd.jpg';
+		update medElement;
+
 		// When
 		Test.startTest();
-		list<MediaElement__c> searchedList = MediaElementsManagerController.getMediaElements ('0', '', '6');
-		list<MediaElement__c> searchedList2 = MediaElementsManagerController.getMediaElements ('6', '', '6');
+		list<MediaElementsManagerController.ContentWrapper> searchedList = MediaElementsManagerController.getData('0', '', '6', 'false');
+		list<MediaElementsManagerController.ContentWrapper> searchedList2 = MediaElementsManagerController.getData('6', '', '6', 'true');
 		Test.stopTest();
 		// Then
-		System.assertEquals( 6, searchedList.size() );
-		System.assertEquals( 5, searchedList2.size() );
+		System.assertEquals(6, searchedList.size());
+		System.assertEquals(2, searchedList2.size());
 	}
 	@isTest 
 	static void PA181_CASE_5(){
@@ -80,10 +87,10 @@ public class MediaElementsManagerControllerTest {
 		MediaElementsManagerController.assignMediaElementToId (content[0].Id, 'icon', 'Content__c','MediaElementAssignment__c', medElement[0].Id);
 		Test.stopTest();
 
-		List<MediaElementAssignment__c> junctionObjectRecord = [SELECT id, Place__c FROM MediaElementAssignment__c WHERE Content__c = :content[0].Id AND MediaElement__c = :medElement[0].Id];
+		List<MediaElementAssignment__c> junctionObjectRecord = [SELECT id, Placement__c FROM MediaElementAssignment__c WHERE Content__c = :content[0].Id AND MediaElement__c = :medElement[0].Id];
 		// Then
 		System.assertEquals( 1, junctionObjectRecord.size());
-		System.assertEquals( 'icon', junctionObjectRecord[0].Place__c);
+		System.assertEquals( 'icon', junctionObjectRecord[0].Placement__c);
 	}
 	@isTest 
 	static void PA181_CASE_6(){
@@ -93,7 +100,7 @@ public class MediaElementsManagerControllerTest {
 		Cluster__c cluster = [SELECT id FROM Cluster__c LIMIT 1];
 		List<Content__c> content = MockupFactory.createContent('Event', cluster, 1);
 		List<MediaElement__c> medElement = MockupFactory.createMediaElement(1);
-		MediaElementAssignment__c junctionObjectRecord = new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Place__c = 'icon');
+		MediaElementAssignment__c junctionObjectRecord = new MediaElementAssignment__c (MediaElement__c = medElement[0].id, Content__c = content[0].id , Placement__c = 'icon');
 		insert junctionObjectRecord;
 		// When
 		Test.startTest();

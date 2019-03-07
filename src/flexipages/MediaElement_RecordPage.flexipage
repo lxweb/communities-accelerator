@@ -58,55 +58,13 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-e9136278-a68e-408c-aece-eac787d43c88</value>
             </componentInstanceProperties>
             <componentName>flexipage:tabset</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>FinalCheck</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <componentInstances>
             <componentName>MediaElementUploader</componentName>
-            <visibilityRule>
-                <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>SetMedia</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>FinalCheck</rightValue>
-                </criteria>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>EQUAL</operator>
-                    <rightValue>Available</rightValue>
-                </criteria>
-            </visibilityRule>
         </componentInstances>
         <mode>Replace</mode>
         <name>header</name>

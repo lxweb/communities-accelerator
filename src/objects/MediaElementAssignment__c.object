@@ -54,18 +54,6 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>Category__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Category</label>
-        <referenceTo>Category__c</referenceTo>
-        <relationshipLabel>Media Element Assignments</relationshipLabel>
-        <relationshipName>MediaElementAssignments</relationshipName>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>Content__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -152,48 +140,27 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Location__c</fullName>
-        <externalId>false</externalId>
-        <label>Location</label>
-        <length>80</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>MediaElement__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Media Element</label>
         <referenceTo>MediaElement__c</referenceTo>
         <relationshipLabel>Media Element Assignments</relationshipLabel>
         <relationshipName>Assignments</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>Place__c</fullName>
+        <fullName>Placement__c</fullName>
         <externalId>false</externalId>
-        <label>Place</label>
+        <label>Placement</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>StatusApprovalProcess__c</fullName>
-        <externalId>false</externalId>
-        <label>Status approval process</label>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>StatusApprovalProcess</valueSetName>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Width__c</fullName>
@@ -230,6 +197,6 @@
         <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

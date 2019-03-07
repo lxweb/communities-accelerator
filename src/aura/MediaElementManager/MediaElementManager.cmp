@@ -61,24 +61,8 @@
 			    		</div>
 						
 						<!-- LIST OF MEDIA ELEMENTS -->
-						
-						<!-- <lightning:icon iconName="utility:image" aura:id="ss01"/> -->
-				    	<aura:if isTrue="{!v.mediaElementPlace != ''}" >
-							<!-- <lightning:tabset selectedTabId="media-element" class="media-element_tabset">
-								<lightning:tab label="Media Element" id="media-element">
-									<lightning:input label="search element"></lightning:input>
-									<div onkeyup="{! c.handleKeyUp }">
-										<lightning:input
-											aura:id="enter-search"
-											name="enter-search"
-											label="Search when user hits the 'enter' key"
-											type="search"
-										/>
-									</div>
-								</lightning:tab>
-							</lightning:tabset> -->
+				    	<aura:if isTrue="{!v.mediaElementPlace != ''}" >					
 					    	<div class="div_mediaSearchSection">
-					    		<!--{!v.mediaElementPlace}-->
 					    		<!-- SEARCH BOX -->
 					    		<input type="text" aura:id="searchField" class="input_search" placeholder="Word to search"/>
 								<lightning:button  aura:id="searchButton" title="Search" onclick="{!c.searchByText}">
@@ -89,19 +73,13 @@
 								<!-- MEDIA ELEMENTS LIST -->
 								<aura:iteration items="{!v.mediaElementList}" var="mediaElement">
 									<div class="div_mediaElementCardContainer">
-										<img src="{!mediaElement.FileURLDesktop__c}" class="img_mediaElementReview"  onclick="{!c.choseMediaElement}" id="{!mediaElement.Id}"/>
+										<img src="{!mediaElement.fileURLDesktop}" class="img_mediaElementReview"  onclick="{!c.choseMediaElement}" id="{!mediaElement.idME}"/>
 										<div class="div_cardTitle">
-											{!mediaElement.Name}
+											{!mediaElement.name}
 										</div>
 									</div>
 								</aura:iteration>
 							</div>
-				    		<aura:if isTrue="{! v.isEndPage }">
-								<!-- NO MORE RECORDS MESSAGE -->
-								<div >
-									<!--{!$Label.c.NoRecordsToShow}--> 
-								</div>
-							</aura:if>
 				    	</aura:if>
 				    </aura:set>
 			    </aura:if>

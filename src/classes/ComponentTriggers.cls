@@ -19,6 +19,9 @@ public with sharing class ComponentTriggers extends TriggersHandler {
         allow_finalLoop_AfterInsert = true;
         allow_finalLoop_AfterUpdate = true;
         allow_finalLoop_BeforeUpdate = true;
+
+        //PA-266 Trigger que elimine los registros generados en Assignment cuando no es master detail
+        allow_masterLoop_BeforeDelete = true;          
     }
     
     /*****************************************************************/
@@ -27,16 +30,22 @@ public with sharing class ComponentTriggers extends TriggersHandler {
     
     //Master loops
     public override void masterLoop_BeforeInsert(SObject recNew) {
+        validateTagCriteria((Component__c)recNew);
         setExternalId((Component__c)recNew);
         customSort((Component__c)recNew, null);
     }
     public override void masterLoop_BeforeUpdate(SObject recNew, SObject recOld) {
+        validateTagCriteria((Component__c)recNew);
         setExternalId((Component__c)recNew);
         customSort((Component__c)recNew, (Component__c)recOld);
         //PA-206 Governance de Componentes(Reparenting)
         errorClusterFieldChange((Component__c)recNew, (Component__c)recOld, true);
     }
 
+    //PA-266
+    public override void masterLoop_BeforeDelete (SObject recOld){
+        setDeleteIdsList((Component__c) recOld);
+    }
 
     //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
@@ -73,10 +82,28 @@ public with sharing class ComponentTriggers extends TriggersHandler {
                 objectIdToMessageErrosMap.put(recordList[0].Id,Label.SharingWithOutReason);
             }
         }
+
+        //PA-266
+        if(!contentAssignmentList.isEmpty()){
+            delete contentAssignmentList;
+        }
+        if(!menuAssignmentList.isEmpty()){
+            delete menuAssignmentList;
+        }
+        if(!tagAssignmentList.isEmpty()){
+            delete tagAssignmentList;
+        }
+        if(!categoryAssignmentList.isEmpty()){
+            delete categoryAssignmentList;
+        }
     }
     
+    //PA-266
+    List<ContentAssignment__c> contentAssignmentList = new List<ContentAssignment__c>();
+    List<MenuAssignment__c> menuAssignmentList = new List<MenuAssignment__c>();
+    List<TagAssignment__c> tagAssignmentList = new List<TagAssignment__c>();
+    List<CategoryAssignment__c> categoryAssignmentList = new List<CategoryAssignment__c>();   
     public override void dataPreparing() {
-
 
         //PA-177 CMA: Clustering: Apex Sharing
         if(!recordList.isEmpty() && excecuteTrigger){
@@ -105,6 +132,14 @@ public with sharing class ComponentTriggers extends TriggersHandler {
                 componentIdsWithAssignment.add(tagList.Component__r.Id);    
             }
         }
+
+        //PA-266
+        if(!deleteIdsList.isEmpty()){
+            contentAssignmentList = [SELECT ID FROM ContentAssignment__c WHERE Component__c  in : deleteIdsList];
+            menuAssignmentList = [SELECT ID FROM MenuAssignment__c WHERE Component__c  in : deleteIdsList];
+            tagAssignmentList = [SELECT ID FROM TagAssignment__c WHERE Component__c in : deleteIdsList];
+            categoryAssignmentList = [SELECT ID FROM CategoryAssignment__c WHERE Component__c in : deleteIdsList];
+        }
         
     }
 
@@ -121,6 +156,19 @@ public with sharing class ComponentTriggers extends TriggersHandler {
             recNew.ExternalID__c = GeneralUtils.generateExternalId(recNew.Name);
         }
     }
+
+    private void validateTagCriteria(Component__c recNew){
+        if(!canMethod('validateTagCriteria')){return;}
+
+        if(recNew.TagCriteria__c != null){
+            String value = recNew.TagCriteria__c.deleteWhitespace().toUpperCase().replaceAll('AND', ' AND ').replaceAll('OR', ' OR ');
+            value = value.replaceAll('\\d', 'TRUE');
+            if(value.replaceAll('TRUE|\\(|\\)|AND|OR| ', '').length() > 0 || !BooleanExpression.eval(value)){
+                recNew.TagCriteria__c.AddError(Label.General_InvalidFormulaFormat);
+            }
+        }
+    }
+
     private void customSort(Component__c recNew, Component__c recOld){
         if(!canMethod('customSort')){return;}
         
@@ -195,5 +243,9 @@ public with sharing class ComponentTriggers extends TriggersHandler {
 
     }
 
-
+    //PA-266
+    List<String> deleteIdsList = new List<String>(); 
+    private void setDeleteIdsList(Component__c recOld){
+        deleteIdsList.add(recOld.Id);
+    }
 }

@@ -92,24 +92,6 @@
         </componentInstances>
         <componentInstances>
             <componentInstanceProperties>
-                <name>hideUpdateButton</name>
-                <value>false</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>variant</name>
-                <value>linear</value>
-            </componentInstanceProperties>
-            <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
-            <visibilityRule>
-                <criteria>
-                    <leftValue>{!Record.PathStep__c}</leftValue>
-                    <operator>NE</operator>
-                    <rightValue>Confirmation</rightValue>
-                </criteria>
-            </visibilityRule>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
                 <name>tabs</name>
                 <value>Facet-b8900d04-1ce8-430f-8a77-1a9469910d18</value>
             </componentInstanceProperties>

@@ -8,15 +8,6 @@
 		<aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
         	<c:CG_News componentWrapper="{!v.componentWrapper}"/>
 
-	        <aura:set attribute="else">
-	        	<div class="slds-page-header" style="text-align: center;">
-	                <lightning:layout horizontalAlign="left">
-	                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
-	                        <p>No existen News relacionadas</p>
-	                    </lightning:layoutItem>
-	                </lightning:layout>
-	            </div>
-	        </aura:set>
         </aura:if>
     </aura:if>
 

@@ -50,7 +50,6 @@
         <fullName>MediaElement_CompactLayout</fullName>
         <fields>Name</fields>
         <fields>ExternalId__c</fields>
-        <fields>StatusApprovalProcess__c</fields>
         <label>Media Element - Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -232,53 +231,17 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>PathStep__c</fullName>
-        <description>Its field is for path purpouses</description>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
-        <label>Path step</label>
-        <required>false</required>
+        <label>Status</label>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>SetMedia</fullName>
-                    <default>false</default>
-                    <label>Set media</label>
-                </value>
-                <value>
-                    <fullName>FinalCheck</fullName>
-                    <default>false</default>
-                    <label>Final check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
-    </fields>
-    <fields>
-        <fullName>StatusApprovalProcess__c</fullName>
-        <description>Indicates if the media element is available or not in order to be use within different contents.</description>
-        <externalId>false</externalId>
-        <label>Status Approval Process</label>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>StatusApprovalProcess</valueSetName>
+            <valueSetName>Status</valueSetName>
         </valueSet>
     </fields>
     <fields>
@@ -337,59 +300,10 @@
     </fields>
     <label>Media Element</label>
     <listViews>
-        <fullName>All</fullName>
-        <columns>NAME</columns>
-        <columns>DesktopFileExtension__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
         <fullName>All1</fullName>
         <columns>NAME</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
-    </listViews>
-    <listViews>
-        <fullName>Available_Media_Elements</fullName>
-        <columns>NAME</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>PathStep__c</field>
-            <operation>equals</operation>
-            <value>Available</value>
-        </filters>
-        <filters>
-            <field>StatusApprovalProcess__c</field>
-            <operation>equals</operation>
-            <value>Draft,Pending Approval</value>
-        </filters>
-        <label>Available Draft Media Elements</label>
-    </listViews>
-    <listViews>
-        <fullName>Demo_1</fullName>
-        <columns>NAME</columns>
-        <columns>CREATEDBY_USER</columns>
-        <columns>ExternalId__c</columns>
-        <columns>FileURLDesktop__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>demo 1</value>
-        </filters>
-        <label>Demo 1</label>
-    </listViews>
-    <listViews>
-        <fullName>MediaElementsLihue</fullName>
-        <columns>NAME</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>NAME</field>
-            <operation>contains</operation>
-            <value>Lihue</value>
-        </filters>
-        <label>Media elements Lihue</label>
     </listViews>
     <nameField>
         <label>Media Element Name</label>

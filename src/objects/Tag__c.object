@@ -92,34 +92,16 @@
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>PathStep__c</fullName>
-        <description>This field is used for path purposes</description>
+        <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
-        <inlineHelpText>This field is used for path purposes</inlineHelpText>
-        <label>Path Step</label>
-        <required>false</required>
+        <label>Status</label>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Initial</fullName>
-                    <default>true</default>
-                    <label>Initial</label>
-                </value>
-                <value>
-                    <fullName>Final check</fullName>
-                    <default>false</default>
-                    <label>Final check</label>
-                </value>
-                <value>
-                    <fullName>Available</fullName>
-                    <default>false</default>
-                    <label>Available</label>
-                </value>
-            </valueSetDefinition>
+            <valueSetName>Status</valueSetName>
         </valueSet>
     </fields>
     <label>Tag</label>

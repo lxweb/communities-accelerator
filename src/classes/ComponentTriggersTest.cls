@@ -134,4 +134,43 @@ public with sharing class ComponentTriggersTest {
 
 	}
 
+	@isTest 
+	static void deleteBeforeComponentTest(){
+		/* Comment: Comprueba que al eliminar un Content__c se eliminan
+		los assigment correspondientes */
+
+		//Given
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterArg[0]);
+		
+		List<Content__c> contentList = MockupFactory.createContent('Banner', clusterArg[0], 1);
+		List<ContentAssignment__c> contentAssigList = MockupFactory.createContentAssignment(contentList, componentList);
+		
+		List<Menu__c> menuList = MockupFactory.createMenu('menuName', 1, clusterArg[0].id);
+		List<MenuAssignment__c> menuAssigList = MockupFactory.createMenuAssignment(menuList, componentList);
+
+		List<Tag__c> tagList = MockupFactory.createTag('TestTag', 'description', 1, clusterArg[0].id);
+		List<TagAssignment__c> tagAssigList =  MockupFactory.createTagAssignment(tagList, componentList, contentList);
+
+		List<Category__c> categoryList = MockupFactory.createCategory('catName', 1, clusterArg[0].id);
+		List<CategoryAssignment__c> categoryAssigList = MockupFactory.createCategoryAssignment(categoryList, componentList);
+
+		//When
+		Test.startTest();
+		delete componentList;
+		Test.stopTest();
+
+		//Then
+        List<ContentAssignment__c> contentAssignResultList = [SELECT ID FROM ContentAssignment__c WHERE id = : contentAssigList[0].id];
+        List<MenuAssignment__c> menuAssignResultList = [SELECT ID FROM MenuAssignment__c WHERE id = :  menuAssigList[0].id];  
+        List<TagAssignment__c> tagAssignResultList = [SELECT ID FROM TagAssignment__c WHERE id = : tagAssigList[0].id];
+		List<CategoryAssignment__c> categoryAssignResultList = [SELECT ID FROM CategoryAssignment__c WHERE id = : categoryAssigList[0].id];
+
+		System.Assert(contentAssignResultList.isEmpty());
+		System.Assert(menuAssignResultList.isEmpty());
+		System.Assert(tagAssignResultList.isEmpty());
+		System.Assert(categoryAssignResultList.isEmpty());
+	}
+
 }

@@ -6,7 +6,47 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>AcceleratorSettingWrongField</shortDescription>
-        <value>El campo seleccionado en custom settings &quot;Accelerator Settings&quot; es incorrecto</value>
+        <value>The selected field at custom settings &quot;Accelerator Settings&quot; is incorrect.</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsFeaturing</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Featuring</shortDescription>
+        <value>Featuring</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsIngredients</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Ingredients</shortDescription>
+        <value>INGREDIENTS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsRelatedTags</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Related Tags</shortDescription>
+        <value>Related Tags</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsInstructions</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Instructions</shortDescription>
+        <value>INSTRUCTIONS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsTitle</fullName>
+        <categories>CG Asset Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AssetDetailsTitle</shortDescription>
+        <value>Asset Details</value>
     </labels>
     <labels>
         <fullName>CannotReassignComponent</fullName>
@@ -14,7 +54,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>CannotReassignComponent</shortDescription>
-        <value>El Componente tiene asociado al menos un Contenido, Tag y/o Categoria y por ese motivo no puede reasignarse. Elimine todas las asociaciones del mismo antes de intentar reasignarlo a otro Cluster</value>
+        <value>The Component has associated at least one Content, Label and/or Category and for that reason can not be reassigned. Remove all associations from it before attempting to reassign it to another Cluster.</value>
     </labels>
     <labels>
         <fullName>ClusterDoesntHaveRequiredGroups</fullName>
@@ -41,12 +81,164 @@
         <value>Please complete the component attribute &quot;Component External Id&quot; with a valid value</value>
     </labels>
     <labels>
+        <fullName>ContentDetailContent</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailContent</shortDescription>
+        <value>CONTENT</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailCreatedBy</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Created By</shortDescription>
+        <value>Created By:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailDraft</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Draft</shortDescription>
+        <value>Draft</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailLastSave</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Last Save</shortDescription>
+        <value>Last Save:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailNever</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Never</shortDescription>
+        <value>Never</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailNew</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail New</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPublicationStatus</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Publication Status</shortDescription>
+        <value>Publication Status:</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPublish</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Publish</shortDescription>
+        <value>Publish</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailSaveDraft</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Save Draft</shortDescription>
+        <value>Save Draft</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailUnpublish</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Unpublish</shortDescription>
+        <value>Unpublish</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingAll</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing All Tab label</shortDescription>
+        <value>All</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingCategory</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Content Landing Category Lable</shortDescription>
+        <value>Category</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingCluster</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Content Landing Cluster Lable</shortDescription>
+        <value>Cluster</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNew</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing New Content button label</shortDescription>
+        <value>New Content</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingContentType</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingContentType</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingTags</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Content Landing Tags Lable</shortDescription>
+        <value>Tags</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingTemplate</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Create Template button label</shortDescription>
+        <value>Create Template</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNone</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingNone</shortDescription>
+        <value>None</value>
+    </labels>
+    <labels>
         <fullName>Desktop</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Desktop</shortDescription>
         <value>Desktop</value>
+    </labels>
+    <labels>
+        <fullName>DuplicateItem</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Duplicate Item</shortDescription>
+        <value>The item you added is already present in the cart</value>
     </labels>
     <labels>
         <fullName>ExistByDefaultLanguage</fullName>
@@ -73,6 +265,14 @@
         <value>Are you sure?</value>
     </labels>
     <labels>
+        <fullName>General_Next</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
         <fullName>General_Cancel</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -89,6 +289,14 @@
         <value>Delete</value>
     </labels>
     <labels>
+        <fullName>General_Close</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Close</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
         <fullName>General_Edit</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -103,6 +311,14 @@
         <protected>false</protected>
         <shortDescription>General_Error</shortDescription>
         <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>General_InvalidFormulaFormat</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid formula format</shortDescription>
+        <value>The formula can only has numbers, parentesis, AND, OR. Example: (1 AND 2) OR 3</value>
     </labels>
     <labels>
         <fullName>General_Order</fullName>
@@ -185,6 +401,14 @@
         <value>No content found</value>
     </labels>
     <labels>
+        <fullName>GlobalSearchOrder</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Order</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
         <fullName>GlobalSearchPlaceholder</fullName>
         <categories>Global Search</categories>
         <language>en_US</language>
@@ -199,6 +423,14 @@
         <protected>true</protected>
         <shortDescription>Global Search Results</shortDescription>
         <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>GlobalSearchTags</fullName>
+        <categories>Global Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Global Search Tags</shortDescription>
+        <value>TAGS</value>
     </labels>
     <labels>
         <fullName>GlobalSearchWrongField</fullName>
@@ -233,6 +465,22 @@
         <value>Image Uploader</value>
     </labels>
     <labels>
+        <fullName>IncorrectExternalId</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IncorrectExternalId</shortDescription>
+        <value>External Id does not belong to a compatible object or record type. Enter the External Id of the record you want to link to this component</value>
+    </labels>
+    <labels>
+        <fullName>ItemWasAdded</fullName>
+        <categories>CG_ContentTools</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Item was added</shortDescription>
+        <value>Your item was added Successfully!</value>
+    </labels>
+    <labels>
         <fullName>Language</fullName>
         <categories>TranslationComponent.cmp</categories>
         <language>en_US</language>
@@ -247,6 +495,30 @@
         <protected>true</protected>
         <shortDescription>Mobile</shortDescription>
         <value>Mobile</value>
+    </labels>
+    <labels>
+        <fullName>ModalRecordTypeTitle</fullName>
+        <categories>Modal Record Type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modal record type selection title</shortDescription>
+        <value>New {0}</value>
+    </labels>
+    <labels>
+        <fullName>ModalRecordTypeLabel</fullName>
+        <categories>Modal Record Type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modal record type radio buttons lable</shortDescription>
+        <value>Select a record type</value>
+    </labels>
+    <labels>
+        <fullName>NoClusterSelected</fullName>
+        <categories>CG_BaseComponent.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>The cookie associated with the cluster don&apos;t have any value.</value>
     </labels>
     <labels>
         <fullName>NoRecordsSelected</fullName>
@@ -289,6 +561,30 @@
         <value>Tag name already exist in cluster branch</value>
     </labels>
     <labels>
+        <fullName>SearchContentTagFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of tag filter in search content page</shortDescription>
+        <value>Tags</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentTypeFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of content type filter in search content page</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
+        <fullName>SearchPlaceholder</fullName>
+        <categories>Search</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Search Placeholder</shortDescription>
+        <value>Search...</value>
+    </labels>
+    <labels>
         <fullName>SelectLanguage</fullName>
         <categories>TranslationComponent.cmp</categories>
         <language>en_US</language>
@@ -327,5 +623,101 @@
         <protected>false</protected>
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
+    </labels>
+    <labels>
+        <fullName>AddMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AddMediaElement</shortDescription>
+        <value>Add Media</value>
+    </labels>
+    <labels>
+        <fullName>SelectMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SelectMediaElement</shortDescription>
+        <value>Select Media Element</value>
+    </labels>
+	<labels>
+        <fullName>NewsContentDetailError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while saving a news content</shortDescription>
+        <value>There was an error while saving.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExternalId</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ExternalId__c field</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExtract</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description__c field</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailLoadError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while loading content detail</shortDescription>
+        <value>Error while loading content.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailRequiredField</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>All required fields must be completed.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitle</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListTitle__c field</shortDescription>
+        <value>List Title</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailBody</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListDescription__c field</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailImage</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Feature image</shortDescription>
+        <value>Feature Image</value>
+    </labels>
+	<labels>
+	<fullName>SearchContentCategoryFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of category filter in search content page</shortDescription>
+        <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentClusterFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of cluster filter in search content page</shortDescription>
+        <value>Cluster</value>
     </labels>
 </CustomLabels>

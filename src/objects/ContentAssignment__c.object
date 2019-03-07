@@ -55,15 +55,15 @@
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>Component__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Component</label>
         <referenceTo>Component__c</referenceTo>
+        <relationshipLabel>Content Assignment</relationshipLabel>
         <relationshipName>ComponentContentAssignment</relationshipName>
-        <relationshipOrder>1</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Content__c</fullName>
@@ -89,16 +89,16 @@
         <unique>true</unique>
     </fields>
     <fields>
-        <fullName>StatusApprovalProcess__c</fullName>
+        <fullName>Order__c</fullName>
+        <description>It&apos;s the numeric field to do a manual order.</description>
         <externalId>false</externalId>
-        <label>Status approval process</label>
+        <label>Order</label>
+        <precision>18</precision>
         <required>false</required>
+        <scale>0</scale>
         <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>StatusApprovalProcess</valueSetName>
-        </valueSet>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <label>Content Assignment</label>
     <listViews>

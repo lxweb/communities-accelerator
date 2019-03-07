@@ -1,9 +1,9 @@
 ({
     getCluster: function (component, helper) {
-       
         var action = component.get("c.getClusterRoot");
+        component.set('v.isLivePreview', String(window.location.href).includes('livepreview.') || String(window.location.href).includes('sitestudio.'));
         action.setParams({
-            externalId: component.get("v.clusterExternalID"),
+            externalId: component.get("v.componentExternalId"),
             componentId: component.get("v.componentId")
         });
         action.setCallback(this, function(f){
@@ -56,6 +56,5 @@
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         var expires = "expires="+ d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }    
-    
+    }  
 })

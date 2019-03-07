@@ -153,11 +153,11 @@
         <type>Lookup</type>
     </fields>
     <fields>
-        <fullName>RecordListLayout__c</fullName>
+        <fullName>SearchDetail__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <label>Record List Layout</label>
-        <referenceTo>RecordListLayout__c</referenceTo>
+        <label>Search Detail</label>
+        <referenceTo>SearchDetail__c</referenceTo>
         <relationshipLabel>Translations</relationshipLabel>
         <relationshipName>Translations</relationshipName>
         <required>false</required>

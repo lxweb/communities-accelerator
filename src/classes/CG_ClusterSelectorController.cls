@@ -68,6 +68,7 @@ public with sharing class CG_ClusterSelectorController {
     public static TreeWrapper getClusterRootForComponent(String componentId){
         System.debug('getClusterRootForComponent' + componentId);
         String clusterId = getComponentClusterId(componentId);
+        System.debug('getComponentClusterId' + clusterId);
         Boolean leafOnly=false;
         ClusterUtils.ClusterWrapper clusterWrappper = ClusterUtils.getClustersBelow(clusterId);
         TreeWrapper tree = CG_ClusterSelectorController.getTree(clusterWrappper, leafOnly);     

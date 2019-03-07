@@ -1,0 +1,60 @@
+<aura:component controller="ModalRecordTypeController">
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <aura:method name="show" action="{!c.onShow}" />
+    <aura:method name="hide" action="{!c.onHide}" />
+    
+    <aura:attribute name="sObjectName" 		type="String" />
+    <aura:attribute name="sObjectLabel"     type="String" />
+    <aura:attribute name="rtDevNameList" 	type="List" />
+    <aura:attribute name="options"			type="List" />
+    <aura:attribute name="value"			type="String" />
+    
+        <section aura:id="modalBox" role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="{!$Label.c.General_Close}" onclick="{! c.onHide }">
+                        <lightning:icon iconName="utility:close" alternativeText="{!$Label.c.General_Close}" size="small" />
+                        <span class="slds-assistive-text">{!$Label.c.General_Close}</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                        {! format($Label.c.ModalRecordTypeTitle, v.sObjectLabel)}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <fieldset class="slds-m-left_xx-large slds-m-top_medium slds-form-element">
+                        <table>
+                            <tr><td width="25%">
+                                <legend class="slds-form-element__label gravity-top">{!$Label.c.ModalRecordTypeLabel}</legend></td>
+                                <div class="slds-form-element__control slds-m-top_large">
+                                    <aura:iteration items="{!v.options}" var="type" indexVar="key">
+                                        <span class="slds-radio">
+                                            <input id="{!'radio-'+type.Id}" value="{!type.Id}" name="options" type="radio" onchange="{!c.optionSelected}"/>
+                                            <label class="slds-radio__label" for="{!'radio-'+type.Id}">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label">{!type.Name}</span><br></br>
+                                                <div class="slds-p-left_xx-large">
+                                                <span class="slds-form-element__label">{!type.Description}</span><br></br>
+                                                </div>
+                                                </label>
+                                        </span>
+                                        <br></br> 
+                                    </aura:iteration>
+                                </div>
+                            </tr>
+                        </table>
+                    </fieldset>
+					<!--<lightning:radioGroup name="radioGroupRequired"
+                          label="{!$Label.c.ModalRecordTypeLabel}"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="radio"/>-->
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button label="{!$Label.c.General_Cancel}" title="{!$Label.c.General_Cancel}" onclick="{! c.onHide }"/>
+                    <lightning:button variant="brand" label="{!$Label.c.General_Next}" title="{!$Label.c.General_Next}" onclick="{! c.onNewRecord }" disabled="{! v.value == null}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop" aura:id="modalBackdrop"/>
+</aura:component>

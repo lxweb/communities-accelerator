@@ -1,11 +1,14 @@
-<aura:component access="global" >
+<aura:component access="global" controller="CG_CommunityComponentFrameController" >
     
+    <!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
     <aura:attribute name="componentWrapper" type="Object"/>
 
     <aura:attribute name="contentActivated" type="Boolean" default="false"/>
     <aura:attribute name="isLivePreview" type="Boolean" default="false"/>
     
-    <aura:if isTrue="{!and(v.componentWrapper.isEnabledCommunityEditFrame, not(v.isLivePreview))}">
+    <aura:if isTrue="{!and(or(v.componentWrapper.isEnabledCommunityEditFrame, v.componentWrapper.isEnabledCommunityViewFrame), not(v.isLivePreview))}">
         
         <div id="editFrame">
             <div id="{!v.componentWrapper.component.Id}" onmouseover="{!c.doShowEditFrame}" onmouseout="{!c.doHideEditFrame}" class="mainEditFrame">
@@ -20,13 +23,26 @@
             		{#v.componentWrapper.component.RecordType.DeveloperName + ' - ' + v.componentWrapper.component.Name}
             	</div>
 
-            	<!-- Buttons -->
+                <!-- Buttons -->
                 <div class="buttonsPanel hidden">
                     <lightning:buttonIcon iconName="utility:settings" class="buttonsPanelIcons" title="View Component" alternativeText="component" onclick="{!c.doViewComponent}" size="medium"/>
-                    <aura:if isTrue="{#v.componentWrapper.contentWrapper.length > 0}">
+
+                    <aura:if isTrue="{!v.componentWrapper.isEnabledCommunityEditFrame}">
+
+                        <aura:if isTrue="{!or(
+                            and(v.componentWrapper.component.RecordType.DeveloperName == 'AdvanceContent',
+                                or(v.componentWrapper.contentWrapper == null, 0 >= v.componentWrapper.contentWrapper.length)),
+                            v.componentWrapper.component.RecordType.DeveloperName != 'AdvanceContent')}">
+
+                            <lightning:buttonIcon iconName="utility:insert_template" class="buttonsPanelIcons" title="Add content" alternativeText="Add content" onclick="{!c.doNewContent}" size="medium"/>
+                        </aura:if>
+                        
+                    </aura:if>
+
+                    <aura:if isTrue="{!v.componentWrapper.contentWrapper.length > 0}">
                         <lightning:buttonIcon iconName="utility:image" class="buttonsPanelIcons" title="View Content" alternativeText="content" onclick="{!c.doViewContent}" size="medium"/>
                     </aura:if>
-            	</div>
+                </div>
 
                 <!-- Related Content -->
                 <aura:if isTrue="{#v.componentWrapper.contentWrapper.length > 0}">
