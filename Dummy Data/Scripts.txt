@@ -18,6 +18,9 @@ delete [SELECT Id FROM TagAssignment__c];
 delete [SELECT Id FROM Translation__c];
 delete [SELECT Id FROM SearchDetail__c];
 delete [SELECT Id From Group WHERE Type='Regular' and DoesIncludeBosses=false and (Name LIKE '%_RW%' or Name LIKE '%_RO%')];
+delete [SELECT Id FROM Recipe__c];
+delete [SELECT Id FROM RecipeStep__c];
+delete [SELECT Id FROM RecipeIngredient__c];
 
 //Insertar dummy data
 ORGInitUtils.upsertDummyData();

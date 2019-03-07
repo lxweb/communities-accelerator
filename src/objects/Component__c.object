@@ -2220,45 +2220,21 @@
         <picklistValues>
             <picklist>Datasource__c</picklist>
             <values>
-                <fullName>All Events</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>All News</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Categories</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ManualAssignment</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentComponentBehaviour</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentContentCategories</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentContentTags</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>ParentContentTagsCategories</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Tags</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>TagsCategories</fullName>
-                <default>false</default>
-            </values>
+				<fullName>Brands</fullName>
+				<default>false</default>
+			</values>
+			<values>
+				<fullName>Brand Variants</fullName>
+				<default>false</default>
+			</values>
+			<values>
+				<fullName>Assets</fullName>
+				<default>false</default>
+			</values>
+			<values>
+				<fullName>Assets Related to Assets</fullName>
+				<default>false</default>
+			</values>
         </picklistValues>
         <picklistValues>
             <picklist>Direction__c</picklist>
@@ -2337,31 +2313,11 @@
         <picklistValues>
             <picklist>OrderBy__c</picklist>
             <values>
-                <fullName>Category%5F%5Fr%2EName ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Category%5F%5Fr%2EName DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>CreatedDate ASC</fullName>
-                <default>true</default>
+                <default>false</default>
             </values>
             <values>
                 <fullName>CreatedDate DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Custom Sorting</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>EventStartDate%5F%5Fc ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>EventStartDate%5F%5Fc DESC</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2370,22 +2326,6 @@
             </values>
             <values>
                 <fullName>ListTitle%5F%5Fc DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Name ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Name DESC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>PublishStartDate%5F%5Fc ASC</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>PublishStartDate%5F%5Fc DESC</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

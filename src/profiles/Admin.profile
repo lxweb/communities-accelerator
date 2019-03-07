@@ -5,6 +5,16 @@
         <field>Recipe__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Cluster__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.Content__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.ExternalId__c</field>
@@ -33,6 +43,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.CustomIngredient__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.Brand__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
+        <editable>true</editable>
+        <field>RecipeIngredient__c.BrandVariant__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

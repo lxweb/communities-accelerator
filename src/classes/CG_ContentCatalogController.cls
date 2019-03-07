@@ -48,6 +48,7 @@ public with sharing class CG_ContentCatalogController {
 		//Armo el wrapper de retorno
 		CatalogWrapper catalogWrapper = new CatalogWrapper();
 		catalogWrapper.component = new Component__c(
+			
 			Id = component.Id,
 			PageSize__c = component.PageSize__c, 
 			ShowFilters__c = component.ShowFilters__c,
@@ -118,29 +119,42 @@ public with sharing class CG_ContentCatalogController {
 
 		}
 
+		Integer brandTotal = CatalogWrapper.brands.size();
 		//Query Content
-		for(QueryContentWrapper qcw: getContentWrapper(setContentIds, orderBy, Integer.valueOf(component.PageSize__c), true, null)){
-			
-			//Data used for search(Filter side panel)
-			catalogWrapper.allContentSearchWrapper.add(qcw.csw);	
-			
-			//Elements shown as cards/Lines
-			if(qcw.cw != null){catalogWrapper.contentWrapper.add(qcw.cw);}
+		if(component.Mode__c == 'Mini'){
+			for(QueryContentWrapper qcw: getContentWrapper(setContentIds, orderBy, Integer.valueOf(component.PageSize__c), true, Integer.valueOf(component.PageSize__c))){
+				
+				//Data used for search(Filter side panel)
+				catalogWrapper.allContentSearchWrapper.add(qcw.csw);	
+				
+				//Elements shown as cards/Lines
+				if(qcw.cw != null){catalogWrapper.contentWrapper.add(qcw.cw);}
+			}
 		}
-		
+		if(component.Mode__c == 'Full'){
+			for(QueryContentWrapper qcw: getContentWrapper(setContentIds, orderBy, Integer.valueOf(component.PageSize__c), true, brandTotal)){
+			
+				catalogWrapper.allContentSearchWrapper.add(qcw.csw);	
+	
+				if(qcw.cw != null){catalogWrapper.contentWrapper.add(qcw.cw);}
+			}	
+		}
+	
 		return catalogWrapper;
 	}
 
 	@auraEnabled
 	public static List<ContentWrapper> getNextContent(List<String> contentIds, String orderBy){
 		List<ContentWrapper> wrapper = new List<ContentWrapper>();
+		
 		set<Id> setContentIds = new set<Id>();
 		for(String i: contentIds){
 			setContentIds.add(i);
 		}
-		for(QueryContentWrapper qcw: getContentWrapper(setContentIds, orderBy, contentIds.size(), false, 4)){
+
+		for(QueryContentWrapper qcw: getContentWrapper(setContentIds, orderBy, contentIds.size(), false, setContentIds.size())){
 			wrapper.add(qcw.cw);
-		}
+		}		
 		return wrapper;
 	}
     
@@ -152,7 +166,8 @@ public with sharing class CG_ContentCatalogController {
 		queryContent += 'SELECT Id, Name, ListTitle__c, Category__r.Name, Category__c, RecordType.DeveloperName, Description__c, LinkDetail__r.URL__c ';
 		queryContent += 'FROM Content__c ';
 		queryContent += 'WHERE Id IN: setContentIds AND ListTitle__c != \'' + '' + '\' ';
-		queryContent += 'ORDER BY ' + orderBy ;	
+		queryContent += 'ORDER BY ' + orderBy ;
+		queryContent += '\' '+ queryLimit != null ? (' LIMIT ' + String.ValueOf(queryLimit)) : ''; 	
 
 		//Search Properties	
 		for(Content__c content: Database.query(queryContent)){
