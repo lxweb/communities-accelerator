@@ -1,4 +1,3 @@
-<design:component>
-	<design:attribute label="Component" 				name="componentExtId" 	datasource="apex://SearchComponentPicklist"	/>
-	
+<design:component label="CG Search">
+	<design:attribute label="Component" name="componentExtId" datasource="apex://SearchComponentPicklist"	/>
 </design:component>
