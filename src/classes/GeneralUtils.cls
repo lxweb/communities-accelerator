@@ -1,27 +1,27 @@
 public class GeneralUtils{
 
-	public static String generateExternalId(String name, String clusterID){
-		String apiName = name.deleteWhitespace();
-		// Alternativa: '[|,|.|\\,||"||:|~|!|@|#|$|%|^|&|*|°|-|+|=|<|>|?|\\(|\\)|\\{|\\}|\\;|\\\'"]'s
-		apiName = apiName.replaceAll('[^a-zA-Z0-9]', '_');
+    public static String generateExternalId(String name, String clusterID){
+        String apiName = name.deleteWhitespace();
+        // Alternativa: '[|,|.|\\,||"||:|~|!|@|#|$|%|^|&|*|°|-|+|=|<|>|?|\\(|\\)|\\{|\\}|\\;|\\\'"]'s
+        apiName = apiName.replaceAll('[^a-zA-Z0-9]', '_');
 
-		if (clusterID == null){
-			return apiName;
-		} else {
+        if (clusterID == null){
+            return apiName;
+        } else {
             if (Pattern.compile( '[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}' ).matcher(clusterID).matches() ){
                 Cluster__c cluster = [SELECT Id, name FROM Cluster__c WHERE Id =: clusterID];
                 clusterID = cluster.name;
                 clusterID.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_');
             }
         }
-		return clusterID + '_' + apiName;
+        return clusterID + '_' + apiName;
         //Test
-	}
+    }
 
-	public static String generateExternalId(String name){
-		String stringToReturn = generateExternalId(name, null);
-		return stringToReturn;	
-	}
+    public static String generateExternalId(String name){
+        String stringToReturn = generateExternalId(name, null);
+        return stringToReturn;  
+    }
 
     public static String joinFields(List<String> listToJoin){
         set<String> finalset = new set<String>();
@@ -37,7 +37,7 @@ public class GeneralUtils{
         return String.join((Iterable<String>)finalset, ', ');
     }
 
-	public static String replaceDynamicFields(String originalText, String objectApiName, Id recordId, Boolean addQuotes){
+    public static String replaceDynamicFields(String originalText, String objectApiName, Id recordId, Boolean addQuotes){
         if(originalText != null && objectApiName != null && recordId != null){
             objectApiName = objectApiName.toLowerCase();
 
@@ -76,7 +76,7 @@ public class GeneralUtils{
         return originalText;
     }
 
-	public static Object getFieldValue(SObject record, String fieldPath){
+    public static Object getFieldValue(SObject record, String fieldPath){
         SObject recordAux = record;
         while(fieldPath.contains('.')){
             String fieldAux = fieldPath.substring(0, fieldPath.indexOf('.'));
@@ -188,4 +188,14 @@ public class GeneralUtils{
         return mapGroupKeyAndGroupType;
     }
 
+    public static Set<String> getObjectFieldNames(String objectApiName){
+        Set<String> fieldNames = new Set<String>();
+        Map<String, Schema.SObjectType> gd = Schema.getGlobalDescribe(); 
+        Schema.SObjectType ctype = gd.get(objectApiName); 
+        Map<String, Schema.SobjectField> fmap = ctype.getDescribe().fields.getMap();
+        for(Schema.sObjectField field : fmap.values()){
+            fieldNames.add(field.getDescribe().getName());
+        }
+        return fieldNames;
+    }
 }

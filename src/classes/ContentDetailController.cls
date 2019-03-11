@@ -1,15 +1,17 @@
-public class ContentDetailController {
+public with sharing class ContentDetailController {
 
     //DATA WRAPPER
     public class DataWrapper{
         @auraEnabled public Content__c content;
         @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
         @auraEnabled public String currentUserName;
+        @auraEnabled public String behaviourMessage;
         
-        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName){
+        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName, String behaviourMessage){
             this.content = content;
             this.visibilitySelectors = visibilitySelectors;
             this.currentUserName = currentUserName;
+            this.behaviourMessage = behaviourMessage;
         }
     }
 
@@ -54,17 +56,63 @@ public class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), null);
         return data;
-
     }
 
     @AuraEnabled
-    public static DataWrapper getDataNew(String contentRecordTypeId){
+    public static String getBehaviourMessage(String recordId, String componentId){
+        //Get DataSource
+        Component__c component = [SELECT Id, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
+        String dataSource = component.dataSource__c;
+        //Get records related to DataSource
+        String behaviourMessage;
+        if(dataSource == 'ManualAssignment'){
+            behaviourMessage = Label.ComponentBehaviourManualAssignment;
+        }
+        if(dataSource == 'Tags'){
+            behaviourMessage = getTagsMessage(component);
+        }
+        if(dataSource == 'Categories'){
+            behaviourMessage = getCategoriesMessage(component);
+        }
+        if(dataSource == 'TagsCategories'){            
+            behaviourMessage = getTagsMessage(component) + '\n\n';
+            behaviourMessage += getCategoriesMessage(component);
+        }
+        // Build Message
+        return behaviourMessage;
+    }
+
+    public static String getTagsMessage(Component__c component){
+        String behaviourMessage;
+        behaviourMessage = Label.ComponentBehaviourTags + '\n';
+        List<TagAssignment__c> tagAssignments = [SELECT Id, Tag__c, Tag__r.Name, Order__c FROM TagAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
+        for(TagAssignment__c tagAssignment : tagAssignments){
+            behaviourMessage += '\n' + tagAssignment.Order__c + '. ' + tagAssignment.Tag__r.Name;
+        }
+        behaviourMessage += '\n\n Tag criteria: ' + component.TagCriteria__c;
+        return behaviourMessage;
+    }
+
+    public static String getCategoriesMessage(Component__c component){
+        String behaviourMessage;
+        behaviourMessage = Label.ComponentBehaviourCategories + '\n';
+        List<CategoryAssignment__c> categoryAssignments = [SELECT Id, Category__c, Category__r.Name FROM CategoryAssignment__c WHERE Component__c =: component.Id];
+        for(CategoryAssignment__c categoryAssignment : categoryAssignments){
+            behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
+        }
+        return behaviourMessage;
+    }
+
+    @AuraEnabled
+    public static DataWrapper getDataNew(String contentRecordTypeId, String componentId){
         //Gets the entire cluster branch of the current user.
         Set<Id> clusterIds = getClusterBranch();
         //Gets the data from the current content.
         Content__c contentRecord = initializeContentValues(contentRecordTypeId);
+        //Gets the component behaviour message
+        String behaviourMessage = getBehaviourMessage(contentRecord.Id, componentId);
         //A non allowed record type was passed as url parameter
         if(contentRecord == null){
             return null;
@@ -74,26 +122,30 @@ public class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, new Set<Id>()));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), behaviourMessage);
         return data;
 
     }
 
     @AuraEnabled
-    public static Content__c saveContent(Content__c content, String visibilitySelectorsString, String mediaElementId, String action, List<TagAssignment__c> contentOldTagAssignments){
+    public static Content__c saveContent(String componentId, Content__c content, String visibilitySelectorsString, String mediaElementId, String action, List<TagAssignment__c> contentOldTagAssignments){
         Savepoint sp = Database.setSavepoint();
         try{
-            system.debug('CONTENT' + content);
             List<VisibilitySelectorWrapper> visibilitySelectors = (List<VisibilitySelectorWrapper>)JSON.deserialize(visibilitySelectorsString, List<VisibilitySelectorWrapper>.class);
             content = updateContent(content, visibilitySelectors, action);
             updateTagAssignments(content, getSelectorByApiName(visibilitySelectors, 'Tag__c'), contentOldTagAssignments);
             if(mediaElementId != null)
                 updateMediaElementAssignment(content, mediaElementId);
             
+            String dataSource = [SELECT Id, dataSource__c FROM Component__c WHERE Id =: componentId].dataSource__c;
+            if(dataSource == 'ManualAssignment'){
+                ContentAssignment__c contentAssignment = new ContentAssignment__c(Component__c = componentId, Content__c = content.Id);
+                insert contentAssignment;
+            }
             return content;
         }catch(Exception e){
             Database.rollback(sp);
-            System.debug(e + 'Error during content upsert process, rolling back');
+            System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
             System.debug(e.getStackTraceString());
             return null;
         } 
@@ -177,10 +229,10 @@ public class ContentDetailController {
         content.Category__c = newContentCategory;
         content.Name = content.ListTitle__c;
         if(action == 'Publish'){
-			content.Status__c = 'Published';
-		}else if (action == 'UnPublish' || action == 'Draft'){
-			content.Status__c = 'Draft';
-		}
+            content.Status__c = 'Published';
+        }else if (action == 'UnPublish' || action == 'Draft'){
+            content.Status__c = 'Draft';
+        }
         if(content.id == null)
             insert content;
         else
@@ -198,13 +250,9 @@ public class ContentDetailController {
     }
 
     private static Content__c getContentData(String recordId){
-        Content__c content = [SELECT name, lastModifiedDate, createdBy.name, cluster__c, category__c, 
-                                     ListTitle__c, Description__c, ListDescription__c, Status__c, 
-                                     RecordType.name, ExternalId__c,
-                              (SELECT Tag__c FROM Tags__r),
-                              (SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE '%ImageList') 
-                              FROM Content__c 
-                              WHERE id = :recordId];
+        String contentFields = getContentFields();
+        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.name,' 
+                                            + contentFields + ' FROM Content__c WHERE id = :recordId');
         return content;
     }
 
@@ -276,16 +324,15 @@ public class ContentDetailController {
     private static Content__c initializeContentValues(Id recordTypeId){
         Content__c content = new Content__c();
         RecordType rt = [SELECT id, name, developerName FROM RecordType WHERE Id = :recordTypeId];
-        if(rt.developerName != 'News'){
-            return null;
-        }
-        content.name = '';
-        content.listTitle__c = '';
-        content.description__c = '';
-        content.listDescription__c = '';
-        content.ExternalId__c = '';
         content.recordTypeId = recordTypeId;
         content.recordType = rt;
         return content;
+    }
+
+    private static String getContentFields(){
+        String commaSeparatedFields = '';
+        Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
+        commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
+        return commaSeparatedFields;
     }
 }
