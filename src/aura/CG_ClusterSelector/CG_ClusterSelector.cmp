@@ -19,11 +19,11 @@
             <a class="{!v.tree.leafOnly? 'slds-tree__item-label unclickable-span':'slds-tree__item-label'}" data-clusterId="{!v.tree.name}" data-clustertype="{!v.tree.clustertype}" data-clusterLanding="{!v.tree.clusterLanding}" onclick="{!c.doOnclick}">
                 <h4 class="slds-text-title_caps" id="treeheading">{!v.tree.label}</h4>
             </a>
-            <div class="slds-grid">
+            <div class="slds-grid slds-wrap">
 
                 <aura:iteration items="{!v.tree.items}" var="item">
                     
-                    <div class="slds-col">
+                    <div class="slds-col slds-small-size_12-of-12 slds-large-size_4-of-12 slds-medium-size_6-of-12">
                         
                         <ul class="slds-tree" role="tree" aria-labelledby="treeheading">
                             <li aura:id="{!item.name}" role="treeitem" aria-level="1" aria-expanded="true" aria-label="{!item.label}">
