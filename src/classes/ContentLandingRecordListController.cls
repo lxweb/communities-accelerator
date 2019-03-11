@@ -8,11 +8,13 @@ public class ContentLandingRecordListController {
 		public String title;
 		public List<String> columnSet;
 		public List<ContentWrapper> contentWrappers;
+		public String message;
 		// Wrapper para enviar el título, las columnas y los registros que componen la tabla
 		public TableWrapper(String title, List<String> columnSet, List<ContentWrapper> contentWrappers){
 			this.title = title;
 			this.columnSet = columnSet;
 			this.contentWrappers = contentWrappers;
+			this.message = System.Label.NoRecordsToShow;
 		}	
 	}
 
@@ -44,7 +46,7 @@ public class ContentLandingRecordListController {
 		String searchText;
 		// Wrapper para agrupar los criterios de filtro recibidos
 		FilterWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
-            this.contentTypeName = contentTypeId != null ? [SELECT Id, Name FROM RecordType WHERE SObjectType = 'Content__c' AND Id =: contentTypeId LIMIT 1].Name : 'Recent';
+            this.contentTypeName = contentTypeId != null ? [SELECT Id, Name FROM RecordType WHERE SObjectType = 'Content__c' AND Id =: contentTypeId LIMIT 1].Name : 'Last Modified';
 			this.contentTypeId = contentTypeId;
 			this.clusterId = clusterId;
 			this.categoryId = categoryId;
@@ -87,7 +89,7 @@ public class ContentLandingRecordListController {
 		}
 		// Si no hay registros, mostramos un mensaje de error
 		if(contents.isEmpty()){
-			tableWrapper = new TableWrapper(System.Label.NoRecordsToShow, null, null);
+			tableWrapper = new TableWrapper(null, null, null);
 		}
 		// El Wrapper es enviado al componente en forma de JSON
 		return tableWrapper;
