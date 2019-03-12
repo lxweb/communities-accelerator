@@ -10,11 +10,11 @@
     <br />
     <br />
     <lightning:input label="{!$Label.c.FAQContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
-    <lightning:input label="{!$Label.c.FAQContentDetailTitle}" name="contentName" value="{!v.contentData.ListTitle__c}" required="true" aura:id="contentName"/>
+    <lightning:input label="{!$Label.c.FAQContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
     <br />
 
     <ui:outputText value="{!$Label.c.FAQContentDetailBody}"/>
-    <c:richTextContainer contentBody="{!v.contentData.ListDescription__c}" />
+    <c:richTextContainer contentBody="{!v.contentData.Body__c}" />
     <ui:outputText value="{!$Label.c.FAQContentDetailImage}"/><br />
     <c:MediaElementSearcher />
     <aura:if isTrue="{!v.imageUrl}">
