@@ -175,7 +175,7 @@ public class ContentDetailController {
         }
         content.Cluster__c = newContentCluster;
         content.Category__c = newContentCategory;
-        content.Name = content.ListTitle__c;
+        content.Name = content.Title__c;
         if(action == 'Publish'){
 			content.Status__c = 'Published';
 		}else if (action == 'UnPublish' || action == 'Draft'){
@@ -199,7 +199,7 @@ public class ContentDetailController {
 
     private static Content__c getContentData(String recordId){
         Content__c content = [SELECT name, lastModifiedDate, createdBy.name, cluster__c, category__c, 
-                                     ListTitle__c, Description__c, ListDescription__c, Status__c, 
+                                     Title__c, Description__c, Extract__c, Status__c, Body__c,  
                                      RecordType.name, ExternalId__c,
                               (SELECT Tag__c FROM Tags__r),
                               (SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE '%ImageList') 
@@ -280,12 +280,13 @@ public class ContentDetailController {
             return null;
         }
         content.name = '';
-        content.listTitle__c = '';
+        content.Title__c = '';
         content.description__c = '';
-        content.listDescription__c = '';
+        content.Extract__c = '';
         content.ExternalId__c = '';
         content.recordTypeId = recordTypeId;
         content.recordType = rt;
         return content;
     }
+    
 }
