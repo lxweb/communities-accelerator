@@ -11,7 +11,7 @@
         <componentInstances>
             <componentInstanceProperties>
                 <name>fieldSet</name>
-                <value>ListTitle__c, ListDescription__c, ButtonLabel__c</value>
+                <value>Title__c , Extract__c, ButtonLabel__c</value>
             </componentInstanceProperties>
             <componentInstanceProperties>
                 <name>parentLookupName</name>

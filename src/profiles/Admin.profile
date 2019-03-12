@@ -625,14 +625,18 @@
         <field>Content__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
+	<fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.DetailDescription__c</field>
+        <field>Content__c.Title__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
+	    <editable>true</editable>
+        <field>Content__c.Extract__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+	<fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.DetailTitle__c</field>
+        <field>Content__c.Body__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -678,16 +682,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Content__c.LinkDetail__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Content__c.ListDescription__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Content__c.ListTitle__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

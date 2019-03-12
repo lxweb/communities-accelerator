@@ -7,7 +7,6 @@
 	<!-- ADVANCE CONTENT COMPONENT -->
 	<aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
 		<div>
-			<h1>{!wrapper.content.DetailTitle__c}</h1>
 			<aura:unescapedHtml value="{!wrapper.content.HTMLContent__c}"/>
 		</div>
 	</aura:iteration>

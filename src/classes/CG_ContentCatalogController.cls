@@ -1,5 +1,4 @@
 public with sharing class CG_ContentCatalogController {
-	
 	//WRAPPERS
     public class CatalogWrapper{
         @auraEnabled public Component__c component;
@@ -88,13 +87,13 @@ public with sharing class CG_ContentCatalogController {
 		if(component.Datasource__c == 'Brands' || component.Datasource__c == 'Brand Variants'){
             
 			//Filtro : Brands
-			List<Brand__c> brandobj = [SELECT BrandContent__c, BrandContent__r.ListTitle__c FROM Brand__c WHERE BrandContent__c != NULL];
+			List<Brand__c> brandobj = [SELECT BrandContent__c, BrandContent__r.Title__c FROM Brand__c WHERE BrandContent__c != NULL];
 			set<String> setBrands = new set<String>();
 			for(Brand__c c2 : brandobj){
 				setContentIds.add(c2.BrandContent__c);
 				if(!setBrands.contains(c2.BrandContent__c)){
 					setBrands.add(c2.BrandContent__c);
-					catalogWrapper.brands.add(c2.BrandContent__r.ListTitle__c);
+					catalogWrapper.brands.add(c2.BrandContent__r.Title__c);
 				}	
 			}
 
@@ -163,9 +162,9 @@ public with sharing class CG_ContentCatalogController {
 
 		//Display Brands
 		String queryContent = '';
-		queryContent += 'SELECT Id, Name, ListTitle__c, Category__r.Name, Category__c, RecordType.DeveloperName, Description__c, LinkDetail__r.URL__c ';
+		queryContent += 'SELECT Id, Name, Title__c, Category__r.Name, Category__c, RecordType.DeveloperName, Description__c, LinkDetail__r.URL__c ';
 		queryContent += 'FROM Content__c ';
-		queryContent += 'WHERE Id IN: setContentIds AND ListTitle__c != \'' + '' + '\' ';
+		queryContent += 'WHERE Id IN: setContentIds AND Title__c != \'' + '' + '\' ';
 		queryContent += 'ORDER BY ' + orderBy ;
 		queryContent += '\' '+ queryLimit != null ? (' LIMIT ' + String.ValueOf(queryLimit)) : ''; 	
 
@@ -175,8 +174,8 @@ public with sharing class CG_ContentCatalogController {
 			if(getSearchWrapper){
 				qcw.csw = new ContentSearchWrapper();
 				qcw.csw.contentId = content.Id;
-		        qcw.csw.searchWords = content.ListTitle__c;
-		        qcw.csw.brand = content.ListTitle__c;
+		        qcw.csw.searchWords = content.Title__c;
+		        qcw.csw.brand = content.Title__c;
 		        qcw.csw.category = content.Category__r.Name;
 		        qcw.csw.tags = '';
 		        for(TagAssignment__c c : [SELECT Tag__r.Name FROM TagAssignment__c WHERE Content__r.RecordType.DeveloperName  = 'BrandDetail' AND Content__r.Name =: content.Name]){
@@ -190,7 +189,7 @@ public with sharing class CG_ContentCatalogController {
                 List<Brand__c> brandsOnly = [SELECT Id, RecordTypeId, Name, BrandContent__c, Description__c FROM Brand__c WHERE BrandContent__c =: content.Id];	
                 for(Brand__c b : brandsOnly){
             		qcw.cw.brand = new Brand__c(Id = b.Id, Name = b.Name, BrandContent__c = b.BrandContent__c, RecordTypeId = b.RecordTypeId);	
-            		qcw.cw.content = new Content__c(Id = content.Id, Description__c = content.Description__c, ListTitle__c = content.ListTitle__c);
+            		qcw.cw.content = new Content__c(Id = content.Id, Description__c = content.Description__c, Title__c = content.Title__c);
                     qcw.cw.brandURL = content.LinkDetail__r.URL__c;
                 }
                 // Load mediaElement images 
@@ -204,4 +203,5 @@ public with sharing class CG_ContentCatalogController {
 		}
 		return wrapper;
 	}
+
 }
