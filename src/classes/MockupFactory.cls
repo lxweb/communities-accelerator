@@ -8,7 +8,9 @@ public class MockupFactory {
             MaxSizeMobile__c = 480, 
             MaxSizeTablet__c = 768,
             ClusterFieldForPublicGroups__c = 'ExternalId__c',
-            ContentLandingColumnFields__c = 'RecordType.Name,Name,Category__r.Name,Status__c');
+            ContentLandingColumnFields__c = 'RecordType.Name,Name,Category__r.Name,Status__c',
+            ContentLandingRecordTypes__c = 'News,Event,Recipe,BrandDetail'
+            );
         insert acceleratorSetting;
     }
     
