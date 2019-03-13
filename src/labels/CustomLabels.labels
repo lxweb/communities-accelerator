@@ -793,6 +793,14 @@
         <value>Sharing with out reason</value>
     </labels>
     <labels>
+        <fullName>StructureContentDescription</fullName>
+        <categories>ModalRecordTypeSelectionHelper.js</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Structure content description</shortDescription>
+        <value>Create advance content, FAQ or banner contents straight from each structure page.</value>
+    </labels>
+    <labels>
         <fullName>Tablet</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
