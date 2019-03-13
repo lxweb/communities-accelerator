@@ -21,7 +21,7 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListDescription__c field</shortDescription>
+        <shortDescription>Body__c field</shortDescription>
         <value>Body</value>
     </labels>
     <labels>
@@ -45,8 +45,8 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListTitle__c field</shortDescription>
-        <value>List Title</value>
+        <shortDescription>Title__c field</shortDescription>
+        <value>Title</value>
     </labels>
     <labels>
         <fullName>AssetDetailsFeaturing</fullName>
@@ -317,7 +317,7 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListDescription__c field</shortDescription>
+        <shortDescription>Body__c field</shortDescription>
         <value>Body</value>
     </labels>
     <labels>
@@ -341,8 +341,8 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListTitle__c field</shortDescription>
-        <value>List Title</value>
+        <shortDescription>Title__c field</shortDescription>
+        <value>Title</value>
     </labels>
     <labels>
         <fullName>FieldsValues</fullName>
@@ -613,7 +613,7 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListDescription__c field</shortDescription>
+        <shortDescription>Body__c field</shortDescription>
         <value>Body</value>
     </labels>
     <labels>
@@ -669,8 +669,8 @@
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ListTitle__c field</shortDescription>
-        <value>List Title</value>
+        <shortDescription>Title__c field</shortDescription>
+        <value>Title</value>
     </labels>
     <labels>
         <fullName>NoClusterSelected</fullName>

@@ -22,7 +22,7 @@ public class CG_BrandDetailControllerTest {
         brandVariant.BrandContent__c = content.Id;
         update brandVariant;
         content.Description__c = 'DescriptionTest';
-        content.DetailTitle__c = 'DetailTitleTest';
+        content.Title__c = 'TitleTest';
         update content;
 		mediaElement.FileURLDesktop__c = 'FileURLDesktopTest';
 		update mediaElement;
@@ -49,7 +49,7 @@ public class CG_BrandDetailControllerTest {
 		System.assertEquals('FileURLDesktopTest', wrapper.imageBannerURL);
 		System.assertEquals(null, wrapper.imageLogoURL);
 		System.assertEquals(false, wrapper.isVariant);
-		System.assertEquals('DetailTitleTest', wrapper.variants[0].title);
+		System.assertEquals('TitleTest', wrapper.variants[0].title);
 		System.assertEquals('FileURLDesktopTest', wrapper.variants[0].imageURL);
 		System.assertEquals(variant.Id, wrapper.variants[0].Id);
 	}
@@ -68,7 +68,7 @@ public class CG_BrandDetailControllerTest {
 
 		// Then
 		System.assertEquals('DescriptionTest', wrapper.description);
-		System.assertEquals('DetailTitleTest', wrapper.title);
+		System.assertEquals('TitleTest', wrapper.title);
 		System.assertEquals(true, wrapper.isVariant);
 	}
 

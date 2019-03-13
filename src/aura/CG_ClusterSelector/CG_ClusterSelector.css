@@ -8,3 +8,7 @@
     cursor: default;
     text-decoration: none;
 }
+
+.THIS .slds-tree_container {
+    max-width: none;
+}

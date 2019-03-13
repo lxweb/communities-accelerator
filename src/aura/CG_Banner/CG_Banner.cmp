@@ -25,7 +25,7 @@
 				<c:CG_Carousel showTotal="false" seeBullet="{!v.componentWrapper.component.ShowBullets__c}" automaticTransition="{!v.componentWrapper.component.AutomaticTransition__c}" transitionTime="{!v.componentWrapper.component.BannerTransitionTime__c}" loop="{!v.componentWrapper.component.Loop__c}" direction="{!v.componentWrapper.component.Direction__c}" fadeInMode="{!v.componentWrapper.component.BannerType__c == 'Fade'}" heightValue="{!v.heightValue}">
 				    <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
 						<aura:iteration items="{!wrapper.mediaElements}" var="element">
-					    	<c:CG_CarouselItem imgSrc="{!element.FileURLDesktop__c}" imgHref="{!wrapper.content.LinkDetail__r.URL__c}" title="{!wrapper.content.ListTitle__c}" description="{!wrapper.content.ListDescription__c}" buttonLabel="{!wrapper.content.ButtonLabel__c}" overLapLocation="{!wrapper.content.OverlayQuadrant__c}" heightValue="{!v.heightValue}"/> 
+					    	<c:CG_CarouselItem imgSrc="{!element.FileURLDesktop__c}" imgHref="{!wrapper.content.LinkDetail__r.URL__c}" title="{!wrapper.content.Title__c}" description="{!wrapper.content.Extract__c}" buttonLabel="{!wrapper.content.ButtonLabel__c}" overLapLocation="{!wrapper.content.OverlayQuadrant__c}" heightValue="{!v.heightValue}"/> 
 						</aura:iteration>
 					</aura:iteration>
 				</c:CG_Carousel>

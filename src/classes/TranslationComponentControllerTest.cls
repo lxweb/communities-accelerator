@@ -48,7 +48,7 @@ private class TranslationComponentControllerTest {
 	static void saveTranslationTest() {
 		Content__c cont = [SELECT id from Content__c where Cluster__c!=null LIMIT 1];		
 		String parentLookupName = 'Content__c';
-		String fieldSet = 'Description__c, Name,DetailDescription__c';
+		String fieldSet = 'Description__c, Name,Extract__c';
 		TranslationComponentController.RecordsWrapper rw = TranslationComponentController.getLanguages(parentLookupName, fieldSet, cont.id);
 		String queryStr = 'SELECT id FROM ' + parentLookupName + ' LIMIT 1';
 		sObject sobj = Database.query(queryStr);

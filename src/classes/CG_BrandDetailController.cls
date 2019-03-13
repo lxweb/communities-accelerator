@@ -32,11 +32,11 @@ public with sharing class CG_BrandDetailController {
         {   
             bw.showContent = true;
 
-            Brand__c brand = [SELECT Id, Name, BrandContent__c, BrandContent__r.Description__c, BrandContent__r.DetailTitle__c, MasterBrand__c, RecordType.DeveloperName, Description__c FROM Brand__c WHERE id = :brandId];
+            Brand__c brand = [SELECT Id, Name, BrandContent__c, BrandContent__r.Description__c, BrandContent__r.Title__c, MasterBrand__c, RecordType.DeveloperName, Description__c FROM Brand__c WHERE id = :brandId];
             if(brand.RecordType.DeveloperName == 'BrandVariant'){
                 bw.isVariant = true;
                 bw.description = brand.BrandContent__r.Description__c;
-                bw.title = brand.BrandContent__r.DetailTitle__c;
+                bw.title = brand.BrandContent__r.Title__c;
             }
 
             if(brand.RecordType.DeveloperName == 'Brand'){
@@ -53,7 +53,7 @@ public with sharing class CG_BrandDetailController {
                     }
                 }
                 // GET THE RELATEDS 4 BRANDS
-                list<Brand__c> relatedBrands = [SELECT Id, Name, BrandContent__c, BrandContent__r.DetailTitle__c FROM Brand__c WHERE MasterBrand__c =: brand.Id AND RecordType.DeveloperName = 'BrandVariant' ORDER BY LastModifiedDate DESC LIMIT 4];
+                list<Brand__c> relatedBrands = [SELECT Id, Name, BrandContent__c, BrandContent__r.Title__c FROM Brand__c WHERE MasterBrand__c =: brand.Id AND RecordType.DeveloperName = 'BrandVariant' ORDER BY LastModifiedDate DESC LIMIT 4];
                 set<String> relatedBrandsContents = new set<String>();
                 for (Brand__c rb : relatedBrands){
                     relatedBrandsContents.add(rb.BrandContent__c);
@@ -64,7 +64,7 @@ public with sharing class CG_BrandDetailController {
                     VariantWrapper vw = new VariantWrapper();
                     for(MediaElementAssignment__c content : relatedContent){
                         if(b.BrandContent__c == content.Content__c){
-                            vw.title = b.BrandContent__r.DetailTitle__c;
+                            vw.title = b.BrandContent__r.Title__c;
                             vw.imageURL = content.MediaElement__r.FileURLDesktop__c;
                             vw.id = b.Id;
                             if(variants.size() < 4){
