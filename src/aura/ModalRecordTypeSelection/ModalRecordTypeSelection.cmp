@@ -27,7 +27,7 @@
                         <div class="bottom-line">
                         <table>
                             <tr><td width="35%">
-                                <legend class="slds-form-element__label gravity-top">General Contents</legend></td>
+                                <legend class="slds-form-element__label gravity-top">{!$Label.c.GeneralContents}</legend></td>
                                 <div class="slds-form-element__control slds-m-top_large">
                                     <aura:iteration items="{!v.options}" var="type" indexVar="key">
                                         <span class="slds-radio">
@@ -49,7 +49,7 @@
                         <div>
                         <table>
                             <tr><td width="35%">
-                                <legend class="slds-form-element__label gravity-bottom">Structure Content</legend></td>
+                                <legend class="slds-form-element__label gravity-bottom">{!$Label.c.StructureContent}</legend></td>
                                 <div class="slds-form-element__control slds-m-top_large">
                                     <aura:iteration items="{!v.option}" var="type" indexVar="key">
                                         <span class="slds-radio">
