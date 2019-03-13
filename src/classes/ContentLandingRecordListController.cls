@@ -64,10 +64,11 @@ public class ContentLandingRecordListController {
 	}
 
 	public static TableWrapper buildTableWrapper(String contentType, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
-//		FilterWrapper wrapper = mockUpWrapper();
 		FilterWrapper wrapper = new FilterWrapper(contentType, clusterId, categoryId, tagIds, status, searchText);
 		String title = (wrapper.contentTypeName + ' Records').toUpperCase();
-		List<String> columnSet = getColumnSet().split(',');
+		String columnSetString = getColumnSet();
+		if(columnSetString == null || columnSetString == '') return new TableWrapper(null, null, null);
+		List<String> columnSet = columnSetString.split(',');
 		List<String> columnLabelSet = getColumnLabelSet();
 		TableWrapper tableWrapper = new TableWrapper(title, columnLabelSet, new List<ContentWrapper>());
 		List<Content__c> contents = getRecords(wrapper);
