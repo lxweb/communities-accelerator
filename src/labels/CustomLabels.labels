@@ -353,6 +353,14 @@
         <value>Fields Values</value>
     </labels>
     <labels>
+        <fullName>GeneralContents</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>General contents</shortDescription>
+        <value>General Contents</value>
+    </labels>
+    <labels>
         <fullName>General_AreYouSure</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -791,6 +799,14 @@
         <protected>true</protected>
         <shortDescription>SharingWithOutReason</shortDescription>
         <value>Sharing with out reason</value>
+    </labels>
+    <labels>
+        <fullName>StructureContent</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Structure content</shortDescription>
+        <value>Structure Content</value>
     </labels>
     <labels>
         <fullName>StructureContentDescription</fullName>
