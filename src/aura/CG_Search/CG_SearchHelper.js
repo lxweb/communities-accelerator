@@ -52,7 +52,7 @@
 	manageSearchResults : function(component, helper, event, searchedString){
 		var isEnterKey = event.keyCode === 13;
         if (isEnterKey) {
-            helper.getSearchResults(component, queryTerm);
+            helper.getSearchResults(component, searchedString);
         }
 	},
 	getSearchResults: function (component, searchedString) {
