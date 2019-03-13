@@ -57,7 +57,7 @@
 
 	upsertContent : function(component, eventAction){
 		var content = component.get('v.contentData');
-		if(content.ListTitle__c == ''){
+		if(content.Title__c == ''){
 			this.displayErrorMessage($A.get("$Label.c.NewsContentDetailRequiredField"));
 			return;
 		}

@@ -47,8 +47,8 @@ public with sharing class ContentDetailControllerTest {
         //Given
         Component__c component = [SELECT id FROM Component__c LIMIT 1];
         RecordType rt = [SELECT id FROM RecordType WHERE sObjectType = 'Content__c' AND developerName = 'News'];
-        ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
-        dataWrapper.content.listTitle__c = 'testName';
+        ContentDetailController.DataWrapper dataWrapper=  ContentDetailController.getDataNew(rt.Id, component.Id);
+        dataWrapper.content.Title__c = 'testName';
         //When
         Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then
