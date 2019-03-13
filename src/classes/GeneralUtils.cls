@@ -188,4 +188,14 @@ public class GeneralUtils{
         return mapGroupKeyAndGroupType;
     }
 
+    public static Set<String> getObjectFieldNames(String objectApiName){
+        Set<String> fieldNames = new Set<String>();
+        Map<String, Schema.SObjectType> gd = Schema.getGlobalDescribe(); 
+        Schema.SObjectType ctype = gd.get(objectApiName); 
+        Map<String, Schema.SobjectField> fmap = ctype.getDescribe().fields.getMap();
+        for(Schema.sObjectField field : fmap.values()){
+            fieldNames.add(field.getDescribe().getName());
+        }
+        return fieldNames;
+    }
 }

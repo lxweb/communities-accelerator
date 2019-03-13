@@ -9,6 +9,14 @@
         <value>The selected field at custom settings &quot;Accelerator Settings&quot; is incorrect.</value>
     </labels>
     <labels>
+        <fullName>AddMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AddMediaElement</shortDescription>
+        <value>Add Media</value>
+    </labels>
+    <labels>
         <fullName>AssetDetailsFeaturing</fullName>
         <categories>CG_AssetDetail</categories>
         <language>en_US</language>
@@ -25,20 +33,20 @@
         <value>INGREDIENTS</value>
     </labels>
     <labels>
-        <fullName>AssetDetailsRelatedTags</fullName>
-        <categories>CG_AssetDetail</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Asset Details Related Tags</shortDescription>
-        <value>Related Tags</value>
-    </labels>
-    <labels>
         <fullName>AssetDetailsInstructions</fullName>
         <categories>CG_AssetDetail</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Asset Details Instructions</shortDescription>
         <value>INSTRUCTIONS</value>
+    </labels>
+    <labels>
+        <fullName>AssetDetailsRelatedTags</fullName>
+        <categories>CG_AssetDetail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Asset Details Related Tags</shortDescription>
+        <value>Related Tags</value>
     </labels>
     <labels>
         <fullName>AssetDetailsTitle</fullName>
@@ -185,6 +193,14 @@
         <value>Cluster</value>
     </labels>
     <labels>
+        <fullName>ContentLandingContentType</fullName>
+        <categories>Content Landing</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentLandingContentType</shortDescription>
+        <value>Content Type</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingNew</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
@@ -193,12 +209,12 @@
         <value>New Content</value>
     </labels>
     <labels>
-        <fullName>ContentLandingContentType</fullName>
+        <fullName>ContentLandingNone</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>ContentLandingContentType</shortDescription>
-        <value>Content Type</value>
+        <shortDescription>ContentLandingNone</shortDescription>
+        <value>None</value>
     </labels>
     <labels>
         <fullName>ContentLandingTags</fullName>
@@ -215,14 +231,6 @@
         <protected>true</protected>
         <shortDescription>Content Landing Create Template button label</shortDescription>
         <value>Create Template</value>
-    </labels>
-    <labels>
-        <fullName>ContentLandingNone</fullName>
-        <categories>Content Landing</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>ContentLandingNone</shortDescription>
-        <value>None</value>
     </labels>
     <labels>
         <fullName>Desktop</fullName>
@@ -265,14 +273,6 @@
         <value>Are you sure?</value>
     </labels>
     <labels>
-        <fullName>General_Next</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Next</shortDescription>
-        <value>Next</value>
-    </labels>
-    <labels>
         <fullName>General_Cancel</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -281,20 +281,20 @@
         <value>Cancel</value>
     </labels>
     <labels>
-        <fullName>General_Delete</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Delete</shortDescription>
-        <value>Delete</value>
-    </labels>
-    <labels>
         <fullName>General_Close</fullName>
         <categories>General</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Close</shortDescription>
         <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>General_Delete</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
     </labels>
     <labels>
         <fullName>General_Edit</fullName>
@@ -319,6 +319,14 @@
         <protected>true</protected>
         <shortDescription>Invalid formula format</shortDescription>
         <value>The formula can only has numbers, parentesis, AND, OR. Example: (1 AND 2) OR 3</value>
+    </labels>
+    <labels>
+        <fullName>General_Next</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next</shortDescription>
+        <value>Next</value>
     </labels>
     <labels>
         <fullName>General_Order</fullName>
@@ -497,6 +505,14 @@
         <value>Mobile</value>
     </labels>
     <labels>
+        <fullName>ModalRecordTypeLabel</fullName>
+        <categories>Modal Record Type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Modal record type radio buttons lable</shortDescription>
+        <value>Select a record type</value>
+    </labels>
+    <labels>
         <fullName>ModalRecordTypeTitle</fullName>
         <categories>Modal Record Type</categories>
         <language>en_US</language>
@@ -505,12 +521,68 @@
         <value>New {0}</value>
     </labels>
     <labels>
-        <fullName>ModalRecordTypeLabel</fullName>
-        <categories>Modal Record Type</categories>
+        <fullName>NewsContentDetailBody</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>Modal record type radio buttons lable</shortDescription>
-        <value>Select a record type</value>
+        <shortDescription>ListDescription__c field</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while saving a news content</shortDescription>
+        <value>There was an error while saving.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExternalId</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ExternalId__c field</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailExtract</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description__c field</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailImage</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Feature image</shortDescription>
+        <value>Feature Image</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailLoadError</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Unexpected error while loading content detail</shortDescription>
+        <value>Error while loading content.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailRequiredField</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoClusterSelected</shortDescription>
+        <value>All required fields must be completed.</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitle</fullName>
+        <categories>ContentDetailContainer.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListTitle__c field</shortDescription>
+        <value>List Title</value>
     </labels>
     <labels>
         <fullName>NoClusterSelected</fullName>
@@ -561,6 +633,22 @@
         <value>Tag name already exist in cluster branch</value>
     </labels>
     <labels>
+        <fullName>SearchContentCategoryFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of category filter in search content page</shortDescription>
+        <value>Categories</value>
+    </labels>
+    <labels>
+        <fullName>SearchContentClusterFilter</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label of cluster filter in search content page</shortDescription>
+        <value>Cluster</value>
+    </labels>
+    <labels>
         <fullName>SearchContentTagFilter</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -591,6 +679,14 @@
         <protected>true</protected>
         <shortDescription>Select language</shortDescription>
         <value>Select language</value>
+    </labels>
+    <labels>
+        <fullName>SelectMediaElement</fullName>
+        <categories>MediaElementSearcher.cmp</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SelectMediaElement</shortDescription>
+        <value>Select Media Element</value>
     </labels>
     <labels>
         <fullName>SetUpAcceleratorSetting</fullName>
@@ -625,99 +721,115 @@
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
     <labels>
-        <fullName>AddMediaElement</fullName>
-        <categories>MediaElementSearcher.cmp</categories>
+        <fullName>BannerContentDetailType</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>AddMediaElement</shortDescription>
-        <value>Add Media</value>
+        <protected>false</protected>
+        <shortDescription>Banner type field used in banner record page</shortDescription>
+        <value>Banner Type</value>
     </labels>
     <labels>
-        <fullName>SelectMediaElement</fullName>
-        <categories>MediaElementSearcher.cmp</categories>
+        <fullName>BannerContentDetailName</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>SelectMediaElement</shortDescription>
-        <value>Select Media Element</value>
-    </labels>
-	<labels>
-        <fullName>NewsContentDetailError</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Unexpected error while saving a news content</shortDescription>
-        <value>There was an error while saving.</value>
+        <protected>false</protected>
+        <shortDescription>Banner name field used in banner record page</shortDescription>
+        <value>Banner Name</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailExternalId</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>BannerContentDetailButton</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>ExternalId__c field</shortDescription>
-        <value>External Id</value>
+        <protected>false</protected>
+        <shortDescription>Banner button field used in banner record page</shortDescription>
+        <value>Button</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailExtract</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>BannerContentDetailLink</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Description__c field</shortDescription>
+        <protected>false</protected>
+        <shortDescription>Banner link field used in banner record page</shortDescription>
+        <value>Link</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLayout</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner layout field used in banner record page</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLeftAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Left-Align value of the overlayQuadrant field</shortDescription>
+        <value>Left Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailMiddleAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Center-Align value of the overlayQuadrant field</shortDescription>
+        <value>Middle Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailRightAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Right-Align value of the overlayQuadrant field</shortDescription>
+        <value>Right Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailTitle</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner title field used in banner record page</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailExtract</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner extract field used in banner record page</shortDescription>
         <value>Extract</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailLoadError</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>BannerContentDetailExternalId</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Unexpected error while loading content detail</shortDescription>
-        <value>Error while loading content.</value>
+        <protected>false</protected>
+        <shortDescription>ExternalId field used in banner record page</shortDescription>
+        <value>External Id</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailRequiredField</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>ComponentBehaviourManualAssignment</fullName>
+        <categories>ContentDetailController.cls</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>NoClusterSelected</shortDescription>
-        <value>All required fields must be completed.</value>
+        <protected>false</protected>
+        <shortDescription>-</shortDescription>
+        <value>label 1</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailTitle</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>ComponentBehaviourTags</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>ListTitle__c field</shortDescription>
-        <value>List Title</value>
+        <protected>false</protected>
+        <shortDescription>-</shortDescription>
+        <value>label 2</value>
     </labels>
     <labels>
-        <fullName>NewsContentDetailBody</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
+        <fullName>ComponentBehaviourCategories</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>ListDescription__c field</shortDescription>
-        <value>Body</value>
-    </labels>
-    <labels>
-        <fullName>NewsContentDetailImage</fullName>
-        <categories>ContentDetailContainer.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Feature image</shortDescription>
-        <value>Feature Image</value>
-    </labels>
-	<labels>
-	<fullName>SearchContentCategoryFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of category filter in search content page</shortDescription>
-        <value>Categories</value>
-    </labels>
-    <labels>
-        <fullName>SearchContentClusterFilter</fullName>
-        <categories>General</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Label of cluster filter in search content page</shortDescription>
-        <value>Cluster</value>
+        <protected>false</protected>
+        <shortDescription>-</shortDescription>
+        <value>label 3</value>
     </labels>
 </CustomLabels>
