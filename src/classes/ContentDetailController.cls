@@ -251,14 +251,8 @@ public with sharing class ContentDetailController {
 
     private static Content__c getContentData(String recordId){
         String contentFields = getContentFields();
-        Content__c content = [SELECT name, lastModifiedDate, createdBy.name, cluster__c, category__c, 
-                                     Title__c, Description__c, Extract__c, Status__c, Body__c,  
-                                     RecordType.name, ExternalId__c,
-                              (SELECT Tag__c FROM Tags__r),
-                              (SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE '%ImageList') 
-                              FROM Content__c 
-                              WHERE id = :recordId];
-
+        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.name,' 
+                                            + contentFields + ' FROM Content__c WHERE id = :recordId');
         return content;
     }
 
@@ -330,19 +324,10 @@ public with sharing class ContentDetailController {
     private static Content__c initializeContentValues(Id recordTypeId){
         Content__c content = new Content__c();
         RecordType rt = [SELECT id, name, developerName FROM RecordType WHERE Id = :recordTypeId];
-        if(rt.developerName != 'News'){
-            return null;
-        }
-        content.name = '';
-        content.Title__c = '';
-        content.description__c = '';
-        content.Extract__c = '';
-        content.ExternalId__c = '';
         content.recordTypeId = recordTypeId;
         content.recordType = rt;
         return content;
     }
-
 
     private static String getContentFields(){
         String commaSeparatedFields = '';
@@ -350,5 +335,4 @@ public with sharing class ContentDetailController {
         commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
         return commaSeparatedFields;
     }
-
 }
