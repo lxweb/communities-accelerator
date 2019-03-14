@@ -1,4 +1,4 @@
-<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+<aura:component access="global">
 	<aura:handler event="c:SetRecordList" action="{!c.handleRecordList}"/>
 
 	<aura:attribute name="title" type="String" />

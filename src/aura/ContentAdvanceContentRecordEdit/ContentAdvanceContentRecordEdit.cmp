@@ -1,0 +1,23 @@
+<aura:component>
+    <aura:attribute name="contentData" type="Object" />
+    <aura:attribute name="behaviourMessage" type="Object" />
+    <aura:attribute name="imageUrl" type="String" />
+
+    <strong> <ui:outputText value="Component Behaviour"/> </strong> 
+    <br />
+    <br />
+    <ui:outputText value="{!v.behaviourMessage}"/>
+    <br />
+    <br />
+    <lightning:input label="{!$Label.c.AdvanceContentContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
+    <lightning:input label="{!$Label.c.AdvanceContentContentDetailTitle}" name="contentName" value="{!v.contentData.Name}" required="true" aura:id="contentName"/>
+    <br />
+
+    <ui:outputText value="{!$Label.c.AdvanceContentContentDetailBody}"/>
+    <c:richTextContainer contentBody="{!v.contentData.HTMLContent__c}" />
+    <ui:outputText value="{!$Label.c.AdvanceContentContentDetailImage}"/><br />
+    <c:MediaElementSearcher />
+    <aura:if isTrue="{!v.imageUrl}">
+        <img style="height:200px" src="{!v.imageUrl}" />
+    </aura:if>
+</aura:component>
