@@ -11,19 +11,18 @@
 	 
 	<div class="slds-list_horizontal">
 	<div class="slds-grid slds-gutters slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open slds-grid slds-wrap  " >
-
 		<div class="slds-size_full slds-size_2-of-2">
 			<a class="slds-button slds-button_icon slds-button_icon-more languajeBtn  slds-size_2-of-2 " aria-expanded="true" aria-haspopup="true" onclick="{!c.showMenuItems}">
-				<img src="{!$Resource.CG_Flags + '/ar.png'}" class="flag-icon flag-selected"/> {!v.MenuWrapper.userLanguage.name} <lightning:icon iconName="utility:down" size="xx-small" style="float:right;"/>
+				<img src="{!$Resource.CG_Flags + '/ar.png'}" class="flag-icon flag-selected"/> 
+				<aura:if isTrue="{!!$Browser.isPhone}">
+					{!v.MenuWrapper.userLanguage.name}
+				</aura:if>
+				<lightning:icon iconName="utility:down" size="xx-small" style="float:right;"/>
 
 			</a>
 		</div>
-			
-		
-		
 		<div class="slds-dropdown slds-dropdown_left hideItems slds-size_2-of-2"  aura:id="menuLanguajeItems"  >
 			<ul class="dropdown__list items" role="menu"  >
-				
 				<aura:iteration items="{!v.MenuWrapper.languages}" var="langCode">
 						<aura:if isTrue="{!v.MenuWrapper.userLanguage.value!=langCode.value}">
 							<li class="slds-dropdown__item items"  role="presentation" aura:id="{!langCode.value}"  >

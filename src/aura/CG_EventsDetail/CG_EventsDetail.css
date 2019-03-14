@@ -35,7 +35,15 @@
 	margin-left: 50px;
 	color: white;
 }
-
 .THIS.container {
   position: relative;
+}
+@media only screen and (max-width: 768px) {
+	.THIS .detailImage {
+		position: relative;
+    	left: 50%;
+    	max-width: 100vw;
+    	width: 100vw;
+    	transform: translateX(-50%);
+	}
 }
