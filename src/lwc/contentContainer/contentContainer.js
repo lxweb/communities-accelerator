@@ -259,4 +259,9 @@ export default class ContentContainer extends LightningElement {
                 this.setRenderTable(false);
             });
     }
+
+    // deleteFilters(){
+    //     this.contentTypeValue = null;
+    //     this.tableDataFilter();
+    // }
 }

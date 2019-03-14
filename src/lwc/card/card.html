@@ -1,0 +1,53 @@
+<template>
+    <div class="container">
+        <template if:true={config}>
+            <template if:true={config.headerText}>
+                <div class="header-container">
+                    <p class="header">7 Mar 2019</p>
+                </div>
+            </template>
+            <template if:true={config.title}>
+                <div class="title-container">
+                    <h3 class="title">
+                        {config.title}
+                    </h3>
+                </div>
+            </template>
+            <template if:true={config.bodyText}>
+                <div class="body-container">
+                    <p class="body">
+                        {config.bodyText}
+                    </p>
+                </div>
+            </template>
+            <template if:true={config.imgSrc}>
+                <div class="img-container-portrait">
+                    <img src="https://i.imgur.com/OyGpPd5.jpg" alt="" class="img-portrait">
+                </div>
+            </template>
+            <template if:true={config.footer}>
+                <div class="footer">
+                    <template if:true={config.footer.description}>
+                        <div class="description-conainter">
+                            <div class="desc-primary">
+                                {config.footer.description.descPrimary}
+                            </div>
+                            <div class="desc-secondary">
+                                {config.footer.description.descSecondary}
+                            </div>
+                        </div>
+                    </template>
+                    <!-- <template if:true={config.footer.controls}> -->
+                    <!-- <div class="controls">
+                                    <template for:each={config.footer.controls} for:item="control">
+                                        <template if:true={control.icon}>
+            
+                                        </template>
+                                    </template>
+                                </div> -->
+                    <!-- </template> -->
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

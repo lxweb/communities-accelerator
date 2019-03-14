@@ -28,11 +28,14 @@
 
                     <lightning:layoutitem size="{!and(v.componentWrapper.component.PagingType__c == 'Carousel', v.showPaging) ? 10 : 12}">
                         <lightning:layout multipleRows="true" >
-                            <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
-                                <lightning:layoutItem class="{!' slds-x-small-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_' + (12 / if(v.componentWrapper.component.PageSize__c > v.componentWrapper.listAllContentIds.length, v.componentWrapper.listAllContentIds.length, v.componentWrapper.component.PageSize__c)) + '-of-12'}" padding="around-small" >
-                                    <c:CG_EventsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}" parentComponentId="{!v.parentComponentId}" type="{!v.componentWrapper.component.EventsType__c}" linkDetail="{!v.componentWrapper.component.LinkDetail__r.URL__c}" height="{!v.aspectRatios.height1_5}"/>
-                                </lightning:layoutItem> 
-                            </aura:iteration>
+                            <aura:if isTrue="{!v.componentWrapper.contentWrapper.length > 0}" >
+                                <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
+                                    <lightning:layoutItem class="{!' slds-x-small-size_12-of-12 slds-small-size_12-of-12    slds-medium-size_6-of-12 slds-large-size_' + (12 / if(v.componentWrapper.component.PageSize__c >   v.componentWrapper.listAllContentIds.length, v.componentWrapper.listAllContentIds.length,     v.componentWrapper.component.PageSize__c)) + '-of-12'}" padding="around-small" >
+                                        <!-- <c:CG_EventsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}   " parentComponentId="{!v.parentComponentId}" type="    {!v.componentWrapper.component.EventsType__c}" linkDetail=" {!v.componentWrapper.component.LinkDetail__r.URL__c}" height="{!v.aspectRatios.height1_5}"/>     -->
+                                        <c:eventCard event="{!contentItem}"/>
+                                    </lightning:layoutItem> 
+                                </aura:iteration>
+                            </aura:if>
                         </lightning:layout>
                     </lightning:layoutitem>
 
