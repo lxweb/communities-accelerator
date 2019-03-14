@@ -8,7 +8,11 @@
     <aura:attribute name="clusterLeafs"     type="Cluster__c[]" />
     <aura:attribute name="clusterId"        type="String"       />
     <aura:attribute name="url"              type="String"       />
+    <aura:attribute name="homeUrl"          type="String"       />
     <aura:attribute name="siteId"           type="String"       />
+    <aura:attribute name="isLogin"          type="Boolean"      />
+    <aura:attribute name="orgId"            type="String"       />
+    <aura:attribute name="instance"         type="String"       />
 
 	<div class="slds-grid slds-grid_vertical slds-p-left_xx-small">
   		<div class="slds-col slds-p-top_small">
@@ -39,7 +43,7 @@
         		<div class="slds-grid slds-grid_vertical">
       				<aura:iteration items="{!v.sitemap}" var="menu" >
       					<lightning:accordion aura:id="general" allowMultipleSectionsOpen="true">
-    				  		<c:ContentLandingSitemapItem menu="{!menu}" level="0" navigation="{!v.navigation}"/>
+    				  		<c:ContentLandingSitemapItem menu="{!menu}" level="0" navigation="{!v.navigation}" url="{!v.url}" homeUrl="{!v.homeUrl}"/>
     				  	</lightning:accordion>
     			  	</aura:iteration>
     			</div>

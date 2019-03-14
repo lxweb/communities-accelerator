@@ -21,6 +21,9 @@
 }
 .THIS .slds-media__body {
 	height:100% !important;
+    max-height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
 }
 .THIS h2 {
 	height:100% !important;

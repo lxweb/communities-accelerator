@@ -33,6 +33,7 @@
 		return returnValue;
 	},
 	getSiteId : function(component) {
+		console.log(component.get("v.url"));
 		var action = component.get('c.getSiteId');
 		action.setParams({
 			clusterId : component.get("v.clusterId")
@@ -44,11 +45,10 @@
 				var newSite = response.getReturnValue()
 				component.set('v.siteId', newSite);
 
-				var hostname = window.location.hostname;
-				var arr = hostname.split(".");
-				var instance = arr[0];
+				var instance = component.get("v.instance");
 				if(oldSite != newSite){
-					component.set("v.url", "http://" + instance + ".preview.salesforce-communities.com/?orgId=" + 
+					component.set("v.isLogin", true);
+					component.set("v.url", "https://" + instance + ".preview.salesforce-communities.com/?orgId=" + 
 								component.get("v.orgId") + "&siteId=" + newSite + "&language=en_US");
 				}
 				console.log(component.get("v.url"));

@@ -4,5 +4,10 @@
 	},
 	onMenuClick : function(component, event, helper) {
 		component.set("v.navigation", component.get("v.menu").menu.Navigation__r.URL__c);
+		if(component.get("v.navigation") == "/"){
+			component.set("v.url", component.get("v.homeUrl"));
+		} else {
+			component.set("v.url", component.get("v.homeUrl") + component.get("v.navigation"));
+		}
 	}
 })

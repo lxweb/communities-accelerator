@@ -19,6 +19,28 @@ public class ContentLandingStructureController {
 		}
 	}
 
+	public class GeneralWrapper{
+		@AuraEnabled public String				orgId;
+		@AuraEnabled public String				communityName;
+		@AuraEnabled public List<Cluster__c>	clusterLeafs;
+
+		public GeneralWrapper(String orgId, String communityName, List<Cluster__c> clusterLeafs){
+			this.orgId 			= orgId;
+			this.communityName	= communityName;
+			this.clusterLeafs	= clusterLeafs;
+		}
+	}
+
+	@AuraEnabled(cacheable=true)
+	public static GeneralWrapper getGeneralData(){
+		return new GeneralWrapper(getOrgId(), getCommunityName(), getClusterLeafs());
+	}
+
+	@AuraEnabled(cacheable=true)
+	public static String getCommunityName(){
+		return getClusterRoot(getClusterUserId()).CommunityName__c.toLowerCase();
+	}
+
 	@AuraEnabled(cacheable=true)
 	public static List<MenuWrapper> getMenus(){
 		Map<Id, Set<Id>> 		fatherChilds 	= new Map<Id, Set<Id>>();
@@ -65,32 +87,37 @@ public class ContentLandingStructureController {
 
 	@AuraEnabled(cacheable=true)
 	public static String getOrgId(){
-		return UserInfo.getOrganizationId();
+		return String.valueOf(UserInfo.getOrganizationId()).substring(0, 15);
 	}
 
 	@AuraEnabled(cacheable=true)
 	public static String getSiteId(String clusterId){
-		String siteName = getClusterRoot(clusterId).CommunityName__c;
-		List<Site> site = [SELECT Id, Name FROM Site WHERE Name =: siteName];
+		String networkName = getClusterRoot(clusterId).CommunityName__c;
+		String siteName1   = networkName + '1';
+		String siteName_C  = networkName + '_C';
+		List<Site> site = [SELECT Id, Name FROM Site WHERE Name =: siteName1 OR Name =: siteName_C];
 		if(!site.isEmpty())
-			return site.get(0).Id;
+			return String.valueOf(site.get(0).Id).substring(0, 15);
 		else
 			throw new AuraException('The site does not exist');
 	}
 
 	@AuraEnabled(cacheable=true)
 	public static List<Cluster__c> getClusterLeafs(){
+		return getSubordinateClusterLeafs(getClusterUserId());
+	}
+
+	public static Id getClusterUserId(){
 		List<ClusterUser__c> clusterUser = [SELECT Id, Cluster__c FROM ClusterUser__c WHERE User__c =:UserInfo.getUserId()];
 		if(clusterUser.size() == 0)
 			throw new AuraException('You have no cluster associated');
-
-		return getSubordinateClusterLeafs(clusterUser.get(0).Cluster__c);
+		return clusterUser.get(0).Cluster__c;
 	}
 
 	public static Cluster__c getClusterRoot(String clusterId){
 		Cluster__c cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:clusterId];
 		while(cluster.ParentCluster__c != null){
-			cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.Id];
+			cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.ParentCluster__c];
 		}
 		return cluster;
 	}
@@ -99,7 +126,7 @@ public class ContentLandingStructureController {
 		List<Cluster__c> 	leafs 			= new List<Cluster__c>();
 		Set<Id> 			parentIds 		= new Set<Id>();
 		Set<Id> 			tempIds 		= new Set<Id>();
-		Map<Id,Cluster__c>	clusterMap		= new Map<Id,Cluster__c>([SELECT Id, CommunityName__c, ParentCluster__c, RecordType.DeveloperName FROM Cluster__c]);
+		Map<Id,Cluster__c>	clusterMap		= new Map<Id,Cluster__c>([SELECT Id, Name, ParentCluster__c, RecordType.DeveloperName FROM Cluster__c]);
 		List<Cluster__c> 	clusterList 	= clusterMap.values();
 		List<Cluster__c> 	tempList;
 		if(clusterMap.get(clusterId).RecordType.DeveloperName == 'ClusterLeaf'){

@@ -12,26 +12,24 @@
 		});
 		$A.enqueueAction(action);
 	},
-	getOrgId : function(component) {
-		var action = component.get('c.getOrgId');
+	getGeneralData : function(component) {
+		var action = component.get('c.getGeneralData');
 		action.setParams({});
 		action.setCallback(this, function(response){
 			var state = response.getState();
 			if (state === "SUCCESS") {
-				component.set('v.orgId', response.getReturnValue());
+				var getGeneralData = response.getReturnValue();
+				component.set('v.clusterLeafs', getGeneralData.clusterLeafs);
+				component.set('v.orgId', getGeneralData.orgId);
+				component.set('v.communityName', getGeneralData.communityName);
 			}
 		});
 		$A.enqueueAction(action);
 	},
-	getClusterLeafs : function(component) {
-		var action = component.get('c.getClusterLeafs');
-		action.setParams({});
-		action.setCallback(this, function(response){
-			var state = response.getState();
-			if (state === "SUCCESS") {
-				component.set('v.clusterLeafs', response.getReturnValue());
-			}
-		});
-		$A.enqueueAction(action);
+	setInstance : function(component) {
+		var hostname = window.location.hostname;
+		var arr = hostname.split(".");
+		var instance = arr[0];
+		component.set("v.instance", instance);
 	}
 })
