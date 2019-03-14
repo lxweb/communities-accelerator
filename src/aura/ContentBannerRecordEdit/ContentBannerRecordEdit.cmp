@@ -53,7 +53,7 @@
     <!--Choose Layout-->
     <div>
         <aura:if isTrue="{!v.layoutOptions.length > 0}">
-            <c:ContentLayoutPicker selectedValue="{!if(v.contentData.OverlayQuadrant__c != null,v.contentData.OverlayQuadrant__c,'Middle-Left')}"
+            <c:ContentLayoutPicker selectedValue="{!v.contentData.OverlayQuadrant__c}"
                 layoutOptions="{!v.layoutOptions}" />
         </aura:if>
     </div>
