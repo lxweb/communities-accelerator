@@ -1212,6 +1212,10 @@
     <tabVisibilities>
         <tab>NewContent</tab>
         <visibility>DefaultOn</visibility>
+    </tabVisibilities> 
+    <tabVisibilities>
+        <tab>Sitemap</tab>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>   
     <userLicense>Salesforce</userLicense>
     <objectPermissions>

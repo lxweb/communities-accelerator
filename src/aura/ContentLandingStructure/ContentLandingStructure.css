@@ -1,0 +1,30 @@
+.THIS.container{
+    padding: 0px;
+    flex-shrink: 0;
+    box-shadow: none;
+    display: block;
+}
+.THIS .slds-tabs_default__content {
+    padding: 0px !important;
+}
+.THIS .slds-tabs--default__content {
+    padding: 0px !important;
+}
+.THIS.all-page-height {
+	height:100% !important;
+}
+.THIS .slds-card {
+	height:100% !important;
+}
+.THIS .slds-card__header {
+	height:100% !important;
+}
+.THIS .slds-media__body {
+	height:100% !important;
+}
+.THIS h2 {
+	height:100% !important;
+}
+.THIS iframe {
+    border-width: 0px !important;
+}
