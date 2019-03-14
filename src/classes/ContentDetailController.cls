@@ -59,64 +59,17 @@ public with sharing class ContentDetailController {
         DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), null);
         return data;
     }
-
-    @AuraEnabled
-    public static String getBehaviourMessage(String recordId, String componentId){
-        //Get DataSource
-        Component__c component = [SELECT Id, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
-        String dataSource = component.dataSource__c;
-        //Get records related to DataSource
-        String behaviourMessage;
-        if(dataSource == 'ManualAssignment'){
-            behaviourMessage = Label.ComponentBehaviourManualAssignment;
-        }
-        if(dataSource == 'Tags'){
-            behaviourMessage = getTagsMessage(component);
-        }
-        if(dataSource == 'Categories'){
-            behaviourMessage = getCategoriesMessage(component);
-        }
-        if(dataSource == 'TagsCategories'){            
-            behaviourMessage = getTagsMessage(component) + '\n\n';
-            behaviourMessage += getCategoriesMessage(component);
-        }
-        // Build Message
-        return behaviourMessage;
-    }
-
-    public static String getTagsMessage(Component__c component){
-        String behaviourMessage;
-        behaviourMessage = Label.ComponentBehaviourTags + '\n';
-        List<TagAssignment__c> tagAssignments = [SELECT Id, Tag__c, Tag__r.Name, Order__c FROM TagAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
-        for(TagAssignment__c tagAssignment : tagAssignments){
-            behaviourMessage += '\n' + tagAssignment.Order__c + '. ' + tagAssignment.Tag__r.Name;
-        }
-        behaviourMessage += '\n\n Tag criteria: ' + component.TagCriteria__c;
-        return behaviourMessage;
-    }
-
-    public static String getCategoriesMessage(Component__c component){
-        String behaviourMessage;
-        behaviourMessage = Label.ComponentBehaviourCategories + '\n';
-        List<CategoryAssignment__c> categoryAssignments = [SELECT Id, Category__c, Category__r.Name FROM CategoryAssignment__c WHERE Component__c =: component.Id];
-        for(CategoryAssignment__c categoryAssignment : categoryAssignments){
-            behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
-        }
-        return behaviourMessage;
-    }
-
+    
     @AuraEnabled
     public static DataWrapper getDataNew(String contentRecordTypeId, String componentId){
         //Gets the entire cluster branch of the current user.
         Set<Id> clusterIds = getClusterBranch();
         //Gets the data from the current content.
         Content__c contentRecord = initializeContentValues(contentRecordTypeId);
-        //Gets the component behaviour message
-        String behaviourMessage = getBehaviourMessage(contentRecord.Id, componentId);
+        //Gets the component behaviour message                                                                                                       
+        String behaviourMessage = componentId != null ? getBehaviourMessage(contentRecord.Id, componentId) : null;                                                                                                      
         //A non allowed record type was passed as url parameter
-        if(contentRecord == null){
-            return null;
-        }
+        if(contentRecord == null) return null;
         //Gets all the visibility options.
         List<VisibilitySelectorWrapper> visibilitySelectorList = new List<VisibilitySelectorWrapper>();
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
@@ -136,20 +89,24 @@ public with sharing class ContentDetailController {
             updateTagAssignments(content, getSelectorByApiName(visibilitySelectors, 'Tag__c'), contentOldTagAssignments);
             if(mediaElementId != null)
                 updateMediaElementAssignment(content, mediaElementId);
-            
-            String dataSource = [SELECT Id, dataSource__c FROM Component__c WHERE Id =: componentId].dataSource__c;
-            if(dataSource == 'ManualAssignment'){
-                ContentAssignment__c contentAssignment = new ContentAssignment__c(Component__c = componentId, Content__c = content.Id);
-                insert contentAssignment;
-            }
+            if(componentId != null)
+                insertContentAssignment(componentId, content);                                                                                                               
             return content;
         }catch(Exception e){
             Database.rollback(sp);
             System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
             System.debug(e.getStackTraceString());
             return null;
-        } 
-        
+        }        
+    }
+
+    private static void insertContentAssignment(String componentId, Content__c content){
+        Component__c component = [SELECT Id, dataSource__c FROM Component__c WHERE Id =: componentId];
+        String dataSource = component != null ? component.dataSource__c : null;
+        if(content != null && dataSource == 'ManualAssignment'){
+            ContentAssignment__c contentAssignment = new ContentAssignment__c(Component__c = componentId, Content__c = content.Id);
+            insert contentAssignment;
+        }
     }
 
     private static void updateTagAssignments(Content__c content, VisibilitySelectorWrapper tagVisibility, List<TagAssignment__c> contentOldTagAssignments){
@@ -251,7 +208,7 @@ public with sharing class ContentDetailController {
 
     private static Content__c getContentData(String recordId){
         String contentFields = getContentFields();
-        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.name,' 
+        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.name,RecordType.developerName,' 
                                             + contentFields + ' FROM Content__c WHERE id = :recordId');
         return content;
     }
@@ -334,5 +291,49 @@ public with sharing class ContentDetailController {
         Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
         commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
         return commaSeparatedFields;
+    }
+
+    private static String getBehaviourMessage(String recordId, String componentId){
+        //Get DataSource
+        Component__c component = [SELECT Id, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
+        String dataSource = component.dataSource__c;
+        //Get records related to DataSource
+        String behaviourMessage;
+        if(dataSource == 'ManualAssignment'){
+            behaviourMessage = Label.ComponentBehaviourManualAssignment;
+        }
+        if(dataSource == 'Tags'){
+            behaviourMessage = getTagsMessage(component);
+        }
+        if(dataSource == 'Categories'){
+            behaviourMessage = getCategoriesMessage(component);
+        }
+        if(dataSource == 'TagsCategories'){            
+            behaviourMessage = getTagsMessage(component) + '\n\n';
+            behaviourMessage += getCategoriesMessage(component);
+        }
+        // Build Message
+        return behaviourMessage;
+    }
+
+    private static String getTagsMessage(Component__c component){
+        String behaviourMessage;
+        behaviourMessage = Label.ComponentBehaviourTags + '\n';
+        List<TagAssignment__c> tagAssignments = [SELECT Id, Tag__c, Tag__r.Name, Order__c FROM TagAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
+        for(TagAssignment__c tagAssignment : tagAssignments){
+            behaviourMessage += '\n' + tagAssignment.Order__c + '. ' + tagAssignment.Tag__r.Name;
+        }
+        behaviourMessage += '\n\n Tag criteria: ' + component.TagCriteria__c;
+        return behaviourMessage;
+    }
+
+    private static String getCategoriesMessage(Component__c component){
+        String behaviourMessage;
+        behaviourMessage = Label.ComponentBehaviourCategories + '\n';
+        List<CategoryAssignment__c> categoryAssignments = [SELECT Id, Category__c, Category__r.Name FROM CategoryAssignment__c WHERE Component__c =: component.Id];
+        for(CategoryAssignment__c categoryAssignment : categoryAssignments){
+            behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
+        }
+        return behaviourMessage;
     }
 }
