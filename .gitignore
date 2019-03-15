@@ -279,3 +279,12 @@ src/profiles/Partner Community Login User.profile
 src/staticresources/SiteSamples.resource
 src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
+node_modules/
+lwc/
+force-app/
+.vscode/settings.json
+.vim-force.com/session.properties
+package-lock.json
+package.json
+.sfdx
+.forceignore
