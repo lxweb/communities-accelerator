@@ -225,30 +225,6 @@
         <value>Unpublish</value>
     </labels>
     <labels>
-        <fullName>ContentLandingStructureNavigation</fullName>
-        <categories>Content Landing Structure</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Content Landing Structure Navigation title</shortDescription>
-        <value>Navigations</value>
-    </labels>
-    <labels>
-        <fullName>ContentLandingStructureCluster</fullName>
-        <categories>Content Landing Structure</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Content Landing Structure Select Cluster</shortDescription>
-        <value>Select Cluster...</value>
-    </labels>
-    <labels>
-        <fullName>ContentLandingStructureSitemap</fullName>
-        <categories>Content Landing Structure</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Content Landing Structure Sitemap Navigation</shortDescription>
-        <value>Sitemap Navigation</value>
-    </labels>
-    <labels>
         <fullName>ContentLandingAll</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
@@ -375,14 +351,6 @@
         <protected>true</protected>
         <shortDescription>Fields Values</shortDescription>
         <value>Fields Values</value>
-    </labels>
-    <labels>
-        <fullName>GeneralContents</fullName>
-        <categories>ModalRecordTypeSelection.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>General contents</shortDescription>
-        <value>General Contents</value>
     </labels>
     <labels>
         <fullName>General_AreYouSure</fullName>
@@ -825,22 +793,6 @@
         <value>Sharing with out reason</value>
     </labels>
     <labels>
-        <fullName>StructureContent</fullName>
-        <categories>ModalRecordTypeSelection.cmp</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Structure content</shortDescription>
-        <value>Structure Content</value>
-    </labels>
-    <labels>
-        <fullName>StructureContentDescription</fullName>
-        <categories>ModalRecordTypeSelectionHelper.js</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Structure content description</shortDescription>
-        <value>Create advance content, FAQ or banner contents straight from each structure page.</value>
-    </labels>
-    <labels>
         <fullName>Tablet</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
@@ -950,6 +902,30 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>EventContentDetailTitleTop</shortDescription>
+        <value>Title Top</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleBottom</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleBottom</shortDescription>
+        <value>Title Bottom</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleMiddle</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleMiddle</shortDescription>
+        <value>Title Middle</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleTop</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleTop</shortDescription>
         <value>Title Top</value>
     </labels>
 </CustomLabels>
