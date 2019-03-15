@@ -53,28 +53,14 @@
     <description>Each content is a collection of data that ultimately will be shown in a Component. That data (Its kind and quantity) depends on the Content record type</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>false</enableBulkApi>
-	<enableChangeDataCapture>false</enableChangeDataCapture>														
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
-    <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>false</enableSharing>
     <enableStreamingApi>false</enableStreamingApi>
     <fields>
-        <fullName>BannerFrameType__c</fullName>
-        <externalId>false</externalId>
-        <label>Banner Frame Type</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>BannerFrameType</valueSetName>
-        </valueSet>
-    </fields>
-	<fields>
         <fullName>Body__c</fullName>
         <externalId>false</externalId>
         <label>Body</label>
@@ -82,7 +68,7 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Html</type>
-        <visibleLines>25</visibleLines> 
+        <visibleLines>25</visibleLines>
     </fields>
     <fields>
         <fullName>ButtonLabel__c</fullName>
@@ -311,7 +297,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <type>Checkbox</type>
     </fields>
     <fields>
-	<fullName>Layout__c</fullName>
+        <fullName>Layout__c</fullName>
         <externalId>false</externalId>
         <label>Layout</label>
         <required>false</required>
@@ -340,7 +326,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <fields>								  	
+    <fields>
         <fullName>LinkDetail__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -651,21 +637,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Advance Content.</description>
         <label>Advance Content</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -775,21 +746,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Banner content. This content will scroll or appear-fade inside a Banner. The data this type of content allows are Media elements</description>
         <label>Banner</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -899,21 +855,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Brand Detail content. This content will display a a brand detail including all it related brands. The data this type of content allows are Media elements</description>
         <label>Brand Detail</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -1023,21 +964,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Event content. This content will be shown inside an Event. The data this type of content allows are Media elements and Event metadata such as event date, event capacity, etc.</description>
         <label>Event</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -1147,21 +1073,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new FAQ content. This content will be shown inside a FAQ list. The data this type of content allows are Texts for questions and answers</description>
         <label>FAQ</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -1271,21 +1182,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new News content. This content will be shown inside a News. The data this type of content allows are Media elements and News metadata such as title, news description, etc.</description>
         <label>News</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -1395,21 +1291,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Recipe content. This content will be shown inside a Recipe</description>
         <label>Recipe</label>
         <picklistValues>
-            <picklist>BannerFrameType__c</picklist>
-            <values>
-                <fullName>Hero</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Page</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Square</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-		<picklistValues>
             <picklist>Layout__c</picklist>
             <values>
                 <fullName>Title Bottom</fullName>
@@ -1558,8 +1439,8 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                  RecordType.Name = &quot;Banner&quot;
 )</errorConditionFormula>
         <errorDisplayField>OverlayQuadrant__c</errorDisplayField>
-        <errorMessage>Si este campo esta vacío, los campos &quot;Title&quot;, &quot;Extract&quot;, &quot;Button Label&quot; NO deben tener valor. 
-Si este campo tiene valor, de los campos &quot;Title&quot;, &quot;Extract&quot;, &quot;Button Label&quot; al menos uno NO debe estar vacío.</errorMessage>
+        <errorMessage>Si este campo esta vacío, los campos &quot;List Title&quot;, &quot;List Description&quot;, &quot;Button Label&quot; NO deben tener valor. 
+Si este campo tiene valor, de los campos &quot;List Title&quot;, &quot;List Description&quot;, &quot;Button Label&quot; al menos uno NO debe estar vacío.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>PublishEndDate</fullName>
@@ -1571,15 +1452,3 @@ Si este campo tiene valor, de los campos &quot;Title&quot;, &quot;Extract&quot;,
     </validationRules>
     <visibility>Public</visibility>
 </CustomObject>
-					
-	 
-	   
-		
-	  
-	
-			  
-	   
-   
-		
-	
-	 

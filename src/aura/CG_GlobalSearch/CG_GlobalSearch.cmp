@@ -1,0 +1,14 @@
+<aura:component controller="GlobalSearchController" implements="forceCommunity:availableForAllPageTypes,forceCommunity:searchInterface" access="global" >
+    <aura:registerEvent name="appEvent" type="c:SetSearchResults"/>
+
+    <div onkeyup="{! c.handleKeyUp }">
+        <lightning:input
+            aura:id="enter-search"
+            name="enter-search"
+            label="no label"
+            placeholder="{!$Label.c.GlobalSearchPlaceholder}"
+            type="search"
+            variant="label-hidden"
+        />
+    </div>
+</aura:component>

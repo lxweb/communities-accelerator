@@ -1,2 +1,15 @@
-.THIS {
+@media (max-width: 767px) {
+    .THIS .slds-nav-vertical__section>div {
+        max-height: 100px;
+        overflow-y: scroll;
+    }
+    .THIS .slds-nav-vertical__title {
+        padding-left: 0;
+    }
+    .THIS .cCG_RecordList{
+        margin-top: 10px;
+        margin-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

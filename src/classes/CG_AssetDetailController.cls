@@ -51,9 +51,9 @@ public with sharing class CG_AssetDetailController {
         
         ContentWrapper contentWrapper = new ContentWrapper();
         if(content != null){
-            contentWrapper.detailTitle = content.DetailTitle__c;
+            contentWrapper.detailTitle = content.Title__c;
 
-            contentWrapper.longDescription = content.ListDescription__c;
+            contentWrapper.longDescription = content.Description__c;
             contentWrapper.tagsList = getTags(contentId, externalId);            
 
             System.debug('DEBUG: content.RecordType.DeveloperName: '+content.RecordType.DeveloperName);
@@ -139,7 +139,7 @@ public with sharing class CG_AssetDetailController {
         try{
             //search for asset-details page
             //Ingredients__c, Instructions__c,
-        	 content = [SELECT Id, RecordType.DeveloperName, DetailTitle__c, ListDescription__c, URLRedirect__c, 
+        	 content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c, 
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'assetImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
@@ -147,7 +147,7 @@ public with sharing class CG_AssetDetailController {
             //search for assets page
             //Ingredients__c, Instructions__c,
             if(content.RecordType.DeveloperName == 'BrandDetail'){
-                content = [SELECT Id, RecordType.DeveloperName, DetailTitle__c, ListDescription__c, URLRedirect__c,
+                content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c,
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'BrandImageList') //'brandVariantCatalogImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
@@ -155,7 +155,7 @@ public with sharing class CG_AssetDetailController {
 /* NO EXISTEN ESTOS RECORD TYPE
             //Ingredients__c, Instructions__c,
             if(content.RecordType.DeveloperName == 'Product'){
-                content = [SELECT Id, RecordType.DeveloperName, DetailTitle__c, ListDescription__c, URLRedirect__c,
+                content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c,
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'productImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
@@ -163,7 +163,7 @@ public with sharing class CG_AssetDetailController {
 
             //Ingredients__c, Instructions__c,
             if(content.RecordType.DeveloperName == 'Brand'){
-                content = [SELECT Id, RecordType.DeveloperName, DetailTitle__c, ListDescription__c, URLRedirect__c,
+                content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c,
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'BrandImageLogo') //'BrandLogoImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
@@ -204,11 +204,11 @@ public with sharing class CG_AssetDetailController {
             }
             
             RecipeIngredient__c recipe = [SELECT id, BrandVariant__c, Recipe__c FROM RecipeIngredient__c WHERE Recipe__r.content__c =: contentId and RecordType.DeveloperName = 'BrandIngredient' ];
-            Brand__c brand = [SELECT Id, Name, BrandContent__c, BrandContent__r.ListDescription__c, BrandContent__r.DetailTitle__c, MasterBrand__c, RecordType.DeveloperName, Description__c FROM Brand__c WHERE Id = :recipe.BrandVariant__c];
+            Brand__c brand = [SELECT Id, Name, BrandContent__c, BrandContent__r.Description__c, BrandContent__r.Title__c, MasterBrand__c, RecordType.DeveloperName, Description__c FROM Brand__c WHERE Id = :recipe.BrandVariant__c];
 
             list<MediaElementAssignment__c> brandContent = [SELECT id, MediaElement__r.FileURLDesktop__c, Placement__c FROM MediaElementAssignment__c WHERE Content__c =: brand.BrandContent__c and Placement__c = 'BrandImageList' ];
             mediaMap.put('BrandImageList', brandContent[0].MediaElement__r.FileURLDesktop__c);
-            mediaMap.put('brandTitle', brand.BrandContent__r.DetailTitle__c);
+            mediaMap.put('brandTitle', brand.BrandContent__r.Title__c);
             String link = getLinkFeaturing(externalId);
            mediaMap.put('urlBrandLink', link+'?brand='+brand.Id);
     

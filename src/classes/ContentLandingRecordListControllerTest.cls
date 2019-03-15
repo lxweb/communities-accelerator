@@ -81,7 +81,7 @@ public class ContentLandingRecordListControllerTest {
 		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'String Inexistente');
 		
 		//Then	
-		System.assertEquals(True, tableWrapperTest.title.contains('No records'));
+		System.assertEquals(True, tableWrapperTest.title == null);
 	}
 
 	@isTest

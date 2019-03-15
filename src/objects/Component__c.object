@@ -53,7 +53,6 @@
     <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
-											
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -70,8 +69,11 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>BannerFrameType__c</fullName>																													 
-        <externalId>false</externalId>																																																									 
+        <fullName>BannerFrameType__c</fullName>
+        <defaultValue>&quot;Hero&quot;</defaultValue>
+        <description>This field allows users to define the banner rather a small, medium or large on the page added</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Para presentación horizontal | Hero banner , 3 , 1 | Page banner , 6 , 1 | Tiny banner , 1 , 1 |||||| Para presentación vertical | Hero banner , 1 , 3 | Page banner , 1 , 6 | Tiny banner , 1 , 1</inlineHelpText>
         <label>Banner Frame Type</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -79,7 +81,24 @@
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetName>BannerFrameType</valueSetName>			 
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Hero</fullName>
+                    <default>true</default>
+                    <label>Hero</label>
+                </value>
+                <value>
+                    <fullName>Page</fullName>
+                    <default>false</default>
+                    <label>Page</label>
+                </value>
+                <value>
+                    <fullName>Square</fullName>
+                    <default>false</default>
+                    <label>Square</label>
+                </value>
+            </valueSetDefinition>
         </valueSet>
     </fields>
     <fields>

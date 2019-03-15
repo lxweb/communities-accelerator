@@ -12,7 +12,7 @@
 	<aura:attribute name="loadingScroll" type="Boolean" default="false" />
 
 	<!-- ORDER & LAYOUT-->
-	<aura:attribute name="orderBy" type="String" default="ListTitle__c ASC"/>
+	<aura:attribute name="orderBy" type="String" default="Title__c ASC"/>
 	<aura:attribute name="layout" type="String" default="Cards" />
 	
 	<!-- FILTERS -->
@@ -41,8 +41,8 @@
 
 				    			<aura:if isTrue="{!v.catalogWrapper.component.ShowOrder__c}">
 					    			<lightning:select class="select_order" name="selectItem" onchange="{!c.doOrderBy}">
-						    			<option value="ListTitle__c ASC" selected="{!v.orderBy == 'ListTitle__c ASC'}">Alphabetical, A-Z</option>
-						    			<option value="ListTitle__c DESC" selected="{!v.orderBy == 'ListTitle__c DESC'}">Alphabetical, Z-A</option>
+						    			<option value="Title__c ASC" selected="{!v.orderBy == 'Title__c ASC'}">Alphabetical, A-Z</option>
+						    			<option value="Title__c DESC" selected="{!v.orderBy == 'Title__c DESC'}">Alphabetical, Z-A</option>
 						    			<option value="CreatedDate ASC" selected="{!v.orderBy == 'Creation Date ASC'}">Date, Ascending</option>
 						    			<option value="CreatedDate DESC" selected="{!v.orderBy == 'Creation Date DESC'}">Date, Descending</option>
 						    		</lightning:select>
@@ -164,7 +164,7 @@
 		    		<aura:iteration items="{!v.catalogWrapper.contentWrapper}" var="catalogItem">
 
 		    			<!-- LAYOUT LIST -->
-		    			<aura:if isTrue="{!and(v.layout == 'List', v.catalogWrapper.content.ListTitle__c != '')}">
+		    			<aura:if isTrue="{!and(v.layout == 'List', v.catalogWrapper.content.Title__c != '')}">
 				    		<div class="{! 'div_item_list ' + catalogItem.content.AssetType__c}" id="{!'contentId-' + catalogItem.content.Id}">
 				    			<aura:if isTrue="{!and(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c != 'Brand Variants')}">
 		    						<div class="div_item_list_social_btns">
@@ -174,7 +174,7 @@
 			    				<a href="{! catalogItem.brandURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.brand.Id, 'asset=' + catalogItem.content.Id) }" target="{!v.catalogWrapper.contentWrapper.behavior}">
 				    				<img class="img_item_list_image" src="{!catalogItem.mediaElementImageURL}"/>
 				    				<div class="div_item_list_detail">
-				    					<h4>{!catalogItem.content.ListTitle__c}</h4>
+				    					<h4>{!catalogItem.content.Title__c}</h4>
 				    					<aura:unescapedHtml value="{!catalogItem.content.Description__c}"/>
 				    				</div>
 			    				</a>
@@ -182,7 +182,7 @@
 			    		</aura:if>
 
 			    		<!-- LAYOUT CARDS -->
-			    		<aura:if isTrue="{!and(v.layout == 'Cards',v.catalogWrapper.content.ListTitle__c != '')}">
+			    		<aura:if isTrue="{!and(v.layout == 'Cards',v.catalogWrapper.content.Title__c != '')}">
 			    			<div class="{! 'div_item_card ' + catalogItem.content.AssetType__c}" id="{!'contentId-' + catalogItem.content.Id}">
 			    				
 			    				<!-- BRAND & BRAND VARIANTS TYPE CARD -->
@@ -190,17 +190,17 @@
 				    				<img class="img_item_card_image" src="{!catalogItem.mediaElementImageURL}"/>
 				    				<aura:if isTrue="{!or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants')}">
 				    					<div class="div_item_card_detail">
-					    					<h4>{!catalogItem.content.ListTitle__c}</h4>
+					    					<h4>{!catalogItem.content.Title__c}</h4>
 					    					<aura:unescapedHtml value="{!catalogItem.content.Description__c}"/>
 				    					</div>
 				    				</aura:if>
 			    				</a>
 
 			    				<!-- OTHER CARDS TYPES -->
-			    				<aura:if isTrue="{!and(v.catalogWrapper.component.Datasource__c != 'Brands', v.catalogWrapper.component.Datasource__c != 'Brand Variants', v.catalogWrapper.content.ListTitle__c != '')}">
+			    				<aura:if isTrue="{!and(v.catalogWrapper.component.Datasource__c != 'Brands', v.catalogWrapper.component.Datasource__c != 'Brand Variants', v.catalogWrapper.content.Title__c != '')}">
 			    					<div class="div_item_card_detail">
 			    						<a href="{! catalogItem.brandURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.brand.Id, 'asset=' + catalogItem.content.Id) }" target="{!v.catalogWrapper.contentWrapper.behavior}">
-				    						<h4>{!catalogItem.content.ListTitle__c}</h4>
+				    						<h4>{!catalogItem.content.Title__c}</h4>
 				    					</a>
 				    					<div class="div_item_card_social_btns">
 				    						<c:CG_ContentTools classIn="btn_item_action" iconName="utility:download" isFromCart="true" contentId="{!ContentSearchWrapper.contentId}"/>

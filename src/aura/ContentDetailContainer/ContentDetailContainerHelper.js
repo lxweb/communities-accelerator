@@ -3,8 +3,11 @@
 		//var recordTypeId = component.get("v.pageReference").state.recordTypeId;
 		var recordId = component.get('v.recordId');
 		var recordTypeId;
-		if(component.get("v.pageReference"))
+		var componentId;		
+		if(component.get("v.pageReference")){
 			recordTypeId = component.get("v.pageReference").state.RecordTypeId;
+			componentId = component.get("v.pageReference").state.ComponentId;
+		}
 		var action;
 		//If we're viewing an existing content.
 		if(recordId){
@@ -32,7 +35,8 @@
 		}else if(recordTypeId){
 			action = component.get('c.getDataNew');
 			action.setParams({
-				contentRecordTypeId: recordTypeId
+				contentRecordTypeId: recordTypeId,
+				componentId: componentId
         	});
 			action.setCallback(this, function(response){
 				var state = response.getState();
@@ -40,6 +44,7 @@
 					component.set("v.currentUserName", response.getReturnValue().currentUserName);
 					component.set("v.contentData", response.getReturnValue().content);
 					component.set("v.visibilitySelectors", response.getReturnValue().visibilitySelectors);
+					component.set("v.behaviourMessage", response.getReturnValue().behaviourMessage);
 				}
 			});
 		}else{
@@ -52,14 +57,18 @@
 
 	upsertContent : function(component, eventAction){
 		var content = component.get('v.contentData');
-		if(content.ListTitle__c == ''){
+		if(content.Title__c == ''){
 			this.displayErrorMessage($A.get("$Label.c.NewsContentDetailRequiredField"));
 			return;
+		}
+		if(component.get("v.pageReference")){
+			var componentId = component.get("v.pageReference").state.ComponentId;
 		}
 		var visibilitySelectors = component.get('v.visibilitySelectors');
 		var mediaElementId = component.get('v.mediaElementId');
 		var action = component.get('c.saveContent');
 		action.setParams({
+			componentId : componentId,
 			content : content,
 			visibilitySelectorsString : JSON.stringify(visibilitySelectors),
 			mediaElementId : mediaElementId,
