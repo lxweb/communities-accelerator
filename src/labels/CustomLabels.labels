@@ -1056,4 +1056,28 @@
         <shortDescription>NewsContentDetailChooseLayout</shortDescription>
         <value>Choose Layout</value>
     </labels>
+    <labels>
+        <fullName>StructureContent</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Structure content</shortDescription>
+        <value> Structure Content</value>
+    </labels>
+    <labels>
+        <fullName>StructureContentDescription</fullName>
+        <categories>ModalRecordTypeSelectionHelper.js</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Structure content description</shortDescription>
+        <value>Create advance content, FAQ or banner contents straight from each structure page.</value>
+    </labels>
+    <labels>
+        <fullName>GeneralContents</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General contents</shortDescription>
+        <value>General Contents</value>
+    </labels>
 </CustomLabels>
