@@ -1,0 +1,8 @@
+.THIS  ul li:hover {
+    background-color: rgb(243, 242, 242);
+    text-decoration: none;
+    color: inherit;
+}
+.THIS .text-light {
+    opacity: 0.6;
+}

@@ -225,6 +225,30 @@
         <value>Unpublish</value>
     </labels>
     <labels>
+        <fullName>ContentLandingStructureNavigation</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Navigation title</shortDescription>
+        <value>Navigations</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingStructureCluster</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Select Cluster</shortDescription>
+        <value>Select Cluster...</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingStructureSitemap</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Sitemap Navigation</shortDescription>
+        <value>Sitemap Navigation</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingAll</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>

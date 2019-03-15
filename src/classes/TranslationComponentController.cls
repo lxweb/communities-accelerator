@@ -24,16 +24,33 @@ public with sharing class TranslationComponentController {
 			this.name = name;
 		}
 	}
+
+	private static String getLookupObjectName(String parentLookupName, String objectName){
+		Schema.DescribeFieldResult f = Schema.getGlobalDescribe()
+		    .get(objectName)
+		    .getDescribe()
+		    .fields
+		    .getMap()
+		    .get(parentLookupName)
+		    .getDescribe();
+
+		for(Schema.SObjectType reference : f.getReferenceTo()) {
+		    return reference.getDescribe().getName();
+		}
+		return null;
+	}
 	
 	@auraEnabled
 	public static RecordsWrapper getLanguages(String parentLookupName, String fieldSet, String recordId){
-		RecordsWrapper rw = new RecordsWrapper();
-		system.debug('recordId: '+recordId);
-		Content__c content = [SELECT id, Cluster__r.DefaultLanguage__c, Cluster__r.OtherLanguages__c  FROM Content__c where id=: recordId];
+		RecordsWrapper rw = new RecordsWrapper();		
 		List<String> langs= new List<String>();
-		langs.add(content.Cluster__r.DefaultLanguage__c);
-		if(content.Cluster__r.OtherLanguages__c!=null){
-			String[] tmpString = content.Cluster__r.OtherLanguages__c.split(';');
+		SObject content = Database.query('SELECT id, Cluster__r.DefaultLanguage__c, Cluster__r.OtherLanguages__c  FROM ' + getLookupObjectName(parentLookupName, 'Translation__c') + ' WHERE id=: recordId');
+		System.debug('Query: ' + 'SELECT id, Cluster__r.DefaultLanguage__c, Cluster__r.OtherLanguages__c  FROM ' + getLookupObjectName(parentLookupName, 'Translation__c') + ' WHERE id=: recordId');
+		System.debug('Object: ' + JSON.serialize(content));
+		//Content__c content = [SELECT id, Cluster__r.DefaultLanguage__c, Cluster__r.OtherLanguages__c  FROM Content__c where id=: recordId];
+		langs.add((String)content.getSobject('Cluster__r').get('DefaultLanguage__c'));
+		if(content.getSobject('Cluster__r').get('OtherLanguages__c')!=null){
+			String[] tmpString = ((String) content.getSobject('Cluster__r').get('OtherLanguages__c')).split(';');
 			langs.addAll(tmpString);
 		}	
 
