@@ -960,4 +960,100 @@
         <shortDescription>NewsContentDetailTitleTop</shortDescription>
         <value>Title Top</value>
     </labels>
+    <labels>
+        <fullName>BannerContentDetailLeftAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Left-Align value of the overlayQuadrant field</shortDescription>
+        <value>Left Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailMiddleAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Center-Align value of the overlayQuadrant field</shortDescription>
+        <value>Middle Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailRightAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Right-Align value of the overlayQuadrant field</shortDescription>
+        <value>Right Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailTitle</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner title field used in banner record page</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailExtract</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner extract field used in banner record page</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailExternalId</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExternalId field used in banner record page</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailType</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner type field used in banner record page</shortDescription>
+        <value>Banner Type</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLink</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner link field used in banner record page</shortDescription>
+        <value>Link</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailName</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner name field used in banner record page</shortDescription>
+        <value>Banner Name</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLayout</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner layout field used in banner record page</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailButton</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner button field used in banner record page</shortDescription>
+        <value>Button</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailChooseLayout</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailChooseLayout</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
 </CustomLabels>
