@@ -3,9 +3,10 @@ public class ContentLandingStructureControllerTest {
 
 	@testSetup
     static void setup(){
+    	Network net = [SELECT Id, Name FROM Network LIMIT 1];
         MockupFactory.generateAcceleratorSetting();
         List<Cluster__c> clusterRoot = MockupFactory.createCluster('Test Cluster Root', null, 1, 'ClusterRoot');
-        clusterRoot[0].CommunityName__c = 'Accelerator';
+        clusterRoot[0].CommunityName__c = net.Name;
         update clusterRoot;
         List<Cluster__c> clustersLevel2 = MockupFactory.createCluster('Test Cluster Level 2', clusterRoot.get(0).Id, 2, 'ClusterGroup');
         Set<Id> level2Ids = (new Map<Id, SObject>(clustersLevel2)).keySet();
