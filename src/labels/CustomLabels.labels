@@ -630,7 +630,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Modal record type selection title</shortDescription>
-        <value>New {0}</value>
+        <value>New</value>
     </labels>
     <labels>
         <fullName>NewsContentDetailBody</fullName>
