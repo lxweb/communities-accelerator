@@ -9,29 +9,24 @@
     outline: none;
     font-size: 15px;
     transition: .4s;
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-
+.accordeon-item-container{
+    margin-bottom: 39px;
+}
+.chevron-icon{
+    line-height: 22px;
+}
 .accordion.active{
     border-bottom: none;
     background-color: transparent;
     margin-bottom: 0;
 }
-
-.accordion:after {
-    content: '\003e';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-    transform: rotate(90deg);
+.accordion.active .chevron-icon {
+    transform: rotate(180deg);
 }
-
-.accordion.active:after {
-    content: "\003e";
-    transform: rotate(-90deg);
-}
-
 .panel{
     padding: 0 10px;
     background-color: transparent;
@@ -39,7 +34,6 @@
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
-
 .panel.active{
     border-bottom: 1px solid #7f7f7f;
     border-left: 1px solid #7f7f7f;
@@ -47,7 +41,6 @@
     border-top: none;
     margin-bottom: 10px;
 }
-
 .panel label{
     width: 100%;
     display: flex;
@@ -56,21 +49,20 @@
     color: #7F7F7F;
     padding-bottom: 10px;
 }
-
 .panel label:first-child{
     padding-top: 10px;
 }
-
 .panel label input[type=checkbox]{
     width: 16px;
     height: 16px;
     margin-right: 5px;
 }
-
 .panel label input[type=radio]{
     margin-right: 5px;
 }
-
+.panel label input[type=radio],.panel label input[type=checkbox]{
+    cursor: pointer;
+}
 select{
     display: flex;
     flex-direction: column;
@@ -90,12 +82,6 @@ select{
 select:hover{
     cursor: pointer;
 }
-
-.btn-filter-remove{
-    background: #7F7F7F;
-    color: white;
-    border: 1px solid #7F7F7F;
-    border-radius: 5px;
-    width: 100%;
-    height: 30px;
+.btn-filter-remove {
+    margin-bottom: 39px;
 }

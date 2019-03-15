@@ -1,13 +1,19 @@
+.datatable-container{
+    padding:22px 37px 42px 37px;
+}
 .datatable-container .msg-no-records {
-    margin-top: 36px;
-    font-size: 14px;
-    text-align: left;
+    margin-top: 22px;
+    font-size: 13px;
+    text-align: center;
 }
 .datatable-container h1 {
     text-align: left;
     line-height: 35px;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+.datatable-container h1.table-title{
+    font-size: 23px;
 }
 .datatable-container table thead tr th {
     height: 50px;
@@ -30,12 +36,13 @@
 .datatable-container table thead tr th div.column-permission {
     display: flex;
     flex-direction: row;
+    font-size: 12px;
     line-height: 55px;
 }
 .datatable-container table tbody tr td {
     padding-left: 10px;
     height: 50px;
-    font-size: 11px;
+    font-size: 13px;
 }
 .datatable-container table tbody tr td a {
     color: #4092DF;

@@ -6,13 +6,17 @@ export default class Acordeon extends LightningElement {
 
     openAccordeon(event){
         var panel;
-        event.target.classList.toggle("active");
-        panel = event.target.nextElementSibling;
+        event.currentTarget.classList.toggle("active");
+        panel = event.currentTarget.nextElementSibling;
         if (panel.style.maxHeight){
             panel.style.maxHeight = null;
+            panel.style.overflow = "hidden";
             panel.classList.toggle("active");
         } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
+            panel.style.maxHeight = "218px";
+            if(panel.scrollHeight > 218){
+                panel.style.overflow = "scroll";
+            }
             panel.classList.toggle("active");
         } 
     }
@@ -23,7 +27,7 @@ export default class Acordeon extends LightningElement {
         'check': event.currentTarget.checked,
         'label': event.currentTarget.dataset.label});
         
-        event.target.classList.toggle("active");
+        event.currentTarget.classList.toggle("active");
 
         this.eventDispatch(value);
         
@@ -36,7 +40,7 @@ export default class Acordeon extends LightningElement {
         'check': event.currentTarget.checked,
         'label': event.currentTarget.dataset.label});
         
-        event.target.classList.toggle("active");
+        event.currentTarget.classList.toggle("active");
 
         this.eventDispatch(value);
     }
