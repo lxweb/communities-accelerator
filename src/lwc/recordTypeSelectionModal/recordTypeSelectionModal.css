@@ -1,0 +1,23 @@
+.slds-icon-text-default{
+    fill: rgb(255, 255, 255) !important;
+}
+.gravity-top {
+    position: absolute;
+    top: 0px;
+    margin-left: 40px;
+    font-size: large;
+    font-weight: bold;
+}
+.gravity-bottom {
+    position: absolute;
+    bottom: 60px;
+    margin-left: 40px;
+    font-size: large;
+    font-weight: bold;
+}
+.bottom-line {
+    border-bottom: 2px solid rgb(221, 219, 218);
+}   
+.no-margin {
+    margin: 0px;
+}

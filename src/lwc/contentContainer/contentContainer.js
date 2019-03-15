@@ -9,6 +9,9 @@ import ContentLandingContentType from '@salesforce/label/c.ContentLandingContent
 import ContentLandingCluster from '@salesforce/label/c.ContentLandingCluster';
 import ContentLandingCategory from '@salesforce/label/c.ContentLandingCategory';
 import ContentLandingTags from '@salesforce/label/c.ContentLandingTags';
+import SidebarFilterTitle from '@salesforce/label/c.SidebarFilterTitle';
+import ContentLandingNew from '@salesforce/label/c.ContentLandingNew';
+import ContentLandingTemplate from '@salesforce/label/c.ContentLandingTemplate';
 import { registerListener, unregisterAllListeners } from 'c/pubsub';
 import { CurrentPageReference } from 'lightning/navigation';
 
@@ -16,10 +19,13 @@ export default class ContentContainer extends LightningElement {
     @api objectApiName;
     @api filtersValues;
     @api tabledata;
+    @api headerButtonsPrimary;
+    @api headerButtonsSecondary;
     
     @track renderHeader;
     @track renderFilterSidebar;
     @track renderTable;
+    @track SidebarFilterTitle;
     
     filters;
     filtersStatus;
@@ -101,6 +107,27 @@ export default class ContentContainer extends LightningElement {
             {label: ContentLandingCluster, value: null, id: null},
             {label: ContentLandingCategory, value: null, id: null},
             {label: ContentLandingTags, value: null, id: null},
+        ];
+        this.SidebarFilterTitle = SidebarFilterTitle;
+        this.headerButtonsPrimary = [
+            {
+                type: 'primary',
+                label: ContentLandingNew,
+                labelAlternative: null,
+                action: 'handleOnClick',
+                typeAction: 'dispatchEvent',
+                show: true
+            }
+        ]
+        this.headerButtonsSecondary = [
+            {
+                type: 'secondary',
+                label: ContentLandingTemplate,
+                labelAlternative: null,
+                action: 'handleOnClick',
+                typeAction: 'redirect',
+                show: true
+            }
         ];
     }
 
