@@ -8,7 +8,9 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Content Event Record Page</masterLabel>
-    <pageTemplate>flexipage:recordHomeSingleColNoHeaderTemplateDesktop</pageTemplate>
+    <template>
+        <name>flexipage:recordHomeSingleColNoHeaderTemplateDesktop</name>
+    </template>
     <sobjectType>Content__c</sobjectType>
     <type>RecordPage</type>
 </FlexiPage>
