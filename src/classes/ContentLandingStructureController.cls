@@ -23,17 +23,19 @@ public class ContentLandingStructureController {
 		@AuraEnabled public String				orgId;
 		@AuraEnabled public String				communityName;
 		@AuraEnabled public List<Cluster__c>	clusterLeafs;
+		@AuraEnabled public String 				urlPathPrefix;
 
-		public GeneralWrapper(String orgId, String communityName, List<Cluster__c> clusterLeafs){
+		public GeneralWrapper(String orgId, String communityName, List<Cluster__c> clusterLeafs, String urlPathPrefix){
 			this.orgId 			= orgId;
 			this.communityName	= communityName;
 			this.clusterLeafs	= clusterLeafs;
+			this.urlPathPrefix 	= urlPathPrefix;
 		}
 	}
 
 	@AuraEnabled(cacheable=true)
 	public static GeneralWrapper getGeneralData(){
-		return new GeneralWrapper(getOrgId(), getCommunityName(), getClusterLeafs());
+		return new GeneralWrapper(getOrgId(), getCommunityName(), getClusterLeafs(), getUrlPathPrefix(getClusterUserId()));
 	}
 
 	@AuraEnabled(cacheable=true)
@@ -100,6 +102,15 @@ public class ContentLandingStructureController {
 			return String.valueOf(site.get(0).Id).substring(0, 15);
 		else
 			throw new AuraException('The site does not exist');
+	}
+
+	@AuraEnabled(cacheable=true)
+	public static String getUrlPathPrefix(String clusterId){
+		String networkName = getClusterRoot(clusterId).CommunityName__c;
+		List<Network> net = [SELECT UrlPathPrefix FROM Network WHERE Name = :networkName];
+		if(net.isEmpty())
+			throw new AuraException('The community does not exist');
+		return net[0].UrlPathPrefix;
 	}
 
 	@AuraEnabled(cacheable=true)

@@ -16,6 +16,7 @@
     <aura:attribute name="isLogin"          type="Boolean"  default="false" />
     <aura:attribute name="instance"         type="String"                   />
     <aura:attribute name="communityName"    type="String"                   />
+    <aura:attribute name="urlPathPrefix"    type="String"                   />
 
 	<div class="container all-page-height">
         <div class="slds-grid slds-p-horizontal_xxx-small" style="height:100% !important;">
