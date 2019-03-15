@@ -1,0 +1,28 @@
+<template>
+    <template if:true={filters}>
+        <template for:each={filters} for:item="itemAcordeon">
+            <template  if:true={itemAcordeon.isMultiPicklist}>
+                <div key={itemAcordeon.id}>
+                    <button class="accordion" onclick={openAccordeon}>{itemAcordeon.label}</button>
+                    <div class="panel">
+                        <template for:each={itemAcordeon.values} for:item="itemAcordeonValue">
+                            <label key={itemAcordeonValue.id} ><input type="checkbox" checked={itemAcordeonValue.isSelected} data-label={itemAcordeonValue.label} data-accordeon={itemAcordeon.label} name={itemAcordeon.label} value={itemAcordeonValue.id} onclick={acordeonCheckboxSelected}>{itemAcordeonValue.label}</label>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template  if:false={itemAcordeon.isMultiPicklist}>
+                <div key={itemAcordeon.id}>
+                    <button class="accordion" onclick={openAccordeon}>{itemAcordeon.label}</button>
+                    <div class="panel">
+                        <!-- <label><input type="radio" data-accordeon={itemAcordeon.label} name={itemAcordeon.label} value='null' onclick={acordeonItemSelected}>None</label> -->
+                        <template for:each={itemAcordeon.values} for:item="itemAcordeonValue">
+                            <label key={itemAcordeonValue.id} ><input type="radio" checked={itemAcordeonValue.isSelected} data-label={itemAcordeonValue.label} data-accordeon={itemAcordeon.label} name={itemAcordeon.label} value={itemAcordeonValue.id} onclick={acordeonRadioBtnSelected}>{itemAcordeonValue.label}</label>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <button class="btn-filter-remove" onclick={removeFilters} disabled={disableButton}>Delete Filters</button>
+    </template>
+</template>

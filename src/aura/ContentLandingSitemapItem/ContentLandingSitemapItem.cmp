@@ -1,0 +1,27 @@
+<aura:component >
+
+	<aura:attribute name="menu" 		type="Object" 					/>
+	<aura:attribute name="isOpen" 		type="Boolean"	default="false" />
+	<aura:attribute name="level" 		type="Integer" 					/>
+    <aura:attribute name="navigation"	type="String"   				/>
+    <aura:attribute name="url"          type="String"       			/>
+    <aura:attribute name="homeUrl"      type="String"       			/>
+
+	<div class="slds-col slds-border_bottom slds-p-vertical_x-small" style="{! 'padding-left:' + (v.level*20) + 'px;'}">
+		<div class="slds-grid slds-gutters">
+		  	<div class="slds-col slds-size_1-of-12">
+		    	<aura:if isTrue="{! v.menu.childsMenu.length > 0}" >
+			   		<lightning:buttonIcon iconName="{!(v.isOpen) ? 'utility:chevrondown' : 'utility:chevronright'}" variant="bare" onclick="{! c.onSectionToggle }" class="centered slds-p-bottom_xx-small" />
+			   </aura:if>
+		  	</div>
+		  	<div class="slds-col slds-size_11-of-12">
+		    	<span><a onclick="{!c.onMenuClick}">{!v.menu.menu.Name}</a></span>
+		  	</div>
+		</div>
+	</div>
+	<aura:if isTrue="{! and(v.menu.childsMenu.length > 0, v.isOpen) }" >
+		<aura:iteration items="{!v.menu.childsMenu}" var="subMenu" >
+		  		<c:ContentLandingSitemapItem menu="{!subMenu}" level="{! v.level+1}" />
+		</aura:iteration>
+	</aura:if>
+</aura:component>

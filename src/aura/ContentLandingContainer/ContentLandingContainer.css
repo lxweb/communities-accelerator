@@ -1,0 +1,12 @@
+.THIS.container{
+    padding: 0px;
+    flex-shrink: 0;
+    box-shadow: none;
+    display: block;
+}
+.THIS .slds-tabs_default__content {
+    padding: 0px !important;
+}
+.THIS .slds-tabs--default__content {
+    padding: 0px !important;
+}

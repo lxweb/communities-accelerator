@@ -1,0 +1,32 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:registerEvent name="appEventRecordList" type="c:SetRecordList"/>
+    
+	<aura:handler event="c:SetSearchResults" action="{!c.handleSearchResults}"/>
+
+	<aura:attribute name="results" type="Map[]" />
+	<aura:attribute name="selectedItem" type="String" />
+
+	<aura:if isTrue="{! v.results.length > 0}">
+		<div>
+	        <lightning:verticalNavigation selectedItem="{!v.selectedItem}" onselect="{! c.onItemSelect}">
+
+	            <lightning:verticalNavigationSection label="{!$Label.c.GlobalSearchResults}">
+	            	<aura:iteration items="{!v.results}" var="item">
+	            		<aura:if isTrue="{!item.iconName != null}">
+			                <lightning:verticalNavigationItemIcon
+			                    label="{!item.sectionName}"
+			                    name="{!item.sectionApiName}"
+			                    iconName="{!item.iconName}"/>
+			                <aura:set attribute="else">
+				                <lightning:verticalNavigationItem
+				                    label="{!item.sectionName}"
+				                    name="{!item.sectionApiName}" />
+			            	</aura:set>
+			            </aura:if>
+		            </aura:iteration>
+
+	            </lightning:verticalNavigationSection>
+	        </lightning:verticalNavigation>
+	    </div>
+	</aura:if>
+</aura:component>

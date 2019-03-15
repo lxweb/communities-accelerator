@@ -36,7 +36,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_FAQ_Page</content>
+        <content>Content_FAQ_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.FAQ</recordType>
@@ -54,7 +54,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_Advance_Content_Page</content>
+        <content>Content_AdvanceContent_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.AdvanceContent</recordType>
@@ -71,7 +71,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_News_Page</content>
+        <content>Content_News_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.News</recordType>
@@ -189,7 +189,6 @@
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
-
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Search_Component_Record_Page</content>

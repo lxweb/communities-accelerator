@@ -1,0 +1,49 @@
+<aura:component >
+
+	<aura:attribute name="contentData" type="Object" />
+	<aura:attribute name="currentUserName" type="String" />
+	<aura:attribute name="Name" type="String" default="{!$Label.c.ContentDetailNew}"/>
+	<aura:attribute name="LastModifiedDate" type="String" default="{!$Label.c.ContentDetailNever}" />
+	<aura:attribute name="CreatedById" type="String" />
+	<aura:attribute name="Status" type="String" default="{!$Label.c.ContentDetailDraft}"/>
+	<aura:attribute name="RecordType" type="String" />
+
+	<aura:registerEvent name="upsertContentsEvent" type="c:upsertContentsEvent"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+	<div class="slds-grid slds-wrap">
+	    <div class="slds-col slds-size_1-of-2">
+	        <h4>{!$Label.c.ContentDetailContent} > {!v.RecordType} </h4>
+	        <h1>{!v.Name}  </h1>
+	    </div>
+	    <div class="slds-col slds-size_1-of-2" >
+	    	<aura:if isTrue="{!(v.Status) == ($Label.c.ContentDetailDraft)}">
+	        	<button class="slds-button slds-button_neutral" onclick="{!c.doSaveDraft}">{!$Label.c.ContentDetailSaveDraft}</button>
+	        	<aura:set attribute="else">
+	        		<button class="slds-button slds-button_text-destructive" onclick="{!c.doUnPublishContent}" >{!$Label.c.ContentDetailUnpublish}</button>
+	        	</aura:set>
+	        </aura:if>
+	        <button class="slds-button slds-button_brand" onclick="{!c.doPublishContent}" >{!$Label.c.ContentDetailPublish}</button>
+	    </div>
+	    <div class="slds-col slds-size_1-of-2">
+	        <div class="slds-grid">
+	            <div class="slds-col slds-size_1-of-3">
+	                <h4>{!$Label.c.ContentDetailPublicationStatus}</h4>
+	                <h1><b>{!v.Status}</b></h1>
+	            </div>
+	            <div class="slds-col slds-size_1-of-3">
+	                <h4>{!$Label.c.ContentDetailLastSave}</h4>
+	                <h1><b>{!v.LastModifiedDate}</b></h1>
+	            </div>
+	            <div class="slds-col slds-size_1-of-3">
+	                <h4>{!$Label.c.ContentDetailCreatedBy}</h4>
+	                <h1><b>{!v.CreatedById}</b></h1>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="slds-col slds-size_1-of-2">
+	    </div>
+	</div>
+
+</aura:component>

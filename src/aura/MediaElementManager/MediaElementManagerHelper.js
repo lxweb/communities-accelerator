@@ -40,12 +40,13 @@
 		//component.set("v.isLoading", true);
 		var searchValue = component.get("v.searchValue");
 		var elementPerPage = component.get("v.elementPerPage");
-		var action = component.get("c.getMediaElements");
+		var action = component.get("c.getData");
 
 		action.setParams({
 			stringOffset: component.get("v.offset").toString(),
 			searchText: searchValue,
-			stringElementPerPage: elementPerPage.toString()
+			stringElementPerPage: elementPerPage.toString(),
+			findContent: 'false'
 		});
 		action.setCallback(this, function(f) {
             if(f.getState() === "SUCCESS") {

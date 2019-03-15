@@ -1,0 +1,16 @@
+<aura:component>
+    <aura:attribute name="contentData" type="Object" />
+    <aura:attribute name="imageUrl" type="String" />
+
+    <lightning:input label="{!$Label.c.NewsContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
+    <lightning:input label="{!$Label.c.NewsContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
+    <lightning:input label="{!$Label.c.NewsContentDetailExtract}" name="contentExtract" value="{!v.contentData.Extract__c}"/>
+    <br />
+    <ui:outputText value="{!$Label.c.NewsContentDetailBody}"/>
+    <c:richTextContainer contentBody="{!v.contentData.Body__c}" />
+    <ui:outputText value="{!$Label.c.NewsContentDetailImage}"/><br />
+    <c:MediaElementSearcher />
+    <aura:if isTrue="{!v.imageUrl}">
+        <img style="height:200px" src="{!v.imageUrl}" />
+    </aura:if>
+</aura:component>

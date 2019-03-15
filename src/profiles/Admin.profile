@@ -5,14 +5,19 @@
         <field>Recipe__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Recipe__c.Cluster__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Recipe__c.Content__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Recipe__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -45,12 +50,12 @@
         <field>RecipeIngredient__c.CustomIngredient__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.Brand__c</field>
         <readable>true</readable>
     </fieldPermissions>
-	<fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>RecipeIngredient__c.BrandVariant__c</field>
         <readable>true</readable>
@@ -107,6 +112,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Brand__c.StatusApprovalProcess__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>MenuAssignment__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -148,11 +158,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Menu__c.ParentMenu__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Menu__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -316,11 +321,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>CategoryAssignment__c.StatusApprovalProcess__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Category__c.Cluster__c</field>
         <readable>true</readable>
@@ -333,11 +333,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Category__c.ParentCategory__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Category__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -556,21 +551,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Component__c.ShowDescription__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Component__c.ShowImage__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Component__c.ShowTitle__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Component__c.ShowOrder__c</field>
         <readable>true</readable>
@@ -587,11 +567,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Component__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Component__c.PredictiveSearchEnabled__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -603,11 +578,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ContentAssignment__c.ExternalId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>ContentAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -642,12 +612,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.DetailDescription__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Content__c.DetailTitle__c</field>
+        <field>Content__c.Body__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -697,12 +662,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.ListDescription__c</field>
+        <field>Content__c.Extract__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.ListTitle__c</field>
+        <field>Content__c.Layout__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.Title__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -747,17 +717,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Content__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Content__c.URLRedirect__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MediaElementAssignment__c.Category__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -788,16 +748,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MediaElementAssignment__c.Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MediaElementAssignment__c.Location__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MediaElementAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -872,11 +822,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MediaElement__c.StatusApprovalProcess__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MediaElement__c.TabletFileExtension__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -923,11 +868,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>TagAssignment__c.ExternalId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>TagAssignment__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1253,7 +1193,15 @@
     <tabVisibilities>
         <tab>Recipe__c</tab>
         <visibility>DefaultOn</visibility>
-    </tabVisibilities>  
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>NewContent</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities> 
+    <tabVisibilities>
+        <tab>Sitemap</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities> 
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -1582,7 +1530,7 @@
         <recordType>Content__c.Recipe</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>   
-	<recordTypeVisibilities>
+    <recordTypeVisibilities>
         <default>true</default>
         <recordType>RecipeIngredient__c.BrandIngredient</recordType>
         <visible>true</visible>

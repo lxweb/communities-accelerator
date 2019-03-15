@@ -8,3 +8,28 @@
 .THIS .detail{
 	font-size:16px;
 }
+
+.THIS .text-block {
+	font-size:36px;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.6);
+	text-align: left;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 50px;
+	color: white;
+}
+
+.THIS.container {
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+	.THIS .detailImage {
+		position: relative;
+    	left: 50%;
+    	max-width: 100vw;
+    	width: 100vw;
+    	transform: translateX(-50%);
+	}
+}

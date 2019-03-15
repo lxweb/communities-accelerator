@@ -17,6 +17,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>ContentLandingColumnFields__c</fullName>
+        <externalId>false</externalId>
+        <label>Content Landing Column Fields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>EnableMediaElementAutomaticResize__c</fullName>
         <defaultValue>true</defaultValue>
         <description>If true, the user will have the option to resize a desktop image for tablet and/or mobile.</description>

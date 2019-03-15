@@ -12,34 +12,67 @@
 			helper.showContentDetail(component, false);
 		}
 	},
+	newContent : function(component, event, helper) {
+		
+		var cWrapper = component.get('v.componentWrapper');
+		var componentRecordTypeId = cWrapper.component.RecordType.DeveloperName;
+		var action = component.get('c.getContentRecordtypeId');
+
+		action.setParams({
+			componentRecordType: componentRecordTypeId,
+		});
+
+	    action.setCallback(this, function(f) {
+            if(f.getState() === "SUCCESS") {
+            	var contntRecordTypeWp = action.getReturnValue();
+
+
+				var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
+				if(contntRecordTypeWp.haveContentRecordType){
+
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent' + '?RecordTypeId=' + contntRecordTypeWp.contentRecordTypeId + '&ComponentId=' + cWrapper.component.Id;
+				}else{
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
+				}
+				
+				window.open(url);
+
+	        }
+	    });
+	    
+	    $A.enqueueAction(action);
+	},
 	showHideEditFrame : function(component, helper, show) {
 		var cWrapper = component.get('v.componentWrapper');
 		var mainPanel = document.getElementById(component.get('v.componentWrapper.component.Id'));
+		if (mainPanel){
 		var divComponentNamePanel = mainPanel.getElementsByClassName('componentNamePanel')[0];
 		var divButtonsPanel = mainPanel.getElementsByClassName('buttonsPanel')[0];
 		var contentDetail = component.find('contentDetail');
-		
-		if(show){
-			mainPanel.classList.add('borderColorBlue');
-			divComponentNamePanel.classList.remove('hidden');
-			divButtonsPanel.classList.remove('hidden');
-			divComponentNamePanel.classList.add('show');
-			divButtonsPanel.classList.add('show');
-			if(contentDetail != undefined){
-				if(component.get("v.contentActivated")){
-					contentDetail.getElement().classList.remove('hidden');
-					contentDetail.getElement().classList.add('show');
+			if(show){
+				mainPanel.classList.add('borderColorBlue');
+				divComponentNamePanel.classList.remove('hidden');
+				divButtonsPanel.classList.remove('hidden');
+				divComponentNamePanel.classList.add('show');
+				divButtonsPanel.classList.add('show');
+
+				if(contentDetail != undefined){
+					if(component.get("v.contentActivated")){
+						contentDetail.getElement().classList.remove('hidden');
+						contentDetail.getElement().classList.add('show');
+					}
 				}
-			}
-		}else{
-			mainPanel.classList.remove('borderColorBlue');
-			divComponentNamePanel.classList.remove('show');
-			divButtonsPanel.classList.remove('show');
-			divComponentNamePanel.classList.add('hidden');
-			divButtonsPanel.classList.add('hidden');
-			if(contentDetail != undefined){
-				contentDetail.getElement().classList.remove('show');
-				contentDetail.getElement().classList.add('hidden');
+			}else{
+				mainPanel.classList.remove('borderColorBlue');
+				divComponentNamePanel.classList.remove('show');
+				divButtonsPanel.classList.remove('show');
+				divComponentNamePanel.classList.add('hidden');
+				divButtonsPanel.classList.add('hidden');
+			
+				if(contentDetail != undefined){
+					contentDetail.getElement().classList.remove('show');
+					contentDetail.getElement().classList.add('hidden');
+				}
 			}
 		}
 	},

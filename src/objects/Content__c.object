@@ -34,7 +34,10 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Tab</actionName>
-        <type>Default</type>
+        <content>ContentLandingContainer</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>LightningComponent</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
@@ -57,6 +60,16 @@
     <enableSearch>true</enableSearch>
     <enableSharing>false</enableSharing>
     <enableStreamingApi>false</enableStreamingApi>
+    <fields>
+        <fullName>Body__c</fullName>
+        <externalId>false</externalId>
+        <label>Body</label>
+        <length>10000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
     <fields>
         <fullName>ButtonLabel__c</fullName>
         <externalId>false</externalId>
@@ -137,36 +150,13 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     </fields>
     <fields>
         <fullName>Description__c</fullName>
-        <description>Description of the content</description>
         <externalId>false</externalId>
-        <inlineHelpText>Enter a description for this content</inlineHelpText>
         <label>Description</label>
         <length>4096</length>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
-    </fields>
-    <fields>
-        <fullName>DetailDescription__c</fullName>
-        <externalId>false</externalId>
-        <label>Detail Description</label>
-        <length>10000</length>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Html</type>
-        <visibleLines>20</visibleLines>
-    </fields>
-    <fields>
-        <fullName>DetailTitle__c</fullName>
-        <externalId>false</externalId>
-        <label>Detail Title</label>
-        <length>255</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>EventDates__c</fullName>
@@ -263,6 +253,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Extract__c</fullName>
+        <externalId>false</externalId>
+        <label>Extract</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>HTMLContent__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>If html content wants to be uploaded use this field instead of the Long Description one.</inlineHelpText>
@@ -297,6 +297,36 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Layout__c</fullName>
+        <externalId>false</externalId>
+        <label>Layout</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Title Top</fullName>
+                    <default>true</default>
+                    <label>Title Top</label>
+                </value>
+                <value>
+                    <fullName>Title Middle</fullName>
+                    <default>false</default>
+                    <label>Title Middle</label>
+                </value>
+                <value>
+                    <fullName>Title Bottom</fullName>
+                    <default>false</default>
+                    <label>Title Bottom</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>LinkDetail__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -308,27 +338,6 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>ListDescription__c</fullName>
-        <externalId>false</externalId>
-        <label>List Description</label>
-        <length>2000</length>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>10</visibleLines>
-    </fields>
-    <fields>
-        <fullName>ListTitle__c</fullName>
-        <externalId>false</externalId>
-        <label>List Title</label>
-        <length>255</length>
-        <required>false</required>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Location__c</fullName>
@@ -488,9 +497,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
     </fields>
     <fields>
         <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -504,22 +514,28 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                     <label>Draft</label>
                 </value>
                 <value>
-                    <fullName>Active</fullName>
+                    <fullName>Published</fullName>
                     <default>false</default>
-                    <label>Active</label>
+                    <label>Published</label>
                 </value>
                 <value>
-                    <fullName>Inactive</fullName>
+                    <fullName>Archived</fullName>
                     <default>false</default>
-                    <label>Inactive</label>
-                </value>
-                <value>
-                    <fullName>Scheduled</fullName>
-                    <default>false</default>
-                    <label>Scheduled</label>
+                    <label>Archived</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>URLRedirect__c</fullName>
@@ -621,6 +637,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Advance Content.</description>
         <label>Advance Content</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -681,7 +712,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -696,7 +727,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -704,11 +735,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>true</default>
             </values>
             <values>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Scheduled</fullName>
+                <fullName>Published</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -719,6 +746,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Banner content. This content will scroll or appear-fade inside a Banner. The data this type of content allows are Media elements</description>
         <label>Banner</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -779,7 +821,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -794,12 +836,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Published</fullName>
+                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -809,6 +855,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Brand Detail content. This content will display a a brand detail including all it related brands. The data this type of content allows are Media elements</description>
         <label>Brand Detail</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -869,7 +930,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -884,12 +945,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Published</fullName>
+                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -899,6 +964,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Event content. This content will be shown inside an Event. The data this type of content allows are Media elements and Event metadata such as event date, event capacity, etc.</description>
         <label>Event</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -959,7 +1039,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -974,12 +1054,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Published</fullName>
+                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -989,6 +1073,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new FAQ content. This content will be shown inside a FAQ list. The data this type of content allows are Texts for questions and answers</description>
         <label>FAQ</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -1049,7 +1148,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1064,12 +1163,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Published</fullName>
+                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -1079,6 +1182,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new News content. This content will be shown inside a News. The data this type of content allows are Media elements and News metadata such as title, news description, etc.</description>
         <label>News</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -1139,7 +1257,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1154,12 +1272,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Draft</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Published</fullName>
+                <default>false</default>
             </values>
         </picklistValues>
     </recordTypes>
@@ -1169,6 +1291,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Configure a new Recipe content. This content will be shown inside a Recipe</description>
         <label>Recipe</label>
         <picklistValues>
+            <picklist>Layout__c</picklist>
+            <values>
+                <fullName>Title Bottom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Middle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Title Top</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>OverlayQuadrant__c</picklist>
             <values>
                 <fullName>Bottom-Center</fullName>
@@ -1229,7 +1366,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
             <values>
-                <fullName>Draft</fullName>
+                <fullName>Initial</fullName>
                 <default>true</default>
             </values>
             <values>
@@ -1244,7 +1381,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Active</fullName>
+                <fullName>Archived</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1252,11 +1389,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>true</default>
             </values>
             <values>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Scheduled</fullName>
+                <fullName>Published</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1290,18 +1423,18 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <fullName>HTMLContentAndLongDescription</fullName>
         <active>false</active>
         <description>Validation on HTMLContent__c and LongDescription__c fields</description>
-        <errorConditionFormula>AND(NOT(ISBLANK(HTMLContent__c)), LEN(DetailDescription__c) &lt;&gt; 0)</errorConditionFormula>
+        <errorConditionFormula>AND(NOT(ISBLANK(HTMLContent__c)), LEN(Body__c) &lt;&gt; 0)</errorConditionFormula>
         <errorMessage>Can not fill both HTML Content and Long Description fields.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>OverlayQuadrantObligatory</fullName>
         <active>true</active>
-        <description>RecordType &quot;Banner&quot;; Cuando OverlayQuadrant__c este vació y los campos ListTitle__c, ListDescription__c, ButtonLabel__c tienen valor u OverlayQuadrant__c tiene valor y todos los campos ListTitle__c, ListDescription__c, ButtonLabel__c  estén todos vacíos.</description>
+        <description>RecordType &quot;Banner&quot;; Cuando OverlayQuadrant__c este vació y los campos Title__c, Extract__c, ButtonLabel__c tienen valor u OverlayQuadrant__c tiene valor y todos los campos Title__c, Extract__c, ButtonLabel__c  estén todos vacíos.</description>
         <errorConditionFormula>AND(
     OR(
-        AND(ISBLANK(TEXT(OverlayQuadrant__c)), OR(NOT(ISBLANK(ListTitle__c)), NOT(LEN(ListDescription__c) = 0), NOT(ISBLANK(ButtonLabel__c))))  
+        AND(ISBLANK(TEXT(OverlayQuadrant__c)), OR(NOT(ISBLANK(Title__c)), NOT(LEN(Extract__c) = 0), NOT(ISBLANK(ButtonLabel__c))))  
     ,
-        AND(NOT(ISBLANK(TEXT(OverlayQuadrant__c))), AND(ISBLANK(ListTitle__c), LEN(ListDescription__c) = 0, ISBLANK(ButtonLabel__c)))  
+        AND(NOT(ISBLANK(TEXT(OverlayQuadrant__c))), AND(ISBLANK(Title__c), LEN(Extract__c) = 0, ISBLANK(ButtonLabel__c)))  
     ),
                  RecordType.Name = &quot;Banner&quot;
 )</errorConditionFormula>

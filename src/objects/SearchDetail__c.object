@@ -267,12 +267,5 @@ Ex: &quot;utility:user&quot;</inlineHelpText>
         <errorDisplayField>URLParameterName__c</errorDisplayField>
         <errorMessage>Only alfanumeric or underscore characters are admitted</errorMessage>
     </validationRules>
-    <validationRules>
-        <fullName>Unique_Section_Name</fullName>
-        <active>true</active>
-        <errorConditionFormula>AND(VLOOKUP($ObjectType.SearchDetail__c.Fields.Name, $ObjectType.SearchDetail__c.Fields.Name, Name) = Name, OR(ISNEW(), ISCHANGED(Name)))</errorConditionFormula>
-        <errorDisplayField>Name</errorDisplayField>
-        <errorMessage>Name field must be unique</errorMessage>
-    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

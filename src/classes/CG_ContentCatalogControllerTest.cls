@@ -17,7 +17,7 @@ public with sharing class CG_ContentCatalogControllerTest {
 		component.add(componentElem);
 		insert component;
 		List<Content__c> content = MockupFactory.createContent('Brand Detail', cluster, 1);
-		content[0].DetailTitle__c = 'Soy un test';
+		content[0].Description__c = 'Soy un test';
 		update content[0];
 		List<Brand__c> brand = MockupFactory.createBrand('brandTest', 1, cluster.Id);
 		brand[0].BrandContent__c = content[0].Id;
@@ -57,7 +57,7 @@ public with sharing class CG_ContentCatalogControllerTest {
 		component.add(componentElem);
 		insert component;
 		List<Content__c> content = MockupFactory.createContent('Brand Detail', cluster, 1);
-		content[0].ListTitle__c = 'Soy un test';
+		content[0].Title__c = 'Soy un test';
 		update content[0];
 		List<Brand__c> brand = MockupFactory.createBrand('brandTest', 1, cluster.Id);
 		brand[0].BrandContent__c = content[0].Id;
@@ -74,7 +74,7 @@ public with sharing class CG_ContentCatalogControllerTest {
 		Set<Id> contentId = new Set<Id>();
 		contentId.add(content[0].Id);
 
-		List<CG_ContentCatalogController.QueryContentWrapper> contWrapper = CG_ContentCatalogController.getContentWrapper(contentId, 'ListTitle__c ASC', 1 , true, 1);
+		List<CG_ContentCatalogController.QueryContentWrapper> contWrapper = CG_ContentCatalogController.getContentWrapper(contentId, 'Title__c ASC', 1 , true, 1);
 		test.stopTest();
 		//Then
 	}

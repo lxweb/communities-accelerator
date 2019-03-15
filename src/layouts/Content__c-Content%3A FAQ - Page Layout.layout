@@ -12,11 +12,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Description__c</field>
+                <field>LinkDetail__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>LinkDetail__c</field>
+                <field>Title__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -57,11 +57,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ListTitle__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>ListDescription__c</field>
+                <field>Body__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -71,16 +67,7 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>FAQ Detail Information</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>DetailTitle__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>DetailDescription__c</field>
-            </layoutItems>
-        </layoutColumns>
+        <layoutColumns/>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
@@ -90,7 +77,7 @@
         <label>Status</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Required</behavior>
                 <field>Status__c</field>
             </layoutItems>
         </layoutColumns>

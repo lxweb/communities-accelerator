@@ -9,11 +9,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Name</field>
+                <field>Status__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Description__c</field>
+                <behavior>Required</behavior>
+                <field>Name</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -30,6 +30,26 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>LinkDetail__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Layout__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Title__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Extract__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Body__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Description__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -73,6 +93,9 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <miniLayout>
+        <fields>Status__c</fields>
+    </miniLayout>
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>

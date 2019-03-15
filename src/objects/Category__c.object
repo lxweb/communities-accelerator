@@ -97,26 +97,15 @@
     </fields>
     <fields>
         <fullName>Status__c</fullName>
+        <description>Manage the status of the record.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Active</fullName>
-                    <default>true</default>
-                    <label>Active</label>
-                </value>
-                <value>
-                    <fullName>Inactive</fullName>
-                    <default>false</default>
-                    <label>Inactive</label>
-                </value>
-            </valueSetDefinition>
+            <valueSetName>Status</valueSetName>
         </valueSet>
     </fields>
     <label>Category</label>
@@ -124,7 +113,6 @@
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>ParentCategory__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
         <language>en_US</language>
@@ -133,7 +121,6 @@
         <fullName>CP_Category_Brand</fullName>
         <columns>NAME</columns>
         <columns>ParentCategory__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>3) Brand</label>
         <language>en_US</language>
@@ -142,7 +129,6 @@
         <fullName>CP_Category_BrandVariant</fullName>
         <columns>NAME</columns>
         <columns>ParentCategory__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>4) Brand Variant</label>
         <language>en_US</language>
@@ -151,7 +137,6 @@
         <fullName>CP_Category_Classification</fullName>
         <columns>NAME</columns>
         <columns>ParentCategory__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>1) Category</label>
         <language>en_US</language>
@@ -160,7 +145,6 @@
         <fullName>CP_Category_Type</fullName>
         <columns>NAME</columns>
         <columns>ParentCategory__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>2) Type</label>
         <language>en_US</language>
