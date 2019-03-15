@@ -10,11 +10,11 @@
 	<aura:attribute name="searchedString" 	type="String" 		/>
 	
 	<div class="slds-grid slds-wrap">
-  		<div class="slds-col slds-size_4-of-4 slds-medium-size_1-of-4">
+  		<div class="slds-col slds-size_1-of-4">
     		<span>
     			<aura:if isTrue="{! v.results.length > 0}">
 					<div>
-				        <lightning:verticalNavigation selectedItem="{!v.selectedItem}" onselect="{! c.onItemSelect}" compact="{!$Browser.isPhone}">
+				        <lightning:verticalNavigation selectedItem="{!v.selectedItem}" onselect="{! c.onItemSelect}">
 
 				            <lightning:verticalNavigationSection label="{!$Label.c.GlobalSearchResults}">
 				            	<aura:iteration items="{!v.results}" var="item">
@@ -37,7 +37,7 @@
 				</aura:if>
     		</span>
   		</div>
-  		<div class="slds-col slds-size_4-of-4 slds-medium-size_3-of-4">
+  		<div class="slds-col slds-size_3-of-4">
     		<span>
     			<c:CG_RecordList />
     		</span>

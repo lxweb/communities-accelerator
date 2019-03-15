@@ -289,10 +289,10 @@ src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
 node_modules/
 lwc/
-force-app/
-.vscode/settings.json
-.vim-force.com/session.properties
-package-lock.json
-package.json
-.sfdx
 .forceignore
+force-app/
+package.json
+package-lock.json
+.vim-force.com/session.properties
+.vscode/settings.json
+.sfdx
