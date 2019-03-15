@@ -34,7 +34,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
 	constructor(){
 		super();
-		this.modalRecordTypeTitle = ModalRecordTypeTitle + this.sObjectLabel;
+		this.modalRecordTypeTitle = ModalRecordTypeTitle;
 		this.generalClose = General_Close;
 		this.generalContents = GeneralContents;
 		this.structureContent = StructureContent;
@@ -56,6 +56,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 		getObjectLabel({ sObjectType: this.objectapiname})
 			.then(result => {
 					this.sObjectLabel = JSON.parse(JSON.stringify(result));
+					this.modalRecordTypeTitle += ' ' + this.sObjectLabel;
 			})
 			.catch( err => {
 					console.log(err);
