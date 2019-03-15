@@ -14,6 +14,7 @@ public with sharing class ContentDetailController {
             this.behaviourMessage = behaviourMessage;
         }
     }
+    
 
     //VISIBILITY WRAPPER
     public class VisibilitySelectorWrapper {

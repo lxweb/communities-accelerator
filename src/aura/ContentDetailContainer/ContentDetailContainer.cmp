@@ -9,7 +9,6 @@
     <aura:attribute name="visibilitySelectors" type="List" />
     <aura:attribute name="contentData" type="Object" />
     <aura:attribute name="currentUserName" type="String" />
-    <aura:attribute name="behaviourMessage" type="String" />
     <aura:attribute name="mediaElementId" type="String" />
     <aura:attribute name="imageUrl" type="String" />
 
@@ -39,7 +38,12 @@
                         <lightning:card >
                             <aura:set attribute="title">
                                 <aura:if isTrue="{!v.contentData}">
-                                        <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
+                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'News'}">
+                                        <c:ContentNewsRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Event'}">
+                                        <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
+                                    </aura:if>                                    
                                 </aura:if>
                             </aura:set>
                         </lightning:card>
