@@ -83,4 +83,5 @@ public with sharing class ContentDetailControllerTest {
         system.assert(saveSuccess.id != null);
         system.assert([SELECT count() FROM ContentAssignment__c] == 1);
     }
+    
 }
