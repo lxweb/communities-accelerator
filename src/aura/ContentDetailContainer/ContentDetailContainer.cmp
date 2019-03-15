@@ -44,6 +44,15 @@
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Event'}">
                                         <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
                                     </aura:if>                                    
+                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Banner'}">
+                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
+                                    </aura:if>       
+                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'AdvanceContent'}">
+                                        <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
+                                    </aura:if>  
+                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'FAQ'}">
+                                        <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" />
+                                    </aura:if>                                                                          
                                 </aura:if>
                             </aura:set>
                         </lightning:card>
