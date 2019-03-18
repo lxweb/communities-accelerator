@@ -5,6 +5,9 @@
 						<template if:true={modalRecordTypeTitle}>
 							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
 								{modalRecordTypeTitle}
+								<template if:true={sObjectLabel}>
+									{sObjectLabel}
+								</template>
 							</h2>
 						</template>
 						<div>
