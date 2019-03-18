@@ -16,8 +16,4 @@
     <ui:outputText value="{!$Label.c.AdvanceContentContentDetailBody}"/>
     <c:richTextContainer contentBody="{!v.contentData.HTMLContent__c}" />
     <ui:outputText value="{!$Label.c.AdvanceContentContentDetailImage}"/><br />
-    <c:MediaElementSearcher />
-    <aura:if isTrue="{!v.imageUrl}">
-        <img style="height:200px" src="{!v.imageUrl}" />
-    </aura:if>
 </aura:component>
