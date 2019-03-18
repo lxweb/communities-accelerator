@@ -1,0 +1,9 @@
+.THIS .selectedLayout{
+    border:solid;
+    border-color:blue;
+}
+.THIS .layout-box{
+    float:left;
+    margin:20px;
+    cursor:pointer;
+}

@@ -15,6 +15,17 @@ public with sharing class ContentDetailController {
         }
     }
 
+    //SAVE RESPONSE WRAPPER
+    public class SaveResponseWrapper {
+        @auraEnabled public Boolean isSuccess;
+        @auraEnabled public String message;
+
+        public SaveResponseWrapper(Boolean isSuccess, String message){
+            this.isSuccess = isSuccess;
+            this.message = message;
+        }
+    }
+
     //VISIBILITY WRAPPER
     public class VisibilitySelectorWrapper {
         @auraEnabled public String label;
@@ -81,7 +92,7 @@ public with sharing class ContentDetailController {
     }
 
     @AuraEnabled
-    public static Content__c saveContent(String componentId, Content__c content, String visibilitySelectorsString, String mediaElementId, String action, List<TagAssignment__c> contentOldTagAssignments){
+    public static SaveResponseWrapper saveContent(String componentId, Content__c content, String visibilitySelectorsString, String mediaElementId, String action, List<TagAssignment__c> contentOldTagAssignments){
         Savepoint sp = Database.setSavepoint();
         try{
             List<VisibilitySelectorWrapper> visibilitySelectors = (List<VisibilitySelectorWrapper>)JSON.deserialize(visibilitySelectorsString, List<VisibilitySelectorWrapper>.class);
@@ -91,12 +102,17 @@ public with sharing class ContentDetailController {
                 updateMediaElementAssignment(content, mediaElementId);
             if(componentId != null)
                 insertContentAssignment(componentId, content);                                                                                                               
-            return content;
+            return new SaveResponseWrapper(true,content.Id);
+        }catch(DMLException e){
+            Database.rollback(sp);
+            System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
+            System.debug(e.getStackTraceString());
+            return new SaveResponseWrapper(false, e.getDMLMessage(0));
         }catch(Exception e){
             Database.rollback(sp);
             System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
             System.debug(e.getStackTraceString());
-            return null;
+            return new SaveResponseWrapper(false, label.NewsContentDetailError);
         }        
     }
 

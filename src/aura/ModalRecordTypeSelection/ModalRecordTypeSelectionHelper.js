@@ -28,6 +28,12 @@
 	        if(response.getState() === "SUCCESS") {
 	           	var options = response.getReturnValue();
 				component.set("v.options", options);
+				var option = [];
+				var structureContent = {Id: 'structureContent',
+										Name: "Structure Content", 
+	           							Description: $A.get("$Label.c.StructureContentDescription")};
+	           	option.push(structureContent);
+				component.set("v.option", option);
 		    }
 		});
 			    
@@ -45,11 +51,28 @@
 		$A.util.removeClass(modalBox, 'slds-fade-in-open');
 		$A.util.removeClass(modalBackdrop,'slds-backdrop--open');
 	},
-	goToNewRecord : function(component){
-    	var urlEvent = $A.get("e.force:navigateToURL");
-	    urlEvent.setParams({
-	      "url": "/lightning/n/NewContent?RecordTypeId=" + component.get("v.value")
-	    });
+	goToNewRecord : function(component){	
+		var helper = this;	
+    	var action = component.get("c.getNoRedirectRecordTypes");
+    	var recordTypeId = component.get("v.value");
+		action.setCallback(this, function(response) {
+	        if(response.getState() === "SUCCESS") {
+	           	var noRedirectRecordTypes = response.getReturnValue();
+	           	if(recordTypeId == 'structureContent'){
+					helper.navigateTo(component, "/lightning/n/Sitemap");
+	           	} else if(! noRedirectRecordTypes.includes(recordTypeId)){
+					helper.navigateTo(component, "/lightning/n/NewContent?RecordTypeId=" + recordTypeId);
+	    		}
+			}
+		});			    
+		$A.enqueueAction(action);  
+	},
+	navigateTo : function(component, url){
+		var urlEvent = $A.get("e.force:navigateToURL");
+	   	urlEvent.setParams({
+	      "url": url
+	    });	
 	    urlEvent.fire();
 	}
 })
+

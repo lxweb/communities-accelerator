@@ -22,6 +22,7 @@
 				component.set('v.clusterLeafs', getGeneralData.clusterLeafs);
 				component.set('v.orgId', getGeneralData.orgId);
 				component.set('v.communityName', getGeneralData.communityName);
+				component.set('v.urlPathPrefix', getGeneralData.urlPathPrefix);
 			}
 		});
 		$A.enqueueAction(action);

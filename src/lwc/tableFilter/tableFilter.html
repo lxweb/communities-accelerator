@@ -2,7 +2,7 @@
     <!-- the container element determine the height of the datatable -->
     <div class="datatable-container">
         <template if:true={tabledata.title}>
-            <h1 class="h1-30-black-light">{tabledata.title}</h1>
+            <h1 class="table-title">{tabledata.title}</h1>
         </template>
         <table role="table" class="slds-max-medium-table_stacked-horizontal slds-no-row-hover">
             <template if:true={tabledata}>
@@ -42,8 +42,8 @@
                             </tr>
                         </template>
                     </template>
-                    <template if:false={tabledata.columnSet}>
-                        <!-- <span>{tabledata.noRowsMessage}</span> -->
+                    <template if:false={tabledata.contentWrappers}>
+                        <p class="msg-no-records">{tabledata.message}</p>
                     </template>
                 </tbody>
             </template>            

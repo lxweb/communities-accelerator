@@ -8,6 +8,7 @@
     <aura:attribute name="sObjectLabel"     type="String" />
     <aura:attribute name="rtDevNameList" 	type="List" />
     <aura:attribute name="options"			type="List" />
+    <aura:attribute name="option"           type="List" />
     <aura:attribute name="value"			type="String" />
     
         <section aura:id="modalBox" role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal">
@@ -22,17 +23,18 @@
                     </h2>
                 </header>
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                    <fieldset class="slds-m-left_xx-large slds-m-top_medium slds-form-element">
+                    <fieldset class="slds-m-left_xx-large slds-m-top_medium slds-form-element no-margin">
+                        <div class="bottom-line">
                         <table>
-                            <tr><td width="25%">
-                                <legend class="slds-form-element__label gravity-top">{!$Label.c.ModalRecordTypeLabel}</legend></td>
+                            <tr><td width="35%">
+                                <legend class="slds-form-element__label gravity-top">{!$Label.c.GeneralContents}</legend></td>
                                 <div class="slds-form-element__control slds-m-top_large">
                                     <aura:iteration items="{!v.options}" var="type" indexVar="key">
                                         <span class="slds-radio">
                                             <input id="{!'radio-'+type.Id}" value="{!type.Id}" name="options" type="radio" onchange="{!c.optionSelected}"/>
                                             <label class="slds-radio__label" for="{!'radio-'+type.Id}">
                                                 <span class="slds-radio_faux"></span>
-                                                <span class="slds-form-element__label">{!type.Name}</span><br></br>
+                                                <span class="slds-form-element__label"><b>{!type.Name}</b></span><br></br>
                                                 <div class="slds-p-left_xx-large">
                                                 <span class="slds-form-element__label">{!type.Description}</span><br></br>
                                                 </div>
@@ -43,6 +45,29 @@
                                 </div>
                             </tr>
                         </table>
+                        </div>
+                        <div>
+                        <table>
+                            <tr><td width="35%">
+                                <legend class="slds-form-element__label gravity-bottom">{!$Label.c.StructureContent}</legend></td>
+                                <div class="slds-form-element__control slds-m-top_large">
+                                    <aura:iteration items="{!v.option}" var="type" indexVar="key">
+                                        <span class="slds-radio">
+                                            <input id="{!'radio-'+type.Id}" value="{!type.Id}" name="options" type="radio" onchange="{!c.optionSelected}"/>
+                                            <label class="slds-radio__label" for="{!'radio-'+type.Id}">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><b>{!type.Name}</b></span><br></br>
+                                                <div class="slds-p-left_xx-large">
+                                                <span class="slds-form-element__label">{!type.Description}</span><br></br>
+                                                </div>
+                                                </label>
+                                        </span>
+                                        <br></br> 
+                                    </aura:iteration>
+                                </div>
+                            </tr>
+                        </table>
+                        </div>                      
                     </fieldset>
 					<!--<lightning:radioGroup name="radioGroupRequired"
                           label="{!$Label.c.ModalRecordTypeLabel}"
