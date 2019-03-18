@@ -21,7 +21,7 @@
 	</div>
 	<aura:if isTrue="{! and(v.menu.childsMenu.length > 0, v.isOpen) }" >
 		<aura:iteration items="{!v.menu.childsMenu}" var="subMenu" >
-		  		<c:ContentLandingSitemapItem menu="{!subMenu}" level="{! v.level+1}" />
+		  		<c:ContentLandingSitemapItem menu="{!subMenu}" level="{! v.level+1}" navigation="{!v.navigation}" url="{!v.url}" homeUrl="{!v.homeUrl}"/>
 		</aura:iteration>
 	</aura:if>
 </aura:component>

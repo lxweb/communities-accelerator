@@ -1,6 +1,10 @@
 <aura:component>
+    
     <aura:attribute name="contentData" type="Object" />
     <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="layoutOptions" type="List" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
     <lightning:input label="{!$Label.c.NewsContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
     <lightning:input label="{!$Label.c.NewsContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
@@ -13,4 +17,13 @@
     <aura:if isTrue="{!v.imageUrl}">
         <img style="height:200px" src="{!v.imageUrl}" />
     </aura:if>
+
+    <!--Choose Layout-->
+    <ui:outputText value="{!$Label.c.NewsContentDetailChooseLayout}"/>
+    <div>
+        <aura:if isTrue="{!v.layoutOptions.length > 0}">
+            <c:ContentLayoutPicker selectedValue="{!v.contentData.Layout__c}" layoutOptions="{!v.layoutOptions}" />
+        </aura:if>
+    </div>
+
 </aura:component>

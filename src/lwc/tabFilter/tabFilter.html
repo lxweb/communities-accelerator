@@ -1,6 +1,5 @@
 <template>
     <div class="tab-container">
-        <!-- <button class="btn-tab-item" data-index="-1" name={label.ContentLandingAll} value={label.ContentLandingAll} onclick={filterForTab}><span>{label.ContentLandingAll}</span></button> -->
         <template for:each={listtabfilter} for:item="tabItem" for:index="index">
                 <c-tab-item 
                     key={tabItem.value}

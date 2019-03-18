@@ -45,7 +45,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_Event_Page</content>
+        <content>Content_Event_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.Event</recordType>
@@ -122,7 +122,7 @@
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
-        <content>Content_Banner_Page</content>
+        <content>Content_Banner_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>Content__c</pageOrSobjectType>
         <recordType>Content__c.Banner</recordType>

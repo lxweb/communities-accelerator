@@ -18,9 +18,19 @@
                 </div>
                 <div class="slds-page-header__col-actions">
                     <div class="slds-page-header__controls">
-                        <lightning-button-group>
-                            <button class="btn-header-new">{label.ContentLandingNew}</button>
-                            <button class="btn-header-new">{label.ContentLandingTemplate}</button>
+                        <lightning-button-group class="header-button-group">
+                            <template for:each={headerbuttonsprimary} for:item="button">
+                                <template if:true={button.type}>
+                                    <button key={button.label} data-typeaction={button.typeAction} data-label={button.label} class="slds-button slds-button_brand btn-header-new" onclick={handleOnClick}>{button.label}</button>
+                                </template>
+                            </template>
+                        </lightning-button-group>
+                        <lightning-button-group class="header-button-group">
+                            <template for:each={headerbuttonssecondary} for:item="button">
+                                <template if:true={button.type}>
+                                    <button key={button.label} data-typeaction={button.typeAction} class="slds-button slds-button_neutral btn-header-new" onclick={handleOnClick}>{button.label}</button>
+                                </template>
+                            </template>
                         </lightning-button-group>
                     </div>
                 </div>
@@ -33,29 +43,32 @@
             <div class="slds-grid slds-p-horizontal_small slds-p-vertical_x-small">
                 <template for:each={filterselected} for:item="filter">
                     <div key={filter.label} class="slds-p-horizontal_small slds-border_right slds-truncate">
-                        <div class="slds-text-title_caps">{filter.label}</div>
+                        <div class="slds-text-title_caps slds-truncate">{filter.label}</div>
                         <template if:false={filter.value}>
                             <div class="slds-text-heading_small slds-p-top_xx-small slds-align_absolute-center slds-text-value_caps"> --- </div>
                         </template>
                         <template if:true={filter.value}>
-                            <div class="slds-text-heading_small slds-p-top_xx-small slds-text-value_caps" title={filter.value}>{filter.value}</div>
+                            <div class="slds-text-heading_small slds-p-top_xx-small slds-text-value_caps slds-truncate" title={filter.value}>{filter.value}</div>
                         </template>
                     </div>
                 </template>
                 <div class="slds-col_bump-left">
-                    <div onkeyup={searchEnter}  onfocusout={searchOnFocusOut} class="slds-p-horizontal_small div-input-search slds-align_absolute-center">
+                    <div class="slds-p-horizontal_small div-input-search slds-align_absolute-center">
                         <input
                             class="searchInputFilter"
                             id="searchInput"
                             name="searchInput"
                             type="search"
                             placeholder={label.General_Search}
+                            onkeyup={searchEnter} onblur={searchOnFocusOut}
                         ></input>
-                        <lightning-icon
+                        <lightning-button-icon
                             icon-name="utility:search"
-                            size="x-small"
-                            alternative-text={label.General_Search}>
-                        </lightning-icon>
+                            size="medium"
+                            variant="bare"
+                            alternative-text={label.General_Search}
+                            onclick={searchOnIconClick}>
+                        </lightning-button-icon>
                     </div>
                 </div>
             </div>

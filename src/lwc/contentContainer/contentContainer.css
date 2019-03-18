@@ -1,0 +1,18 @@
+.slds-wrap{
+    align-items: initial;
+}
+.slds-col{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.left-col{
+    background-color: #FFF;
+}
+.title-filter{
+    padding-top: 18px;
+    padding-bottom: 47px;
+    font-size: 16px;
+}
+.tableContainer{
+    background-color: #FFF;
+}

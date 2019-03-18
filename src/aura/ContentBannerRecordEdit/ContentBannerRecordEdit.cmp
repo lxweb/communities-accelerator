@@ -1,0 +1,64 @@
+<aura:component>
+    <aura:attribute name="contentData" type="Object" />
+    <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="layoutOptions" type="List" />
+    <aura:attribute name="behaviourMessage" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:if isTrue="{!v.behaviourMessage}">
+        <strong>
+            <ui:outputText value="Component Behaviour" /> </strong>
+        <br />
+        <br />
+        <ui:outputText value="{!v.behaviourMessage}" />
+        <br />
+        <br />
+    </aura:if>
+
+    <!--Banner Name-->
+    <lightning:input label="{!$Label.c.BannerContentDetailName}" name="bannerName" value="{!v.contentData.Name}"
+        required="true" aura:id="bannerName" />
+    <!--External Id-->
+    <lightning:input label="{!$Label.c.BannerContentDetailExternalId}" name="contentExternalId"
+        value="{!v.contentData.ExternalId__c}" />
+    <!--Banner Type-->
+    <lightning:select name="bannerType" label="{!$Label.c.BannerContentDetailType}"
+        value="{!v.contentData.BannerFrameType__c}">
+        <option text="Hero" value="Hero" />
+        <option text="Page" value="Page" />
+        <option text="Square" value="Square" />
+    </lightning:select>
+    <!--Feature Image-->
+    <ui:outputText value="{!$Label.c.NewsContentDetailImage}" /><br />
+    <c:MediaElementSearcher />
+    <aura:if isTrue="{!v.imageUrl}">
+        <img style="height:200px" src="{!v.imageUrl}" />
+    </aura:if>
+    <!--Title-->
+    <lightning:input label="{!$Label.c.BannerContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}"
+        required="true" aura:id="contentName" />
+    <!--Extract-->
+    <lightning:input label="{!$Label.c.BannerContentDetailExtract}" name="contentExtract"
+        value="{!v.contentData.Extract__c}" />
+    <br />
+    <!--Booton-->
+    <lightning:input label="{!$Label.c.BannerContentDetailButton}" name="buttonLabel"
+        value="{!v.contentData.ButtonLabel__c}" />
+    <br />
+    <!--Link-->
+    <c:LookupInput objectAPIName="Navigation__c" IconName="standard:link"
+        selectedRecordId="{!v.contentData.LinkDetail__c}" label="{!$Label.c.BannerContentDetailLink}" />
+    <br />
+    <ui:outputText value="{!$Label.c.BannerContentDetailLayout}" /><br />
+    <!--Choose Layout-->
+    <div>
+        <aura:if isTrue="{!v.layoutOptions.length > 0}">
+            <c:ContentLayoutPicker selectedValue="{!v.contentData.OverlayQuadrant__c}"
+                layoutOptions="{!v.layoutOptions}" />
+        </aura:if>
+    </div>
+
+
+
+
+</aura:component>

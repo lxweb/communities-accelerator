@@ -36,9 +36,9 @@ public with sharing class ContentDetailControllerTest {
         insert new TagAssignment__c(Content__c = content.id, Tag__c = tag.id);
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataExisting(content.Id);
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), me.id, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), me.id, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess != null);
+        system.assert(saveSuccess.isSuccess);
 
     }
 
@@ -50,9 +50,9 @@ public with sharing class ContentDetailControllerTest {
         ContentDetailController.DataWrapper dataWrapper=  ContentDetailController.getDataNew(rt.Id, component.Id);
         dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
 
     }
     
@@ -64,9 +64,9 @@ public with sharing class ContentDetailControllerTest {
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
         dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
     }
         
     @isTest 
@@ -78,9 +78,10 @@ public with sharing class ContentDetailControllerTest {
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
         dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then        
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
         system.assert([SELECT count() FROM ContentAssignment__c] == 1);
     }
+    
 }
