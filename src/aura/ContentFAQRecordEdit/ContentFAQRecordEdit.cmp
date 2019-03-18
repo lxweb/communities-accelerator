@@ -3,17 +3,19 @@
     <aura:attribute name="behaviourMessage" type="Object" />
     <aura:attribute name="imageUrl" type="String" />
 
-    <strong> <ui:outputText value="Component Behaviour"/> </strong> 
-    <br />
-    <br />
-    <ui:outputText value="{!v.behaviourMessage}"/>
-    <br />
-    <br />
+    <aura:if isTrue="{!v.behaviourMessage}">
+        <strong>
+            <ui:outputText value="Component Behaviour" /> </strong>
+        <br />
+        <br />
+        <ui:outputText value="{!v.behaviourMessage}" />
+        <br />
+        <br />
+    </aura:if>
     <lightning:input label="{!$Label.c.FAQContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
     <lightning:input label="{!$Label.c.FAQContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
     <br />
 
     <ui:outputText value="{!$Label.c.FAQContentDetailBody}"/>
     <c:richTextContainer contentBody="{!v.contentData.Body__c}" />
-    <ui:outputText value="{!$Label.c.FAQContentDetailImage}"/><br />
 </aura:component>
