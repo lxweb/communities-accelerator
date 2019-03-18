@@ -56,6 +56,9 @@
 	},
 
 	upsertContent : function(component, eventAction){
+		if(component.get("v.pageReference")){
+			var componentId = component.get("v.pageReference").state.ComponentId;
+		}
 		var content = component.get('v.contentData');
 		var visibilitySelectors = component.get('v.visibilitySelectors');
 		var mediaElementId = component.get('v.mediaElementId');
