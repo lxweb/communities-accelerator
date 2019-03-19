@@ -2,18 +2,6 @@
     <aura:attribute name="contentData" type="Object" />
     <aura:attribute name="imageUrl" type="String" />
     <aura:attribute name="layoutOptions" type="List" />
-    <aura:attribute name="behaviourMessage" type="String" />
-
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-    <aura:if isTrue="{!v.behaviourMessage}">
-        <strong>
-            <ui:outputText value="Component Behaviour" /> </strong>
-        <br />
-        <br />
-        <ui:outputText value="{!v.behaviourMessage}" />
-        <br />
-        <br />
-    </aura:if>
 
     <!--Banner Name-->
     <lightning:input label="{!$Label.c.BannerContentDetailName}" name="bannerName" value="{!v.contentData.Name}"
