@@ -55,7 +55,6 @@ public class ContentLandingStructureControllerTest {
             } catch (AuraException e){
                 System.assert(e.getMessage() == 'The site does not exist' || e.getMessage() == 'The community does not exist', 'error');
             }
-    		
     	}
     }
 
