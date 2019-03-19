@@ -297,6 +297,16 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>IsTemplate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Identifies when a record represents a template</description>
+        <externalId>false</externalId>
+        <label>Is Template</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Layout__c</fullName>
         <externalId>false</externalId>
         <label>Layout</label>
@@ -500,7 +510,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <description>Manage the status of the record.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <required>true</required>
+        <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -525,6 +535,40 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>TemplateDescription__c</fullName>
+        <description>Description of the template</description>
+        <externalId>false</externalId>
+        <label>Template Description</label>
+        <length>1500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>TemplateUsed__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Relates a content to the template that was used as model when the record was created</description>
+        <externalId>false</externalId>
+        <label>Template Used</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.IsTemplate__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Content__c</referenceTo>
+        <relationshipLabel>Contents</relationshipLabel>
+        <relationshipName>RelatedContents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Title__c</fullName>
