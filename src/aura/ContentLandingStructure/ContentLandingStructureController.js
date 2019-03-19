@@ -14,6 +14,7 @@
 			component.set("v.url", component.get("v.homeUrl") + "?clusterId=" + component.get("v.clusterId"));
 		} else {
 			console.log("no login");
+			component.set("v.isLoading", false);
 		}
 	}
 })

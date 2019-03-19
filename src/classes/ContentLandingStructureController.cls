@@ -1,5 +1,15 @@
 public class ContentLandingStructureController {
 
+	public class SitemapWrapper {
+		@AuraEnabled public List<MenuWrapper> menus;
+		@AuraEnabled public List<Navigation__c> navigations;
+
+		public SitemapWrapper(List<MenuWrapper> menus, List<Navigation__c> navigations){
+			this.menus			= menus;
+			this.navigations 	= navigations;
+		}
+	}
+
 	public class MenuWrapper{
 		@AuraEnabled public Menu__c				menu;
 		@AuraEnabled public List<MenuWrapper>	childsMenu;
@@ -44,17 +54,21 @@ public class ContentLandingStructureController {
 	}
 
 	@AuraEnabled(cacheable=true)
-	public static List<MenuWrapper> getMenus(){
+	public static SitemapWrapper getMenus(){
 		Map<Id, Set<Id>> 		fatherChilds 	= new Map<Id, Set<Id>>();
 		Map<Id, MenuWrapper> 	menuWrapperMap 	= new Map<Id, MenuWrapper>();
 		List<MenuWrapper> 		menuWrappers 	= new List<MenuWrapper>();
+		Set<Id>					navigations 	= new Set<Id>();
 		Map<Id,Menu__c> 		menuMap 		= new Map<Id,Menu__c>([
-									SELECT Id, Name, Navigation__r.URL__c, RecordType.DeveloperName,
+									SELECT Id, Name, Navigation__c, Navigation__r.URL__c, RecordType.DeveloperName,
 										ParentMenu__r.Name, ParentMenu__r.Navigation__r.URL__c, ParentMenu__r.RecordType.DeveloperName
 									FROM Menu__c 
 									WHERE (Navigation__r.Type__c = 'Internal' AND ParentMenu__c = null) OR (Navigation__r.Type__c = 'Internal' AND ParentMenu__r.Navigation__r.Type__c = 'Internal')]);
 
 		for(Menu__c m : menuMap.values()){
+			if(m.Navigation__c != null){
+				navigations.add(m.Navigation__r.Id);
+			}
 			if(m.ParentMenu__r != null){
 				if(fatherChilds.containsKey(m.ParentMenu__r.Id)){
 					fatherChilds.get(m.ParentMenu__r.Id).add(m.Id);
@@ -84,7 +98,13 @@ public class ContentLandingStructureController {
 			}
 		}
 
-		return menuWrappers;
+
+
+		return new SitemapWrapper(menuWrappers, getInternalNavigations(navigations));
+	}
+
+	public static List<Navigation__c> getInternalNavigations(Set<Id> notIncludedNavigations){
+		return [SELECT Id, Name, URL__c FROM Navigation__c WHERE Type__c = 'Internal' AND Id NOT IN :notIncludedNavigations];
 	}
 
 	@AuraEnabled(cacheable=true)
