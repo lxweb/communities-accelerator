@@ -6,26 +6,26 @@ public class ModalRecordTypeController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<RecordType> getRecordTypes(String sObjectType, List<String> recordTypes){
-        List<Map<String,String>>            rtValues    = new List<Map<String,String>>();
-        Map<String,Schema.RecordTypeInfo>   recordTypeInfos = Schema.getGlobalDescribe().get(sObjectType).getDescribe().getRecordTypeInfosByDeveloperName();
-        if(recordTypes.isEmpty()){
-            return getSortedRecordTypes(sObjectType, recordTypes);
-//            return [SELECT Id, Name, Description FROM RecordType WHERE SobjectType =: sObjectType];
-        } else {
-            return [SELECT Id, Name, Description FROM RecordType WHERE SobjectType =: sObjectType AND DeveloperName IN :recordTypes];
-        }
+    public static List<RecordType> getContentRecordTypes(String sObjectType){
+        AcceleratorSettings__c acceleratorSettings = [SELECT Id, ContentLandingRecordTypes__c FROM AcceleratorSettings__c];
+        List<String> recordTypeNames = acceleratorSettings.ContentLandingRecordTypes__c.split(',');
+        return getSortedRecordTypes(sObjectType, recordTypeNames);
     }
 
-    static List<RecordType> getSortedRecordTypes(String sObjectType, List<String> recordTypes){
-        AcceleratorSettings__c acceleratorSettings = [SELECT Id, ContentLandingRecordTypes__c FROM AcceleratorSettings__c];
-        recordTypes = acceleratorSettings.ContentLandingRecordTypes__c.split(',');
-        List<RecordType> recordTypesTemp = [SELECT Id, DeveloperName, Name, Description FROM RecordType WHERE SobjectType =: sObjectType AND DeveloperName IN :recordTypes];
-        RecordType [] recordTypesFinal = new RecordType [recordTypes.size()];
+    @AuraEnabled(cacheable=true)
+    public static List<RecordType> getTemplateRecordTypes(String sObjectType){
+        AcceleratorMetadata__mdt acceleratorMetadata = [SELECT Id, ContentTemplateRecordTypes__c FROM AcceleratorMetadata__mdt];
+        List<String> recordTypeNames = acceleratorMetadata.ContentTemplateRecordTypes__c.split(',');
+        return getSortedRecordTypes(sObjectType, recordTypeNames);
+    }
+
+    static List<RecordType> getSortedRecordTypes(String sObjectType, List<String> recordTypeNames){
+        List<RecordType> recordTypesTemp = [SELECT Id, DeveloperName, Name, Description FROM RecordType WHERE SobjectType =: sObjectType AND DeveloperName IN :recordTypeNames];
+        RecordType [] recordTypesToReturn = new RecordType [recordTypeNames.size()];
         for(RecordType recordType : recordTypesTemp){
-            recordTypesFinal[recordTypes.indexOf(recordType.DeveloperName)] = recordType;
+            recordTypesToReturn[recordTypeNames.indexOf(recordType.DeveloperName)] = recordType;
         }
-        return recordTypesFinal;
+        return recordTypesToReturn;
     }
 
     @AuraEnabled(cacheable=true)
@@ -36,7 +36,6 @@ public class ModalRecordTypeController {
         for(RecordType recordType : recordTypes){
             toRet.add(recordType.Id);
         }
-        system.debug(toRet);
         return toRet;
     }
 }
