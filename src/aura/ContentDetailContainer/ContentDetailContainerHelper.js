@@ -56,14 +56,10 @@
 	},
 
 	upsertContent : function(component, eventAction){
-		var content = component.get('v.contentData');
-		if(content.ListTitle__c == ''){
-			this.displayErrorMessage($A.get("$Label.c.NewsContentDetailRequiredField"));
-			return;
-		}
 		if(component.get("v.pageReference")){
 			var componentId = component.get("v.pageReference").state.ComponentId;
 		}
+		var content = component.get('v.contentData');
 		var visibilitySelectors = component.get('v.visibilitySelectors');
 		var mediaElementId = component.get('v.mediaElementId');
 		var action = component.get('c.saveContent');
@@ -78,15 +74,15 @@
 		action.setCallback(this, function(response){
 			var state = response.getState();
 			if (state === "SUCCESS") {
-				if(response.getReturnValue()){
-					component.set('v.contentData', response.getReturnValue());
+				if(response.getReturnValue().isSuccess){
+					//component.set('v.contentData', response.getReturnValue());
 					var navEvt = $A.get("e.force:navigateToSObject");
     				navEvt.setParams({
-						"recordId": response.getReturnValue().Id,
+						"recordId": response.getReturnValue().message,
    					 });
     				navEvt.fire();
 				}else{
-					this.displayErrorMessage($A.get("$Label.c.NewsContentDetailError"));
+					this.displayErrorMessage(response.getReturnValue().message);
 				}
 			}
 		});

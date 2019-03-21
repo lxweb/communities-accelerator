@@ -36,9 +36,9 @@ public with sharing class ContentDetailControllerTest {
         insert new TagAssignment__c(Content__c = content.id, Tag__c = tag.id);
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataExisting(content.Id);
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), me.id, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), me.id, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess != null);
+        system.assert(saveSuccess.isSuccess);
 
     }
 
@@ -47,12 +47,12 @@ public with sharing class ContentDetailControllerTest {
         //Given
         Component__c component = [SELECT id FROM Component__c LIMIT 1];
         RecordType rt = [SELECT id FROM RecordType WHERE sObjectType = 'Content__c' AND developerName = 'News'];
-        ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
-        dataWrapper.content.listTitle__c = 'testName';
+        ContentDetailController.DataWrapper dataWrapper=  ContentDetailController.getDataNew(rt.Id, component.Id);
+        dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
 
     }
     
@@ -62,11 +62,11 @@ public with sharing class ContentDetailControllerTest {
         Component__c component = [SELECT id FROM Component__c LIMIT 1];
         RecordType rt = [SELECT id FROM RecordType WHERE sObjectType = 'Content__c' AND developerName = 'FAQ'];
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
-        dataWrapper.content.listTitle__c = 'testName';
+        dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
     }
         
     @isTest 
@@ -76,11 +76,12 @@ public with sharing class ContentDetailControllerTest {
         component.Datasource__c = 'ManualAssignment'; update component;
         RecordType rt = [SELECT id FROM RecordType WHERE sObjectType = 'Content__c' AND developerName = 'FAQ'];
         ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getDataNew(rt.Id, component.Id);
-        dataWrapper.content.listTitle__c = 'testName';
+        dataWrapper.content.Title__c = 'testName';
         //When
-        Content__c saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
+        ContentDetailController.SaveResponseWrapper saveSuccess = ContentDetailController.saveContent(component.Id, dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), null, 'Publish', dataWrapper.content.Tags__r);
         //Then        
-        system.assert(saveSuccess.id != null);
+        system.assert(saveSuccess.isSuccess);
         system.assert([SELECT count() FROM ContentAssignment__c] == 1);
     }
+    
 }

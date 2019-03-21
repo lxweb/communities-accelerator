@@ -10,7 +10,7 @@
 			<aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
 		        <!-- <lightning:accordionSection name="{!wrapper.content.Id}" label="{!wrapper.content.ListTitle__c}">
 		            <aura:set attribute="body">
-		                <aura:unescapedHtml value="{!wrapper.content.ListDescription__c}"/>
+		                <aura:unescapedHtml value="{!wrapper.content.Body__c}"/>
 		            </aura:set>
 				</lightning:accordionSection> -->
 				<div class="slds-grid">

@@ -1,13 +1,8 @@
-.card-header-title .slds-page-header__col-actions .slds-page-header__controls lightning-button-group .btn-header-new:first-child{
-    margin-right: 25px;
+.card-header-title .slds-page-header__col-actions{
+    align-self: center;
 }
-.card-header-title .btn-header-new{
-    background: #7f7f7f;
-    color: white;
-    border-radius: 5px;
-    height: 40px;
-    min-width: 130px;
-    border: none;
+.card-header-title .slds-page-header__col-actions .slds-page-header__controls lightning-button-group:first-child{
+    margin-right: 25px;
 }
 .card-header-title .h1-object-label{
     color: #7f7f7f;
@@ -20,16 +15,22 @@
     font-size: 25px;
 }
 .card-header-title.slds-page-header{
-    background: #d4d4d4;
     border-radius: 0;
-    border: none;
-    margin-bottom: 15px;
+    border-bottom: none;
 }
 .card-header-subtitle{
     background: white;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+.header-button-group.slds-button-group .slds-button:first-child,.header-button-group.slds-button-group .slds-button:last-child{
+    border-radius: .25rem;
 }
 .card-header-subtitle .slds-border_right{
     border-color: #7F7F7F;
+}
+.card-header-subtitle div.slds-border_right:nth-last-child(2){
+    border-right: none;
 }
 .card-header-subtitle .card-header-subtitle-filters{
     border-bottom: 1px solid #7F7F7F;
@@ -37,10 +38,14 @@
 .card-header-subtitle .div-input-search{
     position: relative;
 }
-.card-header-subtitle .div-input-search lightning-icon{
+.card-header-subtitle .div-input-search lightning-button-icon{
     position: absolute;
     right: 20px;
-    top: 10px;
+    top: 6px;
+}
+.card-header-subtitle .div-input-search lightning-button-icon:focus{
+    outline: none;
+    box-shadow: none;
 }
 .card-header-subtitle .div-input-search input{
     height: 35px;
