@@ -6,24 +6,34 @@
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-    <lightning:input label="{!$Label.c.NewsContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
-    <lightning:input label="{!$Label.c.NewsContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
-    <lightning:input label="{!$Label.c.NewsContentDetailExtract}" name="contentExtract" value="{!v.contentData.Extract__c}"/>
-    <br />
-    <ui:outputText value="{!$Label.c.NewsContentDetailBody}"/>
-    <c:richTextContainer contentBody="{!v.contentData.Body__c}" />
-    <ui:outputText value="{!$Label.c.NewsContentDetailImage}"/><br />
-    <c:MediaElementSearcher />
-    <aura:if isTrue="{!v.imageUrl}">
-        <img style="height:200px" src="{!v.imageUrl}" />
-    </aura:if>
-
-    <!--Choose Layout-->
-    <ui:outputText value="{!$Label.c.NewsContentDetailChooseLayout}"/>
-    <div>
-        <aura:if isTrue="{!v.layoutOptions.length > 0}">
-            <c:ContentLayoutPicker selectedValue="{!v.contentData.Layout__c}" layoutOptions="{!v.layoutOptions}" />
+        <aura:if isTrue="{!v.contentData.IsTemplate__c}">
+            <div style="background-color:#EEEEEE;padding:10px;">
+                <lightning:textarea label="Template Description" name="templateDescription" value="{!v.contentData.TemplateDescription__c}" required="true" aura:id="templateDescription"/>
+            </div>
+    
         </aura:if>
-    </div>
+        <div style="padding:10px">
+
+            <lightning:input label="{!$Label.c.NewsContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName"/>
+        <lightning:input label="{!$Label.c.NewsContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
+        <lightning:input label="{!$Label.c.NewsContentDetailExtract}" name="contentExtract" value="{!v.contentData.Extract__c}"/>
+        <br />
+        <ui:outputText value="{!$Label.c.NewsContentDetailBody}"/>
+        <c:richTextContainer contentBody="{!v.contentData.Body__c}" />
+        <ui:outputText value="{!$Label.c.NewsContentDetailImage}"/><br />
+        <c:MediaElementSearcher />
+        <aura:if isTrue="{!v.imageUrl}">
+            <img style="height:200px" src="{!v.imageUrl}" />
+        </aura:if>
+    
+        <!--Choose Layout-->
+        <ui:outputText value="{!$Label.c.NewsContentDetailChooseLayout}"/>
+        <div>
+            <aura:if isTrue="{!v.layoutOptions.length > 0}">
+                <c:ContentLayoutPicker selectedValue="{!v.contentData.Layout__c}" layoutOptions="{!v.layoutOptions}" />
+            </aura:if>
+        </div>
+        </div>
+        
 
 </aura:component>
