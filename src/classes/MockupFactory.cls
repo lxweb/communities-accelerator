@@ -486,5 +486,58 @@ public class MockupFactory {
         insert stepsList;
         return stepsList;
     }
-
+    
+    
+    public static List<Datatable__c> createDatatables(String name, String externalId, String objectApiName, Integer quantity, Id clusterId) {
+        List<Datatable__c> datatablesToCreate = new List<Datatable__c>();
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            Datatable__c dat = new Datatable__c();
+            dat.Name = name + '_' + i;
+            dat.Cluster__c = clusterId;
+            dat.ExternalId__c = externalId + '_' + i;
+            dat.ObjectApiName__c = objectApiName;
+            
+            datatablesToCreate.add(dat);
+        }
+        
+        insert datatablesToCreate;
+        
+        return datatablesToCreate;
+    }
+    
+    public static List<DatatableElement__c> createDatatableElements(String name, String externalId, Integer quantity, Id datatableId) {
+        List<DatatableElement__c> datatableElementsToCreate = new List<DatatableElement__c>();
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            DatatableElement__c datElement = new DatatableElement__c();
+            datElement.Name = name + '_' + i;
+            datElement.ExternalId__c = name + '_' + i;
+            datElement.Datatable__c = datatableId;
+            
+            datatableElementsToCreate.add(datElement);
+        }
+        
+        insert datatableElementsToCreate;
+        
+        return datatableElementsToCreate;
+    }
+    
+    public static List<DatatableAction__c> createDatatableActions(String name, String externalId, Integer quantity, Id datatableId, Id recordtypeId) {
+        List<DatatableAction__c> datatableActionsToCreate = new List<DatatableAction__c>();
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            DatatableAction__c datAction = new DatatableAction__c();
+            datAction.Name = name + '_' + i;
+            datAction.Datatable__c = datatableId;
+            datAction.ExternalId__c = name + '_' + i;
+            datAction.RecordTypeId = recordtypeId;
+            
+            datatableActionsToCreate.add(datAction);
+        }
+        
+        insert datatableActionsToCreate;
+        
+        return datatableActionsToCreate;
+    }
 }

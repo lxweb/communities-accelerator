@@ -1,7 +1,7 @@
 public with sharing class ORGInitUtils {
 	private static map<String, RecordType> mapRecordTypes;
     private static map<String, SObject> mapRecords = new map<String, SObject>();
-    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c','RecipeIngredient__c','Brand__c'};
+    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c','RecipeIngredient__c','Brand__c', 'ListViewAction__c'};
         
     private static void addToMapRecords(List<SObject> records){
         for(SObject rec: records){
@@ -73,6 +73,10 @@ public with sharing class ORGInitUtils {
         upsertContentCartItems();
 
         upsertSearchDetails();
+        /*
+        TriggersHandlerManager.byPassTrigger('ListViewTriggers');
+        upsertListViews();
+        */
     }
 
     private static void upsertClusters(){
@@ -775,5 +779,114 @@ public with sharing class ORGInitUtils {
         
         addToMapRecords(recipeIngList);
         /* Inserta 4 RecipeIngredient__c - END */
+    }
+    
+    public static void upsertListViews() {
+        /* Inserta 1 ListView__c - BEGIN */
+        List<Datatable__c> datatablesList = new List<Datatable__c>();
+        List<DatatableElement__c> datatableElementsList = new List<DatatableElement__c>();
+        List<DatatableAction__c> datatableActionsList = new List<DatatableAction__c>();
+        
+        Datatable__c datatable = new Datatable__c(ActionLabel__c = ''
+                                                , Cluster__c = getId('DUMMY_OnTrade_Global')
+                                                , Description__c = 'This is a dummy list view'
+                                                , ExternalId__c = 'DatatableTest1'
+                                                , Name = 'DatatableTest1'
+                                                , NoRecordsMessage__c = 'There are no records to display'
+                                                , NumberOfColumns__c = '2'
+                                                , ObjectApiName__c = 'Component__c'
+                                                , PagingType__c = 'Bottom'
+                                                , RecordsPerPage__c = 2
+                                                , Title__c = 'Component List'
+                                                , WhereCondition__c = '');
+        
+        datatablesList.add(datatable);
+        
+        Database.upsert(datatablesList, Datatable__c.Fields.ExternalId__c, true);
+        
+        addToMapRecords(datatablesList);
+        /* Inserta 1 Datatable__c - END */
+        
+        /* Inserta 2 DatatableElement__c - BEGIN */
+        DatatableElement__c datatableElement = new DatatableElement__c(ColumnInformation__c = 'Dummy column 1'
+                                                                    , DisplaySettings__c = 'Desktop'
+                                                                    , ExternalId__c = 'DatatableElementTest1'
+                                                                    , FieldApiName__c = 'Name'
+                                                                    , Filtrable__c = false
+                                                                    , Label__c = 'Name'
+                                                                    , Datatable__c = getId('DatatableTest1')
+                                                                    , Name = 'DatatableElementTest1'
+                                                                    , Order__c = 1
+                                                                    , Searchable__c = true
+                                                                    , Sortable__c = true
+                                                                    , Type__c = '');
+        
+        datatableElementsList.add(datatableElement);
+        
+        datatableElement = new datatableElement__c(ColumnInformation__c = 'Dummy column 2'
+                                                                    , DisplaySettings__c = 'Desktop'
+                                                                    , ExternalId__c = 'DatatablelementTest2'
+                                                                    , FieldApiName__c = 'Datasource__c'
+                                                                    , Filtrable__c = false
+                                                                    , Label__c = 'Component Type'
+                                                                    , Datatable__c = getId('DatatableTest1')
+                                                                    , Name = 'DatatableElementTest2'
+                                                                    , Order__c = 2
+                                                                    , Searchable__c = true
+                                                                    , Sortable__c = true
+                                                                    , Type__c = 'Type');
+        
+        datatableElementsList.add(datatableElement);
+        
+        Database.upsert(datatableElementsList, datatableElement__c.Fields.ExternalId__c, true);
+        
+        addToMapRecords(DatatableElementsList);
+        /* Inserta 1 DatatableElement__c - END */
+        
+        /* Inserta 1 DatatableAction__c - BEGIN */
+        DatatableAction__c DatatableAction = new DatatableAction__c(Component__c = 'CG_ClusterSelector'
+                                                                    , DisplaySettings__c = 'Desktop'
+                                                                    , ExternalId__c = 'DatatableRowActionDummy1'
+                                                                    //, Icon__c = ''
+                                                                    , Label__c = 'Action 1'
+                                                                    , Datatable__c = getId('DatatableTest1')
+                                                                    , Name = 'DatatableRowActionDummy1'
+                                                                    //, Navigation__c = ''
+                                                                    , RecordTypeId = getRTId('DatatableAction__c-RowAction').Id
+                                                                    , SelectableRow__c = true
+                                                                    , Type__c = 'Custom');
+        
+        datatableActionsList.add(datatableAction);
+        
+        datatableAction = new DatatableAction__c(DisplaySettings__c = 'Desktop'
+                                                   , ExternalId__c = 'DatatableRowActionDummy2'
+                                                   //, Icon__c = ''
+                                                   , Label__c = 'Action 2'
+                                                   , Datatable__c = getId('DatatableTest1')
+                                                   , Name = 'DatatableRowActionDummy2'
+                                                   , Navigation__c = getId('DUMMY_Nav_home')
+                                                   , RecordTypeId = getRTId('DatatableAction__c-RowAction').Id
+                                                   , SelectableRow__c = true
+                                                   , Type__c = 'Navigation');
+        
+        datatableActionsList.add(datatableAction);
+        
+        datatableAction = new datatableAction__c(DisplaySettings__c = 'Desktop'
+                                                   , ExternalId__c = 'DatatableGlobalActionDummy1'
+                                                   //, Icon__c = ''
+                                                   , Label__c = 'Global Action 1'
+                                                   , Datatable__c = getId('DatatableTest1')
+                                                   , Name = 'DatatableGlobalActionDummy1'
+                                                   , Navigation__c = getId('DUMMY_Nav_home')
+                                                   , RecordTypeId = getRTId('DatatableAction__c-RowAction').Id
+                                                   , SelectableRow__c = true
+                                                   , Type__c = 'Navigation');
+        
+        datatableActionsList.add(datatableAction);
+        
+        Database.upsert(datatableActionsList, DatatableAction__c.Fields.ExternalId__c, true);
+        
+        addToMapRecords(datatableActionsList);
+        /* Inserta 1 DatatableAction__c - END */
     }
 }
