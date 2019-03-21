@@ -100,7 +100,7 @@ public with sharing class CG_ContentCatalogController {
 
 			set<Id> contentIdsByTags = new set<Id>();
 			if(!setComponentTagIds.isEmpty()){
-				for(TagAssignment__c ta: [SELECT Id, Content__c FROM TagAssignment__c WHERE ExternalId__c IN: setComponentTagIds AND Content__c != NULL AND Content__r.RecordType.DeveloperName = 'BrandDetail']){
+				for(TagAssignment__c ta: [SELECT Id, Content__c FROM TagAssignment__c WHERE Id IN: setComponentTagIds AND Content__c != NULL AND Content__r.RecordType.DeveloperName = 'BrandDetail']){
 					contentIdsByTags.add(ta.Content__c);
 				}
 			}
