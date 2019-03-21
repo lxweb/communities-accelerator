@@ -1,7 +1,7 @@
 public with sharing class ORGInitUtils {
 	private static map<String, RecordType> mapRecordTypes;
     private static map<String, SObject> mapRecords = new map<String, SObject>();
-    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c','RecipeIngredient__c','Brand__c', 'ListViewAction__c'};
+    private static set<String> caObjectsSet = new set<String>{'Category__c','CategoryAssignment__c','Cluster__c','ClusterUser__c','Component__c','Content__c','ContentAssignment__c','MediaElement__c','MediaElementAssignment__c','Navigation__c','Tag__c','TagAssignment__c','Translation__c','Menu__c','RecipeIngredient__c','Brand__c', 'DatatableAction__c'};
         
     private static void addToMapRecords(List<SObject> records){
         for(SObject rec: records){
