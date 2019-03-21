@@ -1,15 +1,24 @@
 ({
 	setFilteredSitemap : function(component, searchedStr) {
 		var sitemapBackupString = JSON.stringify(component.get("v.sitemapBackup"));
-		var sitemapBackup = JSON.parse(sitemapBackupString);
+		var sitemapBackup = JSON.parse(sitemapBackupString).menus;
+		var navigationBackup = JSON.parse(sitemapBackupString).navigations;
 		if(searchedStr != null && searchedStr != ''){
 			for(var i=0; i < sitemapBackup.length; i++){
 				i += this.updateMenuWrapper(sitemapBackup[i], sitemapBackup, i, searchedStr);
 			}
-		} 
+			for(var i=0; i < navigationBackup.length; i++){
+				if(!navigationBackup[i].Name.toUpperCase().includes(searchedStr.toUpperCase())){
+					navigationBackup.splice(i, 1);
+					i--;
+				}
+			}
+		}
 		
 		let sitemap = [...sitemapBackup];
+		let navigation = [...navigationBackup];
 		component.set("v.sitemap", sitemap);
+		component.set("v.otherNavigations", navigation);
 	},
 	updateMenuWrapper : function(menuWrapper, array, index, searchedStr){
 		var returnValue;
@@ -50,6 +59,7 @@
 					component.set("v.isLogin", true);
 					component.set("v.url", "https://" + instance + ".preview.salesforce-communities.com/?orgId=" + 
 								component.get("v.orgId") + "&siteId=" + newSite + "&language=en_US");
+					component.set("v.isLoading", true);
 				}
 				console.log(component.get("v.url"));
 			}
