@@ -1,5 +1,6 @@
 @isTest
 private class GeneralUtilsTest {
+    
 	@testSetup
     static void setupTest(){
     	String nameRecordType = 'Banner';
@@ -60,8 +61,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name');
-		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id');
+		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name', true);
+		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id', true);
 		Test.stopTest();
 
 		//Then
@@ -75,8 +76,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeObject('Cluster__c');
-		Boolean result2 = GeneralUtils.isSafeObject('Test__c');
+		Boolean result = GeneralUtils.isSafeObject('Cluster__c', true);
+		Boolean result2 = GeneralUtils.isSafeObject('Test__c', true);
 		Test.stopTest();
 
 		//Then
