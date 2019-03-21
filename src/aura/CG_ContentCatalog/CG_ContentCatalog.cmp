@@ -22,20 +22,21 @@
 	<aura:attribute name="selectedCategories" type="String[]" />
 	<aura:attribute name="showClearFilters" type="Boolean" default="false" />
 	
-	<!-- LOADING -->
+    <!-- LOADING -->
     <aura:attribute name="isLoading" type="boolean" default="true" />
+
     <!-- COMPONENT -->
     <div aura:id="cg_component">
-
-    	<aura:if isTrue="{!v.catalogWrapper.component != null}">
+    	<aura:if isTrue="{!v.catalogWrapper != null}">
 
 	    	<div class="div_main">
-
+                
 	    		<!-- SIDE PANEL -->
 	    		<aura:if isTrue="{!not(v.catalogWrapper.isMini)}">
 			    	<div class="div_side_panel">
 
 			    		<!-- ORDER & LAYOUT -->
+			    	
 			    		<aura:if isTrue="{!or(v.catalogWrapper.component.ShowOrder__c, v.catalogWrapper.component.ShowDisplayMode__c)}">
 					    	<div class="div_order_layout">
 
@@ -43,11 +44,11 @@
 					    			<lightning:select class="select_order" name="selectItem" onchange="{!c.doOrderBy}">
 						    			<option value="Title__c ASC" selected="{!v.orderBy == 'Title__c ASC'}">Alphabetical, A-Z</option>
 						    			<option value="Title__c DESC" selected="{!v.orderBy == 'Title__c DESC'}">Alphabetical, Z-A</option>
-						    			<option value="CreatedDate ASC" selected="{!v.orderBy == 'Creation Date ASC'}">Date, Ascending</option>
-						    			<option value="CreatedDate DESC" selected="{!v.orderBy == 'Creation Date DESC'}">Date, Descending</option>
+						    			<option value="CreatedDate ASC" selected="{!v.orderBy == 'CreatedDate ASC'}">Date, Ascending</option>
+						    			<option value="CreatedDate DESC" selected="{!v.orderBy == 'CreatedDate DESC'}">Date, Descending</option>
 						    		</lightning:select>
 					    		</aura:if>
-
+					    		
 					    		<aura:if isTrue="{!v.catalogWrapper.component.ShowDisplayMode__c}">
 						    		<div class="div_layout slds-button-group viewGrp" role="group">
 						    			<lightning:buttonIcon iconName="utility:picklist_type" title="List" alternativeText="List" onclick="{!c.doViewList}" size="medium"/>
@@ -160,9 +161,9 @@
 		    	</aura:if>
 
 		    	<!-- CATALOG -->
-		    	<div class="{!if(v.catalogWrapper.isMini, 'div_catalog_mini', 'div_catalog')}" onmouseover="{!c.doGetNextPage}" style="{!'width: ' + if(v.catalogWrapper.withFilters, '100', '80') + '%;'}">
+		    	<div class="{!if(v.catalogWrapper.isMini, 'div_catalog_mini', 'div_catalog')}" style="{!'width: ' + if(v.catalogWrapper.withFilters, '100', '80') + '%;'}">
 		    		<aura:iteration items="{!v.catalogWrapper.contentWrapper}" var="catalogItem">
-
+                	
 		    			<!-- LAYOUT LIST -->
 		    			<aura:if isTrue="{!and(v.layout == 'List', v.catalogWrapper.content.Title__c != '')}">
 				    		<div class="{! 'div_item_list ' + catalogItem.content.AssetType__c}" id="{!'contentId-' + catalogItem.content.Id}">
@@ -171,7 +172,8 @@
 			    						<c:CG_ContentTools classIn="btn_item_action" iconName="utility:download" isFromCart="true" contentId="{!catalogItem.contentId}"/>
 			    					</div>
 		    					</aura:if>
-			    				<a href="{! catalogItem.brandURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.brand.Id, 'asset=' + catalogItem.content.Id) }" target="{!v.catalogWrapper.contentWrapper.behavior}">
+		    					
+			    				<a href="{!v.catalogWrapper.navigationURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.content.Brand__c, 'asset=' + catalogItem.content.Id) }">
 				    				<img class="img_item_list_image" src="{!catalogItem.mediaElementImageURL}"/>
 				    				<div class="div_item_list_detail">
 				    					<h4>{!catalogItem.content.Title__c}</h4>
@@ -182,11 +184,11 @@
 			    		</aura:if>
 
 			    		<!-- LAYOUT CARDS -->
+			    
 			    		<aura:if isTrue="{!and(v.layout == 'Cards',v.catalogWrapper.content.Title__c != '')}">
 			    			<div class="{! 'div_item_card ' + catalogItem.content.AssetType__c}" id="{!'contentId-' + catalogItem.content.Id}">
-			    				
 			    				<!-- BRAND & BRAND VARIANTS TYPE CARD -->
-			    				<a href="{! catalogItem.brandURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.brand.Id, 'asset=' + catalogItem.content.Id) }" target="{!v.catalogWrapper.contentWrapper.behavior}">
+			    				<a href="{!v.catalogWrapper.navigationURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.content.Brand__c, 'asset=' + catalogItem.content.Id) }">
 				    				<img class="img_item_card_image" src="{!catalogItem.mediaElementImageURL}"/>
 				    				<aura:if isTrue="{!or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants')}">
 				    					<div class="div_item_card_detail">
@@ -199,11 +201,11 @@
 			    				<!-- OTHER CARDS TYPES -->
 			    				<aura:if isTrue="{!and(v.catalogWrapper.component.Datasource__c != 'Brands', v.catalogWrapper.component.Datasource__c != 'Brand Variants', v.catalogWrapper.content.Title__c != '')}">
 			    					<div class="div_item_card_detail">
-			    						<a href="{! catalogItem.brandURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.brand.Id, 'asset=' + catalogItem.content.Id) }" target="{!v.catalogWrapper.contentWrapper.behavior}">
+			    						<a href="{!v.catalogWrapper.navigationURL + '?' + if(or(v.catalogWrapper.component.Datasource__c == 'Brands', v.catalogWrapper.component.Datasource__c == 'Brand Variants'), 'brand=' + catalogItem.content.Brand__c, 'asset=' + catalogItem.content.Id) }">
 				    						<h4>{!catalogItem.content.Title__c}</h4>
 				    					</a>
 				    					<div class="div_item_card_social_btns">
-				    						<c:CG_ContentTools classIn="btn_item_action" iconName="utility:download" isFromCart="true" contentId="{!ContentSearchWrapper.contentId}"/>
+				    						<c:CG_ContentTools classIn="btn_item_action" iconName="utility:download" isFromCart="false" contentId="{catalogItem.contentId}"/>
 				    					</div>
 				    				</div>
 			    				</aura:if>
