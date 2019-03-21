@@ -81,7 +81,7 @@ public class DatatableTriggers extends TriggersHandler {
     }
 	
     public void validateObjectApiName(Datatable__c recNew) {
-        if(!GeneralUtils.isSafeObject(recNew.ObjectApiName__c)) {
+        if(!GeneralUtils.isSafeObject(recNew.ObjectApiName__c, false)) {
             recNew.addError('The Object ' + recNew.ObjectApiName__c + ' is not valid.');
         }
     }
