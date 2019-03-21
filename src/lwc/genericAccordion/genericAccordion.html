@@ -1,0 +1,10 @@
+<template>
+    <div class="accordion">
+        <button onclick={openAccordion} class="slds-button slds-button_reset btn-accordion">
+            <p class="title">
+                {items.ListTitle__c}
+            </p>
+        </button>
+        <div class="slds-accordion_content scale-out-ver-top content-accordion">{items.ListDescription__c}</div>   
+    </div> 
+</template>
