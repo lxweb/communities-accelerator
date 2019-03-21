@@ -11,7 +11,7 @@
   color: #C0C0C0;
 }
 .accordion .slds-button.slds-button_reset:after {
-  content: url('sfsites/c/resource/IconArrowAccordion');
+  content: url('sfsites/c/resource/Assets/Assets/Icons/arrow.svg');
   float: right;
   margin-left: auto;
   transition: 0.3s;
