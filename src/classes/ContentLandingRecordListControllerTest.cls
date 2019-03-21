@@ -93,7 +93,7 @@ public class ContentLandingRecordListControllerTest {
 		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0];
 		bannerTest.Status__c = 'Draft'; update bannerTest;
 		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0];
-		newsTest.Status__c = 'Draft'; update newsTest;
+		newsTest.Status__c = 'Published'; newsTest.isTemplate__c = true; update newsTest;
 
 		//When
 		ContentLandingRecordListController.TableWrapper tableWrapperTest1 = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null);
@@ -104,5 +104,7 @@ public class ContentLandingRecordListControllerTest {
 		System.debug(tableWrapperTest1.contentWrappers +' '+ tableWrapperTest2.contentWrappers);
 		System.assertEquals(True, tableWrapperTest1.title == tableWrapperTest2.title);
 		System.assertEquals(True, tableWrapperTest1.columnSet == tableWrapperTest2.columnSet);
+		System.assertEquals(True, bannerTest.Id == tableWrapperTest2.contentWrappers.get(0).contentId);
+		System.assertEquals(True, tableWrapperTest2.contentWrappers.get(1).actions.size() > 2);
 	}
 }
