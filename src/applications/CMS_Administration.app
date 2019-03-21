@@ -229,5 +229,6 @@
     <tabs>Brand__c</tabs>
     <tabs>AudienceUser__c</tabs>
     <tabs>SocialNetwork__c</tabs>
+    <tabs>Datatable__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
