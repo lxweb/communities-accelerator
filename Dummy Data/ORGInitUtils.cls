@@ -73,10 +73,9 @@ public with sharing class ORGInitUtils {
         upsertContentCartItems();
 
         upsertSearchDetails();
-        /*
-        TriggersHandlerManager.byPassTrigger('ListViewTriggers');
+        
+        TriggersHandlerManager.byPassTrigger('DatatableTriggers');
         upsertListViews();
-        */
     }
 
     private static void upsertClusters(){
