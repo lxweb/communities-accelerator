@@ -66,10 +66,6 @@ private class DatatableTriggersTest {
         
         List<Database.SaveResult> results = Database.insert(datatables, false);
         
-        Boolean hasError = false;
-        
-        System.assert(!results[0].isSuccess());
-        
         Test.stopTest();
     }
 }
