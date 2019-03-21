@@ -21,7 +21,7 @@ public without sharing virtual class ContentUtils {
         
         List<Id> contentIdList = new List<Id>();
         Set<Id> setCategoriesIds = new Set<Id>();
-
+        string bannerFrameType = component.BannerFrameType__c;
         if(setContentToExclude == null){setContentToExclude = new Set<String>();}
 
         //Armado del query principal a objeto Content
@@ -38,7 +38,10 @@ public without sharing virtual class ContentUtils {
         
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
-            query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
+          
+        query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
+        query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c =: bannerFrameType ' : '';
+            
         }else{
             if(component.Datasource__c != null){
                 //Busqueda de contenido por Datasource
@@ -68,6 +71,7 @@ public without sharing virtual class ContentUtils {
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
                 query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
+
                 query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
@@ -77,6 +81,13 @@ public without sharing virtual class ContentUtils {
                     query += 'AND (EventEndDate__c >: dateAndTime) ';
                 }
             }
+
+
+            query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c =: bannerFrameType ' : '';
+            
+            
+            
+            
         }
 
         //ORDER
@@ -88,6 +99,7 @@ public without sharing virtual class ContentUtils {
             query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
         }       
         
+
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 
