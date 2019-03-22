@@ -595,6 +595,32 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         </valueSet>
     </fields>
     <fields>
+        <fullName>StructureComponent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Structure Component</label>
+        <referenceTo>Component__c</referenceTo>
+        <relationshipLabel>Contents</relationshipLabel>
+        <relationshipName>Contents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StructureNavigation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Structure Navigation</label>
+        <referenceTo>Navigation__c</referenceTo>
+        <relationshipLabel>Contents (Structure Navigation)</relationshipLabel>
+        <relationshipName>Contents1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>TemplateDescription__c</fullName>
         <description>Description of the template</description>
         <externalId>false</externalId>
