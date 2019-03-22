@@ -55,4 +55,16 @@ export default class HeaderListViewPage extends LightningElement {
             
         // }
     }
+    
+    handleOnClickCreateTemplate(event){
+        var typeOfAction = event.currentTarget.dataset.typeaction;
+        var value = event.currentTarget.dataset.label;
+
+        if(typeOfAction === "dispatchEvent"){
+            fireEvent(this.pageRef, 'btnheaderopencreatetemplate', value);
+        }
+        // else if (typeOfAction === "redirect"){
+            
+        // }
+    }
 }
