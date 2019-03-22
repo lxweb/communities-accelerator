@@ -50,14 +50,22 @@ public class ContentLandingStructureControllerTest {
     public static void getGeneralData(){
         List<user> userForTesting = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
     	system.runAs(userForTesting[0]) {
-    		ContentLandingStructureController.getGeneralData();
+            try{
+                ContentLandingStructureController.getGeneralData();
+            } catch (AuraException e){
+                System.assert(e.getMessage() == 'The site does not exist' || e.getMessage() == 'The community does not exist', 'error');
+            }
     	}
     }
 
     @isTest
     public static void getSiteId(){
     	List<Cluster__c> clRoot = [SELECT Id FROM Cluster__c WHERE RecordType.DeveloperName = 'ClusterRoot'];
-    	ContentLandingStructureController.getSiteId(clRoot.get(0).Id);
+        try{
+            ContentLandingStructureController.getSiteId(clRoot.get(0).Id);
+        } catch (AuraException e){
+            System.assertEquals('The site does not exist', e.getMessage(), 'error');
+        }
     }
 
 }

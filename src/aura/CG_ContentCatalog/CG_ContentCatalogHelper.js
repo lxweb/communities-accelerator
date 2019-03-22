@@ -12,7 +12,7 @@
 	        var tag = helper.getUrlParameter('tag');
 	        var category = helper.getUrlParameter('category');
 
-            if(brand){component.set("v.selectedBrands", new Array(tag));}
+            if(brand){component.set("v.selectedBrands", new Array(brand));}
             if(tag){component.set("v.selectedTags", new Array(tag));}
             if(category){component.set("v.selectedCategories", new Array(category));}
             helper.getInitContent(component, event, helper, asset, search, brand, tag, category);

@@ -1,34 +1,5 @@
-<aura:component implements="lightning:actionOverride,force:hasSObjectName,lightning:isUrlAddressable" >
-	<aura:handler name="init" value="{!this}" action="{!c.onInit}" />
-	
-    <aura:attribute name="sObjectName"        type="String" />
-    
+<aura:component implements="force:appHostable,lightning:isUrlAddressable" >
     <div class="container">
-        <!--<div class="slds-grid">
-        	<div class="slds-m-right_x-small">
-                <lightning:card >
-                    <aura:set attribute="title">
-                        <c:ContentSearchFilters sObjectName="{!v.sObjectName}" />
-                    </aura:set>
-                </lightning:card>
-          	</div>
-          	<div class="slds-col slds-m-left_x-small" >
-            	<div class="slds-grid slds-grid_vertical">
-                    <div class="slds-col slds-m-bottom_x-small">
-                     	<span>
-                            <c:ContentLandingHeader sObjectName="{!v.sObjectName}" defaultRecordType="{!v.defaultRecordType}" />
-                        </span>
-                 	</div>
-                  	<div class="slds-col slds-m-top_x-small" >
-                        <lightning:card >
-                            <aura:set attribute="title">
-                                <c:ContentLandingRecordList />
-                            </aura:set>
-                        </lightning:card>
-                  	</div>
-                </div>
-          	</div>
-        </div>-->
-        <c:contentContainer objectApiName="{!v.sObjectName}" />
+        <c:contentContainer objectApiName="Content__c" />
     </div>
 </aura:component>

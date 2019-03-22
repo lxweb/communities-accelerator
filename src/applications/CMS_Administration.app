@@ -218,7 +218,7 @@
     </profileActionOverrides>
     <tabs>Cluster__c</tabs>
     <tabs>Component__c</tabs>
-    <tabs>Content__c</tabs>
+    <tabs>ContentLanding</tabs>
     <tabs>MediaElement__c</tabs>
     <tabs>Category__c</tabs>
     <tabs>Tag__c</tabs>
@@ -229,5 +229,6 @@
     <tabs>Brand__c</tabs>
     <tabs>AudienceUser__c</tabs>
     <tabs>SocialNetwork__c</tabs>
+    <tabs>Datatable__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

@@ -5,17 +5,21 @@
     <aura:attribute name="componentType" type="String" default="Event"/>
     <aura:attribute name="componentWrapper" type="Object" />
     <aura:attribute name="showPaging" type="Boolean" default="{!v.componentWrapper.listAllContentIds.length > v.componentWrapper.contentWrapper.length}"/>
-
+          
     <aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
+        <c:cardList contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentType}"/>
+    </aura:if>
 
-        <!-- PORTRAIT AND HIGHLIGHTS -->
+    <!-- <aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
+
+        PORTRAIT AND HIGHLIGHTS
         <aura:if isTrue="{!or(v.componentWrapper.component.EventsType__c == 'Portrait', v.componentWrapper.component.EventsType__c == 'Highlight')}" >
             <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
                 <c:CG_EventsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}" parentComponentId="{!v.parentComponentId}" type="{!v.componentWrapper.component.EventsType__c}" linkDetail="{!v.componentWrapper.component.LinkDetail__r.URL__c}"/>
             </aura:iteration>
         </aura:if>
 
-        <!-- LANDSCAPE -->
+        LANDSCAPE
         <aura:if isTrue="{!v.componentWrapper.component.EventsType__c == 'Landscape'}" >
             <div class="main-div-landscape" style="{! 'height: ' + v.aspectRatios.height1_5 }">
                 <lightning:layout >
@@ -28,11 +32,14 @@
 
                     <lightning:layoutitem size="{!and(v.componentWrapper.component.PagingType__c == 'Carousel', v.showPaging) ? 10 : 12}">
                         <lightning:layout multipleRows="true" >
-                            <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
-                                <lightning:layoutItem class="{!' slds-x-small-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_' + (12 / if(v.componentWrapper.component.PageSize__c > v.componentWrapper.listAllContentIds.length, v.componentWrapper.listAllContentIds.length, v.componentWrapper.component.PageSize__c)) + '-of-12'}" padding="around-small" >
-                                    <c:CG_EventsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}" parentComponentId="{!v.parentComponentId}" type="{!v.componentWrapper.component.EventsType__c}" linkDetail="{!v.componentWrapper.component.LinkDetail__r.URL__c}" height="{!v.aspectRatios.height1_5}"/>
-                                </lightning:layoutItem> 
-                            </aura:iteration>
+                            <aura:if isTrue="{!v.componentWrapper.contentWrapper.length > 0}" >
+                                <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
+                                    <lightning:layoutItem class="{!' slds-x-small-size_12-of-12 slds-small-size_12-of-12    slds-medium-size_6-of-12 slds-large-size_' + (12 / if(v.componentWrapper.component.PageSize__c >   v.componentWrapper.listAllContentIds.length, v.componentWrapper.listAllContentIds.length,     v.componentWrapper.component.PageSize__c)) + '-of-12'}" padding="around-small" >
+                                        <c:CG_EventsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}   " parentComponentId="{!v.parentComponentId}" type="    {!v.componentWrapper.component.EventsType__c}" linkDetail=" {!v.componentWrapper.component.LinkDetail__r.URL__c}" height="{!v.aspectRatios.height1_5}"/>    
+                                        <c:eventCard event="{!contentItem}"/>
+                                    </lightning:layoutItem> 
+                                </aura:iteration>
+                            </aura:if>
                         </lightning:layout>
                     </lightning:layoutitem>
 
@@ -63,5 +70,5 @@
                 </div>
             </aura:if>
         </aura:if>
-    </aura:if>
+    </aura:if> -->
 </aura:component>

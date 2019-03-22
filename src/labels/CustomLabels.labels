@@ -225,12 +225,36 @@
         <value>Unpublish</value>
     </labels>
     <labels>
+        <fullName>ContentLandingStructurePromptTitle</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Prompt Title</shortDescription>
+        <value>Cluster not selected</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingStructurePromptDescription</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Prompt Description</shortDescription>
+        <value>Choose a cluster to start navigating through the sitemap.</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingStructureNavigation</fullName>
         <categories>Content Landing Structure</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Content Landing Structure Navigation title</shortDescription>
         <value>Navigations</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingStructureOtherNavigations</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Other Navigations</shortDescription>
+        <value>Other navigations</value>
     </labels>
     <labels>
         <fullName>ContentLandingStructureCluster</fullName>
@@ -399,6 +423,14 @@
         <protected>true</protected>
         <shortDescription>Close</shortDescription>
         <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>General_Loading</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Loading</shortDescription>
+        <value>Loading...</value>
     </labels>
     <labels>
         <fullName>General_Delete</fullName>

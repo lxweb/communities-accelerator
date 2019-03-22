@@ -34,7 +34,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
 	constructor(){
 		super();
-		this.modalRecordTypeTitle = ModalRecordTypeTitle;
+		this.modalRecordTypeTitle = ModalRecordTypeTitle + ' ';
 		this.generalClose = General_Close;
 		this.generalContents = GeneralContents;
 		this.structureContent = StructureContent;
@@ -55,12 +55,11 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 	getObjectLbl(){
 		getObjectLabel({ sObjectType: this.objectapiname})
 			.then(result => {
-					this.sObjectLabel = JSON.parse(JSON.stringify(result));
-					this.modalRecordTypeTitle += ' ' + this.sObjectLabel;
+				this.sObjectLabel = JSON.parse(JSON.stringify(result));
 			})
 			.catch( err => {
-					console.log(err);
-					this.sObjectLabel = null;
+				console.log(err);
+				this.sObjectLabel = null;
 			});
 	}
 
@@ -68,19 +67,19 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 	getRecordType(){ 
 		getRecordTypes({ sObjectType: this.objectapiname, recordTypes: this.rtDevNameList})
 			.then(result => {
-					var opt = [];
-					var structureContent;
-					this.options = JSON.parse(JSON.stringify(result));
-					structureContent = {Id: 'structureContent',
-															Name: "Structure Content", 
-															Description: this.structureContentDescription};
-					opt.push(structureContent);
-					this.option = JSON.parse(JSON.stringify(opt));
+				var opt = [];
+				var structureContent;
+				this.options = JSON.parse(JSON.stringify(result));
+				structureContent = {Id: 'structureContent',
+														Name: "Structure Content", 
+														Description: this.structureContentDescription};
+				opt.push(structureContent);
+				this.option = JSON.parse(JSON.stringify(opt));
 			})
 			.catch( err => {
-					console.log(err);
-					this.options = null;
-					this.option = null;
+				console.log(err);
+				this.options = null;
+				this.option = null;
 			});
 	}
 

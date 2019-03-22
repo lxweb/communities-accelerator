@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes">
+<aura:component>
 	<aura:attribute name="contentBody" type="String"/>
     <aura:handler name="URLEvent" event="c:MediaElementSearcherEvent" action="{!c.handleURLEvent}"/>
 
