@@ -34,10 +34,7 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Tab</actionName>
-        <content>ContentLandingContainer</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>LightningComponent</type>
+        <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
@@ -93,6 +90,19 @@
                     <label>Occasion</label>
                 </value>
             </valueSetDefinition>
+        </valueSet>
+    </fields>
+	<fields>
+        <fullName>BannerFrameType__c</fullName>
+        <externalId>false</externalId>
+        <label>Banner Frame Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>BannerFrameType</valueSetName>
         </valueSet>
     </fields>
     <fields>
@@ -725,6 +735,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
         </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Layout__c</picklist>
             <values>
@@ -980,6 +1005,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
         </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Layout__c</picklist>
             <values>
@@ -1105,6 +1145,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1236,6 +1291,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
         </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Layout__c</picklist>
             <values>
@@ -1364,6 +1434,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <default>false</default>
             </values>
         </picklistValues>
+		 <picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Layout__c</picklist>
             <values>
@@ -1489,6 +1574,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1744,6 +1844,21 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Videos</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+		<picklistValues>
+            <picklist>BannerFrameType__c</picklist>
+            <values>
+                <fullName>Hero</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Page</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Square</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
