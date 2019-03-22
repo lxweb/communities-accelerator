@@ -124,8 +124,8 @@ export default class ContentContainer extends LightningElement {
                 type: 'secondary',
                 label: ContentLandingTemplate,
                 labelAlternative: null,
-                action: 'handleOnClick',
-                typeAction: 'redirect',
+                action: 'handleOnClickCreateTemplate',
+                typeAction: 'dispatchEvent',
                 show: true
             }
         ];
@@ -285,5 +285,11 @@ export default class ContentContainer extends LightningElement {
                 this.tabledata = null;
                 this.setRenderTable(false);
             });
+    }
+
+    handlerModalSitemapEvent(event){
+        event.stopPropagation();
+        const showSitemapContainer = new CustomEvent('showsitemapcontainer', {bubbles:"true"});
+		this.dispatchEvent(showSitemapContainer);
     }
 }

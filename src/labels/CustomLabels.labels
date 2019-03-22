@@ -1112,4 +1112,20 @@
         <shortDescription>General contents</shortDescription>
         <value>General Contents</value>
     </labels>
+    <labels>
+        <fullName>Template</fullName>
+        <categories>recordTypeSelectionModal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Template</shortDescription>
+        <value>Template</value>
+    </labels>
+    <labels>
+        <fullName>Create</fullName>
+        <categories>recordTypeSelectionModal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create</shortDescription>
+        <value>Create</value>
+    </labels>
 </CustomLabels>
