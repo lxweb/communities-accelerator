@@ -288,7 +288,6 @@ src/staticresources/SiteSamples.resource
 src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
 node_modules/
-lwc/
 .forceignore
 force-app/
 package.json
