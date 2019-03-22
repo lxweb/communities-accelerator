@@ -10,7 +10,7 @@
     
     </aura:if>
     <div style="padding:10px">
-        <aura:if isTrue="{!v.behaviourMessage}"><!--dsad-->
+        <aura:if isTrue="{!v.behaviourMessage}">
             <strong>
                 <ui:outputText value="Component Behaviour" /> </strong>
             <br />
