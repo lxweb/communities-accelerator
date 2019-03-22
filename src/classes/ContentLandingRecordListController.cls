@@ -106,9 +106,9 @@ public class ContentLandingRecordListController {
 			fieldWrappers.add(new FieldWrapper(value, link));
 		}
 		// Si es un template y esta publicado, agrega la opcion 'New from Template'
-		List<String> actions = new List<String>{'View', 'Delete'};
+		List<String> actions = new List<String>{System.Label.General_View, System.Label.General_Delete};
 		if(content.isTemplate__c && content.Status__c == 'Published'){
-			actions.add('New from Template');
+			actions.add(System.Label.ContentLandingNewFromTemplate);
 		}
 		// Crea el Wrapper de Contenido y lo agrega a la lista
 		return new ContentWrapper(content.Id, fieldWrappers, actions);
