@@ -204,7 +204,6 @@ public class ContentUtilsTest {
 		List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
 		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
 		Component__c comp = componentList[0];
-		System.debug('DAMIAN:' + comp);
 		comp.Datasource__c = 'ManualAssignment';
 		comp.OrderBy__c = 'Manual Order';
 		update comp;
@@ -223,7 +222,6 @@ public class ContentUtilsTest {
 		// When
 		Test.startTest();
 		ContentUtils.ContentWrapper cw = ContentUtils.getContentFromComponent(componentList[0], fieldSet, null, null, setClusterIds, 'Desktop');
-		System.debug('DAMIAN2: ' +  cw);
 		Test.stopTest();
 
 		// Then

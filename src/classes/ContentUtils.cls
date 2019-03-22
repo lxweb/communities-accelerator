@@ -102,6 +102,8 @@ public without sharing virtual class ContentUtils {
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 
+  
+
         if(!mapContent.isEmpty()){
             //Manual Order del contenido
             if(component.Datasource__c == 'ManualAssignment' && component.OrderBy__c == 'Manual Order' && contentIdList.size() > 0){
@@ -196,7 +198,7 @@ public without sharing virtual class ContentUtils {
         List<String> tagList = new List<String>();
         List<String> visitedList = new List<String>();
         Map<String, String> orderTagMap = new Map<String, Id>();
-
+        System.debug(contentTypeToSearch + ' - ' + tagCriteria);
         if(String.isNotBlank(tagCriteria)){
             tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
             orderList = tagCriteria.split('\\(|\\)|AND|OR');
