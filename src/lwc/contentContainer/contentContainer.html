@@ -8,11 +8,12 @@
         </div>
         <div class="slds-col right-col slds-size_10-of-12" onsearchenter={onSearchEvent}>
             <template if:true={renderHeader}>
-                <c-record-type-selection-modal objectapiname={objectApiName} onshowsitemapmodal={handlerModalSitemapEvent}></c-record-type-selection-modal>
+                <c-record-type-selection-modal objectapiname={objectApiName}></c-record-type-selection-modal>
+                <c-create-new-content-modal></c-create-new-content-modal>
                 <c-header-list-view-page objectlabel={objectLabel} filtersstatus={filtersStatus} filterselected={filtersValues} headerbuttonsprimary={headerButtonsPrimary} headerbuttonssecondary={headerButtonsSecondary}></c-header-list-view-page>
             </template>
             <template if:true={renderTable}>
-                <div class="tableContainer">
+                <div class="tableContainer" ondeletecontentrecord={handleDeleteContent}>
                     <c-table-filter tabledata={tabledata}></c-table-filter>
                 </div>
             </template>

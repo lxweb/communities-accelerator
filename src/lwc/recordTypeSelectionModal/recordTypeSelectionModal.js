@@ -136,7 +136,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 				.then(result => {
 					var noRedirectRecordTypes = JSON.parse(JSON.stringify(result));
 					if(this.value === "structureContent"){
-						this.eventSetShowSitemap();
+						this.navigateToWebPage("/lightning/n/Sitemap");
 					} else if(! noRedirectRecordTypes.includes(this.value)){
 						const eventDetail = { 
 							recordTypeId : this.value,
@@ -161,16 +161,21 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 		fireEvent(this.pageRef, 'btncreatecontentclicked', eventDetail);
 	}
 
-	//Fire event to notify LC that structure content is selected
-	eventSetShowSitemap(){
-		const showSitemapModal = new CustomEvent('showsitemapmodal', {bubbles:"true"});
-		this.dispatchEvent(showSitemapModal);
-	}
-
 	//Get if the button is disabled or not
 	get isDisabled(){
 		return this.value === null;
 	}
+
+	//Navigate to a URL
+	navigateToWebPage(url) {
+        // Navigate to a URL
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: url
+            }
+        });
+    }
 
 	//Handle event dispatched when create content button is clicked on the headerListViewComponent
 	handleClickBtnHeader(){

@@ -3,6 +3,7 @@ import getFilters from	'@salesforce/apex/ContentSearchFiltersController.getFilte
 import getObjectLabel from	'@salesforce/apex/ContentLandingHeaderController.getObjectLabel';
 import getPicklistValues from	'@salesforce/apex/ContentLandingHeaderController.getPicklistValues';
 import getTableWrapper from	'@salesforce/apex/ContentLandingRecordListController.getTableWrapper';
+import deleteContent from	'@salesforce/apex/ContentLandingRecordListController.deleteContent';
 import ContentLandingAll from '@salesforce/label/c.ContentLandingAll';
 import ContentLandingNone from '@salesforce/label/c.ContentLandingNone';
 import ContentLandingContentType from '@salesforce/label/c.ContentLandingContentType';
@@ -287,9 +288,15 @@ export default class ContentContainer extends LightningElement {
             });
     }
 
-    handlerModalSitemapEvent(event){
+    handleDeleteContent(event){
+        var idContent = event.detail;
         event.stopPropagation();
-        const showSitemapContainer = new CustomEvent('showsitemapcontainer', {bubbles:"true"});
-		this.dispatchEvent(showSitemapContainer);
+        deleteContent({ contentId: idContent})
+            .then(result => {
+                this.tableDataFilter(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
+            })
+            .catch( err => {
+                console.log(err);
+            });
     }
 }
