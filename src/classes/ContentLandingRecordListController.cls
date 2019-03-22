@@ -60,6 +60,11 @@ public class ContentLandingRecordListController {
 		}
 	}
 
+	public static void deleteContent(String contentId){
+		Content__c content = [SELECT Id FROM Content__c WHERE ID =: contentId];
+		delete content;		
+	}
+
 	@auraEnabled(Cacheable = true)
 	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
 		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds, status, searchText);
