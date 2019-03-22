@@ -16,7 +16,7 @@ public with sharing class CreateNewContentModalController {
         return Schema.SObjectType.Content__c.getRecordTypeInfosById().get(recordTypeId).getName();
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static SaveResponseWrapper createNewContent(String recordTypeId, Boolean isTemplate, String componentId, String navigationId, String recordName){
         Content__c newContent = new Content__c(
             Name = recordName.left(60),
