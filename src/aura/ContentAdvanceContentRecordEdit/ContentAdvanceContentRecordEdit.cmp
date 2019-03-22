@@ -1,17 +1,7 @@
 <aura:component>
     <aura:attribute name="contentData" type="Object" />
-    <aura:attribute name="behaviourMessage" type="Object" />
     <aura:attribute name="imageUrl" type="String" />
 
-    <aura:if isTrue="{!v.behaviourMessage}">
-        <strong>
-            <ui:outputText value="Component Behaviour" /> </strong>
-        <br />
-        <br />
-        <ui:outputText value="{!v.behaviourMessage}" />
-        <br />
-        <br />
-    </aura:if>
     <lightning:input label="{!$Label.c.AdvanceContentContentDetailExternalId}" name="contentExternalId" value="{!v.contentData.ExternalId__c}"/>
     <lightning:input label="{!$Label.c.AdvanceContentContentDetailTitle}" name="contentName" value="{!v.contentData.Name}" required="true" aura:id="contentName"/>
     <br />
