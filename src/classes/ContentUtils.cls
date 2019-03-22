@@ -21,7 +21,6 @@ public without sharing virtual class ContentUtils {
         
         List<Id> contentIdList = new List<Id>();
         Set<Id> setCategoriesIds = new Set<Id>();
-        string bannerFrameType = component.BannerFrameType__c;
         if(setContentToExclude == null){setContentToExclude = new Set<String>();}
 
         //Armado del query principal a objeto Content
@@ -40,8 +39,8 @@ public without sharing virtual class ContentUtils {
             //Busqueda de contenido por parametro
           
         query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
-        query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c =: bannerFrameType ' : '';
-            
+        query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
+              
         }else{
             if(component.Datasource__c != null){
                 //Busqueda de contenido por Datasource
@@ -83,7 +82,7 @@ public without sharing virtual class ContentUtils {
             }
 
 
-            query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c =: bannerFrameType ' : '';
+           query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
             
             
             
