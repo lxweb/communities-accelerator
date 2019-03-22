@@ -1,0 +1,43 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal modalbox3">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <template if:true={modalTitle}>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                        {modalTitle}
+                    </h2>
+                </template>
+                <div>
+                    <lightning-button-icon
+                    icon-name="utility:close"
+                    size="large"
+                    variant="bare"
+                    title={label.generalClose}
+                    icon-class="slds-button slds-button_icon slds-button_icon-inverse"
+                    class="buttonStyle slds-modal__close"
+                    alternative-text={label.generalClose}
+                    onclick={showHideModal}>
+                    </lightning-button-icon>
+                </div>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">     
+                <div class="slds-grid slds-warp">
+                    <div class="slds-col slds-size_12-of-12">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="inputTitleIdEmpty">{label.recordName}</label>
+                            <div class="slds-form-element__control">
+                                <input id="inputTitleIdEmpty" class="slds-input inputName" type="text" value="" onkeypress={setValue} onblur={setValue} />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" title={label.generalCancel} onclick={showHideModal}>{label.generalCancel}</button>
+                <button class="slds-button slds-button_brand" title={label.saveAndNext} onclick={onNewRecord} disabled={isDisabled}>{label.saveAndNext}</button>
+            </footer>
+        </div>
+    </section>
+    <div class="divBackdrop3 slds-backdrop"></div>
+</template>
