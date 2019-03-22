@@ -6,12 +6,14 @@ public with sharing class ContentDetailController {
         @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
         @auraEnabled public String currentUserName;
         @auraEnabled public String behaviourMessage;
+        @auraEnabled public List<String> bannerFrameTypes;
         
-        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName, String behaviourMessage){
+        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName, String behaviourMessage, List<String> bannerFrameTypes){
             this.content = content;
             this.visibilitySelectors = visibilitySelectors;
             this.currentUserName = currentUserName;
             this.behaviourMessage = behaviourMessage;
+            this.bannerFrameTypes = bannerFrameTypes;
         }
     }
 
@@ -67,7 +69,11 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), null);
+
+        //Gets the possible values of the BannerFrameType__c picklist
+        List<String> bannerFrameTypes = getBannerFrameTypes();
+
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), null, bannerFrameTypes);
         return data;
     }
     
@@ -86,7 +92,10 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, new Set<Id>()));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), behaviourMessage);
+        //Gets the possible values of the BannerFrameType__c 
+        List<String> bannerFrameTypes = getBannerFrameTypes();
+
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), behaviourMessage, bannerFrameTypes);
         return data;
 
     }
@@ -351,5 +360,15 @@ public with sharing class ContentDetailController {
             behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
         }
         return behaviourMessage;
+    }
+
+    private static List<String> getBannerFrameTypes(){
+        List<String> pickListValuesList= new List<String>();
+        Schema.DescribeFieldResult fieldResult = Content__c.BannerFrameType__c.getDescribe();
+        List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+        for( Schema.PicklistEntry pickListVal : ple){
+            pickListValuesList.add(pickListVal.getValue());
+        }    
+        return pickListValuesList;
     }
 }

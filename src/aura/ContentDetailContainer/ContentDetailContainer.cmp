@@ -12,6 +12,7 @@
     <aura:attribute name="behaviourMessage" type="String" />
     <aura:attribute name="mediaElementId" type="String" />
     <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="bannerFrameTypes" type="List" />
 
     <div class="container">
         <div class="slds-grid">
@@ -46,7 +47,7 @@
                                         <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
                                     </aura:if>                                    
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Banner'}">
-                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
+                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}" bannerFrameTypes="{!v.bannerFrameTypes}"/>
                                     </aura:if>       
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'AdvanceContent'}">
                                         <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
