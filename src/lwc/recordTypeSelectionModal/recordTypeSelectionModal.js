@@ -1,6 +1,5 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import getContentRecordTypes from	'@salesforce/apex/ModalRecordTypeController.getContentRecordTypes';
-import getNoRedirectRecordTypes from	'@salesforce/apex/ModalRecordTypeController.getNoRedirectRecordTypes';
 import getTemplateRecordTypes from	'@salesforce/apex/ModalRecordTypeController.getTemplateRecordTypes';
 import Create from '@salesforce/label/c.Create';
 import TemplateLabel from '@salesforce/label/c.Template';
@@ -132,26 +131,17 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 			}
 			this.dispatchEventTemplateModal(eventDetail);
 		}else{
-			getNoRedirectRecordTypes({})
-				.then(result => {
-					var noRedirectRecordTypes = JSON.parse(JSON.stringify(result));
-					if(this.value === "structureContent"){
-						this.navigateToWebPage("/lightning/n/Sitemap");
-					} else if(! noRedirectRecordTypes.includes(this.value)){
-						const eventDetail = { 
-							recordTypeId : this.value,
-							isTemplate : false,
-							componentId : null,
-							navigationId : null
-						}
-						this.dispatchEventTemplateModal(eventDetail);
-					}
-				})
-				.catch( err => {
-						console.log(err);
-						this.noRedirectRecordTypes = null;
-						this.value = null;
-				});
+			if(this.value === "structureContent"){
+				this.navigateToWebPage("/lightning/n/Sitemap");
+			} else{
+				const eventDetail = { 
+					recordTypeId : this.value,
+					isTemplate : false,
+					componentId : null,
+					navigationId : null
+				}
+				this.dispatchEventTemplateModal(eventDetail);
+			}
 		}
 	}
 
