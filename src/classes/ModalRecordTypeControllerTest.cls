@@ -11,6 +11,5 @@ public with sharing class ModalRecordTypeControllerTest {
         MockupFactory.generateAcceleratorSetting();
 		ModalRecordTypeController.getContentRecordTypes('Content__c');
 		ModalRecordTypeController.getTemplateRecordTypes('Content__c');
-		ModalRecordTypeController.getNoRedirectRecordTypes();
 	}
 }
