@@ -27,15 +27,5 @@ public class ModalRecordTypeController {
         }
         return recordTypesToReturn;
     }
-
-    @AuraEnabled(cacheable=true)
-    public static List<String> getNoRedirectRecordTypes(){
-        List<String> names = new List<String>{'Recipe','BrandDetail'};
-        List<RecordType> recordTypes = [SELECT Id FROM RecordType WHERE SObjectType = 'Content__c' AND DeveloperName IN :names];
-        List<String> toRet = new List<String>();
-        for(RecordType recordType : recordTypes){
-            toRet.add(recordType.Id);
-        }
-        return toRet;
-    }
+    
 }
