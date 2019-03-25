@@ -9,7 +9,6 @@
     <aura:attribute name="visibilitySelectors" type="List" />
     <aura:attribute name="contentData" type="Object" />
     <aura:attribute name="currentUserName" type="String" />
-    <aura:attribute name="behaviourMessage" type="String" />
     <aura:attribute name="mediaElementId" type="String" />
     <aura:attribute name="imageUrl" type="String" />
 
@@ -46,13 +45,13 @@
                                         <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
                                     </aura:if>                                    
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Banner'}">
-                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
+                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
                                     </aura:if>       
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'AdvanceContent'}">
-                                        <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
+                                        <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
                                     </aura:if>  
                                     <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'FAQ'}">
-                                        <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" behaviourMessage="{!v.behaviourMessage}"/>
+                                        <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
                                     </aura:if>                                                                          
                                 </aura:if>
                             </aura:set>

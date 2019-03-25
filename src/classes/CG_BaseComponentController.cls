@@ -193,7 +193,7 @@ public with sharing class CG_BaseComponentController {
     	if(componentType == 'RelatedNews'){componentType = 'News';}
     	
         set<String> setFields;
-        if(componentType == 'Banner'){			setFields = new set<String>{'LinkDetail__r.URL__c','OverlayQuadrant__c', 'Title__c', 'Extract__c', 'ButtonLabel__c'};}
+        if(componentType == 'Banner'){			setFields = new set<String>{'LinkDetail__r.URL__c','OverlayQuadrant__c', 'Title__c', 'Extract__c', 'ButtonLabel__c','BannerFrameType__c'};}
         if(componentType == 'News'){			setFields = new set<String>{'Title__c', 'Extract__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
         if(componentType == 'Event'){			setFields = new set<String>{'Title__c', 'Extract__c', 'EventStartDate__c', 'EventEndDate__c', 'Location__c', 'LinkDetail__r.URL__c', 'ExternalId__c'};}
         if(componentType == 'AdvanceContent'){	setFields = new set<String>{'HTMLContent__c'};}

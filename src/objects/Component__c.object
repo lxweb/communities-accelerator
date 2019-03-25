@@ -81,28 +81,11 @@
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Hero</fullName>
-                    <default>true</default>
-                    <label>Hero</label>
-                </value>
-                <value>
-                    <fullName>Page</fullName>
-                    <default>false</default>
-                    <label>Page</label>
-                </value>
-                <value>
-                    <fullName>Square</fullName>
-                    <default>false</default>
-                    <label>Square</label>
-                </value>
-            </valueSetDefinition>
+            <valueSetName>BannerFrameType</valueSetName>						 
         </valueSet>
     </fields>
     <fields>
-        <fullName>BannerTransitionTime__c</fullName>
+		<fullName>BannerTransitionTime__c</fullName>
         <defaultValue>5000</defaultValue>
         <externalId>false</externalId>
         <inlineHelpText>Time between content in milliseconds</inlineHelpText>
