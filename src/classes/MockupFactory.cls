@@ -187,55 +187,23 @@ public class MockupFactory {
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Component__c' AND Name =: nameRecordType LIMIT 1];
         
         if(cluster != null){
-            if (nameRecordType !='Banner'){
-                for(Integer i = 0; i < quantity; i++){
-                   componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
-                                    ExternalId__c = nameRecordType +'Component_' + i,
-                                    Datasource__c = 'ManualAssignment',
-                                    RecordTypeId = recordT.Id,
-                                    Cluster__c = cluster.Id,
-                                    Status__c='Inactive'));
-                }
-            }
-            else
-            {
-                for(Integer i = 0; i < quantity; i++){
-               
-                   componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
-                                    ExternalId__c = nameRecordType +'Component_' + i,
-                                    Datasource__c = 'ManualAssignment',
-                                    RecordTypeId = recordT.Id,
-                                    Cluster__c = cluster.Id,
-                                    Status__c='Inactive',
-                                    BannerFrameType__c='Hero'));
-                }
-                   
-             
+            for(Integer i = 0; i < quantity; i++){
+                
+                componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
+                                        ExternalId__c = nameRecordType +'Component_' + i,
+                                        Datasource__c = 'ManualAssignment',
+                                        RecordTypeId = recordT.Id,
+                                        Cluster__c = cluster.Id,
+                                        Status__c='Inactive'));
             }
 
-        }
-        else
-        {
-            if (nameRecordType !='Banner'){
-
-                for(Integer i = 0; i < quantity; i++){
-                    componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
-                                            ExternalId__c = nameRecordType +'Component_' + i,
-                                            Datasource__c = 'ManualAssignment',
-                                            RecordTypeId = recordT.id,
-                                            Status__c='Inactive'));
-                }
-            }
-            else
-            {
-                for(Integer i = 0; i < quantity; i++){
-                    componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
-                                            ExternalId__c = nameRecordType +'Component_' + i,
-                                            Datasource__c = 'ManualAssignment',
-                                            RecordTypeId = recordT.id,
-                                            Status__c='Inactive',
-                                            BannerFrameType__c='Hero'));
-                }
+        }else{
+            for(Integer i = 0; i < quantity; i++){
+                componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
+                                        ExternalId__c = nameRecordType +'Component_' + i,
+                                        Datasource__c = 'ManualAssignment',
+                                        RecordTypeId = recordT.id,
+                                        Status__c='Inactive'));
             }
         }
 
@@ -247,30 +215,15 @@ public class MockupFactory {
     public static List<Content__c> createContent(String nameRecordType, Cluster__c clusterArg, Integer quantity){
         List<Content__c> contentList = new List<Content__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Content__c' AND Name =: nameRecordType LIMIT 1];
-        if (nameRecordType == 'Banner')
-        {
-            for(Integer i = 0; i < quantity; i++){
+
+        for(Integer i = 0; i < quantity; i++){
             contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
                                     Order__c = i+1,
-                                    Status__c='Draft',
-                                    BannerFrameType__c='Hero'));
-                }
+                                    Status__c='Draft'));
         }
-        else
-        {
-             for(Integer i = 0; i < quantity; i++){
-                contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
-                                ExternalId__c = nameRecordType + 'Content_' + i,
-                                RecordTypeId = recordT.id,
-                                Cluster__c = clusterArg.id,
-                                Order__c = i+1,
-                                Status__c='Draft'));
-            }
-        }
-       
         insert contentList;
         return contentList;
     }
@@ -397,10 +350,11 @@ public class MockupFactory {
 
     public static List<Navigation__c>  createNavigation(String navName, String url, Integer quantity, Id clusterId){
         List<Navigation__c> navList = new List<Navigation__c>();
-        
+       
         for(Integer i = 0;i<quantity;i++){
-            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId, Status__c='Inactive'));
+            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Status__c='Inactive'));
         }
+        
         insert navList;
 
         return navList;
@@ -544,6 +498,8 @@ public class MockupFactory {
             dat.Cluster__c = clusterId;
             dat.ExternalId__c = externalId + '_' + i;
             dat.ObjectApiName__c = objectApiName;
+            dat.RecordsPerPage__c = 1;
+            dat.NumberOfColumns__c = '1';
             
             datatablesToCreate.add(dat);
         }
@@ -561,6 +517,9 @@ public class MockupFactory {
             datElement.Name = name + '_' + i;
             datElement.ExternalId__c = name + '_' + i;
             datElement.Datatable__c = datatableId;
+            datElement.FieldApiName__c ='Name';
+            datElement.Label__c = 'TestLabel';
+     
             
             datatableElementsToCreate.add(datElement);
         }
@@ -572,6 +531,10 @@ public class MockupFactory {
     
     public static List<DatatableAction__c> createDatatableActions(String name, String externalId, Integer quantity, Id datatableId, Id recordtypeId) {
         List<DatatableAction__c> datatableActionsToCreate = new List<DatatableAction__c>();
+         
+        List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootClusterTest', null, 1, 'ClusterRoot');
+        
+        List<Navigation__c> nav = MockupFactory.createNavigation('NavTest','nav-test',1,clustersRoot[0].Id);
         
         for(Integer i = 0 ; i < quantity ; i ++) {
             DatatableAction__c datAction = new DatatableAction__c();
@@ -579,12 +542,16 @@ public class MockupFactory {
             datAction.Datatable__c = datatableId;
             datAction.ExternalId__c = name + '_' + i;
             datAction.RecordTypeId = recordtypeId;
+            datAction.Type__c = 'Navigation';
+            datAction.Label__c = 'Test';
+            datAction.DisplaySettings__c = 'Desktop';
+            datAction.Navigation__c = nav[0].Id;
+            
             
             datatableActionsToCreate.add(datAction);
         }
         
         insert datatableActionsToCreate;
-        
         return datatableActionsToCreate;
     }
 }
