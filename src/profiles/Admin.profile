@@ -1007,11 +1007,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>DatatableAction__c.DisplaySettings__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>DatatableAction__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1022,22 +1017,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>DatatableAction__c.Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>DatatableAction__c.Navigation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>DatatableAction__c.SelectableRow__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>DatatableAction__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
