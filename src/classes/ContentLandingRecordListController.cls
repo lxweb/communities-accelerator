@@ -44,8 +44,9 @@ public class ContentLandingRecordListController {
 		List<String> tagIds;
 		String status;
 		String searchText;
+		Boolean isTemplate;
 		// Wrapper para agrupar los criterios de filtro recibidos
-		FilterWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
+		FilterWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText, Boolean isTemplate){
             this.contentTypeName = contentTypeId != null ? [SELECT Id, Name FROM RecordType WHERE SObjectType = 'Content__c' AND Id =: contentTypeId LIMIT 1].Name : 'Last Modified';
 			this.contentTypeId = contentTypeId;
 			this.clusterId = clusterId;
@@ -53,18 +54,19 @@ public class ContentLandingRecordListController {
 			this.tagIds = tagIds;
 			this.status = status;
 			this.searchText = searchText;
+			this.isTemplate = isTemplate;
 		}
 	}
 
 	@auraEnabled(Cacheable = true)
-	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
-		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds, status, searchText);
+	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText, Boolean isTemplate){
+		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds, status, searchText, isTemplate);
 		// El Wrapper es enviado al componente en forma de JSON
 		return JSON.serialize(tableWrapper);
 	}
 
-	public static TableWrapper buildTableWrapper(String contentType, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
-		FilterWrapper wrapper = new FilterWrapper(contentType, clusterId, categoryId, tagIds, status, searchText);
+	public static TableWrapper buildTableWrapper(String contentType, String clusterId, String categoryId, List<String> tagIds, String status, String searchText, Boolean isTemplate){
+		FilterWrapper wrapper = new FilterWrapper(contentType, clusterId, categoryId, tagIds, status, searchText, isTemplate);
 		String title = (wrapper.contentTypeName + ' Records').toUpperCase();
 		String columnSetString = getColumnSet();
 		if(columnSetString == null || columnSetString == '') return new TableWrapper(null, null, null);
@@ -171,6 +173,7 @@ public class ContentLandingRecordListController {
 		if(wrapper.contentTypeId != null) 	queryConditions.add('RecordTypeId = \'' + wrapper.contentTypeId + '\'');
 		if(wrapper.clusterId != null) 		queryConditions.add('Cluster__c = \'' + wrapper.clusterId + '\'');
 		if(wrapper.categoryId != null) 		queryConditions.add('Category__c = \'' + wrapper.categoryId + '\'');
+		if(wrapper.isTemplate != null) 		queryConditions.add('isTemplate__c = ' + wrapper.isTemplate);
 		if(wrapper.tagIds != null && ! wrapper.tagIds.isEmpty()){
 			// Trae los IDs de los Contenidos asociados a las Tags recibidas
 			String tagedContentIds = getTagedContentIds(wrapper.tagIds);
