@@ -79,7 +79,7 @@
         <fullName>DisplaySettings__c</fullName>
         <externalId>false</externalId>
         <label>Display Settings</label>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -130,7 +130,7 @@
         <externalId>false</externalId>
         <label>Label</label>
         <length>50</length>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -159,7 +159,7 @@
         <fullName>Type__c</fullName>
         <externalId>false</externalId>
         <label>Type</label>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -288,5 +288,19 @@
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>CustomComponentTypeValidation</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(AND(TEXT(Type__c) = &apos;Custom&apos;, ISBLANK( Component__c)) , true, false)</errorConditionFormula>
+        <errorDisplayField>Component__c</errorDisplayField>
+        <errorMessage>A Component should be specified for an Action of type Custom</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NavigationTypeValidation</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(AND(TEXT(Type__c) = &apos;Navigation&apos;, ISBLANK( Navigation__c )) , true, false)</errorConditionFormula>
+        <errorDisplayField>Navigation__c</errorDisplayField>
+        <errorMessage>A Navigation lookup should be specified for an Action of type Navigation</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

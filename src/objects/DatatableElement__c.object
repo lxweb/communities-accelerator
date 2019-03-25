@@ -140,7 +140,7 @@
         <externalId>false</externalId>
         <label>Field Api Name</label>
         <length>50</length>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -159,7 +159,7 @@
         <externalId>false</externalId>
         <label>Label</label>
         <length>50</length>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
