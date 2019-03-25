@@ -44,7 +44,6 @@
 					component.set("v.currentUserName", response.getReturnValue().currentUserName);
 					component.set("v.contentData", response.getReturnValue().content);
 					component.set("v.visibilitySelectors", response.getReturnValue().visibilitySelectors);
-					component.set("v.behaviourMessage", response.getReturnValue().behaviourMessage);
 				}
 			});
 		}else{
