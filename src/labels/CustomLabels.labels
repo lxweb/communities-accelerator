@@ -1159,4 +1159,12 @@
         <shortDescription>Create</shortDescription>
         <value>Create</value>
     </labels>
+    <labels>
+        <fullName>General_ShowMore</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_ShowMore</shortDescription>
+        <value>Show More</value>
+    </labels>
 </CustomLabels>
