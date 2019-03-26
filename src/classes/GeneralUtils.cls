@@ -1,6 +1,6 @@
 public class GeneralUtils{
 
-    public static String generateExternalId(String name, String clusterID){
+    public static String generateExternalId(String name, String clusterID, String sobjectType){
         String apiName = name.deleteWhitespace();
         // Alternativa: '[|,|.|\\,||"||:|~|!|@|#|$|%|^|&|*|°|-|+|=|<|>|?|\\(|\\)|\\{|\\}|\\;|\\\'"]'s
         apiName = apiName.replaceAll('[^a-zA-Z0-9]', '_');
@@ -9,20 +9,32 @@ public class GeneralUtils{
             return apiName;
         } else {
             if (Pattern.compile( '[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}' ).matcher(clusterID).matches() ){
-                Cluster__c cluster = [SELECT Id, name FROM Cluster__c WHERE Id =: clusterID];
-                clusterID = cluster.name;
-                clusterID.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_');
+                Cluster__c cluster = [SELECT Id, ExternalID__c FROM Cluster__c WHERE Id =: clusterID];
+
+                if(String.isNotEmpty(sobjectType) && sobjectType.equalsIgnoreCase('Content__c')){
+                    String contentDate = String.valueOf(date.today());
+                    contentDate=contentDate.subString(0,10);
+                    contentDate = contentDate.replaceAll('-','');
+                    if(apiName.length()>65){
+                        apiName=apiName.subString(0,65);    
+                    }
+                    return cluster.ExternalID__c + apiName + contentDate;
+                }else{
+                    if(apiName.length()>74){
+                        apiName=apiName.subString(0,74);    
+                    }
+                    apiName=cluster.ExternalID__c + apiName;
+                }
             }
         }
-        return clusterID + '_' + apiName;
-        //Test
+        return apiName;
     }
-
+/*
     public static String generateExternalId(String name){
-        String stringToReturn = generateExternalId(name, null);
+        String stringToReturn = generateExternalId(name, null, null);
         return stringToReturn;  
     }
-
+*/
     public static String joinFields(List<String> listToJoin){
         set<String> finalset = new set<String>();
         finalset.addAll(listToJoin);

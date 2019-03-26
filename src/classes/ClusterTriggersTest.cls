@@ -7,45 +7,6 @@ public with sharing class ClusterTriggersTest {
 		MockupFactory.generateAcceleratorSetting();
 	}
 
-
-	@isTest 
-	static void insertClusterTest(){
-		/* Comment: Comprueba que al crear un Cluster__c se inserta
-			con el correspondiente ExternalId__c */
-
-		//Given
-		Cluster__c clusterTest = new Cluster__c(Name='Cluster Test 01');
-
-		//When
-		Test.startTest();
-			insert(clusterTest);
-		Test.stopTest();
-
-		//Then
-		Cluster__c clusterTestResult =[select id, ExternalId__c from Cluster__c where id =: clusterTest.id];
-		System.assertNotEquals(clusterTestResult.ExternalId__c, null);
-	}
-
-	@isTest
-	static void updateClusterTest(){
-		/* Comment: Comprueba que al actualizar un Cluster__c se actualiza
-		con el correspondiente ExternalId__c */
-		
-		//Given
-		Cluster__c clusterTest = new Cluster__c(Name='Cluster Test 01');
-		insert(clusterTest);
-		clusterTest.ExternalId__c = null;
-		clusterTest.Name = 'Clusterl Test 02';
-		//When
-		Test.startTest();
-			update(clusterTest);
-		Test.stopTest();
-
-		//Then
-		Cluster__c clusterTestResult2 =[select id, ExternalId__c from Cluster__c where id =: clusterTest.id];
-		System.assertNotEquals(clusterTestResult2.ExternalId__c, null);
-	}
-
 	@isTest static void generateOneRootCluster() {
 		// Comment: cuando se genera un cluster root se debe validar:
 		// 1.- la creacion de solo dos grupos para ese cluster 
@@ -58,29 +19,27 @@ public with sharing class ClusterTriggersTest {
 		Test.startTest();
 		//Cluster__c clusterRoot = MockupFactory.createClusterRoot('ClusterRootTest');
 		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
+		Cluster__c cluster=clusterRootList[0];
+		String groupName=cluster.ExternalId__c+'_';
 		Test.stopTest();
 
 		System.debug('ClusterTriggersTest clusterRootList: ' + clusterRootList);
 		// Then
-		List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name LIKE 'ClusterRootTest%_R%'];
+		List<Group> groupList = [SELECT Id, Name FROM Group WHERE Name LIKE :groupName+'R%'];
 		List<Group> getGroupList = new List<Group>();
-		System.debug('ClusterTriggersTest groupList: ' + groupList);
 		Group groupRW = new Group();
 		Group groupROViewDown = new Group(); 
 		Group groupROViewUp = new Group(); 
 		for(Group groupItem: groupList){
-			if(groupItem.name == 'ClusterRootTest00_' + readAndWrite){
-				System.debug('ClusterTriggersTest readAndWrite');
+			if(groupItem.name == groupName + readAndWrite){
                 groupRW = groupItem;
 				getGroupList.add(groupRW);
 			}
-			if(groupItem.name == 'ClusterRootTest00_' + readAndOnlyViewDown){
-				System.debug('ClusterTriggersTest readAndOnlyViewDown');
+			if(groupItem.name == groupName + readAndOnlyViewDown){
                 groupROViewDown = groupItem;
 				getGroupList.add(groupROViewDown);
 			}
-			if(groupItem.name == 'ClusterRootTest00_' + readAndOnlyViewUp){
-				System.debug('ClusterTriggersTest readAndOnlyViewUp');
+			if(groupItem.name == groupName + readAndOnlyViewUp){
                 groupROViewUp = groupItem;
 				getGroupList.add(groupROViewUp);
 			}
@@ -109,19 +68,22 @@ public with sharing class ClusterTriggersTest {
 		// 3.- la agregacion los grupos RW y ROVD del root a los grupo RW y ROVD de los cluster groups hijos
 		// 4.- la agregacion del grupo RODU de cada cluster hijo al grupo RODU de su cluster root padre
 		
-		System.debug('ClusterTriggersTest groupRootList2: ');
 		// Given: la Custom Settings ha sido seteada anteriormente en el testSetup
 
 		// When
 		Test.startTest();
 		List<Cluster__c> clusterGroupFirstLevelList = generateClusterTreeFirstLevel();
+		Cluster__c clusterRoot = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'ClusterRootTest%' LIMIT 1];
+		String groupNameRoot=clusterRoot.Name.substring(0, 3);
+		Cluster__c clusterFirst=clusterGroupFirstLevelList[0];
+		String groupName=clusterFirst.Name.substring(0, 3);
 		Test.stopTest();
 
 		// Then
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest%_R%' ];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE :groupNameRoot+'%_R%' ];
 		System.debug('ClusterTriggersTest groupRootList: '+groupRootList);
 		System.debug('ClusterTriggersTest groupRootList: '+groupRootList.size());
-		List<Group> groupsForClusterGroupsList = [SELECT Id, name FROM Group WHERE name LIKE '%CGFTest%'];
+		List<Group> groupsForClusterGroupsList = [SELECT Id, name FROM Group WHERE name LIKE :groupName+'%_R%'];
 		System.debug('ClusterTriggersTest groupsForClusterGroupsList: '+groupsForClusterGroupsList);
 		System.debug('ClusterTriggersTest groupsForClusterGroupsList: '+groupsForClusterGroupsList.size());
 
@@ -175,22 +137,30 @@ public with sharing class ClusterTriggersTest {
 		// When
 		Test.startTest();
 		List<Cluster__c> clusterGroupFirstLevelList = generateClusterTreeSecondLevel();
+
+		Cluster__c clusterRoot = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'ClusterRootTest%' LIMIT 1];
+		String groupNameRoot = clusterRoot.Name.substring(0, 3);
+		Cluster__c clusterfirst = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'CGFTest%' LIMIT 1];
+		String groupNameFirst = clusterfirst.Name.substring(0, 3);
+		Cluster__c clusterSecond = clusterGroupFirstLevelList[0];
+		String groupNameSecond = clusterSecond.Name.substring(0, 2);
+
 		Test.stopTest();
 
 
 		// Then
 		
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'ClusterRootTest%_R%'];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameRoot+'%_R%'];
         System.debug('ClusterTriggersTest method groupRootList: '+groupRootList);
         System.debug('ClusterTriggersTest method groupRootList: '+groupRootList.size());
 		
-		List<Group> groupsForClustersFirstLevelList = [SELECT Id, name FROM Group 
-		WHERE name LIKE '%CGFTest%'];
+		List<Group> groupsForClustersFirstLevelList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameFirst+'%_R%'];
+		//WHERE name LIKE '%CGFTest%'];
         System.debug('ClusterTriggersTest method groupsForClustersFirstLevelList: '+groupsForClustersFirstLevelList);
         System.debug('ClusterTriggersTest method groupsForClustersFirstLevelList: '+groupsForClustersFirstLevelList.size());
 
-		List<Group> groupsForClustersSecondLevelList = [SELECT Id, name FROM Group 
-		WHERE name LIKE '%CGSTest%'];
+		List<Group> groupsForClustersSecondLevelList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameSecond+'%'];
+		//WHERE name LIKE '%CGSTest%'];
         System.debug('ClusterTriggersTest method groupsForClustersSecondLevelList: '+groupsForClustersSecondLevelList);
         System.debug('ClusterTriggersTest method groupsForClustersSecondLevelList: '+groupsForClustersSecondLevelList.size());
 
@@ -271,7 +241,7 @@ public with sharing class ClusterTriggersTest {
         List<Cluster__c> clusterGroupSecondList = new List<Cluster__c>();
         integer i = 1;
         for(Cluster__c clusterItem : clusterGroupList){
-        	List<Cluster__c> clusterGroupSecond = MockupFactory.createCluster('CGSTest'+i , (String) clusterItem.id ,2 ,'ClusterGroup');
+        	List<Cluster__c> clusterGroupSecond = MockupFactory.createCluster('CS'+i, (String) clusterItem.id ,2 ,'ClusterGroup');//MockupFactory.createCluster('CGSTest'+i, (String) clusterItem.id ,2 ,'ClusterGroup');
         	clusterGroupSecondList.addAll(clusterGroupSecond);
         	i++;
         }
@@ -305,25 +275,36 @@ public with sharing class ClusterTriggersTest {
 		// When
 		Test.startTest();
 		List<Cluster__c> clusterGroupFirstLevelList = generateClusterTreeFourLevelWithLeaf();
+
+		Cluster__c clusterRoot = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'CRTest%' LIMIT 1];
+		String groupNameRoot = clusterRoot.Name.substring(0, 3);
+		Cluster__c clusterfirst = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'CGFTest%' LIMIT 1];
+		String groupNameFirst = clusterfirst.Name.substring(0, 3);
+		Cluster__c clusterSecond = [SELECT Id, Name FROM Cluster__c WHERE name LIKE 'CS%' LIMIT 1];
+		String groupNameSecond = clusterSecond.Name.substring(0, 2);
+		Cluster__c clusterLeaf = clusterGroupFirstLevelList[0];
+		String groupNameLeaf = clusterLeaf.Name.substring(0, 2);
+
 		Test.stopTest();
 
 		// Then
-		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE 'CRTest00_R%'];
+		List<Group> groupRootList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameRoot+'%_R%'];
+		//WHERE name LIKE 'CRTest00_R%'];
         System.debug('ClusterTriggersTest groupRootList: '+groupRootList);
         System.debug('ClusterTriggersTest groupRootList: '+groupRootList.size());
 		
-		List<Group> groupsForClusterGroupsFirstLevelList = [SELECT Id, name FROM Group 
-		WHERE name LIKE '%CGFTest%'];
+		List<Group> groupsForClusterGroupsFirstLevelList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameFirst+'%_R%'];
+		//WHERE name LIKE '%CGFTest%'];
         System.debug('ClusterTriggersTest groupsForClusterGroupsFirstLevelList: '+groupsForClusterGroupsFirstLevelList);
         System.debug('ClusterTriggersTest groupsForClusterGroupsFirstLevelList: '+groupsForClusterGroupsFirstLevelList.size());
 		
-		List<Group> groupsForClusterGroupsSecondLevelList = [SELECT Id, name FROM Group 
-		WHERE name LIKE '%CGSTest%'];
+		List<Group> groupsForClusterGroupsSecondLevelList = [SELECT Id, name FROM Group WHERE name LIKE  :groupNameSecond+'%_R%'];
+		//WHERE name LIKE '%CGSTest%'];
         System.debug('ClusterTriggersTest groupsForClusterGroupsSecondLevelList: '+groupsForClusterGroupsSecondLevelList);
         System.debug('ClusterTriggersTest groupsForClusterGroupsSecondLevelList: '+groupsForClusterGroupsSecondLevelList.size());
 
-		List<Group> groupsForClusterGroupsLeafList = [SELECT Id, name FROM Group 
-		WHERE name LIKE '%CLeaf%'];
+		List<Group> groupsForClusterGroupsLeafList = [SELECT Id, name FROM Group  WHERE name LIKE  :groupNameLeaf+'%_R%'];
+		//WHERE name LIKE '%CLeaf%'];
         System.debug('ClusterTriggersTest groupsForClusterGroupsLeafList: '+groupsForClusterGroupsLeafList);
         System.debug('ClusterTriggersTest groupsForClusterGroupsLeafList: '+groupsForClusterGroupsLeafList.size());
 
@@ -390,7 +371,7 @@ public with sharing class ClusterTriggersTest {
         List<Cluster__c> clusterGroupSecondList = new List<Cluster__c>();
         Integer i = 1;
         for(Cluster__c clusterItem : clusterGroupList){
-        	List<Cluster__c> clusterGroupSecond = MockupFactory.createCluster('CGSTest'+i , (String) clusterItem.id ,2 ,'ClusterGroup');
+        	List<Cluster__c> clusterGroupSecond = MockupFactory.createCluster('CS'+i , (String) clusterItem.id ,2 ,'ClusterGroup');
         	clusterGroupSecondList.addAll(clusterGroupSecond);
         	i++;
         }
@@ -399,7 +380,7 @@ public with sharing class ClusterTriggersTest {
         i = 1;
         List<Cluster__c> clusterLeafList = new List<Cluster__c>();
         for(Cluster__c clusterSecondItem: clusterGroupSecondList){
-        	List<Cluster__c> clusterLeaf = MockupFactory.createCluster('CLeaf'+i , (String) clusterSecondItem.id ,2 ,'ClusterLeaf');
+        	List<Cluster__c> clusterLeaf = MockupFactory.createCluster('CL'+i , (String) clusterSecondItem.id ,2 ,'ClusterLeaf');
         	clusterLeafList.addAll(clusterLeaf);
         	i++;
         }
@@ -487,6 +468,7 @@ public with sharing class ClusterTriggersTest {
        	System.debug('ClusterTriggerTest Language getClusterLeafList: ' + getClusterLeafList);
         return clusterLeafList;
     }
+
     //changeLanguageWithThirdLavelTree
 	@isTest static void changeLanguageWithFourLevelTree() {
 		// Comment: cuando se crea un arbol de cuarto nivel con hojas se debe validar que:
@@ -578,7 +560,7 @@ public with sharing class ClusterTriggersTest {
 		List<Cluster__c> ClusterRootList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CRTest%'];
 		List<Cluster__c> ClusterGroupFList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGFTest%'];
 		List<Cluster__c> ClusterGroupSList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CGSTest%'];
-		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE 'CLTest%'];
+		List<Cluster__c> ClusterLeafList = [SELECT Id, Name, DefaultLanguage__c, OtherLanguages__c FROM Cluster__c WHERE name LIKE '%CLTest%'];
 
 		//Coment
 		System.debug('ClusterTriggersTest changeLanguageOnLeaf ClusterRootList: ' + ClusterRootList);
@@ -636,7 +618,7 @@ public with sharing class ClusterTriggersTest {
         }
 
         List<Cluster__c> clusterLeafList = MockupFactory.createCluster('CLTest', listIdClusters2 ,2 ,'ClusterLeaf','es_MX', 'es;pt_BR');
-        List<Cluster__c> clusterLeafList2 = MockupFactory.createCluster('CLTest2', listIdClusters3 ,2 ,'ClusterLeaf','en_US', 'es');
+        List<Cluster__c> clusterLeafList2 = MockupFactory.createCluster('CLSecondTest', listIdClusters3 ,2 ,'ClusterLeaf','en_US', 'es');
         return clusterLeafList;
 
     }

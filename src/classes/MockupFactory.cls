@@ -32,6 +32,7 @@ public class MockupFactory {
         RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName =: clusterType];
         System.debug('MockupFactorycreateCluster parentClusterIdList: ' + parentClusterIdList);
         Cluster__c clusterl = new Cluster__c();
+       String externalIdName = clusterName.substring(0, 3); 
        if(!String.isBlank(defaultLanguage) && !String.isBlank(otherLangeuage)){
            clusterl.DefaultLanguage__c = defaultLanguage;
            clusterl.OtherLanguages__c = otherLangeuage;
@@ -42,7 +43,7 @@ public class MockupFactory {
             for(Id parentClusterId: parentClusterIdList){
                 for(Integer i = 0; i < quantity; i++){
 
-                    Cluster__c clusterItemOne = new Cluster__c(Name = clusterName+j+i, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id);
+                    Cluster__c clusterItemOne = new Cluster__c(Name = clusterName+j+i, ExternalId__c= externalIdName+j+i, ParentCluster__c = parentClusterId, RecordTypeId = rtGroup.Id);
                     clusterItemOne.DefaultLanguage__c = clusterl.DefaultLanguage__c;
                     clusterItemOne.OtherLanguages__c = clusterl.OtherLanguages__c;
                     clusterList.add(clusterItemOne);
@@ -54,7 +55,7 @@ public class MockupFactory {
             integer j = 0;
             for(Integer i = 0; i < quantity; i++){
                     
-                Cluster__c clusterOne = new Cluster__c(Name = clusterName+i+j, ParentCluster__c = null, RecordTypeId = rtGroup.Id);
+                Cluster__c clusterOne = new Cluster__c(Name = clusterName+i+j, ExternalId__c= externalIdName+i+j, ParentCluster__c = null, RecordTypeId = rtGroup.Id);
                 clusterOne.DefaultLanguage__c = clusterl.DefaultLanguage__c;
                 clusterOne.OtherLanguages__c = clusterl.OtherLanguages__c;
                 clusterList.add(clusterOne);
@@ -62,7 +63,7 @@ public class MockupFactory {
             j++;
         }   
        
-       
+        System.debug('DEBUG | clusterList: ' + clusterList);
         insert clusterList;
         return clusterList;
     }

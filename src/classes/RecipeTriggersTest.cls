@@ -8,7 +8,7 @@ private class RecipeTriggersTest {
         String name = 'Argentina';
         List<Cluster__c> clusterRootList = MockupFactory.createCluster(name, null, 1, 'ClusterRoot');
         Cluster__c cg = clusterRootList[0];
-        List<Cluster__c> clusterList = MockupFactory.createCluster(cg.Name, cg.Id, 1, 'ClusterGroup');
+        List<Cluster__c> clusterList = MockupFactory.createCluster('BuenosAires', cg.Id, 1, 'ClusterGroup');
         List<Content__c> contentList = MockupFactory.createContent('Recipe', clusterList[0], 1);
        
     }
@@ -44,7 +44,7 @@ private class RecipeTriggersTest {
 
 		//Then
 		Recipe__c recipeTest = [SELECT id, ExternalID__c, Name from Recipe__c where Id =: recipe.Id   Limit 1];
-		System.assertEquals(recipeTest.ExternalID__c, recipeTest.Name);
+		System.assertNotEquals(recipeTest.ExternalID__c, null);
 	}
 	
 

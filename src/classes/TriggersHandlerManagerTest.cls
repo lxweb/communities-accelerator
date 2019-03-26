@@ -13,7 +13,7 @@ public class TriggersHandlerManagerTest {
 
         List<Cluster__c> clusters = MockupFactory.createCluster('TestCluster', null, 10, 'ClusterRoot');
         Id clusterId = clusters[0].Id;
-        MockupFactory.createCluster('TestClusterLevel2', clusterId, 10, 'ClusterGroup');
+        MockupFactory.createCluster('ClusterLevel2', clusterId, 10, 'ClusterGroup');
 
     }
 
@@ -98,9 +98,9 @@ public class TriggersHandlerManagerTest {
         //Comment: 
         
         //Given
-        TriggersHandlerManager.triggerOld = Database.query('SELECT Id, ParentCluster__c, name FROM Cluster__c WHERE name LIKE \'TestCluster%\'');
+        TriggersHandlerManager.triggerOld = Database.query('SELECT Id, ParentCluster__c, name FROM Cluster__c WHERE name LIKE \'%Cluster%\'');
 
-        TriggersHandlerManager.triggerNew = Database.query('SELECT Id, ParentCluster__c, name FROM Cluster__c WHERE name LIKE \'TestCluster%\'');
+        TriggersHandlerManager.triggerNew = Database.query('SELECT Id, ParentCluster__c, name FROM Cluster__c WHERE name LIKE \'%Cluster%\'');
 
         //When
         TriggersHandlerManager.TriggerFiltered filteredResultName = TriggersHandlerManager.getTriggerListFiltered('name');
