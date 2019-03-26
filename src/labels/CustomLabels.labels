@@ -153,6 +153,46 @@
         <value>CONTENT</value>
     </labels>
     <labels>
+        <fullName>ContentDetailPublishMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailPublishMessage</shortDescription>
+        <value>{0} "{1}" was published.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailUnpublishMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailUnpublishMessage</shortDescription>
+        <value>{0} "{1}" was unpublished and saved as draft.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailDraftMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailDraftMessage</shortDescription>
+        <value>{0} "{1}" was saved as draft.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailSchedule</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailSchedule</shortDescription>
+        <value>Schedule</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPreview</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailPreview</shortDescription>
+        <value>Preview</value>
+    </labels>
+    <labels>
         <fullName>ContentDetailCreatedBy</fullName>
         <categories>Content Detail</categories>
         <language>en_US</language>

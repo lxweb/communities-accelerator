@@ -1,8 +1,15 @@
 <template>
     <div class="rich">
-        <div class="slds-grid slds-grid_align-end">
+        <div class="slds-grid">
             <div class="slds-col">
-                <lightning-button class="buttonToRight" type="submit" name="dSource" label="Display Source" onclick={displaySource}></lightning-button>
+                <div class="slds-grid">
+                    <div class="slds-p-top_x-small">
+                        <span class="slds-form-element__label">{label}</span>
+                    </div>
+                    <div class="slds-col_bump-left slds-p-bottom_x-small">
+                        <lightning-button class="buttonToRight" type="submit" name="dSource" label="Display Source" onclick={displaySource}></lightning-button>
+                    </div>
+                </div>
             </div>
         </div>
         <div>
@@ -16,9 +23,16 @@
     </div>
     
     <div class="source" style="display:none;">
-        <div class="slds-grid slds-grid_align-end">
+        <div class="slds-grid">
             <div class="slds-col">
-                <lightning-button type="submit" name="hSource" label="Hide Source" onclick={hideSource}></lightning-button>
+                <div class="slds-grid">
+                    <div class="slds-p-top_x-small">
+                        <span class="slds-form-element__label">{label}</span>
+                    </div>
+                    <div class="slds-col_bump-left slds-p-bottom_x-small">
+                            <lightning-button type="submit" name="hSource" label="Hide Source" onclick={hideSource}></lightning-button>
+                    </div>
+                </div>
             </div>
         </div>
         <div>

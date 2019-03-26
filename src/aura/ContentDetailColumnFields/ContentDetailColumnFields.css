@@ -1,8 +1,6 @@
-.THIS .title {
-	font-size: 16px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	font-weight: bold;
+.THIS .section-title {
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 .THIS.row {

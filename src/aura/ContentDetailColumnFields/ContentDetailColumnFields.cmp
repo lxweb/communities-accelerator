@@ -4,10 +4,8 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-	<div class="slds-card">
-		<header class="slds-card_header"> 
-			<h1>Visibility</h1>
-		</header>
+	<div class="slds-p-around_medium">
+		<div class="slds-text-title_caps section-title">Visibility</div>
 		<aura:iteration items="{!v.objectWrapper}" var="data" indexVar="index">
 			<!--Cluster-->
 				<aura:if isTrue="{!data.isMultiPicklist}">
