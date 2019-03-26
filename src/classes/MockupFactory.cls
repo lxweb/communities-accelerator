@@ -244,6 +244,23 @@ public class MockupFactory {
         return contentList;
     }
 
+    //Create Banner Content__c related to a Component
+    public static Content__c createBannerContentRelatedToComponent(Cluster__c clusterArg, Component__c component){
+        RecordType recordT = [SELECT Id FROM RecordType WHERE SobjectType = 'Content__c' AND Name = 'Banner' LIMIT 1];
+        Content__c content = new Content__c(
+            Name = 'Banner',
+            ExternalId__c = 'BannerContent',
+            RecordTypeId = recordT.Id,
+            Cluster__c = clusterArg.Id,
+            Order__c = 1,
+            Status__c = 'Draft',
+            StructureComponent__c = component.Id,
+            BannerFrameType__c = 'Hero'
+        );
+        insert content;
+        return content;
+    }
+
     //Create ContentAssignment__c by Content && Component
     public static List<ContentAssignment__c> createContentAssignment(List<Content__c> contentList, List<Component__c> componentList){
         List<ContentAssignment__c> contentAssignmentList = new List<ContentAssignment__c>();
@@ -505,7 +522,6 @@ public class MockupFactory {
         return stepsList;
     }
     
-    
     public static List<Datatable__c> createDatatables(String name, String externalId, String objectApiName, Integer quantity, Id clusterId) {
         List<Datatable__c> datatablesToCreate = new List<Datatable__c>();
         
@@ -570,5 +586,6 @@ public class MockupFactory {
         
         insert datatableActionsToCreate;
         return datatableActionsToCreate;
-    }
+    }    
+
 }
