@@ -275,6 +275,23 @@ public class MockupFactory {
         return contentList;
     }
 
+    //Create Banner Content__c related to a Component
+    public static Content__c createBannerContentRelatedToComponent(Cluster__c clusterArg, Component__c component){
+        RecordType recordT = [SELECT Id FROM RecordType WHERE SobjectType = 'Content__c' AND Name = 'Banner' LIMIT 1];
+        Content__c content = new Content__c(
+            Name = 'Banner',
+            ExternalId__c = 'BannerContent',
+            RecordTypeId = recordT.Id,
+            Cluster__c = clusterArg.Id,
+            Order__c = 1,
+            Status__c = 'Draft',
+            StructureComponent__c = component.Id,
+            BannerFrameType__c = 'Hero'
+        );
+        insert content;
+        return content;
+    }
+
     //Create ContentAssignment__c by Content && Component
     public static List<ContentAssignment__c> createContentAssignment(List<Content__c> contentList, List<Component__c> componentList){
         List<ContentAssignment__c> contentAssignmentList = new List<ContentAssignment__c>();
@@ -534,7 +551,6 @@ public class MockupFactory {
         return stepsList;
     }
     
-    
     public static List<Datatable__c> createDatatables(String name, String externalId, String objectApiName, Integer quantity, Id clusterId) {
         List<Datatable__c> datatablesToCreate = new List<Datatable__c>();
         
@@ -544,6 +560,8 @@ public class MockupFactory {
             dat.Cluster__c = clusterId;
             dat.ExternalId__c = externalId + '_' + i;
             dat.ObjectApiName__c = objectApiName;
+            dat.RecordsPerPage__c = 1;
+            dat.NumberOfColumns__c = '1';
             
             datatablesToCreate.add(dat);
         }
@@ -561,6 +579,9 @@ public class MockupFactory {
             datElement.Name = name + '_' + i;
             datElement.ExternalId__c = name + '_' + i;
             datElement.Datatable__c = datatableId;
+            datElement.FieldApiName__c ='Name';
+            datElement.Label__c = 'TestLabel';
+     
             
             datatableElementsToCreate.add(datElement);
         }
@@ -572,6 +593,10 @@ public class MockupFactory {
     
     public static List<DatatableAction__c> createDatatableActions(String name, String externalId, Integer quantity, Id datatableId, Id recordtypeId) {
         List<DatatableAction__c> datatableActionsToCreate = new List<DatatableAction__c>();
+         
+        List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootClusterTest', null, 1, 'ClusterRoot');
+        
+        List<Navigation__c> nav = MockupFactory.createNavigation('NavTest','nav-test',1,clustersRoot[0].Id);
         
         for(Integer i = 0 ; i < quantity ; i ++) {
             DatatableAction__c datAction = new DatatableAction__c();
@@ -579,12 +604,17 @@ public class MockupFactory {
             datAction.Datatable__c = datatableId;
             datAction.ExternalId__c = name + '_' + i;
             datAction.RecordTypeId = recordtypeId;
+            datAction.Type__c = 'Navigation';
+            datAction.Label__c = 'Test';
+            datAction.DisplaySettings__c = 'Desktop';
+            datAction.Navigation__c = nav[0].Id;
+            
             
             datatableActionsToCreate.add(datAction);
         }
         
         insert datatableActionsToCreate;
-        
         return datatableActionsToCreate;
-    }
+    }    
+
 }

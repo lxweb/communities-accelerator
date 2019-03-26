@@ -1,13 +1,19 @@
 @isTest(seeAllData = false)
 public with sharing class ContentTriggersTest {
 
+    @testSetup
+	static void generateData(){
+		MockupFactory.generateAcceleratorSetting();
+		List<Cluster__c> clusterRoot = MockupFactory.createCluster('Cluster Root', '', 1, 'ClusterRoot');
+        MockupFactory.createComponent('Banner', 1, clusterRoot.get(0));
+	}
+
 	@isTest 
 	static void insertContentTest(){
 		/* Comment: Comprueba que al crear un Content__c se inserta
 		con el correspondiente ExternalId__c */
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
 
 		//When
@@ -26,7 +32,6 @@ public with sharing class ContentTriggersTest {
 		con el correspondiente ExternalId__c */
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
 		List<Content__c> contentTest = MockupFactory.createContent('Banner', clusterArg[0], 1);
 		contentTest[0].ExternalId__c = null;
@@ -49,7 +54,6 @@ public with sharing class ContentTriggersTest {
 		Valida la creacion de las Manual Sharing al moemnto de crear un Tag*/
 
 		// Given
-		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 1, 'ClusterRoot');
 		List<Cluster__c> getClusterList = [SELECT Id, Name FROM Cluster__c WHERE Name LIKE 'ClusterRootTest%' LIMIT 1 ];
 		//System.debug('ClusterTriggersTest method clusterList: '+clusterList);
@@ -70,7 +74,6 @@ public with sharing class ContentTriggersTest {
 	@isTest
 	static void updateNavigationSharing(){
 		// Given
-		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterRootList = MockupFactory.createCluster('ClusterRootTest', null, 2, 'ClusterRoot');
 		List<Cluster__c> getClusterList = [SELECT Id, Name FROM Cluster__c WHERE Name LIKE 'ClusterRootTest%' LIMIT 2 ];
 		System.debug('ClusterTriggersTest method getClusterList: '+getClusterList);
@@ -105,17 +108,16 @@ public with sharing class ContentTriggersTest {
 		los assigment correspondientes */
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
 		List<Content__c> contentTest = MockupFactory.createContent('Banner', clusterArg[0], 1);
 		
 		List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
 		List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentTest, mediaElementList);
 
-		List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterArg[0]);
+		Component__c component = [SELECT Id FROM Component__c LIMIT 1];
 
 		List<Tag__c> tagList = MockupFactory.createTag('TestTag', 'description', 1, clusterArg[0].id);
-		List<TagAssignment__c> tagAssigList =  MockupFactory.createTagAssignment(tagList, componentList, contentTest);
+		List<TagAssignment__c> tagAssigList =  MockupFactory.createTagAssignment(tagList, new List<Component__c>{component}, contentTest);
 		//When
 		Test.startTest();
 		delete contentTest;
@@ -152,5 +154,27 @@ public with sharing class ContentTriggersTest {
 		Content__c contentTestResult =[SELECT ExternalId__c FROM Content__c WHERE Id =: contentTest.Id];
 		System.assertNotEquals(contentTestResult.ExternalId__c, null);
 	}
-*/	
+*/
+
+	@isTest 
+	static void insertContentAssignment(){
+
+		//Given
+        Component__c component = [SELECT Id FROM Component__c LIMIT 1];
+        component.Datasource__c = 'ManualAssignment';
+        update component;
+        List<Cluster__c> clusterArg = MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+
+		//When
+		Test.startTest();
+		Content__c contentTest = MockupFactory.createBannerContentRelatedToComponent(clusterArg[0], component);
+		contentTest.HTMLContent__c = '<h1>WELCOME [!user.name]</h1>';
+		update contentTest;
+		Test.stopTest();
+
+		//Then
+		List<ContentAssignment__c> contAssigment = [SELECT Id FROM ContentAssignment__c WHERE Component__c =: component.Id AND Content__c =: contentTest.Id];
+		System.Assert(!contAssigment.isEmpty());
+	}
+
 }
