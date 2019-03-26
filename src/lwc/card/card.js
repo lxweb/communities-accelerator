@@ -1,4 +1,6 @@
 import { LightningElement, api, track } from 'lwc';
+import { loadStyle } from 'lightning/platformResourceLoader';
+import Style from '@salesforce/resourceUrl/Assets';
 
 export default class Card extends LightningElement {
     @api config; 
@@ -26,6 +28,10 @@ export default class Card extends LightningElement {
 
     connectedCallback() {
         window.addEventListener("orientationchange", () => this.handleOrientation());
+        loadStyle(this, Style + '/Assets/Styles/roboto.css')
+    }
+    disconnectedCallback() {
+        window.removeEventListener("orientationchange")
     }
 
     handleOrientation() {
@@ -41,15 +47,15 @@ export default class Card extends LightningElement {
     }
 
     get headerClass() {
-        return this.config.type === 'Event'? 'header head-event' : 'header head-news'; 
+        return this.isEvent? 'header head-event' : 'header head-news'; 
     }
 
     get primaryDescClass() {
-        return this.config.type === 'Event'? 'desc-normal' : 'desc-highlight'; 
+        return this.isEvent? 'desc-normal' : 'desc-highlight'; 
     }
 
     get secondaryDescClass() {
-        return this.config.type === 'Event'? 'desc-highlight' : 'desc-normal'; 
+        return this.isEvent? 'desc-highlight' : 'desc-normal'; 
     }
 
 }

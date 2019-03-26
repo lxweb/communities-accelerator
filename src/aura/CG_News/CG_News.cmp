@@ -8,11 +8,7 @@
 
     <aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
             <c:cardList contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentType}"/>
-    </aura:if>
-    
-    <!-- <aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
-        
-        PORTRAIT AND HIGHLIGHTS
+        <!-- PORTRAIT AND HIGHLIGHTS
         <aura:if isTrue="{!or(v.componentWrapper.component.NewsType__c == 'Portrait', v.componentWrapper.component.NewsType__c == 'Highlight')}" >
             <aura:iteration items="{!v.componentWrapper.contentWrapper}" var="contentItem" >
                 <c:CG_NewsItem contentWrapper="{!contentItem}" componentWrapper="{!v.componentWrapper}" parentComponentId="{!v.parentComponentId}" type="{!v.componentWrapper.component.NewsType__c}" linkDetail="{!v.componentWrapper.component.LinkDetail__r.URL__c}"/>
@@ -66,6 +62,6 @@
                     </div>
                 </div>
             </aura:if>
-        </aura:if>
-    </aura:if> -->
+        </aura:if> -->
+    </aura:if>
 </aura:component>

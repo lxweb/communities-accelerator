@@ -35,7 +35,8 @@
                                 </div>
                                 <div class={secondaryDescClass}>
                                     <template if:true={isEvent}>
-                                        <lightning-icon src="sfsites/c/resource/Assets/Icons/location.svg" alternative-text="emoji"></lightning-icon>
+                                        <lightning-icon class="slds-icon_container" icon-name="custom:custom106" size="x-small"
+                                            alternative-text="Location"></lightning-icon>
                                     </template>
                                     {config.footer.description.descSecondary}
                                 </div>
@@ -94,9 +95,11 @@
                                         {config.footer.description.descPrimary}
                                     </div>
                                     <div class={secondaryDescClass}>
-                                            <template if:true={isEvent}>
-                                                <lightning-icon src="sfsites/c/resource/Assets/Icons/location.svg" alternative-text="emoji"></lightning-icon>
-                                            </template>
+                                        <template if:true={isEvent}>
+                                            <div class="location-container">
+                                                <i class="icon location-icon"></i>
+                                            </div>
+                                        </template>
                                         {config.footer.description.descSecondary}
                                     </div>
                                 </div>
