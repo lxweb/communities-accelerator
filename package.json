@@ -1,0 +1,24 @@
+{
+  "name": "communities-accelerator",
+  "version": "1.0.0",
+  "description": "CMS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CG-NWG/communities-accelerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CG-NWG/communities-accelerator/issues"
+  },
+  "homepage": "https://github.com/CG-NWG/communities-accelerator#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-directory-sync": "^1.2.3",
+    "gulp-file-sync": "^2.0.0"
+  }
+}
