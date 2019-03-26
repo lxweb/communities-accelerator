@@ -176,7 +176,7 @@ public class MockupFactory {
     //Create Component__c by RecordTypeName
     public static List<Component__c> createComponent(String nameRecordType, Integer quantity){
 
-        List<Component__c> componentList = createComponent(nameRecordType, quantity,null);
+        List<Component__c> componentList = createComponent(nameRecordType, quantity, null);
         
         return componentList;
     }
@@ -185,15 +185,15 @@ public class MockupFactory {
     public static List<Component__c> createComponent(String nameRecordType, Integer quantity, Cluster__c cluster){
         List<Component__c> componentList= new List<Component__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Component__c' AND Name =: nameRecordType LIMIT 1];
-        
-        if(cluster != null){
+
+        if(nameRecordType != 'Banner'){
+
             for(Integer i = 0; i < quantity; i++){
-                
                 componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
                                         RecordTypeId = recordT.Id,
-                                        Cluster__c = cluster.Id,
+                                        Cluster__c = cluster == null ? null : cluster.Id,
                                         Status__c='Inactive'));
             }
 
@@ -203,7 +203,9 @@ public class MockupFactory {
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
                                         RecordTypeId = recordT.id,
-                                        Status__c='Inactive'));
+                                        Cluster__c = cluster == null ? null : cluster.Id,
+                                        Status__c='Inactive',
+                                        BannerFrameType__c='Hero'));
             }
         }
 
@@ -216,13 +218,27 @@ public class MockupFactory {
         List<Content__c> contentList = new List<Content__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Content__c' AND Name =: nameRecordType LIMIT 1];
 
-        for(Integer i = 0; i < quantity; i++){
+        if (nameRecordType != 'Banner'){
+           for(Integer i = 0; i < quantity; i++){
             contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
                                     Order__c = i+1,
                                     Status__c='Draft'));
+            } 
+        }
+        else
+        {
+            for(Integer i = 0; i < quantity; i++){
+            contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
+                                    ExternalId__c = nameRecordType + 'Content_' + i,
+                                    RecordTypeId = recordT.id,
+                                    Cluster__c = clusterArg.id,
+                                    Order__c = i+1,
+                                    Status__c='Draft',
+                                    BannerFrameType__c='Hero'));
+            }       
         }
         insert contentList;
         return contentList;
@@ -348,11 +364,12 @@ public class MockupFactory {
         return translationList;
     }
 
+ 
     public static List<Navigation__c>  createNavigation(String navName, String url, Integer quantity, Id clusterId){
         List<Navigation__c> navList = new List<Navigation__c>();
        
         for(Integer i = 0;i<quantity;i++){
-            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Status__c='Inactive'));
+            navList.add(new Navigation__c(Name=navName+i, URL__c=url, Status__c='Inactive', Cluster__c=clusterId));
         }
         
         insert navList;
