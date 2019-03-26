@@ -1,19 +1,11 @@
 # Archivos VisualStudio Code
 .forceCode/
-.sdfx/
 force.json
-sfdx-project.json
-.sfdx
-.forceignore
-README.md
 settings.json
-.eslintrc.json
 jsconfig.json
-force-app/*
 .vim-force.com
 
 # Archivos Sublime
-config/
 *.sublime-project
 *.sublime-workspace
 
@@ -289,10 +281,6 @@ src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
 node_modules/
 lwc/
-.forceignore
-force-app/
 package.json
 package-lock.json
 .vim-force.com/session.properties
-.vscode/settings.json
-.sfdx
