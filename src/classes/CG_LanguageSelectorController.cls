@@ -40,7 +40,7 @@ public with sharing class CG_LanguageSelectorController {
 			if(langs.contains(entry.getValue()) && entry.isActive()){	
 				LanguageWrapper lang= new LanguageWrapper(entry.getLabel(), entry.getValue());
 				wrapper.languages.add(lang);
-				if( entry.getValue().equalsIgnoreCase(userLanguage)){
+				if(entry.getValue().equalsIgnoreCase(userLanguage)){
 					wrapper.userLanguage=lang;
 				}	
 				
