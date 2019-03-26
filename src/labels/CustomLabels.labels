@@ -537,6 +537,14 @@
         <value>Success</value>
     </labels>
     <labels>
+        <fullName>General_View</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General_View</shortDescription>
+        <value>View</value>
+    </labels>
+    <labels>
         <fullName>General_ViewMore</fullName>
         <categories>General</categories>
         <language>en_US</language>
@@ -1158,5 +1166,13 @@
         <protected>false</protected>
         <shortDescription>Create</shortDescription>
         <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNewFromTemplate</fullName>
+        <categories>ContentLandingRecordListController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentLandingNewFromTemplate</shortDescription>
+        <value>New from template</value>
     </labels>
 </CustomLabels>
