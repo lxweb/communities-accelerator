@@ -126,7 +126,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Component behaviour manual assignment</shortDescription>
-        <value>When you save the record, a manual assignment to the component will be generated.</value>
+        <value>When you saved the record, a manual assignment to the component was generated.</value>
     </labels>
     <labels>
         <fullName>ComponentBehaviourTags</fullName>

@@ -56,8 +56,7 @@ public class ComponentBehaviourController {
     }
 
     private static String getBannerType(Component__c component){
-        String bannerType;        
-        bannerType += '\n\n Banner type: ' + component.BannerFrameType__c;
+        String bannerType = '\n\n Banner type: ' + component.BannerFrameType__c;
         return bannerType;
     }
 
