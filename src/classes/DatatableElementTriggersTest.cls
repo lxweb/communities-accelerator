@@ -11,22 +11,22 @@ private class DatatableElementTriggersTest {
         Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', 'DummyDatatable', 'Account', 1, clusterId);
         
-        List<DatatableElement__c> datatableElements = MockupFactory.createDatatableElements('DummyDatatableElement', 'DummyDatatableElement', 2, datatables.get(0).Id);
+        List<DatatableElement__c> datatableElements = MockupFactory.createDatatableElements('DummyDatatableElement', 'DummyDatatableElement', 2, datatables[0].Id);
         
         Test.stopTest();
     }
     
     @isTest
     static void createDatabaseElementWithoutExternalId() {
-		Test.startTest();
+        Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', null, 'Account', 1, clusterId);
@@ -38,10 +38,10 @@ private class DatatableElementTriggersTest {
     
     @isTest
     static void updateDatabaseElementWithExternalId() {
-		Test.startTest();
+        Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', 'DummyDatatable', 'Account', 1, clusterId);
@@ -61,7 +61,7 @@ private class DatatableElementTriggersTest {
         Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', null, 'Account', 1, clusterId);

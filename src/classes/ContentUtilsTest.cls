@@ -206,7 +206,9 @@ public class ContentUtilsTest {
 		Component__c comp = componentList[0];
 		comp.Datasource__c = 'ManualAssignment';
 		comp.OrderBy__c = 'Manual Order';
+		comp.BannerFrameType__c='Hero';
 		update comp;
+
 
 		componentList = [SELECT Name, TagCriteria__c, ExternalId__c,BannerFrameType__c, Datasource__c, Status__c, PageSize__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
 				FROM Component__c WHERE Id =: comp.ID];
@@ -223,10 +225,10 @@ public class ContentUtilsTest {
 		Test.startTest();
 		ContentUtils.ContentWrapper cw = ContentUtils.getContentFromComponent(componentList[0], fieldSet, null, null, setClusterIds, 'Desktop');
 		Test.stopTest();
-
 		// Then
 		contentAssigmentList = [SELECT Id, Content__c FROM ContentAssignment__c ORDER BY Order__c];		
 		Integer i = 0;
+
 		for(ContentUtils.ContentDataWrapper cont : cw.contentDataPage){
 			System.assertEquals(contentAssigmentList[i].Content__c, cont.content.Id);
 			i++;
