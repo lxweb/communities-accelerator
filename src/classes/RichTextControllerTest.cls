@@ -18,16 +18,15 @@ public class RichTextControllerTest {
         String richTextExternalIds = '<img src="@ME:123@">-<img src="@ME:456@">-<img src="@ME:789@">-<img src="@ME:100@">-'
             					   + '<img src="@ME:ABC@">-<img src="@ME:DEF@">-<img src="@ME:GHI@">-<img src="@ME:JKL@">-';
         
-        // When
-        List<String> mediaElementExternalIds = RichTextController.getMediaElementExternalIds(new List<String>{richTextExternalIds});
-        Map<String, String> externalIdURLMap = RichTextController.getExternalIdURLMap(mediaElementExternalIds);
-        String richTextURLs = RichTextController.replaceExternalIdsWithURLs(richTextExternalIds, externalIdURLMap);
+        String expectedRichTextURLs = '<img src="www.123">-<img src="www.456">-<img src="www.789">-<img src="www.100">-'
+                                    + '<img src="www.ABC">-<img src="www.DEF">-<img src="www.GHI">-<img src="www.JKL">-';
 
-        List<String> mediaElementURLs = RichTextController.getMediaElementURLs(new List<String>{richTextURLs});
-        Map<String, String> urlExternalIdMap = RichTextController.getURLExternalIdMap(mediaElementURLs);
-        String richTextFinal = RichTextController.replaceURLsWithExternalIds(richTextURLs, urlExternalIdMap);
+        // When
+        String richTextURLs = RichTextController.replaceExternalIdsWithURLs(richTextExternalIds);
+        String richTextFinal = RichTextController.replaceURLsWithExternalIds(richTextURLs);
         
         // Then
+        System.assertEquals(expectedRichTextURLs, richTextURLs);
         System.assertEquals(richTextExternalIds, richTextFinal);
     }
 

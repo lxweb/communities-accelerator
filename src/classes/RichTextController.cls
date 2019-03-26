@@ -2,6 +2,12 @@ public class RichTextController {
 
     // From ExternalIds To URLs
 
+    public static String replaceExternalIdsWithURLs(String richText){
+        List<String> mediaElementExternalIds = getMediaElementExternalIds(new List<String>{richText});
+        Map<String, String> externalIdURLMap = getExternalIdURLMap(mediaElementExternalIds);
+        return replaceExternalIdsWithURLs(richText, externalIdURLMap);
+    }
+
     public static String replaceExternalIdsWithURLs(String richText, Map<String, String> externalIdUrlMap){
         // Replaces External Ids in tags @ME:@ with URLs
         if(richText.contains('@ME:')){
@@ -46,6 +52,12 @@ public class RichTextController {
     }
 
     // From URLs To ExternalIds
+
+    public static String replaceURLsWithExternalIds(String richText){
+        List<String> mediaElementURLs = getMediaElementURLs(new List<String>{richText});
+        Map<String, String> urlExternalIdMap = getURLExternalIdMap(mediaElementURLs);
+        return replaceURLsWithExternalIds(richText, urlExternalIdMap);
+    }
 
     public static String replaceURLsWithExternalIds(String richText, Map<String, String> urlExternalIdMap){
         // Replaces URLs with External Ids in tags @ME:@ 
