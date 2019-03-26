@@ -187,13 +187,18 @@ private class GeneralUtilsTest {
 		String test4 = GeneralUtils.generateExternalId(name4, clusterC.id, null);
 		String test5 = GeneralUtils.generateExternalId(name5, clusterC.id, 'Content__c');
 		Test.stopTest();
+		String dateString = String.valueOf(datetime.now());
+                 
+        dateString = dateString.replaceAll('-','');
+        dateString = dateString.replaceAll(':','');
+        dateString = dateString.replaceAll(' ','');
 
 		//Then
 		System.assertEquals(test1, res1);
 		System.assertEquals(test2, res2);
 		System.assertEquals(test3, res3);
-		System.assertEquals(test4, clusterC.ExternalId__c+res4.replaceAll('[^a-zA-Z0-9]', '_'));
-		System.assertEquals(test5, clusterC.ExternalId__c+res5.replaceAll('[^a-zA-Z0-9]', '_')+ String.valueOf(date.today()).replaceAll('-',''));
+		System.assertEquals(test4, clusterC.ExternalId__c+'_'+res4.replaceAll('[^a-zA-Z0-9]', '_'));
+		System.assertEquals(test5, clusterC.ExternalId__c+'_'+res5.replaceAll('[^a-zA-Z0-9]', '_')+'_'+ dateString);
 	}	
 	
 }

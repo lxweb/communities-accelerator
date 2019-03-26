@@ -12,29 +12,27 @@ public class GeneralUtils{
                 Cluster__c cluster = [SELECT Id, ExternalID__c FROM Cluster__c WHERE Id =: clusterID];
 
                 if(String.isNotEmpty(sobjectType) && sobjectType.equalsIgnoreCase('Content__c')){
-                    String contentDate = String.valueOf(date.today());
-                    contentDate=contentDate.subString(0,10);
-                    contentDate = contentDate.replaceAll('-','');
-                    if(apiName.length()>65){
-                        apiName=apiName.subString(0,65);    
+                   
+                    String dateString = String.valueOf(datetime.now());
+                 
+                    dateString = dateString.replaceAll('-','');
+                    dateString = dateString.replaceAll(':','');
+                    dateString = dateString.replaceAll(' ','');
+                    if(apiName.length()>59){
+                        apiName=apiName.subString(0,59);    
                     }
-                    return cluster.ExternalID__c + apiName + contentDate;
+                    return cluster.ExternalID__c +'_'+ apiName +'_'+ dateString;// contentDate + timeString;
                 }else{
                     if(apiName.length()>74){
                         apiName=apiName.subString(0,74);    
                     }
-                    apiName=cluster.ExternalID__c + apiName;
+                    apiName=cluster.ExternalID__c +'_'+ apiName;
                 }
             }
         }
         return apiName;
     }
-/*
-    public static String generateExternalId(String name){
-        String stringToReturn = generateExternalId(name, null, null);
-        return stringToReturn;  
-    }
-*/
+
     public static String joinFields(List<String> listToJoin){
         set<String> finalset = new set<String>();
         finalset.addAll(listToJoin);
