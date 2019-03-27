@@ -1112,4 +1112,28 @@
         <shortDescription>General contents</shortDescription>
         <value>General Contents</value>
     </labels>
+    <labels>
+        <fullName>NewsContentDetailTemplateDescription</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTemplateDescription</shortDescription>
+        <value>Template Description</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailTemplateDescription</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailTemplateDescription</shortDescription>
+        <value>Template Description</value>
+    </labels>
+    <labels>
+        <fullName>AdvanceContentDetailTemplateDescription</fullName>
+        <categories>ContentAdvanceContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AdvanceContentDetailTemplateDescription</shortDescription>
+        <value>Template Description</value>
+    </labels>
 </CustomLabels>
