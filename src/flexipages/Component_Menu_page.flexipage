@@ -9,9 +9,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>CG_ClusterSelector</componentName>
-        </componentInstances>
-        <componentInstances>
             <componentName>CommunityComponentPreview</componentName>
         </componentInstances>
         <name>Facet-053c1da3-4a07-46f8-967e-11a9a458d2e7</name>
