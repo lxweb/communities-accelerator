@@ -5,11 +5,11 @@ import Assets from '@salesforce/resourceUrl/Assets';
 export default class Banner extends LightningElement {
 
     @track position = 0;
+    swipedir
     startX
-    startY
     dist
     threshold = 150 //required min distance traveled to be considered swipe
-    allowedTime = 200 // maximum time allowed to travel that distance
+    allowedTime = 2000 // maximum time allowed to travel that distance
     elapsedTime
     startTime
 
@@ -58,11 +58,13 @@ export default class Banner extends LightningElement {
     //     carouselNext.setAttribute('href', `#${id}`);
     const carousel = this.template.querySelector('.carousel-inner');
         carousel.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             let touchobj = e.changedTouches[0]
+            this.swipedir = 'none'
             this.dist = 0
             this.startX = touchobj.pageX
-            this.startY = touchobj.pageY
-            this.startTime = new Date().getTime() // record time when finger first makes contact with surface
+            this.startTime = new Date().getTime()// record time when finger first makes contact with surface
             e.preventDefault()
         }, false)
 
@@ -71,12 +73,17 @@ export default class Banner extends LightningElement {
         }, false)
 
         carousel.addEventListener('touchend', (e) => {
-            var touchobj = e.changedTouches[0]
-            this.dist = touchobj.pageX - this.startX // get total dist traveled by finger while in contact with surface
+            e.preventDefault();
+            e.stopPropagation();
+            let touchobj = e.changedTouches[0]
+            this.distX = touchobj.pageX - this.startX // get horizontal dist traveled by finger while in contact with surface
             this.elapsedTime = new Date().getTime() - this.startTime // get time elapsed
-            // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
-            let swiperightBol = (this.elapsedTime <= this.allowedTime && this.dist >= this.threshold && Math.abs(touchobj.pageY - this.startY) <= 100)
-            this.handleswipe(swiperightBol)
+            if (this.elapsedTime <= this.allowedTime){ // first condition for awipe met
+                if (Math.abs(this.distX) >= this.threshold){ // 2nd condition for horizontal swipe met
+                    this.swipedir = (this.distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+                }
+            }
+            this.handleswipe(this.swipedir);
             e.preventDefault()
         }, false)
     }
@@ -85,9 +92,10 @@ export default class Banner extends LightningElement {
         if (isrightswipe)
             this.next();
         else{
-            this.prev();
+            this.previous();
         }
     }
+
     next(){
         this.elements[this.position].class = this.elements[this.position].class.replace(' active','');
         this.elements[this.position].indicatorClass = '';
