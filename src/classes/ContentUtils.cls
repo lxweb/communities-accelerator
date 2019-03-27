@@ -21,6 +21,7 @@ public without sharing virtual class ContentUtils {
         
         List<Id> contentIdList = new List<Id>();
         Set<Id> setCategoriesIds = new Set<Id>();
+
         if(setContentToExclude == null){setContentToExclude = new Set<String>();}
 
         //Armado del query principal a objeto Content
@@ -34,12 +35,10 @@ public without sharing virtual class ContentUtils {
 
         //WHERE
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
+        
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
-          
-        query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
-        query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
-              
+            query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
         }else{
             if(component.Datasource__c != null){
                 //Busqueda de contenido por Datasource
@@ -69,7 +68,6 @@ public without sharing virtual class ContentUtils {
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
                 query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
-
                 query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
@@ -79,13 +77,6 @@ public without sharing virtual class ContentUtils {
                     query += 'AND (EventEndDate__c >: dateAndTime) ';
                 }
             }
-
-
-           query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
-            
-            
-            
-            
         }
 
         //ORDER
@@ -97,11 +88,9 @@ public without sharing virtual class ContentUtils {
             query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
         }       
         
-
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 
-  
         if(!mapContent.isEmpty()){
             //Manual Order del contenido
             if(component.Datasource__c == 'ManualAssignment' && component.OrderBy__c == 'Manual Order' && contentIdList.size() > 0){
@@ -113,6 +102,7 @@ public without sharing virtual class ContentUtils {
             }
             
             //TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
+
             //Si despues de aplicar segmentacion tenemos algun registro evaluamos las paginas
             if(!mapContent.isEmpty()){
 
@@ -195,6 +185,7 @@ public without sharing virtual class ContentUtils {
         List<String> tagList = new List<String>();
         List<String> visitedList = new List<String>();
         Map<String, String> orderTagMap = new Map<String, Id>();
+
         if(String.isNotBlank(tagCriteria)){
             tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
             orderList = tagCriteria.split('\\(|\\)|AND|OR');
@@ -316,6 +307,38 @@ public without sharing virtual class ContentUtils {
         for(Content__c con: contentList){
             con.HTMLContent__c = GeneralUtils.replaceDynamicFields(con.HTMLContent__c, 'User', UserInfo.getUserId(), false);
         }
+    }
+    
+    @auraEnabled
+    public static String createFromTemplate(Id templateId){
+
+        Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
+        Content__c template = Database.query('SELECT ' +  String.join(new List<String>(fieldNames), ',') + ' FROM Content__c WHERE Id =: templateId');
+
+        if(template.IsTemplate__c && template.Status__c == 'Published'){
+            Content__c newContent = template.clone(false,false,false,false);
+            newContent.Name = 'Copy of - ' + template.Name.left(69);
+            newContent.TemplateUsed__c = templateId;
+            newContent.Status__c = 'Draft';
+            newContent.IsTemplate__c = false;
+            newContent.ExternalId__c = null;
+            newContent.OwnerId = UserInfo.getUserId();
+            try{
+                insert newContent;
+                return newContent.Id;
+            }catch(DMLException e){
+                System.debug(e.getMessage());
+                System.debug(e.getStackTraceString());
+                throw new AuraHandledException(e.getDMLMessage(0));
+            }catch(Exception e){
+                System.debug(e.getMessage());
+                System.debug(e.getStackTraceString());
+                throw new AuraHandledException(e.getMessage());
+            }  
+        }else{
+            throw new AuraHandledException(template.IsTemplate__c ? label.NewTemplateInvalidTemplate : label.NewTemplateNotPublished);
+        }       
+
     }
     
 }

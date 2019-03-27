@@ -1159,7 +1159,6 @@
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
-<<<<<<< HEAD
     <labels>
         <fullName>Template</fullName>
         <categories>recordTypeSelectionModal</categories>
@@ -1176,7 +1175,20 @@
         <shortDescription>Create</shortDescription>
         <value>Create</value>
     </labels>
+    <labels>
+        <fullName>NewTemplateInvalidTemplate</fullName>
+        <categories>ContentUtils.cls</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewTemplateInvalidTemplate</shortDescription>
+        <value>The record used as template is not marked as template.</value>
+    </labels>
+    <labels>
+        <fullName>NewTemplateNotPublished</fullName>
+        <categories>ContentUtils.cls</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewTemplateNotPublished</shortDescription>
+        <value>Only published templates can be used to create new records.</value>
+    </labels>
 </CustomLabels>
-=======
-</CustomLabels>
->>>>>>> feature/CMS-72
