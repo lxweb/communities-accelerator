@@ -1,6 +1,6 @@
 <template>
     <template if:true={orientation}>
-        <div class="container-portrait">
+        <div class="container-portrait" onclick={navigateToDetail}>
             <template if:true={config}>
                 <template if:true={config.headerText}>
                     <div class="header-container">
@@ -35,8 +35,7 @@
                                 </div>
                                 <div class={secondaryDescClass}>
                                     <template if:true={isEvent}>
-                                        <lightning-icon class="slds-icon_container" icon-name="custom:custom106" size="x-small"
-                                            alternative-text="Location"></lightning-icon>
+                                            <i class="icon location-icon"></i>
                                     </template>
                                     {config.footer.description.descSecondary}
                                 </div>
@@ -58,7 +57,7 @@
     </template>
     <template if:false={orientation}>
         <template if:true={config}>
-            <div class="container-landscape slds-grid">
+            <div class="container-landscape slds-grid" onclick={navigateToDetail}>
                 <div class="slds-col slds-size_1-of-4">
                     <template if:true={config.imgSrc}>
                         <div class="img-container-landscape">

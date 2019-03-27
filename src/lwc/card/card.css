@@ -93,14 +93,14 @@
 }
 .icon::before {
   content: '';
-  float: right;
+  float: left;
   height: 1em;
   width: 1em;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  bottom: -3px;
+  bottom: -1px;
 }
 .icon {
   font-size: 1rem;

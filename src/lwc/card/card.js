@@ -5,6 +5,7 @@ import Style from '@salesforce/resourceUrl/Assets';
 export default class Card extends LightningElement {
     @api config; 
     //{id:string ,
+    // externalId,
     // type:sting,
     // headerText:string,
     // title:string,
@@ -40,6 +41,18 @@ export default class Card extends LightningElement {
         } else {
             this.orientation = false;
         }
+    }
+
+    navigateToDetail() {
+        let url = '';
+        if(this.config.type === 'Event') {
+            url = 'eventdetail';
+        } else {
+            url = 'newsdetail'
+        }
+        const values = JSON.stringify({ id: this.config.externalId, url });
+        const naivgateEvent = new CustomEvent('navigatetodetail', { bubbles: true, composed: true, detail: { values } });
+        this.dispatchEvent(naivgateEvent);
     }
 
     get isEvent() {

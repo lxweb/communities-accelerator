@@ -1,14 +1,11 @@
 const formatContent = (content, type) => {
     let formatedContent;
     let temp = content.mediaElements.length > 0 ? content.mediaElements[0] : {};
-
-    for(let i = 0; i < 5; i++) {
-
-    }
     if (content.content !== null && !formatedContent) {
         if (type === 'Event') {
             formatedContent = {
                 id: content.content.Id,
+                externalId: content.content.ExternalId__c,
                 type: type,
                 headerText: content.content.EventStartDate__c,
                 title: content.content.Title__c,
@@ -25,6 +22,7 @@ const formatContent = (content, type) => {
         else {
             formatedContent = {
                 id: content.content.Id,
+                externalId: content.content.ExternalId__c,
                 headerText: null,
                 title: content.content.Title__c,
                 bodyText: content.content.Extract__c,
@@ -48,16 +46,18 @@ const formatContentCompressed = (content, type) => {
         if (type === 'Event') {
             formatedContent = {
                 id: content.content.Id,
+                externalId: content.content.ExternalId__c,
                 type: type,
-                headerText: content.content.EventStartDate__c,
+                headerText: content.content.EventStartDate__c.slice(0, 10),
                 title: content.content.Title__c,
                 imgSrc: temp.FileURLDesktop__c,
-                description: content.content.name
+                description: content.content.Name
             };
         }
         else {
             formatedContent = {
                 id: content.content.Id,
+                externalId: content.content.ExternalId__c,
                 type: type,
                 headerText: null,
                 title: content.content.Title__c,
