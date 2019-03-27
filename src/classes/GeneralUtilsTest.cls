@@ -1,5 +1,6 @@
 @isTest
 private class GeneralUtilsTest {
+    
 	@testSetup
     static void setupTest(){
     	String nameRecordType = 'Banner';
@@ -60,8 +61,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name');
-		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id');
+		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name', true);
+		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id', true);
 		Test.stopTest();
 
 		//Then
@@ -75,8 +76,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeObject('Cluster__c');
-		Boolean result2 = GeneralUtils.isSafeObject('Test__c');
+		Boolean result = GeneralUtils.isSafeObject('Cluster__c', true);
+		Boolean result2 = GeneralUtils.isSafeObject('Test__c', true);
 		Test.stopTest();
 
 		//Then
@@ -196,6 +197,34 @@ private class GeneralUtilsTest {
 		System.assertEquals(test4, res4);
 		System.assertEquals(test5, res5);
 		System.assertEquals(test6, clusterC.name.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_') + '_' + cluster);
-	}	
+	}
+
+	@isTest
+	static void hasSObjectFieldTest() {
+		//Given
+		List<Cluster__c> clusterList = [SELECT Id FROM Cluster__c LIMIT 1];
+		//When
+		Test.startTest();
+		Boolean result = GeneralUtils.hasSObjectField('Id', clusterList[0]);
+		Boolean result2 = GeneralUtils.hasSObjectField('Name', clusterList[0]);
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(result, true);
+		System.assertEquals(result2, false);
+	}
+
+	@isTest
+	static void getObjectFieldNamesTest() {
+		//Given
+
+		//When
+		Test.startTest();
+		Set<String> result = GeneralUtils.getObjectFieldNames('Cluster__c');
+		Test.stopTest();
+
+		//Then
+		System.assertNotEquals(result.size(), 0);
+	}
 	
 }

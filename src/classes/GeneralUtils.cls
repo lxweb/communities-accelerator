@@ -134,23 +134,42 @@ public class GeneralUtils{
         }
         return retText;
     }
-
-    public static Boolean isSafeObject(String objName){
+    
+    public static Boolean isSafeObject(String objName, Boolean checkPermissions){
+        Boolean result = false;
+        
         SObjectType myObj = Schema.getGlobalDescribe().get(objName);
-        if(myObj != null && myObj.getDescribe().isAccessible()) { 
-            return true; 
+        
+        if(myObj != null) {
+            if(checkPermissions) {
+                if(myObj.getDescribe().isAccessible()) {
+                    result = true;
+                }
+            }else {
+                result = true;
+            }
         }
-        return false;
+        
+        return result;
     }
 
-    public static Boolean isSafeField(String objName, String fieldName){
-        if(isSafeObject(objName)) {
+    public static Boolean isSafeField(String objName, String fieldName, Boolean checkPermissions){
+        Boolean result = false;
+        
+        if(isSafeObject(objName, checkPermissions)) {
             SObjectField myField = Schema.getGlobalDescribe().get(objName).getDescribe().fields.getMap().get(fieldName);
-            if(myField != null && myField.getDescribe().isAccessible()){
-                return true;
-            }            
+            
+            if(myField != null) {
+                if(checkPermissions) {
+                    if(myField.getDescribe().isAccessible()){
+                        result = true;
+                    }
+                }else {
+                    result = true;
+                }
+            }    
         }
-        return false;
+        return result;
     }
 
     public static map<String, Network> mapNetworks;
@@ -197,6 +216,18 @@ public class GeneralUtils{
             fieldNames.add(field.getDescribe().getName());
         }
         return fieldNames;
+    }
+
+    /* Check if an Sobject has a field */
+    public static boolean hasSObjectField(String fieldName, SObject so){
+        String s = JSON.serialize(so);
+        // Deserialize it back into a key/value map
+        Map<String,Object> obj = (Map<String,Object>) JSON.deserializeUntyped(s);
+         
+        // Build a set containing the fields present on our SObject
+        Set<String> fieldsPresent = obj.keyset().clone();
+         
+        return fieldsPresent.contains(fieldName);
     }
     
 }
