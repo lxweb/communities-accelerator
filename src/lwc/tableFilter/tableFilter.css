@@ -48,10 +48,10 @@
     color: #4092DF;
     padding-left: 5px;
 }
+.datatable-container table tbody tr .td-row-action {
+    text-align: center;
+}
 @media (min-width:768px) {
-    .datatable-container table {
-        table-layout: fixed;
-    }
     .datatable-container table tbody tr:nth-child(2n+1) {
         background-color: #F7F7F7;
     }

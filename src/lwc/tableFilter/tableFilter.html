@@ -39,6 +39,30 @@
                                         </div>
                                     </td>
                                 </template>
+                                <template if:true={item.actions}>
+                                    <td class="td-row-action">
+                                        <div class="slds-dropdown-trigger slds-dropdown-trigger_click divAction">
+                                            <button class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-border-filled" onblur={showActions} onclick={showActions} aria-haspopup="true" title={showMore}>
+                                                <lightning-icon
+                                                    icon-name="utility:down"
+                                                    size="x-small">
+                                                </lightning-icon>
+                                                <span class="slds-assistive-text">{showMore}</span>
+                                            </button>
+                                            <div class="slds-dropdown slds-dropdown_right">
+                                                <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                                    <template for:each={item.actions} for:item=itemAction>
+                                                        <li key={itemAction} class="slds-dropdown__item slds-truncate" role="presentation">
+                                                            <a role="menuitem" tabindex="0" class="action-a" onmousedown={handleClick}>
+                                                                <span class="slds-truncate" data-id={item.contentId} data-label={itemAction} title={itemAction}>{itemAction}</span>
+                                                            </a>
+                                                        </li>
+                                                    </template>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </template>
                             </tr>
                         </template>
                     </template>
