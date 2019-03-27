@@ -291,6 +291,7 @@ src/pages/
 /package-lock.json
 /package.json
 node_modules/
+# lwc/
 /force-app
 .forceignore
 force-app/
@@ -299,4 +300,4 @@ package-lock.json
 .vim-force.com/session.properties
 .vscode/settings.json
 .sfdx
-.vscode/settings.json
+/gulpfile.js
