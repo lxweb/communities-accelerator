@@ -1,26 +1,24 @@
 <template>
     <div class="datatable"> 
         <div class="slds-grid slds-wrap">
-            <lightning-button-menu label="filter">
-                <template for:each={table.columns} for:item="col">
-                    <div key={col.fieldName} class="slds-col slds-size_2-of-4">
-                        <lightning-button-menu label={col.fieldName}>
-                            <template for:each={col.filtrableValues} for:item="filter">
-                                <div key={filter}>
-                                    <lightning-menu-item
-                                        label={filter}
-                                        value={filter}
-                                        data-column={col.fieldName} 
-                                        data-type={col.type} 
-                                        data-value={filter} 
-                                        onclick={filterEvent}>
-                                    </lightning-menu-item>
-                                </div>
-                            </template>
-                        </lightning-button-menu>
-                    </div>
-                </template>
-            </lightning-button-menu>
+            <template for:each={table.columns} for:item="col">
+                <div key={col.fieldName} class="slds-col slds-size_2-of-4">
+                    <lightning-button-menu label={col.fieldName}>
+                        <template for:each={col.filtrableValues} for:item="filter">
+                            <div key={filter}>
+                                <lightning-menu-item
+                                    label={filter}
+                                    value={filter}
+                                    data-column={col.fieldName} 
+                                    data-type={col.type} 
+                                    data-value={filter} 
+                                    onclick={filterEvent}>
+                                </lightning-menu-item>
+                            </div>
+                        </template>
+                    </lightning-button-menu>
+                </div>
+            </template>
         </div>
         <template for:each={table.tableData} for:item="data">    
             <article key={data.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>             
