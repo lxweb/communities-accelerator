@@ -89,6 +89,94 @@
         <value>Asset Details</value>
     </labels>
     <labels>
+        <fullName>BannerContentDetailButton</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner button field used in banner record page</shortDescription>
+        <value>Button</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailExternalId</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ExternalId field used in banner record page</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailExtract</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner extract field used in banner record page</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLayout</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner layout field used in banner record page</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLeftAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Left-Align value of the overlayQuadrant field</shortDescription>
+        <value>Left Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailLink</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner link field used in banner record page</shortDescription>
+        <value>Link</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailMiddleAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Center-Align value of the overlayQuadrant field</shortDescription>
+        <value>Middle Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailName</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner name field used in banner record page</shortDescription>
+        <value>Banner Name</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailRightAlign</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Right-Align value of the overlayQuadrant field</shortDescription>
+        <value>Right Align</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailTitle</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner title field used in banner record page</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>BannerContentDetailType</fullName>
+        <categories>ContentBannerRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Banner type field used in banner record page</shortDescription>
+        <value>Banner Type</value>
+    </labels>
+    <labels>
         <fullName>CannotReassignComponent</fullName>
         <categories>ComponentTriggers</categories>
         <language>en_US</language>
@@ -313,6 +401,14 @@
         <value>New Content</value>
     </labels>
     <labels>
+        <fullName>ContentLandingNewFromTemplate</fullName>
+        <categories>ContentLanding</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing New from Template</shortDescription>
+        <value>New from Template</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingNone</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
@@ -361,6 +457,102 @@
         <value>The item you added is already present in the cart</value>
     </labels>
     <labels>
+        <fullName>EventContentDetailBody</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailBody</shortDescription>
+        <value>Body</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailChooseLayout</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailChooseLayout</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailEventEndDate</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailEventEndDate</shortDescription>
+        <value>Event End date</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailEventLocationInformation</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailEventLocationInformation</shortDescription>
+        <value>Location Information</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailEventStartDate</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailEventStartDate</shortDescription>
+        <value>Event Start date</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailExternalId</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailExternalId</shortDescription>
+        <value>External Id</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailExtract</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailExtract</shortDescription>
+        <value>Extract</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailFeatureImage</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailFeatureImage</shortDescription>
+        <value>Feature Image</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailTitle</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailTitle</shortDescription>
+        <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailTitleBottom</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailTitleBottom</shortDescription>
+        <value>Title Bottom</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailTitleMiddle</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailTitleMiddle</shortDescription>
+        <value>Title Middle</value>
+    </labels>
+    <labels>
+        <fullName>EventContentDetailTitleTop</fullName>
+        <categories>ContentEventRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EventContentDetailTitleTop</shortDescription>
+        <value>Title Top</value>
+    </labels>
+    <labels>
         <fullName>ExistByDefaultLanguage</fullName>
         <categories>ClusterTriggers</categories>
         <language>en_US</language>
@@ -407,6 +599,14 @@
         <protected>true</protected>
         <shortDescription>Fields Values</shortDescription>
         <value>Fields Values</value>
+    </labels>
+    <labels>
+        <fullName>GeneralContents</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>General contents</shortDescription>
+        <value>General Contents</value>
     </labels>
     <labels>
         <fullName>General_AreYouSure</fullName>
@@ -535,6 +735,14 @@
         <protected>false</protected>
         <shortDescription>General_Success</shortDescription>
         <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>General_View</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>View</shortDescription>
+        <value>View</value>
     </labels>
     <labels>
         <fullName>General_ViewMore</fullName>
@@ -689,6 +897,14 @@
         <value>Body</value>
     </labels>
     <labels>
+        <fullName>NewsContentDetailChooseLayout</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailChooseLayout</shortDescription>
+        <value>Choose Layout</value>
+    </labels>
+    <labels>
         <fullName>NewsContentDetailError</fullName>
         <categories>ContentDetailContainer.cmp</categories>
         <language>en_US</language>
@@ -743,6 +959,30 @@
         <protected>true</protected>
         <shortDescription>Title__c field</shortDescription>
         <value>Title</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleBottom</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleBottom</shortDescription>
+        <value>Title Bottom</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleMiddle</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleMiddle</shortDescription>
+        <value>Title Middle</value>
+    </labels>
+    <labels>
+        <fullName>NewsContentDetailTitleTop</fullName>
+        <categories>ContentNewsRecordEdit.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewsContentDetailTitleTop</shortDescription>
+        <value>Title Top</value>
     </labels>
     <labels>
         <fullName>NoClusterSelected</fullName>
@@ -888,6 +1128,22 @@
         <value>FILTER</value>
     </labels>
     <labels>
+        <fullName>StructureContent</fullName>
+        <categories>ModalRecordTypeSelection.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Structure content</shortDescription>
+        <value>Structure Content</value>
+    </labels>
+    <labels>
+        <fullName>StructureContentDescription</fullName>
+        <categories>ModalRecordTypeSelectionHelper.js</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Structure content description</shortDescription>
+        <value>Create advance content, FAQ or banner contents straight from each structure page.</value>
+    </labels>
+    <labels>
         <fullName>Tablet</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
@@ -903,246 +1159,7 @@
         <shortDescription>not refer ClusterSelector record</shortDescription>
         <value>The External Id entered does not refer to a ClusterSelector record</value>
     </labels>
-    <labels>
-        <fullName>EventContentDetailBody</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailBody</shortDescription>
-        <value>Body</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailChooseLayout</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailChooseLayout</shortDescription>
-        <value>Choose Layout</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailEventEndDate</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailEventEndDate</shortDescription>
-        <value>Event End date</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailEventLocationInformation</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailEventLocationInformation</shortDescription>
-        <value>Location Information</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailEventStartDate</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailEventStartDate</shortDescription>
-        <value>Event Start date</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailExternalId</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailExternalId</shortDescription>
-        <value>External Id</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailExtract</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailExtract</shortDescription>
-        <value>Extract</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailFeatureImage</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailFeatureImage</shortDescription>
-        <value>Feature Image</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailTitle</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailTitle</shortDescription>
-        <value>Title</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailTitleBottom</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailTitleBottom</shortDescription>
-        <value>Title Bottom</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailTitleMiddle</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailTitleMiddle</shortDescription>
-        <value>Title Middle</value>
-    </labels>
-    <labels>
-        <fullName>EventContentDetailTitleTop</fullName>
-        <categories>ContentEventRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>EventContentDetailTitleTop</shortDescription>
-        <value>Title Top</value>
-    </labels>
-    <labels>
-        <fullName>NewsContentDetailTitleBottom</fullName>
-        <categories>ContentNewsRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>NewsContentDetailTitleBottom</shortDescription>
-        <value>Title Bottom</value>
-    </labels>
-    <labels>
-        <fullName>NewsContentDetailTitleMiddle</fullName>
-        <categories>ContentNewsRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>NewsContentDetailTitleMiddle</shortDescription>
-        <value>Title Middle</value>
-    </labels>
-    <labels>
-        <fullName>NewsContentDetailTitleTop</fullName>
-        <categories>ContentNewsRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>NewsContentDetailTitleTop</shortDescription>
-        <value>Title Top</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailLeftAlign</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Left-Align value of the overlayQuadrant field</shortDescription>
-        <value>Left Align</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailMiddleAlign</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Center-Align value of the overlayQuadrant field</shortDescription>
-        <value>Middle Align</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailRightAlign</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Right-Align value of the overlayQuadrant field</shortDescription>
-        <value>Right Align</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailTitle</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner title field used in banner record page</shortDescription>
-        <value>Title</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailExtract</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner extract field used in banner record page</shortDescription>
-        <value>Extract</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailExternalId</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>ExternalId field used in banner record page</shortDescription>
-        <value>External Id</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailType</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner type field used in banner record page</shortDescription>
-        <value>Banner Type</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailLink</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner link field used in banner record page</shortDescription>
-        <value>Link</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailName</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner name field used in banner record page</shortDescription>
-        <value>Banner Name</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailLayout</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner layout field used in banner record page</shortDescription>
-        <value>Choose Layout</value>
-    </labels>
-    <labels>
-        <fullName>BannerContentDetailButton</fullName>
-        <categories>ContentBannerRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Banner button field used in banner record page</shortDescription>
-        <value>Button</value>
-    </labels>
-    <labels>
-        <fullName>NewsContentDetailChooseLayout</fullName>
-        <categories>ContentNewsRecordEdit.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>NewsContentDetailChooseLayout</shortDescription>
-        <value>Choose Layout</value>
-    </labels>
-    <labels>
-        <fullName>StructureContent</fullName>
-        <categories>ModalRecordTypeSelection.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Structure content</shortDescription>
-        <value> Structure Content</value>
-    </labels>
-    <labels>
-        <fullName>StructureContentDescription</fullName>
-        <categories>ModalRecordTypeSelectionHelper.js</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Structure content description</shortDescription>
-        <value>Create advance content, FAQ or banner contents straight from each structure page.</value>
-    </labels>
-    <labels>
-        <fullName>GeneralContents</fullName>
-        <categories>ModalRecordTypeSelection.cmp</categories>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>General contents</shortDescription>
-        <value>General Contents</value>
-    </labels>
+<<<<<<< HEAD
     <labels>
         <fullName>Template</fullName>
         <categories>recordTypeSelectionModal</categories>
@@ -1160,3 +1177,6 @@
         <value>Create</value>
     </labels>
 </CustomLabels>
+=======
+</CustomLabels>
+>>>>>>> feature/CMS-72

@@ -19,10 +19,14 @@ public class ContentLandingRecordListController {
 	}
 
 	class ContentWrapper{
+		public String contentId;
 		public List<FieldWrapper> fieldWrappers;
+		public List<String> actions;
 		// Wrapper que emula un Contenido para soportar Wrappers de campo
-		ContentWrapper(List<FieldWrapper> fieldWrappers){
+		ContentWrapper(String contentId, List<FieldWrapper> fieldWrappers, List<String> actions){
+			this.contentId = contentId;
 			this.fieldWrappers = fieldWrappers;
+			this.actions = actions;
 		}
 	}
 
@@ -56,6 +60,11 @@ public class ContentLandingRecordListController {
 		}
 	}
 
+	public static void deleteContent(String contentId){
+		Content__c content = [SELECT Id FROM Content__c WHERE ID =: contentId];
+		delete content;		
+	}
+
 	@auraEnabled(Cacheable = true)
 	public static String getTableWrapper(String contentTypeId, String clusterId, String categoryId, List<String> tagIds, String status, String searchText){
 		TableWrapper tableWrapper = buildTableWrapper(contentTypeId, clusterId, categoryId, tagIds, status, searchText);
@@ -76,17 +85,7 @@ public class ContentLandingRecordListController {
 		if(searchText != null && searchText != '') contents = searchTextInRecords(searchText, contents);
 		// Construye los Wrappers auxiliares
 		for(Content__c content : contents){
-			List<FieldWrapper> fieldWrappers = new List<FieldWrapper>();
-			for(String column : columnSet){
-				// Verifica si la Columna es un campo relacionado y si esta populado
-				String value = getWrapperValue(content, column);
-				// La Columna lleva un link al registro de Contenido
-				String link = column == 'Name' ? System.URL.getSalesforceBaseURL().toExternalForm()+'/'+content.Id : null;
-				// Crea el Wrapper de campo y lo agrega a la lista
-				fieldWrappers.add(new FieldWrapper(value, link));
-			}
-			// Crea el Wrapper de Contenido y lo agrega a la lista
-			tableWrapper.contentWrappers.add(new ContentWrapper(fieldWrappers));
+			tableWrapper.contentWrappers.add(buildContentWrapper(content, columnSet));
 		}
 		// Si no hay registros, mostramos un mensaje de error
 		if(contents.isEmpty()){
@@ -96,8 +95,30 @@ public class ContentLandingRecordListController {
 		return tableWrapper;
 	}
 
-	static List<Content__c> getRecords(FilterWrapper wrapper){		
-		String queryInString = 'SELECT Id, ' + getColumnSet() + ' FROM Content__c ';
+	static ContentWrapper buildContentWrapper(Content__c content, List<String> columnSet){
+		List<FieldWrapper> fieldWrappers = new List<FieldWrapper>();
+		for(String column : columnSet){
+			// Verifica si la Columna es un campo relacionado y si esta populado
+			String value = getWrapperValue(content, column);
+			// La Columna lleva un link al registro de Contenido
+			String link = column == 'Name' ? System.URL.getSalesforceBaseURL().toExternalForm()+'/'+content.Id : null;
+			// Crea el Wrapper de campo y lo agrega a la lista
+			fieldWrappers.add(new FieldWrapper(value, link));
+		}
+		// Si es un template y esta publicado, agrega la opcion 'New from Template'
+		List<String> actions = new List<String>{System.Label.General_View, System.Label.General_Delete};
+		if(content.isTemplate__c && content.Status__c == 'Published'){
+			actions.add(System.Label.ContentLandingNewFromTemplate);
+		}
+		// Crea el Wrapper de Contenido y lo agrega a la lista
+		return new ContentWrapper(content.Id, fieldWrappers, actions);
+	}
+
+	static List<Content__c> getRecords(FilterWrapper wrapper){
+		String columnSet = getColumnSet();
+		columnSet += columnSet.contains('Status__c') ? '' : ', Status__c';
+		columnSet += columnSet.contains('isTemplate__c') ? '' : ', isTemplate__c';
+		String queryInString = 'SELECT Id, ' + columnSet + ' FROM Content__c ';
 		List<String> queryConditions = getQueryConditions(wrapper);
 		// Si no recibe filtros, trae los 10 registros modificados mas recientemente
 		if(queryConditions.isEmpty()){
