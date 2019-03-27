@@ -288,7 +288,7 @@ src/staticresources/SiteSamples.resource
 src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
 node_modules/
-lwc/
+# lwc/
 /force-app
 .forceignore
 force-app/
@@ -297,3 +297,4 @@ package-lock.json
 .vim-force.com/session.properties
 .vscode/settings.json
 .sfdx
+/gulpfile.js
