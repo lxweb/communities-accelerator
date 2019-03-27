@@ -6,3 +6,66 @@
 .bd-example:after {
   margin-top: 100vh;
 }
+.bd-example p {
+  font-size: 16px;
+}
+.bd-example h5 {
+  font-size: 30px;
+}
+.bd-example li {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-right: 0;
+  margin-left: 20px;
+}
+.bd-example .acrylic {
+  padding: 37px 50px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  min-height: 30%;
+}
+.bd-example .acrylic::before {
+  filter: blur(10px);
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  z-index: 9;
+  -webkit-filter: url('#blur');
+  filter: url('#blur');
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  background-size: cover;
+  opacity: 0.5;
+}
+.bd-example .acrylic::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  opacity: 0.35;
+  border: 1px solid #fff;
+  background: #fff;
+}
+.bd-example .carousel-caption {
+  text-align: left;
+  bottom: inherit;
+  left: 0;
+  top: 0;
+}
+.bd-example .carousel-indicators {
+  justify-content: left;
+  margin-left: 5%;
+  margin-bottom: 60px;
+}
+.bd-example .carousel-item {
+  background: url(https://static.wixstatic.com/media/7d9c7e_7e0a396900a442b48964e226cbe76717~mv2.jpg/v1/fill/w_1184,h_564,al_c,q_85/7d9c7e_7e0a396900a442b48964e226cbe76717~mv2.webp);
+}
