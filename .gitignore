@@ -291,6 +291,7 @@ src/pages/
 /package-lock.json
 /package.json
 node_modules/
+/force-app
 .forceignore
 force-app/
 package.json

@@ -3,10 +3,11 @@
 	<!-- GENERAL VARIABLES --> 
 	<aura:attribute name="componentExternalId" type="String" />
 	<aura:attribute name="componentType" type="String" default="RelatedEvents"/>
+	<aura:attribute name="recordType" type="String" default="Events"/>
 
 	<aura:if isTrue="{!not(v.componentWrapper == null)}" >
         <aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
-        	<c:CG_Events componentWrapper="{!v.componentWrapper}"/>
+			<c:relatedCardList contents="{!v.componentWrapper.contentWrapper}" type="{!v.recordType}"/>
         </aura:if>
     </aura:if>
 
