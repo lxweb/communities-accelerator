@@ -8,7 +8,7 @@
 
     <aura:if isTrue="{!v.contentData.IsTemplate__c}">
         <div style="background-color:#EEEEEE;padding:10px;">
-            <lightning:textarea label="Template Description" name="templateDescription" value="{!v.contentData.TemplateDescription__c}" required="true" aura:id="templateDescription"/>
+            <lightning:textarea label="{!$Label.c.EventDetailTemplateDescription}" name="templateDescription" value="{!v.contentData.TemplateDescription__c}" required="true" aura:id="templateDescription"/>
          </div>
     
     </aura:if>
