@@ -1,26 +1,30 @@
 @isTest
 public class ContentLandingRecordListControllerTest {
 
-	@isTest
-	public static void testDefaultCondition(){
-		
-		//Given
+	static void generalTestSetup(){
 		MockupFactory.generateAcceleratorSetting();
-		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
+		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];		
 		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0];
 		bannerTest.Status__c = 'Draft'; update bannerTest;
 		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0];
-		newsTest.Status__c = 'Draft'; update newsTest;
+		newsTest.Status__c = 'Published'; newsTest.isTemplate__c = false; update newsTest;
+	}
+
+	@isTest
+	static void testDefaultCondition(){
+		
+		//Given
+		generalTestSetup();
 
 		//When
-		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null);
+		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null, false);
 
 		//Then
 		System.assertEquals(2, tableWrapperTest.contentWrappers.size());
 	}
 
 	@isTest
-	public static void testCustomCondition(){
+	static void testCustomCondition(){
 		
 		//Given
 		MockupFactory.generateAcceleratorSetting();
@@ -40,7 +44,7 @@ public class ContentLandingRecordListControllerTest {
 		insert new TagAssignment__c(Component__c = componentTest.Id, Content__c = bannerTest2.Id, Tag__c = TagTest2.Id);
 
 		//When
-		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(bannerRecordTypeId, clusterTest.Id, categoryTest.Id, new List<String>{TagTest1.Id, TagTest2.Id}, 'Draft', null);
+		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(bannerRecordTypeId, clusterTest.Id, categoryTest.Id, new List<String>{TagTest1.Id, TagTest2.Id}, 'Draft', null, false);
 
 		//Then
 		System.assertEquals(1, tableWrapperTest.contentWrappers.size());
@@ -48,18 +52,13 @@ public class ContentLandingRecordListControllerTest {
 	}
 
 	@isTest
-	public static void testSearch(){
+	static void testSearch(){
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
-		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; 
-		bannerTest.Status__c = 'Draft'; update bannerTest;
-		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; 
-		newsTest.Status__c = 'Draft'; update newsTest;
+		generalTestSetup();
 
 		//When
-		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'Banner');
+		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'Banner', false);
 		
 		//Then
 		System.assertEquals(1, tableWrapperTest.contentWrappers.size());		
@@ -67,42 +66,69 @@ public class ContentLandingRecordListControllerTest {
 	}
 
 	@isTest
-	public static void testEmpty(){
+	static void testEmpty(){
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
-		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0]; bannerTest.Status__c = 'Draft';
-		bannerTest.Status__c = 'Draft'; update bannerTest;
-		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0]; newsTest.Status__c = 'Draft';
-		newsTest.Status__c = 'Draft'; update newsTest;
+		generalTestSetup();
 
 		//When
-		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'String Inexistente');
+		ContentLandingRecordListController.TableWrapper tableWrapperTest = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, 'String Inexistente', false);
 		
 		//Then	
 		System.assertEquals(True, tableWrapperTest.title == null);
 	}
 
 	@isTest
-	public static void testJSON(){
+	static void testJSON(){
 
 		//Given
-		MockupFactory.generateAcceleratorSetting();
-		Cluster__c clusterTest = MockupFactory.createCluster('ClusterTest', null, 1, 'ClusterRoot')[0];
-		Content__c bannerTest = MockupFactory.createContent('Banner', clusterTest, 1)[0];
-		bannerTest.Status__c = 'Draft'; update bannerTest;
-		Content__c newsTest = MockupFactory.createContent('News', clusterTest, 1)[0];
-		newsTest.Status__c = 'Draft'; update newsTest;
+		generalTestSetup();
+		String bannerContentTestId = [SELECT Id FROM Content__c WHERE RecordType.Name = 'Banner' LIMIT 1].Id;
 
 		//When
-		ContentLandingRecordListController.TableWrapper tableWrapperTest1 = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null);
-		String tableWrapperJSON = ContentLandingRecordListController.getTableWrapper(null, null, null, null, null, null);
+		ContentLandingRecordListController.TableWrapper tableWrapperTest1 = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null, false);
+		String tableWrapperJSON = ContentLandingRecordListController.getTableWrapper(null, null, null, null, null, null, false);
 		ContentLandingRecordListController.TableWrapper tableWrapperTest2 = (ContentLandingRecordListController.TableWrapper) JSON.deserialize(tableWrapperJSON, ContentLandingRecordListController.TableWrapper.class);
 
 		//Then
 		System.debug(tableWrapperTest1.contentWrappers +' '+ tableWrapperTest2.contentWrappers);
 		System.assertEquals(True, tableWrapperTest1.title == tableWrapperTest2.title);
 		System.assertEquals(True, tableWrapperTest1.columnSet == tableWrapperTest2.columnSet);
+		System.assertEquals(True, bannerContentTestId == tableWrapperTest2.contentWrappers.get(0).contentId);
+		System.assertEquals(True, tableWrapperTest2.contentWrappers.get(1).actions.size() > 1);
+	}
+
+    @isTest
+	static void testJSONNotCacheable(){
+
+		//Given
+		generalTestSetup();
+		String bannerContentTestId = [SELECT Id FROM Content__c WHERE RecordType.Name = 'Banner' LIMIT 1].Id;
+
+		//When
+		ContentLandingRecordListController.TableWrapper tableWrapperTest1 = ContentLandingRecordListController.buildTableWrapper(null, null, null, null, null, null, false);
+		String tableWrapperJSON = ContentLandingRecordListController.getUpdatedTableWrapper(null, null, null, null, null, null, false);
+		ContentLandingRecordListController.TableWrapper tableWrapperTest2 = (ContentLandingRecordListController.TableWrapper) JSON.deserialize(tableWrapperJSON, ContentLandingRecordListController.TableWrapper.class);
+
+		//Then
+		System.debug(tableWrapperTest1.contentWrappers +' '+ tableWrapperTest2.contentWrappers);
+		System.assertEquals(True, tableWrapperTest1.title == tableWrapperTest2.title);
+		System.assertEquals(True, tableWrapperTest1.columnSet == tableWrapperTest2.columnSet);
+		System.assertEquals(True, bannerContentTestId == tableWrapperTest2.contentWrappers.get(0).contentId);
+		System.assertEquals(True, tableWrapperTest2.contentWrappers.get(1).actions.size() > 1);
+	}
+    
+	@isTest
+	static void testDeleteContent(){
+
+		//Given
+		generalTestSetup();
+		List<Content__c> contentRecords = [SELECT Id FROM Content__c];
+
+		//When
+		ContentLandingRecordListController.DeleteContent(contentRecords.get(0).Id);
+
+		//Then
+		System.assertEquals(contentRecords.size() - 1, [SELECT Count() FROM Content__c]);
 	}
 }
