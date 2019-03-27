@@ -3,7 +3,6 @@ const dirSync = require( 'gulp-directory-sync' );
 const fileSync = require('gulp-file-sync');
 
 function defaultTask(cb) {
-  // place code for your default task here
   cb();
 }
 
