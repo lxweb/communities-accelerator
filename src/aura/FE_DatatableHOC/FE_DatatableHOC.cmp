@@ -19,10 +19,10 @@
     <!-- LOC Component -->
     <div aura:id="cg_component">
         <!-- BASE COMPONENT -->
-        <c:ComponentToolBox componentType="Datatable" componentExternalId="{!v.componentExternalId}" componentWrapper="{!v.componentWrapper}" isLoading="{!v.isLoading}">
+        <c:FE_ComponentToolBox componentType="Datatable" componentExternalId="{!v.componentExternalId}" componentWrapper="{!v.componentWrapper}" isLoading="{!v.isLoading}">
             <!-- DATATABLE COMPONENT -->
             <c:fe_DatatableLC table="{!v.componentWrapper.data}" onfilter="{!c.doHandleFilter}"/>
-        </c:ComponentToolBox>
+        </c:FE_ComponentToolBox>
     </div>
 
 </aura:component>
