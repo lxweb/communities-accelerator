@@ -9,7 +9,7 @@
           <div class="carousel-inner">
             <template for:each={elements} for:item="element">
                 <div key={element.id} class={element.class}>
-                    <img src={element.imgSrc} class="d-block w-100" alt="...">
+                    <img src={element.imgSrc} class="d-flex min-vh-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{element.title}</h5>
                         <p>{element.description}</p>
