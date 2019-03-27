@@ -126,7 +126,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Component behaviour manual assignment</shortDescription>
-        <value>When you save the record, a manual assignment to the component will be generated.</value>
+        <value>When you saved the record, a manual assignment to the component was generated.</value>
     </labels>
     <labels>
         <fullName>ComponentBehaviourTags</fullName>
@@ -1158,5 +1158,21 @@
         <protected>false</protected>
         <shortDescription>Create</shortDescription>
         <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>NewTemplateInvalidTemplate</fullName>
+        <categories>ContentUtils.cls</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewTemplateInvalidTemplate</shortDescription>
+        <value>The record used as template is not marked as template.</value>
+    </labels>
+    <labels>
+        <fullName>NewTemplateNotPublished</fullName>
+        <categories>ContentUtils.cls</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewTemplateNotPublished</shortDescription>
+        <value>Only published templates can be used to create new records.</value>
     </labels>
 </CustomLabels>
