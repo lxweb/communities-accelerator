@@ -81,8 +81,11 @@ public class FE_DatatableController extends FE_ComponentManager {
      public override MetaWrapper getMeta() {
          MetaWrapper mw = new MetaWrapper();
          List<DataTable__c> dt = [SELECT Id,Name FROM DataTable__c WHERE ExternalId__c=: this.componentExternalId];
-         mw.objectId = dt[0].Id;
-         mw.name = dt[0].Name;
+         if (dt[0] != null){
+            mw.objectId = dt[0].Id;
+            mw.name = dt[0].Name;
+         }
+  
          return mw;
      }
 
