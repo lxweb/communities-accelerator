@@ -5,11 +5,13 @@ public with sharing class ContentDetailController {
         @auraEnabled public Content__c content;
         @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
         @auraEnabled public String currentUserName;
+    @auraEnabled public List<String> bannerFrameTypes;
         
-        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName){
+        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName, List<String> bannerFrameTypes){
             this.content = content;
             this.visibilitySelectors = visibilitySelectors;
             this.currentUserName = currentUserName;
+        this.bannerFrameTypes = bannerFrameTypes;
         }
     }
 
@@ -65,7 +67,11 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
+        
+        //Gets the possible values of the BannerFrameType__c picklist
+        List<String> bannerFrameTypes = getBannerFrameTypes();
+
+    DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), bannerFrameTypes);
         return data;
     }
     
@@ -82,7 +88,9 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, new Set<Id>()));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
+        //Gets the possible values of the BannerFrameType__c 
+        List<String> bannerFrameTypes = getBannerFrameTypes();        
+    DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), bannerFrameTypes);
         return data;
 
     }
@@ -303,5 +311,14 @@ public with sharing class ContentDetailController {
         Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
         commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
         return commaSeparatedFields;
+    }
+    private static List<String> getBannerFrameTypes(){
+        List<String> pickListValuesList= new List<String>();
+        Schema.DescribeFieldResult fieldResult = Content__c.BannerFrameType__c.getDescribe();
+        List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+        for( Schema.PicklistEntry pickListVal : ple){
+            pickListValuesList.add(pickListVal.getValue());
+        }    
+        return pickListValuesList;
     }
 }

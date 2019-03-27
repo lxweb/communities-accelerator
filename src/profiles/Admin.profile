@@ -1380,10 +1380,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>NewContent</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities> 
-    <tabVisibilities>
         <tab>Sitemap</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
