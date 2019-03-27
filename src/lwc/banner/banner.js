@@ -33,30 +33,43 @@ export default class Banner extends LightningElement {
         },
     ]
 
-    renderedCallback() {
+    connectedCallback() {
         loadStyle(this, Assets + '/Assets/Bootstrap/css/bootstrap.min.css')  
         loadScript(this, Assets + '/Assets/Bootstrap/js/bootstrap.min.js')
         loadScript(this, Assets + '/Assets/Bootstrap/js/popper.min.js')
         loadScript(this, Assets + '/Assets/Bootstrap/js/jquery-3.3.1.min.js')
     }
 
+    // renderedCallback() {
+    //     const carouselDiv = this.template.querySelector('.carousel');
+    //     const id = carouselDiv.getAttribute('id');
+    //     const carouselIndicators = this.template.querySelector('.carousel-indicators');
+    //     const carouselPrev = this.template.querySelector('.carousel-control-prev');
+    //     const carouselNext = this.template.querySelector('.carousel-control-next');
+    //     carouselIndicators.setAttribute('data-target', `#${id}`);
+    //     carouselPrev.setAttribute('href', `#${id}`);
+    //     carouselNext.setAttribute('href', `#${id}`);
+    // }
+
     next(){
-        if(this.position < this.elements.length -1 ){ 
-            this.elements[this.position].class = this.elements[this.position].class.replace(' active','');
-            this.elements[this.position].indicatorClass = '';
-            this.position++;
-            this.elements[this.position].class = this.elements[this.position].class.concat(' active');
-            this.elements[this.position].indicatorClass = 'active';
+        this.elements[this.position].class = this.elements[this.position].class.replace(' active','');
+        this.elements[this.position].indicatorClass = '';
+        this.position++;
+        if(this.position === this.elements.length) {
+            this.position = 0;
         }
+        this.elements[this.position].class = this.elements[this.position].class.concat(' active');
+        this.elements[this.position].indicatorClass = 'active';
     }
 
     previous(){
-        if(this.position > 0){
-            this.elements[this.position].class = this.elements[this.position].class.replace(' active','');  
-            this.elements[this.position].indicatorClass = '';
-            this.position--; 
-            this.elements[this.position].class = this.elements[this.position].class.concat(' active');
-            this.elements[this.position].indicatorClass = 'active';
+        this.elements[this.position].class = this.elements[this.position].class.replace(' active','');  
+        this.elements[this.position].indicatorClass = '';
+        this.position--; 
+        if(this.position === -1) {
+            this.position = this.elements.length-1;
         }
+        this.elements[this.position].class = this.elements[this.position].class.concat(' active');
+        this.elements[this.position].indicatorClass = 'active';
     }
 }
