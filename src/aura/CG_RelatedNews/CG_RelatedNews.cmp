@@ -3,11 +3,11 @@
 	<!-- GENERAL VARIABLES --> 
 	<aura:attribute name="componentExternalId" type="String" />
 	<aura:attribute name="componentType" type="String" default="RelatedNews"/>
+	<aura:attribute name="recordType" type="String" default="News"/>
 
 	<aura:if isTrue="{!not(v.componentWrapper == null)}" >
 		<aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
-        	<c:CG_News componentWrapper="{!v.componentWrapper}"/>
-
+				<c:CG_Events componentWrapper="{!v.componentWrapper}"/>
         </aura:if>
     </aura:if>
 

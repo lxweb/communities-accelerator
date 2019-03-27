@@ -9,6 +9,6 @@
     width: 80%;
     margin: auto;
 }
-.last-container:last-child .spacer {
+.list-container:last-child .spacer {
     border-bottom: none;
 }

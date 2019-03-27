@@ -1,0 +1,25 @@
+.list-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+.spacer {
+  border-bottom: 1px solid #C0C0C0;
+  width: 90%;
+  margin: auto;
+}
+.column-spacer:nth-child(2n) {
+  padding-left: 5px;
+  padding-right: 0;
+}
+.column-spacer {
+  padding-right: 5px;
+}
+.related-header {
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+.related-header h2 {
+  font-weight: 300;
+  font-size: 30px;
+}
