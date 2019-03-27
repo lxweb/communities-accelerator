@@ -16,8 +16,8 @@
                 <c-header-list-view-page objectlabel={objectLabel} filtersstatus={filtersStatus} filterselected={filtersValues} headerbuttonsprimary={headerButtonsPrimary} headerbuttonssecondary={headerButtonsSecondary}></c-header-list-view-page>
             </template>
             <template if:true={renderTable}>
-                <div class="tableContainer" ondeletecontentrecord={handleDeleteContent}>
-                    <c-table-filter tabledata={tabledata}></c-table-filter>
+                <div class="tableContainer" >
+                    <c-table-filter tabledata={tabledata} ondeletecontentrecord={handleDeleteContent} oncreatecontentrecord={handleCreateContent}></c-table-filter>
                 </div>
             </template>
         </div>
