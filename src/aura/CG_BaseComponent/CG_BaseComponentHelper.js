@@ -38,7 +38,24 @@
 
 			    action.setCallback(this, function(f) {
 		            if(f.getState() === "SUCCESS") {
-		            	var cWrapper = action.getReturnValue();
+						var cWrapper = action.getReturnValue();
+						//mobile cast
+	                    if($A.get("$Browser.isPhone")){
+		                        var details = {};
+		                        details.type = cWrapper.component.RecordType.DeveloperName === 'EventDetail' ? 'Event' : 'News';
+							if(cWrapper.contentWrapper.length > 0){
+		                        var content = cWrapper.contentWrapper[0].content;
+		                        details.date = content.EventStartDate__c;
+								details.location = {};
+		                        details.location.name = content.Location__c;
+		                        details.location.href = 'https://www.google.com/maps/place/' + content.Location__c;
+		                        details.title = content.Title__c;
+		                        details.imgSrc = cWrapper.contentWrapper[0].mediaElements[0].FileURLDesktop__c;
+		                        details.body = content.Body__c;
+							}
+						cWrapper.details = details;
+	                    }
+	               		//end mobile cast
 		            	component.set("v.componentWrapper", cWrapper);
 		                
 		                if( !(cWrapper.component == null) ){
@@ -79,8 +96,8 @@
 			});
 
 		    action.setCallback(this, function(f) {
-	            if(f.getState() === "SUCCESS") {
-	            	component.set("v.componentWrapper.contentWrapper", action.getReturnValue());
+				if(f.getState() === "SUCCESS") {
+					component.set("v.componentWrapper.contentWrapper", action.getReturnValue());
 	            	component.set('v.currentPageNumber', pageNumber);
 	                component.set("v.isLoading", false);
 		        }

@@ -5,13 +5,11 @@ public with sharing class ContentDetailController {
         @auraEnabled public Content__c content;
         @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
         @auraEnabled public String currentUserName;
-        @auraEnabled public String behaviourMessage;
         
-        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName, String behaviourMessage){
+        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName){
             this.content = content;
             this.visibilitySelectors = visibilitySelectors;
             this.currentUserName = currentUserName;
-            this.behaviourMessage = behaviourMessage;
         }
     }
 
@@ -67,7 +65,7 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), null);
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
         return data;
     }
     
@@ -76,9 +74,7 @@ public with sharing class ContentDetailController {
         //Gets the entire cluster branch of the current user.
         Set<Id> clusterIds = getClusterBranch();
         //Gets the data from the current content.
-        Content__c contentRecord = initializeContentValues(contentRecordTypeId);
-        //Gets the component behaviour message                                                                                                       
-        String behaviourMessage = componentId != null ? getBehaviourMessage(contentRecord.Id, componentId) : null;                                                                                                      
+        Content__c contentRecord = initializeContentValues(contentRecordTypeId);                                                                                                     
         //A non allowed record type was passed as url parameter
         if(contentRecord == null) return null;
         //Gets all the visibility options.
@@ -86,7 +82,7 @@ public with sharing class ContentDetailController {
         visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
         visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
         visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, new Set<Id>()));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName(), behaviourMessage);
+        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
         return data;
 
     }
@@ -307,49 +303,5 @@ public with sharing class ContentDetailController {
         Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
         commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
         return commaSeparatedFields;
-    }
-
-    private static String getBehaviourMessage(String recordId, String componentId){
-        //Get DataSource
-        Component__c component = [SELECT Id, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
-        String dataSource = component.dataSource__c;
-        //Get records related to DataSource
-        String behaviourMessage;
-        if(dataSource == 'ManualAssignment'){
-            behaviourMessage = Label.ComponentBehaviourManualAssignment;
-        }
-        if(dataSource == 'Tags'){
-            behaviourMessage = getTagsMessage(component);
-        }
-        if(dataSource == 'Categories'){
-            behaviourMessage = getCategoriesMessage(component);
-        }
-        if(dataSource == 'TagsCategories'){            
-            behaviourMessage = getTagsMessage(component) + '\n\n';
-            behaviourMessage += getCategoriesMessage(component);
-        }
-        // Build Message
-        return behaviourMessage;
-    }
-
-    private static String getTagsMessage(Component__c component){
-        String behaviourMessage;
-        behaviourMessage = Label.ComponentBehaviourTags + '\n';
-        List<TagAssignment__c> tagAssignments = [SELECT Id, Tag__c, Tag__r.Name, Order__c FROM TagAssignment__c WHERE Component__c =: component.Id ORDER BY Order__c ASC];
-        for(TagAssignment__c tagAssignment : tagAssignments){
-            behaviourMessage += '\n' + tagAssignment.Order__c + '. ' + tagAssignment.Tag__r.Name;
-        }
-        behaviourMessage += '\n\n Tag criteria: ' + component.TagCriteria__c;
-        return behaviourMessage;
-    }
-
-    private static String getCategoriesMessage(Component__c component){
-        String behaviourMessage;
-        behaviourMessage = Label.ComponentBehaviourCategories + '\n';
-        List<CategoryAssignment__c> categoryAssignments = [SELECT Id, Category__c, Category__r.Name FROM CategoryAssignment__c WHERE Component__c =: component.Id];
-        for(CategoryAssignment__c categoryAssignment : categoryAssignments){
-            behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
-        }
-        return behaviourMessage;
     }
 }

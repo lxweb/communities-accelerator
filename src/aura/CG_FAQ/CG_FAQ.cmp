@@ -7,15 +7,18 @@
 	<aura:if isTrue="{!v.componentWrapper.listAllContentIds.length > 0}">
 		<!-- FAQs COMPONENT -->
 		<lightning:accordion aura:id="accordion" allowMultipleSectionsOpen="true">
-			
 			<aura:iteration items="{!v.componentWrapper.contentWrapper}" var="wrapper">
-		        <lightning:accordionSection name="{!wrapper.content.Id}" label="{!wrapper.content.Title__c}">
+		        <!-- <lightning:accordionSection name="{!wrapper.content.Id}" label="{!wrapper.content.Title__c}">
 		            <aura:set attribute="body">
 		                <aura:unescapedHtml value="{!wrapper.content.Body__c}"/>
 		            </aura:set>
-		        </lightning:accordionSection>
+				</lightning:accordionSection> -->
+				<div class="slds-grid">
+					<div class="slds-col slds-size_12-of-12">
+						<c:genericAccordion items="{!wrapper.content}"/>
+					</div>
+				</div>
 	    	</aura:iteration>
-
 	    </lightning:accordion>
     </aura:if>
 </aura:component>
