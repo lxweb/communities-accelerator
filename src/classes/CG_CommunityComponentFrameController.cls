@@ -30,4 +30,19 @@ public with sharing class CG_CommunityComponentFrameController {
 			return contentRecordTypeWP;
 		}
 	}
+
+
+
+	@auraEnabled
+	public static String getNavigationId(String navigationUrl) {
+		String url = navigationUrl.split('/')[navigationUrl.split('/').size()-1];
+		Navigation__c nav = [SELECT Id From Navigation__c WHERE Url__c =: url]; 
+		if (nav != null){
+			return nav.Id;
+		}
+		else{
+			return '';
+		}
+	}
+
 }
