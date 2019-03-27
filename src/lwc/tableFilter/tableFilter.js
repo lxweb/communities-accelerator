@@ -1,7 +1,8 @@
 import { LightningElement, api,track,wire } from 'lwc';
-import ShowMore from '@salesforce/label/c.ShowMore';
+import GeneralShowMore from '@salesforce/label/c.General_ShowMore';
 import GeneralDelete from '@salesforce/label/c.General_Delete';
 import GeneralView from '@salesforce/label/c.General_View';
+import ContentLandingNewFromTemplate from '@salesforce/label/c.ContentLandingNewFromTemplate';
 import { CurrentPageReference,NavigationMixin } from 'lightning/navigation';
 
 export default class TableFilter extends NavigationMixin(LightningElement) {
@@ -11,14 +12,16 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
 
     viewLbl;
     deleteLbl;
+    createFromTemplateLbl;
 
     @wire(CurrentPageReference) pageRef;
 
     constructor(){
         super();
-        this.showMore = ShowMore;
+        this.showMore = GeneralShowMore;
         this.viewLbl = GeneralView;
         this.deleteLbl = GeneralDelete;
+        this.createFromTemplateLbl = ContentLandingNewFromTemplate;
     }
 
     showActions(event){
@@ -27,7 +30,9 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
 
     hideActions(){
         var divOpen = this.template.querySelector('div.divAction.slds-is-open');
-        divOpen.classList.toggle("slds-is-open");
+        if(divOpen){
+            divOpen.classList.toggle("slds-is-open");
+        }
     }
 
     handleClick(event){
@@ -37,12 +42,12 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
         
         this.hideActions();
 
-		if(child){
+        if(child){
             if(child.tagName === "SPAN"){
                 label = child.dataset.label;
                 id = child.dataset.id;
             }
-		}
+        }
 
         switch (label) {
             case this.viewLbl:
@@ -51,11 +56,15 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
             case this.deleteLbl:
                 this.deleteContent(id);
                 break;
+            case this.createFromTemplateLbl:
+                this.createContentFromLanding(id);
+                break;
             default:
         }
     }
 
     navigateToWebPage(url) {
+        this.hideActions();
         // Navigate to a URL
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
@@ -67,10 +76,19 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
 
     deleteContent(idContent){
         var value = idContent;
-        const deleteContentRecord = new CustomEvent('deletecontentrecord', {bubbles:"true",
+        const deleteContentRecord = new CustomEvent('deletecontentrecord', {
         detail: value
         });
         this.dispatchEvent(deleteContentRecord);
+        this.hideActions();
     }
-        
+    
+    createContentFromLanding(idContent){
+        var value = idContent;
+        const createContent = new CustomEvent('createcontentrecord', {
+        detail: value
+        });
+        this.dispatchEvent(createContent);
+        this.hideActions();
+    }
 }

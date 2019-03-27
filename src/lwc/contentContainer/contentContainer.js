@@ -3,7 +3,9 @@ import getFilters from	'@salesforce/apex/ContentSearchFiltersController.getFilte
 import getObjectLabel from	'@salesforce/apex/ContentLandingHeaderController.getObjectLabel';
 import getPicklistValues from	'@salesforce/apex/ContentLandingHeaderController.getPicklistValues';
 import getTableWrapper from	'@salesforce/apex/ContentLandingRecordListController.getTableWrapper';
+import getUpdatedTableWrapper from	'@salesforce/apex/ContentLandingRecordListController.getUpdatedTableWrapper';
 import deleteContent from	'@salesforce/apex/ContentLandingRecordListController.deleteContent';
+import createFromTemplate from	'@salesforce/apex/ContentUtils.createFromTemplate';
 import ContentLandingAll from '@salesforce/label/c.ContentLandingAll';
 import ContentLandingNone from '@salesforce/label/c.ContentLandingNone';
 import ContentLandingContentType from '@salesforce/label/c.ContentLandingContentType';
@@ -13,15 +15,20 @@ import ContentLandingTags from '@salesforce/label/c.ContentLandingTags';
 import SidebarFilterTitle from '@salesforce/label/c.SidebarFilterTitle';
 import ContentLandingNew from '@salesforce/label/c.ContentLandingNew';
 import ContentLandingTemplate from '@salesforce/label/c.ContentLandingTemplate';
+import TemplateLabel from '@salesforce/label/c.Template';
+import ContentDetailContent from '@salesforce/label/c.ContentDetailContent';
+import General_Error from '@salesforce/label/c.General_Error';
 import { registerListener, unregisterAllListeners } from 'c/pubsub';
-import { CurrentPageReference } from 'lightning/navigation';
+import { CurrentPageReference,NavigationMixin } from 'lightning/navigation';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent'
 
-export default class ContentContainer extends LightningElement {
+export default class ContentContainer extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api filtersValues;
     @api tabledata;
     @api headerButtonsPrimary;
     @api headerButtonsSecondary;
+    @api optionsFilterRadioButtonGroup;
     
     @track renderHeader;
     @track renderFilterSidebar;
@@ -36,6 +43,8 @@ export default class ContentContainer extends LightningElement {
     statusValue;
     searchInputValue;
     contentTypeValue;
+    radioButtonGroupValue;
+    lblContent;
 
     //Reference used for the pubsub module
     @wire(CurrentPageReference) pageRef;
@@ -86,7 +95,7 @@ export default class ContentContainer extends LightningElement {
     }
 
     // Get data of the table from APEX CLASS
-    @wire(getTableWrapper, { contentTypeId: null, clusterId: null, categoryId: null, tagIds: null, status: ContentLandingAll, searchText: null })
+    @wire(getTableWrapper, { contentTypeId: null, clusterId: null, categoryId: null, tagIds: null, status: ContentLandingAll, searchText: null,isTemplate: false })
     wiredTableData({ error, data }) {
         if (error) {
             this.tabledata = null;
@@ -101,8 +110,9 @@ export default class ContentContainer extends LightningElement {
 
     constructor() {
         super();
-				this.statusValue = ContentLandingAll;
-				this.searchInputValue = null;
+        this.statusValue = ContentLandingAll;
+        this.searchInputValue = null;
+        this.radioButtonGroupValue = false;
         this.filtersValues = 
         [ 
             {label: ContentLandingCluster, value: null, id: null},
@@ -129,6 +139,11 @@ export default class ContentContainer extends LightningElement {
                 typeAction: 'dispatchEvent',
                 show: true
             }
+        ];
+        this.lblContent = ContentDetailContent.charAt(0) + ContentDetailContent.slice(1).toLowerCase();
+        this.optionsFilterRadioButtonGroup = [
+            { name: "filterRadio", label: this.lblContent, value: false, checked: true },
+            { name: "filterRadio", label: TemplateLabel, value: true, checked: false },
         ];
     }
 
@@ -276,7 +291,21 @@ export default class ContentContainer extends LightningElement {
 
     tableDataFilter(clusterId, categoryId, tagIds){
         this.setRenderTable(false);
-        getTableWrapper({ contentTypeId: this.contentTypeValue, clusterId: clusterId, categoryId: categoryId , tagIds: tagIds, status: this.statusValue, searchText: this.searchInputValue })
+        getTableWrapper({ contentTypeId: this.contentTypeValue, clusterId: clusterId, categoryId: categoryId , tagIds: tagIds, status: this.statusValue, searchText: this.searchInputValue,isTemplate: this.radioButtonGroupValue })
+            .then(result => {
+                this.tabledata = JSON.parse(result);
+                this.setRenderTable(true);
+            })
+            .catch( err => {
+                console.log(err);
+                this.tabledata = null;
+                this.setRenderTable(false);
+            });
+    }
+
+    tableDataDelete(clusterId, categoryId, tagIds){
+        this.setRenderTable(false);
+        getUpdatedTableWrapper({ contentTypeId: this.contentTypeValue, clusterId: clusterId, categoryId: categoryId , tagIds: tagIds, status: this.statusValue, searchText: this.searchInputValue,isTemplate: this.radioButtonGroupValue })
             .then(result => {
                 this.tabledata = JSON.parse(result);
                 this.setRenderTable(true);
@@ -293,10 +322,51 @@ export default class ContentContainer extends LightningElement {
         event.stopPropagation();
         deleteContent({ contentId: idContent})
             .then(result => {
-                this.tableDataFilter(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
+                this.tableDataDelete(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
             })
             .catch( err => {
                 console.log(err);
             });
+    }
+
+    handleCreateContent(event){
+        var idContent = event.detail;
+        event.stopPropagation();
+        createFromTemplate({ templateId: idContent})
+            .then(result => {
+                this.navigateToWebPage("/" + result); //result = recordId
+            })
+            .catch( err => {
+                console.log(err);
+                if(err.body.message){
+                    this.showToast(General_Error,err.body.message,'error');
+                }
+            });
+    }
+
+    handleRadioButtonGroupEvent(event){
+        this.radioButtonGroupValue = event.detail;
+        this.tableDataFilter(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
+    }  
+
+    navigateToWebPage(url) {
+        // Navigate to a URL
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: url
+            }
+        });
+    }
+
+     //Open toast with a message
+     showToast(toastTitle,toastMessage,toastVariant) {
+        const event = new ShowToastEvent({
+            title: toastTitle,
+            message: toastMessage,
+            variant: toastVariant,
+            mode: (toastVariant === "success") ? 'dismissable' : 'sticky'
+        });
+        this.dispatchEvent(event);
     }
 }

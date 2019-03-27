@@ -740,8 +740,8 @@
         <fullName>General_View</fullName>
         <categories>General</categories>
         <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>View</shortDescription>
+        <protected>false</protected>
+        <shortDescription>General_View</shortDescription>
         <value>View</value>
     </labels>
     <labels>
@@ -1198,5 +1198,13 @@
         <protected>false</protected>
         <shortDescription>General_ShowMore</shortDescription>
         <value>Show More</value>
+    </labels>
+    <labels>
+        <fullName>ContentLandingNewFromTemplate</fullName>
+        <categories>ContentLandingRecordListController</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentLandingNewFromTemplate</shortDescription>
+        <value>New from template</value>
     </labels>
 </CustomLabels>
