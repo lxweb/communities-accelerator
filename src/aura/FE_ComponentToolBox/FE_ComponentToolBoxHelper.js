@@ -39,14 +39,15 @@
 
 	showHideEditFrame : function(component, helper, show) {
 		var componentId = component.get('v.componentWrapper.meta.component.Id');
-		var metaComponentId = component.get('v.componentWrapper.objectId');
-		var idDom;
+		var metaComponentId = component.get('v.componentWrapper.meta.objectId');
+		var idDom='';
 		if(componentId != null){
 			idDom = componentId;			
 		}
 		if(metaComponentId != null){
 			idDom += metaComponentId;
 		}
+ 
 		
 		var mainPanel = document.getElementById(idDom);
 		var divComponentNamePanel = mainPanel.getElementsByClassName('componentNamePanel')[0];
