@@ -5,13 +5,13 @@ private class DatatableActionTriggersTest {
     static void generateAcceleratorSetting(){
         MockupFactory.generateAcceleratorSetting();
     }
-	
-	@isTest
+    
+    @isTest
     static void createDatabaseActionWithExternalId() {
         Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         RecordType rt = [SELECT Id FROM RecordType WHERE SobjectType = 'DatatableAction__c' AND DeveloperName = 'GlobalAction'];
         
@@ -24,10 +24,10 @@ private class DatatableActionTriggersTest {
     
     @isTest
     static void createDatabaseActionWithoutExternalId() {
-		Test.startTest();
+        Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         RecordType rt = [SELECT Id FROM RecordType WHERE SobjectType = 'DatatableAction__c' AND DeveloperName = 'GlobalAction'];
         
@@ -40,10 +40,10 @@ private class DatatableActionTriggersTest {
     
     @isTest
     static void updateDatabaseElementWithExternalId() {
-		Test.startTest();
+        Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
+        
         Id clusterId = clustersRoot.get(0).Id;
         RecordType rt = [SELECT Id FROM RecordType WHERE SobjectType = 'DatatableAction__c' AND DeveloperName = 'GlobalAction'];
         
@@ -64,8 +64,8 @@ private class DatatableActionTriggersTest {
         Test.startTest();
         
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-		
-        Id clusterId = clustersRoot.get(0).Id;
+        
+        Id clusterId = clustersRoot[0].Id;
         RecordType rt = [SELECT Id FROM RecordType WHERE SobjectType = 'DatatableAction__c' AND DeveloperName = 'GlobalAction'];
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', null, 'Account', 1, clusterId);
