@@ -5,6 +5,13 @@ import Assets from '@salesforce/resourceUrl/Assets';
 export default class Banner extends LightningElement {
 
     @track position = 0;
+    startX
+    startY
+    dist
+    threshold = 150 //required min distance traveled to be considered swipe
+    allowedTime = 200 // maximum time allowed to travel that distance
+    elapsedTime
+    startTime
 
     @track elements = [
         {
@@ -34,13 +41,13 @@ export default class Banner extends LightningElement {
     ]
 
     connectedCallback() {
-        loadStyle(this, Assets + '/Assets/Bootstrap/css/bootstrap.min.css')  
-        loadScript(this, Assets + '/Assets/Bootstrap/js/bootstrap.min.js')
-        loadScript(this, Assets + '/Assets/Bootstrap/js/popper.min.js')
-        loadScript(this, Assets + '/Assets/Bootstrap/js/jquery-3.3.1.min.js')
+        loadStyle(this, Assets + '/Assets/Bootstrap/css/bootstrap.min.css'); 
+        loadScript(this, Assets + '/Assets/Bootstrap/js/bootstrap.min.js');
+        loadScript(this, Assets + '/Assets/Bootstrap/js/popper.min.js');
+        loadScript(this, Assets + '/Assets/Bootstrap/js/jquery-3.3.1.min.js');
     }
 
-    // renderedCallback() {
+    renderedCallback() {
     //     const carouselDiv = this.template.querySelector('.carousel');
     //     const id = carouselDiv.getAttribute('id');
     //     const carouselIndicators = this.template.querySelector('.carousel-indicators');
@@ -49,8 +56,38 @@ export default class Banner extends LightningElement {
     //     carouselIndicators.setAttribute('data-target', `#${id}`);
     //     carouselPrev.setAttribute('href', `#${id}`);
     //     carouselNext.setAttribute('href', `#${id}`);
-    // }
+    const carousel = this.template.querySelector('.carousel-inner');
+        carousel.addEventListener('touchstart', (e) => {
+            let touchobj = e.changedTouches[0]
+            this.dist = 0
+            this.startX = touchobj.pageX
+            this.startY = touchobj.pageY
+            this.startTime = new Date().getTime() // record time when finger first makes contact with surface
+            e.preventDefault()
+        }, false)
 
+        carousel.addEventListener('touchmove', (e) => {
+            e.preventDefault() // prevent scrolling when inside DIV
+        }, false)
+
+        carousel.addEventListener('touchend', (e) => {
+            var touchobj = e.changedTouches[0]
+            this.dist = touchobj.pageX - this.startX // get total dist traveled by finger while in contact with surface
+            this.elapsedTime = new Date().getTime() - this.startTime // get time elapsed
+            // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+            let swiperightBol = (this.elapsedTime <= this.allowedTime && this.dist >= this.threshold && Math.abs(touchobj.pageY - this.startY) <= 100)
+            this.handleswipe(swiperightBol)
+            e.preventDefault()
+        }, false)
+    }
+
+    handleswipe(isrightswipe){
+        if (isrightswipe)
+            this.next();
+        else{
+            this.prev();
+        }
+    }
     next(){
         this.elements[this.position].class = this.elements[this.position].class.replace(' active','');
         this.elements[this.position].indicatorClass = '';
