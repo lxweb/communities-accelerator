@@ -401,14 +401,6 @@
         <value>New Content</value>
     </labels>
     <labels>
-        <fullName>ContentLandingNewFromTemplate</fullName>
-        <categories>ContentLanding</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Content Landing New from Template</shortDescription>
-        <value>New from Template</value>
-    </labels>
-    <labels>
         <fullName>ContentLandingNone</fullName>
         <categories>Content Landing</categories>
         <language>en_US</language>
