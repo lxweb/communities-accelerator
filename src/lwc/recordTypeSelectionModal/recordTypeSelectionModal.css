@@ -1,23 +1,38 @@
-.slds-icon-text-default{
-    fill: rgb(255, 255, 255) !important;
+.slds-wrap {
+    align-items: inherit;
 }
-.gravity-top {
-    position: absolute;
-    top: 0px;
-    margin-left: 40px;
-    font-size: large;
+.slds-col-general{
+    border-bottom: 1px solid #000000;
+}
+.slds-structure-col{
+    padding-top: 37px;
+}
+.section-title{
+    font-size: 12px;
+    text-align: right;
     font-weight: bold;
 }
-.gravity-bottom {
-    position: absolute;
-    bottom: 60px;
-    margin-left: 40px;
-    font-size: large;
-    font-weight: bold;
+.slds-form-element__control label,.slds-form-element__control label input{
+    cursor: pointer;
 }
-.bottom-line {
-    border-bottom: 2px solid rgb(221, 219, 218);
-}   
-.no-margin {
-    margin: 0px;
+.input-label{
+    font-size: 13px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 14px;
+}
+.desc-lbl{
+    font-size: 13px;
+    text-align: left;
+    color: #706E6B;
+    margin-left: 27px;
+}
+.col-recordType{
+    padding-left: 31px;
+}
+.slds-modal__content{
+    padding: 37px 60px;
+}
+.slds-form-element{
+    margin-bottom: 20px;
 }

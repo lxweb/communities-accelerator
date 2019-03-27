@@ -65,12 +65,13 @@
     </fields>
     <fields>
         <fullName>Cluster__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>Cluster</label>
         <referenceTo>Cluster__c</referenceTo>
+        <relationshipLabel>Datatables</relationshipLabel>
         <relationshipName>ListViews</relationshipName>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
@@ -123,7 +124,7 @@
         <fullName>NumberOfColumns__c</fullName>
         <externalId>false</externalId>
         <label>Number of Columns</label>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -189,7 +190,7 @@
         <externalId>false</externalId>
         <label>Object Api Name</label>
         <length>80</length>
-        <required>false</required>
+        <required>true</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -231,7 +232,7 @@
         <externalId>false</externalId>
         <label>Records Per Page</label>
         <precision>2</precision>
-        <required>false</required>
+        <required>true</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

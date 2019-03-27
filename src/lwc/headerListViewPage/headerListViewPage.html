@@ -28,7 +28,7 @@
                         <lightning-button-group class="header-button-group">
                             <template for:each={headerbuttonssecondary} for:item="button">
                                 <template if:true={button.type}>
-                                    <button key={button.label} data-typeaction={button.typeAction} class="slds-button slds-button_neutral btn-header-new" onclick={handleOnClick}>{button.label}</button>
+                                    <button key={button.label} data-typeaction={button.typeAction} class="slds-button slds-button_neutral btn-header-new" onclick={handleOnClickCreateTemplate}>{button.label}</button>
                                 </template>
                             </template>
                         </lightning-button-group>
