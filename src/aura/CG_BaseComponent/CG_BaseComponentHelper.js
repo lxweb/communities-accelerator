@@ -56,19 +56,6 @@
 			                        details.body = content.Body__c;
 								}
 								cWrapper.details = details;
-							} else if(recordType === 'Banner'){
-								if(cWrapper.contentWrapper.length > 0){
-									cWrapper.bannerElements = cWrapper.contentWrapper.map((c, index) => {
-										return {
-											id: c.content.Id,
-											class: index == 0 ? 'carousel-item active' : 'carousel-item',
-											indicatorClass: index == 0 ? 'active' : '',
-											imgSrc: c.mediaElements[0].FileURLDesktop__c,
-											title: c.content.Title__c,
-											description: c.content.Extract__c
-										}
-									})
-								}
 							}
 	                    }
 	               		//end mobile cast
