@@ -21,7 +21,6 @@ public without sharing virtual class ContentUtils {
         
         List<Id> contentIdList = new List<Id>();
         Set<Id> setCategoriesIds = new Set<Id>();
-
         if(setContentToExclude == null){setContentToExclude = new Set<String>();}
 
         //Armado del query principal a objeto Content
@@ -40,6 +39,7 @@ public without sharing virtual class ContentUtils {
             //Busqueda de contenido por parametro
             query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
             query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
+
         }else{
             if(component.Datasource__c != null){
                 //Busqueda de contenido por Datasource
@@ -69,6 +69,7 @@ public without sharing virtual class ContentUtils {
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
                 query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
+
                 query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
@@ -78,6 +79,7 @@ public without sharing virtual class ContentUtils {
                     query += 'AND (EventEndDate__c >: dateAndTime) ';
                 }
             }
+
             query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
         }
 
@@ -90,8 +92,11 @@ public without sharing virtual class ContentUtils {
             query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
         }       
         
+
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
+
+  
 
         if(!mapContent.isEmpty()){
             //Manual Order del contenido
@@ -187,7 +192,7 @@ public without sharing virtual class ContentUtils {
         List<String> tagList = new List<String>();
         List<String> visitedList = new List<String>();
         Map<String, String> orderTagMap = new Map<String, Id>();
-
+        System.debug(contentTypeToSearch + ' - ' + tagCriteria);
         if(String.isNotBlank(tagCriteria)){
             tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
             orderList = tagCriteria.split('\\(|\\)|AND|OR');
@@ -269,6 +274,7 @@ public without sharing virtual class ContentUtils {
 
         for(Content__c c: contents){
             ContentDataWrapper cdw = new ContentDataWrapper();
+            c = externalIdToUrl(c);
             cdw.content = c;
             cdw.mediaElements = new List<MediaElement__c>();
             for(MediaElementAssignment__c m: c.MediaElementAssignments__r){
@@ -309,6 +315,22 @@ public without sharing virtual class ContentUtils {
         for(Content__c con: contentList){
             con.HTMLContent__c = GeneralUtils.replaceDynamicFields(con.HTMLContent__c, 'User', UserInfo.getUserId(), false);
         }
+    }
+
+    private static Content__c externalIdToUrl(Content__c content){
+        List<String> recordTypesWithBody = new List<String>{'News', 'Event', 'FAQ', 'NewsDetail', 'EventDetail'};
+        String recordTypeDeveloperName = [SELECT Id, RecordType.DeveloperName FROM Content__c WHERE Id =: content.Id].RecordType.DeveloperName;
+        if(recordTypesWithBody.contains(recordTypeDeveloperName)){
+            if(content.Body__c != null){
+                content.Body__c = RichTextController.replaceExternalIdsWithURLs(content.Body__c);
+            }
+            
+        } else if(recordTypeDeveloperName == 'AdvanceContent'){
+            if(content.HTMLContent__c != null){
+                content.HTMLContent__c =  RichTextController.replaceExternalIdsWithURLs(content.HTMLContent__c);
+            }
+        }
+        return content;
     }
     
     @auraEnabled
