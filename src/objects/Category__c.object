@@ -110,44 +110,48 @@
     </fields>
     <label>Category</label>
     <listViews>
+        <fullName>Active</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalId__c</columns>
+        <columns>ParentCategory__c</columns>
+        <columns>Cluster__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </filters>
+        <label>Active</label>
+    </listViews>
+    <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
+        <columns>ExternalId__c</columns>
         <columns>ParentCategory__c</columns>
+        <columns>Status__c</columns>
+        <columns>Cluster__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
-        <language>en_US</language>
     </listViews>
     <listViews>
-        <fullName>CP_Category_Brand</fullName>
+        <fullName>Inactive</fullName>
         <columns>NAME</columns>
+        <columns>ExternalId__c</columns>
         <columns>ParentCategory__c</columns>
+        <columns>Cluster__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
-        <label>3) Brand</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>CP_Category_BrandVariant</fullName>
-        <columns>NAME</columns>
-        <columns>ParentCategory__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>4) Brand Variant</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>CP_Category_Classification</fullName>
-        <columns>NAME</columns>
-        <columns>ParentCategory__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>1) Category</label>
-        <language>en_US</language>
-    </listViews>
-    <listViews>
-        <fullName>CP_Category_Type</fullName>
-        <columns>NAME</columns>
-        <columns>ParentCategory__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>2) Type</label>
-        <language>en_US</language>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Inactive</value>
+        </filters>
+        <label>Inactive</label>
     </listViews>
     <nameField>
         <label>Category Name</label>
@@ -157,11 +161,15 @@
     <searchLayouts>
         <customTabListAdditionalFields>ExternalId__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>ParentCategory__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Cluster__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UPDATEDBY_USER</customTabListAdditionalFields>
         <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
         <searchResultsAdditionalFields>ExternalId__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>ParentCategory__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Cluster__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UPDATEDBY_USER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>

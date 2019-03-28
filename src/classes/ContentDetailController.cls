@@ -100,6 +100,7 @@ public with sharing class ContentDetailController {
         String contentFields = getContentFields();
         Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.Name,RecordType.DeveloperName,' 
                                             + contentFields + ' FROM Content__c WHERE id = :recordId');
+        content.Body__c = externalIdToUrl(content.Body__c);
         return content;
     }
 
@@ -248,6 +249,7 @@ public with sharing class ContentDetailController {
                 break;
             }
         }
+        content.Body__c = urlToExternalId(content.Body__c);
         content.Status__c   = status;
         update content;
         return content;
@@ -285,5 +287,13 @@ public with sharing class ContentDetailController {
             pickListValuesList.add(pickListVal.getValue());
         }    
         return pickListValuesList;
+    }
+
+    private static String externalIdToUrl(String body){
+        return body == null ? null : RichTextController.replaceExternalIdsWithURLs(body);
+    }
+
+    private static String urlToExternalId(String body){
+        return body == null ? null : RichTextController.replaceURLsWithExternalIds(body);
     }
 }

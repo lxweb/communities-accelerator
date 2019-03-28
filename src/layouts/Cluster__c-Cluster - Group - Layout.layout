@@ -54,18 +54,14 @@
                 <field>CreatedById</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>OwnerId</field>
+                <behavior>Readonly</behavior>
+                <field>RecordTypeId</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>RecordTypeId</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -83,14 +79,14 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>Clone</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>1</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>Edit</actionName>
             <actionType>StandardButton</actionType>
             <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Clone</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>1</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Delete</actionName>
@@ -126,7 +122,8 @@
         <fields>NAME</fields>
         <fields>ExternalId__c</fields>
         <fields>ParentCategory__c</fields>
-        <fields>CREATED_DATE</fields>
+        <fields>Status__c</fields>
+        <fields>UPDATEDBY_USER</fields>
         <fields>LAST_UPDATE</fields>
         <relatedList>Category__c.Cluster__c</relatedList>
     </relatedLists>
@@ -135,8 +132,8 @@
         <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>ExternalId__c</fields>
-        <fields>Description__c</fields>
-        <fields>CREATED_DATE</fields>
+        <fields>Status__c</fields>
+        <fields>UPDATEDBY_USER</fields>
         <fields>LAST_UPDATE</fields>
         <relatedList>Tag__c.Cluster__c</relatedList>
     </relatedLists>

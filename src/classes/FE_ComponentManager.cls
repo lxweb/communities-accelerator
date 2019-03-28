@@ -33,6 +33,7 @@ public without sharing virtual class FE_ComponentManager {
     public virtual class MetaWrapper{
         @auraEnabled public Component__c component;
         @auraEnabled public String objectId;
+        @auraEnabled public String name;
         @auraEnabled public String navId;
     }
     
