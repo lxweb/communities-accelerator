@@ -1,11 +1,11 @@
 @isTest
 private class DatatableTriggersTest {
     
-	@testSetup
-	static void generateCustomSettings(){
-		MockupFactory.generateAcceleratorSetting();
-	}
-	
+    @testSetup
+    static void generateCustomSettings(){
+        MockupFactory.generateAcceleratorSetting();
+    }
+    
     @isTest
     static void createValidDatatable() {
         
@@ -24,9 +24,9 @@ private class DatatableTriggersTest {
         
         Test.startTest();
         List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootCluster', null, 1, 'ClusterRoot');
-        List<Cluster__c> clustersLeaf = MockUpFactory.createCluster('DummyLeafCluster', clustersRoot.get(0).Id, 1, 'ClusterLeaf');
+        List<Cluster__c> clustersLeaf = MockUpFactory.createCluster('DummyLeafCluster', clustersRoot[0].Id, 1, 'ClusterLeaf');
         
-        Cluster__c leaf = clustersLeaf.get(0);
+        Cluster__c leaf = clustersLeaf[0];
         
         List<Datatable__c> datatables = MockupFactory.createDatatables('DummyDatatable', 'DummyDatatable', 'Account', 2, leaf.Id);
         
@@ -34,15 +34,15 @@ private class DatatableTriggersTest {
         
         Datatable__c a = datatables.get(0);
         a.Name = 'DummyDatatable2';
-        a.Cluster__c = clustersRoot.get(0).Id;
+        a.Cluster__c = clustersRoot[0].Id;
         
         update a;
         
-        a = datatables.get(0);
+       /* a = datatables.get(0);
         a.Name = 'DummyDatatable2';
         a.Cluster__c = null;
         
-        update a;
+        update a;*/
         
         Test.stopTest();
     }

@@ -219,6 +219,7 @@
     <tabs>Cluster__c</tabs>
     <tabs>Component__c</tabs>
     <tabs>ContentLanding</tabs>
+    <tabs>Sitemap</tabs>
     <tabs>MediaElement__c</tabs>
     <tabs>Category__c</tabs>
     <tabs>Tag__c</tabs>

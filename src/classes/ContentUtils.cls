@@ -34,7 +34,6 @@ public without sharing virtual class ContentUtils {
 
         //WHERE
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
-        
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
           
@@ -103,7 +102,6 @@ public without sharing virtual class ContentUtils {
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 
   
-
         if(!mapContent.isEmpty()){
             //Manual Order del contenido
             if(component.Datasource__c == 'ManualAssignment' && component.OrderBy__c == 'Manual Order' && contentIdList.size() > 0){
@@ -115,7 +113,6 @@ public without sharing virtual class ContentUtils {
             }
             
             //TODO: Aca tenemos que aplicar segmentacion y se tiene que cambiar como manejamos las paginas y el total de las paginas
-
             //Si despues de aplicar segmentacion tenemos algun registro evaluamos las paginas
             if(!mapContent.isEmpty()){
 
@@ -198,7 +195,6 @@ public without sharing virtual class ContentUtils {
         List<String> tagList = new List<String>();
         List<String> visitedList = new List<String>();
         Map<String, String> orderTagMap = new Map<String, Id>();
-        System.debug(contentTypeToSearch + ' - ' + tagCriteria);
         if(String.isNotBlank(tagCriteria)){
             tagCriteria = tagCriteria.deleteWhitespace().toUpperCase();
             orderList = tagCriteria.split('\\(|\\)|AND|OR');

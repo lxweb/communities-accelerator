@@ -113,9 +113,7 @@
 
 		    action.setCallback(this, function(f) {
 				if(f.getState() === "SUCCESS") {
-					var cWrapper = component.get("v.componentWrapper");
-					cWrapper.contentWrapper = action.getReturnValue();
-					component.set("v.componentWrapper", cWrapper);
+					component.set("v.componentWrapper.contentWrapper", action.getReturnValue());
 	            	component.set('v.currentPageNumber', pageNumber);
 	                component.set("v.isLoading", false);
 		        }

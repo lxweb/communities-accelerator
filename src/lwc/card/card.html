@@ -1,6 +1,6 @@
 <template>
     <template if:true={orientation}>
-        <div class="container-portrait">
+        <div class="container-portrait" onclick={navigateToDetail}>
             <template if:true={config}>
                 <template if:true={config.headerText}>
                     <div class="header-container">
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class={secondaryDescClass}>
                                     <template if:true={isEvent}>
-                                        <lightning-icon src="sfsites/c/resource/Assets/Icons/location.svg" alternative-text="emoji"></lightning-icon>
+                                            <i class="icon location-icon"></i>
                                     </template>
                                     {config.footer.description.descSecondary}
                                 </div>
@@ -57,7 +57,7 @@
     </template>
     <template if:false={orientation}>
         <template if:true={config}>
-            <div class="container-landscape slds-grid">
+            <div class="container-landscape slds-grid" onclick={navigateToDetail}>
                 <div class="slds-col slds-size_1-of-4">
                     <template if:true={config.imgSrc}>
                         <div class="img-container-landscape">
@@ -94,9 +94,11 @@
                                         {config.footer.description.descPrimary}
                                     </div>
                                     <div class={secondaryDescClass}>
-                                            <template if:true={isEvent}>
-                                                <lightning-icon src="sfsites/c/resource/Assets/Icons/location.svg" alternative-text="emoji"></lightning-icon>
-                                            </template>
+                                        <template if:true={isEvent}>
+                                            <div class="location-container">
+                                                <i class="icon location-icon"></i>
+                                            </div>
+                                        </template>
                                         {config.footer.description.descSecondary}
                                     </div>
                                 </div>

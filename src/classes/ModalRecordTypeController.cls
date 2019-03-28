@@ -15,7 +15,7 @@ public class ModalRecordTypeController {
     @AuraEnabled(cacheable=true)
     public static List<RecordType> getTemplateRecordTypes(String sObjectType){
         AcceleratorMetadata__mdt acceleratorMetadata = [SELECT Id, ContentTemplateRecordTypes__c FROM AcceleratorMetadata__mdt];
-        List<String> recordTypeNames = acceleratorMetadata.ContentTemplateRecordTypes__c.split(',');
+        List<String> recordTypeNames = acceleratorMetadata != null ? acceleratorMetadata.ContentTemplateRecordTypes__c.split(',') : new List<String>();
         return getSortedRecordTypes(sObjectType, recordTypeNames);
     }
 

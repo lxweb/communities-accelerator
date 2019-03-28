@@ -197,6 +197,34 @@ private class GeneralUtilsTest {
 		System.assertEquals(test4, res4);
 		System.assertEquals(test5, res5);
 		System.assertEquals(test6, clusterC.name.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_') + '_' + cluster);
-	}	
+	}
+
+	@isTest
+	static void hasSObjectFieldTest() {
+		//Given
+		List<Cluster__c> clusterList = [SELECT Id FROM Cluster__c LIMIT 1];
+		//When
+		Test.startTest();
+		Boolean result = GeneralUtils.hasSObjectField('Id', clusterList[0]);
+		Boolean result2 = GeneralUtils.hasSObjectField('Name', clusterList[0]);
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(result, true);
+		System.assertEquals(result2, false);
+	}
+
+	@isTest
+	static void getObjectFieldNamesTest() {
+		//Given
+
+		//When
+		Test.startTest();
+		Set<String> result = GeneralUtils.getObjectFieldNames('Cluster__c');
+		Test.stopTest();
+
+		//Then
+		System.assertNotEquals(result.size(), 0);
+	}
 	
 }

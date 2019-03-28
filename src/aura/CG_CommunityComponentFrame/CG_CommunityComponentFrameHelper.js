@@ -16,8 +16,18 @@
 		
 		var cWrapper = component.get('v.componentWrapper');
 		var componentRecordTypeId = cWrapper.component.RecordType.DeveloperName;
-		var action = component.get('c.getContentRecordtypeId');
+		var navUrl = window.location.pathname;
+		var navId;
 
+		var act = component.get('c.getNavigationId');
+		act.setParams({navigationUrl: navUrl});
+		act.setCallback(this,function(f){
+			if (f.getState()==="SUCCESS"){
+				navId = act.getReturnValue();	
+			}
+		});
+
+		var action = component.get('c.getContentRecordtypeId');
 		action.setParams({
 			componentRecordType: componentRecordTypeId,
 		});
@@ -26,11 +36,10 @@
             if(f.getState() === "SUCCESS") {
             	var contntRecordTypeWp = action.getReturnValue();
 
-
 				var sfDomain  = cWrapper.acceleratorSettings.SalesforceDomain__c;
 				if(contntRecordTypeWp.haveContentRecordType){
 
-					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent' + '?RecordTypeId=' + contntRecordTypeWp.contentRecordTypeId + '&ComponentId=' + cWrapper.component.Id;
+					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent' + '?RecordTypeId=' + contntRecordTypeWp.contentRecordTypeId + '&ComponentId=' + cWrapper.component.Id + '&NavigationId=' + navId;
 				}else{
 					var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
 				}
@@ -39,9 +48,18 @@
 
 	        }
 	    });
-	    
+	    $A.enqueueAction(act);
 	    $A.enqueueAction(action);
 	},
+	  // the function that reads the url parameters
+    getPageUrl: function() {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1));//,
+			//sURLVariables = sPageURL.split('/'),
+			//sParameterName,
+			//i;
+			sPageURL = sPageURL;
+       
+    },
 	showHideEditFrame : function(component, helper, show) {
 		var cWrapper = component.get('v.componentWrapper');
 		var mainPanel = document.getElementById(component.get('v.componentWrapper.component.Id'));
