@@ -134,8 +134,9 @@ public class ContentLandingRecordListController {
         String queryInString = 'SELECT Id, ' + columnSet + ' FROM Content__c ';
         List<String> queryConditions = getQueryConditions(wrapper);
         // Si no recibe filtros, trae los 10 registros modificados mas recientemente
-        if(queryConditions.isEmpty()){
+        if(queryConditions.size() <= 1){
             if(wrapper.searchText == null || wrapper.searchText == ''){
+                queryInString += 'WHERE isTemplate__c = ' + wrapper.isTemplate + ' ';
                 queryInString = setDefaultCondition(queryInString);
             } else {
                 queryInString = setSearchCondition(queryInString, wrapper.searchText);
@@ -145,6 +146,7 @@ public class ContentLandingRecordListController {
             queryInString = setCustomConditions(queryInString, queryConditions);
         }
         // Devuelve los registros filtrados
+        System.debug('queryInString: ' + queryInString);
         List<Content__c> records = Database.query(queryInString);
         return records;
     }
