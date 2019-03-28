@@ -1,7 +1,7 @@
 public with sharing class FE_BannerController extends FE_ComponentManager{
     
     @auraEnabled
-    public static ComponentWrapper getComponentWrapper(String componentExternalId, String clusterId, String device){
+    public static ComponentWrapper getComponentWrapper(String componentExternalId, String clusterId, String device,String navigationUrl){
         FE_BannerController ctrl = new FE_BannerController();
         ctrl.customPermissionEdit = 'Banner Edit Frame';
         ctrl.customPermissionView = 'Banner View Frame';
@@ -19,6 +19,7 @@ public with sharing class FE_BannerController extends FE_ComponentManager{
         ctrl.componentExternalId = componentExternalId;
         ctrl.clusterId = clusterId;
         ctrl.device = device;
+        ctrl.navigationUrl = navigationUrl;
 
         return ctrl.getCW();
     }
