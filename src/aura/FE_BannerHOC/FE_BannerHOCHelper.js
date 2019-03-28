@@ -18,12 +18,27 @@
             action.setCallback(this, function(f) {
                 if(f.getState() === "SUCCESS") {
                     var cWrapper = action.getReturnValue();
+                    var elements = new Object();
                     component.set("v.componentWrapper", cWrapper);
                     
                     if(clusterCookie == undefined || clusterCookie == ''){
                         helper.setCookie('CG_clusterId', cWrapper.clusterId, 100);
                     }
-                    
+
+                    if(cWrapper.data.contentWrapper.length > 0){
+                        elements = cWrapper.data.contentWrapper.map((c, index) => {
+                            return {
+                                id: c.content.Id,
+                                class: index == 0 ? 'carousel-item active' : 'carousel-item',
+                                indicatorClass: index == 0 ? 'active' : '',
+                                imgSrc: c.mediaElements[0].FileURLDesktop__c,
+                                title: c.content.Title__c,
+                                description: c.content.Extract__c
+                            }
+                        })
+                    }
+
+                    component.set("v.elements", elements);
                     //Loading
                     component.set("v.isLoading", false);
                 }
