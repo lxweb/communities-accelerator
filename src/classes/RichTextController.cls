@@ -1,7 +1,8 @@
 public class RichTextController {
 
     // From ExternalIds To URLs
-
+    
+    @AuraEnabled
     public static String replaceExternalIdsWithURLs(String richText){
         List<String> mediaElementExternalIds = getMediaElementExternalIds(new List<String>{richText});
         Map<String, String> externalIdURLMap = getExternalIdURLMap(mediaElementExternalIds);
@@ -53,6 +54,7 @@ public class RichTextController {
 
     // From URLs To ExternalIds
 
+    @AuraEnabled
     public static String replaceURLsWithExternalIds(String richText){
         List<String> mediaElementURLs = getMediaElementURLs(new List<String>{richText});
         Map<String, String> urlExternalIdMap = getURLExternalIdMap(mediaElementURLs);
