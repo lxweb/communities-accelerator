@@ -214,7 +214,6 @@
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Datatable Element</label>
     <nameField>
         <label>Datatable Element Name</label>
