@@ -9,8 +9,9 @@ public class ComponentBehaviourController {
 
     private static String getBehaviourMessage(String componentId){
         //Get DataSource
-        Component__c component = [SELECT Id, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
+        Component__c component = [SELECT Id, RecordType.DeveloperName, BannerFrameType__c, dataSource__c, TagCriteria__c FROM Component__c WHERE Id =: componentId];
         String dataSource = component.dataSource__c;
+        Boolean isBanner = component.RecordType.DeveloperName == 'Banner';
         //Get records related to DataSource
         String behaviourMessage;
         if(dataSource == 'ManualAssignment'){
@@ -25,6 +26,9 @@ public class ComponentBehaviourController {
         if(dataSource == 'TagsCategories'){            
             behaviourMessage = getTagsMessage(component) + '\n\n';
             behaviourMessage += getCategoriesMessage(component);
+        }
+        if(isBanner){
+            behaviourMessage += getBannerType(component);
         }
         // Build Message
         return behaviourMessage;
@@ -49,6 +53,11 @@ public class ComponentBehaviourController {
             behaviourMessage += '\n - ' + categoryAssignment.Category__r.Name;
         }
         return behaviourMessage;
+    }
+
+    private static String getBannerType(Component__c component){
+        String bannerType = '\n\n Banner type: ' + component.BannerFrameType__c;
+        return bannerType;
     }
 
 }

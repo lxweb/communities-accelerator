@@ -309,4 +309,36 @@ public without sharing virtual class ContentUtils {
         }
     }
     
+    @auraEnabled
+    public static String createFromTemplate(Id templateId){
+
+        Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
+        Content__c template = Database.query('SELECT ' +  String.join(new List<String>(fieldNames), ',') + ' FROM Content__c WHERE Id =: templateId');
+
+        if(template.IsTemplate__c && template.Status__c == 'Published'){
+            Content__c newContent = template.clone(false,false,false,false);
+            newContent.Name = 'Copy of - ' + template.Name.left(69);
+            newContent.TemplateUsed__c = templateId;
+            newContent.Status__c = 'Draft';
+            newContent.IsTemplate__c = false;
+            newContent.ExternalId__c = null;
+            newContent.OwnerId = UserInfo.getUserId();
+            try{
+                insert newContent;
+                return newContent.Id;
+            }catch(DMLException e){
+                System.debug(e.getMessage());
+                System.debug(e.getStackTraceString());
+                throw new AuraHandledException(e.getDMLMessage(0));
+            }catch(Exception e){
+                System.debug(e.getMessage());
+                System.debug(e.getStackTraceString());
+                throw new AuraHandledException(e.getMessage());
+            }  
+        }else{
+            throw new AuraHandledException(template.IsTemplate__c ? label.NewTemplateInvalidTemplate : label.NewTemplateNotPublished);
+        }       
+
+    }
+    
 }

@@ -20,6 +20,13 @@
         <div class="slds-col slds-p-around_small" >
             <div class="slds-grid slds-grid_vertical">
                 <div class="slds-col slds-p-bottom_small">
+                    <aura:if isTrue="{!v.contentData.IsTemplate__c}">
+                        <div style="background-color:#EEEEEE;padding:10px;">
+                            <lightning:textarea label="{!$Label.c.NewsContentDetailTemplateDescription}" name="templateDescription" value="{!v.contentData.TemplateDescription__c}" required="true" aura:id="templateDescription"/>
+                        </div>
+                    </aura:if>
+                </div>
+                <!--<div class="slds-col slds-p-bottom_small">
                     <aura:if isTrue="{!not(v.isExtIdEdit)}">
                         <div class="slds-form" role="list">
                             <div class="slds-form__row">
@@ -40,7 +47,7 @@
                             </div>
                         </aura:set>
                     </aura:if>
-                </div>
+                </div>-->
                 <div class="slds-col slds-p-bottom_small">
                     <lightning:input label="{!$Label.c.NewsContentDetailTitle}" name="contentName" value="{!v.contentData.Title__c}" required="true" aura:id="contentName" maxlength="255"/>
                 </div>
@@ -70,5 +77,4 @@
             </div>
         </div>
     </div>
-
 </aura:component>

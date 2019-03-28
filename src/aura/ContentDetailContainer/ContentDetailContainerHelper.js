@@ -14,6 +14,7 @@
 					component.set("v.contentData", 			data.content);
 					component.set("v.timeZone", 			data.timeZone);
 					component.set("v.visibilitySelectors", 	data.visibilitySelectors);
+					component.set("v.bannerFrameTypes", response.getReturnValue().bannerFrameTypes);
 					component.set("v.security", 			data.security);
 					if(data.content.MediaElementAssignments__r != null){
 						component.set('v.imageUrl', data.content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c);

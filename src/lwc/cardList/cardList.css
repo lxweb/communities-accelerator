@@ -1,0 +1,14 @@
+.list-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}
+
+.spacer {
+    border-bottom: 1px solid #C0C0C0;
+    width: 80%;
+    margin: auto;
+}
+.list-container:last-child .spacer {
+    border-bottom: none;
+}

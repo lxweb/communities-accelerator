@@ -1,0 +1,59 @@
+<template>
+    <div class="slds-page-header card-header-title">
+        <div class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <template for:each={breadcrumbsArray} for:item="crumb" for:index="index">
+                <a key={crumb} href="" class="slds-breadcrumb__item slds-text-title_caps">{crumb}</a>
+            </template>
+        </div>
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1 class="h1-object-label slds-align_absolute-center">
+                                    <span class="slds-page-header__title slds-truncate" title={title}>
+                                        {title}
+                                    </span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-page-header__col-actions">
+                <div class="slds-page-header__controls">
+                    <div>
+                        <lightning-button-group>
+                            <template for:each={secondaryControlArray} for:item="button" for:index="index">
+                                <lightning-button
+                                    label={button.label} 
+                                    key={button.label} 
+                                    disabled={button.disabled}
+                                    onclick={handleSecondaryControl}
+                                >
+                                </lightning-button>
+                            </template>
+                        </lightning-button-group>
+                    </div>
+                    <div>
+                        <lightning-button-group>
+                            <template for:each={primaryControlArray} for:item="button" for:index="index">
+                                <button
+                                    data-label={button.label} 
+                                    key={button.label} 
+                                    disabled={button.disabled}
+                                    onclick={handlePrimaryControl}
+                                    class="btn-header-new">
+                                    {button.label} 
+                                </button>
+                            </template>
+                        </lightning-button-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-m-top_x-small card-header-subtitle" onfilteritemselected={setFilterValue}>
+    </div>
+</template>

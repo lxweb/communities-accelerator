@@ -1,16 +1,18 @@
 public with sharing class ContentDetailController {
     //DATA WRAPPER
     public class DataWrapper{
-        @auraEnabled public Content__c                      content;
-        @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
-        @auraEnabled public String                          timeZone;
+        @AuraEnabled public Content__c                      content;
+        @AuraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
+        @AuraEnabled public String                          timeZone;
         @AuraEnabled public SecurityWrapper                 security;
+        @AuraEnabled public List<String>                    bannerFrameTypes;
         
-        public DataWrapper(Content__c content, SecurityWrapper security, List<VisibilitySelectorWrapper> visibilitySelectors, String timeZone){
+        public DataWrapper(Content__c content, SecurityWrapper security, List<VisibilitySelectorWrapper> visibilitySelectors, String timeZone, List<String> bannerFrameTypes){
             this.content                = content;
             this.visibilitySelectors    = visibilitySelectors;
             this.security               = security;
             this.timeZone               = timeZone;
+            this.bannerFrameTypes       = bannerFrameTypes;
         }
     }
 
@@ -77,21 +79,14 @@ public with sharing class ContentDetailController {
                 visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
             }
             visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds, sw.hasEditAccess));
-            data = new DataWrapper(contentRecord, sw, visibilitySelectorList, UserInfo.getTimeZone().getID());
+            List<String> bannerFrameTypes = getBannerFrameTypes();
+
+            data = new DataWrapper(contentRecord, sw, visibilitySelectorList, UserInfo.getTimeZone().getID(), bannerFrameTypes);
         } catch(Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
         return data;
     }
-
-    /*private static List<Cluster__c> getSubordinateClusters(){
-        List<ClusterUser__c> clusterUser = [SELECT Cluster__c FROM ClusterUser__c WHERE User__c = :UserInfo.getUserId() LIMIT 1];
-        if(!clusterUser.isEmpty()){
-            List<Cluster__c> clusters =  ClusterUtils.getClustersBelowList(clusterUser.get(0).cluster__c);
-            return clusters;
-        }
-        return null;
-    }*/
 
     private static Set<Id> getTagsFromContentRecord(Content__c content){
         Set<Id> tagIds = new Set<Id>();
@@ -100,14 +95,6 @@ public with sharing class ContentDetailController {
         }
         return tagIds;
     }
-/*
-    private static VisibilitySelectorWrapper getClusterSelectorWrapper(List<Cluster__c> clusters, String contentClusterId){
-        List<VisibilityOptionWrapper> clusterWrapperList = new List<VisibilityOptionWrapper>();
-        for(Cluster__c cluster : clusters){
-            clusterWrapperList.add(new VisibilityOptionWrapper(cluster.name, cluster.Id, (cluster.id == contentClusterId)));
-        }
-        return new VisibilitySelectorWrapper('Cluster', 'Cluster__c', false, clusterWrapperList);
-    }*/
 
     private static Content__c getContentData(String recordId){
         String contentFields = getContentFields();
@@ -290,4 +277,13 @@ public with sharing class ContentDetailController {
         return Schema.SObjectType.Content__c.getRecordTypeInfosByDeveloperName().get(recordTypeDeveloperName).isAvailable();
     }
 
+    private static List<String> getBannerFrameTypes(){
+        List<String> pickListValuesList= new List<String>();
+        Schema.DescribeFieldResult fieldResult = Content__c.BannerFrameType__c.getDescribe();
+        List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+        for( Schema.PicklistEntry pickListVal : ple){
+            pickListValuesList.add(pickListVal.getValue());
+        }    
+        return pickListValuesList;
+    }
 }

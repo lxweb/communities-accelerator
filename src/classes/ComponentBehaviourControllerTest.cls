@@ -29,10 +29,10 @@ public class ComponentBehaviourControllerTest {
         List<Cluster__c> clusterRoot = MockupFactory.createCluster('Cluster Root', '', 1, 'ClusterRoot');
         List<Cluster__c> clusterGroup = MockupFactory.createCluster('Cluster Group', clusterRoot.get(0).id, 1, 'ClusterGroup');
         List<Cluster__c> clusterLeaf = MockupFactory.createCluster('Cluster Leaf', clusterGroup.get(0).id, 2, 'ClusterLeaf');
-        List<Component__c> components = MockupFactory.createComponent('FAQ', 1, clusterRoot.get(0));
+        List<Component__c> components = MockupFactory.createComponent('Banner', 1, clusterRoot.get(0));
         components.get(0).DataSource__c = 'TagsCategories'; 
         update components;
-        List<Content__c> contents = MockupFactory.createContent('FAQ', clusterLeaf.get(0), 1);
+        List<Content__c> contents = MockupFactory.createContent('Banner', clusterLeaf.get(0), 1);
         contents.get(0).StructureComponent__c = components.get(0).Id;
         update contents;
         List<Tag__c> tags = MockupFactory.createTag('Tag Test', '', 2, clusterLeaf.get(0).id);
@@ -49,6 +49,7 @@ public class ComponentBehaviourControllerTest {
         System.assert(componentBehaviour.contains(Label.ComponentBehaviourCategories));
         System.assert(componentBehaviour.contains('Tag Test'));
         System.assert(componentBehaviour.contains('Category Test'));
+        System.assert(componentBehaviour.contains('Banner type'));
     }
 
 }
