@@ -73,12 +73,12 @@ public class ContentUtilsTest {
 
         // Given
         List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
-        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
+        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1,clusterRootList[0]);
         Component__c comp = componentList[0];
         comp.Datasource__c = 'Tags';
         update comp;
 
-        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c,BannerFrameType__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
                 FROM Component__c WHERE Id =: comp.ID];
 
         List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -87,7 +87,7 @@ public class ContentUtilsTest {
         List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
         List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
 
-        Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+        Set<String> fieldSet =  new Set<String>{'ExternalId__c','BannerFrameType__c'};
         Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
         
         // When
@@ -105,12 +105,12 @@ public class ContentUtilsTest {
 
         // Given
         List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
-        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
+        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterRootList[0]);
         Component__c comp = componentList[0];
         comp.Datasource__c = 'Categories';
         update comp;
 
-        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, BannerFrameType__c,Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
                 FROM Component__c WHERE Id =: comp.ID];
 
         List<Category__c> categoryList = MockupFactory.createCategory('TestCategory', 1, clusterRootList[0].Id);
@@ -119,7 +119,7 @@ public class ContentUtilsTest {
         List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
         List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
 
-        Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+        Set<String> fieldSet =  new Set<String>{'ExternalId__c','BannerFrameType__c'};
         Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
         
         // When
@@ -176,10 +176,10 @@ public class ContentUtilsTest {
         List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
         List<Component__c> componentList = MockupFactory.createComponent('Banner', 1, clusterRootList[0]);
         Component__c comp = componentList[0];
-        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c,BannerFrameType__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
                 FROM Component__c WHERE Id =: comp.ID];
         
-        Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+        Set<String> fieldSet =  new Set<String>{'ExternalId__c','BannerFrameType__c'};
         Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
         
         List<Content__c> contentListDirect = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -203,13 +203,13 @@ public class ContentUtilsTest {
 
         // Given
         List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
-        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
+        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1,clusterRootList[0]);
         Component__c comp = componentList[0];
         comp.Datasource__c = 'ManualAssignment';
         comp.OrderBy__c = 'Manual Order';
         update comp;
 
-        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, PageSize__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
+        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c,BannerFrameType__c, Status__c, PageSize__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c
                 FROM Component__c WHERE Id =: comp.ID];
 
         List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -217,7 +217,7 @@ public class ContentUtilsTest {
         List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
         List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
 
-        Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+        Set<String> fieldSet =  new Set<String>{'ExternalId__c','BannerFrameType__c'};
         Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
         
         // When
@@ -240,13 +240,13 @@ public class ContentUtilsTest {
 
         // Given
         List<Cluster__c> clusterRootList = [SELECT Id FROM Cluster__c];
-        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1);
+        List<Component__c> componentList = MockupFactory.createComponent('Banner', 1,clusterRootList[0]);
         Component__c comp = componentList[0];
         comp.TagCriteria__c = '1 AND 2';
         comp.Datasource__c = 'Tags';
         update comp;
 
-        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
+        componentList = [SELECT Name, TagCriteria__c, ExternalId__c, Datasource__c, BannerFrameType__c,Status__c, RecordTypeId, RecordType.DeveloperName, Cluster__c, ExcludePastEvents__c, OrderBy__c, HierarchicalOrderBy__c, PageSize__c
                 FROM Component__c WHERE Id =: comp.ID];
 
         List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
@@ -255,7 +255,7 @@ public class ContentUtilsTest {
         List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
         List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);
 
-        Set<String> fieldSet =  new Set<String>{'ExternalId__c'};
+        Set<String> fieldSet =  new Set<String>{'ExternalId__c','BannerFrameType__c'};
         Set<String> setClusterIds = new Set<String>{clusterRootList[0].Id};
         
         // When
