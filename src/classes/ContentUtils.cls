@@ -280,6 +280,7 @@ public without sharing virtual class ContentUtils {
 
         for(Content__c c: contents){
             ContentDataWrapper cdw = new ContentDataWrapper();
+            c = externalIdToUrl(c);
             cdw.content = c;
             cdw.mediaElements = new List<MediaElement__c>();
             for(MediaElementAssignment__c m: c.MediaElementAssignments__r){
@@ -320,6 +321,22 @@ public without sharing virtual class ContentUtils {
         for(Content__c con: contentList){
             con.HTMLContent__c = GeneralUtils.replaceDynamicFields(con.HTMLContent__c, 'User', UserInfo.getUserId(), false);
         }
+    }
+
+    private static Content__c externalIdToUrl(Content__c content){
+        List<String> recordTypesWithBody = new List<String>{'News', 'Event', 'FAQ', 'NewsDetail', 'EventDetail'};
+        String recordTypeDeveloperName = [SELECT Id, RecordType.DeveloperName FROM Content__c WHERE Id =: content.Id].RecordType.DeveloperName;
+        if(recordTypesWithBody.contains(recordTypeDeveloperName)){
+            if(content.Body__c != null){
+                content.Body__c = RichTextController.replaceExternalIdsWithURLs(content.Body__c);
+            }
+            
+        } else if(recordTypeDeveloperName == 'AdvanceContent'){
+            if(content.HTMLContent__c != null){
+                content.HTMLContent__c =  RichTextController.replaceExternalIdsWithURLs(content.HTMLContent__c);
+            }
+        }
+        return content;
     }
     
 }
