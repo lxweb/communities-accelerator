@@ -37,9 +37,14 @@ public with sharing class ContentDetailHeaderController {
     	update c;
         return c.Name;
     }
+    
+    @AuraEnabled
+    public static String createFromTemplate(String recordId){
+        return ContentUtils.createFromTemplate(recordId);
+    }
 
     private static Content__c getContentData(String recordId){
-        Content__c content = [SELECT Id, Name, Cluster__r.Name, Status__c, LastModifiedDate, CreatedBy.Name, RecordType.Name, RecordType.DeveloperName FROM Content__c WHERE id = :recordId];
+        Content__c content = [SELECT Id, Name, Cluster__r.Name, Status__c, LastModifiedDate, IsTemplate__c, CreatedBy.Name, RecordType.Name, RecordType.DeveloperName FROM Content__c WHERE id = :recordId];
         return content;
     }
 

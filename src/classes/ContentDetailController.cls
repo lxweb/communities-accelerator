@@ -65,10 +65,10 @@ public with sharing class ContentDetailController {
     public static DataWrapper getData(String recordId){
         DataWrapper data;
         try{
-            //Gets the entire cluster branch of the current user.
-            Set<Id> clusterIds = getClusterBranch();
             //Gets the data from the current content.
             Content__c contentRecord = getContentData(recordId);
+            //Gets the entire cluster branch of the current user.
+            Set<Id> clusterIds = getClusterBranch(contentRecord.Cluster__c);
             //Gets the tags related to the content record.
             Set<Id> tagIds = getTagsFromContentRecord(contentRecord);
             //Gets all the visibility options, with the current content options set as true.
@@ -143,13 +143,9 @@ public with sharing class ContentDetailController {
         return categorySelectorWrapper;
     }
 
-    private static Set<Id> getClusterBranch(){
-        List<ClusterUser__c> clusterUser = [SELECT Cluster__c FROM ClusterUser__c WHERE User__c = :UserInfo.getUserId() LIMIT 1];
-        if(!clusterUser.isEmpty()){
-            Set<Id> clusters =  ClusterUtils.getEntireClusterBranch(clusterUser.get(0).cluster__c);
-            return clusters;
-        }
-        return null;
+    private static Set<Id> getClusterBranch(Id clusterId){
+        Set<Id> clusters = (Set<Id>)JSON.deserialize(JSON.serialize(ClusterUtils.getClustersParents(clusterId)), Set<Id>.class);
+        return clusters;
     }
 
     private static String getContentFields(){

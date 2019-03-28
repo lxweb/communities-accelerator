@@ -12,7 +12,7 @@
     	helper.unpublish(component, event, helper);
     },
     doCreateFromTemplate: function (component, event, helper) {
-        //TODO
+        helper.createFromTemplate(component);
     },
     onKeyUp: function (component, event, helper) {
         var isEnterKey = event.keyCode === 13;

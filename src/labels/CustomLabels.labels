@@ -1296,6 +1296,14 @@
         <value>Template Description</value>
     </labels>
     <labels>
+        <fullName>ContentCreatedFromTemplate</fullName>
+        <categories>ContentDetailHeader.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentCreatedFromTemplate</shortDescription>
+        <value>A new Content was created based on {0} template</value>
+    </labels>
+    <labels>
         <fullName>EventContentDetailTemplateDescription</fullName>
         <categories>ContentEventRecordEdit.cmp</categories>
         <language>en_US</language>
