@@ -1,0 +1,28 @@
+<aura:component controller="FE_DatatableController" implements="forceCommunity:availableForAllPageTypes">
+	<!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.getRecord}" />
+
+    <!-- REGISTERED EVENTS -->
+    <!-- <aura:handler name="datatableSortEvent" event="c:FE_DatatableSortEvent" action="{! c.dohandleSort}" />
+    <aura:handler name="datatableGetPageEvent" event="c:FE_DatatableGetPageEvent" action="{! c.doGetPage}" />
+    <aura:handler name="datatableSearchEvent" event="c:FE_DatatableSearchEvent" action="{! c.doHandleSearch}" />
+    <aura:handler name="datatableFilterEvent" event="c:FE_DatatableFilterEvent" action="{! c.doHandleFilter}" />
+    <aura:handler name="datatableDeleteEvent" event="c:FE_DatatableDeleteEvent" action="{! c.doHandleDelete}" /> -->
+
+	<!-- GENERAL VARIABLES --> 
+    <aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentWrapper" type="Object" />
+    <aura:attribute name="isLoading" type="Boolean" />
+
+    <!-- INTERNAL -->
+
+    <!-- LOC Component -->
+    <div aura:id="cg_component">
+        <!-- BASE COMPONENT -->
+        <c:FE_ComponentToolBox componentType="Datatable" componentExternalId="{!v.componentExternalId}" componentWrapper="{!v.componentWrapper}" isLoading="{!v.isLoading}">
+            <!-- DATATABLE COMPONENT -->
+            <c:fe_DatatableLC table="{!v.componentWrapper.data}" onfilter="{!c.doHandleFilter}"/>
+        </c:FE_ComponentToolBox>
+    </div>
+
+</aura:component>

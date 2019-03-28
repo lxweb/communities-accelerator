@@ -32,8 +32,14 @@
 	                </div>
 
 	                <!-- Component Name -->
+                    
 	                <div class="componentNamePanel borderColorBlue hidden">
-	                    {#v.componentWrapper.meta.component.RecordType.DeveloperName + ' - ' + v.componentWrapper.meta.component.Name}
+                        <aura:if isTrue="{#v.componentWrapper.meta.component != null}">
+                            {#v.componentWrapper.meta.component.RecordType.DeveloperName + ' - ' + v.componentWrapper.meta.component.Name}
+                            <aura:set attribute="else">
+                                {#v.componentWrapper.meta.name}
+                            </aura:set>                                                        
+                        </aura:if>
 	                </div>
 
 	                <!-- Buttons -->

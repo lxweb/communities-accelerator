@@ -20,6 +20,7 @@
 				if (state === "SUCCESS") {
 					if(response.getReturnValue()){
 						component.set("v.currentUserName", response.getReturnValue().currentUserName);
+						component.set("v.bannerFrameTypes", response.getReturnValue().bannerFrameTypes);
 						component.set("v.contentData", response.getReturnValue().content);
 						component.set("v.visibilitySelectors", response.getReturnValue().visibilitySelectors);
 						if(response.getReturnValue().content.MediaElementAssignments__r != null){

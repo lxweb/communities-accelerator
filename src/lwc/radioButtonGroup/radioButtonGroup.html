@@ -1,0 +1,21 @@
+<template>
+    <fieldset class="slds-form-element radioBtnGroup">
+        <template if:true={cmptitle}>
+            <legend class="slds-form-element__legend slds-form-element__label">{cmptitle}</legend>
+        </template>
+        <template if:true={options}>
+            <div class="slds-form-element__control">
+                <div class="slds-radio_button-group">
+                    <template for:each={options} for:item=option>
+                        <span key={option.label} class="slds-button slds-radio_button" onclick={radioBtnGroupSelected}>
+                            <input name={option.name} type="radio" id={option.label} value={option.value} checked={option.checked}/>
+                            <label class="slds-radio_button__label" for="monday">
+                                <span class="slds-radio_faux">{option.label}</span>
+                            </label>
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </fieldset>
+</template>

@@ -640,7 +640,7 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
         <lookupFilter>
             <active>true</active>
             <filterItems>
-                <field>$Source.IsTemplate__c</field>
+                <field>Content__c.IsTemplate__c</field>
                 <operation>equals</operation>
                 <value>True</value>
             </filterItems>
