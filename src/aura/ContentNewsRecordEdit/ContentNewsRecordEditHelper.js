@@ -10,7 +10,6 @@
 			var state = response.getState();
 			if (state === "SUCCESS") {
 				var data = response.getReturnValue();
-				console.log("[ContentNewsRecordEditHelper.js][setContentData] data: " + JSON.stringify(data));
 				if(data){
 					component.set("v.contentData", 			data.content);
 					component.set("v.timeZone", 			data.timeZone);
@@ -21,7 +20,7 @@
 					}
 					helper.setLayoutOptions(component);
 				}else{
-					this.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
+					helper.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
 				}
 			} else if (state === "ERROR") {
 				let errors = response.getError();

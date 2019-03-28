@@ -21,12 +21,7 @@
 	                    <div class="slds-page-header__name">
 	                        <div class="slds-page-header__name-title">
 	                            <h1>
-	                                <span>
-	                                	<lightning:breadcrumbs>
-									        <lightning:breadcrumb label="{!$Label.c.ContentDetailContent}" />
-									        <lightning:breadcrumb label="{!v.contentData.RecordType.Name}" />
-									    </lightning:breadcrumbs>
-									</span>
+	                                <span>{!v.contentData.RecordType.Name + if(v.contentData.IsTemplate__c, ' ' + $Label.c.General_Template,'')}</span>
 									<aura:if isTrue="{!v.isNameEdit}">
 										<div onkeyup="{!c.onKeyUp}">
 											<lightning:input aura:id="name-input" name="input1" label="" value="{!v.temporaryName}" variant="label-hidden" maxlength="80" />
@@ -51,7 +46,9 @@
 						        <lightning:button label="{!$Label.c.ContentDetailSaveDraft}"  onclick="{! c.doSaveDraft}" />
 						    </aura:if>
 					        <lightning:button label="{!$Label.c.ContentDetailSchedule}" />
-					        <lightning:button label="{!$Label.c.ContentDetailPreview}" />
+		                	<aura:if isTrue="{!v.contentData.IsTemplate__c}">
+						        <lightning:button label="{!$Label.c.CreateFromTemplateButton}"  onclick="{! c.doCreateFromTemplate}" />
+						    </aura:if>
 					    </lightning:buttonGroup>
 	                </div>
 	                <aura:if isTrue="{!not((v.contentData.Status__c) == ($Label.c.ContentDetailDraft))}">

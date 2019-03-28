@@ -24,3 +24,7 @@
 .THIS .slds-card{
 	background: white;
 }
+
+.THIS.visibility-width{
+	width: 30em;
+}

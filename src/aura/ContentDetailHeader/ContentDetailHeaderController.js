@@ -11,6 +11,9 @@
     doUnpublishContent: function (component, event, helper) {
     	helper.unpublish(component, event, helper);
     },
+    doCreateFromTemplate: function (component, event, helper) {
+        //TODO
+    },
     onKeyUp: function (component, event, helper) {
         var isEnterKey = event.keyCode === 13;
         var isEscapeKey = event.keyCode === 27;
@@ -25,6 +28,9 @@
     editName: function (component, event, helper) {
         component.set("v.temporaryName", component.get("v.contentData").Name);
         component.set("v.isNameEdit", true);
-        console.log("isEdit: " + component.get("v.isNameEdit"));
+        setTimeout(function(){
+            var nameinput = component.find("name-input");
+            nameinput.focus();
+        }, 0);
     }
 })

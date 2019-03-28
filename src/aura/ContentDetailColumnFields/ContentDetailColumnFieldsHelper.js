@@ -23,5 +23,22 @@
         }
         component.set('v.objectWrapper', objectWrapper);
         event.getSource().set("v.value", true);
+    },
+    setSelectedValue: function(component, apiName, value){
+        var objectWrapper = component.get("v.objectWrapper");
+        for(var i=0; i<objectWrapper.length; i++){
+            if(objectWrapper[i].apiName === apiName){
+                var values = objectWrapper[i].values;
+                for(var h=0; h<values.length; h++){
+                    if(values[h].value === value){
+                        values[h].isSelected = true;
+                    }
+                    if(values[h].value != value && values[h].isSelected === true){
+                        values[h].isSelected = false;
+                    }
+                }
+            }
+        }
+        component.set("v.objectWrapper", objectWrapper);
     }
 })

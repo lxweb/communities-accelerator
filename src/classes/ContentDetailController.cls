@@ -1,156 +1,197 @@
 public with sharing class ContentDetailController {
-
     //DATA WRAPPER
     public class DataWrapper{
-        @auraEnabled public Content__c content;
+        @auraEnabled public Content__c                      content;
         @auraEnabled public List<VisibilitySelectorWrapper> visibilitySelectors;
-        @auraEnabled public String currentUserName;
+        @auraEnabled public String                          timeZone;
+        @AuraEnabled public SecurityWrapper                 security;
         
-        public DataWrapper(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String currentUserName){
-            this.content = content;
-            this.visibilitySelectors = visibilitySelectors;
-            this.currentUserName = currentUserName;
+        public DataWrapper(Content__c content, SecurityWrapper security, List<VisibilitySelectorWrapper> visibilitySelectors, String timeZone){
+            this.content                = content;
+            this.visibilitySelectors    = visibilitySelectors;
+            this.security               = security;
+            this.timeZone               = timeZone;
         }
     }
 
-    //SAVE RESPONSE WRAPPER
-    public class SaveResponseWrapper {
-        @auraEnabled public Boolean isSuccess;
-        @auraEnabled public String message;
+    //SECURITY WRAPPER
+    public class SecurityWrapper{
+        @AuraEnabled public Boolean     hasEditAccess;
+        @AuraEnabled public Boolean     hasCreateContentPermission;
+        @AuraEnabled public Boolean     hasRecordTypeAvailable;
 
-        public SaveResponseWrapper(Boolean isSuccess, String message){
-            this.isSuccess = isSuccess;
-            this.message = message;
+        public SecurityWrapper(Boolean hasEditAccess, Boolean hasCreateContentPermission, Boolean hasRecordTypeAvailable){
+            this.hasEditAccess              = hasEditAccess;
+            this.hasCreateContentPermission = hasCreateContentPermission;
+            this.hasRecordTypeAvailable     = hasRecordTypeAvailable;
         }
     }
 
     //VISIBILITY WRAPPER
     public class VisibilitySelectorWrapper {
-        @auraEnabled public String label;
-        @auraEnabled public String apiName;
-        @auraEnabled public Boolean isMultiPicklist;
-        @auraEnabled public List<VisibilityOptionWrapper> values;
+        @AuraEnabled public String                          label;
+        @AuraEnabled public String                          apiName;
+        @AuraEnabled public Boolean                         isMultiPicklist;
+        @AuraEnabled public List<VisibilityOptionWrapper>   values;
+        @AuraEnabled public String                          selectedValue;
+        @AuraEnabled public String                          placeholder;
 
-        public VisibilitySelectorWrapper(String label, String apiName, Boolean isMultiPicklist, List<VisibilityOptionWrapper> values){
-            this.label = label;
-            this.apiName = apiName;
-            this.isMultiPicklist = isMultiPicklist;
-            this.values = values;
+        public VisibilitySelectorWrapper(String label, String apiName, Boolean isMultiPicklist, List<VisibilityOptionWrapper> values, String selectedValue, String placeholder){
+            this.label              = label;
+            this.apiName            = apiName;
+            this.isMultiPicklist    = isMultiPicklist;
+            this.values             = values;
+            this.selectedValue      = selectedValue;
+            this.placeholder        = placeholder;
         }
     }
 
     //VISIBILITY OPTION WRAPPER
     public class VisibilityOptionWrapper {
-        @auraEnabled public String label;
-        @AuraEnabled public String id;
+        @AuraEnabled public String  label;
+        @AuraEnabled public String  value;
         @AuraEnabled public Boolean isSelected;
 
-        public VisibilityOptionWrapper(String label, string id, Boolean isSelected){
-            this.label = label;
-            this.id = id;
+        public VisibilityOptionWrapper(String label, string value, Boolean isSelected){
+            this.label      = label;
+            this.value      = value;
             this.isSelected = isSelected;
         }
     }
 
     @AuraEnabled
-    public static DataWrapper getDataExisting(String recordId){
-        //Gets the entire cluster branch of the current user.
-        Set<Id> clusterIds = getClusterBranch();
-        //Gets the data from the current content.
-        Content__c contentRecord = getContentData(recordId);
-        //Gets the tags related to the content record.
-        Set<Id> tagIds = getTagsFromContentRecord(contentRecord);
-        //Gets all the visibility options, with the current content options set as true.
-        List<VisibilitySelectorWrapper> visibilitySelectorList = new List<VisibilitySelectorWrapper>();
-        visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
-        visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
-        visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
+    public static DataWrapper getData(String recordId){
+        DataWrapper data;
+        try{
+            //Gets the entire cluster branch of the current user.
+            Set<Id> clusterIds = getClusterBranch();
+            //Gets the data from the current content.
+            Content__c contentRecord = getContentData(recordId);
+            //Gets the tags related to the content record.
+            Set<Id> tagIds = getTagsFromContentRecord(contentRecord);
+            //Gets all the visibility options, with the current content options set as true.
+            SecurityWrapper sw = new SecurityWrapper(hasEditAccess(recordId), hasCreateContentPermission(), hasRecordTypeAvailable(contentRecord.RecordType.DeveloperName));
+            List<VisibilitySelectorWrapper> visibilitySelectorList = new List<VisibilitySelectorWrapper>();
+            if(sw.hasEditAccess){
+                //visibilitySelectorList.add(getClusterSelectorWrapper(getSubordinateClusters(), contentRecord.cluster__c));
+                visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
+            }
+            visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, tagIds, sw.hasEditAccess));
+            data = new DataWrapper(contentRecord, sw, visibilitySelectorList, UserInfo.getTimeZone().getID());
+        } catch(Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
         return data;
     }
-    
-    @AuraEnabled
-    public static DataWrapper getDataNew(String contentRecordTypeId, String componentId){
-        //Gets the entire cluster branch of the current user.
-        Set<Id> clusterIds = getClusterBranch();
-        //Gets the data from the current content.
-        Content__c contentRecord = initializeContentValues(contentRecordTypeId);                                                                                                     
-        //A non allowed record type was passed as url parameter
-        if(contentRecord == null) return null;
-        //Gets all the visibility options.
-        List<VisibilitySelectorWrapper> visibilitySelectorList = new List<VisibilitySelectorWrapper>();
-        visibilitySelectorList.add(getClusterSelectorWrapper(clusterIds, contentRecord.cluster__c));
-        visibilitySelectorList.add(getCategorySelectorWrapper(clusterIds, contentRecord.category__c));
-        visibilitySelectorList.add(getTagSelectorWrapper(clusterIds, new Set<Id>()));
-        DataWrapper data = new DataWrapper(contentRecord, visibilitySelectorList, UserInfo.getName());
-        return data;
 
+    /*private static List<Cluster__c> getSubordinateClusters(){
+        List<ClusterUser__c> clusterUser = [SELECT Cluster__c FROM ClusterUser__c WHERE User__c = :UserInfo.getUserId() LIMIT 1];
+        if(!clusterUser.isEmpty()){
+            List<Cluster__c> clusters =  ClusterUtils.getClustersBelowList(clusterUser.get(0).cluster__c);
+            return clusters;
+        }
+        return null;
+    }*/
+
+    private static Set<Id> getTagsFromContentRecord(Content__c content){
+        Set<Id> tagIds = new Set<Id>();
+        for(TagAssignment__c tagAssignment : content.tags__r){
+            tagIds.add(tagAssignment.Tag__c);
+        }
+        return tagIds;
+    }
+/*
+    private static VisibilitySelectorWrapper getClusterSelectorWrapper(List<Cluster__c> clusters, String contentClusterId){
+        List<VisibilityOptionWrapper> clusterWrapperList = new List<VisibilityOptionWrapper>();
+        for(Cluster__c cluster : clusters){
+            clusterWrapperList.add(new VisibilityOptionWrapper(cluster.name, cluster.Id, (cluster.id == contentClusterId)));
+        }
+        return new VisibilitySelectorWrapper('Cluster', 'Cluster__c', false, clusterWrapperList);
+    }*/
+
+    private static Content__c getContentData(String recordId){
+        String contentFields = getContentFields();
+        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.Name,RecordType.DeveloperName,' 
+                                            + contentFields + ' FROM Content__c WHERE id = :recordId');
+        return content;
+    }
+
+    private static VisibilitySelectorWrapper getCategorySelectorWrapper(Set<Id> clusterIds, String contentCategoryId){
+        List<Category__c> categories = [SELECT id, name FROM Category__c WHERE Cluster__c IN :clusterIds];
+        List<VisibilityOptionWrapper> categoryWrapperList = new List<VisibilityOptionWrapper>();
+        String selectedValue = null;
+        for(Category__c category : categories){
+            VisibilityOptionWrapper categoryWrapper;  
+            if(category.id == contentCategoryId){
+                categoryWrapper = new VisibilityOptionWrapper(category.name, category.Id, true);
+                selectedValue = category.Id;
+            }else{
+                categoryWrapper = new VisibilityOptionWrapper(category.name, category.Id, false);
+            }
+            categoryWrapperList.add(categoryWrapper);
+        }
+        VisibilitySelectorWrapper categorySelectorWrapper = new VisibilitySelectorWrapper('Category', 'Category__c', false, categoryWrapperList, selectedValue, Label.ComboboxCategoryPlaceholder);
+        return categorySelectorWrapper;
+    }
+
+    private static VisibilitySelectorWrapper getTagSelectorWrapper(Set<Id> clusterIds, Set<Id> tagIds, Boolean hasEditAccess){
+        List<Tag__c> tags;
+        if(hasEditAccess)
+            tags = [SELECT id, name FROM Tag__c WHERE Cluster__c IN :clusterIds];
+        else
+            tags = [SELECT id, name FROM Tag__c WHERE Id IN :tagIds];
+
+        List<VisibilityOptionWrapper> tagWrapperList = new List<VisibilityOptionWrapper>();
+        for(Tag__c tag : tags){
+            VisibilityOptionWrapper tagWrapper;  
+            if(tagIds.contains(tag.Id)){
+                tagWrapper = new VisibilityOptionWrapper(tag.name, tag.Id, true);
+            }else{
+                tagWrapper = new VisibilityOptionWrapper(tag.name, tag.Id, false);
+            }
+            tagWrapperList.add(tagWrapper);
+        }
+        VisibilitySelectorWrapper categorySelectorWrapper = new VisibilitySelectorWrapper('Tags', 'Tag__c', true, tagWrapperList, null, Label.MultiComboboxTagPlaceholder);
+        return categorySelectorWrapper;
+    }
+
+    private static Set<Id> getClusterBranch(){
+        List<ClusterUser__c> clusterUser = [SELECT Cluster__c FROM ClusterUser__c WHERE User__c = :UserInfo.getUserId() LIMIT 1];
+        if(!clusterUser.isEmpty()){
+            Set<Id> clusters =  ClusterUtils.getEntireClusterBranch(clusterUser.get(0).cluster__c);
+            return clusters;
+        }
+        return null;
+    }
+
+    private static String getContentFields(){
+        String commaSeparatedFields = '';
+        Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
+        commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
+        return commaSeparatedFields;
     }
 
     @AuraEnabled
-    public static SaveResponseWrapper saveContent(String componentId, Content__c content, String visibilitySelectorsString, String mediaElementId, String action, List<TagAssignment__c> contentOldTagAssignments){
+    public static Boolean saveContent(Content__c content, String visibilitySelectorsString, String mediaElementId, String status, List<TagAssignment__c> contentOldTagAssignments){
         Savepoint sp = Database.setSavepoint();
         try{
             List<VisibilitySelectorWrapper> visibilitySelectors = (List<VisibilitySelectorWrapper>)JSON.deserialize(visibilitySelectorsString, List<VisibilitySelectorWrapper>.class);
-            content = updateContent(content, visibilitySelectors, action);
+            content = updateContent(content, visibilitySelectors, status);
             updateTagAssignments(content, getSelectorByApiName(visibilitySelectors, 'Tag__c'), contentOldTagAssignments);
             if(mediaElementId != null)
                 updateMediaElementAssignment(content, mediaElementId);
-            if(componentId != null)
-                insertContentAssignment(componentId, content);                                                                                                               
-            return new SaveResponseWrapper(true,content.Id);
+            return true;
         }catch(DMLException e){
             Database.rollback(sp);
             System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
             System.debug(e.getStackTraceString());
-            return new SaveResponseWrapper(false, e.getDMLMessage(0));
+            throw new AuraHandledException(e.getMessage());
         }catch(Exception e){
             Database.rollback(sp);
             System.debug(e.getMessage() + ' Error during content upsert process, rolling back');
             System.debug(e.getStackTraceString());
-            return new SaveResponseWrapper(false, label.NewsContentDetailError);
+            throw new AuraHandledException(label.NewsContentDetailError);
         }        
-    }
-
-    private static void insertContentAssignment(String componentId, Content__c content){
-        Component__c component = [SELECT Id, dataSource__c FROM Component__c WHERE Id =: componentId];
-        String dataSource = component != null ? component.dataSource__c : null;
-        if(content != null && dataSource == 'ManualAssignment'){
-            ContentAssignment__c contentAssignment = new ContentAssignment__c(Component__c = componentId, Content__c = content.Id);
-            insert contentAssignment;
-        }
-    }
-
-    private static void updateTagAssignments(Content__c content, VisibilitySelectorWrapper tagVisibility, List<TagAssignment__c> contentOldTagAssignments){
-        Map<String, String> tagToTagAssignment = new Map<String, String>();
-        List<TagAssignment__c> tagAssignmentsToDelete = new List<TagAssignment__c>();
-        List<TagAssignment__c> tagAssignmentsToCreate = new List<tagAssignment__c>();
-        if(contentOldTagAssignments != null){
-            for(TagAssignment__c tagAssignment : contentOldTagAssignments){
-                tagToTagAssignment.put(tagAssignment.Tag__c, tagAssignment.Id);
-            }
-        }
-        
-        for(VisibilityOptionWrapper tagOption : tagVisibility.values){
-            if(tagOption.isSelected){
-                //If a new tag is being added to the content
-                if(tagToTagAssignment.get(tagOption.id) == null){
-                    tagAssignmentsToCreate.add(new TagAssignment__c(Content__c = content.id, Tag__c = tagOption.id));
-                }
-            }else{
-                //If a tag was removed from the content
-                if(tagToTagAssignment.get(tagOption.id) != null){
-                    tagAssignmentsToDelete.add(new TagAssignment__c(id=tagToTagAssignment.get(tagOption.id)));
-                }
-            }
-        }
-        if(!tagAssignmentsToCreate.isEmpty()){
-            insert tagAssignmentsToCreate;
-        }
-        if(!tagAssignmentsToDelete.isEmpty()){
-            delete tagAssignmentsToDelete;
-        }
-
     }
 
     private static void updateMediaElementAssignment(Content__c content, String mediaElementId){
@@ -178,107 +219,51 @@ public with sharing class ContentDetailController {
         }
     }
 
-    private static Content__c updateContent(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String action){
-        Id newContentCategory;
-        Id newContentCluster;
+    private static void updateTagAssignments(Content__c content, VisibilitySelectorWrapper tagVisibility, List<TagAssignment__c> contentOldTagAssignments){
+        Map<String, String> tagToTagAssignment = new Map<String, String>();
+        List<TagAssignment__c> tagAssignmentsToDelete = new List<TagAssignment__c>();
+        List<TagAssignment__c> tagAssignmentsToCreate = new List<tagAssignment__c>();
+        if(contentOldTagAssignments != null){
+            for(TagAssignment__c tagAssignment : contentOldTagAssignments){
+                tagToTagAssignment.put(tagAssignment.Tag__c, tagAssignment.Id);
+            }
+        }
+        
+        for(VisibilityOptionWrapper tagOption : tagVisibility.values){
+            if(tagOption.isSelected){
+                //If a new tag is being added to the content
+                if(tagToTagAssignment.get(tagOption.value) == null){
+                    tagAssignmentsToCreate.add(new TagAssignment__c(Content__c = content.id, Tag__c = tagOption.value));
+                }
+            }else{
+                //If a tag was removed from the content
+                if(tagToTagAssignment.get(tagOption.value) != null){
+                    tagAssignmentsToDelete.add(new TagAssignment__c(id=tagToTagAssignment.get(tagOption.value)));
+                }
+            }
+        }
+        if(!tagAssignmentsToCreate.isEmpty()){
+            insert tagAssignmentsToCreate;
+        }
+        if(!tagAssignmentsToDelete.isEmpty()){
+            delete tagAssignmentsToDelete;
+        }
+
+    }
+
+    private static Content__c updateContent(Content__c content, List<VisibilitySelectorWrapper> visibilitySelectors, String status){
         VisibilitySelectorWrapper categorySelector = getSelectorByApiName(visibilitySelectors, 'Category__c');
-        VisibilitySelectorWrapper clusterSelector = getSelectorByApiName(visibilitySelectors, 'Cluster__c');
+        System.debug('categorySelector: ' + JSON.serialize(categorySelector));
+        
         for(VisibilityOptionWrapper category : categorySelector.values){
             if(category.isSelected){
-                newContentCategory = category.id;
+                content.Category__c = category.value;
                 break;
             }
         }
-        for(VisibilityOptionWrapper cluster : clusterSelector.values){
-            if(cluster.isSelected){
-                newContentCluster = cluster.id;
-            }
-        }
-        content.Cluster__c = newContentCluster;
-        content.Category__c = newContentCategory;
-        content.Name = content.Title__c;
-        if(action == 'Publish'){
-            content.Status__c = 'Published';
-        }else if (action == 'UnPublish' || action == 'Draft'){
-            content.Status__c = 'Draft';
-        }
-        if(content.id == null)
-            insert content;
-        else
-            update content;
+        content.Status__c   = status;
+        update content;
         return content;
-    }
-
-    private static Set<Id> getClusterBranch(){
-        List<ClusterUser__c> clusterUser = [SELECT Cluster__c FROM ClusterUser__c WHERE User__c = :UserInfo.getUserId() LIMIT 1];
-        if(!clusterUser.isEmpty()){
-            Set<Id> clusters =  ClusterUtils.getEntireClusterBranch(clusterUser.get(0).cluster__c);
-            return clusters;
-        }
-        return null;
-    }
-
-    private static Content__c getContentData(String recordId){
-        String contentFields = getContentFields();
-        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.name,RecordType.developerName,' 
-                                            + contentFields + ' FROM Content__c WHERE id = :recordId');
-        return content;
-    }
-
-    private static Set<Id> getTagsFromContentRecord(Content__c content){
-        Set<Id> tagIds = new Set<Id>();
-        for(TagAssignment__c tagAssignment : content.tags__r){
-            tagIds.add(tagAssignment.Tag__c);
-        }
-        return tagIds;
-    }
-
-    private static VisibilitySelectorWrapper getClusterSelectorWrapper(Set<Id> clusterIds, String contentClusterId){
-        List<Cluster__c> clusters = [SELECT id, name FROM Cluster__c WHERE id IN :clusterIds];
-        List<VisibilityOptionWrapper> clusterWrapperList = new List<VisibilityOptionWrapper>();
-        for(Cluster__c cluster : clusters){
-            VisibilityOptionWrapper clusterWrapper;  
-            if(cluster.id == contentClusterId){
-                clusterWrapper = new VisibilityOptionWrapper(cluster.name, cluster.Id, true);
-            }else{
-                clusterWrapper = new VisibilityOptionWrapper(cluster.name, cluster.Id, false);
-            }
-            clusterWrapperList.add(clusterWrapper);
-        }
-        VisibilitySelectorWrapper clusterSelectorWrapper = new VisibilitySelectorWrapper('Cluster', 'Cluster__c', false, clusterWrapperList);
-        return clusterSelectorWrapper;
-    }
-
-    private static VisibilitySelectorWrapper getCategorySelectorWrapper(Set<Id> clusterIds, String contentCategoryId){
-        List<Category__c> categories = [SELECT id, name FROM Category__c WHERE Cluster__c IN :clusterIds];
-        List<VisibilityOptionWrapper> categoryWrapperList = new List<VisibilityOptionWrapper>();
-        for(Category__c category : categories){
-            VisibilityOptionWrapper categoryWrapper;  
-            if(category.id == contentCategoryId){
-                categoryWrapper = new VisibilityOptionWrapper(category.name, category.Id, true);
-            }else{
-                categoryWrapper = new VisibilityOptionWrapper(category.name, category.Id, false);
-            }
-            categoryWrapperList.add(categoryWrapper);
-        }
-        VisibilitySelectorWrapper categorySelectorWrapper = new VisibilitySelectorWrapper('Category', 'Category__c', false, categoryWrapperList);
-        return categorySelectorWrapper;
-    }
-
-    private static VisibilitySelectorWrapper getTagSelectorWrapper(Set<Id> clusterIds, Set<Id> tagIds){
-        List<Tag__c> tags = [SELECT id, name FROM Tag__c WHERE Cluster__c IN :clusterIds];
-        List<VisibilityOptionWrapper> tagWrapperList = new List<VisibilityOptionWrapper>();
-        for(Tag__c tag : tags){
-            VisibilityOptionWrapper tagWrapper;  
-            if(tagIds.contains(tag.Id)){
-                tagWrapper = new VisibilityOptionWrapper(tag.name, tag.Id, true);
-            }else{
-                tagWrapper = new VisibilityOptionWrapper(tag.name, tag.Id, false);
-            }
-            tagWrapperList.add(tagWrapper);
-        }
-        VisibilitySelectorWrapper categorySelectorWrapper = new VisibilitySelectorWrapper('Tags', 'Tag__c', true, tagWrapperList);
-        return categorySelectorWrapper;
     }
 
     private static VisibilitySelectorWrapper getSelectorByApiName(List<VisibilitySelectorWrapper> visibilitySelectorList, String apiName){
@@ -290,18 +275,19 @@ public with sharing class ContentDetailController {
         return null;
     }
 
-    private static Content__c initializeContentValues(Id recordTypeId){
-        Content__c content = new Content__c();
-        RecordType rt = [SELECT id, name, developerName FROM RecordType WHERE Id = :recordTypeId];
-        content.recordTypeId = recordTypeId;
-        content.recordType = rt;
-        return content;
+    //SECURITY METHODS
+
+    private static Boolean hasCreateContentPermission(){
+        return Schema.sObjectType.Content__c.isCreateable();
     }
 
-    private static String getContentFields(){
-        String commaSeparatedFields = '';
-        Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
-        commaSeparatedFields = String.join(new List<String>(fieldNames), ',');
-        return commaSeparatedFields;
+    private static Boolean hasEditAccess(String recordId){
+        UserRecordAccess ura = [SELECT RecordId, HasEditAccess FROM UserRecordAccess WHERE UserId = :UserInfo.getUserId() AND RecordId = :recordId];
+        return ura.HasEditAccess;
     }
+
+    private static Boolean hasRecordTypeAvailable(String recordTypeDeveloperName){
+        return Schema.SObjectType.Content__c.getRecordTypeInfosByDeveloperName().get(recordTypeDeveloperName).isAvailable();
+    }
+
 }
