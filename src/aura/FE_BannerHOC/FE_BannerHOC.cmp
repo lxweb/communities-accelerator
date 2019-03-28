@@ -16,7 +16,7 @@
     <!-- MAIN COMPONENT -->
     <div aura:id="cg_component">
         <aura:if isTrue="{!$Browser.isPhone}">
-            <!--c:banner bannerData="{!v.elements}"/-->
+            <c:banner bannerData="{!v.elements}"/>
             <aura:set attribute="else">
                 <!-- TOOL BOX COMPONENT -->
                 <c:FE_ComponentToolBox componentType="Banner" componentExternalId="{!v.componentExternalId}" componentWrapper="{!v.componentWrapper}" isLoading="{!v.isLoading}">

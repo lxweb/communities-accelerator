@@ -260,7 +260,6 @@
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
-    <gender>Feminine</gender>
     <label>Datatable</label>
     <listViews>
         <fullName>All</fullName>

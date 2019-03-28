@@ -179,7 +179,6 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <gender>Feminine</gender>
     <label>Datatable Action</label>
     <listViews>
         <fullName>GlobalActions</fullName>
