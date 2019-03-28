@@ -12,7 +12,7 @@ public with sharing class FE_DynamicPicklistDatatable extends VisualEditor.Dynam
 		picklistValues.addRow(nullValue); 
 
 		List<Datatable__c> idsToDisplay = [SELECT Name, ExternalId__c FROM Datatable__c];
-		for(Component__c cIds : idsToDisplay){
+		for(Datatable__c cIds : idsToDisplay){
 			picklistValues.addRow(new VisualEditor.DataRow(cIds.Name,cIds.ExternalId__c));
 		}
 		return picklistValues;
