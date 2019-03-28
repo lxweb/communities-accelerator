@@ -1,7 +1,7 @@
 public with sharing class FE_AdvanceContentController extends FE_ComponentManager{
     
     @auraEnabled
-    public static ComponentWrapper getComponentWrapper(String componentExternalId, String clusterId, String device){
+    public static ComponentWrapper getComponentWrapper(String componentExternalId, String clusterId, String device, String navigationUrl){
         FE_AdvanceContentController ctrl = new FE_AdvanceContentController();
         ctrl.customPermissionEdit = 'AdvanceContent Edit Frame';
         ctrl.customPermissionView = 'AdvanceContent View Frame';
@@ -9,7 +9,7 @@ public with sharing class FE_AdvanceContentController extends FE_ComponentManage
         ctrl.componentExternalId = componentExternalId;
         ctrl.clusterId = clusterId;
         ctrl.device = device;
-
+        ctrl.navigationUrl = navigationUrl;
         return ctrl.getCW();
     }
 
