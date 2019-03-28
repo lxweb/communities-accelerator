@@ -23,10 +23,14 @@ private class FE_BannerControllerTest {
 		contentList[0].BannerFrameType__c = 'Hero';
 		contentList[0].OverlayQuadrant__c = 'Middle-Left';
 		update contentList;
+        
+        //Navigation Record
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
 
 		// When
 		Test.startTest();
-		FE_ComponentManager.ComponentWrapper componentWr = FE_BannerController.getComponentWrapper(componentList[0].ExternalId__c, componentList[0].Cluster__c, 'Desktop');
+		FE_ComponentManager.ComponentWrapper componentWr = FE_BannerController.getComponentWrapper(componentList[0].ExternalId__c, componentList[0].Cluster__c, 'Desktop','s/'+nav.Url__c);
 		Test.stopTest();
 
 		// Then
