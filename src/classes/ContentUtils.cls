@@ -29,7 +29,8 @@ public without sharing virtual class ContentUtils {
 
         //SELECT
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';
-
+        query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
+        
         //FROM
         query += 'FROM Content__c ';
 
@@ -77,6 +78,7 @@ public without sharing virtual class ContentUtils {
                     query += 'AND (EventEndDate__c >: dateAndTime) ';
                 }
             }
+            query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
         }
 
         //ORDER
