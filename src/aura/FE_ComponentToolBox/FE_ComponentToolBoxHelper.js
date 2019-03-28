@@ -3,7 +3,7 @@
 		var sfDomain = component.get('v.salesforceDomain');
 		var componentId = component.get('v.componentWrapper.meta.component.Id');
 		var metaComponentId = component.get('v.componentWrapper.meta.objectId');
-		//alert(metaComponentId);
+
 		var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/';
 		
 		if(componentId != null){
@@ -26,12 +26,12 @@
 	},
 	
 	newContent : function(component, event, helper) {		
-		var componentD = component.get('v.componentWrapper.meta.component.Id');
+		var componentD = component.get('v.componentWrapper.meta.component');
+        var navigationId = component.get('v.componentWrapper.meta.navId');
 		var sfDomain = component.get('v.salesforceDomain');
 		var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
-		
 		if(componentD.RecordType.Id != null){
-			url = url + '?RecordTypeId=' + componentD.RecordType.Id + '&ComponentId=' + componentD.Id;
+			url = url + '?RecordTypeId=' + componentD.RecordType.Id + '&ComponentId=' + componentD.Id + '&NavigationId=' + navigationId;
 		}
 
 		window.open(url);
@@ -39,15 +39,14 @@
 
 	showHideEditFrame : function(component, helper, show) {
 		var componentId = component.get('v.componentWrapper.meta.component.Id');
-		var metaComponentId = component.get('v.componentWrapper.meta.objectId');
-		var idDom='';
+		var metaComponentId = component.get('v.componentWrapper.objectId');
+		var idDom;
 		if(componentId != null){
 			idDom = componentId;			
 		}
 		if(metaComponentId != null){
 			idDom += metaComponentId;
 		}
- 
 		
 		var mainPanel = document.getElementById(idDom);
 		var divComponentNamePanel = mainPanel.getElementsByClassName('componentNamePanel')[0];

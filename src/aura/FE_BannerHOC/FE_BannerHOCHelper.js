@@ -4,6 +4,8 @@
 		var componentExternalId = component.get("v.componentExternalId");
         var device = $A.get("$Browser.formFactor");
         
+        var navUrl = window.location.pathname;
+        
         if(cw == null){
             component.set("v.isLoading", true);
             var clusterCookie = helper.getCookie("CG_clusterId");
@@ -12,7 +14,8 @@
             action.setParams({
                 componentExternalId: componentExternalId,
                 clusterId: clusterCookie,
-                device: device
+                device: device,
+                navigationUrl: navUrl
             });
 
             action.setCallback(this, function(f) {

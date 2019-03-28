@@ -5,6 +5,7 @@ public without sharing virtual class FE_ComponentManager {
     public String clusterId;
     public String device;
     public String componentId;
+    public String navigationUrl;
 
     //Base atributes
     public Set<String> defaultComponentFieldSet;
@@ -32,7 +33,7 @@ public without sharing virtual class FE_ComponentManager {
     public virtual class MetaWrapper{
         @auraEnabled public Component__c component;
         @auraEnabled public String objectId;
-        @auraEnabled public String name;
+        @auraEnabled public String navId;
     }
     
     public virtual class DataWrapper{}
@@ -86,7 +87,7 @@ public without sharing virtual class FE_ComponentManager {
         defaultComponentFieldSet.add('PageSize__c');
         defaultComponentFieldSet.addAll(componentFieldSet);
         mw.component = ComponentUtils.getComponent(componentExternalId, defaultComponentFieldSet, device);
-
+        mw.navId = GeneralUtils.getNavigationId(navigationUrl);
         return mw;
     }
 
@@ -94,5 +95,8 @@ public without sharing virtual class FE_ComponentManager {
         DataWrapper cw = new DataWrapper();
         return cw;
     }
+    
+    
+
 
 }

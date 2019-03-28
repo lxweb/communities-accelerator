@@ -230,4 +230,15 @@ public class GeneralUtils{
         return fieldsPresent.contains(fieldName);
     }
     
+    
+    public static String getNavigationId(String navigationUrl) {
+        if (String.isNotBlank(navigationUrl)){
+            String url = navigationUrl.split('/')[navigationUrl.split('/').size()-1];
+            Navigation__c nav = [SELECT Id From Navigation__c WHERE Url__c =: url]; 
+            if (nav != null){
+                return nav.Id;
+            }            
+        }       
+        return ''; 
+	}    
 }
