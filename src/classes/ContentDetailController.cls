@@ -204,7 +204,9 @@ public with sharing class ContentDetailController {
         }
         content.Cluster__c = newContentCluster;
         content.Category__c = newContentCategory;
-        content.Name = content.Title__c;
+        if(content.Name == null){
+            content.Name = content.Title__c;
+        }
         content.Body__c = urlToExternalId(content.Body__c);
         if(action == 'Publish'){
             content.Status__c = 'Published';
