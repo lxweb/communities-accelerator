@@ -35,7 +35,7 @@
 		$A.enqueueAction(action);
 	},
 
-	upsertContent : function(component, status){
+	updateContent : function(component, status){
 		var helper				= this;
 		var content 			= component.get('v.contentData');
 		var previousStatus		= content.Status__c;
