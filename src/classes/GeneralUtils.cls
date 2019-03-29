@@ -233,12 +233,12 @@ public class GeneralUtils{
     
     public static String getNavigationId(String navigationUrl) {
         if (String.isNotBlank(navigationUrl)){
-            String url = navigationUrl.split('/')[navigationUrl.split('/').size()-1];
-            Navigation__c nav = [SELECT Id From Navigation__c WHERE Url__c =: url]; 
-            if (nav != null){
-                return nav.Id;
+            String url = navigationUrl.split('/')[navigationUrl.split('/').size()-1];   
+            List<Navigation__c> nav = [SELECT Id From Navigation__c WHERE Url__c =: url LIMIT 1]; 
+            if (nav.size() > 0){
+                return nav[0].Id;
             }            
         }       
         return ''; 
-	}    
+    }    
 }
