@@ -129,6 +129,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
                     this.navigateToWebPage("/" + this.result.message);
                 }else{
                     this.errorMessage = this.result.message;
+			this.showToast();
                 }
             })
             .catch( err => {
