@@ -227,10 +227,9 @@ private class GeneralUtilsTest {
 		System.assertNotEquals(result.size(), 0);
 	}
     
-     @isTest
-	static void getNavigationIdTest() {
+   @isTest
+	static void getNavigationIdWhitExistingRecordTest() {
 		// Given 
-		//Navigation Record
         Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
         insert nav;
 
@@ -240,7 +239,57 @@ private class GeneralUtilsTest {
 		test.stopTest();
 
 		// Then
-		System.assertNotEquals(navId, null);
+		System.assertEquals(navId, nav.id);
+
+
+	}
+
+	  @isTest
+	static void getNavigationIdWhitOutExistingRecordTest() {
+		// Given 
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('/s/testNav');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
+
+
+	}
+
+		@isTest
+	static void getNavigationIdBlankUrlTest() {
+		// Given 
+		//Navigation Record
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
+
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
 	}
 	
+		@isTest
+	static void getNavigationIdWrongUrlTest() {
+		// Given 
+		//Navigation Record
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
+
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('wrongTestNav');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
+	}
 }

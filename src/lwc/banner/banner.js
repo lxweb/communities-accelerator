@@ -73,10 +73,10 @@ export default class Banner extends LightningElement {
         
     }
 
-    handleswipe(isrightswipe){
-        if (isrightswipe)
+    handleswipe(){
+        if (this.swipedir === 'right'){
             this.next();
-        else{
+        }else{
             this.previous();
         }
     }
