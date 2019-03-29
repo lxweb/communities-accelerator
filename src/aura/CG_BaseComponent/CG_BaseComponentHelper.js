@@ -44,7 +44,7 @@
 							var recordType = cWrapper.component.RecordType.DeveloperName;
 							if(recordType === 'EventDetail' || recordType === 'NewsDetail'){
 		                        var details = {};
-		                        details.type = type === 'EventDetail' ? 'Event' : 'News';
+		                        details.type = recordType === 'EventDetail' ? 'Event' : 'News';
 								if(cWrapper.contentWrapper.length > 0){
 			                        var content = cWrapper.contentWrapper[0].content;
 			                        details.date = content.EventStartDate__c;
