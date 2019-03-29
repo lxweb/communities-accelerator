@@ -37,6 +37,13 @@ public with sharing class ContentDetailHeaderController {
     	update c;
         return c.Name;
     }
+
+    @AuraEnabled
+    public static String setStatus(String recordId, String status){
+        Content__c c = new Content__c(Id=recordId, Status__c=status);
+        update c;
+        return c.Status__c;
+    }
     
     @AuraEnabled
     public static String createFromTemplate(String recordId){
@@ -46,12 +53,6 @@ public with sharing class ContentDetailHeaderController {
     private static Content__c getContentData(String recordId){
         Content__c content = [SELECT Id, Name, Cluster__r.Name, Status__c, LastModifiedDate, IsTemplate__c, CreatedBy.Name, RecordType.Name, RecordType.DeveloperName FROM Content__c WHERE id = :recordId];
         return content;
-    }
-
-    private static String setContentStatus(String recordId, String status){
-        Content__c c = new Content__c(Id=recordId, Status__c=status);
-        update c;
-        return c.Status__c;
     }
 
     private static Boolean hasCreateContentPermission(){
