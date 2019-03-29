@@ -582,6 +582,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Content__c.BannerFrameType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Content__c.ButtonLabel__c</field>
         <readable>true</readable>
     </fieldPermissions>
