@@ -19,6 +19,7 @@
 						component.set('v.imageUrl', data.content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c);
 					}
 					helper.setLayoutOptions(component);
+					component.find("richTextContainer").setContentBody();
 				}else{
 					helper.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
 				}
