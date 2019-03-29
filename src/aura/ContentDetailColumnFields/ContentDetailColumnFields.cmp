@@ -4,28 +4,20 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-	<div class="slds-card">
-		<header class="slds-card_header"> 
-			<h1>Visibility</h1>
-		</header>
-		<aura:iteration items="{!v.objectWrapper}" var="data" indexVar="index">
-			<!--Cluster-->
-				<aura:if isTrue="{!data.isMultiPicklist}">
-					<!--checkbox-->
-						<br/>
-						<h1>{!data.label}</h1>
-				        <aura:iteration items="{!data.values}" var="option">
-				            <ui:inputCheckbox name="{!index}" label="{!option.label}" value="{!option.isSelected}" aura:id="{!data.apiName}" />
-				        </aura:iteration>
-			    	<aura:set attribute="else">
-				    	<!--radioButton-->
-				    	<br/>
-				    	<h1>{!data.label}</h1>
-				        <aura:iteration items="{!data.values}" var="option">
-				            <ui:inputRadio name="{!index}" label="{!option.label}" value="{!option.isSelected}" aura:id="{!data.apiName}" change="{!c.onRadio}"/>
-				        </aura:iteration>
-				    </aura:set>
-				</aura:if>
-		</aura:iteration>
+	<div class="slds-p-around_medium visibility-width">
+		<div class="slds-text-title_caps section-title">Visibility</div>
+		<div class="slds-grid slds-grid_vertical">
+			<aura:iteration items="{!v.objectWrapper}" var="data" indexVar="index">
+				<div class="slds-col slds-p-top_small">
+				<!--Cluster-->
+					<aura:if isTrue="{!data.isMultiPicklist}">
+						<c:MultiSelectCombobox label="{!data.label}" options="{!data.values}" placeholder="{!data.placeholder}" oneItemSelectedText="{!$Label.c.MultiComboboxOneTagSelected}" moreItemsSelectedText="{!$Label.c.MultiComboboxMoreTagsSelected}"/>
+				    	<aura:set attribute="else">
+					    	<lightning:combobox name="{!data.apiName}" label="{!data.label}" value="{!data.selectedValue}" placeholder="{!data.placeholder}" options="{! data.values }" onchange="{! c.onChange }"/>
+					    </aura:set>
+					</aura:if>
+				</div>
+			</aura:iteration>
+		</div>
 	</div>	
 </aura:component>

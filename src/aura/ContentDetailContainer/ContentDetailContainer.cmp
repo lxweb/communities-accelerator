@@ -2,7 +2,7 @@
     
     <!-- HANDLERS -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-    <aura:handler name="upsertContentsEvent" event="c:upsertContentsEvent" action="{!c.handleUpsertEvent}"/>
+    <aura:handler event="c:upsertContentsEvent" action="{!c.handleUpsertEvent}"/>
     <aura:handler name="URLEvent" event="c:MediaElementSearcherEvent" action="{!c.handleMediaElementEvent}"/>
     <!-- ATTRIBUTES -->
     <aura:attribute name="recordId" type="String" />
@@ -11,6 +11,7 @@
     <aura:attribute name="currentUserName" type="String" />
     <aura:attribute name="mediaElementId" type="String" />
     <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="timeZone"             type="String" />
     <aura:attribute name="bannerFrameTypes" type="List" />
 
     <div class="container">
@@ -23,44 +24,28 @@
                 </lightning:card>
             </div>
             <div class="slds-col slds-m-left_x-small" >
-                <div class="slds-grid slds-grid_vertical">
-                    <div class="slds-col slds-m-bottom_x-small">
-                        <lightning:card >
-                            <aura:set attribute="title">
-                                <span>
-                                    <aura:if isTrue="{!v.contentData}">
-                                        <c:ContentDetailHeader contentData="{!v.contentData}" currentUserName="{!v.currentUserName}"/>
-                                    </aura:if>
-                                </span>
-                            </aura:set>
-                        </lightning:card>
-                    </div>
-                    <div class="slds-col slds-m-top_x-small" >
-                        <lightning:card >
-                            <aura:set attribute="title">
-                                <aura:if isTrue="{!v.contentData}">
-                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'News'}">
-                                        <c:ContentNewsRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
-                                    </aura:if>
-                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Event'}">
-                                        <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
-                                    </aura:if>                                    
-                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Banner'}">
-                                        <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" bannerFrameTypes="{!v.bannerFrameTypes}"/>
-                                    </aura:if>       
-                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'AdvanceContent'}">
-                                        <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
-                                    </aura:if>  
-                                    <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'FAQ'}">
-                                        <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
-                                    </aura:if>                                                                          
-                                </aura:if>
-                            </aura:set>
-                        </lightning:card>                        
-                    </div>
-                </div>
+                <lightning:card >
+                    <aura:set attribute="title">
+                        <aura:if isTrue="{!v.contentData}">
+                            <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'News'}">
+                                <c:ContentNewsRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
+                            </aura:if>
+                            <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Event'}">
+                                <c:ContentEventRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
+                            </aura:if>                                    
+                            <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'Banner'}">
+                                <c:ContentBannerRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}" bannerFrameTypes="{!v.bannerFrameTypes}"/>
+                            </aura:if>       
+                            <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'AdvanceContent'}">
+                                <c:ContentAdvanceContentRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
+                            </aura:if>  
+                            <aura:if isTrue="{!v.contentData.RecordType.DeveloperName == 'FAQ'}">
+                                <c:ContentFAQRecordEdit imageUrl="{!v.imageUrl}" contentData="{!v.contentData}"/>
+                            </aura:if>                                                                          
+                        </aura:if>
+                    </aura:set>
+                </lightning:card>                        
             </div>
         </div>
     </div>
-    
 </aura:component>

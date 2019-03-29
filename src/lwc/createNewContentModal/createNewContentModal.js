@@ -113,7 +113,6 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     onNewRecord(){
         if(this.recordNameValue){
             this.setRecord();
-            this.showHideModal();
         }else{
             this.errorMessage = this.requiredFieldMessage;
             this.showToast();
@@ -126,9 +125,11 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
             .then(result => {
                 this.result = JSON.parse(JSON.stringify(result));
                 if(result.isSuccess){
+                    this.showHideModal();
                     this.navigateToWebPage("/" + this.result.message);
                 }else{
                     this.errorMessage = this.result.message;
+			this.showToast();
                 }
             })
             .catch( err => {
@@ -169,7 +170,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         const event = new ShowToastEvent({
             message: this.errorMessage,
             variant: "error",
-            mode: "pester"
+            mode: "sticky"
         });
         this.dispatchEvent(event);
     }

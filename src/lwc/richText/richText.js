@@ -2,7 +2,9 @@ import { LightningElement, api, wire, track } from 'lwc';
 import replaceExternalIdsWithURLs from  '@salesforce/apex/RichTextController.replaceExternalIdsWithURLs';
 import replaceURLsWithExternalIds from  '@salesforce/apex/RichTextController.replaceURLsWithExternalIds';
 export default class CustomRichText extends LightningElement {
-  
+
+    @api label;
+
     @api handleReceiveUrl(URL){
         // Receive URL from Lightning Component (container).
         var Rich = this.template.querySelector('lightning-input-rich-text');

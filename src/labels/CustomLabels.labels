@@ -225,6 +225,46 @@
         <value>To see this content in the component, the following tags should be assigned:</value>
     </labels>
     <labels>
+        <fullName>MultiComboboxTagPlaceholder</fullName>
+        <categories>ContentDetailController.apxc</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MultiComboboxTagPlaceholder</shortDescription>
+        <value>Select tags...</value>
+    </labels>
+    <labels>
+        <fullName>CreateFromTemplateButton</fullName>
+        <categories>Content Button</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CreateFromTemplateButton</shortDescription>
+        <value>Create from template</value>
+    </labels>
+    <labels>
+        <fullName>ComboboxCategoryPlaceholder</fullName>
+        <categories>ContentDetailController.apxc</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ComboboxCategoryPlaceholder</shortDescription>
+        <value>Select a category...</value>
+    </labels>
+    <labels>
+        <fullName>MultiComboboxOneTagSelected</fullName>
+        <categories>Multi Select Combobox</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text showed when only a tag is selected</shortDescription>
+        <value>{0} tag selected</value>
+    </labels>
+    <labels>
+        <fullName>MultiComboboxMoreTagsSelected</fullName>
+        <categories>Multi Select Combobox</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text showed when more tags are selected</shortDescription>
+        <value>{0} tags selected</value>
+    </labels>
+    <labels>
         <fullName>ComponentEmpty</fullName>
         <categories>CG_BaseComponent.cmp</categories>
         <language>en_US</language>
@@ -239,6 +279,46 @@
         <protected>true</protected>
         <shortDescription>ContentDetailContent</shortDescription>
         <value>CONTENT</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPublishMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailPublishMessage</shortDescription>
+        <value>{0} "{1}" was published.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailUnpublishMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailUnpublishMessage</shortDescription>
+        <value>{0} "{1}" was unpublished and saved as draft.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailDraftMessage</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailDraftMessage</shortDescription>
+        <value>{0} "{1}" was saved as draft.</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailSchedule</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailSchedule</shortDescription>
+        <value>Schedule</value>
+    </labels>
+    <labels>
+        <fullName>ContentDetailPreview</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ContentDetailPreview</shortDescription>
+        <value>Preview</value>
     </labels>
     <labels>
         <fullName>ContentDetailCreatedBy</fullName>
@@ -607,6 +687,14 @@
         <protected>false</protected>
         <shortDescription>Are you sure?</shortDescription>
         <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>General_Template</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Template</shortDescription>
+        <value>Template</value>
     </labels>
     <labels>
         <fullName>General_Cancel</fullName>
@@ -1206,6 +1294,14 @@
         <protected>false</protected>
         <shortDescription>NewsContentDetailTemplateDescription</shortDescription>
         <value>Template Description</value>
+    </labels>
+    <labels>
+        <fullName>ContentCreatedFromTemplate</fullName>
+        <categories>ContentDetailHeader.cmp</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentCreatedFromTemplate</shortDescription>
+        <value>A new Content was created based on {0} template</value>
     </labels>
     <labels>
         <fullName>EventContentDetailTemplateDescription</fullName>

@@ -25,7 +25,9 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
     }
 
     showActions(event){
-        event.currentTarget.parentElement.classList.toggle("slds-is-open");
+        if(!event.currentTarget.parentElement.classList.contains("slds-is-open")){
+            event.currentTarget.parentElement.classList.toggle("slds-is-open");
+        }
     }
 
     hideActions(){
@@ -42,12 +44,12 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
         
         this.hideActions();
 
-        if(child){
+		if(child){
             if(child.tagName === "SPAN"){
                 label = child.dataset.label;
                 id = child.dataset.id;
             }
-        }
+		}
 
         switch (label) {
             case this.viewLbl:

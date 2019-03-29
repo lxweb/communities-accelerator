@@ -1,7 +1,7 @@
 @isTest
-public with sharing class ContentDetailControllerTest {
-    
-    @testSetup
+public class ContentDetailHeaderControllerTest {
+
+	@testSetup
     static void generateCustomSettings(){
         MockupFactory.generateAcceleratorSetting();
         List<Cluster__c> clusterRoot = MockupFactory.createCluster('Cluster Root', '', 1, 'ClusterRoot');
@@ -24,21 +24,31 @@ public with sharing class ContentDetailControllerTest {
         MockupFactory.createCategoryAssignment(categories, components);
         update components;
     }
+    
+    @isTest
+    public static void getData(){
+        List<Content__c> contents = [SELECT id FROM Content__c];
+        ContentDetailHeaderController.getData(contents.get(0).Id);
+    }
+    
+    @isTest
+    public static void setName(){
+        List<Content__c> contents = [SELECT id FROM Content__c];
+        ContentDetailHeaderController.setName(contents.get(0).Id, 'New Name');
+    }
 
-    @isTest 
-    static void getDataTest(){
-        //Given
-        Component__c component = [SELECT id FROM Component__c LIMIT 1];
-        MediaElement__c me = [SELECT id FROM MediaElement__c LIMIT 1];
-        Content__c content = [SELECT id FROM Content__c LIMIT 1];
-        Tag__c tag = [SELECT id FROM Tag__c LIMIT 1];
-        insert new MediaElementAssignment__c(Content__c = content.id, MediaElement__c = me.id);
-        insert new TagAssignment__c(Content__c = content.id, Tag__c = tag.id);
-        ContentDetailController.DataWrapper dataWrapper= ContentDetailController.getData(content.Id);
-        //When
-        Boolean saveSuccess = ContentDetailController.saveContent(dataWrapper.content, JSON.serialize(dataWrapper.visibilitySelectors), me.id, 'Published', dataWrapper.content.Tags__r);
-        //Then
-        system.assert(saveSuccess);
+    @isTest
+    public static void setStatus(){
+        List<Content__c> contents = [SELECT id FROM Content__c];
+        ContentDetailHeaderController.setStatus(contents.get(0).Id, 'Published');
+    }
 
-    }    
+    @isTest
+    public static void createFromTemplate(){
+        List<Content__c> contents = [SELECT id FROM Content__c];
+        contents.get(0).IsTemplate__c = true;
+        contents.get(0).Status__c = 'Published';
+        update contents.get(0);
+        ContentDetailHeaderController.createFromTemplate(contents.get(0).Id);
+    }
 }
