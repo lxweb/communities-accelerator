@@ -306,15 +306,20 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
         <columns>RECORDTYPE</columns>
         <columns>ParentCluster__c</columns>
         <columns>DefaultLanguage__c</columns>
-        <columns>OWNER.ALIAS</columns>
-        <columns>OBJECT_ID</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <listViews>
         <fullName>Groups</fullName>
         <columns>NAME</columns>
-        <filterScope>Mine</filterScope>
+        <columns>ExternalId__c</columns>
+        <columns>ParentCluster__c</columns>
+        <columns>DefaultLanguage__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
@@ -325,7 +330,12 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
     <listViews>
         <fullName>Leafs</fullName>
         <columns>NAME</columns>
-        <filterScope>Mine</filterScope>
+        <columns>ExternalId__c</columns>
+        <columns>ParentCluster__c</columns>
+        <columns>DefaultLanguage__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
@@ -336,7 +346,13 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
     <listViews>
         <fullName>Roots</fullName>
         <columns>NAME</columns>
-        <filterScope>Mine</filterScope>
+        <columns>ExternalId__c</columns>
+        <columns>CommunityName__c</columns>
+        <columns>CommunityURL__c</columns>
+        <columns>DefaultLanguage__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
@@ -680,6 +696,7 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
     <recordTypes>
         <fullName>ClusterRoot</fullName>
         <active>true</active>
+        <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
         <description>Represents the highest level of the clustering tree or the only cluster applicable for a community. (Ex. Global)</description>
         <label>Cluster Root</label>
         <picklistValues>
@@ -845,17 +862,13 @@ if(ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.DeveloperName =
         <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
         <customTabListAdditionalFields>ParentCluster__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>DefaultLanguage__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>CommunityName__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>CommunityURL__c</customTabListAdditionalFields>
-        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UPDATEDBY_USER</customTabListAdditionalFields>
         <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
         <searchResultsAdditionalFields>ExternalId__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>ParentCluster__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>DefaultLanguage__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CommunityName__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CommunityURL__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UPDATEDBY_USER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LAST_UPDATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>

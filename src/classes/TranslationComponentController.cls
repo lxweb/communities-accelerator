@@ -1,4 +1,5 @@
 public with sharing class TranslationComponentController {
+    
 	public class RecordsWrapper{
 		@auraEnabled public String defaultLanguage;
 		@auraEnabled public List<Couple> language;
@@ -62,12 +63,12 @@ public with sharing class TranslationComponentController {
 			
 		}
 
-		if(GeneralUtils.isSafeObject(parentLookupName)) {
+		if(GeneralUtils.isSafeObject(parentLookupName, true)) {
 			Map<String,Schema.SObjectField> sobjectDescribeMap = Schema.getGlobalDescribe().get(parentLookupName).getDescribe().fields.getMap();
 			List<String> fieldNameList = fieldSet.deleteWhitespace().split(',');
 			
 			for(String fieldName : fieldNameList){
-				if(GeneralUtils.isSafeField(parentLookupName, fieldName)){
+				if(GeneralUtils.isSafeField(parentLookupName, fieldName, true)){
 					Schema.DescribeFieldResult fieldDescribe = sobjectDescribeMap.get(fieldName).getDescribe();
 					String typeField;
 
@@ -104,7 +105,7 @@ public with sharing class TranslationComponentController {
 			rw.dataObject[i].idCouple = '';
 		}
 		
-		if(GeneralUtils.isSafeObject(parentLookupName)) {
+		if(GeneralUtils.isSafeObject(parentLookupName, true)) {
 			language = String.escapeSingleQuotes(language);
 			recordId = String.escapeSingleQuotes(recordId);
 			
@@ -138,7 +139,7 @@ public with sharing class TranslationComponentController {
 		List<Translation__c> deleteTranslationList = new List<Translation__c>();
 		Map<String, Integer> mapPositionValues = new Map<String, Integer>();
 		
-		if(GeneralUtils.isSafeObject(parentLookupName)) {
+		if(GeneralUtils.isSafeObject(parentLookupName, true)) {
 			recordId = String.escapeSingleQuotes(recordId);
 			String nameCouple = (String) Database.query('SELECT Name FROM ' + parentLookupName + ' WHERE Id =: recordId')[0].get('Name');
 			nameCouple = GeneralUtils.getSubstring(nameCouple, 40);

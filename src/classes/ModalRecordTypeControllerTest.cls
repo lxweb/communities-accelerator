@@ -9,7 +9,7 @@ public with sharing class ModalRecordTypeControllerTest {
 	@isTest 
 	static void getRecordTypes() {
         MockupFactory.generateAcceleratorSetting();
-		ModalRecordTypeController.getRecordTypes('Content__c', new List<String>());
-		ModalRecordTypeController.getRecordTypes('Content__c', new List<String>{'Event','News'});
+		ModalRecordTypeController.getContentRecordTypes('Content__c');
+		ModalRecordTypeController.getTemplateRecordTypes('Content__c');
 	}
 }

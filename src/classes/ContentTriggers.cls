@@ -46,6 +46,7 @@ public with sharing class ContentTriggers extends TriggersHandler {
     //PA-177 CMA: Clustering: Apex Sharing
     public override void masterLoop_AfterInsert(SObject recNew) {
         addSharing((Content__c) recNew, null, true);
+        insertContentAssignment((Content__c) recNew);
     }
     public override void masterLoop_AfterUpdate(SObject recNew, SObject recOld) {
         addSharing((Content__c) recNew, (Content__c) recOld, true);
@@ -191,6 +192,16 @@ public with sharing class ContentTriggers extends TriggersHandler {
     List<String> deleteIdsList = new List<String>(); 
     private void setDeleteIdsList(Content__c recOld){
         deleteIdsList.add(recOld.Id);
+    }
+
+    private void insertContentAssignment(Content__c recNew){
+        if(recNew.StructureComponent__c != null){
+            Component__c component = [SELECT Id, DataSource__c FROM Component__c WHERE Id =: recNew.StructureComponent__c];
+            if(component.dataSource__c == 'ManualAssignment'){
+                ContentAssignment__c contentAssignment = new ContentAssignment__c(Component__c = recNew.StructureComponent__c, Content__c = recNew.Id);
+                insert contentAssignment;
+            }
+        }
     }
 
 }

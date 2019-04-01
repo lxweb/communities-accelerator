@@ -1,4 +1,8 @@
 ({
+    setContentBody: function(component, event) {
+        var body = component.get('v.contentBody');
+        component.find('customRich').setText(body);
+    },
   
 
     handleImageClicked: function(component, event) {

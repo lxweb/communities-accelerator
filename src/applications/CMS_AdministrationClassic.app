@@ -13,4 +13,5 @@
     <tabs>Menu__c</tabs>
     <tabs>Brand__c</tabs>
     <tabs>AudienceUser__c</tabs>
+    <tabs>Datatable__c</tabs>
 </CustomApplication>

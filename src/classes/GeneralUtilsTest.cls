@@ -1,5 +1,6 @@
 @isTest
 private class GeneralUtilsTest {
+    
 	@testSetup
     static void setupTest(){
     	String nameRecordType = 'Banner';
@@ -60,8 +61,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name');
-		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id');
+		Boolean result = GeneralUtils.isSafeField('Cluster__c', 'name', true);
+		Boolean result2 = GeneralUtils.isSafeField('Test__c', 'id', true);
 		Test.stopTest();
 
 		//Then
@@ -75,8 +76,8 @@ private class GeneralUtilsTest {
 
 		//When
 		Test.startTest();
-		Boolean result = GeneralUtils.isSafeObject('Cluster__c');
-		Boolean result2 = GeneralUtils.isSafeObject('Test__c');
+		Boolean result = GeneralUtils.isSafeObject('Cluster__c', true);
+		Boolean result2 = GeneralUtils.isSafeObject('Test__c', true);
 		Test.stopTest();
 
 		//Then
@@ -199,6 +200,99 @@ private class GeneralUtilsTest {
 		System.assertEquals(test3, res3);
 		System.assertEquals(test4, clusterC.ExternalId__c+'_'+res4.replaceAll('[^a-zA-Z0-9]', '_'));
 		System.assertEquals(test5, clusterC.ExternalId__c+'_'+res5.replaceAll('[^a-zA-Z0-9]', '_')+'_'+ dateString);
-	}	
+	}
+
+	@isTest
+	static void hasSObjectFieldTest() {
+		//Given
+		List<Cluster__c> clusterList = [SELECT Id FROM Cluster__c LIMIT 1];
+		//When
+		Test.startTest();
+		Boolean result = GeneralUtils.hasSObjectField('Id', clusterList[0]);
+		Boolean result2 = GeneralUtils.hasSObjectField('Name', clusterList[0]);
+		Test.stopTest();
+
+		//Then
+		System.assertEquals(result, true);
+		System.assertEquals(result2, false);
+	}
+
+	@isTest
+	static void getObjectFieldNamesTest() {
+		//Given
+
+		//When
+		Test.startTest();
+		Set<String> result = GeneralUtils.getObjectFieldNames('Cluster__c');
+		Test.stopTest();
+
+		//Then
+		System.assertNotEquals(result.size(), 0);
+	}
+    
+   @isTest
+	static void getNavigationIdWhitExistingRecordTest() {
+		// Given 
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('/s/testNav');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, nav.id);
+
+
+	}
+
+	  @isTest
+	static void getNavigationIdWhitOutExistingRecordTest() {
+		// Given 
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('/s/testNav');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
+
+
+	}
+
+		@isTest
+	static void getNavigationIdBlankUrlTest() {
+		// Given 
+		//Navigation Record
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
+
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
+	}
 	
+		@isTest
+	static void getNavigationIdWrongUrlTest() {
+		// Given 
+		//Navigation Record
+        Navigation__c nav = new Navigation__c(Name = 'NavTest', URL__c = 'testNav');
+        insert nav;
+
+
+		// When
+		test.startTest();
+		String navId = GeneralUtils.getNavigationId('wrongTestNav');
+		test.stopTest();
+
+		// Then
+		System.assertEquals(navId, '');
+	}
 }

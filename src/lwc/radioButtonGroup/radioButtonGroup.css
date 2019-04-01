@@ -1,0 +1,7 @@
+.radioBtnGroup {
+    padding-top: 47px;
+}
+.slds-form-element__control{
+    justify-content: center;
+    display: flex;
+}

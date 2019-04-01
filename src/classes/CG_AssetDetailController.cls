@@ -47,8 +47,9 @@ public with sharing class CG_AssetDetailController {
 **/
     @AuraEnabled
     public static ContentWrapper getRecord(Id contentId, String externalId){
-        Content__c content = getcontent(contentId);
+
         
+        Content__c content = getcontent(contentId);
         ContentWrapper contentWrapper = new ContentWrapper();
         if(content != null){
             contentWrapper.detailTitle = content.Title__c;
@@ -56,8 +57,6 @@ public with sharing class CG_AssetDetailController {
             contentWrapper.longDescription = content.Description__c;
             contentWrapper.tagsList = getTags(contentId, externalId);            
 
-            System.debug('DEBUG: content.RecordType.DeveloperName: '+content.RecordType.DeveloperName);
-            System.debug('DeveloperName: '+content.RecordType.DeveloperName);
             if(content.RecordType.DeveloperName == 'Recipe'){
 
                 contentWrapper.isRecipie = true;
@@ -106,6 +105,7 @@ public with sharing class CG_AssetDetailController {
                 contentWrapper.urlBrandLink = mediaMap.get('urlBrandLink');
 
             }else if(!content.MediaElementAssignments__r.isEmpty() && content.MediaElementAssignments__r[0].MediaElement__c != null){
+               
                 contentWrapper.mediaElementImageURL = content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c;
                 contentWrapper.mediaElementImageDocumentId = contentWrapper.mediaElementImageURL.right(18);
                 contentWrapper.disableAdd=false;
@@ -139,10 +139,12 @@ public with sharing class CG_AssetDetailController {
         try{
             //search for asset-details page
             //Ingredients__c, Instructions__c,
+ 
         	 content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c, 
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'assetImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
+          
 
             //search for assets page
             //Ingredients__c, Instructions__c,
@@ -152,7 +154,7 @@ public with sharing class CG_AssetDetailController {
                         FROM Content__c
                         WHERE Id =:contentId]; 
             }
-/* NO EXISTEN ESTOS RECORD TYPE
+
             //Ingredients__c, Instructions__c,
             if(content.RecordType.DeveloperName == 'Product'){
                 content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c,
@@ -161,14 +163,14 @@ public with sharing class CG_AssetDetailController {
                         WHERE Id =:contentId]; 
             }
 
-            //Ingredients__c, Instructions__c,
+        /*    //Ingredients__c, Instructions__c,
             if(content.RecordType.DeveloperName == 'Brand'){
                 content = [SELECT Id, RecordType.DeveloperName, Title__c, Description__c, URLRedirect__c,
                        (SELECT Id, MediaElement__c, Placement__c, MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE Placement__c = 'BrandImageLogo') //'BrandLogoImage')
                         FROM Content__c
                         WHERE Id =:contentId]; 
-            }
-*/
+            }*/
+
         }catch(exception e){}
 
         return content;     

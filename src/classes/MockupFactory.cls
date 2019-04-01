@@ -177,7 +177,7 @@ public class MockupFactory {
     //Create Component__c by RecordTypeName
     public static List<Component__c> createComponent(String nameRecordType, Integer quantity){
 
-        List<Component__c> componentList = createComponent(nameRecordType, quantity,null);
+        List<Component__c> componentList = createComponent(nameRecordType, quantity, null);
         
         return componentList;
     }
@@ -186,15 +186,15 @@ public class MockupFactory {
     public static List<Component__c> createComponent(String nameRecordType, Integer quantity, Cluster__c cluster){
         List<Component__c> componentList= new List<Component__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Component__c' AND Name =: nameRecordType LIMIT 1];
-        
-        if(cluster != null){
+
+        if(nameRecordType != 'Banner'){
+
             for(Integer i = 0; i < quantity; i++){
-                
                 componentList.add(new Component__c(Name = nameRecordType + ' ' + i,
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
                                         RecordTypeId = recordT.Id,
-                                        Cluster__c = cluster.Id,
+                                        Cluster__c = cluster == null ? null : cluster.Id,
                                         Status__c='Inactive'));
             }
 
@@ -204,7 +204,9 @@ public class MockupFactory {
                                         ExternalId__c = nameRecordType +'Component_' + i,
                                         Datasource__c = 'ManualAssignment',
                                         RecordTypeId = recordT.id,
-                                        Status__c='Inactive'));
+                                        Cluster__c = cluster == null ? null : cluster.Id,
+                                        Status__c='Inactive',
+                                        BannerFrameType__c='Hero'));
             }
         }
 
@@ -217,16 +219,47 @@ public class MockupFactory {
         List<Content__c> contentList = new List<Content__c>();
         RecordType recordT = [SELECT id FROM RecordType WHERE SobjectType = 'Content__c' AND Name =: nameRecordType LIMIT 1];
 
-        for(Integer i = 0; i < quantity; i++){
+        if (nameRecordType != 'Banner'){
+           for(Integer i = 0; i < quantity; i++){
             contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
                                     ExternalId__c = nameRecordType + 'Content_' + i,
                                     RecordTypeId = recordT.id,
                                     Cluster__c = clusterArg.id,
                                     Order__c = i+1,
                                     Status__c='Draft'));
+            } 
+        }
+        else
+        {
+            for(Integer i = 0; i < quantity; i++){
+            contentList.add(new Content__c(Name =nameRecordType + ' ' + i,
+                                    ExternalId__c = nameRecordType + 'Content_' + i,
+                                    RecordTypeId = recordT.id,
+                                    Cluster__c = clusterArg.id,
+                                    Order__c = i+1,
+                                    Status__c='Draft',
+                                    BannerFrameType__c='Hero'));
+            }       
         }
         insert contentList;
         return contentList;
+    }
+
+    //Create Banner Content__c related to a Component
+    public static Content__c createBannerContentRelatedToComponent(Cluster__c clusterArg, Component__c component){
+        RecordType recordT = [SELECT Id FROM RecordType WHERE SobjectType = 'Content__c' AND Name = 'Banner' LIMIT 1];
+        Content__c content = new Content__c(
+            Name = 'Banner',
+            ExternalId__c = 'BannerContent',
+            RecordTypeId = recordT.Id,
+            Cluster__c = clusterArg.Id,
+            Order__c = 1,
+            Status__c = 'Draft',
+            StructureComponent__c = component.Id,
+            BannerFrameType__c = 'Hero'
+        );
+        insert content;
+        return content;
     }
 
     //Create ContentAssignment__c by Content && Component
@@ -349,12 +382,14 @@ public class MockupFactory {
         return translationList;
     }
 
+ 
     public static List<Navigation__c>  createNavigation(String navName, String url, Integer quantity, Id clusterId){
         List<Navigation__c> navList = new List<Navigation__c>();
-        
+       
         for(Integer i = 0;i<quantity;i++){
-            navList.add( new Navigation__c(Name=navName+i, URL__c=url, Cluster__c=clusterId, Status__c='Inactive'));
+            navList.add(new Navigation__c(Name=navName+i, URL__c=url, Status__c='Inactive', Cluster__c=clusterId));
         }
+        
         insert navList;
 
         return navList;
@@ -487,5 +522,71 @@ public class MockupFactory {
         insert stepsList;
         return stepsList;
     }
+    
+    public static List<Datatable__c> createDatatables(String name, String externalId, String objectApiName, Integer quantity, Id clusterId) {
+        List<Datatable__c> datatablesToCreate = new List<Datatable__c>();
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            Datatable__c dat = new Datatable__c();
+            dat.Name = name + '_' + i;
+            dat.Cluster__c = clusterId;
+            dat.ExternalId__c = externalId + '_' + i;
+            dat.ObjectApiName__c = objectApiName;
+            dat.RecordsPerPage__c = 1;
+            dat.NumberOfColumns__c = '1';
+            
+            datatablesToCreate.add(dat);
+        }
+        
+        insert datatablesToCreate;
+        
+        return datatablesToCreate;
+    }
+    
+    public static List<DatatableElement__c> createDatatableElements(String name, String externalId, Integer quantity, Id datatableId) {
+        List<DatatableElement__c> datatableElementsToCreate = new List<DatatableElement__c>();
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            DatatableElement__c datElement = new DatatableElement__c();
+            datElement.Name = name + '_' + i;
+            datElement.ExternalId__c = name + '_' + i;
+            datElement.Datatable__c = datatableId;
+            datElement.FieldApiName__c ='Name';
+            datElement.Label__c = 'TestLabel';
+     
+            
+            datatableElementsToCreate.add(datElement);
+        }
+        
+        insert datatableElementsToCreate;
+        
+        return datatableElementsToCreate;
+    }
+    
+    public static List<DatatableAction__c> createDatatableActions(String name, String externalId, Integer quantity, Id datatableId, Id recordtypeId) {
+        List<DatatableAction__c> datatableActionsToCreate = new List<DatatableAction__c>();
+         
+        List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootClusterTest', null, 1, 'ClusterRoot');
+        
+        List<Navigation__c> nav = MockupFactory.createNavigation('NavTest','nav-test',1,clustersRoot[0].Id);
+        
+        for(Integer i = 0 ; i < quantity ; i ++) {
+            DatatableAction__c datAction = new DatatableAction__c();
+            datAction.Name = name + '_' + i;
+            datAction.Datatable__c = datatableId;
+            datAction.ExternalId__c = name + '_' + i;
+            datAction.RecordTypeId = recordtypeId;
+            datAction.Type__c = 'Navigation';
+            datAction.Label__c = 'Test';
+            datAction.DisplaySettings__c = 'Desktop';
+            datAction.Navigation__c = nav[0].Id;
+            
+            
+            datatableActionsToCreate.add(datAction);
+        }
+        
+        insert datatableActionsToCreate;
+        return datatableActionsToCreate;
+    }    
 
 }

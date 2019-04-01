@@ -1,0 +1,77 @@
+.card-header-title .slds-page-header__col-actions .slds-page-header__controls lightning-button-group .btn-header-new:first-child{
+    margin-right: 25px;
+}
+.card-header-title .btn-header-new{
+    background: #7f7f7f;
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    min-width: 130px;
+    border: none;
+}
+.card-header-title .h1-object-label{
+    color: #7f7f7f;
+    height: 40px;
+    font-weight: 300;
+}
+.card-header-title .h1-object-label span{
+    color: #7f7f7f;
+    font-weight: 300;
+    font-size: 25px;
+}
+.card-header-title.slds-page-header{
+    background: #d4d4d4;
+    border-radius: 0;
+    border: none;
+    margin-bottom: 15px;
+}
+.card-header-subtitle{
+    background: white;
+}
+.card-header-subtitle .slds-border_right{
+    border-color: #7F7F7F;
+}
+.card-header-subtitle .card-header-subtitle-filters{
+    border-bottom: 1px solid #7F7F7F;
+}
+.card-header-subtitle .div-input-search{
+    position: relative;
+}
+.card-header-subtitle .div-input-search lightning-icon{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+.card-header-subtitle .div-input-search input{
+    height: 35px;
+    width: 220px;
+    margin-right: 5px;
+    font-size: 15px;
+    padding-left: 5px;
+    padding-right: 20px;
+}
+.card-header-subtitle .div-input-search input:hover,.card-header-subtitle .div-input-search input:focus,.card-header-subtitle .div-input-search input:active{
+    outline: none;
+    box-shadow: none;
+}
+.card-header-subtitle .div-input-search input::-webkit-input-placeholder,.card-header-subtitle .div-input-search input::-moz-placeholder,.card-header-subtitle .div-input-search input:-ms-input-placeholder, .card-header-subtitle .div-input-search input:-moz-placeholder,.card-header-subtitle .div-input-search input::placeholder {
+    color: #7D7773;
+    font-size: 15px;
+}
+.card-header-subtitle .slds-text-title_caps{
+    color: #7F7F7F;
+    font-weight: 300;
+    font-size: 12px;
+}
+.card-header-subtitle .slds-text-value_caps{
+    color: #7F7F7F;
+    font-weight: 700;
+    font-size: 15px;
+}
+.slds-breadcrumb__item .slds-text-title_caps {
+    color: red;
+}
+.slds-breadcrumb__item .slds-text-title_caps:not(:first-child)::before {
+    position: relative;
+    margin: 0 3px;
+}

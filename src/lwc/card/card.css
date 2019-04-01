@@ -1,0 +1,122 @@
+.container-portrait {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin: 20px auto;
+  color: #C0C0C0;
+  width: 80%;
+  min-width: 300px;
+}
+.container-landscape {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin: 30px auto;
+  color: #C0C0C0;
+  width: 90%;
+  max-height: 200px;
+  min-width: 350px;
+}
+.container-info {
+  margin-left: 10px;
+}
+.header {
+  font-family: 'Roboto';
+  padding: 0 5px;
+}
+.head-event {
+  background-color: #333333;
+  color: #FDFDFD;
+  text-align: right;
+}
+.head-news {
+  color: #C0C0C0;
+}
+.title {
+  word-break: break-word;
+  font-family: 'Roboto';
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #333333;
+  max-height: 60px;
+  overflow: hidden;
+}
+.body {
+  max-height: 42px;
+  overflow: hidden;
+  font-weight: 400;
+}
+.body-portrait {
+  margin: 10px 0;
+}
+.body-landscape {
+  margin: 5px 0;
+  line-height: 19px;
+}
+.img-container-portrait {
+  width: 100vw;
+  height: 140px;
+  position: relative;
+  left: 50%;
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+.img-portrait {
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.footer {
+  padding: 23px 0 0 0;
+}
+.description {
+  font-weight: 400;
+}
+.desc-normal {
+  color: #C0C0C0;
+  line-height: 17px;
+}
+.desc-highlight {
+  color: #333333;
+  line-height: 17px;
+}
+.img-landscape {
+  height: 140px;
+  width: 100%;
+}
+.footer-landscape {
+  text-align: right;
+}
+.location-container {
+  display: inline-block;
+}
+.icon::before {
+  content: '';
+  float: left;
+  height: 1em;
+  width: 1em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  bottom: -1px;
+}
+.icon {
+  font-size: 1rem;
+}
+.icon.icon-2x {
+  font-size: 2rem;
+}
+.icon.icon-3x {
+  font-size: 3rem;
+}
+.icon.icon-4x {
+  font-size: 4rem;
+}
+.icon.icon-5x {
+  font-size: 5rem;
+}
+.location-icon::before {
+  background-image: url("sfsites/c/resource/Assets/Assets/Icons/location.svg");
+}

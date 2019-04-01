@@ -1,0 +1,12 @@
+.datatable .slds-card {
+  border: none;
+  border-bottom: 1px solid;
+  padding-top: 6px;
+  padding-bottom: 30px;
+}
+.datatable span {
+  font-weight: bold;
+}
+.datatable footer.slds-card__footer {
+  padding: 0;
+}

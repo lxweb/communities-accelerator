@@ -28,7 +28,7 @@
                         </div>
                         <div aura:id="div1"></div>
                         <div class="slds-modal__content slds-p-around--medium" onclick="{!c.doClusterChange}">
-                            <c:CG_ClusterSelector isBackend="true" componentId="{!v.recordId}" componentExternalId="{!v.clusterSelectorExternalId}"/>
+                            <c:FE_ClusterSelectorHOC isBackend="true" componentId="{!v.recordId}" componentExternalId="{!v.clusterSelectorExternalId}"/>
                         </div>
                         <footer class="slds-modal__footer">     
                             <div class="slds-align_absolute-center">
@@ -43,7 +43,7 @@
                     <lightning:buttonIcon iconName="utility:refresh" alternativeText="{!$Label.c.General_Refresh}" onclick="{!c.doInit}" size="medium"/>                
                     <div class="div_render_components">
                         <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'Banner'}">
-                            <c:CG_Banner componentExternalId="{!v.record.ExternalId__c}"/>
+                            <c:FE_BannerHOC componentExternalId="{!v.record.ExternalId__c}"/>
                         </aura:if>
                         <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'News'}">
                             <c:CG_News componentExternalId="{!v.record.ExternalId__c}"/>
@@ -55,7 +55,7 @@
                             <c:CG_FAQ componentExternalId="{!v.record.ExternalId__c}"/>
                         </aura:if>
                         <aura:if isTrue="{!v.record.RecordType.DeveloperName == 'AdvanceContent'}">
-                            <c:CG_AdvanceContent componentExternalId="{!v.record.ExternalId__c}"/>
+                            <c:FE_AdvanceContentHOC componentExternalId="{!v.record.ExternalId__c}"/>
                         </aura:if>
                     </div>
                 </div>
