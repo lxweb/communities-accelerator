@@ -2,7 +2,6 @@
 public with sharing class ContentDetailControllerTest {
     
     @testSetup
-<<<<<<< HEAD
 	static void generateCustomSettings(){
 		MockupFactory.generateAcceleratorSetting();
 		List<Cluster__c> clusterRoot = MockupFactory.createCluster('CRoot', '', 1, 'ClusterRoot');
