@@ -42,6 +42,11 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     //Reference used for the pubsub module
     @wire(CurrentPageReference) pageRef;
 
+    @api
+    show() {
+        this.showHideModal();
+    }
+
     constructor(){
         super();
         this.contentCreateLabel = contentCreateLabel;
