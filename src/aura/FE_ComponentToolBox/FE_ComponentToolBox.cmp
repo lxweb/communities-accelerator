@@ -6,7 +6,8 @@
     <!-- PUBLIC ATTRIBUTES -->
     <aura:attribute name="componentType" type="String" access="global"/>
     <aura:attribute name="componentExternalId" type="String" access="global"/>
-    <aura:attribute name="componentWrapper" type="Object" access="global"/>
+	<aura:attribute name="componentWrapper" type="Object" access="global"/>
+	<aura:attribute name="salesforceDomain" type="String" access="global"/>
     <aura:attribute name="isLoading" type="boolean" default="true" access="global"/>
     <aura:attribute name="showComponentFrame" type="Boolean" default="true" access="global"/>
     	
@@ -54,7 +55,7 @@
 	                    <div aura:id="contentDetail" class="contentDetail borderColorBlue hidden">
 	                        <ul>
 	                            <aura:iteration items="{!v.componentWrapper.data.contentWrapper}" var="wrapper">
-	                                <li><a href="{!v.componentWrapper.acceleratorSettings.SalesforceDomain__c + '/' + wrapper.content.Id}" target="_blank">{!wrapper.content.Name}</a></li>
+	                                <li><a href="{!v.salesforceDomain + '/' + wrapper.content.Id}" target="_blank">{!wrapper.content.Name}</a></li>
 	                            </aura:iteration>
 	                        </ul>
 	                    </div>
