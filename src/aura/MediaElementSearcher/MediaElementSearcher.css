@@ -1,52 +1,41 @@
-.THIS .buttonStyle {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+.THIS .div_mediaElementsContainer{
+	display: flex;
+	flex-direction: column;
 }
-
+.THIS .div_mediaSearchSection{
+    height: 275px;
+    overflow-y: auto;
+}
 .THIS .div_mediaElementCardContainer{	
-	display: -webkit-box;
-    margin: 10px;
+	display: flex;
+	flex-direction: row;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	border-bottom: 1px solid #000;
 }
-
+.THIS .div_mediaElementCardContainer:last-child{	
+	border-bottom: none;
+}
 .THIS .img_mediaElementReview{
-	height: 100px;
+	height: 70px;
+	width: 70px;
+	-o-object-fit: contain;
 	object-fit: contain;
 }
-
 .THIS .input_search{
-	width: 250px;
-	height: 28px;
+	width: 90%;
+	height: 40px;
+	padding: 10px;
+	margin-right: 10px;
 }
-
-.THIS .div_mediaElementsContainer{
-	flex-wrap: wrap;
-	display: flex;
-	justify-content: space-evenly;
-	overflow: auto;
-	max-height: 90%;
-}
-
 .THIS .div_cardTitle{
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	text-align: left;
-	margin-left: 10px;
+	margin-left: 25px;
 }
-
-.THIS .div_mediaSearchSection{
-	text-align: center;
-	padding-top: 15px;
-	padding-bottom: 10px;
-	background-color: rgb(243, 242, 242);
-	max-height: 70%;
+.THIS .div_mediaElementCardContainer:hover{
+	cursor: pointer;
+	opacity: 0.6;
 }
-
-.THIS .slds-modal__header{
-	background-color: rgb(243, 242, 242);
+.THIS button {
+	outline: none;
+    box-shadow: none;
 }
