@@ -401,6 +401,14 @@
         <value>Cluster not selected</value>
     </labels>
     <labels>
+        <fullName>ContentLandingStructureMissingConfiguration</fullName>
+        <categories>Content Landing Structure</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Landing Structure Missing Configuration</shortDescription>
+        <value>Some configurations in Cluster root is missing.</value>
+    </labels>
+    <labels>
         <fullName>ContentLandingStructurePromptDescription</fullName>
         <categories>Content Landing Structure</categories>
         <language>en_US</language>
