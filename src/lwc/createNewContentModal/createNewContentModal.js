@@ -129,7 +129,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     //Create the record.
     setRecord(){
         var contentModal = this;
-        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, structureComponent :  this.componentId, structureNavigation : this.navigationId, recordName : this.recordNameValue})
+        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, componentId :  this.componentId, navigationId : this.navigationId, recordName : this.recordNameValue})
             .then(result => {
                 this.result = JSON.parse(JSON.stringify(result));
                 if(result.isSuccess){
