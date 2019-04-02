@@ -41,7 +41,7 @@ public without sharing virtual class ContentUtils {
         query += 'FROM Content__c';
 
         //WHERE
-        query += ' WHERE IsTemplate__c = false ';
+        query += ' WHERE IsTemplate__c = false AND Status__c = \'Published\' ';
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
         
         if(setContentDirect != null){
@@ -156,7 +156,7 @@ public without sharing virtual class ContentUtils {
         String query = '';
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
-        query += 'WHERE IsTemplate__c = false AND Id IN: setAllContentIds ';
+        query += 'WHERE IsTemplate__c = false AND Status__c = \'Published\' AND Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
         query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ASC, ');
         query += 'LIMIT ' + pageSize + ' ';
