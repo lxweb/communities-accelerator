@@ -1,5 +1,13 @@
 public without sharing virtual class ContentUtils {
 
+    public static Map<String, String> rtComponentToContent = new Map<String, String>{
+        'Event'             => 'Event',
+        'FAQ'               => 'FAQ',
+        'News'              => 'News',
+        'AdvanceContent'    => 'AdvanceContent',
+        'Banner'            => 'Banner'
+    };
+
     public class ContentWrapper{
         public Set<String> setAllContentIds;
         public Integer totalPages;

@@ -21,6 +21,10 @@
 		helper.showHideEditFrame(component, helper, false);
 	},
 	doNewContent : function(component, event, helper){
-		helper.newContent(component, event, helper);
+		component.find("newContentModal").show();
+	},
+	doGoToContent : function(component, event, helper){
+		var recordId = event.getParam('recordId') 
+		helper.newContent(component, recordId);
 	}
 })
