@@ -129,7 +129,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     //Create the record.
     setRecord(){
         var contentModal = this;
-        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, structureComponent :  this.structureComponent, structureNavigation : this.structureNavigation, recordName : this.recordNameValue})
+        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, structureComponent :  this.componentId, structureNavigation : this.navigationId, recordName : this.recordNameValue})
             .then(result => {
                 this.result = JSON.parse(JSON.stringify(result));
                 if(result.isSuccess){
@@ -141,7 +141,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
                     }
                 }else{
                     this.errorMessage = this.result.message;
-			this.showToast();
+            this.showToast();
                 }
             })
             .catch( err => {
@@ -152,14 +152,14 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     }
 
     //Navigates to URL
-	navigateToWebPage(url) {
-		this[NavigationMixin.Navigate]({
-				type: 'standard__webPage',
-				attributes: {
+    navigateToWebPage(url) {
+        this[NavigationMixin.Navigate]({
+                type: 'standard__webPage',
+                attributes: {
                     url: url
-				}
-		});
-	}
+                }
+        });
+    }
 
     //Sets value of the input to the var.
     setValue(event){
