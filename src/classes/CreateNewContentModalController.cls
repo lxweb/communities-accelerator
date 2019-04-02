@@ -22,8 +22,8 @@ public with sharing class CreateNewContentModalController {
             Name = recordName.left(60),
             RecordTypeId = recordTypeId,
             IsTemplate__c = isTemplate,
-            StructureComponent__c = componentId,
-            StructureNavigation__c = navigationId
+            StructureComponent__c = componentId
+            //StructureNavigation__c = navigationId
         );
         try{
             insert newContent;
