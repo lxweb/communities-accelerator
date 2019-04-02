@@ -310,12 +310,12 @@ public without sharing virtual class ContentUtils {
         
         String contentPlaceToSearch = '';
         if(componentRT == 'Banner'){contentPlaceToSearch = 'BannerImage';}
-        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImageList';}
-        else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
-        else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
-        else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
-        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImageList';}
-        else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
+        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImage';}
+        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImage';}
+        else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImage';}
         return contentPlaceToSearch;
     }
 

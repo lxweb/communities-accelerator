@@ -1319,4 +1319,12 @@
         <shortDescription>AdvanceContentDetailTemplateDescription</shortDescription>
         <value>Template Description</value>
     </labels>
+    <labels>
+        <fullName>UnassignImage</fullName>
+        <categories>ContentNewsRecordEdit</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UnassignImage</shortDescription>
+        <value>Unassign Image</value>
+    </labels>
 </CustomLabels>

@@ -61,7 +61,7 @@ public with sharing class ContentDetailController {
         }
     }
 
-    @AuraEnabled
+    @AuraEnabled (Cacheable = false)
     public static DataWrapper getData(String recordId){
         DataWrapper data;
         try{
@@ -98,7 +98,7 @@ public with sharing class ContentDetailController {
 
     private static Content__c getContentData(String recordId){
         String contentFields = getContentFields();
-        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c FROM MediaElementAssignments__r WHERE placement__c LIKE \'%ImageList\'),RecordType.Name,RecordType.DeveloperName,' 
+        Content__c content = Database.query('SELECT (SELECT Tag__c FROM Tags__r),(SELECT MediaElement__r.FileURLDesktop__c,MediaElement__r.Name FROM MediaElementAssignments__r),RecordType.Name,RecordType.DeveloperName,' 
                                             + contentFields + ' FROM Content__c WHERE id = :recordId');
         content.Body__c = externalIdToUrl(content.Body__c);
         return content;
@@ -162,8 +162,7 @@ public with sharing class ContentDetailController {
             List<VisibilitySelectorWrapper> visibilitySelectors = (List<VisibilitySelectorWrapper>)JSON.deserialize(visibilitySelectorsString, List<VisibilitySelectorWrapper>.class);
             content = updateContent(content, visibilitySelectors, status);
             updateTagAssignments(content, getSelectorByApiName(visibilitySelectors, 'Tag__c'), contentOldTagAssignments);
-            if(mediaElementId != null)
-                updateMediaElementAssignment(content, mediaElementId);
+            updateMediaElementAssignment(content, mediaElementId);
             return true;
         }catch(DMLException e){
             Database.rollback(sp);
@@ -180,27 +179,33 @@ public with sharing class ContentDetailController {
 
     private static void updateMediaElementAssignment(Content__c content, String mediaElementId){
 
-        Boolean MEAAlreadyCreated = false;
-        String meListPlacement = content.recordType.name + 'ImageList';
-        String meDetailPlacement = content.recordType.name + 'ImageDetail';
-        if(content.id != null){
-            List<MediaElementAssignment__c> MEAToDelete = new List<MediaElementAssignment__c>();
-            List<MediaElementAssignment__c> oldMediaElementAssignments = [SELECT id, mediaElement__c FROM MediaElementAssignment__c WHERE Content__c = :content.id AND (placement__c = :meListPlacement OR placement__c = :meDetailPlacement)];
-            for(MediaElementAssignment__c mea : oldMediaElementAssignments){
-                if(mea.mediaElement__c != mediaElementId){
-                    MEAToDelete.add(mea);
-                }else{
-                    MEAAlreadyCreated = true;
+        String placement = content.RecordType.DeveloperName + 'Image';
+        
+        if(mediaElementId == null){
+            delete [SELECT Id, MediaElement__c FROM MediaElementAssignment__c WHERE Content__c =: content.Id];
+        }else{
+            List<MediaElementAssignment__c> oldAssignments = [SELECT Id, MediaElement__c FROM MediaElementAssignment__c WHERE Content__c =: content.Id];
+            if(oldAssignments.isEmpty()){
+                insert new MediaElementAssignment__c(Content__c = content.Id, MediaElement__c = mediaElementId, Placement__c = placement);
+            }else{
+                List<MediaElementAssignment__c> toDelete = new List<MediaElementAssignment__c>();
+                Boolean mediaElementAlreadyAssigned = false; 
+                for(MediaElementAssignment__c oldAssignment: oldAssignments){
+                    if(!mediaElementAlreadyAssigned && oldAssignment.MediaElement__c == mediaElementId){
+                        mediaElementAlreadyAssigned = true;
+                    }else{
+                        toDelete.add(oldAssignment);
+                    }
                 }
-            }
-            delete MEAToDelete;
+                if(!mediaElementAlreadyAssigned){
+                	insert new MediaElementAssignment__c(Content__c = content.Id, MediaElement__c = mediaElementId, Placement__c = placement);
+                }
+                if(!toDelete.isEmpty()){
+                	delete toDelete;
+                }
+            }           
         }
-        if(!MEAAlreadyCreated){
-            MediaElementAssignment__c mediaelementAssignmentList = new MediaElementAssignment__c(content__c = content.id, mediaElement__c = mediaElementId, placement__c = meListPlacement);
-            MediaElementAssignment__c mediaelementAssignmentDetail = new MediaElementAssignment__c(content__c = content.id, mediaElement__c = mediaElementId, placement__c = meDetailPlacement);
-            List<MediaElementAssignment__c> MEAToCreate = new List<MediaElementAssignment__c>{mediaelementAssignmentList, mediaelementAssignmentDetail};
-            insert MEAToCreate;
-        }
+        
     }
 
     private static void updateTagAssignments(Content__c content, VisibilitySelectorWrapper tagVisibility, List<TagAssignment__c> contentOldTagAssignments){

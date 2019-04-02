@@ -1,9 +1,22 @@
+.THIS.choose-layout{
+    display: flex;
+    flex-direction: row;
+}
 .THIS .selectedLayout{
-    border:solid;
-    border-color:blue;
+    border: solid 2px #007FEB;
 }
 .THIS .layout-box{
-    float:left;
-    margin:20px;
     cursor:pointer;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+.THIS .layout-box:hover{
+    opacity: 0.6;
+}
+.THIS img.choose-layout-img{
+    width: 125px;
+    height: 97px;
+}
+.THIS .choose-layout-title{
+    font-weight: bold;
 }
