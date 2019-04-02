@@ -17,6 +17,8 @@
 					component.set("v.security", 			data.security);
 					if(data.content.MediaElementAssignments__r != null){
 						component.set('v.imageUrl', data.content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c);
+						component.set('v.mediaElementName', data.content.MediaElementAssignments__r[0].MediaElement__r.Name);
+                        component.set('v.mediaElementId', data.content.MediaElementAssignments__r[0].MediaElement__r.Id);
 					}
 					helper.setLayoutOptions(component);
 					component.find("richTextContainer").setContentBody();
@@ -45,12 +47,12 @@
         component.set('v.contentData.Layout__c', component.get('v.contentData.Layout__c') == null ? 'Title Top' : component.get('v.contentData.Layout__c')); 
     },
     updateContent : function(component, status){
-    	var helper				= this;
-		var content 			= component.get('v.contentData');
-		var previousStatus		= content.Status__c;
-		var visibilitySelectors = component.get('v.visibilitySelectors');
-		var mediaElementId 		= component.get('v.mediaElementId');
-		var action 				= component.get('c.saveContent');
+    	var helper				   = this;
+		var content 			   = component.get('v.contentData');
+		var previousStatus		   = content.Status__c;
+		var visibilitySelectors    = component.get('v.visibilitySelectors');
+		var mediaElementId 		   = component.get('v.mediaElementId');
+		var action 				   = component.get('c.saveContent');        
 		action.setParams({
 			content : content,
 			visibilitySelectorsString : JSON.stringify(visibilitySelectors),
@@ -116,5 +118,10 @@
 	    return string.replace(/\{(\d+)\}/g, function() {
 	        return outerArguments[parseInt(arguments[1]) + 1];
 	    });
-	}
+	},
+	unassignFeatureImg: function(component, event, helper){
+		component.set('v.mediaElementId', null);
+		component.set('v.imageUrl', null);
+		component.set('v.mediaElementName', null);
+	},
 })

@@ -4,7 +4,12 @@
 	},
 	handleUpsertEvent : function(component, event, helper){
 		var status = event.getParam("status");
-		helper.updateContent(component, status);
+		var contentId = event.getParam("contentId");
+		var recordId = component.get("v.contentData.Id");
+		if(recordId == contentId){
+			event.stopPropagation();
+			helper.updateContent(component, status);
+		}
 	},
 	handleMediaElementEvent : function(component, event, helper){
 		var mediaElementId = event.getParam("ID");
