@@ -52,9 +52,14 @@ public without sharing virtual class FE_ComponentManager {
         cw.clusterId = clusterId;
         cw.permissions = getPermissionWrapper();
         cw.meta = getMeta();
-        cw.contentRecordTypeId = Schema.SObjectType.Content__c.getRecordTypeInfosByDeveloperName().get(ContentUtils.rtComponentToContent.get(cw.meta.component.Recordtype.DeveloperName)).getRecordTypeId();
+        
+        String contentRTDevName = ContentUtils.rtComponentToContent.get(cw.meta.component.Recordtype.DeveloperName);
+        if(contentRTDevName != null){
+            cw.contentRecordTypeId = Schema.SObjectType.Content__c.getRecordTypeInfosByDeveloperName().get(contentRTDevName).getRecordTypeId();
+        }
+        
         cw.data = getData();
-
+        
         return cw;
     }
 
@@ -98,8 +103,5 @@ public without sharing virtual class FE_ComponentManager {
         DataWrapper cw = new DataWrapper();
         return cw;
     }
-    
-    
-
 
 }
