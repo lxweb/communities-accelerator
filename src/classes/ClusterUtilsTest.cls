@@ -4,12 +4,12 @@ public class ClusterUtilsTest {
     @testSetup
     static void setup(){
         MockupFactory.generateAcceleratorSetting();
-        List<Cluster__c> clusterRoot = MockupFactory.createCluster('CRootTest', null, 1, 'ClusterRoot');
-        List<Cluster__c> clustersLevel2 = MockupFactory.createCluster('CL2Test', clusterRoot.get(0).Id, 2, 'ClusterGroup');
+        List<Cluster__c> clusterRoot = MockupFactory.createCluster('CRootTest', null, 1, 'ClusterRoot', 'CRT');
+        List<Cluster__c> clustersLevel2 = MockupFactory.createCluster('CL2Test', clusterRoot.get(0).Id, 2, 'ClusterGroup', 'CGT');
         Set<Id> level2Ids = (new Map<Id, SObject>(clustersLevel2)).keySet();
-        List<Cluster__c> clustersLevel3 = MockupFactory.createCluster('CL3Test', new List<Id>(level2Ids), 2, 'ClusterGroup', 'es', '');
+        List<Cluster__c> clustersLevel3 = MockupFactory.createCluster('CL3Test', new List<Id>(level2Ids), 2, 'ClusterGroup', 'es', '', 'CG3');
         Set<Id> level3Ids = (new Map<Id, SObject>(clustersLevel3)).keySet();
-        List<Cluster__c> clustersLeaf = MockupFactory.createCluster('CLeafTest', new List<Id>(level3Ids), 2, 'ClusterLeaf', 'es', '');
+        List<Cluster__c> clustersLeaf = MockupFactory.createCluster('CLeafTest', new List<Id>(level3Ids), 2, 'ClusterLeaf', 'es', '', 'CLT');
     }
 
     @isTest
