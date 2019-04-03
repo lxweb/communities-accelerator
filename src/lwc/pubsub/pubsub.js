@@ -5,7 +5,7 @@
  */
 
 const events = {};
-
+/** Commented for Salesforce Bug Community Builder*/
 const samePageRef = (pageRef1, pageRef2) => {
     const obj1 = pageRef1.attributes;
     const obj2 = pageRef2.attributes;
@@ -16,6 +16,7 @@ const samePageRef = (pageRef1, pageRef2) => {
         });
 };
 
+
 /**
  * Registers a callback for an event
  * @param {string} eventName - Name of the event to listen for.
@@ -24,11 +25,12 @@ const samePageRef = (pageRef1, pageRef2) => {
  */
 const registerListener = (eventName, callback, thisArg) => {
     // Checking that the listener has a pageRef property. We rely on that property for filtering purpose in fireEvent()
+    /** Commented for Salesforce Bug Community Builder
     if (!thisArg.pageRef) {
         throw new Error(
             'pubsub listeners need a "@wire(CurrentPageReference) pageRef" property'
         );
-    }
+    }*/
 
     if (!events[eventName]) {
         events[eventName] = [];

@@ -8,8 +8,8 @@
 	onLogin : function(component, event, helper) {
 		if(component.get("v.isLogin")){
 			component.set("v.isLogin", false);
-			component.set("v.homeUrl", "https://" + component.get("v.instance") + 
-				".preview.salesforce-communities.com" + ((component.get("v.urlPathPrefix")) ? "/" + component.get("v.urlPathPrefix") : "") + 
+			component.set("v.homeUrl", "https://" + component.get("v.communityPreviewDomain") 
+			 + ((component.get("v.urlPathPrefix")) ? "/" + component.get("v.urlPathPrefix") : "") + 
 				"/s/");
 			component.set("v.url", component.get("v.homeUrl") + "?clusterId=" + component.get("v.clusterId"));
 		} else {

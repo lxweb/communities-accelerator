@@ -46,55 +46,58 @@ public class MediaElementsManagerController {
 		Integer intOffset = Integer.valueOf(stringOffset);
 		Integer elementPerPages = Integer.valueOf(stringElementPerPage);
 
-		list<MediaElement__c> mediaElementsList = new list<MediaElement__c>();
-		String queryMediaElement = 'SELECT Id, Name, FileURLDesktop__c, LastModifiedDate FROM MediaElement__c ';
+        String whereClause = '';	
 		if (String.isNotBlank(searchText)){
 			String likeValue = '%' + searchText + '%';
-			queryMediaElement += ' WHERE Name LIKE \'' + likeValue + '\'';
+			whereClause += ' WHERE Name LIKE \'' + likeValue + '\'';
 		}
+        
+        Integer totalRows = Database.countQuery('SELECT count() FROM MediaElement__c' + whereClause);
+        
+        if(intOffset >= 0 && intOffset <= totalRows){
 
-		queryMediaElement += ' ORDER BY LastModifiedDate DESC LIMIT ' + elementPerPages;
-		if(intOffset > 0){
-			queryMediaElement += ' OFFSET ' + intOffset;
-		}
+            list<MediaElement__c> mediaElementsList = new list<MediaElement__c>();
+            String queryMediaElement = 'SELECT Id, Name, FileURLDesktop__c, LastModifiedDate FROM MediaElement__c' + whereClause;    
+            queryMediaElement += ' ORDER BY LastModifiedDate DESC LIMIT ' + elementPerPages + ' OFFSET ' + intOffset;
 		
-		Set<String> contentSet = new Set<String>();
-		for(MediaElement__c me : Database.query(queryMediaElement)){
-			ContentWrapper cw = new ContentWrapper();
-			cw.idME = me.Id;
-			cw.name = me.Name;
-			cw.fileURLDesktop = me.FileURLDesktop__c;
-			cw.lastModified = String.valueOf(me.LastModifiedDate);
-
-			if(String.isNotBlank(findContent) && findContent == 'true'){
-	            String str = me.FileURLDesktop__c.substringAfterLast('/');
-	            if (Pattern.compile('[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}').matcher(str).matches()){
-	            	contentSet.add(str);
-	            } else {
-	            	cw.size = 'Web';
-	            	cw.ext = str.substringAfter('.');
-	            }
-	            contentWrMap.put(str, cw);
-			}else{
-				contentWrMap.put(me.Id, cw);
-			}
-			
-		}
-
-		if(String.isNotBlank(findContent) && findContent == 'true'){
-			if(contentSet.size() > 0){
-				for(ContentDocument file : [SELECT id, Title, ContentSize, FileExtension FROM ContentDocument WHERE id IN: contentSet]){
-					ContentWrapper cw = contentWrMap.get(file.id);
-					if(file.ContentSize != null){
-						cw.size = String.valueOf(Integer.valueOf(file.ContentSize * 0.001)) + ' KB';
-					}
-					if(String.isNotBlank(file.FileExtension)){
-						cw.ext = file.FileExtension;
-					}
-					contentWrMap.put(file.id, cw);
-				}
-			}
-		}     
+            Set<String> contentSet = new Set<String>();
+            for(MediaElement__c me : Database.query(queryMediaElement)){
+                ContentWrapper cw = new ContentWrapper();
+                cw.idME = me.Id;
+                cw.name = me.Name;
+                cw.fileURLDesktop = me.FileURLDesktop__c;
+                cw.lastModified = String.valueOf(me.LastModifiedDate);
+    
+                if(String.isNotBlank(findContent) && findContent == 'true'){
+                    String str = me.FileURLDesktop__c.substringAfterLast('/');
+                    if (Pattern.compile('[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}').matcher(str).matches()){
+                        contentSet.add(str);
+                    } else {
+                        cw.size = 'Web';
+                        cw.ext = str.substringAfter('.');
+                    }
+                    contentWrMap.put(str, cw);
+                }else{
+                    contentWrMap.put(me.Id, cw);
+                }
+                
+            }
+    
+            if(String.isNotBlank(findContent) && findContent == 'true'){
+                if(contentSet.size() > 0){
+                    for(ContentDocument file : [SELECT id, Title, ContentSize, FileExtension FROM ContentDocument WHERE id IN: contentSet]){
+                        ContentWrapper cw = contentWrMap.get(file.id);
+                        if(file.ContentSize != null){
+                            cw.size = String.valueOf(Integer.valueOf(file.ContentSize * 0.001)) + ' KB';
+                        }
+                        if(String.isNotBlank(file.FileExtension)){
+                            cw.ext = file.FileExtension;
+                        }
+                        contentWrMap.put(file.id, cw);
+                    }
+                }
+            }
+        }
 
         return contentWrMap.values();
     }

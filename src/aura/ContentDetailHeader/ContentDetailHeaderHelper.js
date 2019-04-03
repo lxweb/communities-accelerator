@@ -134,30 +134,39 @@
 	},
 	saveDraft : function(component, event, helper) {
 		console.log("[ContentDetailHeaderHelper.js][saveDraft] hasDetailComponent: " + component.get("v.hasDetailComponent"));
+		var contentId = component.get('v.recordId');
 		if(component.get("v.hasDetailComponent")){
 			var cmpEvent = $A.get("e.c:upsertContentsEvent");
 	        cmpEvent.setParams({
-	            "status" : "Draft" });
+				"status" : "Draft",
+				"contentId" :  contentId
+			});
 	        cmpEvent.fire();
 	    } else
 	    	helper.setStatus(component, 'Draft');
 	},
 	publish : function(component, event, helper) {
 		console.log("[ContentDetailHeaderHelper.js][publish] hasDetailComponent: " + component.get("v.hasDetailComponent"));
+		var contentId = component.get('v.recordId');
 		if(component.get("v.hasDetailComponent")){
 			var cmpEvent = $A.get("e.c:upsertContentsEvent");
 	        cmpEvent.setParams({
-	            "status" : "Published" });
+				"status" : "Published",
+				"contentId" :  contentId
+			});
 	        cmpEvent.fire();
 	    } else
 	    	helper.setStatus(component, 'Published');
 	},
 	unpublish : function(component, event, helper) {
 		console.log("[ContentDetailHeaderHelper.js][unpublish] hasDetailComponent: " + component.get("v.hasDetailComponent"));
+		var contentId = component.get('v.recordId');
 		if(component.get("v.hasDetailComponent")){
 			var cmpEvent = $A.get("e.c:upsertContentsEvent");
 	        cmpEvent.setParams({
-	            "status" : "Draft" });
+				"status" : "Draft",
+				"contentId" :  contentId
+			});
 	        cmpEvent.fire();
 	    } else
 	    	helper.setStatus(component, 'Draft');

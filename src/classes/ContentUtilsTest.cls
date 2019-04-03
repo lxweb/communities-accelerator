@@ -213,6 +213,8 @@ public class ContentUtilsTest {
                 FROM Component__c WHERE Id =: comp.ID];
 
         List<Content__c> contentList = MockupFactory.createContent('Banner', clusterRootList[0], 1);
+        contentList[0].Status__c = 'Published';
+        update contentList;
         List<ContentAssignment__c> contentAssigmentList = MockupFactory.createContentAssignment(contentList, componentList);
         List<MediaElement__c> mediaElementList = MockupFactory.createMediaElement(1);
         List<MediaElementAssignment__c> mediaElementAssigList = MockupFactory.createMediaElementAssignment(contentList, mediaElementList);

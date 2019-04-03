@@ -18,16 +18,17 @@ public without sharing virtual class FE_ComponentManager {
 
     //WRAPPERS
     public class ComponentWrapper{
-		@auraEnabled public AcceleratorSettings__c acceleratorSettings;
+        @auraEnabled public AcceleratorSettings__c acceleratorSettings;
         @auraEnabled public String clusterId;
         @auraEnabled public PermissionsWrapper permissions;
         @auraEnabled public MetaWrapper meta;
         @auraEnabled public DataWrapper data;
-	}
+        @auraEnabled public String contentRecordTypeId;
+    }
 
     public class PermissionsWrapper{
         @auraEnabled public Boolean isEnabledEditFrame; 
-		@auraEnabled public Boolean isEnabledViewFrame;
+        @auraEnabled public Boolean isEnabledViewFrame;
     }
 
     public virtual class MetaWrapper{
@@ -51,8 +52,14 @@ public without sharing virtual class FE_ComponentManager {
         cw.clusterId = clusterId;
         cw.permissions = getPermissionWrapper();
         cw.meta = getMeta();
+        
+        String contentRTDevName = ContentUtils.rtComponentToContent.get(cw.meta.component.Recordtype.DeveloperName);
+        if(contentRTDevName != null){
+            cw.contentRecordTypeId = Schema.SObjectType.Content__c.getRecordTypeInfosByDeveloperName().get(contentRTDevName).getRecordTypeId();
+        }
+        
         cw.data = getData();
-
+        
         return cw;
     }
 
@@ -61,13 +68,13 @@ public without sharing virtual class FE_ComponentManager {
         pw.isEnabledEditFrame = FeatureManagement.checkPermission('CommunityEditFrame');
         pw.isEnabledViewFrame = FeatureManagement.checkPermission('CommunityViewFrame');
         
-		if(!pw.isEnabledEditFrame){
-			pw.isEnabledEditFrame = FeatureManagement.checkPermission(customPermissionEdit.deleteWhitespace());
-		}
+        if(!pw.isEnabledEditFrame){
+            pw.isEnabledEditFrame = FeatureManagement.checkPermission(customPermissionEdit.deleteWhitespace());
+        }
 
-		if (!pw.isEnabledViewFrame){
-			pw.isEnabledViewFrame = FeatureManagement.checkPermission(customPermissionView.deleteWhitespace());
-		}
+        if (!pw.isEnabledViewFrame){
+            pw.isEnabledViewFrame = FeatureManagement.checkPermission(customPermissionView.deleteWhitespace());
+        }
 
         return pw; 
     }
@@ -96,8 +103,5 @@ public without sharing virtual class FE_ComponentManager {
         DataWrapper cw = new DataWrapper();
         return cw;
     }
-    
-    
-
 
 }

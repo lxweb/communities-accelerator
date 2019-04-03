@@ -43,6 +43,7 @@
 	},
 	getSiteId : function(component) {
 		console.log(component.get("v.url"));
+		var helper = this;
 		var action = component.get('c.getSiteId');
 		action.setParams({
 			clusterId : component.get("v.clusterId")
@@ -50,14 +51,19 @@
 		action.setCallback(this, function(response){
 			var state = response.getState();
 			if (state === "SUCCESS") {
-				var oldSite = component.get("v.siteId");
-				var newSite = response.getReturnValue()
+				var oldSite 				= component.get("v.siteId");
+				var newSite 				= response.getReturnValue()
+				var communityPreviewDomain 	= component.get("v.communityPreviewDomain");
+				if(communityPreviewDomain == null || newSite == null){
+					helper.showToast("Error!", $A.get("$Label.c.ContentLandingStructureMissingConfiguration"), "error");
+					component.set("v.isLoading", true);
+					return;
+				}
 				component.set('v.siteId', newSite);
-
 				var instance = component.get("v.instance");
 				if(oldSite != newSite){
 					component.set("v.isLogin", true);
-					component.set("v.url", "https://" + instance + ".preview.salesforce-communities.com/?orgId=" + 
+					component.set("v.url", "https://" + communityPreviewDomain + "/?orgId=" + 
 								component.get("v.orgId") + "&siteId=" + newSite + "&language=en_US");
 					component.set("v.isLoading", true);
 				}
@@ -65,5 +71,15 @@
 			}
 		});
 		$A.enqueueAction(action);
+	},
+	showToast : function(toastTitle, toastMessage, toastType){
+	    var toastEvent = $A.get("e.force:showToast");
+	    toastEvent.setParams({
+	        title: toastTitle,
+	        message: toastMessage,
+	        type: toastType,
+			mode: ((toastType === "success") ? 'dismissable' : 'sticky')
+	    });
+	    toastEvent.fire();
 	}
 })

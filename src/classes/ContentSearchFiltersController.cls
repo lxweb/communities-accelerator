@@ -41,7 +41,7 @@ public class ContentSearchFiltersController {
     public static FilterWrapper getFilters (String sObjectType){
         Set<Id> clusterIds = getCurrentUserClusterTree();
         List<Cluster__c> clusterList = [SELECT Id, Name FROM Cluster__c WHERE id IN :clusterIds];
-        List<RecordType> contentTypeList = [SELECT Id, Name FROM RecordType WHERE sObjectType = :sObjectType];
+        List<RecordType> contentTypeList = [SELECT Id, Name FROM RecordType WHERE sObjectType = :sObjectType AND IsActive = true];
         List<Category__c> categoryList = [SELECT Id, Name FROM Category__c WHERE Cluster__c IN :clusterIds];
         List<Tag__c> tagList = [SELECT Id, Name FROM Tag__c WHERE Cluster__c IN :clusterIds];
     

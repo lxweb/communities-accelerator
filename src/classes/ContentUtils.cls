@@ -1,5 +1,13 @@
 public without sharing virtual class ContentUtils {
 
+    public static Map<String, String> rtComponentToContent = new Map<String, String>{
+        'Event'             => 'Event',
+        'FAQ'               => 'FAQ',
+        'News'              => 'News',
+        'AdvanceContent'    => 'AdvanceContent',
+        'Banner'            => 'Banner'
+    };
+
     public class ContentWrapper{
         public Set<String> setAllContentIds;
         public Integer totalPages;
@@ -30,14 +38,15 @@ public without sharing virtual class ContentUtils {
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';     
         
         //FROM
-        query += 'FROM Content__c ';
+        query += 'FROM Content__c';
 
         //WHERE
+        query += ' WHERE IsTemplate__c = false AND Status__c = \'Published\' ';
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
         
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
-            query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
+            query += 'AND (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
             query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
 
         }else{
@@ -67,10 +76,10 @@ public without sharing virtual class ContentUtils {
             }
 
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
-                query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'AND Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
 
-                query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'AND (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
             if(component.Recordtype.Developername == 'Event' || component.Recordtype.DeveloperName == 'RelatedEvent'){
@@ -147,7 +156,7 @@ public without sharing virtual class ContentUtils {
         String query = '';
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
-        query += 'WHERE Id IN: setAllContentIds ';
+        query += 'WHERE IsTemplate__c = false AND Status__c = \'Published\' AND Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
         query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ASC, ');
         query += 'LIMIT ' + pageSize + ' ';
@@ -302,12 +311,12 @@ public without sharing virtual class ContentUtils {
         
         String contentPlaceToSearch = '';
         if(componentRT == 'Banner'){contentPlaceToSearch = 'BannerImage';}
-        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImageList';}
-        else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImageList';}
-        else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImageDetail';}
-        else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImageList';}
-        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImageList';}
-        else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImageDetail';}
+        else if(componentRT == 'RelatedNews'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'News'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'NewsDetail'){contentPlaceToSearch = 'NewsImage';}
+        else if(componentRT == 'Event'){contentPlaceToSearch = 'EventImage';}
+        else if(componentRT == 'RelatedEvents'){contentPlaceToSearch = 'EventImage';}
+        else if(componentRT == 'EventDetail'){contentPlaceToSearch = 'EventImage';}
         return contentPlaceToSearch;
     }
 

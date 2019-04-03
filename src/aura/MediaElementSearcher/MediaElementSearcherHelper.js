@@ -1,4 +1,16 @@
 ({
+	initSearch : function(component, event, helper){
+        component.set("v.searchValue", '');
+        component.find("searchField").getElement().value = '';
+        component.set("v.offset", '0');
+		component.set("v.mediaElementList", '');
+		document.body.style.overflowY = "hidden";
+        var cmpTarget = component.find('Modalbox');
+        var cmpBack = component.find('Modalbackdrop');
+        $A.util.addClass(cmpTarget, 'slds-fade-in-open');
+        $A.util.addClass(cmpBack, 'slds-backdrop--open');
+        helper.searchByText(component, event, helper);
+    },
 	searchByText : function(component, event, helper) {
 		component.set('v.scrollCalled', true);
 		component.set("v.isEndPage", false);
@@ -7,7 +19,31 @@
 		component.set("v.mediaElementList", '');
 		helper.getMedElems(component);
 	},
+	selectMediaElement : function(component, event, helper) {
+        var mElementUrl;
+		var mElementId;
+		var mElementName;
+		var compEvents;
+		
+		var childElements = Array.from(event.currentTarget.children);
 
+        childElements.forEach(element => {
+            if(element.tagName === "IMG" && element.classList.contains("img_mediaElementReview")){
+				mElementUrl = element.getAttribute("src"), 
+				mElementId = element.getAttribute("id");
+				mElementName = element.dataset.name;
+				compEvents = component.getEvent("URLEvent");
+				compEvents.setParams({ 
+					"URL" 	: mElementUrl,
+					"ID" 	:  mElementId,
+					"NAME" 	: mElementName
+				});
+				compEvents.fire();
+				helper.closeModal(component, event, helper);
+            }
+        });
+
+    },
 	getMedElems: function( component ) {
 		//component.set("v.isLoading", true);
 		var searchtext = component.get("v.searchValue");
@@ -48,11 +84,26 @@
 
 	    $A.enqueueAction(action);
 	},
-
-	closeModal : function(component, event, helper){		
+	closeModal : function(component, event, helper){	
+		document.body.style.overflowY = "auto";	
         var cmpTarget = component.find('Modalbox');
         var cmpBack = component.find('Modalbackdrop');
         $A.util.removeClass(cmpBack,'slds-backdrop--open');
         $A.util.removeClass(cmpTarget, 'slds-fade-in-open');
-	}
+	},
+    doSearch: function(component, event, helper) {
+        if (event.which === 13 || event.keyCode === 13) {
+            helper.searchByText(component, event, helper);
+        }
+    },
+	getMoreRecords: function(component, event, helper) {
+        var elem = event.currentTarget;
+        if (component.isValid() && !component.get('v.scrollCalled')) {
+            if (elem.clientHeight + elem.scrollTop + 1 >= elem.scrollHeight) {
+                //Call your helper method to show more items
+                helper.getMedElems(component);
+                component.set('v.scrollCalled', true);
+            }
+        }
+    }
 })
