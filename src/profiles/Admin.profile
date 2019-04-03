@@ -307,6 +307,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Navigation__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Navigation__c.URL__c</field>
         <readable>true</readable>
     </fieldPermissions>
