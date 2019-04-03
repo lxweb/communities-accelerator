@@ -337,6 +337,14 @@
         <value>Draft</value>
     </labels>
     <labels>
+        <fullName>ContentDetailPublished</fullName>
+        <categories>Content Detail</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Content Detail Published</shortDescription>
+        <value>Published</value>
+    </labels>
+    <labels>
         <fullName>ContentDetailLastSave</fullName>
         <categories>Content Detail</categories>
         <language>en_US</language>
