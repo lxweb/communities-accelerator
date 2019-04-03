@@ -11,9 +11,9 @@ public class TriggersHandlerManagerTest {
         u.TriggersByPass__c = 'triggerBypassedInUser';
         update u;
 
-        List<Cluster__c> clusters = MockupFactory.createCluster('TestCluster', null, 10, 'ClusterRoot');
+        List<Cluster__c> clusters = MockupFactory.createCluster('TestCluster', null, 10, 'ClusterRoot', 'CRT');
         Id clusterId = clusters[0].Id;
-        MockupFactory.createCluster('ClusterLevel2', clusterId, 10, 'ClusterGroup');
+        MockupFactory.createCluster('ClusterLevel2', clusterId, 10, 'ClusterGroup', 'CGT');
 
     }
 

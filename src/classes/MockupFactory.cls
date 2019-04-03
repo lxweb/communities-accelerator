@@ -15,7 +15,7 @@ public class MockupFactory {
     }
     
     //Create Cluster__c, sure to call generateAcceleratorSetting() one time before
-    public static List<Cluster__c> createCluster(String clusterName, String parentClusterId, Integer quantity, String clusterType){
+    public static List<Cluster__c> createCluster(String clusterName, String parentClusterId, Integer quantity, String clusterType, String externalId){
         
         List<String> parentClusterIdList = new List<String>();
         if(!String.isBlank(parentClusterId)){
@@ -23,16 +23,21 @@ public class MockupFactory {
             parentClusterIdList.add(parentClusterId);
         }
         
-        List<Cluster__c> clusterList = createCluster(clusterName, parentClusterIdList, quantity, clusterType, null, null);
+        List<Cluster__c> clusterList = createCluster(clusterName, parentClusterIdList, quantity, clusterType, null, null, externalId);
         return clusterList;
     }
 
-   public static List<Cluster__c> createCluster(String clusterName, List<String> parentClusterIdList, Integer quantity, String clusterType, String defaultLanguage, String otherLangeuage){
+   public static List<Cluster__c> createCluster(String clusterName, List<String> parentClusterIdList, Integer quantity, String clusterType, String defaultLanguage, String otherLangeuage, String externalId){
         List<Cluster__c> clusterList = new List<Cluster__c>();
         RecordType rtGroup = [SELECT Id FROM RecordType WHERE SobjectType = 'Cluster__c' AND DeveloperName =: clusterType];
         System.debug('MockupFactorycreateCluster parentClusterIdList: ' + parentClusterIdList);
         Cluster__c clusterl = new Cluster__c();
-       String externalIdName = clusterName.substring(0, 3); 
+        String externalIdName;
+        if(externalId.length() >3){
+            externalIdName = externalId.substring(0, 3);     
+        }else{
+            externalIdName=externalId;
+        }
        if(!String.isBlank(defaultLanguage) && !String.isBlank(otherLangeuage)){
            clusterl.DefaultLanguage__c = defaultLanguage;
            clusterl.OtherLanguages__c = otherLangeuage;
@@ -566,7 +571,7 @@ public class MockupFactory {
     public static List<DatatableAction__c> createDatatableActions(String name, String externalId, Integer quantity, Id datatableId, Id recordtypeId) {
         List<DatatableAction__c> datatableActionsToCreate = new List<DatatableAction__c>();
          
-        List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootClusterTest', null, 1, 'ClusterRoot');
+        List<Cluster__c> clustersRoot = MockUpFactory.createCluster('DummyRootClusterTest', null, 1, 'ClusterRoot','DRC');
         
         List<Navigation__c> nav = MockupFactory.createNavigation('NavTest','nav-test',1,clustersRoot[0].Id);
         
