@@ -25,6 +25,44 @@ public with sharing class ORGInitUtils {
         }
         return mapRecordTypes.get(objDevName.toLowerCase());
     }
+    
+    public static void deleteDummyData(){
+        delete [SELECT Id FROM Content__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Component__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Category__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Tag__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM MediaElement__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Navigation__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Menu__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM ClusterUser__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Cluster__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM CategoryAssignment__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM ContentAssignment__c WHERE Name LIKE 'DUMMY_%'];
+        //delete [SELECT Id FROM ContentCartltem__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM MediaElementAssignment__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM MenuAssignment__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM TagAssignment__c WHERE Name LIKE 'DUMMY_%'];
+        delete [SELECT Id FROM Translation__c WHERE Name LIKE 'DUMMY_%'];
+    }
+    
+    public static void deleteAllCMSData(){
+        delete [SELECT Id FROM Content__c];
+        delete [SELECT Id FROM Component__c];
+        delete [SELECT Id FROM Category__c];
+        delete [SELECT Id FROM Tag__c];
+        delete [SELECT Id FROM MediaElement__c];
+        delete [SELECT Id FROM Navigation__c];
+        delete [SELECT Id FROM Menu__c];
+        delete [SELECT Id FROM ClusterUser__c];
+        delete [SELECT Id FROM Cluster__c];
+        delete [SELECT Id FROM CategoryAssignment__c];
+        delete [SELECT Id FROM ContentAssignment__c];
+        //delete [SELECT Id FROM ContentCartltem__c];
+        delete [SELECT Id FROM MediaElementAssignment__c];
+        delete [SELECT Id FROM MenuAssignment__c];
+        delete [SELECT Id FROM TagAssignment__c];
+        delete [SELECT Id FROM Translation__c];
+    }
 
     public static void upsertDummyData(){
 
@@ -800,7 +838,7 @@ public with sharing class ORGInitUtils {
         /* Inserta 4 RecipeIngredient__c - END */
     }
     
-    public static void upsertListViews() {
+    private static void upsertListViews() {
         /* Inserta 1 ListView__c - BEGIN */
         List<Datatable__c> datatablesList = new List<Datatable__c>();
         List<DatatableElement__c> datatableElementsList = new List<DatatableElement__c>();

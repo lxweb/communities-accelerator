@@ -1,4 +1,4 @@
-import { LightningElement, api, wire, track } from 'lwc'; 
+import { LightningElement, api} from 'lwc'; 
 import replaceExternalIdsWithURLs from  '@salesforce/apex/RichTextController.replaceExternalIdsWithURLs';
 import replaceURLsWithExternalIds from  '@salesforce/apex/RichTextController.replaceURLsWithExternalIds';
 export default class CustomRichText extends LightningElement {
@@ -19,19 +19,16 @@ export default class CustomRichText extends LightningElement {
         Rich.value = body;
         Rich.focus();
         Rich.blur();
-  
     }
 
 
     handleTextChange(event){   //On RichText change, clone text from RichText to AreaText in HTML Format.
-        var textArea = this.template.querySelector('textarea');
         this.urlToExternalId(event.detail.value);
         console.log('textarea.value: ' + this.template.querySelector('textarea').value);
         this.handleSaveContentEvent();
     }
 
     handleAreaText(){ //On TextArea change, clone text from TextArea to RichText in plain text format.
-        var Rich = this.template.querySelector('lightning-input-rich-text');
         var textArea = this.template.querySelector('textarea');
         this.externalIdToUrl(textArea.value);  
         this.handleSaveContentEventHTML();   

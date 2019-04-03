@@ -362,6 +362,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Cluster__c.CommunityPreviewDomain__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Cluster__c.CommunityURL__c</field>
         <readable>true</readable>
     </fieldPermissions>

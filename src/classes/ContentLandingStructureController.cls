@@ -32,20 +32,23 @@ public class ContentLandingStructureController {
 	public class GeneralWrapper{
 		@AuraEnabled public String				orgId;
 		@AuraEnabled public String				communityName;
+		@AuraEnabled public String 				communityPreviewDomain;
 		@AuraEnabled public List<Cluster__c>	clusterLeafs;
 		@AuraEnabled public String 				urlPathPrefix;
 
-		public GeneralWrapper(String orgId, String communityName, List<Cluster__c> clusterLeafs, String urlPathPrefix){
-			this.orgId 			= orgId;
-			this.communityName	= communityName;
-			this.clusterLeafs	= clusterLeafs;
-			this.urlPathPrefix 	= urlPathPrefix;
+		public GeneralWrapper(String orgId, String communityName, String communityPreviewDomain, List<Cluster__c> clusterLeafs, String urlPathPrefix){
+			this.orgId 					= orgId;
+			this.communityName			= communityName;
+			this.communityPreviewDomain	= communityPreviewDomain;
+			this.clusterLeafs			= clusterLeafs;
+			this.urlPathPrefix 			= urlPathPrefix;
 		}
 	}
 
 	@AuraEnabled(cacheable=true)
 	public static GeneralWrapper getGeneralData(){
-		return new GeneralWrapper(getOrgId(), getCommunityName(), getClusterLeafs(), getUrlPathPrefix(getClusterUserId()));
+		Cluster__c croot = getClusterRoot(getClusterUserId());
+		return new GeneralWrapper(getOrgId(), croot.CommunityName__c.toLowerCase(), croot.CommunityPreviewDomain__c, getClusterLeafs(), getUrlPathPrefix(getClusterUserId()));
 	}
 
 	@AuraEnabled(cacheable=true)
@@ -146,9 +149,9 @@ public class ContentLandingStructureController {
 	}
 
 	public static Cluster__c getClusterRoot(String clusterId){
-		Cluster__c cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:clusterId];
+		Cluster__c cluster = [SELECT Id, CommunityName__c, CommunityPreviewDomain__c, ParentCluster__c FROM Cluster__c WHERE Id=:clusterId];
 		while(cluster.ParentCluster__c != null){
-			cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.ParentCluster__c];
+			cluster = [SELECT Id, CommunityName__c, CommunityPreviewDomain__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.ParentCluster__c];
 		}
 		return cluster;
 	}

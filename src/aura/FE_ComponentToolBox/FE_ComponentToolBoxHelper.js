@@ -25,15 +25,9 @@
 		}
 	},
 	
-	newContent : function(component, event, helper) {		
-		var componentD = component.get('v.componentWrapper.meta.component');
-        var navigationId = component.get('v.componentWrapper.meta.navId');
+	newContent : function(component, recordId) {		
 		var sfDomain = component.get('v.salesforceDomain');
-		var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/n/NewContent';
-		if(componentD.RecordType.Id != null){
-			url = url + '?RecordTypeId=' + componentD.RecordType.Id + '&ComponentId=' + componentD.Id + '&NavigationId=' + navigationId;
-		}
-
+		var url = ((sfDomain === undefined || sfDomain == '') ? './detail' : sfDomain) + '/lightning/r/Content__c/' + recordId + '/view';
 		window.open(url);
 	},
 

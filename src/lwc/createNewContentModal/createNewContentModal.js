@@ -21,6 +21,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     @api isTemplate; //type="Boolean"
     @api componentId; //type="String"
     @api navigationId; //type="String"
+    @api salesforceDomain; //type="String"
 
     @track recordTypeLabel;
     @track contentCreateLabel;
@@ -41,6 +42,12 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
     //Reference used for the pubsub module
     @wire(CurrentPageReference) pageRef;
+
+    @api
+    show() {
+        this.showHideModal();
+        this.getRecordTypeName();
+    }
 
     constructor(){
         super();
@@ -120,16 +127,21 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     }
 
     //Create the record.
-    setRecord(){    
-        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, structureComponent :  this.structureComponent, structureNavigation : this.structureNavigation, recordName : this.recordNameValue})
+    setRecord(){
+        var contentModal = this;
+        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, componentId :  this.componentId, navigationId : this.navigationId, recordName : this.recordNameValue})
             .then(result => {
                 this.result = JSON.parse(JSON.stringify(result));
                 if(result.isSuccess){
                     this.showHideModal();
-                    this.navigateToWebPage("/" + this.result.message);
+                    if(contentModal.salesforceDomain == null){
+                        this.navigateToWebPage("/" + this.result.message);
+                    } else {
+                        contentModal.dispatchEvent(new CustomEvent('contentcreated', {detail: { recordId: this.result.message }}));
+                    }
                 }else{
                     this.errorMessage = this.result.message;
-			this.showToast();
+            this.showToast();
                 }
             })
             .catch( err => {
@@ -140,14 +152,14 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     }
 
     //Navigates to URL
-	navigateToWebPage(url) {
-		this[NavigationMixin.Navigate]({
-				type: 'standard__webPage',
-				attributes: {
+    navigateToWebPage(url) {
+        this[NavigationMixin.Navigate]({
+                type: 'standard__webPage',
+                attributes: {
                     url: url
-				}
-		});
-	}
+                }
+        });
+    }
 
     //Sets value of the input to the var.
     setValue(event){
