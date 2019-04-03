@@ -4,6 +4,11 @@
   padding-top: 6px;
   padding-bottom: 30px;
 }
+.datatable .checkbox {
+  width: 100%;
+  text-align: -webkit-right;
+  display: none;
+}
 .datatable span {
   font-weight: bold;
 }

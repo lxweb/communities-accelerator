@@ -214,37 +214,22 @@ public class FE_DatatableController extends FE_ComponentManager {
         return rows;
     }
 
-    public static List<List<FE_DatatableController.DatatableRowWrapper>> mapDatatableDataToWrappers(List<SObject> records, List<FE_DatatableController.DatatableElementWrapper> datatableElements) {
-        // List<Map<String, String>> datatableData = new List<Map<String, String>>();
+    public static List<Map<String, String>> mapDatatableDataToWrappers(List<SObject> records, List<FE_DatatableController.DatatableElementWrapper> datatableElements) {
+        List<Map<String, String>> datatableData = new List<Map<String, String>>();
         
-        // for(SObject record : records) {
-        //     Map<String, String> structure = new Map<String, String>();
-
-        //     for(FE_DatatableController.DatatableElementWrapper de : datatableElements) {
-        //         String fieldApiName = de.fieldName;
-
-        //         structure.put(fieldApiName, (String)record.get(fieldApiName));
-        //     }
-
-        //     datatableData.add(structure);
-        // }
-
-        // return datatableData;
-
-        List<List<FE_DatatableController.DatatableRowWrapper>> datatableData = new List<List<FE_DatatableController.DatatableRowWrapper>>();
         for(SObject record : records) {
-            List<FE_DatatableController.DatatableRowWrapper> structure = new List<FE_DatatableController.DatatableRowWrapper>();
+            Map<String, String> structure = new Map<String, String>();
 
             for(FE_DatatableController.DatatableElementWrapper de : datatableElements) {
-                FE_DatatableController.DatatableRowWrapper str = new FE_DatatableController.DatatableRowWrapper();
-                str.columnName = de.fieldName;
-                str.rowValue = (String)record.get(de.fieldName) != null ? (String)record.get(de.fieldName) : '-';
-                structure.add(str);
+                String fieldApiName = de.fieldName;
+
+                structure.put(fieldApiName, (String)record.get(fieldApiName));
             }
-            datatableData.add(structure);            
+
+            datatableData.add(structure);
         }
-        
-        return datatableData; 
+
+        return datatableData;
     }
 
     public static List<FE_DatatableController.DatatableElementWrapper> mapDatatableElementsToWrappers(List<DatatableElement__c> elements) {
@@ -360,7 +345,7 @@ public class FE_DatatableController extends FE_ComponentManager {
         public List<DatatableFilterWrapper> appliedFilters {get;set;}
         public List<FE_DatatableController.DatatableElementWrapper> columns {get;set;}
         public List<FE_DatatableController.DatatableActionWrapper> actions {get;set;}        
-        public List<List<FE_DatatableController.DatatableRowWrapper>> tableData {get;set;}
+        public List<Map<String, String>> tableData {get;set;}
 
         public DatatableWrapper() {
             appliedFilters = new List<DatatableFilterWrapper>();

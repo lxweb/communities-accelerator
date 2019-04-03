@@ -4,6 +4,7 @@ export default class Fe_DatatableLC extends LightningElement {
     @api table;
 
     @track orientation;
+    @track columnsToShow;
 
     constructor() {
         super();
@@ -14,11 +15,17 @@ export default class Fe_DatatableLC extends LightningElement {
         window.addEventListener("orientationchange", () => this.handleOrientation());
     }
 
-    get columnClass(){
+    renderedCallback() {
+        if(this.table && !this.columnsToShow) {
+            this.columnsToShow = this.table.columns.slice(0, this.table.numberOfColumns);
+        }
+    }
+
+    get columnClass() {
         return this.orientation ? "slds-col slds-size_2-of-4" : "slds-col slds-size_1-of-4";
     }
 
-    handleOrientation(){    
+    handleOrientation() {    
         if (screen.orientation.angle === 0){
             this.orientation = true;            //Portrail
         }
@@ -31,7 +38,29 @@ export default class Fe_DatatableLC extends LightningElement {
         console.log("hola");
     }
 
-    filterEvent(event){
+    editTable(){
+        var checkbox = this.template.querySelectorAll("div.checkbox");
+        var edit = this.template.querySelector("p.edit-cancel");
+        
+        if (edit.innerText === "Edit") {
+            checkbox.forEach(cb =>{
+                cb.style.display = "block";
+            })
+            edit.innerText = "Cancel";
+        }else {
+            checkbox.forEach(cb =>{
+                cb.style.display = "none";
+            })
+            edit.innerText = "Edit";
+        }
+    }
+
+    searchEvent() {
+        const searchValue = new CustomEvent('search');
+        this.dispatchEvent(searchValue);
+    }
+
+    filterEvent(event) {
         const values = JSON.stringify({ 
             'name': event.currentTarget.dataset.column,
             'type': event.currentTarget.dataset.type, 

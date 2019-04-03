@@ -1,6 +1,11 @@
 <template>
     <div class="datatable"> 
-        <div class="slds-grid slds-wrap">
+        <p class="edit-cancel" onclick={editTable}>Edit</p>
+        <h1>{table.title}</h1>
+        <div class="slds-form-element">
+            <input placeholder="Placeholder Text" class="slds-input" type="search" onsearch={searchEvent} />
+        </div>
+        <!-- <div class="slds-grid slds-wrap">
             <template for:each={table.columns} for:item="col">
                 <div key={col.fieldName} class="slds-col slds-size_2-of-4">
                     <template if:true={col.filtrable}>
@@ -21,14 +26,16 @@
                     </template>
                 </div>
             </template>
-        </div>
-        <template for:each={table.tableData} for:item="data">    
-            <article key={data.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>             
-                <template for:each={data} for:item="row">                 
-                    <div key={row.columnName} class={columnClass}>
-                        <p><span>{row.columnName}</span></p>
-                        <p>{row.rowValue}</p>
-                    </div>
+        </div> -->
+        <template for:each={table.tableData} for:item="row">    
+            <article key={row.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>  
+                <div class="checkbox">
+                    <input type="checkbox" name="options" value="checkbox"/>  
+                </div>
+                <template for:each={columnsToShow} for:item="col"> 
+                    <div key={col.label} class={columnClass}>
+                        <c-fe-datatable-row colname={col.label} column={col.fieldName} row={row}></c-fe-datatable-row>
+                    </div> 
                 </template>
                 <!-- <template for:each={table.actions} for:item="action">
                     <footer key={action.Id} class="slds-card__footer">
