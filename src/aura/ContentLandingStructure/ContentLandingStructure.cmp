@@ -4,27 +4,28 @@
     <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
 
     <!-- ATTRIBUTES -->
-    <aura:attribute name="sitemapBackup"    type="Object"                   />
-    <aura:attribute name="sitemap"          type="Object"                   />
-    <aura:attribute name="orgId"            type="String"                   />
-    <aura:attribute name="siteId"           type="String"                   />
-    <aura:attribute name="homeUrl"          type="String"                   />
-    <aura:attribute name="url"              type="String"                   />
-    <aura:attribute name="navigation"       type="String"   default=""      />
-    <aura:attribute name="clusterLeafs"     type="Cluster__c[]"             />
-    <aura:attribute name="clusterId"        type="String"                   />
-    <aura:attribute name="isLogin"          type="Boolean"  default="false" />
-    <aura:attribute name="instance"         type="String"                   />
-    <aura:attribute name="communityName"    type="String"                   />
-    <aura:attribute name="urlPathPrefix"    type="String"                   />
-    <aura:attribute name="isLoading"        type="Boolean"  default="false" />
+    <aura:attribute name="sitemapBackup"            type="Object"                   />
+    <aura:attribute name="sitemap"                  type="Object"                   />
+    <aura:attribute name="orgId"                    type="String"                   />
+    <aura:attribute name="siteId"                   type="String"                   />
+    <aura:attribute name="communityPreviewDomain"   type="String"                   />
+    <aura:attribute name="homeUrl"                  type="String"                   />
+    <aura:attribute name="url"                      type="String"                   />
+    <aura:attribute name="navigation"               type="String"   default=""      />
+    <aura:attribute name="clusterLeafs"             type="Cluster__c[]"             />
+    <aura:attribute name="clusterId"                type="String"                   />
+    <aura:attribute name="isLogin"                  type="Boolean"  default="false" />
+    <aura:attribute name="instance"                 type="String"                   />
+    <aura:attribute name="communityName"            type="String"                   />
+    <aura:attribute name="urlPathPrefix"            type="String"                   />
+    <aura:attribute name="isLoading"                type="Boolean"  default="false" />
 
 	<div class="container all-page-height">
         <div class="slds-grid slds-p-horizontal_xxx-small" style="height:100% !important;">
             <div class="slds-p-right_x-small slds-size_3-of-12" style="height:100% !important;">
                 <lightning:card >
                     <aura:set attribute="title">
-                        <c:ContentLandingSitemap sitemap="{!v.sitemap.menus}" sitemapBackup="{!v.sitemapBackup}" navigation="{!v.navigation}" clusterLeafs="{!v.clusterLeafs}" clusterId="{! v.clusterId}" siteId="{!v.siteId}" url="{!v.url}" isLogin="{!v.isLogin}" orgId="{!v.orgId}" instance="{!v.instance}" homeUrl="{!v.homeUrl}" otherNavigations ="{!v.sitemap.navigations}" isLoading="{!v.isLoading}"/>
+                        <c:ContentLandingSitemap sitemap="{!v.sitemap.menus}" sitemapBackup="{!v.sitemapBackup}" navigation="{!v.navigation}" clusterLeafs="{!v.clusterLeafs}" clusterId="{! v.clusterId}" siteId="{!v.siteId}" url="{!v.url}" isLogin="{!v.isLogin}" orgId="{!v.orgId}" instance="{!v.instance}" homeUrl="{!v.homeUrl}" otherNavigations ="{!v.sitemap.navigations}" isLoading="{!v.isLoading}" communityPreviewDomain="{!v.communityPreviewDomain}"/>
                     </aura:set>
                 </lightning:card>
             </div>

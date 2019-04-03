@@ -1,0 +1,58 @@
+.bd-example {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+}
+.bd-example:after {
+  margin-top: 100vh;
+}
+.bd-example p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 30px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-bottom: 50px;
+}
+.bd-example h5 {
+  font-size: 30px;
+  margin-top: 50px;
+  font-weight: 200;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.bd-example li {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-right: 0;
+  margin-left: 20px;
+}
+.bd-example .acrylic {
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+}
+.bd-example .acrylic.blurred {
+  background-color: rgba(241, 241, 241, 0.7);
+  filter: brightness(0.6);
+}
+.bd-example .acrylic.blurred h5 {
+  opacity: 0;
+}
+.bd-example .acrylic.blurred p {
+  opacity: 0;
+}
+.bd-example .carousel-caption {
+  text-align: left;
+  bottom: inherit;
+  left: 0;
+  top: 0;
+}
+.bd-example .carousel-indicators {
+  justify-content: left;
+  margin-left: 5%;
+  margin-bottom: 60px;
+}

@@ -1,2 +1,11 @@
+/* SCRIPT 1 */
+//Delete all dummy data
+ORGInitUtils.deleteDummyData();
+
+/* SCRIPT 2 */
+//Delete all CMS data
+ORGInitUtils.deleteAllCMSData();
+
+/* SCRIPT 3 */
 //Insertar dummy data
 ORGInitUtils.upsertDummyData();

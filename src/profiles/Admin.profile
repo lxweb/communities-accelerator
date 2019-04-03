@@ -307,6 +307,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Navigation__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Navigation__c.URL__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -362,17 +367,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Cluster__c.CommunityPreviewDomain__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Cluster__c.CommunityURL__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Cluster__c.DefaultLanguage__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Cluster__c.ExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -582,6 +587,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Content__c.BannerFrameType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Content__c.ButtonLabel__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -608,6 +618,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Content__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+        <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.AssetType__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -653,6 +668,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Content__c.IsActive__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Content__c.IsTemplate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -715,6 +735,31 @@
         <field>Content__c.StatusApprovalProcess__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.StructureComponent__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.StructureNavigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>    
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.TemplateDescription__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Content__c.TemplateUsed__c</field>
+        <readable>true</readable>
+    </fieldPermissions>    
     <fieldPermissions>
         <editable>true</editable>
         <field>Content__c.URLRedirect__c</field>
@@ -965,6 +1010,131 @@
         <field>User.TriggersDebugs__c</field>
         <readable>true</readable>
     </fieldPermissions>
+<fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableAction__c.Component__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableAction__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableAction__c.Icon__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableAction__c.Navigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableAction__c.SelectableRow__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.ColumnInformationIcon__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.ColumnInformation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.DisplaySettings__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.ExcludedPicklistValues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Filtrable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Navigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Searchable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Sortable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>DatatableElement__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.ActionLabel__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.ExternalId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.Navigation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.NoRecordsMessage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.OrderBy__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.PagingType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.Title__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Datatable__c.WhereCondition__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <applicationVisibilities>
         <application>CMS_Administration</application>
         <default>false</default>
@@ -1087,6 +1257,10 @@
     <layoutAssignments>
         <layout>Content__c-Content Layout</layout>
     </layoutAssignments>    
+        <layoutAssignments>
+        <layout>Content__c-Content%3A Product - Page Layout</layout>
+        <recordType>Content__c.Product</recordType>
+    </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content%3A Recipe - Page Layout</layout>
         <recordType>Content__c.Recipe</recordType>
@@ -1094,6 +1268,10 @@
     <layoutAssignments>
         <layout>Content__c-Content%3A Advance Content - Page Layout</layout>
         <recordType>Content__c.AdvanceContent</recordType>
+    </layoutAssignments>
+     <layoutAssignments>
+        <layout>Content__c-Content%3A Asset - Page Layout</layout>
+        <recordType>Content__c.Asset</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Content__c-Content%3A Banner - Page Layout</layout>
@@ -1130,6 +1308,23 @@
     <layoutAssignments>
         <layout>Menu__c-Menu Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>DatatableAction__c-List View Action Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DatatableAction__c-List View Action Layout</layout>
+        <recordType>DatatableAction__c.GlobalAction</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DatatableAction__c-List View Action Layout</layout>
+        <recordType>DatatableAction__c.RowAction</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DatatableElement__c-List View Element Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Datatable__c-List View Layout</layout>
+    </layoutAssignments>
     <tabVisibilities>
         <tab>Brand__c</tab>
         <visibility>DefaultOn</visibility>
@@ -1155,7 +1350,7 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Content__c</tab>
+        <tab>ContentLanding</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
@@ -1195,13 +1390,13 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>NewContent</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities> 
-    <tabVisibilities>
         <tab>Sitemap</tab>
         <visibility>DefaultOn</visibility>
-    </tabVisibilities> 
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Datatable__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -1383,6 +1578,33 @@
         <object>RecipeIngredient__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+<objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>DatatableAction__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>DatatableElement__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Datatable__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Component__c.ContentCatalog</recordType>
@@ -1538,6 +1760,16 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>RecipeIngredient__c.CustomIngredient</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>DatatableAction__c.GlobalAction</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>DatatableAction__c.RowAction</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
 </Profile>

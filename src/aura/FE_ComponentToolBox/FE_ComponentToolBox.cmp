@@ -1,0 +1,120 @@
+<aura:component access="global">
+    
+    <!-- CONSTRUCTOR -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- PUBLIC ATTRIBUTES -->
+    <aura:attribute name="componentType" 		type="String" 	access="global"					/>
+    <aura:attribute name="componentExternalId" 	type="String" 	access="global"					/>
+	<aura:attribute name="componentWrapper" 	type="Object" 	access="global"					/>
+	<aura:attribute name="salesforceDomain" 	type="String" 	access="global"					/>
+    <aura:attribute name="isLoading" 			type="Boolean" 	access="global" default="true" 	/>
+    <aura:attribute name="showComponentFrame" 	type="Boolean" 	access="global" default="true"	/>
+    <aura:attribute name="isTemplate" 			type="Boolean" 					default="false" />
+	<aura:attribute name="contentActivated" 	type="Boolean" 					default="false"	/>
+    	
+    <!-- COMPONENT -->
+    <aura:if isTrue="{!or(not(v.componentWrapper == null), not(v.componentWrapper.meta.component == null))}">
+
+    	<aura:if isTrue="{!and(or(v.componentWrapper.permissions.isEnabledViewFrame, v.componentWrapper.permissions.isEnabledEditFrame), v.showComponentFrame)}">
+        
+	        <div id="editFrame">
+	            <div id="{!v.componentWrapper.meta.component.Id + v.componentWrapper.meta.objectId}" onmouseover="{!c.doShowEditFrame}" onmouseout="{!c.doHideEditFrame}" class="mainEditFrame">
+	                
+	                <!-- Component Body -->
+	                <div class="componentBody">
+	                    <!-- COMMUNITY COMPONENT -->
+			            <div class="body-container">
+			                {!v.body}
+			                
+			                <!-- LOADING SPINNER -->
+			                <aura:if isTrue="{!v.isLoading}"> 
+			                    <c:FE_Spinner/>
+			                </aura:if>
+			            </div>
+	                </div>
+
+	                <!-- Component Name -->
+	                <div class="componentNamePanel borderColorBlue hidden">
+	                    {#v.componentWrapper.meta.component.RecordType.DeveloperName + ' - ' + v.componentWrapper.meta.component.Name}
+	                </div>
+
+	                <!-- Buttons -->
+	                <div class="buttonsPanel hidden">
+	                    <lightning:buttonIcon iconName="utility:settings" class="buttonsPanelIcons" title="View Component" alternativeText="component" onclick="{!c.doViewComponent}" size="medium"/>
+	                    
+	                    <aura:if isTrue="{!v.componentWrapper.permissions.isEnabledEditFrame}">
+	                        <lightning:buttonIcon iconName="utility:insert_template" class="buttonsPanelIcons" title="Add content" alternativeText="Add content" onclick="{!c.doNewContent}" size="medium"/>
+	                    </aura:if>
+	                    
+	                    <aura:if isTrue="{#v.componentWrapper.data.contentWrapper.length > 0}">
+	                        <lightning:buttonIcon iconName="utility:image" class="buttonsPanelIcons" title="View Content" alternativeText="content" onclick="{!c.doViewContent}" size="medium"/>
+	                    </aura:if>
+	                </div>
+
+	                <!-- Related Content -->
+	                <aura:if isTrue="{#v.componentWrapper.data.contentWrapper.length > 0}">
+	                    <div aura:id="contentDetail" class="contentDetail borderColorBlue hidden">
+	                        <ul>
+	                            <aura:iteration items="{!v.componentWrapper.data.contentWrapper}" var="wrapper">
+	                                <li><a href="{!v.salesforceDomain + '/' + wrapper.content.Id}" target="_blank">{!wrapper.content.Name}</a></li>
+	                            </aura:iteration>
+	                        </ul>
+	                    </div>
+	                </aura:if>
+
+	            </div>
+	        </div>
+
+	        <aura:set attribute="else">
+	            <!-- COMMUNITY COMPONENT -->
+	            <div class="body-container">
+	                {!v.body}
+	                
+	                <!-- LOADING SPINNER -->
+	                <aura:if isTrue="{!v.isLoading}"> 
+	                    <c:FE_Spinner/>
+	                </aura:if>
+	            </div>
+	        </aura:set>
+
+	    </aura:if>   
+            
+   
+   		<!-- VALIDATIONS -->
+        <aura:set attribute="else">
+
+        	<!-- Empty component Validation -->
+	        <aura:if isTrue="{!v.componentExternalId == ''}">
+	            <div class="slds-page-header" style="text-align: center;">
+	                <lightning:layout horizontalAlign="left">
+	                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+	                        <h1 class="slds-page-header__title slds-text-heading_large">{!v.componentType}</h1>
+	                        <p>{!$Label.c.ComponentEmpty}</p>
+	                    </lightning:layoutItem>
+	                </lightning:layout>
+	            </div>
+				
+				<!-- Cluster Validation -->
+	            <aura:set attribute="else">
+	            	<aura:if isTrue="{!and(v.componentWrapper != null, or(v.componentWrapper.clusterId == null, or(v.componentWrapper.clusterId == 'undefined', v.componentWrapper.clusterId == '')))}">
+			            <div class="slds-page-header" style="text-align: center;">
+			                <lightning:layout horizontalAlign="left">
+			                    <lightning:layoutItem size="12" flexibility="auto" padding="around-small">
+			                        <h1 class="slds-page-header__title slds-text-heading_large">{!v.componentType}</h1>
+			                        <p>{!$Label.c.NoClusterSelected}</p>
+			                    </lightning:layoutItem>
+			                </lightning:layout>
+			            </div>  
+			    	</aura:if>
+	            </aura:set>
+
+	        </aura:if>	        
+        </aura:set> 
+    </aura:if>
+    <aura:if isTrue="{!v.componentWrapper != null}">
+    	<c:createNewContentModal aura:id="newContentModal" recordTypeId="{!v.componentWrapper.contentRecordTypeId}" componentId="{!v.componentWrapper.meta.component.Id}" navigationId="{!v.componentWrapper.meta.navId}" isTemplate="{!v.isTemplate}" salesforceDomain="{!v.salesforceDomain}" oncontentcreated="{!c.doGoToContent}"></c:createNewContentModal>
+    </aura:if>
+    
+        
+</aura:component>

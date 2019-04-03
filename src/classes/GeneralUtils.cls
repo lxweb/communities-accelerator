@@ -1,6 +1,6 @@
 public class GeneralUtils{
 
-    public static String generateExternalId(String name, String clusterID){
+    public static String generateExternalId(String name, String clusterID, String sobjectType){
         String apiName = name.deleteWhitespace();
         // Alternativa: '[|,|.|\\,||"||:|~|!|@|#|$|%|^|&|*|°|-|+|=|<|>|?|\\(|\\)|\\{|\\}|\\;|\\\'"]'s
         apiName = apiName.replaceAll('[^a-zA-Z0-9]', '_');
@@ -9,18 +9,28 @@ public class GeneralUtils{
             return apiName;
         } else {
             if (Pattern.compile( '[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}' ).matcher(clusterID).matches() ){
-                Cluster__c cluster = [SELECT Id, name FROM Cluster__c WHERE Id =: clusterID];
-                clusterID = cluster.name;
-                clusterID.deleteWhitespace().replaceAll('[^a-zA-Z0-9]', '_');
+                Cluster__c cluster = [SELECT Id, ExternalID__c FROM Cluster__c WHERE Id =: clusterID];
+
+                if(String.isNotEmpty(sobjectType) && sobjectType.equalsIgnoreCase('Content__c')){
+                   
+                    String dateString = String.valueOf(datetime.now());
+                 
+                    dateString = dateString.replaceAll('-','');
+                    dateString = dateString.replaceAll(':','');
+                    dateString = dateString.replaceAll(' ','');
+                    if(apiName.length()>59){
+                        apiName=apiName.subString(0,59);    
+                    }
+                    return cluster.ExternalID__c +'_'+ apiName +'_'+ dateString;// contentDate + timeString;
+                }else{
+                    if(apiName.length()>74){
+                        apiName=apiName.subString(0,74);    
+                    }
+                    apiName=cluster.ExternalID__c +'_'+ apiName;
+                }
             }
         }
-        return clusterID + '_' + apiName;
-        //Test
-    }
-
-    public static String generateExternalId(String name){
-        String stringToReturn = generateExternalId(name, null);
-        return stringToReturn;  
+        return apiName;
     }
 
     public static String joinFields(List<String> listToJoin){
@@ -134,23 +144,42 @@ public class GeneralUtils{
         }
         return retText;
     }
-
-    public static Boolean isSafeObject(String objName){
+    
+    public static Boolean isSafeObject(String objName, Boolean checkPermissions){
+        Boolean result = false;
+        
         SObjectType myObj = Schema.getGlobalDescribe().get(objName);
-        if(myObj != null && myObj.getDescribe().isAccessible()) { 
-            return true; 
+        
+        if(myObj != null) {
+            if(checkPermissions) {
+                if(myObj.getDescribe().isAccessible()) {
+                    result = true;
+                }
+            }else {
+                result = true;
+            }
         }
-        return false;
+        
+        return result;
     }
 
-    public static Boolean isSafeField(String objName, String fieldName){
-        if(isSafeObject(objName)) {
+    public static Boolean isSafeField(String objName, String fieldName, Boolean checkPermissions){
+        Boolean result = false;
+        
+        if(isSafeObject(objName, checkPermissions)) {
             SObjectField myField = Schema.getGlobalDescribe().get(objName).getDescribe().fields.getMap().get(fieldName);
-            if(myField != null && myField.getDescribe().isAccessible()){
-                return true;
-            }            
+            
+            if(myField != null) {
+                if(checkPermissions) {
+                    if(myField.getDescribe().isAccessible()){
+                        result = true;
+                    }
+                }else {
+                    result = true;
+                }
+            }    
         }
-        return false;
+        return result;
     }
 
     public static map<String, Network> mapNetworks;
@@ -198,5 +227,28 @@ public class GeneralUtils{
         }
         return fieldNames;
     }
+
+    /* Check if an Sobject has a field */
+    public static boolean hasSObjectField(String fieldName, SObject so){
+        String s = JSON.serialize(so);
+        // Deserialize it back into a key/value map
+        Map<String,Object> obj = (Map<String,Object>) JSON.deserializeUntyped(s);
+         
+        // Build a set containing the fields present on our SObject
+        Set<String> fieldsPresent = obj.keyset().clone();
+         
+        return fieldsPresent.contains(fieldName);
+    }
     
+    
+    public static String getNavigationId(String navigationUrl) {
+        if (String.isNotBlank(navigationUrl)){
+            String url = navigationUrl.split('/')[navigationUrl.split('/').size()-1];   
+            List<Navigation__c> nav = [SELECT Id From Navigation__c WHERE Url__c =: url LIMIT 1]; 
+            if (nav.size() > 0){
+                return nav[0].Id;
+            }            
+        }       
+        return ''; 
+    }    
 }

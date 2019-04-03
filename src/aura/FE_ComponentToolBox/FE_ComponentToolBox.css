@@ -1,0 +1,71 @@
+.THIS .body-container {
+	position: relative;
+	overflow: hidden;
+	min-height: 31px;
+}
+.THIS .componentBody{
+	position: relative;
+	overflow: hidden;
+	min-height: 31px;
+}
+.THIS .show{
+	visibility: visible;
+	opacity: 0.8;
+}
+.THIS .hidden{
+	visibility: hidden;
+	opacity: 0;
+}
+
+/* BLUE FRAME */
+.THIS .mainEditFrame{
+	position: relative;
+	min-height: 40px;
+   	background-color: white;
+}
+.THIS .borderColorBlue{
+	outline: 2px solid #0059A7;
+}
+
+/* PANEL - NAME */
+.THIS .componentNamePanel{
+	position: absolute;
+	text-align: center;
+	top: 0;
+	padding: 10px;
+	background-color: #2874A6;
+	color: white;
+	transition: opacity 0.7s;
+	font-weight: bold;
+	z-index: 100;
+	min-width: 300px;
+}
+
+/* PANEL - BUTTONS */
+.THIS .buttonsPanel{
+	position: absolute;
+	top: 0px;
+	right: 0;
+	transition: opacity 0.7s;
+	z-index: 100;
+}
+.THIS .buttonsPanelIcons {
+	background-color: #2874A6;
+}
+.THIS .buttonsPanelIcons svg {
+	fill: white;
+}
+
+/* PANEL - CONTENT */
+.THIS .contentDetail{
+	position: absolute;
+	bottom: 0;
+	padding: 10px;
+	background-color: #2874A6;
+	min-width: 70%;
+	transition: opacity 0.7s;
+	z-index: 100;
+}
+.THIS .contentDetail a{
+	color: white;
+}

@@ -3,12 +3,13 @@
 		helper.doInit(component, event, helper);
 	},
 	handleUpsertEvent : function(component, event, helper){
-		var test = event.getParam("action");
-		console.log(test);
-	},
-	handleUpsertEvent : function(component, event, helper){
-		var action = event.getParam("action");
-		helper.upsertContent(component, action);
+		var status = event.getParam("status");
+		var contentId = event.getParam("contentId");
+		var recordId = component.get("v.contentData.Id");
+		if(recordId == contentId){
+			event.stopPropagation();
+			helper.updateContent(component, status);
+		}
 	},
 	handleMediaElementEvent : function(component, event, helper){
 		var mediaElementId = event.getParam("ID");

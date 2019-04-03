@@ -1,94 +1,89 @@
 ({
 	doInit : function(component, event, helper) {
-		//var recordTypeId = component.get("v.pageReference").state.recordTypeId;
-		var recordId = component.get('v.recordId');
-		var recordTypeId;
-		var componentId;		
-		if(component.get("v.pageReference")){
-			recordTypeId = component.get("v.pageReference").state.RecordTypeId;
-			componentId = component.get("v.pageReference").state.ComponentId;
-		}
-		var action;
-		//If we're viewing an existing content.
-		if(recordId){
-			action = component.get('c.getDataExisting');
-			action.setParams({
-				recordId: recordId
-        	});
-			action.setCallback(this, function(response){
-				var state = response.getState();
-				if (state === "SUCCESS") {
-					if(response.getReturnValue()){
-						component.set("v.currentUserName", response.getReturnValue().currentUserName);
-						component.set("v.contentData", response.getReturnValue().content);
-						component.set("v.visibilitySelectors", response.getReturnValue().visibilitySelectors);
-						if(response.getReturnValue().content.MediaElementAssignments__r != null){
-							component.set('v.imageUrl', response.getReturnValue().content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c);
-						}	
-					}else{
-						this.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
-						return;
+		var action 		= component.get('c.getData');
+		var recordId 	= component.get('v.recordId');
+		var helper		= this;
+		action.setParams({
+			recordId: recordId
+    	});
+		action.setCallback(this, function(response){
+			var state = response.getState();
+			if (state === "SUCCESS") {
+				var data = response.getReturnValue();
+				if(data){
+					component.set("v.contentData", 			data.content);
+					component.set("v.timeZone", 			data.timeZone);
+					component.set("v.visibilitySelectors", 	data.visibilitySelectors);
+					component.set("v.bannerFrameTypes", response.getReturnValue().bannerFrameTypes);
+					component.set("v.security", 			data.security);
+					if(data.content.MediaElementAssignments__r != null){
+						component.set('v.imageUrl', data.content.MediaElementAssignments__r[0].MediaElement__r.FileURLDesktop__c);
 					}
+				}else{
+					helper.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
 				}
-			});
-		//If we are creating a new content
-		}else if(recordTypeId){
-			action = component.get('c.getDataNew');
-			action.setParams({
-				contentRecordTypeId: recordTypeId,
-				componentId: componentId
-        	});
-			action.setCallback(this, function(response){
-				var state = response.getState();
-				if (state === "SUCCESS") {
-					component.set("v.currentUserName", response.getReturnValue().currentUserName);
-					component.set("v.contentData", response.getReturnValue().content);
-					component.set("v.visibilitySelectors", response.getReturnValue().visibilitySelectors);
-					component.set("v.behaviourMessage", response.getReturnValue().behaviourMessage);
+			} else if (state === "ERROR") {
+				let errors = response.getError();
+				let message = 'Unknown error';
+				if (errors && Array.isArray(errors) && errors.length > 0) {
+				    message = errors[0].message;
 				}
-			});
-		}else{
-			this.displayErrorMessage($A.get("$Label.c.NewsContentDetailLoadError"));
-			return;
-		}
+				helper.displayErrorMessage(message);
+			}
+		});
 		
 		$A.enqueueAction(action);
 	},
 
-	upsertContent : function(component, eventAction){
-		if(component.get("v.pageReference")){
-			var componentId = component.get("v.pageReference").state.ComponentId;
-		}
-		var content = component.get('v.contentData');
+	updateContent : function(component, status){
+		var helper				= this;
+		var content 			= component.get('v.contentData');
+		var previousStatus		= content.Status__c;
 		var visibilitySelectors = component.get('v.visibilitySelectors');
-		var mediaElementId = component.get('v.mediaElementId');
-		var action = component.get('c.saveContent');
+		var mediaElementId 		= component.get('v.mediaElementId');
+		var action 				= component.get('c.saveContent');
 		action.setParams({
-			componentId : componentId,
 			content : content,
 			visibilitySelectorsString : JSON.stringify(visibilitySelectors),
 			mediaElementId : mediaElementId,
-			action : eventAction,
+			status : status,
 			contentOldTagAssignments : content.Tags__r
         });
 		action.setCallback(this, function(response){
 			var state = response.getState();
 			if (state === "SUCCESS") {
-				if(response.getReturnValue().isSuccess){
-					//component.set('v.contentData', response.getReturnValue());
-					var navEvt = $A.get("e.force:navigateToSObject");
-    				navEvt.setParams({
-						"recordId": response.getReturnValue().message,
-   					 });
-    				navEvt.fire();
-				}else{
-					this.displayErrorMessage(response.getReturnValue().message);
+				helper.showCorrectMessage(component, content, previousStatus, status);
+				var navEvt = $A.get("e.force:navigateToSObject");
+				navEvt.setParams({
+					"recordId": content.Id,
+					 });
+				navEvt.fire();
+			} else if (state === "ERROR") {
+				let errors = response.getError();
+				let message = 'Unknown error';
+				if (errors && Array.isArray(errors) && errors.length > 0) {
+				    message = errors[0].message;
 				}
+				helper.displayErrorMessage(message);
 			}
 		});
 		$A.enqueueAction(action);
 	},
+	showCorrectMessage : function(component, content, previousStatus, actualStatus){
+		var recordTypeName 	= content.RecordType.Name;
+		var recordName 		= content.Name;
+		var helper 			= this;
 
+		if(previousStatus === 'Draft' && actualStatus === 'Draft'){
+			helper.displaySuccessMessage(helper.stringFormat($A.get("$Label.c.ContentDetailDraftMessage"), recordTypeName, recordName));
+		} else if(previousStatus === 'Draft' && actualStatus === 'Published'){
+			helper.displaySuccessMessage(helper.stringFormat($A.get("$Label.c.ContentDetailPublishMessage"), recordTypeName, recordName));
+		} else if(previousStatus === 'Published' && actualStatus === 'Draft'){
+			helper.displaySuccessMessage(helper.stringFormat($A.get("$Label.c.ContentDetailUnpublishMessage"), recordTypeName, recordName));
+		} else if(previousStatus === 'Published' && actualStatus === 'Published'){
+			helper.displaySuccessMessage(helper.stringFormat($A.get("$Label.c.ContentDetailPublishMessage"), recordTypeName, recordName));
+		}
+	},
 	displayErrorMessage : function(message){
 		var toastEvent = $A.get("e.force:showToast");
 					toastEvent.setParams({
@@ -98,7 +93,6 @@
 					});
 		toastEvent.fire();
 	},
-
 	displaySuccessMessage : function(message){
 		var toastEvent = $A.get("e.force:showToast");
 					toastEvent.setParams({
@@ -107,5 +101,11 @@
 						type: "success"
 					});
 					toastEvent.fire();
+	},
+	stringFormat: function(string) {
+	    var outerArguments = arguments;
+	    return string.replace(/\{(\d+)\}/g, function() {
+	        return outerArguments[parseInt(arguments[1]) + 1];
+	    });
 	}
 })

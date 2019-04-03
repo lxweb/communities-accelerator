@@ -4,13 +4,46 @@
         <componentInstances>
             <componentName>ContentDetailContainer</componentName>
         </componentInstances>
+        <name>Facet-d767aaee-a87e-4bf1-8de4-c60e05d42408</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-d767aaee-a87e-4bf1-8de4-c60e05d42408</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.detail</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <name>Facet-4964dea0-51ae-4671-b1e6-b4cce6381749</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>hasDetailComponent</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>ContentDetailHeader</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>tabs</name>
+                <value>Facet-4964dea0-51ae-4671-b1e6-b4cce6381749</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tabset</componentName>
+        </componentInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Content Event Record Page</masterLabel>
+    <sobjectType>Content__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSingleColNoHeaderTemplateDesktop</name>
     </template>
-    <sobjectType>Content__c</sobjectType>
     <type>RecordPage</type>
 </FlexiPage>

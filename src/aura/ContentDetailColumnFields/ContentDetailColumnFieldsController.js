@@ -7,5 +7,10 @@
     },
     onCheck : function(component, event, helper){
         helper.onCheck(component, event);
+    },
+    onChange : function(component, event, helper){
+    	var value = event.getParam("value");
+        var apiName = event.getSource().get("v.name");
+    	helper.setSelectedValue(component, apiName, value);
     }
 })

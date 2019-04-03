@@ -1,0 +1,29 @@
+<template>
+    <div class="slds-page-header slds-grid">
+        <template for:each={items} for:item="item">
+            <div class="slds-page-header__row" key={item.id}>
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <template if:true={item.iconName}>
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    <lightning-icon icon-name={item.iconName}></lightning-icon>
+                                </span>
+                            </div>
+                        </template>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title={item.title}>{item.title}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta">{item.subtitle}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+      </div>
+</template>

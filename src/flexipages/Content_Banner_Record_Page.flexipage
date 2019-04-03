@@ -4,6 +4,39 @@
         <componentInstances>
             <componentName>ContentDetailContainer</componentName>
         </componentInstances>
+        <name>Facet-c24813c8-908c-4fa6-93ff-98a10bd086a6</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>body</name>
+                <value>Facet-c24813c8-908c-4fa6-93ff-98a10bd086a6</value>
+            </componentInstanceProperties>
+            <componentInstanceProperties>
+                <name>title</name>
+                <value>Standard.Tab.detail</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tab</componentName>
+        </componentInstances>
+        <name>Facet-8d3f372c-0c7d-4706-b95c-7c3245399c85</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>hasDetailComponent</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>ContentDetailHeader</componentName>
+        </componentInstances>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>tabs</name>
+                <value>Facet-8d3f372c-0c7d-4706-b95c-7c3245399c85</value>
+            </componentInstanceProperties>
+            <componentName>flexipage:tabset</componentName>
+        </componentInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>

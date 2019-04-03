@@ -1,4 +1,4 @@
-<aura:event type="COMPONENT" description="This event is call to send the action from ContentDetailHeader to ContentDetailContainer for insert or update Content__c" >
-	<aura:attribute name="action" type="String"/>
+<aura:event type="APPLICATION" description="This event is call to send the action from ContentDetailHeader to ContentDetailContainer to update the record" >
+	<aura:attribute name="status" type="String"/>
+	<aura:attribute name="contentId" type="String"/>
 </aura:event>
-

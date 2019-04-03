@@ -2,18 +2,7 @@
     <aura:attribute name="contentData" type="Object" />
     <aura:attribute name="imageUrl" type="String" />
     <aura:attribute name="layoutOptions" type="List" />
-    <aura:attribute name="behaviourMessage" type="String" />
-
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
-    <aura:if isTrue="{!v.behaviourMessage}">
-        <strong>
-            <ui:outputText value="Component Behaviour" /> </strong>
-        <br />
-        <br />
-        <ui:outputText value="{!v.behaviourMessage}" />
-        <br />
-        <br />
-    </aura:if>
+    <aura:attribute name="bannerFrameTypes" type="List" />
 
     <!--Banner Name-->
     <lightning:input label="{!$Label.c.BannerContentDetailName}" name="bannerName" value="{!v.contentData.Name}"
@@ -24,9 +13,9 @@
     <!--Banner Type-->
     <lightning:select name="bannerType" label="{!$Label.c.BannerContentDetailType}"
         value="{!v.contentData.BannerFrameType__c}">
-        <option text="Hero" value="Hero" />
-        <option text="Page" value="Page" />
-        <option text="Square" value="Square" />
+        <aura:iteration items="{!v.bannerFrameTypes}" var="bannerFrameType">
+            <option text="{!bannerFrameType}" value="{!bannerFrameType}" />
+        </aura:iteration>
     </lightning:select>
     <!--Feature Image-->
     <ui:outputText value="{!$Label.c.NewsContentDetailImage}" /><br />

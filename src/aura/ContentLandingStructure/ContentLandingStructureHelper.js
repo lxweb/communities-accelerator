@@ -23,6 +23,7 @@
 				component.set('v.orgId', getGeneralData.orgId);
 				component.set('v.communityName', getGeneralData.communityName);
 				component.set('v.urlPathPrefix', getGeneralData.urlPathPrefix);
+				component.set('v.communityPreviewDomain', getGeneralData.communityPreviewDomain);
 			}
 		});
 		$A.enqueueAction(action);

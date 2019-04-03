@@ -32,20 +32,23 @@ public class ContentLandingStructureController {
 	public class GeneralWrapper{
 		@AuraEnabled public String				orgId;
 		@AuraEnabled public String				communityName;
+		@AuraEnabled public String 				communityPreviewDomain;
 		@AuraEnabled public List<Cluster__c>	clusterLeafs;
 		@AuraEnabled public String 				urlPathPrefix;
 
-		public GeneralWrapper(String orgId, String communityName, List<Cluster__c> clusterLeafs, String urlPathPrefix){
-			this.orgId 			= orgId;
-			this.communityName	= communityName;
-			this.clusterLeafs	= clusterLeafs;
-			this.urlPathPrefix 	= urlPathPrefix;
+		public GeneralWrapper(String orgId, String communityName, String communityPreviewDomain, List<Cluster__c> clusterLeafs, String urlPathPrefix){
+			this.orgId 					= orgId;
+			this.communityName			= communityName;
+			this.communityPreviewDomain	= communityPreviewDomain;
+			this.clusterLeafs			= clusterLeafs;
+			this.urlPathPrefix 			= urlPathPrefix;
 		}
 	}
 
 	@AuraEnabled(cacheable=true)
 	public static GeneralWrapper getGeneralData(){
-		return new GeneralWrapper(getOrgId(), getCommunityName(), getClusterLeafs(), getUrlPathPrefix(getClusterUserId()));
+		Cluster__c croot = getClusterRoot(getClusterUserId());
+		return new GeneralWrapper(getOrgId(), croot.CommunityName__c.toLowerCase(), croot.CommunityPreviewDomain__c, getClusterLeafs(), getUrlPathPrefix(getClusterUserId()));
 	}
 
 	@AuraEnabled(cacheable=true)
@@ -115,8 +118,8 @@ public class ContentLandingStructureController {
 	@AuraEnabled(cacheable=true)
 	public static String getSiteId(String clusterId){
 		String networkName = getClusterRoot(clusterId).CommunityName__c;
-		String siteName1   = networkName + '1';
-		String siteName_C  = networkName + '_C';
+		String siteName1   = networkName.replace(' ', '_') + '1';
+		String siteName_C  = networkName.replace(' ', '_') + '_C';
 		List<Site> site = [SELECT Id, Name FROM Site WHERE Name =: siteName1 OR Name =: siteName_C];
 		if(!site.isEmpty())
 			return String.valueOf(site.get(0).Id).substring(0, 15);
@@ -146,9 +149,9 @@ public class ContentLandingStructureController {
 	}
 
 	public static Cluster__c getClusterRoot(String clusterId){
-		Cluster__c cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:clusterId];
+		Cluster__c cluster = [SELECT Id, CommunityName__c, CommunityPreviewDomain__c, ParentCluster__c FROM Cluster__c WHERE Id=:clusterId];
 		while(cluster.ParentCluster__c != null){
-			cluster = [SELECT Id, CommunityName__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.ParentCluster__c];
+			cluster = [SELECT Id, CommunityName__c, CommunityPreviewDomain__c, ParentCluster__c FROM Cluster__c WHERE Id=:cluster.ParentCluster__c];
 		}
 		return cluster;
 	}

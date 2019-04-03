@@ -3,7 +3,7 @@ public with sharing class CG_ContentCatalogControllerTest {
 	@testSetup
 	public static void setParameters(){
         MockupFactory.generateAcceleratorSetting();
-        MockupFactory.createCluster('Global', null, 1, 'ClusterRoot');
+        MockupFactory.createCluster('Global', null, 1, 'ClusterRoot', 'CRT');
 	}
 
 	@isTest
@@ -32,8 +32,8 @@ public with sharing class CG_ContentCatalogControllerTest {
 		Component__c c = [SELECT ExternalId__c FROM Component__c WHERE Id =: component LIMIT 1];
 		String componentToWrap = c.ExternalId__c;
 		String brandToWrap = String.valueOf(brand[0]);
-		String categoryToWrap = String.valueOf(category[0]);
-		String tagToWrap = String.valueOf(tag[0]);
+		String categoryToWrap = String.valueOf(category[0].Id);
+		String tagToWrap = String.valueOf(tag[0].Id);
 		Set<Id> setCategory = new Set<Id>();
 		
 		for(Content__c cont : content){
