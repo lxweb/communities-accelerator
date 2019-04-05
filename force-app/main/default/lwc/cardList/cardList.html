@@ -1,0 +1,8 @@
+<template>
+    <div class="list-container">
+        <template for:each={contents} for:item="content" for:index="index">
+            <c-card-hoc key={content.content.Id} content={content} type={type}></c-card-hoc>
+            <div  key={content.content.Id} class="spacer"></div>
+        </template>
+    </div>
+</template>

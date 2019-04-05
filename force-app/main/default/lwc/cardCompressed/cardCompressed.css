@@ -1,0 +1,88 @@
+.container {
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 20px 0 10px 0;
+  color: #C0C0C0;
+  max-height: 140px;
+}
+.container-info {
+  padding-left: 14px;
+}
+.img-container {
+  height: 100%;
+}
+.img-container .img {
+  height: 100%;
+  width: auto;
+}
+.header {
+  font-family: 'Roboto';
+  padding: 0 5px;
+}
+.head-event {
+  background-color: #333333;
+  color: #FDFDFD;
+  text-align: right;
+}
+.head-news {
+  color: #C0C0C0;
+}
+.title {
+  word-break: break-word;
+  font-family: 'Roboto';
+  line-height: 30px;
+  height: 60px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #333333;
+  max-height: 60px;
+  overflow: hidden;
+}
+.body {
+  max-height: 42px;
+  overflow: hidden;
+  font-weight: 400;
+}
+.description {
+  font-weight: 400;
+  color: #121212;
+  font-size: 12px;
+  line-height: 14px;
+}
+.footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 10px;
+}
+.location-container {
+  display: inline-block;
+}
+.icon::before {
+  content: '';
+  float: right;
+  height: 1em;
+  width: 1em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  bottom: -3px;
+}
+.icon {
+  font-size: 1rem;
+}
+.icon.icon-2x {
+  font-size: 2rem;
+}
+.icon.icon-3x {
+  font-size: 3rem;
+}
+.icon.icon-4x {
+  font-size: 4rem;
+}
+.icon.icon-5x {
+  font-size: 5rem;
+}
+.location-icon::before {
+  background-image: url("sfsites/c/resource/Assets/Assets/Icons/location.svg");
+}

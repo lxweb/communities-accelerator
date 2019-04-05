@@ -1,0 +1,38 @@
+.slds-wrap {
+    align-items: inherit;
+}
+.slds-col-general{
+    border-bottom: 1px solid #000000;
+}
+.slds-structure-col{
+    padding-top: 37px;
+}
+.section-title{
+    font-size: 12px;
+    text-align: right;
+    font-weight: bold;
+}
+.slds-form-element__control label,.slds-form-element__control label input{
+    cursor: pointer;
+}
+.input-label{
+    font-size: 13px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 14px;
+}
+.desc-lbl{
+    font-size: 13px;
+    text-align: left;
+    color: #706E6B;
+    margin-left: 27px;
+}
+.col-recordType{
+    padding-left: 31px;
+}
+.slds-modal__content{
+    padding: 37px 60px;
+}
+.slds-form-element{
+    margin-bottom: 20px;
+}

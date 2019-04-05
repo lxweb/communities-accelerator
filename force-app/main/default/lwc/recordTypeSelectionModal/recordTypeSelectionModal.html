@@ -1,0 +1,120 @@
+<template>
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal modalbox2">
+		<div class="slds-modal__container">
+			<header class="slds-modal__header">
+				<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+					<template if:true={create}>
+						{create}
+					</template>
+					<template if:true={isTemplate}>
+						<template if:true={templateLabel}>
+							{templateLabel}
+						</template>
+					</template>
+				</h2>
+				<div>
+					<template if:true={generalClose}>
+						<lightning-button-icon
+						icon-name="utility:close"
+						size="large"
+						variant="bare"
+						title={generalClose}
+						icon-class="slds-button slds-button_icon slds-button_icon-inverse"
+						class="buttonStyle slds-modal__close"
+						alternative-text={generalClose}
+						onclick={showHideModal}>
+						</lightning-button-icon>
+					</template>
+				</div>
+			</header>
+			<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+				<div class="slds-grid slds-wrap">
+					<template if:false={isTemplate}>
+						<div class="slds-col slds-size_4-of-12 slds-grid_vertical-align-start slds-col-general">
+							<template if:true={generalContents}>
+								<p class="section-title">{generalContents}</p>
+							</template>
+						</div>
+						<div class="slds-col slds-size_8-of-12 col-recordType slds-col-general">
+							<template if:true={options}>
+								<template for:each={options} for:item="opts">
+									<template if:true={opts}>
+										<div key={opts.Id} class="slds-form-element">
+											<div class="slds-form-element__control">
+												<label>
+													<input id={opts.Id} value={opts.Id} name="options" type="radio" onclick={optionSelected}/>
+													<span class="input-label">{opts.Name}</span>
+												</label>
+											</div>
+											<p class="desc-lbl">{opts.Description}</p>
+										</div>
+									</template>
+								</template>
+							</template>
+						</div>
+						<div class="slds-col slds-size_4-of-12 slds-grid_vertical-align-start slds-structure-col">
+							<template if:true={structureContent}>
+								<p class="section-title">{structureContent}</p>
+							</template>
+						</div>
+						<div class="slds-col slds-size_8-of-12 col-recordType slds-structure-col">
+							<template if:true={option}>
+								<template for:each={option} for:item="opt">
+									<template if:true={opt}>
+										<div key={opt.Id} class="slds-form-element">
+											<div class="slds-form-element__control">
+												<label>
+													<input id={opt.Id} value={opt.Id} name="options" type="radio" onclick={optionSelected}/>
+													<span class="input-label">{opt.Name}</span>
+												</label>
+											</div>
+											<p class="desc-lbl">{opt.Description}</p>
+										</div>
+									</template>
+								</template>
+							</template>
+						</div>
+					</template>
+					<template if:true={isTemplate}>
+						<div class="slds-col slds-size_4-of-12 slds-grid_vertical-align-start">
+							<template if:true={generalContents}>
+								<p class="section-title">{generalContents}</p>
+							</template>
+						</div>
+						<div class="slds-col slds-size_8-of-12 col-recordType">
+							<template if:true={options}>
+								<template for:each={options} for:item="opts">
+									<template if:true={opts}>
+										<div key={opts.Id} class="slds-form-element">
+											<div class="slds-form-element__control">
+												<label>
+													<input id={opts.Id} value={opts.Id} name="options" type="radio" onclick={optionSelected}/>
+													<span class="input-label">
+														{opts.Name}
+														<template if:true={templateLabel}>
+															&nbsp; {templateLabel}
+														</template>
+													</span>
+												</label>
+											</div>
+											<p class="desc-lbl">{opts.Description}</p>
+										</div>
+									</template>
+								</template>
+							</template>
+						</div>
+					</template>
+				</div>
+			</div>
+			<footer class="slds-modal__footer">
+				<template if:true={generalCancel}>
+					<button class="slds-button slds-button_neutral" title={generalCancel} onclick={showHideModal}>{generalCancel}</button>
+				</template>
+				<template if:true={generalNext}>
+					<button class="slds-button slds-button_brand" title={generalNext} onclick={onNewRecord} disabled={isDisabled}>{generalNext}</button>
+				</template>
+			</footer>
+		</div>
+	</section>
+	<div class="divBackdrop2 slds-backdrop"></div>
+</template>
