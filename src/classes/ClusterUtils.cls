@@ -157,13 +157,13 @@ public with sharing class ClusterUtils {
 		List<Cluster__c> 	clusterList 	= new List<Cluster__c>();
 		Set<Id>				clusterRelatedSet	= new Set<Id>();
 
-		Cluster__c cluster = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE Id =: clusterId];
+		Cluster__c cluster = [SELECT Id, Name, ExternalId__c, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, RecordType.Name FROM Cluster__c WHERE Id =: clusterId];
 		
 		clusterList.add(cluster);
 		clusterRelatedSet.add(cluster.Id);
 
 		while(!clusterRelatedSet.isEmpty()){
-			List<Cluster__c> clustersRelated = [SELECT Id, Name, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName FROM Cluster__c WHERE ParentCluster__c IN: clusterRelatedSet ORDER BY Name];
+			List<Cluster__c> clustersRelated = [SELECT Id, Name, ExternalId__c, ParentCluster__c, ClusterLandingUrl__c, RecordType.DeveloperName, RecordType.Name FROM Cluster__c WHERE ParentCluster__c IN: clusterRelatedSet ORDER BY Name];
 			clusterRelatedSet.clear();
 			clusterList.addAll(clustersRelated);
 		}

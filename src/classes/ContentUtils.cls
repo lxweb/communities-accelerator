@@ -38,15 +38,14 @@ public without sharing virtual class ContentUtils {
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';     
         
         //FROM
-        query += 'FROM Content__c';
+        query += 'FROM Content__c ';
 
         //WHERE
-        query += ' WHERE IsTemplate__c = false AND Status__c = \'Published\' ';
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
         
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
-            query += 'AND (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
+            query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
             query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
 
         }else{
@@ -76,10 +75,10 @@ public without sharing virtual class ContentUtils {
             }
 
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
-                query += 'AND Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
 
-                query += 'AND (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
             if(component.Recordtype.Developername == 'Event' || component.Recordtype.DeveloperName == 'RelatedEvent'){
@@ -156,7 +155,7 @@ public without sharing virtual class ContentUtils {
         String query = '';
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
-        query += 'WHERE IsTemplate__c = false AND Status__c = \'Published\' AND Id IN: setAllContentIds ';
+        query += 'WHERE Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
         query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ASC, ');
         query += 'LIMIT ' + pageSize + ' ';

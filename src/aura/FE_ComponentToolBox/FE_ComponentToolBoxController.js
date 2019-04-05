@@ -7,6 +7,9 @@
                 component.set('v.showComponentFrame', false);
             }
         }
+        var urlArr = window.location.pathname.split("/s/");
+        var url = (urlArr.length > 1 && urlArr[1] != "") ? urlArr[1] : "/s/";
+        component.set("v.navigationURL", url);
 	},
 	doViewComponent : function(component, event, helper) {
 		helper.viewComponent(component, event, helper);
@@ -19,6 +22,12 @@
 	},
 	doHideEditFrame : function(component, event, helper) {
 		helper.showHideEditFrame(component, helper, false);
+	},
+	doHideNamePanel : function(component, event, helper){
+		helper.showHideNamePanel(component, event, false);
+	},
+	doShowNamePanel : function(component, event, helper){
+		helper.showHideNamePanel(component, event, true);
 	},
 	doNewContent : function(component, event, helper){
 		component.find("newContentModal").show();

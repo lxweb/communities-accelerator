@@ -529,6 +529,14 @@
         <value>Name</value>
     </labels>
     <labels>
+        <fullName>ClusterLookupPlaceholder</fullName>
+        <categories>createNewContentModal.lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ClusterLookupPlaceholder</shortDescription>
+        <value>Search Cluster...</value>
+    </labels>
+    <labels>
         <fullName>Desktop</fullName>
         <categories>MediaElementUpload.cmp</categories>
         <language>en_US</language>
@@ -1318,6 +1326,14 @@
         <protected>false</protected>
         <shortDescription>ContentCreatedFromTemplate</shortDescription>
         <value>A new Content was created based on {0} template</value>
+    </labels>
+    <labels>
+        <fullName>ContentCreated</fullName>
+        <categories>CreateNewContentModal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ContentCreated</shortDescription>
+        <value>Content {0} was created</value>
     </labels>
     <labels>
         <fullName>EventContentDetailTemplateDescription</fullName>
