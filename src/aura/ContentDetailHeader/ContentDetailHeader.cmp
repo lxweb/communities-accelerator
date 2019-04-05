@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailHeaderController">
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailHeaderController" access="global">
 
     <!-- HANDLERS -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -7,7 +7,7 @@
 	<aura:attribute name="recordId" 			type="String" 						/>
 	<aura:attribute name="contentData" 			type="Content__c" 					/>
 	<aura:attribute name="timeZone" 			type="String" 						/>
-	<aura:attribute name="hasDetailComponent"	type="Boolean" 						/>
+	<aura:attribute name="hasDetailComponent"	type="Boolean" 						access="global"/>
 	<aura:attribute name="temporaryName"		type="String"						/>
 	<aura:attribute name="isNameEdit"			type="Boolean"		default="false"	/>
 
