@@ -1,32 +1,50 @@
 <template>
     <div class="datatable"> 
-        <p class="edit-cancel" onclick={editTable}>Edit</p>
+        <!-- <p class="edit-cancel" onclick={editTable}>Edit</p> -->
         <h1>{table.title}</h1>
-        <div class="slds-form-element">
-            <input placeholder="Placeholder Text" class="slds-input" type="search" onsearch={searchEvent} />
+        <div class="search-element">
+            <input class="searchInput" placeholder="Placeholder Text" type="search" onsearch={searchEvent} onfocus={showFilter}/>
+            <button class="cancelSearch">Cancel</button>
+            <lightning-icon class="filterIcon" icon-name="utility:connected_apps" onclick={openFilter} ></lightning-icon>
         </div>
-        <!-- <div class="slds-grid slds-wrap">
-            <template for:each={table.columns} for:item="col">
-                <div key={col.fieldName} class="slds-col slds-size_2-of-4">
-                    <template if:true={col.filtrable}>
-                        <lightning-button-menu label={col.fieldName}>
-                            <template for:each={col.filtrableValues} for:item="filter">
-                                <div key={filter}>
-                                    <lightning-menu-item
-                                        label={filter}
-                                        value={filter}
-                                        data-column={col.fieldName} 
-                                        data-type={col.type} 
-                                        data-value={filter} 
-                                        onclick={filterEvent}>
-                                    </lightning-menu-item>
-                                </div>
-                            </template>
-                        </lightning-button-menu>
-                    </template>
+        <template if:true={appliedFilters}>
+            <template for:each={table.appliedFilters} for:item="filters">
+                <div key={filters.filter.name}>
+                    <span class="slds-pill slds-pill_link">
+                        <span class="slds-pill__label">{filters.value1}</span>
+                        <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" title="Remove">
+                        </button>
+                    </span>
                 </div>
             </template>
-        </div> -->
+        </template>
+        <div class="modal">
+            <div class="modal__header">
+                <button class="closeModal" onclick={openFilter}>Close</button>
+            </div>
+            <div class="modal__content">
+                <template for:each={table.columns} for:item="col">
+                    <div key={col.fieldName}>
+                        <template if:true={col.filtrable}>
+                            <h2>{col.label}</h2>
+                            <template for:each={col.filtrableValues} for:item="filter">
+                                <div key={filter}>
+                                    <button class="filter" 
+                                            data-column={col.fieldName} 
+                                            data-type={col.type} 
+                                            data-value={filter}
+                                            onclick={filterActive}>{filter}</button>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </div>
+            <div class="modal__footer hidden">
+                <button onclick={filterRemove}>Remove All Filters</button>
+                <button class="applyFilter" onclick={filterEvent}>Apply</button>
+            </div>
+        </div>
         <template for:each={table.tableData} for:item="row">    
             <article key={row.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>  
                 <div class="checkbox">
