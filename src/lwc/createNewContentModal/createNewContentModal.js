@@ -1,14 +1,20 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import generalCancel from '@salesforce/label/c.General_Cancel';
 import generalClose from '@salesforce/label/c.General_Close';
+import generalError from '@salesforce/label/c.General_Error';
+import generalSuccess from '@salesforce/label/c.General_Success';
+import contentCreated from '@salesforce/label/c.ContentCreated';
+import clusterField from '@salesforce/label/c.ContentLandingCluster';
 import saveAndNext from '@salesforce/label/c.SaveAndNext';
 import recordName from '@salesforce/label/c.ContentNameInput';
 import contentCreateLabel from '@salesforce/label/c.Create';
 import errorMessageLabel from '@salesforce/label/c.NewContentErrorMessage';
 import templateLabel from '@salesforce/label/c.Template';
 import requiredFieldMessage from '@salesforce/label/c.RequiredField';
+import ClusterLookupPlaceholder from '@salesforce/label/c.ClusterLookupPlaceholder';
 import getRecordTypeName from '@salesforce/apex/CreateNewContentModalController.getRecordTypeName';
 import createNewContent from '@salesforce/apex/CreateNewContentModalController.createNewContent';
+import getClusters from '@salesforce/apex/CreateNewContentModalController.getClusters';
 
 import { CurrentPageReference,NavigationMixin } from 'lightning/navigation';
 import { registerListener, unregisterAllListeners } from 'c/pubsub';
@@ -20,24 +26,39 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     @api recordTypeId; //type="String"
     @api isTemplate; //type="Boolean"
     @api componentId; //type="String"
-    @api navigationId; //type="String"
+    @api navigationUrl; //type="String"
     @api salesforceDomain; //type="String"
+    // Use alerts instead of toast to notify user
+    @api notifyViaAlerts = false;
+    @api clusters;
+    
+    @track isMultiEntry = false;
+    @api initialSelection = [
+        //{id: 'idcluster', sObjectType: 'Cluster__c', icon: 'custom:custom26', title: 'Nombre cluster', subtitle:'Not a valid record'}
+    ];
+    @track errors = [];
 
     @track recordTypeLabel;
-    @track contentCreateLabel;
-    @track errorMessageLabel;
-    @track templateLabel;
     @track modalTitle;
-    @track requiredFieldMessage;
     @track isDisabled;
 
     recordNameValue;
+    selectedClusterId;
 
     label = {
-        generalCancel,
-        saveAndNext,
         generalClose,
-        recordName
+        generalCancel,
+        generalSuccess,
+        generalError,
+        contentCreated,
+        saveAndNext,
+        recordName,
+        clusterField,
+        contentCreateLabel,
+        errorMessageLabel,
+        templateLabel,
+        requiredFieldMessage,
+        ClusterLookupPlaceholder
     };
 
     //Reference used for the pubsub module
@@ -51,15 +72,12 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
     constructor(){
         super();
-        this.contentCreateLabel = contentCreateLabel;
-        this.templateLabel = templateLabel;
-        this.errorMessageLabel = errorMessageLabel;
-        this.requiredFieldMessage = requiredFieldMessage;
         this.recordNameValue = null;
     }
 
     connectedCallback() {
         registerListener('btncreatecontentclicked', this.handleClickBtnHeader, this);
+        this.getClustersBelow();
     }
 
     disconnectedCallback() {
@@ -71,7 +89,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         this.recordTypeId = event.recordTypeId;
         this.isTemplate = event.isTemplate;
         this.componentId = event.componentId;
-        this.navigationId = event.navigationId;
+        this.navigationUrl = event.navigationUrl;
         this.onInit();
         this.showHideModal();
     }
@@ -88,18 +106,54 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
                 this.recordTypeLabel = result;
                 this.assignTitle();
             })
+            // eslint-disable-next-line handle-callback-err
             .catch( err => {
-                console.log(err);
                 this.recordTypeLabel = '';
                 this.assignTitle();
             });
     }
 
+    getClustersBelow(){
+        getClusters()
+            .then(result => {
+                this.clusters = JSON.parse(result);
+            })
+            .catch( err => {
+                if(err.body.message){
+                    this.showToast(this.label.generalError, err.body.message, 'error');  // Use a custom label for toast title
+                }
+            });
+    }
+
+    handleSearch(event) {
+        let results = [];
+        let stringText = event.detail.searchTerm;
+        var i;
+
+        if(stringText === ''){
+            results = this.clusters;
+        } else {
+            for(i=0; i<this.clusters.length; i++){
+                if(this.clusters[i].title.toLowerCase().includes(stringText.toLowerCase())){
+                    results.push(this.clusters[i]);
+                }
+            }
+        }
+
+        this.template.querySelector('c-lightning-lookup').setSearchResults(results);
+        
+    }
+
+    handleSelectionChange() {
+        const selection = JSON.parse(JSON.stringify(this.template.querySelector('c-lightning-lookup').getSelection()));
+        this.selectedClusterId = ( selection.length > 0) ? selection[0].id : null;
+    }
+
     //Sets the modal title.
     assignTitle(){
-        this.modalTitle = this.contentCreateLabel + ' ' + this.recordTypeLabel;
+        this.modalTitle = this.label.contentCreateLabel + ' ' + this.recordTypeLabel;
         if(this.isTemplate){
-            this.modalTitle += ' ' + this.templateLabel;
+            this.modalTitle += ' ' + this.label.templateLabel;
         }
     }
 
@@ -121,34 +175,37 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         if(this.recordNameValue){
             this.setRecord();
         }else{
-            this.errorMessage = this.requiredFieldMessage;
-            this.showToast();
+            this.showToast(this.label.generalError,this.label.requiredFieldMessage,"error");
         }
     }
 
     //Create the record.
     setRecord(){
         var contentModal = this;
-        createNewContent({ recordTypeId: this.recordTypeId, isTemplate : this.isTemplate, componentId :  this.componentId, navigationId : this.navigationId, recordName : this.recordNameValue})
-            .then(result => {
-                this.result = JSON.parse(JSON.stringify(result));
-                if(result.isSuccess){
-                    this.showHideModal();
-                    if(contentModal.salesforceDomain == null){
-                        this.navigateToWebPage("/" + this.result.message);
-                    } else {
-                        contentModal.dispatchEvent(new CustomEvent('contentcreated', {detail: { recordId: this.result.message }}));
-                    }
-                }else{
-                    this.errorMessage = this.result.message;
-            this.showToast();
+        createNewContent({ 
+            recordTypeId: this.recordTypeId, 
+            isTemplate : this.isTemplate, 
+            componentId :  this.componentId, 
+            navigationUrl : this.navigationUrl, 
+            recordName : this.recordNameValue, 
+            clusterId : this.selectedClusterId
+        }).then(result => {
+            this.result = JSON.parse(JSON.stringify(result));
+            if(result.isSuccess){
+                this.showHideModal();
+                if(this.salesforceDomain == null){
+                    this.navigateToWebPage("/" + this.result.message);
+                } else {
+                    contentModal.dispatchEvent(new CustomEvent('contentcreated', {detail: { recordId: this.result.message }}));
                 }
-            })
-            .catch( err => {
-                console.log(err);
-                this.errorMessage = this.errorMessageLabel;
-                this.showToast();
-            });
+                this.showToast(this.label.generalSuccess, this.stringFormat(this.label.contentCreated, this.recordNameValue), "success");
+            }else{
+                this.showToast(this.label.generalError, this.result.message, "errror");
+            }
+        // eslint-disable-next-line handle-callback-err
+        }).catch( err => {
+            contentModal.showToast(this.label.generalError, this.label.errorMessageLabel, "errror");
+        });
     }
 
     //Navigates to URL
@@ -159,6 +216,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
                     url: url
                 }
         });
+        
     }
 
     //Sets value of the input to the var.
@@ -177,14 +235,20 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         }
     }
 
-    //Open toast with a message
-    showToast() {
+    showToast(toastTitle,toastMessage,toastVariant) {
         const event = new ShowToastEvent({
-            message: this.errorMessage,
-            variant: "error",
-            mode: "sticky"
+            title: toastTitle,
+            message: toastMessage,
+            variant: toastVariant,
+            mode: (toastVariant === "success") ? 'dismissable' : 'sticky'
         });
         this.dispatchEvent(event);
     }
 
+    stringFormat(string) {
+	    var outerArguments = arguments;
+	    return string.replace(/\{(\d+)\}/g, function() {
+	        return outerArguments[parseInt(arguments[1]) + 1];
+	    });
+	}
 }
