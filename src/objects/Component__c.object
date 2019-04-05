@@ -2442,7 +2442,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Pending Approval</fullName>
+                <fullName>In Approval</fullName>
                 <default>false</default>
             </values>
             <values>
