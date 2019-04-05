@@ -582,6 +582,11 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                     <label>Draft</label>
                 </value>
                 <value>
+                    <fullName>Scheduled</fullName>
+                    <default>false</default>
+                    <label>Scheduled</label>
+                </value>
+                <value>
                     <fullName>Published</fullName>
                     <default>false</default>
                     <label>Published</label>
@@ -922,6 +927,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <fullName>Published</fullName>
                 <default>false</default>
             </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
     </recordTypes>
     <recordTypes>
@@ -1047,6 +1056,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Published</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1192,6 +1205,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <fullName>Published</fullName>
                 <default>false</default>
             </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
     </recordTypes>
     <recordTypes>
@@ -1333,6 +1350,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Published</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1478,6 +1499,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <fullName>Published</fullName>
                 <default>false</default>
             </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
     </recordTypes>
     <recordTypes>
@@ -1619,6 +1644,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Published</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1764,6 +1793,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
                 <fullName>Published</fullName>
                 <default>false</default>
             </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
         </picklistValues>
     </recordTypes>
     <recordTypes>
@@ -1889,6 +1922,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Published</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -2032,6 +2069,10 @@ if(Cluster__r.ParentCluster__r.ParentCluster__r.ParentCluster__r.RecordType.Deve
             </values>
             <values>
                 <fullName>Published</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
