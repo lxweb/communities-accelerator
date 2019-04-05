@@ -11,7 +11,7 @@
                 <aura:if isTrue="{!v.componentWrapper.component.RecordType.DeveloperName == 'Event'}">
                         <c:cardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentType}"/>
                         <aura:set attribute="else">
-                                <c:relatedCardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.recordType}"/>
+                                <c:relatedCardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentWrapper.component.RecordType.DeveloperName}"/>
                         </aura:set>
                 </aura:if>
             </aura:if>
