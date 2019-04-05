@@ -1,5 +1,5 @@
 ({
-	helperMethod : function() {
-		
+	reloadTable : function(component) {
+        component.find('container').reloadTable();
 	}
 })

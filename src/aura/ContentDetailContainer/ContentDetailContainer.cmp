@@ -13,6 +13,7 @@
     <aura:attribute name="imageUrl" type="String" />
     <aura:attribute name="timeZone"             type="String" />
     <aura:attribute name="bannerFrameTypes" type="List" />
+    <aura:attribute name="security" type="Object" />
 
     <div class="container">
         <div class="slds-grid">

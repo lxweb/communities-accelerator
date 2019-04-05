@@ -3,7 +3,9 @@
         <div class="card-detail slds-grid slds-gutters_direct slds-gutters_x-large slds-grid_align-center">
             <div class="detail slds-col slds-size_4-of-4">
                 <div class={eventClass}>
-                    <p class="date">{details.date}</p>
+                    <p class="date">
+                        <lightning-formatted-date-time value={details.date} year="numeric" day="numeric" month="long" time-zone="UTC"></lightning-formatted-date-time>
+                    </p>
                 </div>
                 <div if:true={isEvent} class="location-container">
                     <lightning-icon class="slds-icon_container" icon-name="custom:custom106" size="x-small" alternative-text="Location" ></lightning-icon>

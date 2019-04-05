@@ -1,4 +1,5 @@
 ({
-	onInit : function(component, event, helper) {
-	}
+    reInit : function(component, event, helper) {
+    	helper.reloadTable(component);
+    }
 })

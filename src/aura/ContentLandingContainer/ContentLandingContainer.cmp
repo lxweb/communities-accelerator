@@ -1,5 +1,8 @@
 <aura:component implements="force:appHostable,lightning:isUrlAddressable" >
+
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.reInit}" />
+
     <div class="container">
-        <c:contentContainer objectApiName="Content__c" />
+        <c:contentContainer aura:id="container" objectApiName="Content__c" />
     </div>
 </aura:component>

@@ -50,7 +50,7 @@
 			                        details.date = content.EventStartDate__c;
 									details.location = {};
 			                        details.location.name = content.Location__c;
-			                        details.location.href = 'https://www.google.com/maps/place/' + content.Location__c;
+			                        details.location.href = 'https://www.google.com/maps/search/' + content.Location__c;
 			                        details.title = content.Title__c;
 			                        details.imgSrc = cWrapper.contentWrapper[0].mediaElements[0].FileURLDesktop__c;
 			                        details.body = content.Body__c;

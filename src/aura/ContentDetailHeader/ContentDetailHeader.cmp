@@ -46,7 +46,7 @@
 						        <lightning:button label="{!$Label.c.ContentDetailSaveDraft}"  onclick="{! c.doSaveDraft}" />
 						    </aura:if>
 					        <!-- <lightning:button label="{!$Label.c.ContentDetailSchedule}" /> -->
-		                	<aura:if isTrue="{!v.contentData.IsTemplate__c}">
+		                	<aura:if isTrue="{!and(v.contentData.IsTemplate__c,v.contentData.Status__c == ($Label.c.ContentDetailPublished))}">
 						        <lightning:button label="{!$Label.c.CreateFromTemplateButton}"  onclick="{! c.doCreateFromTemplate}" />
 						    </aura:if>
 					    </lightning:buttonGroup>
