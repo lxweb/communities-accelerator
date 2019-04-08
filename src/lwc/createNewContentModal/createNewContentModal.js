@@ -104,7 +104,9 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
     //Get Data of the component
     onInit(){
-        this.getRecordTypeName();
+        if(!this.isTemplate){
+            this.getRecordTypeName();
+        }
     }
 
     //Get record type name from apex
