@@ -18,7 +18,8 @@ public class RichTextController {
             if(externalIdUrlMap.keySet().contains(externalId)){
                 mediaElementURL = externalIdUrlMap.get(externalId);
             } else {
-                mediaElementURL = '@ME_ERROR:' + externalId + '@';
+//                mediaElementURL = '@ME_ERROR:' + externalId + '@';
+                mediaElementURL = externalId;
             }
             richText = richText.replace(toReplace, mediaElementURL);
             return replaceExternalIdsWithURLs(richText, externalIdUrlMap);
@@ -68,11 +69,10 @@ public class RichTextController {
 
     public static String replaceURLsWithExternalIds(String richText, Map<String, String> urlExternalIdMap){
         // Replaces URLs with External Ids in tags @ME:@ 
-        String richTextTemp = richText.contains('@ME:') ? richText.substring(richText.lastIndexOf('@ME:') + 1) : richText;
+        String richTextTemp = richText.contains('@ME') ? richText.substring(richText.lastIndexOf('@ME') + 1) : richText;
         String url = richTextTemp.substringBetween('<img src="', '">');
         if(url != null){
-            System.debug(url);
-            String mediaElementExternalId = urlExternalIdMap.keySet().contains(url) ? '@ME:' + urlExternalIdMap.get(url) + '@' : url.replace('ME_ERROR','ME');
+            String mediaElementExternalId = urlExternalIdMap.keySet().contains(url) ? '@ME:' + urlExternalIdMap.get(url) + '@' : '@ME_ERROR:' + url + '@';
             richText = richText.replace(url, mediaElementExternalId);
             return replaceURLsWithExternalIds(richText, urlExternalIdMap);
         } else {
