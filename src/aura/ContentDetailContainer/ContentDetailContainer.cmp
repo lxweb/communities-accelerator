@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailController">
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailController" access="global">
     
     <!-- HANDLERS -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -13,6 +13,7 @@
     <aura:attribute name="imageUrl" type="String" />
     <aura:attribute name="timeZone"             type="String" />
     <aura:attribute name="bannerFrameTypes" type="List" />
+    <aura:attribute name="security" type="Object" />
 
     <div class="container">
         <div class="slds-grid">

@@ -1,7 +1,7 @@
-<aura:component extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes">
+<aura:component extends="c:CG_BaseComponent" implements="forceCommunity:availableForAllPageTypes" access="global">
 
     <!-- GENERAL VARIABLES --> 
-    <aura:attribute name="componentExternalId" type="String" />
+    <aura:attribute name="componentExternalId" type="String" access="global"/>
     <aura:attribute name="componentType" type="String" default="Event"/>
     <aura:attribute name="componentWrapper" type="Object" />
     <aura:attribute name="showPaging" type="Boolean" default="{!v.componentWrapper.listAllContentIds.length > v.componentWrapper.contentWrapper.length}"/>
@@ -11,7 +11,7 @@
                 <aura:if isTrue="{!v.componentWrapper.component.RecordType.DeveloperName == 'Event'}">
                         <c:cardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentType}"/>
                         <aura:set attribute="else">
-                                <c:relatedCardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.recordType}"/>
+                                <c:relatedCardList onnavigatetodetail="{!c.handleNavigateToDetail}" contents="{!v.componentWrapper.contentWrapper}" type="{!v.componentWrapper.component.RecordType.DeveloperName}"/>
                         </aura:set>
                 </aura:if>
             </aura:if>

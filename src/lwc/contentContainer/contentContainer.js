@@ -29,6 +29,10 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
     @api headerButtonsPrimary;
     @api headerButtonsSecondary;
     @api optionsFilterRadioButtonGroup;
+
+    @api reloadTable(){
+        this.tableDataDelete(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
+    }
     
     @track renderHeader;
     @track renderFilterSidebar;
