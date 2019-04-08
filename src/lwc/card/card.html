@@ -4,9 +4,7 @@
             <template if:true={config}>
                 <template if:true={config.headerText}>
                     <div class="header-container">
-                        <p class={headerClass}>
-                            <lightning-formatted-date-time value={config.headerText} year="numeric" day="numeric" month="long" time-zone="UTC"></lightning-formatted-date-time>
-                        </p>
+                        <p class={headerClass}>7 Mar 2019</p>
                     </div>
                 </template>
                 <template if:true={config.title}>
