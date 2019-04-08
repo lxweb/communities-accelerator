@@ -100,7 +100,6 @@ public without sharing virtual class ContentUtils {
             query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
         }       
         
-
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 

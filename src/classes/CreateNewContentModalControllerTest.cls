@@ -22,7 +22,6 @@ public class CreateNewContentModalControllerTest {
 
         //Then
         system.assertEquals(recordTypeLabel, responseLabel);
-
     }
 
     @isTest
