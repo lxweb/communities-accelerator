@@ -1,4 +1,4 @@
-<aura:component access="global">
+<aura:component access="global" implements="lightning:isUrlAddressable">
     
     <!-- CONSTRUCTOR -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -12,6 +12,7 @@
     <aura:attribute name="showComponentFrame" 	type="Boolean" 	access="global" default="true"	/>
     <aura:attribute name="isTemplate" 			type="Boolean" 					default="false" />
 	<aura:attribute name="contentActivated" 	type="Boolean" 					default="false"	/>
+	<aura:attribute name="navigationURL"		type="String"					default="false" />
     	
     <!-- COMPONENT -->
     <aura:if isTrue="{!or(not(v.componentWrapper == null), not(v.componentWrapper.meta.component == null))}">
@@ -19,7 +20,7 @@
     	<aura:if isTrue="{!and(or(v.componentWrapper.permissions.isEnabledViewFrame, v.componentWrapper.permissions.isEnabledEditFrame), v.showComponentFrame)}">
         
 	        <div id="editFrame">
-	            <div id="{!v.componentWrapper.meta.component.Id + v.componentWrapper.meta.objectId}" onmouseover="{!c.doShowEditFrame}" onmouseout="{!c.doHideEditFrame}" class="mainEditFrame">
+	            <div id="{!v.componentWrapper.meta.component.Id + v.componentWrapper.meta.objectId}" onmouseenter="{!c.doShowEditFrame}" onmouseleave="{!c.doHideEditFrame}" class="mainEditFrame">
 	                
 	                <!-- Component Body -->
 	                <div class="componentBody">
@@ -113,7 +114,7 @@
         </aura:set> 
     </aura:if>
     <aura:if isTrue="{!v.componentWrapper != null}">
-    	<c:createNewContentModal aura:id="newContentModal" recordTypeId="{!v.componentWrapper.contentRecordTypeId}" componentId="{!v.componentWrapper.meta.component.Id}" navigationId="{!v.componentWrapper.meta.navId}" isTemplate="{!v.isTemplate}" salesforceDomain="{!v.salesforceDomain}" oncontentcreated="{!c.doGoToContent}"></c:createNewContentModal>
+    	<c:createNewContentModal aura:id="newContentModal" recordTypeId="{!v.componentWrapper.contentRecordTypeId}" componentId="{!v.componentWrapper.meta.component.Id}" navigationUrl="{!v.navigationURL}" isTemplate="{!v.isTemplate}" salesforceDomain="{!v.salesforceDomain}" oncontentcreated="{!c.doGoToContent}"></c:createNewContentModal>
     </aura:if>
     
         

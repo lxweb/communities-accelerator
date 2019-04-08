@@ -306,6 +306,7 @@ public class ContentUtilsTest {
         try{
             result = ContentUtils.createFromTemplate(contentList[0].Id);
         }catch(Exception e){
+            
         }
         Test.stopTest();
 

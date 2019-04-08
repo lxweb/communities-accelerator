@@ -76,6 +76,35 @@
 		
 	},
 
+	showHideNamePanel : function(component, event, show) {
+		var componentId = component.get('v.componentWrapper.meta.component.Id');
+		var metaComponentId = component.get('v.componentWrapper.objectId');
+
+		var idDom;
+		if(componentId != null){
+			idDom = componentId;			
+		}
+		if(metaComponentId != null){
+			idDom += metaComponentId;
+		}
+
+		if(idDom != undefined){
+			var mainPanel = document.getElementById(idDom);
+			//var divComponentNamePanel = mainPanel.getElementsByClassName('componentNamePanel')[0];
+			var divComponentNamePanel = event.currentTarget;
+			console.log("divComponentNamePanel.classList antes: " + JSON.stringify(divComponentNamePanel.classList));
+			if(show){
+				divComponentNamePanel.classList.remove('hidden');
+				divComponentNamePanel.classList.add('show');
+			}else{
+				divComponentNamePanel.classList.remove('show');
+				divComponentNamePanel.classList.add('hidden');
+			}
+			console.log("divComponentNamePanel.classList despues: " + JSON.stringify(divComponentNamePanel.classList));
+		}
+		
+	},
+
 	showContentDetail : function(component, show) {
 		var contentDetail = component.find('contentDetail').getElement();
 		if(show){

@@ -18,9 +18,9 @@ import ContentLandingTemplate from '@salesforce/label/c.ContentLandingTemplate';
 import TemplateLabel from '@salesforce/label/c.Template';
 import ContentDetailContent from '@salesforce/label/c.ContentDetailContent';
 import General_Error from '@salesforce/label/c.General_Error';
-import { registerListener, unregisterAllListeners } from 'c/pubsub';
+import { registerListener, unregisterAllListeners, fireEvent } from 'c/pubsub';
 import { CurrentPageReference,NavigationMixin } from 'lightning/navigation';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent'
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class ContentContainer extends NavigationMixin(LightningElement) {
     @api objectApiName;
@@ -299,6 +299,12 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
             ];
            this.tableDataFilter();
         }
+        this.filtertHandler();
+    }
+
+    filtertHandler() {
+        const selectedEvent = new CustomEvent('filtervalues', { detail: this.filtersValues });
+        this.dispatchEvent(selectedEvent);
     }
 
     //Handler Status events
@@ -368,35 +374,10 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
             });
     }
 
-    handleCreateContent(event){
-        var idContent = event.detail;
-        event.stopPropagation();
-        createFromTemplate({ templateId: idContent})
-            .then(result => {
-                this.navigateToWebPage("/" + result); //result = recordId
-            })
-            .catch( err => {
-                console.log(err);
-                if(err.body.message){
-                    this.showToast(General_Error,err.body.message,'error');
-                }
-            });
-    }
-
     handleRadioButtonGroupEvent(event){
         this.radioButtonGroupValue = event.detail;
         this.tableDataFilter(this.filtersValues[0].id, this.filtersValues[1].id, this.filtersValues[2].id);
     }  
-
-    navigateToWebPage(url) {
-        // Navigate to a URL
-        this[NavigationMixin.Navigate]({
-            type: 'standard__webPage',
-            attributes: {
-                url: url
-            }
-        });
-    }
 
      //Open toast with a message
      showToast(toastTitle,toastMessage,toastVariant) {
@@ -419,4 +400,28 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
             }
         }
     }
+
+    handleCreateContent(event){
+        var idContent = event.detail.detail;
+        var clusterId = event.detail.clusterid;
+        var clusterName = event.detail.clustername;
+        event.stopPropagation();
+
+        const eventDetail = { 
+            recordTypeId : this.value,
+            isTemplate : false,
+            componentId : null,
+            navigationId : null,
+            templateId : idContent,
+            clusterId : clusterId,
+            clusterName : clusterName
+        }
+        this.dispatchEventFromTemplateModal(eventDetail);
+    }
+
+	//Fire event to notify LC that general content is selected
+	dispatchEventFromTemplateModal(eventDetail) {
+		fireEvent(this.pageRef, 'btncreatecontentclicked', eventDetail);
+	}
+
 }

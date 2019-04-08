@@ -272,6 +272,7 @@ public class ContentLandingRecordListController {
                 }
             }
         }
+        
         // Devuelve la lista de forma que pueda ser incluida en la query dinámicamente
         return tagedContentIds.length() > 2 ? tagedContentIds = '(' + tagedContentIds.substring(0, tagedContentIds.length()-2) + ')' : null;
     }
