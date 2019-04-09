@@ -165,10 +165,10 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
         body.onscroll = function(event){
 
             var elem = lwc.template.querySelector('.landingContainerLwc');
-                if (html.clientHeight + html.scrollTop + 1 >= html.scrollHeight && !lwc.isAddingRecords) {
+                if (html.clientHeight + html.scrollTop + 400 >= html.scrollHeight && !lwc.isAddingRecords) {
                     //Call your helper method to show more items
                     lwc.recordOffset += lwc.recordLimit;
-                    this.isAddingRecords = true;
+                    lwc.isAddingRecords = true;
                     lwc.tableDataFilter(lwc.filtersValues[0].id, lwc.filtersValues[1].id, lwc.filtersValues[2].id, lwc.recordOffset);
                     
                 }
