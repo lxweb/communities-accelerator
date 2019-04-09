@@ -1,0 +1,46 @@
+<template>
+    <div class="datatable"> 
+        <div class="slds-grid slds-wrap">
+            <template for:each={table.columns} for:item="col">
+                <div key={col.fieldName} class="slds-col slds-size_2-of-4">
+                    <template if:true={col.filtrable}>
+                        <lightning-button-menu label={col.fieldName}>
+                            <template for:each={col.filtrableValues} for:item="filter">
+                                <div key={filter}>
+                                    <lightning-menu-item
+                                        label={filter}
+                                        value={filter}
+                                        data-column={col.fieldName} 
+                                        data-type={col.type} 
+                                        data-value={filter} 
+                                        onclick={filterEvent}>
+                                    </lightning-menu-item>
+                                </div>
+                            </template>
+                        </lightning-button-menu>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <template for:each={table.tableData} for:item="data">    
+            <article key={data.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>             
+                <template for:each={data} for:item="row">                 
+                    <div key={row.columnName} class={columnClass}>
+                        <p><span>{row.columnName}</span></p>
+                        <p>{row.rowValue}</p>
+                    </div>
+                </template>
+                <!-- <template for:each={table.actions} for:item="action">
+                    <footer key={action.Id} class="slds-card__footer">
+                        <div class="slds-no-flex">
+                            <button class="slds-button slds-button_neutral">{action.label}</button>
+                            <template if:true={filterCondition}>
+                                <div>Conditional Code</div>
+                            </template>
+                        </div>
+                    </footer>
+                </template> -->
+            </article>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,12 @@
+<template>
+    <div class="tab-container">
+        <template for:each={listtabfilter} for:item="tabItem" for:index="index">
+                <c-tab-item 
+                    key={tabItem.value}
+                    index={index}
+                    item={tabItem}
+                    active-index={selectedTabIndex}
+                ></c-tab-item>
+        </template>
+    </div>
+</template>
