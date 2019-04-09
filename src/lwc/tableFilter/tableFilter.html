@@ -53,8 +53,8 @@
                                                 <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
                                                     <template for:each={item.actions} for:item=itemAction>
                                                         <li key={itemAction} class="slds-dropdown__item slds-truncate" role="presentation">
-                                                            <a role="menuitem" tabindex="0" class="action-a" onmousedown={handleClick}>                                                                
-                                                                <span class="slds-truncate" data-id={item.contentId} data-label={itemAction} data-clusterid={item.clusterId} data-clustername={item.clusterName} title={itemAction}>{itemAction}</span>
+                                                            <a role="menuitem" tabindex="0" class="action-a" onmousedown={handleClick}>
+                                                                <span class="slds-truncate" data-id={item.contentId} data-label={itemAction} title={itemAction}>{itemAction}</span>
                                                             </a>
                                                         </li>
                                                     </template>

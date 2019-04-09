@@ -31,18 +31,19 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     // Use alerts instead of toast to notify user
     @api notifyViaAlerts = false;
     @api clusters;
-    @api clusterId;
     @api templateId;
-    @api initialSelection = [];
     
     @track isMultiEntry = false;
-    @track isLookupReady = false;  
+    @api initialSelection = [
+        //{id: 'idcluster', sObjectType: 'Cluster__c', icon: 'custom:custom26', title: 'Nombre cluster', subtitle:'Not a valid record'}
+    ];
     @track errors = [];
+
     @track recordTypeLabel;
     @track modalTitle;
     @track isDisabled;
-    @track recordNameValue;
-    
+
+    recordNameValue;
     selectedClusterId;
 
     label = {
@@ -70,8 +71,15 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         this.getRecordTypeName();
     }
 
+    constructor(){
+        super();
+        this.isDisabled = true;
+        this.recordNameValue = null;
+    }
+
     connectedCallback() {
-        registerListener('btncreatecontentclicked', this.handleClickBtnHeader, this);        
+        registerListener('btncreatecontentclicked', this.handleClickBtnHeader, this);
+        this.getClustersBelow();
     }
 
     disconnectedCallback() {
@@ -85,28 +93,15 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
         this.componentId = event.componentId;
         this.navigationUrl = event.navigationUrl;
         this.templateId = event.templateId;
-        this.clusterId = event.clusterId;
-        this.clusterName = event.clusterName;
-        if(this.clusterId && this.clusterName){
-            this.initialSelection = [{id: this.clusterId, sObjectType: 'Cluster__c', icon: 'custom:custom26', title: this.clusterName, subtitle:''}];
-            this.selectedClusterId = this.clusterId;
-        }else{
-            this.initialSelection = [];
-            this.selectedClusterId = null;            
-        }
-        this.recordNameValue = null;
         this.isDisabled = true;
+        this.recordNameValue = null;
         this.onInit();
-        this.getClustersBelow();
-        this.isLookupReady = true;
-        this.showHideModal();       
+        this.showHideModal();
     }
 
     //Get Data of the component
     onInit(){
-        if(!this.isTemplate){
-            this.getRecordTypeName();
-        }
+        this.getRecordTypeName();
     }
 
     //Get record type name from apex
@@ -124,30 +119,15 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
     }
 
     getClustersBelow(){
-        var i;
-        var hasAccess = false;
         getClusters()
             .then(result => {
-                this.clusters = JSON.parse(result); 
-                if(this.selectedClusterId){
-                    for(i = 0; i < this.clusters.length; i++){
-                        if(this.clusters[i].id === this.selectedClusterId){
-                            hasAccess = true;
-                            break;
-                        }
-                    }
-                }
-                if(!hasAccess){
-                    this.initialSelection = [];
-                    this.selectedClusterId = null;                      
-                }                  
+                this.clusters = JSON.parse(result);
             })
             .catch( err => {
                 if(err.body.message){
-                    this.showToast(this.label.generalError, err.body.message, 'error');
+                    this.showToast(this.label.generalError, err.body.message, 'error');  // Use a custom label for toast title
                 }
             });
-        
     }
 
     handleSearch(event) {
@@ -195,11 +175,16 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 
     //If input is not null, creates the record. Else error is returned.
     onNewRecord(){
-        if(this.recordNameValue && this.selectedClusterId){
+        if(this.recordNameValue){
             this.setRecord();
         }else{
             this.showToast(this.label.generalError,this.label.requiredFieldMessage,"error");
         }
+    }
+
+    handleRecordNameChange(event) {
+        this.recordNameValue = event.target.value;
+        this.checkDisable();
     }
 
     checkDisable(){
@@ -246,12 +231,24 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
                 attributes: {
                     url: url
                 }
-        });       
+        });
+        
     }
 
-    handleRecordNameChange(event) {
+    //Sets value of the input to the var.
+    setValue(event){
         this.recordNameValue = event.target.value;
-        this.checkDisable();
+        this.isDisabled = false;
+    }
+
+    //Sets value of the input to the var.
+    setValueBlur(event){
+        this.recordNameValue = event.target.value;
+        if(this.recordNameValue){
+            this.isDisabled = true;
+        }else{
+            this.isDisabled = false;
+        }
     }
 
     showToast(toastTitle,toastMessage,toastVariant) {

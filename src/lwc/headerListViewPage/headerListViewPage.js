@@ -48,9 +48,7 @@ export default class HeaderListViewPage extends LightningElement {
         var typeOfAction = event.currentTarget.dataset.typeaction;
         var value = event.currentTarget.dataset.label;
         const eventDetail = { 
-            value : value,
-            parameter1 : this.filterselected ? JSON.parse(JSON.stringify(this.filterselected))[0].id : null,
-            parameter2 : this.filterselected ? JSON.parse(JSON.stringify(this.filterselected))[0].value : null,
+            value : value
         }
         if(typeOfAction === "dispatchEvent"){
             fireEvent(this.pageRef, 'btnheaderlistviewclicked', eventDetail);
@@ -64,9 +62,7 @@ export default class HeaderListViewPage extends LightningElement {
         var typeOfAction = event.currentTarget.dataset.typeaction;
         var value = event.currentTarget.dataset.label;
         const eventDetail = { 
-            value : value,
-            parameter1 : this.filterselected ? JSON.parse(JSON.stringify(this.filterselected))[0].id : null,
-            parameter2 : this.filterselected ? JSON.parse(JSON.stringify(this.filterselected))[0].value : null,
+            value : value
         }
 
         if(typeOfAction === "dispatchEvent"){

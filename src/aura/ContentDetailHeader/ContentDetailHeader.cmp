@@ -1,4 +1,4 @@
-<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailHeaderController" access="global">
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,lightning:isUrlAddressable,force:hasRecordId" controller="ContentDetailHeaderController">
 
     <!-- HANDLERS -->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
@@ -7,9 +7,10 @@
 	<aura:attribute name="recordId" 			type="String" 						/>
 	<aura:attribute name="contentData" 			type="Content__c" 					/>
 	<aura:attribute name="timeZone" 			type="String" 						/>
-	<aura:attribute name="hasDetailComponent"	type="Boolean" 						access="global"/>
+	<aura:attribute name="hasDetailComponent"	type="Boolean" 						/>
 	<aura:attribute name="temporaryName"		type="String"						/>
 	<aura:attribute name="isNameEdit"			type="Boolean"		default="false"	/>
+    <aura:attribute name="IsNewFromTemplate"	type="Boolean"		default="false"	/>
 
 	<aura:registerEvent name="upsertContentsEvent" type="c:upsertContentsEvent"/>
 
@@ -94,4 +95,8 @@
 	    </div>
 	</div>
 
+    <aura:if isTrue="{!v.contentData.Id != null}">
+    	<c:createNewContentModal aura:id="newContentModal" oncontentcreated="{!c.doGoToContent}" templateId="{!v.contentData.Id}"></c:createNewContentModal>
+    </aura:if>
+    
 </aura:component>

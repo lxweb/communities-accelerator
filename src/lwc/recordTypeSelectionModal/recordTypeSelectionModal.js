@@ -130,9 +130,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 				isTemplate : true,
 				componentId : null,
 				navigationId : null,
-				templateId : null,
-				clusterId : this.clusterId,
-				clusterName : this.clusterName
+				templateId : null
 			}
 			this.dispatchEventTemplateModal(eventDetail);
 		}else{
@@ -144,9 +142,7 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 					isTemplate : false,
 					componentId : null,
 					navigationId : null,
-					templateId : null,
-					clusterId : this.clusterId,
-					clusterName : this.clusterName
+					templateId : null
 				}
 				this.dispatchEventTemplateModal(eventDetail);
 			}
@@ -178,8 +174,6 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 	//Handle event dispatched when create content button is clicked on the headerListViewComponent
 	handleClickBtnHeader(event){
 		this.value = event.value;
-		this.clusterId = event.parameter1;
-		this.clusterName = event.parameter2;
 		this.isTemplate = false;
 		this.onInit();
 		this.showHideModal();
@@ -188,8 +182,6 @@ export default class RecordTypeSelectionModal extends NavigationMixin(LightningE
 	//Handle event dispatched when create template button is clicked on the headerListViewComponent
 	handleClickBtnHeaderCreateTemplate(event){
 		this.value = event.value;
-		this.clusterId = event.parameter1;
-		this.clusterName = event.parameter2;
 		this.isTemplate = true;
 		this.onInit();
 		this.showHideModal();

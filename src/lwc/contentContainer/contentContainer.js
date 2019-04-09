@@ -5,7 +5,6 @@ import getPicklistValues from	'@salesforce/apex/ContentLandingHeaderController.g
 import getTableWrapper from	'@salesforce/apex/ContentLandingRecordListController.getTableWrapper';
 import getUpdatedTableWrapper from	'@salesforce/apex/ContentLandingRecordListController.getUpdatedTableWrapper';
 import deleteContent from	'@salesforce/apex/ContentLandingRecordListController.deleteContent';
-import createFromTemplate from	'@salesforce/apex/ContentUtils.createFromTemplate';
 import ContentLandingAll from '@salesforce/label/c.ContentLandingAll';
 import ContentLandingNone from '@salesforce/label/c.ContentLandingNone';
 import ContentLandingContentType from '@salesforce/label/c.ContentLandingContentType';
@@ -165,10 +164,10 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
         body.onscroll = function(event){
 
             var elem = lwc.template.querySelector('.landingContainerLwc');
-                if (html.clientHeight + html.scrollTop + 1 >= html.scrollHeight && !lwc.isAddingRecords) {
+                if (html.clientHeight + html.scrollTop + 400 >= html.scrollHeight && !lwc.isAddingRecords) {
                     //Call your helper method to show more items
                     lwc.recordOffset += lwc.recordLimit;
-                    this.isAddingRecords = true;
+                    lwc.isAddingRecords = true;
                     lwc.tableDataFilter(lwc.filtersValues[0].id, lwc.filtersValues[1].id, lwc.filtersValues[2].id, lwc.recordOffset);
                     
                 }
@@ -402,9 +401,7 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
     }
 
     handleCreateContent(event){
-        var idContent = event.detail.detail;
-        var clusterId = event.detail.clusterid;
-        var clusterName = event.detail.clustername;
+        var idContent = event.detail;
         event.stopPropagation();
 
         const eventDetail = { 
@@ -412,9 +409,7 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
             isTemplate : false,
             componentId : null,
             navigationId : null,
-            templateId : idContent,
-            clusterId : clusterId,
-            clusterName : clusterName
+            templateId : idContent
         }
         this.dispatchEventFromTemplateModal(eventDetail);
     }

@@ -2,6 +2,9 @@ public with sharing class CreateNewContentModalController {
 
     @AuraEnabled(cacheable=true)
     public static String getRecordTypeName(String recordTypeId){
+        if(String.isBlank(recordTypeId)){
+            return null;
+        }
         return Schema.SObjectType.Content__c.getRecordTypeInfosById().get(recordTypeId).getName();
     }
 
