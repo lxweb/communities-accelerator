@@ -4,6 +4,52 @@
   padding-top: 6px;
   padding-bottom: 30px;
 }
+.datatable .checkbox {
+  width: 100%;
+  text-align: -webkit-right;
+  display: none;
+}
+.datatable .search-element {
+  display: inline-block;
+  border: 1px inset #ccc;
+}
+.datatable .search-element input {
+  padding: 0;
+  border: none;
+}
+.datatable .search-element .cancelSearch {
+  border: none;
+  background: none;
+  display: none;
+}
+.datatable .search-element .filterIcon {
+  display: none;
+}
+.datatable .modal {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+}
+.datatable .modal.open {
+  display: block;
+}
+.datatable .modal .modal__content {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+}
+.datatable .modal .modal__footer {
+  bottom: 0;
+  position: absolute;
+}
+.datatable .modal .filter.active {
+  background-color: aqua;
+}
 .datatable span {
   font-weight: bold;
 }

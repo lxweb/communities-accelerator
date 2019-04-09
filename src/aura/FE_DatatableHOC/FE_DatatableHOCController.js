@@ -56,20 +56,12 @@
 
         component.set('v.componentWrapper', componentWrapper);
 
-        helper.doHandleFilter(component, event, helper);
+        helper.dohandleFilter(component, event, helper);
     },
     doHandleFilter : function(component, event, helper){
         var componentWrapper = component.get("v.componentWrapper");
         var eventValues = JSON.parse(event.getParam("values"));
-        var filters = [];
-        var filter = {filter: {
-                            name: eventValues.name, 
-                            type: eventValues.type
-                        },
-                        value1: eventValues.value};
-
-        filters.push(filter);
-        componentWrapper.data.appliedFilters  = filters;
+        componentWrapper.data.appliedFilters  = eventValues;
         component.set('v.componentWrapper', componentWrapper);
         helper.dohandleFilter(component);
     }
