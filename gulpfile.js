@@ -1,5 +1,4 @@
 const { watch, series, parallel, src, dest } = require('gulp');
-const dirSync = require( 'gulp-directory-sync' );
 const fileSync = require('gulp-file-sync');
 
 function defaultTask(cb) {
