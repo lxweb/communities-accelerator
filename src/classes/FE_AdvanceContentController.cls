@@ -3,6 +3,7 @@ public with sharing class FE_AdvanceContentController extends FE_ComponentManage
     @auraEnabled
     public static ComponentWrapper getComponentWrapper(String componentExternalId, String clusterId, String device, String navigationUrl){
         FE_AdvanceContentController ctrl = new FE_AdvanceContentController();
+        ComponentWrapper cw = new ComponentWrapper();
         ctrl.customPermissionEdit = 'AdvanceContent Edit Frame';
         ctrl.customPermissionView = 'AdvanceContent View Frame';
         ctrl.componentFieldSet = new Set<String>();        
@@ -10,7 +11,16 @@ public with sharing class FE_AdvanceContentController extends FE_ComponentManage
         ctrl.clusterId = clusterId;
         ctrl.device = device;
         ctrl.navigationUrl = navigationUrl;
-        return ctrl.getCW();
+        cw = ctrl.getCW();
+        System.debug('------------------ ' + JSON.serialize(cw.data));
+        FE_ContentManager.CMSContent dw = (FE_ContentManager.CMSContent) cw.data;
+        System.debug('------------------ ' + JSON.serialize(dw));
+        System.debug('------------------ ' + JSON.serialize(dw.contentWrapper));
+
+        if(!dw.contentWrapper.isEmpty()){
+            cw.permissions.isEnabledEditFrame = false;
+        }
+        return cw;
     }
 
     public override DataWrapper getData() {

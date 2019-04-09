@@ -38,15 +38,14 @@ public without sharing virtual class ContentUtils {
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(component.RecordType.Developername) +'\') ';     
         
         //FROM
-        query += 'FROM Content__c';
+        query += 'FROM Content__c ';
 
         //WHERE
-        query += ' WHERE IsTemplate__c = false AND Status__c = \'Published\' ';
         String contentTypeToSearch = getRecordTypeContentFromRTComponent(component.RecordType.DeveloperName);
         
         if(setContentDirect != null){
             //Busqueda de contenido por parametro
-            query += 'AND (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
+            query += 'WHERE (Id IN: setContentDirect OR ExternalId__c IN: setContentDirect) AND Recordtype.DeveloperName =: contentTypeToSearch ';
             query += contentTypeToSearch == 'Banner' ? ' AND BannerFrameType__c = \'' + component.BannerFrameType__c + '\' ' : '';
 
         }else{
@@ -76,10 +75,10 @@ public without sharing virtual class ContentUtils {
             }
 
             if(component.Datasource__c != null && (component.Datasource__c == 'All News' || component.Datasource__c == 'All Events') ){
-                query += 'AND Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'WHERE Id NOT IN: setContentToExclude AND ExternalId__c NOT IN: setContentToExclude AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }else{
 
-                query += 'AND (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
+                query += 'WHERE (Id IN: contentIdList OR Category__c IN: setCategoriesIds) AND (Id NOT IN: setContentToExclude) AND (ExternalId__c NOT IN: setContentToExclude) AND Cluster__c IN: setClusterIds AND Recordtype.DeveloperName =: contentTypeToSearch ';
             }
 
             if(component.Recordtype.Developername == 'Event' || component.Recordtype.DeveloperName == 'RelatedEvent'){
@@ -101,7 +100,6 @@ public without sharing virtual class ContentUtils {
             query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ' + component.HierarchicalOrderBy__c + ', ');
         }       
         
-
         ContentWrapper cw = new ContentWrapper();
         Map<Id, Content__c> mapContent = new Map<Id, Content__c>((List<Content__c>)Database.query(query));
 
@@ -156,7 +154,7 @@ public without sharing virtual class ContentUtils {
         String query = '';
         query += 'SELECT ' + GeneralUtils.joinFields(fieldSet) + ', (SELECT Id, MediaElement__c, Placement__c FROM MediaElementAssignments__r WHERE Placement__c = \''+ getPlaceForRTComponent(componentType) +'\') ';
         query += 'FROM Content__c ';
-        query += 'WHERE IsTemplate__c = false AND Status__c = \'Published\' AND Id IN: setAllContentIds ';
+        query += 'WHERE Id IN: setAllContentIds ';
         query += 'ORDER BY ' + orderBy + ' ';
         query = query.replace('ORDER BY', 'ORDER BY Cluster__r.ClusterLevel__c ASC, ');
         query += 'LIMIT ' + pageSize + ' ';
@@ -343,18 +341,20 @@ public without sharing virtual class ContentUtils {
     }
     
     @auraEnabled
-    public static String createFromTemplate(Id templateId){
+    public static String createFromTemplate(Id templateId, String recordName, String clusterId){
 
         Set<String> fieldNames = GeneralUtils.getObjectFieldNames('Content__c');
         Content__c template = Database.query('SELECT ' +  String.join(new List<String>(fieldNames), ',') + ' FROM Content__c WHERE Id =: templateId');
 
         if(template.IsTemplate__c && template.Status__c == 'Published'){
             Content__c newContent = template.clone(false,false,false,false);
-            newContent.Name = 'Copy of - ' + template.Name.left(69);
+            newContent.Name = recordName.left(60);
             newContent.TemplateUsed__c = templateId;
+            newContent.Cluster__c = clusterId != null ? clusterId : newContent.Cluster__c;
             newContent.Status__c = 'Draft';
             newContent.IsTemplate__c = false;
             newContent.ExternalId__c = null;
+            newContent.Category__c = null;
             newContent.OwnerId = UserInfo.getUserId();
             try{
                 insert newContent;

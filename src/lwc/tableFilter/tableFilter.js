@@ -41,6 +41,8 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
         var child = event.currentTarget.children[0];
         var label;
         var id;
+        var idCluster;
+        var nameCluster;
         
         this.hideActions();
 
@@ -48,6 +50,8 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
             if(child.tagName === "SPAN"){
                 label = child.dataset.label;
                 id = child.dataset.id;
+                idCluster = child.dataset.clusterid;
+                nameCluster = child.dataset.clustername;
             }
 		}
 
@@ -59,7 +63,7 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
                 this.deleteContent(id);
                 break;
             case this.createFromTemplateLbl:
-                this.createContentFromLanding(id);
+                this.createContentFromLanding(id, idCluster, nameCluster);
                 break;
             default:
         }
@@ -85,12 +89,17 @@ export default class TableFilter extends NavigationMixin(LightningElement) {
         this.hideActions();
     }
     
-    createContentFromLanding(idContent){
+    createContentFromLanding(idContent, clusterid, clustername){
         var value = idContent;
+        var clusteridValue = clusterid;
+        var clusternameValue = clustername;
         const createContent = new CustomEvent('createcontentrecord', {
-        detail: value
+            detail: {detail : value,
+            clusterid: clusteridValue,
+            clustername: clusternameValue}
         });
         this.dispatchEvent(createContent);
         this.hideActions();
     }
+
 }
