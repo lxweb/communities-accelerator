@@ -102,7 +102,7 @@ export default class ContentContainer extends NavigationMixin(LightningElement) 
     }
 
     // Get data of the table from APEX CLASS
-    @wire(getTableWrapper, { contentTypeId: null, clusterId: null, categoryId: null, tagIds: null, status: ContentLandingAll, searchText: null,isTemplate: false, recordOffset:0 })
+    @wire(getTableWrapper, { contentTypeId: null, clusterId: null, categoryId: null, tagIds: null, status: ContentLandingAll, searchText: null,isTemplate: false, recordOffset:0, recordLimit:20 })
     wiredTableData({ error, data }) {
         if (error) {
             this.tabledata = null;
