@@ -1,0 +1,135 @@
+<template>
+    <div class="datatable"> 
+        <h1>{table.title}</h1>
+        <div class="search-element">
+            <input class="searchInput" placeholder="Placeholder Text" type="search" onsearch={searchEvent} onfocus={focusFilter}/>
+            <template if:true={showCancelSearch}>
+                <button class="cancelSearch" onclick={cancelFilter}>Cancel</button>
+            </template>
+            <template if:true={showFilterIcon}>
+                <img class="filterIcon" src={filterIcon} onclick={openFilterModal}>
+            </template>
+        </div>
+        <template if:true={appliedFilters}>
+            <template for:each={table.appliedFilters} for:item="filters">
+                <div key={filters.filter.name}>
+                    <span class="slds-pill">
+                        <span class="slds-pill__label">{filters.value1}</span>
+                        <img src={closeIcon} data-name={filters.filter.name} data-value={filters.value1} onclick={deleteFilter}>
+                    </span>
+                </div>
+            </template>
+        </template>
+
+        <!-- Filter modal -->
+        <template if:true={showFilterModal}>
+            <div class="modal">
+                <div class="modal__header">
+                    <img class="slds-modal__close closeModal" src={closeIcon} onclick={closeFilterModal}>
+                </div>
+                <div class="modal__content">
+                    <template for:each={setDateFilter} for:item="col">
+                        <div key={col.fieldName} class="slds-grid slds-wrap slds-gutters_x-small">
+                            <template if:true={col.filtrable}>
+                                <div class="filter-title slds-col slds-size_4-of-4 slds-grid">
+                                    <h2 class="slds-col slds-size_3-of-4">{col.label}</h2>
+                                    <template if:true={col.isDate}>
+                                        <div class="slds-col slds-size_1-of-4">
+                                            <p class="slds-col_bump-left">
+                                                <img class="calendarIcon" src={calendarIcon} />
+                                            </p>
+                                        </div>
+                                    </template>
+                                </div>
+                                <template for:each={col.filtrableValues} for:item="filter">
+                                    <div class="slds-col slds-size_2-of-4" key={filter}>  
+                                        <button class="filter" 
+                                                data-column={col.fieldName} 
+                                                data-type={col.type} 
+                                                data-value={filter}
+                                                onclick={filterActive}>{filter}
+                                        </button>
+                                    </div>
+                                </template>
+                                <!-- Move to external component -->
+                                <!--
+                                <div class="filter-title currency slds-col slds-size_4-of-4 slds-grid slds-grid_vertical-align-center">
+                                    <h2 class="slds-col slds-size_3-of-4">Currency</h2>
+                                    <p class="slds-col_bump-left slds-p-right_medium">€</p>
+                                </div>
+                                <div class="slds-col slds-size_4-of-4 slds-grid  slds-gutters_x-small">  
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <input type="number" class="filter number-min" 
+                                            data-column={col.fieldName} 
+                                            data-type={col.type} 
+                                            data-value={filter}
+                                            value={filter}
+                                            placeholder="Min"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <input type="number" class="filter number-max" 
+                                            data-column={col.fieldName} 
+                                            data-type={col.type} 
+                                            data-value={filter}
+                                            value={filter}
+                                            placeholder="Max"/>
+                                    </div>
+                                </div>
+                                -->
+                                <!-- /Move to external component -->                              
+                            </template>
+                        </div>
+                    </template>
+                    <template if:true={showFooterModal}>
+                        <div class="bottom-spacer">&nbsp;</div>
+                    </template>
+                </div>
+                <template if:true={showFooterModal}>
+                    <div class="modal__footer slds-grid slds-wrap">
+                        <button onclick={filterRemove} class="slds-col slds-size_1-of-1">Remove All Filters</button>
+                        <button class="applyFilter slds-col slds-size_1-of-1" onclick={dataFilter}>Apply</button>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <!-- /Filter modal -->
+
+        <template for:each={table.tableData} for:item="row">    
+            <article key={row.Id} class="slds-card slds-grid slds-wrap" onclick={openDetailModal}> 
+                <!--
+                <template if:true={showDetailModal}>
+                    <template for:each={table.columns} for:item="col">
+                        <div key={col.label}>
+                            <c-fe-datatable-modals 
+                                showdetail={showDetailModal} 
+                                column={col} 
+                                row={row}
+                                closeicon={closeIcon}
+                                onclick={closeDetailModal}>
+                            </c-fe-datatable-modals>
+                        </div>
+                    </template>
+                </template>  
+                -->
+                <template for:each={columnsToShow} for:item="col">
+                    <div key={col.label} class={columnClass}>
+                        <c-fe-datatable-row colname={col.label} column={col.fieldName} row={row}></c-fe-datatable-row>
+                    </div> 
+                </template>
+                <footer class="slds-card__footer slds-grid slds-wrap">
+                    <template for:each={rowAction} for:item="action">
+                            <div key={action.label} class="slds-no-flex slds-col slds-size_1-of-4">
+                                <img src={action.icon}>
+                            </div>
+                    </template>
+                </footer>
+
+            </article>
+        </template>
+        <template if:true={appliedFilters}>
+            <div class="table__footer">
+                <button onclick={filterRemove}>Remove All Filters</button>
+            </div>
+        </template>
+    </div>
+</template>

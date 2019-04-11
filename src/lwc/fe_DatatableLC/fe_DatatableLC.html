@@ -61,7 +61,7 @@
                         <c-fe-datatable-row colname={col.label} column={col.fieldName} row={row.row}></c-fe-datatable-row>
                     </div> 
                 </template>
-                <footer class="slds-card__footer slds-grid">
+                <footer class="slds-card__footer slds-grid slds-wrap">
                     <template for:each={rowAction} for:item="action">
                             <div key={action.label} class="slds-no-flex slds-col slds-size_1-of-4">
                                 <img src={action.icon}>

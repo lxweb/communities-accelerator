@@ -7,21 +7,20 @@ export default class Fe_DatatableLC extends LightningElement {
 
     @track orientation;
     @track columnsToShow;
-    @track showFilterModal = false;
+    @track showFilterModal = true;
     @track showFooterModal = false;
     @track showDetailModal = false;
-    @track showActionModal = false;
     @track showCancelSearch = false;
     @track showFilterIcon = false;
     @track rowAction = [];
     @track globalAction = [];
-    @track clickRow;
 
     numberOfColumns = 6;
     filterIcon = Assets + '/Assets/Icons/FilterIcon.svg';
     closeIcon = Assets + '/Assets/Icons/CloseIcon.svg';
-    moreIcon = Assets + '/Assets/Icons/MoreIcon.svg';
-
+    calendarIcon = Assets + '/Assets/Icons/Calendar.svg';
+    
+    
     constructor() {
         super();
         this.handleOrientation();
@@ -48,12 +47,14 @@ export default class Fe_DatatableLC extends LightningElement {
         return (this.table.appliedFilters.length > 0) ? true : false;
     }
 
-    get setDateFilter() {   
+    get setDateFilter() {
         var columns = JSON.parse(JSON.stringify(this.table.columns));
         var filterValues = ["Last Week", "Last Month", "Last Year", "Custom range"]; 
         columns.forEach(col => {
+            col.isDate = false;
             if(col.filtrable && (col.type === "Date" || col.type === "datetime" || col.type === "Date/Time")) {
                 col.filtrableValues = filterValues;
+                col.isDate = true;
             }
         });
         return columns;
@@ -67,26 +68,18 @@ export default class Fe_DatatableLC extends LightningElement {
         this.showFilterModal = false;
     } 
 
-    openDetailModal(event) {
+    openDetailModal() {
         this.showDetailModal = true;
-        this.clickRow = event.currentTarget.dataset.key;
     }
 
-    closeDetailModal() {
-        this.showDetailModal = false;
-    }
-
-    openActionModal() {
-        this.showActionModal = true;
-    }
-
-    closeActionModal() {
-        this.showActionModal = false;
-        this.showDetailModal = false;
+    closeDetailModal(event) {
+        var value = event.detail.values;
+        this.showDetailModal = (value !== "undefined") ? value : false;
     }
 
     typeActions() {
-        this.table.actions.forEach(act => {
+        var actions = JSON.parse(JSON.stringify(this.table.actions));
+        actions.forEach(act => {
             act.icon = Assets + '/Assets/Icons/' + act.icon +'.svg';
             if (act.recordType === "RowAction") {
                 this.rowAction.push(act);
@@ -116,7 +109,7 @@ export default class Fe_DatatableLC extends LightningElement {
         var value = event.currentTarget.dataset.value;
         var filters = JSON.parse(JSON.stringify(this.table));
 
-        this.table.appliedFilters.forEach(fil => {
+        filters.appliedFilters.forEach(fil => {
             if (fil.filter.name === name && fil.value1 === value) {
                 filters.appliedFilters.splice(filters.appliedFilters.indexOf(fil), 1);
             }
@@ -195,27 +188,14 @@ export default class Fe_DatatableLC extends LightningElement {
         this.showCancelSearch = false;
     }
 
+    searchEvent() {
+        const searchValue = new CustomEvent('search');
+        this.dispatchEvent(searchValue);
+    }
+
     filterEvent(values) {
         const filterItemSelected = new CustomEvent('filter', { detail: {values}, });
         this.dispatchEvent(filterItemSelected);
-    }
-
-    rowActionEvent(event) {
-        var actions = [];   
-        var action = { recordId: event.target.id,
-                       componentName: event.target.component,
-                       showAsModal: event.target.modal
-                     };
-        actions.push(action);
-        const values = JSON.stringify(actions);
-        const actionValue = new CustomEvent('action', { detail: {values}, });
-        this.dispatchEvent(actionValue);
-    }
-
-    searchEvent(event) {
-        const values = event.target.value;
-        const searchValue = new CustomEvent('search', { detail: {values}, });
-        this.dispatchEvent(searchValue);
     }
 
     clearFilterEvent() {
