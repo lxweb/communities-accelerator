@@ -1,32 +1,38 @@
+.datatable h1 {
+  font-size: 40px;
+}
 .datatable .slds-card {
   border: none;
   border-bottom: 1px solid;
   padding-top: 6px;
   padding-bottom: 30px;
 }
-.datatable .checkbox {
-  width: 100%;
-  text-align: -webkit-right;
-  display: none;
-}
 .datatable .search-element {
   display: inline-block;
-  border: 1px inset #ccc;
+  min-width: 100%;
+  height: 50px;
 }
-.datatable .search-element input {
+.datatable .search-element .searchInput {
   padding: 0;
   border: none;
+  height: 100%;
 }
-.datatable .search-element .cancelSearch {
+.datatable .search-element .searchInput::placeholder {
+  background-image: url('sfsites/c/resource/Assets/Assets/Icons/SearchIcon.svg');
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+}
+.datatable .search-element .icons-group {
+  display: table-cell;
+  float: right;
+}
+.datatable .search-element .icons-group .cancelSearch {
   border: none;
   background: none;
-  display: none;
-}
-.datatable .search-element .filterIcon {
-  display: none;
+  background-size: 23px 23px;
 }
 .datatable .modal {
-  display: none;
   height: 100%;
   left: 0;
   position: fixed;
@@ -34,9 +40,6 @@
   width: 100%;
   background-color: white;
   z-index: 1;
-}
-.datatable .modal.open {
-  display: block;
 }
 .datatable .modal .modal__content {
   position: absolute;
@@ -49,9 +52,6 @@
 }
 .datatable .modal .filter.active {
   background-color: aqua;
-}
-.datatable span {
-  font-weight: bold;
 }
 .datatable footer.slds-card__footer {
   padding: 0;
