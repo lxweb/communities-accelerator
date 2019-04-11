@@ -1,0 +1,43 @@
+<template>
+    <div class="datatableModals">
+        <div class="modal">
+            <!--                DETAIL MODAL                 -->
+            <template if:true={detailmodal}>
+                <div class="modal__header">
+                    <img class="closeModal" src={closeicon} onclick={closeDetailModal}>
+                </div>
+                <div class="modal__content">
+                    <template for:each={rowData} for:item="data">
+                        <div key={data.column}>
+                                {data.column}
+                                {data.row}
+                        </div>
+                    </template>
+                </div>
+                <div class="modal__footer">
+                    <template for:each={rowaction} for:item="action">
+                            <div key={action.label}>
+                                <img src={action.icon}>
+                            </div>
+                    </template>
+                </div>
+            </template>
+            <!--                ACTIONS MODAL                 -->
+            <template if:true={actionmodal}>
+                <div class="modal__header">
+                </div>
+                <div class="modal__content">
+                    <template for:each={rowaction} for:item="action">
+                            <div key={action.label}>
+                                <label>{action.label}</label>
+                                <img src={action.icon}>
+                            </div>
+                    </template>
+                </div>
+                <div class="modal__footer">
+                    <button onclick={closeDetailModal}>Close</button>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

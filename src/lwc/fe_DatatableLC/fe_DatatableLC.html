@@ -1,71 +1,103 @@
 <template>
     <div class="datatable"> 
-        <!-- <p class="edit-cancel" onclick={editTable}>Edit</p> -->
         <h1>{table.title}</h1>
         <div class="search-element">
-            <input class="searchInput" placeholder="Placeholder Text" type="search" onsearch={searchEvent} onfocus={showFilter}/>
-            <button class="cancelSearch">Cancel</button>
-            <lightning-icon class="filterIcon" icon-name="utility:connected_apps" onclick={openFilter} ></lightning-icon>
+            <input class="searchInput" placeholder=" " type="search" onsearch={searchEvent} onfocus={focusFilter}/>
+            <div class="icons-group">
+                <template if:true={showCancelSearch}>
+                    <button class="cancelSearch" onclick={cancelFilter}>Cancel</button>
+                </template>
+                <template if:true={showFilterIcon}>
+                    <img class="filterIcon" src={filterIcon} onclick={openFilterModal}>
+                </template>
+            </div>
         </div>
         <template if:true={appliedFilters}>
             <template for:each={table.appliedFilters} for:item="filters">
                 <div key={filters.filter.name}>
-                    <span class="slds-pill slds-pill_link">
+                    <span class="slds-pill">
                         <span class="slds-pill__label">{filters.value1}</span>
-                        <button class="slds-button slds-button_icon slds-button_icon slds-pill__remove" title="Remove">
-                        </button>
+                        <img src={closeIcon} data-name={filters.filter.name} data-value={filters.value1} onclick={deleteFilter}>
                     </span>
                 </div>
             </template>
         </template>
-        <div class="modal">
-            <div class="modal__header">
-                <button class="closeModal" onclick={openFilter}>Close</button>
-            </div>
-            <div class="modal__content">
-                <template for:each={table.columns} for:item="col">
-                    <div key={col.fieldName}>
-                        <template if:true={col.filtrable}>
-                            <h2>{col.label}</h2>
-                            <template for:each={col.filtrableValues} for:item="filter">
-                                <div key={filter}>
-                                    <button class="filter" 
-                                            data-column={col.fieldName} 
-                                            data-type={col.type} 
-                                            data-value={filter}
-                                            onclick={filterActive}>{filter}</button>
-                                </div>
+        <template if:true={showFilterModal}>
+            <div class="modal">
+                <div class="modal__header">
+                    <img class="closeModal" src={closeIcon} onclick={closeFilterModal}>
+                </div>
+                <div class="modal__content">
+                    <template for:each={setDateFilter} for:item="col">
+                        <div key={col.fieldName}>
+                            <template if:true={col.filtrable}>
+                                <h2>{col.label}</h2>
+                                <template for:each={col.filtrableValues} for:item="filter">
+                                    <div key={filter}>  
+                                        <button class="filter" 
+                                                data-column={col.fieldName} 
+                                                data-type={col.type} 
+                                                data-value={filter}
+                                                onclick={filterActive}>{filter}
+                                        </button>
+                                    </div>
+                                </template>
                             </template>
-                        </template>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={showFooterModal}>
+                    <div class="modal__footer">
+                        <button onclick={filterRemove}>Remove All Filters</button>
+                        <button class="applyFilter" onclick={dataFilter}>Apply</button>
                     </div>
                 </template>
             </div>
-            <div class="modal__footer hidden">
-                <button onclick={filterRemove}>Remove All Filters</button>
-                <button class="applyFilter" onclick={filterEvent}>Apply</button>
-            </div>
-        </div>
-        <template for:each={table.tableData} for:item="row">    
-            <article key={row.Id} class="slds-card slds-grid slds-wrap" onclick={openDetail}>  
-                <div class="checkbox">
-                    <input type="checkbox" name="options" value="checkbox"/>  
-                </div>
-                <template for:each={columnsToShow} for:item="col"> 
+        </template>
+        <template for:each={rows} for:item="row">    
+            <article key={row.key} class="slds-card slds-grid slds-wrap" onclick={openDetailModal} data-key={row.key}>   
+                <template for:each={columnsToShow} for:item="col">
                     <div key={col.label} class={columnClass}>
-                        <c-fe-datatable-row colname={col.label} column={col.fieldName} row={row}></c-fe-datatable-row>
+                        <c-fe-datatable-row colname={col.label} column={col.fieldName} row={row.row}></c-fe-datatable-row>
                     </div> 
                 </template>
-                <!-- <template for:each={table.actions} for:item="action">
-                    <footer key={action.Id} class="slds-card__footer">
-                        <div class="slds-no-flex">
-                            <button class="slds-button slds-button_neutral">{action.label}</button>
-                            <template if:true={filterCondition}>
-                                <div>Conditional Code</div>
-                            </template>
-                        </div>
-                    </footer>
-                </template> -->
+                <footer class="slds-card__footer slds-grid">
+                    <template for:each={rowAction} for:item="action">
+                            <div key={action.label} class="slds-no-flex slds-col slds-size_1-of-4">
+                                <img src={action.icon}>
+                            </div>
+                    </template>
+                    <div class="slds-no-flex slds-col slds-size_1-of-4">
+                        <img src={moreIcon} onclick={openActionModal}>
+                    </div>
+                </footer>
             </article>
+        </template>
+        <template if:true={appliedFilters}>
+            <div class="table__footer">
+                <button onclick={filterRemove}>Remove All Filters</button>
+            </div>
+        </template>
+        <!--                MODALS                 -->
+        <template if:true={showDetailModal}>
+            <c-fe-datatable-modals  type="detailModal"
+                                    table={table} 
+                                    row={rows}
+                                    rowkey={clickRow}
+                                    rowaction={rowAction}
+                                    closeicon={closeIcon}
+                                    onclose={closeDetailModal}>
+            </c-fe-datatable-modals>
+        </template>
+        <template if:true={showActionModal}>
+            <c-fe-datatable-modals  type="actionModal"
+                                    table={table} 
+                                    row={rows}
+                                    rowaction={rowAction}
+                                    rowkey={clickRow}
+                                    closeicon={closeIcon}
+                                    onclose={closeActionModal}>
+            </c-fe-datatable-modals>
         </template>
     </div>
 </template>
