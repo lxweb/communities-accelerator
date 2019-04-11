@@ -1,3 +1,5 @@
+import Assets from '@salesforce/resourceUrl/Assets';
+
 import { LightningElement, api, track } from 'lwc';
 
 export default class Fe_DatatableLC extends LightningElement {
@@ -5,8 +7,17 @@ export default class Fe_DatatableLC extends LightningElement {
 
     @track orientation;
     @track columnsToShow;
+    @track showFilterModal = false;
+    @track showFooterModal = false;
+    @track showDetailModal = false;
+    @track showCancelSearch = false;
+    @track showFilterIcon = false;
+    @track rowAction = [];
+    @track globalAction = [];
 
-    numberOfColumns = 8;
+    numberOfColumns = 6;
+    filterIcon = Assets + '/Assets/Icons/FilterIcon.svg';
+    closeIcon = Assets + '/Assets/Icons/CloseIcon.svg';
 
     constructor() {
         super();
@@ -18,8 +29,11 @@ export default class Fe_DatatableLC extends LightningElement {
     }
 
     renderedCallback() {
-        if(this.table && !this.columnsToShow) {
+        if (this.table && !this.columnsToShow) {
             this.columnsToShow = this.table.columns.slice(0, this.numberOfColumns);
+        }
+        if (this.table.actions.length > 0 && this.rowAction.length === 0 && this.globalAction.length === 0) {
+            this.typeActions();
         }
     }
 
@@ -31,59 +45,143 @@ export default class Fe_DatatableLC extends LightningElement {
         return (this.table.appliedFilters.length > 0) ? true : false;
     }
 
+    get setDateFilter() {   
+        var columns = JSON.parse(JSON.stringify(this.table.columns));
+        var filterValues = ["Last Week", "Last Month", "Last Year", "Custom range"]; 
+        columns.forEach(col => {
+            if(col.filtrable && (col.type === "Date" || col.type === "datetime" || col.type === "Date/Time")) {
+                col.filtrableValues = filterValues;
+            }
+        });
+        return columns;
+    }
+
+    openFilterModal() {
+        this.showFilterModal = true;
+    }
+
+    closeFilterModal() {
+        this.showFilterModal = false;
+    } 
+
+    openDetailModal() {
+        this.showDetailModal = true;
+    }
+
+    closeDetailModal(event) {
+        var value = event.detail.values;
+        this.showDetailModal = (value !== "undefined") ? value : false;
+    }
+
+    typeActions() {
+        var actions = JSON.parse(JSON.stringify(this.table.actions));
+        actions.forEach(act => {
+            act.icon = Assets + '/Assets/Icons/' + act.icon +'.svg';
+            if (act.recordType === "RowAction") {
+                this.rowAction.push(act);
+            } else {
+                this.globalAction.push(act);
+            }
+        });
+    }
+
     handleOrientation() {
         //TRUE = Portrail  
         this.orientation = (screen.orientation.angle === 0) ? true : false;
     }
 
-    openDetail() {
-        console.log("hola");
+    focusFilter() {
+        this.showCancelSearch = true;
+        this.showFilterIcon = true;
     }
 
-    editTable() {
-        var checkbox = this.template.querySelectorAll("div.checkbox");
-        var edit = this.template.querySelector("p.edit-cancel");
-        
-        if (edit.innerText === "Edit") {
-            checkbox.forEach(cb =>{
-                cb.style.display = "block";
-            })
-            edit.innerText = "Cancel";
-        }else {
-            checkbox.forEach(cb =>{
-                cb.style.display = "none";
-            })
-            edit.innerText = "Edit";
-        }
+    cancelFilter() {
+        this.showCancelSearch = false;
+        this.showFilterIcon = false;
     }
 
-    showFilter() {
-        var button = this.template.querySelector("button.cancelSearch");
-        var icon = this.template.querySelector("lightning-icon.filterIcon");
-        button.style.display = "inline-block"; 
-        icon.style.display = "inline-block"; 
-    }
+    deleteFilter(event) {
+        var name = event.currentTarget.dataset.name;
+        var value = event.currentTarget.dataset.value;
+        var filters = JSON.parse(JSON.stringify(this.table));
 
-    openFilter() {
-        var modal = this.template.querySelector("div.modal");
-        var closeModal = this.template.querySelector("button.closeModal");
-        modal.classList.toggle("open");
-        closeModal.classList.remove("open");
+        filters.appliedFilters.forEach(fil => {
+            if (fil.filter.name === name && fil.value1 === value) {
+                filters.appliedFilters.splice(filters.appliedFilters.indexOf(fil), 1);
+            }
+        });
+        this.table = filters;
+        const values = JSON.stringify(filters.appliedFilters);
+        this.filterEvent(values);
     }
 
     filterActive(event) {
-        var footer = this.template.querySelector("div.modal__footer");
         event.currentTarget.classList.toggle("active");
-        footer.classList.remove("hidden")
+        this.showFooterModal = true;
     }
 
     filterRemove() {
         var button = this.template.querySelectorAll("button.active");
-        var footer = this.template.querySelector("div.modal__footer");
+        var tableFooter = this.template.querySelector("div.table__footer");
+        var filters = [];
         button.forEach(fil =>{
             fil.classList.remove("active");
         });
-        footer.classList.toggle("hidden")
+        if (this.table.appliedFilters.length > 0) {
+            const values = JSON.stringify(filters);
+            tableFooter.classList.toggle("hidden");
+            this.filterEvent(values);
+        }
+        this.showFooterModal = false;
+        this.showFilterIcon = false;
+    }
+
+    formatDate() {
+        var today = new Date();
+        var dates = [];
+        dates = {
+            now: today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'),
+            lastWeek: today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2, '0') + '-' + String(today.getDate()-7).padStart(2, '0'),
+            lastMonth: today.getFullYear() + '-' + String((today.getMonth()+1)-1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0'),
+            lastYear: (today.getFullYear()-1) + '-' + String(today.getMonth()+1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0')
+        };
+        return dates;
+    }
+
+    dataFilter() {
+        var button = this.template.querySelectorAll("button.active");
+        var filters = [];   
+        var filter;
+        var dates = this.formatDate();
+        var value1;
+        var value2;
+        button.forEach(fil =>{
+            value1 = fil.dataset.value;
+            value2 = null;
+            if (fil.dataset.value === "Last Week") {
+                value1 = dates.lastWeek;  //value1 = menor
+                value2 = dates.now; //value2 = mayor
+            } else if (fil.dataset.value === "Last Month") {
+                    value1 = dates.lastMonth;
+                    value2 = dates.now;
+                } else if (fil.dataset.value === "Last Year") {
+                        value1 = dates.lastYear;
+                        value2 = dates.now;
+                    }
+
+            filter = {filter: {
+                            name: fil.dataset.column, 
+                            type: fil.dataset.type
+                        },
+                        value1: value1,
+                        value2: value2
+                    };
+            filters.push(filter);
+        });
+        const values = JSON.stringify(filters);
+        this.filterEvent(values);
+        this.closeFilterModal();
+        this.showCancelSearch = false;
     }
 
     searchEvent() {
@@ -91,23 +189,9 @@ export default class Fe_DatatableLC extends LightningElement {
         this.dispatchEvent(searchValue);
     }
 
-    filterEvent() {
-        var button = this.template.querySelectorAll("button.active");
-        var filters = [];
-        var filter;
-        button.forEach(fil =>{
-            filter = {filter: {
-                            name: fil.dataset.column, 
-                            type: fil.dataset.type
-                        },
-                        value1: fil.dataset.value
-                    };
-            filters.push(filter);
-        });
-        const values = JSON.stringify(filters);
+    filterEvent(values) {
         const filterItemSelected = new CustomEvent('filter', { detail: {values}, });
         this.dispatchEvent(filterItemSelected);
-        this.openFilter();
     }
 
     clearFilterEvent() {

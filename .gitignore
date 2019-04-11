@@ -279,9 +279,7 @@ src/profiles/Partner Community Login User.profile
 src/staticresources/SiteSamples.resource
 src/staticresources/SiteSamples.resource-meta.xml
 src/pages/
-/gulpfile.js
 /package-lock.json
-/package.json
 node_modules/
 package-lock.json
 .vim-force.com/session.properties

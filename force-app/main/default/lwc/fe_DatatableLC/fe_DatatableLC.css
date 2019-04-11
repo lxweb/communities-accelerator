@@ -1,11 +1,57 @@
+.datatable h1 {
+  font-size: 40px;
+}
 .datatable .slds-card {
   border: none;
   border-bottom: 1px solid;
   padding-top: 6px;
   padding-bottom: 30px;
 }
-.datatable span {
-  font-weight: bold;
+.datatable .search-element {
+  display: inline-block;
+  min-width: 100%;
+  height: 50px;
+}
+.datatable .search-element .searchInput {
+  padding: 0;
+  border: none;
+  height: 100%;
+}
+.datatable .search-element .searchInput::placeholder {
+  background-image: url('sfsites/c/resource/Assets/Assets/Icons/SearchIcon.svg');
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+}
+.datatable .search-element .icons-group {
+  display: table-cell;
+  float: right;
+}
+.datatable .search-element .icons-group .cancelSearch {
+  border: none;
+  background: none;
+  background-size: 23px 23px;
+}
+.datatable .modal {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+}
+.datatable .modal .modal__content {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+}
+.datatable .modal .modal__footer {
+  bottom: 0;
+  position: absolute;
+}
+.datatable .modal .filter.active {
+  background-color: aqua;
 }
 .datatable footer.slds-card__footer {
   padding: 0;

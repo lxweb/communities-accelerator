@@ -7,6 +7,6 @@ export default class FeDatatableRow extends LightningElement {
 
     get rowValue(){
         var row = JSON.parse(JSON.stringify(this.row));
-        return row[this.column];
+        return row[this.column] ? row[this.column] : "-";
     }
 }
